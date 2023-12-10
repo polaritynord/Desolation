@@ -6,15 +6,52 @@ local player = {}
 function player.new()
     local instance = {
         position = {0, 0};
+        velocity = {0, 0};
         rotation = 0;
     }
 
+    function instance:movement(delta)
+        local speed = 140
+        self.velocity = {0, 0}
+        --Get key input
+        if love.keyboard.isDown("a") then
+            self.velocity[1] = self.velocity[1] - 1
+        end
+        if love.keyboard.isDown("d") then
+            self.velocity[1] = self.velocity[1] + 1
+        end
+        if love.keyboard.isDown("w") then
+            self.velocity[2] = self.velocity[2] - 1
+        end
+        if love.keyboard.isDown("s") then
+            self.velocity[2] = self.velocity[2] + 1
+        end
+        --Normalize velocity
+        if math.abs(self.velocity[1]) == math.abs(self.velocity[2]) then
+            self.velocity[1] = self.velocity[1] * math.sin(math.pi/4)
+            self.velocity[2] = self.velocity[2] * math.sin(math.pi/4)
+        end
+        --Move by velocity
+        self.position[1] = self.position[1] + (self.velocity[1]*speed*delta)
+        self.position[2] = self.position[2] + (self.velocity[2]*speed*delta)
+    end
+
+    function instance:pointTowardsMouse()
+        local mouseX, mouseY = love.mouse.getPosition()
+        local pos = coreFuncs.getRelativePosition(self.position, Camera)
+        local dx = mouseX-pos[1] ; local dy = mouseY-pos[2]
+        self.rotation = math.atan2(dy, dx)
+    end
+
+    --Core functions
     function instance:load()
 
     end
 
     function instance:update(delta)
-
+        self:movement(delta)
+        self:pointTowardsMouse()
+        Camera:followTarget(self, 8, delta)
     end
 
     function instance:draw()
