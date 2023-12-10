@@ -3,6 +3,8 @@ local player = require("player")
 local rgb = require("coreFuncs").rgb
 local camera = require("camera")
 local mapRenderer = require("mapRenderer")
+local interfaceManager = require("ui.interfaceManager")
+local gameUi = require("ui.gameUi")
 
 local fullscreen = false
 
@@ -23,11 +25,14 @@ function love.load()
     love.graphics.setDefaultFilter("nearest", "nearest")
     assets.load()
     mapRenderer:load()
+    gameUi:load()
 end
 
 function love.update(delta)
     ScreenWidth, ScreenHeight = love.graphics.getDimensions()
     Player:update(delta)
+    gameUi:update()
+    interfaceManager:update()
 end
 
 function love.draw()
@@ -35,4 +40,6 @@ function love.draw()
     --Game
     mapRenderer:draw()
     Player:draw()
+    gameUi:draw()
+    interfaceManager:draw()
 end
