@@ -13,6 +13,8 @@ function assets.load()
             healthBar = love.graphics.newImage("images/hud/health_bar.png")
         }
     }
+
+    assets.fonts = {}
 end
 
 function assets.unloadAll()

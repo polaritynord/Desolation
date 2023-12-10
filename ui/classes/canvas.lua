@@ -1,4 +1,5 @@
 local image = require("ui.classes.image")
+local textLabel = require("ui.classes.textLabel")
 
 local canvas = {}
 
@@ -16,6 +17,20 @@ function canvas.new()
         instance2.scale = scale
         instance2.rotation = rotation
         instance2.align = align
+        instance2.parentCanvas = self
+        self.elements[#self.elements+1] = instance2
+        return instance2
+    end
+
+    function instance:newTextLabel(text, position, size, align, begin, font, color)
+        local instance2 = textLabel.new()
+        instance2.text = text
+        instance2.position = position
+        instance2.size = size
+        instance2.align = align
+        instance2.begin = begin
+        instance2.font = font
+        instance2.color = color
         instance2.parentCanvas = self
         self.elements[#self.elements+1] = instance2
         return instance2
