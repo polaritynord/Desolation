@@ -10,6 +10,20 @@ function player.new()
         rotation = 0;
     }
 
+    function instance:drawHands()
+        local src = assets.images.player.handDefault
+        local width = src:getWidth() ;  local height = src:getHeight()
+        local pos = coreFuncs.getRelativePosition(self.position, Camera)
+        --Move hands forward a bit
+        pos[1] = pos[1] + math.cos(self.rotation) * 20
+        pos[2] = pos[2] + math.sin(self.rotation) * 20
+        --Draw
+        love.graphics.draw(
+            src, pos[1], pos[2], self.rotation,
+            2.8, 2.8, width/2, height/2
+        )
+    end
+
     function instance:movement(delta)
         local speed = 140
         self.velocity = {0, 0}
@@ -55,6 +69,8 @@ function player.new()
     end
 
     function instance:draw()
+        --Draw hands
+        self:drawHands()
         -- Draw body
         local src = assets.images.player.body
         local width = src:getWidth() ;  local height = src:getHeight()
