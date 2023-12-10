@@ -1,4 +1,5 @@
 local assets = require("assets")
+local coreFuncs = require("coreFuncs")
 
 local player = {}
 
@@ -20,10 +21,10 @@ function player.new()
         -- Draw body
         local src = assets.images.player.body
         local width = src:getWidth() ;  local height = src:getHeight()
-        local pos = {self.position[1], self.position[2]}
+        local pos = coreFuncs.getRelativePosition(self.position, Camera)
         love.graphics.draw(
             src, pos[1], pos[2], self.rotation,
-            1, 1, width/2, height/2
+            4, 4, width/2, height/2
         )
     end
 
