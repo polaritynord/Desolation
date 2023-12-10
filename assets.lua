@@ -8,6 +8,9 @@ function assets.load()
         };
         tiles = {
             prototypeGreen = love.graphics.newImage("images/texture_09.png")
+        };
+        ui = {
+            healthBar = love.graphics.newImage("images/hud/health_bar.png")
         }
     }
 end

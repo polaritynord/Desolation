@@ -4,7 +4,7 @@ local gameUi = {}
 
 function gameUi:load()
     self.hud = interfaceManager:newCanvas()
-    self.hud:newImage(assets.images.player.body, {400, 400}, {1,1}, 0)
+    self.hud:newImage(assets.images.ui.healthBar, {97, 465}, {2.35,2.35}, 0, "x+")
 end
 
 function gameUi:update()
