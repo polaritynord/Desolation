@@ -8,6 +8,8 @@ function player.new()
         position = {0, 0};
         velocity = {0, 0};
         rotation = 0;
+        health = 100;
+        armor = 100;
     }
 
     function instance:drawHands()

@@ -11,7 +11,10 @@ function coreFuncs.rgb(r, g, b)
 end
 
 function coreFuncs.getRelativePosition(pos1, camera)
-    local relativePos = {(pos1[1]-camera.position[1]+480)*camera.zoom, (pos1[2]-camera.position[2]+270)*camera.zoom}
+    local relativePos = {
+        (pos1[1]-camera.position[1]+ScreenWidth/2)*camera.zoom,
+        (pos1[2]-camera.position[2]+ScreenHeight/2)*camera.zoom
+    }
     return relativePos
 end
 
