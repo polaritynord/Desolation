@@ -18,7 +18,7 @@ function mapRenderer:draw()
     local pos = coreFuncs.getRelativePosition({0,0}, Camera)
     love.graphics.draw(
         src, pos[1], pos[2], self.rotation,
-        2, 2, width/2, height/2
+        2*Camera.zoom, 2*Camera.zoom, width/2, height/2
     )
 end
 

@@ -10,19 +10,32 @@ function player.new()
         rotation = 0;
         health = 100;
         armor = 100;
+        sprinting = false;
     }
+
+    --Changes camera zoom dynamically depending on current sprinting state.
+    function instance:changeCameraZoom(delta)
+        local smoothness = 10
+        local d
+        if self.sprinting then
+            d = (1.1-Camera.zoom) * smoothness * delta
+        else
+            d = (1-Camera.zoom) * smoothness * delta
+        end
+        Camera.zoom = Camera.zoom + d
+    end
 
     function instance:drawHands()
         local src = assets.images.player.handDefault
         local width = src:getWidth() ;  local height = src:getHeight()
         local pos = coreFuncs.getRelativePosition(self.position, Camera)
         --Move hands forward a bit
-        pos[1] = pos[1] + math.cos(self.rotation) * 20
-        pos[2] = pos[2] + math.sin(self.rotation) * 20
+        pos[1] = pos[1] + math.cos(self.rotation) * 20 * Camera.zoom
+        pos[2] = pos[2] + math.sin(self.rotation) * 20 * Camera.zoom
         --Draw
         love.graphics.draw(
             src, pos[1], pos[2], self.rotation,
-            2.8, 2.8, width/2, height/2
+            2.8*Camera.zoom, 2.8*Camera.zoom, width/2, height/2
         )
     end
 
@@ -41,6 +54,13 @@ function player.new()
         end
         if love.keyboard.isDown("s") then
             self.velocity[2] = self.velocity[2] + 1
+        end
+        --Sprinting
+        local sprintMultiplier = 1.6
+        self.sprinting = love.keyboard.isDown("lshift")
+        if self.sprinting then
+            self.velocity[1] = self.velocity[1] * sprintMultiplier
+            self.velocity[2] = self.velocity[2] * sprintMultiplier
         end
         --Normalize velocity
         if math.abs(self.velocity[1]) == math.abs(self.velocity[2]) then
@@ -68,6 +88,7 @@ function player.new()
         self:movement(delta)
         self:pointTowardsMouse()
         Camera:followTarget(self, 8, delta)
+        self:changeCameraZoom(delta)
     end
 
     function instance:draw()
@@ -79,7 +100,7 @@ function player.new()
         local pos = coreFuncs.getRelativePosition(self.position, Camera)
         love.graphics.draw(
             src, pos[1], pos[2], self.rotation,
-            4, 4, width/2, height/2
+            4*Camera.zoom, 4*Camera.zoom, width/2, height/2
         )
     end
 
