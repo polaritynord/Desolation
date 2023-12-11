@@ -11,6 +11,8 @@ function player.new()
         health = 100;
         armor = 100;
         sprinting = false;
+        moving = false;
+        animationSizeDiff = 0; --Used in walk animation
     }
 
     --Changes camera zoom dynamically depending on current sprinting state.
@@ -18,11 +20,20 @@ function player.new()
         local smoothness = 10
         local d
         if self.sprinting then
-            d = (1.1-Camera.zoom) * smoothness * delta
+            d = (1.035-Camera.zoom) * smoothness * delta
         else
             d = (1-Camera.zoom) * smoothness * delta
         end
         Camera.zoom = Camera.zoom + d
+    end
+
+    --Changes the size of player with a sin wave.
+    function instance:doWalkingAnim()
+        if not self.moving then return end
+        local time = love.timer.getTime()
+        local speed = 12
+        if self.sprinting then speed = speed + 4 end
+        self.animationSizeDiff = math.sin(time*speed)/5
     end
 
     function instance:drawHands()
@@ -35,7 +46,7 @@ function player.new()
         --Draw
         love.graphics.draw(
             src, pos[1], pos[2], self.rotation,
-            2.8*Camera.zoom, 2.8*Camera.zoom, width/2, height/2
+            2.8*Camera.zoom + self.animationSizeDiff/2, 2.8*Camera.zoom + self.animationSizeDiff/2, width/2, height/2
         )
     end
 
@@ -67,6 +78,7 @@ function player.new()
             self.velocity[1] = self.velocity[1] * math.sin(math.pi/4)
             self.velocity[2] = self.velocity[2] * math.sin(math.pi/4)
         end
+        self.moving = math.abs(self.velocity[1]) > 0 or math.abs(self.velocity[2]) > 0
         --Move by velocity
         self.position[1] = self.position[1] + (self.velocity[1]*speed*delta)
         self.position[2] = self.position[2] + (self.velocity[2]*speed*delta)
@@ -89,6 +101,7 @@ function player.new()
         self:pointTowardsMouse()
         Camera:followTarget(self, 8, delta)
         self:changeCameraZoom(delta)
+        self:doWalkingAnim()
     end
 
     function instance:draw()
@@ -100,7 +113,7 @@ function player.new()
         local pos = coreFuncs.getRelativePosition(self.position, Camera)
         love.graphics.draw(
             src, pos[1], pos[2], self.rotation,
-            4*Camera.zoom, 4*Camera.zoom, width/2, height/2
+            4*Camera.zoom + self.animationSizeDiff, 4*Camera.zoom + self.animationSizeDiff, width/2, height/2
         )
     end
 
