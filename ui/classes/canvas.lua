@@ -1,5 +1,6 @@
 local image = require("ui.classes.image")
 local textLabel = require("ui.classes.textLabel")
+local rectangle = require("ui.classes.rectangle")
 
 local canvas = {}
 
@@ -8,6 +9,7 @@ function canvas.new()
         elements = {};
         enabled = true;
         position = {0, 0};
+        alpha = 1;
     }
 
     function instance:newImage(source, position, scale, rotation, align)
@@ -31,6 +33,17 @@ function canvas.new()
         instance2.begin = begin
         instance2.font = font
         instance2.color = color
+        instance2.parentCanvas = self
+        self.elements[#self.elements+1] = instance2
+        return instance2
+    end
+
+    function instance:newRectangle(position, size, color, align)
+        local instance2 = rectangle.new()
+        instance2.position = position
+        instance2.size = size
+        instance2.color = color
+        instance2.align = align
         instance2.parentCanvas = self
         self.elements[#self.elements+1] = instance2
         return instance2

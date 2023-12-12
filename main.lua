@@ -16,7 +16,11 @@ function love.keypressed(key, _unicode)
         -- Set window dimensions to default
         if not fullscreen and false then
          love.window.setMode(960, 540, {resizable=true}) end
-     end
+    end
+    --Pause key
+    if key == "escape" then
+        GamePaused = not GamePaused
+    end
 end
 
 function love.load()
@@ -24,8 +28,10 @@ function love.load()
     Camera = camera.new()
     love.graphics.setDefaultFilter("nearest", "nearest")
     assets.load()
+    Player:load()
     mapRenderer:load()
     gameUi:load()
+    GamePaused = false
 end
 
 function love.update(delta)

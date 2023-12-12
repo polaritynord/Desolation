@@ -13,6 +13,10 @@ function player.new()
         sprinting = false;
         moving = false;
         animationSizeDiff = 0; --Used in walk animation
+        inventory = {
+            weapons = {nil, nil, nil};
+            items = {};
+        };
     }
 
     --Changes camera zoom dynamically depending on current sprinting state.
@@ -93,10 +97,14 @@ function player.new()
 
     --Core functions
     function instance:load()
-
+        --Create item slots in inventory
+        for i = 1, 40 do
+            self.inventory.items[#self.inventory.items+1] = {}
+        end
     end
 
     function instance:update(delta)
+        if GamePaused then return end
         self:movement(delta)
         self:pointTowardsMouse()
         Camera:followTarget(self, 8, delta)

@@ -8,7 +8,7 @@ function mapRenderer:load()
 end
 
 function mapRenderer:update()
-
+    if GamePaused then return end
 end
 
 function mapRenderer:draw()
