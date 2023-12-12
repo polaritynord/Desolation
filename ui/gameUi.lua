@@ -18,7 +18,23 @@ end
 function gameUi:createPauseCanvas()
     self.pauseMenu = interfaceManager:newCanvas()
     --Background
-    self.pauseMenu:newRectangle({0,0}, {960, 540}, {0, 0, 0, 0.4}, "xx")
+    self.pauseMenu:newRectangle({0,0}, {960, 540}, {0, 0, 0, 0.6}, "xx")
+end
+
+function gameUi:updateHUDCanvas()
+    self.hud.healthText.text = Player.health
+    self.hud.armorText.text = Player.armor
+end
+
+function gameUi:updatePauseCanvas(delta)
+    self.pauseMenu.enabled = GamePaused
+    --Smooth alpha transitioning
+    local d ; local smoothness = 7
+    if GamePaused then
+        self.pauseMenu.alpha = self.pauseMenu.alpha + (1 - self.pauseMenu.alpha) * smoothness * delta
+    else
+        self.pauseMenu.alpha = 0.4
+    end
 end
 
 function gameUi:load()
@@ -26,8 +42,10 @@ function gameUi:load()
     self:createPauseCanvas()
 end
 
-function gameUi:update()
-
+function gameUi:update(delta)
+    self:updatePauseCanvas(delta)
+    if GamePaused then return end
+    self:updateHUDCanvas()
 end
 
 function gameUi:draw()

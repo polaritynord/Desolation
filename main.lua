@@ -37,7 +37,7 @@ end
 function love.update(delta)
     ScreenWidth, ScreenHeight = love.graphics.getDimensions()
     Player:update(delta)
-    gameUi:update()
+    gameUi:update(delta)
     interfaceManager:update()
 end
 
