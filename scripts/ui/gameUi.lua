@@ -18,7 +18,17 @@ end
 function gameUi:createPauseCanvas()
     self.pauseMenu = interfaceManager:newCanvas()
     --Background
-    self.pauseMenu:newRectangle({0,0}, {960, 540}, {0, 0, 0, 0.6}, "xx")
+    self.pauseMenu.background = self.pauseMenu:newRectangle(
+        {0,0}, {960, 540}, {0, 0, 0, 0.6}, "xx"
+    )
+    --Title
+    self.pauseMenu.title = self.pauseMenu:newTextLabel(
+        "ETERNAL HORIZONS", {50, 50}, 64, "xx", "left", "disposable-droid", {1,1,1,1}
+    )
+    --Continue button
+    self.pauseMenu.continue = self.pauseMenu:newButton(
+        {70, 200}, {0,0}, {1,1,1,1}, 1, "Continue", 30, "disposable-droid", "xx"
+    )
 end
 
 function gameUi:updateHUDCanvas()
@@ -29,12 +39,14 @@ end
 function gameUi:updatePauseCanvas(delta)
     self.pauseMenu.enabled = GamePaused
     --Smooth alpha transitioning
-    local d ; local smoothness = 7
+    local smoothness = 7
     if GamePaused then
         self.pauseMenu.alpha = self.pauseMenu.alpha + (1 - self.pauseMenu.alpha) * smoothness * delta
     else
         self.pauseMenu.alpha = 0.4
     end
+    --Scale background to fit screen
+    self.pauseMenu.background.size = {ScreenWidth, ScreenHeight}
 end
 
 function gameUi:load()

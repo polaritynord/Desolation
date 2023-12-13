@@ -1,6 +1,7 @@
 local image = require("scripts.ui.classes.image")
 local textLabel = require("scripts.ui.classes.textLabel")
 local rectangle = require("scripts.ui.classes.rectangle")
+local button = require("scripts.ui.classes.button")
 
 local canvas = {}
 
@@ -43,6 +44,21 @@ function canvas.new()
         instance2.position = position
         instance2.size = size
         instance2.color = color
+        instance2.align = align
+        instance2.parentCanvas = self
+        self.elements[#self.elements+1] = instance2
+        return instance2
+    end
+
+    function instance:newButton(position, size, color, buttonType, buttonText, buttonTextSize, font, align)
+        local instance2 = button.new()
+        instance2.position = position
+        instance2.size = size
+        instance2.color = color
+        instance2.buttonType = buttonType
+        instance2.buttonText = buttonText
+        instance2.buttonTextSize = buttonTextSize
+        instance2.font = font
         instance2.align = align
         instance2.parentCanvas = self
         self.elements[#self.elements+1] = instance2
