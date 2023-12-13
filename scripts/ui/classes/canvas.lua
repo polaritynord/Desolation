@@ -1,6 +1,6 @@
-local image = require("ui.classes.image")
-local textLabel = require("ui.classes.textLabel")
-local rectangle = require("ui.classes.rectangle")
+local image = require("scripts.ui.classes.image")
+local textLabel = require("scripts.ui.classes.textLabel")
+local rectangle = require("scripts.ui.classes.rectangle")
 
 local canvas = {}
 

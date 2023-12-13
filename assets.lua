@@ -3,14 +3,14 @@ local assets = {}
 function assets.load()
     assets.images = {
         player = {
-            body = love.graphics.newImage("images/player/body.png");
-            handDefault = love.graphics.newImage("images/player/hand_default.png")
+            body = love.graphics.newImage("assets/images/player/body.png");
+            handDefault = love.graphics.newImage("assets/images/player/hand_default.png")
         };
         tiles = {
-            prototypeGreen = love.graphics.newImage("images/texture_09.png")
+            prototypeGreen = love.graphics.newImage("assets/images/texture_09.png")
         };
         ui = {
-            healthBar = love.graphics.newImage("images/hud/health_bar.png")
+            healthBar = love.graphics.newImage("assets/images/hud/health_bar.png")
         }
     }
 

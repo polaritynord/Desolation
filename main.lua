@@ -1,10 +1,10 @@
 local assets = require("assets")
-local player = require("player")
+local player = require("scripts.player")
 local rgb = require("coreFuncs").rgb
-local camera = require("camera")
-local mapRenderer = require("mapRenderer")
-local interfaceManager = require("ui.interfaceManager")
-local gameUi = require("ui.gameUi")
+local camera = require("scripts.camera")
+local mapRenderer = require("scripts.mapRenderer")
+local interfaceManager = require("scripts.ui.interfaceManager")
+local gameUi = require("scripts.ui.gameUi")
 
 local fullscreen = false
 

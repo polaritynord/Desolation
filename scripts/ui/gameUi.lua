@@ -1,5 +1,5 @@
 local assets = require("assets")
-local interfaceManager = require("ui.interfaceManager")
+local interfaceManager = require("scripts.ui.interfaceManager")
 local gameUi = {}
 
 function gameUi:createHUDCanvas()

@@ -1,4 +1,4 @@
-local canvas = require("ui.classes.canvas")
+local canvas = require("scripts.ui.classes.canvas")
 
 local interfaceManager = {
     canvases = {}
