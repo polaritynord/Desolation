@@ -1,22 +1,16 @@
 local assets = require("assets")
 local coreFuncs = require("coreFuncs")
+local humanoid = require("scripts.humanoid")
 
 local player = {}
 
 function player.new()
-    local instance = {
-        position = {0, 0};
-        velocity = {0, 0};
-        rotation = 0;
-        health = 100;
-        armor = 100;
-        sprinting = false;
-        moving = false;
-        animationSizeDiff = 0; --Used in walk animation
-        inventory = {
-            weapons = {nil, nil, nil};
-            items = {};
-        };
+    local instance = humanoid.new()
+    
+    --Player variables
+    instance.inventory.previousSlot = nil
+    instance.keyPressData = {
+        ["q"] = false;
     }
 
     --Changes camera zoom dynamically depending on current sprinting state.
@@ -95,6 +89,23 @@ function player.new()
         self.rotation = math.atan2(dy, dx)
     end
 
+    function instance:slotSwitching()
+        --Switch slot with number keys
+        for i = 1, 3 do
+            if love.keyboard.isDown(tostring(i)) and i ~= self.inventory.slot then
+                self.inventory.previousSlot = self.inventory.slot
+                self.inventory.slot = i
+            end
+        end
+        --Quick slot switching
+        if love.keyboard.isDown("q") and not self.keyPressData["q"] and self.inventory.previousSlot then
+            local temp = self.inventory.previousSlot
+            self.inventory.previousSlot = self.inventory.slot
+            self.inventory.slot = temp
+        end
+        self.keyPressData["q"] = love.keyboard.isDown("q")
+    end
+
     --Core functions
     function instance:load()
         --Create item slots in inventory
@@ -107,6 +118,7 @@ function player.new()
         if GamePaused then return end
         self:movement(delta)
         self:pointTowardsMouse()
+        self:slotSwitching()
         Camera:followTarget(self, 8, delta)
         self:changeCameraZoom(delta)
         self:doWalkingAnim()
