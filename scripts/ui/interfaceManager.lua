@@ -10,10 +10,10 @@ function interfaceManager:newCanvas()
     return instance
 end
 
-function interfaceManager:update()
+function interfaceManager:update(delta)
     --Update canvases
     for _, v in ipairs(self.canvases) do
-        if v.enabled then v:update() end
+        if v.enabled then v:update(delta) end
     end
 end
 

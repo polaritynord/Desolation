@@ -65,10 +65,10 @@ function canvas.new()
         return instance2
     end
     
-    function instance:update()
+    function instance:update(delta)
         --Update elements
         for _, v in ipairs(self.elements) do
-            if v.update then v:update() end
+            if v.update then v:update(delta) end
         end
     end
     
