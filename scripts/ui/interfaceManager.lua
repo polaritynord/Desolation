@@ -7,6 +7,7 @@ local interfaceManager = {
 function interfaceManager:newCanvas()
     local instance = canvas.new()
     self.canvases[#self.canvases+1] = instance
+    instance.index = #self.canvases
     return instance
 end
 

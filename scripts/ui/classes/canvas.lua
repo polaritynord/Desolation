@@ -11,6 +11,7 @@ function canvas.new()
         enabled = true;
         position = {0, 0};
         alpha = 1;
+        index = nil;
     }
 
     function instance:newImage(source, position, scale, rotation, align)
@@ -50,7 +51,7 @@ function canvas.new()
         return instance2
     end
 
-    function instance:newButton(position, size, color, buttonType, buttonText, buttonTextSize, font, align)
+    function instance:newButton(position, size, color, buttonType, buttonText, buttonTextSize, font, align, clickEvent)
         local instance2 = button.new()
         instance2.position = position
         instance2.size = size
@@ -60,6 +61,7 @@ function canvas.new()
         instance2.buttonTextSize = buttonTextSize
         instance2.font = font
         instance2.align = align
+        instance2.clickEvent = clickEvent
         instance2.parentCanvas = self
         self.elements[#self.elements+1] = instance2
         return instance2

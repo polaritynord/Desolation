@@ -13,23 +13,32 @@ function button.new()
         buttonText = "Button";
         buttonTextSize = 24;
         mouseHovering = false;
+        mouseClicking = false;
         hoverOffset = 0;
+        clickEvent = nil;
     }
 
     function instance:update(delta)
         local pos = coreFuncs.getRelativeElementPosition(self.position, self.align, self.parentCanvas)
         local mX, mY = love.mouse.getPosition()
 
+        --Click event
+        if love.mouse.isDown(1) and self.mouseHovering and not self.mouseClicking and self.clickEvent then
+            self.clickEvent()
+        end
+
         if self.buttonType == 1 then
             --Check for mouse touch
             if mY > pos[2] and mY < pos[2] + self.buttonTextSize then
                 self.mouseHovering = true
-                self.hoverOffset = self.hoverOffset + (14-self.hoverOffset) * 40 * delta
+                self.mouseClicking = love.mouse.isDown(1)
+                self.hoverOffset = self.hoverOffset + (14-self.hoverOffset) * 27 * delta
             else
                 self.mouseHovering = false
-                self.hoverOffset = self.hoverOffset + (0-self.hoverOffset) * 40 * delta
+                self.mouseClicking = false
+                self.hoverOffset = self.hoverOffset + (0-self.hoverOffset) * 27 * delta
             end
-            print(self.mouseHovering)
+            --print(self.mouseHovering, self.mouseClicking)
         end
     end
 

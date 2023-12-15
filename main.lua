@@ -5,6 +5,7 @@ local camera = require("scripts.camera")
 local mapRenderer = require("scripts.mapRenderer")
 local interfaceManager = require("scripts.ui.interfaceManager")
 local gameUi = require("scripts.ui.gameUi")
+local menuUi = require("scripts.ui.menuUi")
 
 local fullscreen = false
 
@@ -23,29 +24,41 @@ function love.keypressed(key, _unicode)
     end
 end
 
-function love.load()
+function GameLoad()
     Player = player.new()
     Camera = camera.new()
-    love.graphics.setDefaultFilter("nearest", "nearest")
-    assets.load()
     Player:load()
     mapRenderer:load()
     gameUi:load()
+end
+
+function love.load()
+    love.graphics.setDefaultFilter("nearest", "nearest")
+    assets.load()
     GamePaused = false
+    menuUi:load()
+    GameState = "menu"
 end
 
 function love.update(delta)
     ScreenWidth, ScreenHeight = love.graphics.getDimensions()
-    Player:update(delta)
-    gameUi:update(delta)
+    if GameState == "game" then
+        Player:update(delta)
+        gameUi:update(delta)
+    elseif GameState == "menu" then
+        menuUi:update(delta)
+    end
     interfaceManager:update(delta)
 end
 
 function love.draw()
-    love.graphics.setBackgroundColor(rgb(50))
-    --Game
-    mapRenderer:draw()
-    Player:draw()
-    gameUi:draw()
+    if GameState == "game" then
+        love.graphics.setBackgroundColor(rgb(50))
+        --Game
+        mapRenderer:draw()
+        Player:draw()
+    elseif GameState == "menu" then
+        love.graphics.setBackgroundColor(rgb(75))
+    end
     interfaceManager:draw()
 end

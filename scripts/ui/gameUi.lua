@@ -17,6 +17,7 @@ end
 
 function gameUi:createPauseCanvas()
     self.pauseMenu = interfaceManager:newCanvas()
+    self.pauseMenu.enabled = false
     --Background
     self.pauseMenu.background = self.pauseMenu:newRectangle(
         {0,0}, {960, 540}, {0, 0, 0, 0.6}, "xx"
@@ -27,7 +28,8 @@ function gameUi:createPauseCanvas()
     )
     --Continue button
     self.pauseMenu.continue = self.pauseMenu:newButton(
-        {70, 200}, {0,0}, {1,1,1,1}, 1, "Continue", 30, "disposable-droid", "xx"
+        {70, 200}, {0,0}, {1,1,1,1}, 1, "Continue", 30,
+        "disposable-droid", "xx", function() GamePaused = false end
     )
 end
 
@@ -55,13 +57,10 @@ function gameUi:load()
 end
 
 function gameUi:update(delta)
+    if GameState ~= "game" then return end
     self:updatePauseCanvas(delta)
     if GamePaused then return end
     self:updateHUDCanvas()
-end
-
-function gameUi:draw()
-    
 end
 
 return gameUi
