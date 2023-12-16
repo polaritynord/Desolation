@@ -4,14 +4,12 @@ local menuUi = {}
 
 --Element event funcs
 local function playButtonClick()
-    menuUi:unload()
     GameLoad()
     GameState = "game"
 end
 
-function menuUi:unload()
-    table.remove(interfaceManager.canvases, self.mainMenu.index)
-    self.mainMenu = nil
+function menuUi:setCanvasState()
+    self.mainMenu.enabled = GameState == "menu"
 end
 
 function menuUi:load()
@@ -29,7 +27,7 @@ function menuUi:load()
 end
 
 function menuUi:update(delta)
-    self.mainMenu.enabled = GameState == "menu"
+    self:setCanvasState()
 end
 
 return menuUi

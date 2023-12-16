@@ -29,14 +29,15 @@ function GameLoad()
     Camera = camera.new()
     Player:load()
     mapRenderer:load()
-    gameUi:load()
+    GamePaused = false
 end
 
 function love.load()
     love.graphics.setDefaultFilter("nearest", "nearest")
     assets.load()
-    GamePaused = false
+    GameLoad()
     menuUi:load()
+    gameUi:load()
     GameState = "menu"
 end
 
@@ -44,10 +45,9 @@ function love.update(delta)
     ScreenWidth, ScreenHeight = love.graphics.getDimensions()
     if GameState == "game" then
         Player:update(delta)
-        gameUi:update(delta)
-    elseif GameState == "menu" then
-        menuUi:update(delta)
-    end
+    elseif GameState == "menu" then end
+    gameUi:update(delta)
+    menuUi:update(delta)
     interfaceManager:update(delta)
 end
 

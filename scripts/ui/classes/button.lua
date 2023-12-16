@@ -29,7 +29,7 @@ function button.new()
 
         if self.buttonType == 1 then
             --Check for mouse touch
-            if mY > pos[2] and mY < pos[2] + self.buttonTextSize then
+            if mY > pos[2] and mY < pos[2] + self.buttonTextSize and mX > pos[1] and mX < pos[1] + 200 then
                 self.mouseHovering = true
                 self.mouseClicking = love.mouse.isDown(1)
                 self.hoverOffset = self.hoverOffset + (14-self.hoverOffset) * 27 * delta
