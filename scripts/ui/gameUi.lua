@@ -18,6 +18,11 @@ function gameUi:createHUDCanvas()
         Player.armor, {44, 448}, 32, "x+", "left", "disposable-droid", {1,1,1,1}
     )
 
+    --Current weapon index
+    self.hud.weaponIndex = self.hud:newTextLabel(
+        "1", {700, 470}, 24, "++", "left", "disposable-droid", {1,1,1,1}
+    )
+
     --Current weapon image
     self.hud.weaponImg = self.hud:newImage(
         assets.images.ui.pistolImg, {760, 480}, {3,3}, 0, "++"
