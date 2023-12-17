@@ -8,10 +8,11 @@ function assets.load()
             handWeapon = love.graphics.newImage("assets/images/player/hand_placeholder.png");
         };
         tiles = {
-            prototypeGreen = love.graphics.newImage("assets/images/texture_09.png")
+            prototypeGreen = love.graphics.newImage("assets/images/texture_09.png");
         };
         ui = {
-            healthBar = love.graphics.newImage("assets/images/hud/health_bar.png")
+            healthBar = love.graphics.newImage("assets/images/hud/health_bar.png");
+            pistolImg = love.graphics.newImage("assets/images/hud/pistol.png");
         }
     }
 

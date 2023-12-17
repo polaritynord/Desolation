@@ -17,6 +17,19 @@ function gameUi:createHUDCanvas()
     self.hud.armorText = self.hud:newTextLabel(
         Player.armor, {44, 448}, 32, "x+", "left", "disposable-droid", {1,1,1,1}
     )
+
+    --Current weapon image
+    self.hud.weaponImg = self.hud:newImage(
+        assets.images.ui.pistolImg, {760, 480}, {3,3}, 0, "++"
+    )
+    --Current weapon mag ammo
+    self.hud.weaponMagAmmo = self.hud:newTextLabel(
+        "12", {800, 455}, 36, "++", "left", "disposable-droid-bold", {1,1,1,1}
+    )
+    --Ammunition of current weapon
+    self.hud.wepaonAmmunition = self.hud:newTextLabel(
+        "94", {800, 485}, 20, "++", "left", "disposable-droid", {1,1,1,1}
+    )
 end
 
 function gameUi:createPauseCanvas()

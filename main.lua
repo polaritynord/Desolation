@@ -9,6 +9,10 @@ local menuUi = require("scripts.ui.menuUi")
 local weaponManager = require("scripts.weaponManager")
 
 local fullscreen = false
+local cursors = {
+    arrow = love.mouse.getSystemCursor("arrow");
+    crosshair = love.mouse.getSystemCursor("crosshair")
+}
 
 function love.keypressed(key, _unicode)
     -- Fullscreen key
@@ -33,13 +37,25 @@ function GameLoad()
     GamePaused = false
 end
 
+local function setMouseCursor()
+    if GameState == "game" then
+        if not GamePaused then
+            love.mouse.setCursor(cursors.crosshair)
+        else
+            love.mouse.setCursor(cursors.arrow)
+        end
+    else
+        love.mouse.setCursor(cursors.arrow)
+    end
+end
+
 function love.load()
     love.graphics.setDefaultFilter("nearest", "nearest")
     assets.load()
+    weaponManager:load()
     GameLoad()
     menuUi:load()
     gameUi:load()
-    weaponManager:load()
     GameState = "menu"
 end
 
@@ -51,6 +67,7 @@ function love.update(delta)
     gameUi:update(delta)
     menuUi:update(delta)
     interfaceManager:update(delta)
+    setMouseCursor()
 end
 
 function love.draw()

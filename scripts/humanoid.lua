@@ -16,6 +16,11 @@ function humanoid.new()
         inventory = {
             weapons = {nil, nil, nil};
             items = {};
+            ammunition = {
+                light = 0;
+                medium = 0;
+                heavy = 0;
+            };
             slot = 1;
         };
     }
@@ -30,7 +35,12 @@ function humanoid.new()
     end
 
     function instance:drawHands()
+        --Get current hand image
         local src = assets.images.player.handDefault
+        if self.inventory.weapons[self.inventory.slot] then
+            src = assets.images.player.handWeapon --Placeholder
+        end
+
         local width = src:getWidth() ;  local height = src:getHeight()
         local pos = coreFuncs.getRelativePosition(self.position, Camera)
         --Move hands forward a bit
@@ -41,13 +51,6 @@ function humanoid.new()
             src, pos[1], pos[2], self.rotation,
             2.8*Camera.zoom + self.animationSizeDiff/2, 2.8*Camera.zoom + self.animationSizeDiff/2, width/2, height/2
         )
-    end
-
-    function instance:load()
-        --Create item slots in inventory
-        for i = 1, 40 do
-            self.inventory.items[#self.inventory.items+1] = {}
-        end
     end
 
     return instance

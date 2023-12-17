@@ -85,6 +85,15 @@ function player.new()
     end
 
     --Core functions
+    function instance:load()
+        --Create item slots in inventory
+        for i = 1, 40 do
+            self.inventory.items[#self.inventory.items+1] = {}
+        end
+        --Some inventory testin stuff
+        instance.inventory.weapons[1] = weaponManager.Pistol.new()
+    end
+
     function instance:update(delta)
         if GamePaused then return end
         self:movement(delta)
