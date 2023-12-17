@@ -24,6 +24,11 @@ function menuUi:load()
         {70, 200}, {0,0}, {1,1,1,1}, 1, "Play", 30,
         "disposable-droid", "xx", playButtonClick
     )
+    --Quit button
+    self.mainMenu.play = self.mainMenu:newButton(
+        {70, 240}, {0,0}, {1,1,1,1}, 1, "Quit", 30,
+        "disposable-droid", "xx", function () love.event.quit() end
+    )
 end
 
 function menuUi:update(delta)

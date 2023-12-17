@@ -4,7 +4,8 @@ function assets.load()
     assets.images = {
         player = {
             body = love.graphics.newImage("assets/images/player/body.png");
-            handDefault = love.graphics.newImage("assets/images/player/hand_default.png")
+            handDefault = love.graphics.newImage("assets/images/player/hand_default.png");
+            handWeapon = love.graphics.newImage("assets/images/player/hand_placeholder.png");
         };
         tiles = {
             prototypeGreen = love.graphics.newImage("assets/images/texture_09.png")
