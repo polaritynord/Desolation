@@ -6,6 +6,7 @@ local mapRenderer = require("scripts.mapRenderer")
 local interfaceManager = require("scripts.ui.interfaceManager")
 local gameUi = require("scripts.ui.gameUi")
 local menuUi = require("scripts.ui.menuUi")
+local weaponManager = require("scripts.weaponManager")
 
 local fullscreen = false
 
@@ -38,6 +39,7 @@ function love.load()
     GameLoad()
     menuUi:load()
     gameUi:load()
+    weaponManager:load()
     GameState = "menu"
 end
 

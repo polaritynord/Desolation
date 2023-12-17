@@ -1,6 +1,7 @@
 local assets = require("assets")
 local coreFuncs = require("coreFuncs")
 local humanoid = require("scripts.humanoid")
+local weaponManager = require("scripts.weaponManager")
 
 local player = {}
 
