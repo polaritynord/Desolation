@@ -32,7 +32,7 @@ function gameUi:createHUDCanvas()
         "12", {800, 455}, 36, "++", "left", "disposable-droid-bold", {1,1,1,1}
     )
     --Ammunition of current weapon
-    self.hud.wepaonAmmunition = self.hud:newTextLabel(
+    self.hud.weaponAmmunition = self.hud:newTextLabel(
         "94", {800, 485}, 20, "++", "left", "disposable-droid", {1,1,1,1}
     )
 end
@@ -70,8 +70,21 @@ function gameUi:createPauseCanvas()
 end
 
 function gameUi:updateHUDCanvas()
+    --Health & Armor bars
     self.hud.healthText.text = Player.health
     self.hud.armorText.text = Player.armor
+    --Current weapon
+    local weapon = Player.inventory.weapons[Player.inventory.slot]
+    if weapon then
+        self.hud.weaponImg.source = assets.images.ui[string.lower(weapon.name) .. "Img"]
+        self.hud.weaponMagAmmo.text = weapon.magAmmo
+        self.hud.weaponAmmunition.text = Player.inventory.ammunition[weapon.ammoType]
+    else
+        self.hud.weaponImg.source = nil
+        self.hud.weaponMagAmmo.text = "-"
+        self.hud.weaponAmmunition.text = "-"
+    end
+    self.hud.weaponIndex.text = Player.inventory.slot
 end
 
 function gameUi:updatePauseCanvas(delta)

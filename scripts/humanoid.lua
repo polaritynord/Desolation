@@ -13,6 +13,7 @@ function humanoid.new()
         sprinting = false;
         moving = false;
         animationSizeDiff = 0; --Used in walk animation
+        handOffset = 0;
         inventory = {
             weapons = {nil, nil, nil};
             items = {};
@@ -46,6 +47,9 @@ function humanoid.new()
         --Move hands forward a bit
         pos[1] = pos[1] + math.cos(self.rotation) * 20 * Camera.zoom
         pos[2] = pos[2] + math.sin(self.rotation) * 20 * Camera.zoom
+        --Offsetting
+        pos[1] = pos[1] + math.cos(self.rotation) * self.handOffset * Camera.zoom
+        pos[2] = pos[2] + math.sin(self.rotation) * self.handOffset * Camera.zoom
         --Draw
         love.graphics.draw(
             src, pos[1], pos[2], self.rotation,

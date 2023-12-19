@@ -88,6 +88,7 @@ function player.new()
     end
 
     function instance:slotSwitching()
+        local oldSlot = self.inventory.slot
         --Switch slot with number keys
         for i = 1, 3 do
             if love.keyboard.isDown(tostring(i)) and i ~= self.inventory.slot then
@@ -102,6 +103,10 @@ function player.new()
             self.inventory.slot = temp
         end
         self.keyPressData["q"] = love.keyboard.isDown("q")
+        --Update hand offset
+        if oldSlot ~= self.inventory.slot and self.inventory.weapons[oldSlot] ~= self.inventory.weapons[self.inventory.slot] then
+            self.handOffset = -15
+        end
     end
 
     --Core functions
@@ -111,7 +116,9 @@ function player.new()
             self.inventory.items[#self.inventory.items+1] = {}
         end
         --Some inventory testin stuff
-        instance.inventory.weapons[1] = weaponManager.Pistol.new()
+        self.inventory.weapons[1] = weaponManager.Pistol.new()
+        self.inventory.weapons[1].magAmmo = 6
+        self.inventory.ammunition["light"] = 78
     end
 
     function instance:update(delta)
@@ -122,6 +129,8 @@ function player.new()
         Camera:followTarget(self, 8, delta)
         self:changeCameraZoom(delta)
         self:doWalkingAnim()
+        --Update hand offset
+        self.handOffset = self.handOffset + (-self.handOffset) * 20 * delta
     end
 
     function instance:draw()

@@ -23,6 +23,7 @@ function weaponManager:load()
         instance.bulletOffset = instanceData.bulletOffset
         instance.recoil = instanceData.recoil
         instance.screenShakeIntensity = instanceData.screenShakeIntensity
+        instance.ammoType = instanceData.ammoType
         self[instance.name] = instance
     end
 end
