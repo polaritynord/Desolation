@@ -35,6 +35,23 @@ function gameUi:createHUDCanvas()
     self.hud.weaponAmmunition = self.hud:newTextLabel(
         "94", {800, 485}, 20, "++", "left", "disposable-droid", {1,1,1,1}
     )
+    
+    --Other weapons 1 index
+    self.hud.weapon2Index = self.hud:newTextLabel(
+        "2", {840, 430}, 16, "++", "left", "disposable-droid", {1,1,1,1}
+    )
+    --Other weapons 1 image
+    self.hud.weapon2Img = self.hud:newImage(
+        assets.images.ui.ARImg, {890, 440}, {2,2}, 0, "++"
+    )
+    --Other weapons 2 index
+    self.hud.weapon3Index = self.hud:newTextLabel(
+        "3", {840, 480}, 16, "++", "left", "disposable-droid", {1,1,1,1}
+    )
+    --Other weapons 2 image
+    self.hud.weapon3Img = self.hud:newImage(
+        assets.images.ui.shotgunImg, {890, 490}, {2,2}, 0, "++"
+    )
 end
 
 function gameUi:createPauseCanvas()
