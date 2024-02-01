@@ -2,8 +2,17 @@ local assets = require("assets")
 local interfaceManager = require("scripts.ui.interfaceManager")
 local gameUi = {}
 
-local function menuButtonClick()
+--Button event functions
+local function menuButtonClick(_element)
     GameState = "menu"
+end
+
+function gameUi.quitButtonClick(element)
+    if element.buttonText == "Quit" then
+        element.buttonText = "Are You Sure?"
+    else
+        love.event.quit()
+    end
 end
 
 function gameUi:createHUDCanvas()
@@ -35,7 +44,7 @@ function gameUi:createHUDCanvas()
     self.hud.weaponAmmunition = self.hud:newTextLabel(
         "94", {800, 485}, 20, "++", "left", "disposable-droid", {1,1,1,1}
     )
-    
+
     --Other weapons 1 index
     self.hud.weapon2Index = self.hud:newTextLabel(
         "2", {840, 430}, 16, "++", "left", "disposable-droid", {1,1,1,1}
@@ -82,7 +91,7 @@ function gameUi:createPauseCanvas()
     --Quit button
     self.pauseMenu.quit = self.pauseMenu:newButton(
         {70, 320}, {0,0}, {1,1,1,1}, 1, "Quit", 30,
-        "disposable-droid", "xx", function () love.event.quit() end
+        "disposable-droid", "xx", gameUi.quitButtonClick
     )
 end
 

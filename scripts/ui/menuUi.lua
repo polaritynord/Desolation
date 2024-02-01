@@ -1,4 +1,5 @@
 local interfaceManager = require("scripts.ui.interfaceManager")
+local quitButtonClick = require("scripts.ui.gameUi").quitButtonClick
 
 local menuUi = {}
 
@@ -25,9 +26,9 @@ function menuUi:load()
         "disposable-droid", "xx", playButtonClick
     )
     --Quit button
-    self.mainMenu.play = self.mainMenu:newButton(
+    self.mainMenu.quit = self.mainMenu:newButton(
         {70, 240}, {0,0}, {1,1,1,1}, 1, "Quit", 30,
-        "disposable-droid", "xx", function () love.event.quit() end
+        "disposable-droid", "xx", quitButtonClick
     )
 end
 
