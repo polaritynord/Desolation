@@ -15,6 +15,7 @@ function gameUi.quitButtonClick(element)
     end
 end
 
+-- CANVAS CREATION FUNCTIONS
 function gameUi:createHUDCanvas()
     self.hud = interfaceManager:newCanvas()
     self.hud:newImage(assets.images.ui.healthBar, {97, 465}, {2.35,2.35}, 0, "x+")
@@ -95,6 +96,14 @@ function gameUi:createPauseCanvas()
     )
 end
 
+function gameUi:createDebugCanvas()
+    self.debug = interfaceManager:newCanvas()
+    self.debug.debugTexts = self.debug:newTextLabel(
+        "FPS: 217", {0, 0}, 20, "xx", "left", "disposable-droid", {1,1,1,1}
+    )
+end
+
+-- CANVAS UPDATING FUNCTIONS
 function gameUi:updateHUDCanvas()
     --Health & Armor bars
     self.hud.healthText.text = Player.health
@@ -129,10 +138,29 @@ end
 function gameUi:setCanvasState()
     self.hud.enabled = GameState == "game"
     self.pauseMenu.enabled = GameState == "game" and GamePaused
+    self.debug.enabled = GameState == "game"
 end
 
+function gameUi:updateDebugCanvas()
+    local fps = love.timer.getFPS()
+    --write vsync next to fps counter if enabled
+    local fps_suffix
+    print(love.window.getVSync())
+    if love.window.getVSync() == 1 then
+        fps_suffix = " (VSync ON)"
+    else
+        fps_suffix = " (VSync OFF)"
+    end
+    --Update debug text
+    self.debug.debugTexts.text = GAME_NAME .. " " .. GAME_VERSION_STATE .. " " .. GAME_VERSION ..
+                                "\nFPS: " .. fps .. fps_suffix .. "\nPlayer Coordinates: X=" ..
+                                math.floor(Player.position[1]) .. " Y=" .. math.floor(Player.position[2])
+end
+
+-- MAIN FUNCTIONS
 function gameUi:load()
     self:createHUDCanvas()
+    self:createDebugCanvas()
     self:createPauseCanvas()
 end
 
@@ -140,6 +168,7 @@ function gameUi:update(delta)
     self:setCanvasState()
     if GameState ~= "game" then return end
     self:updatePauseCanvas(delta)
+    self:updateDebugCanvas()
     if GamePaused then return end
     self:updateHUDCanvas()
 end
