@@ -14,5 +14,35 @@
         "ammoType": "light"
     },
 
-    "WEAPONS_LIST": ["Pistol"]
+    "AssaultRifle": {
+        "weaponType": "auto",
+        "bulletSpeed": 780,
+        "bulletDamage": 0,
+        "bulletSpread": 0,
+        "bulletPerShot": 1,
+        "reloadTime": 0,
+        "shootTime": 0.875,
+        "magSize": 13,
+        "bulletOffset": 15,
+        "recoil": 0.35,
+        "screenShakeIntensity": 0,
+        "ammoType": "light"
+    },
+
+    "Shotgun": {
+        "weaponType": "auto",
+        "bulletSpeed": 780,
+        "bulletDamage": 0,
+        "bulletSpread": 0,
+        "bulletPerShot": 1,
+        "reloadTime": 0,
+        "shootTime": 0.875,
+        "magSize": 13,
+        "bulletOffset": 15,
+        "recoil": 0.35,
+        "screenShakeIntensity": 0,
+        "ammoType": "light"
+    },
+
+    "WEAPONS_LIST": ["Pistol", "AssaultRifle", "Shotgun"]
 }

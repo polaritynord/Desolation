@@ -32,7 +32,6 @@ function gameUi:createHUDCanvas()
     self.hud.weaponIndex = self.hud:newTextLabel(
         "1", {700, 470}, 24, "++", "left", "disposable-droid", {1,1,1,1}
     )
-
     --Current weapon image
     self.hud.weaponImg = self.hud:newImage(
         assets.images.ui.pistolImg, {760, 480}, {3,3}, 0, "++"
@@ -48,7 +47,7 @@ function gameUi:createHUDCanvas()
 
     --Other weapons 1 index
     self.hud.weapon2Index = self.hud:newTextLabel(
-        "2", {840, 430}, 16, "++", "left", "disposable-droid", {1,1,1,1}
+        "2", {840, 430}, 20, "++", "left", "disposable-droid", {1,1,1,1}
     )
     --Other weapons 1 image
     self.hud.weapon2Img = self.hud:newImage(
@@ -56,7 +55,7 @@ function gameUi:createHUDCanvas()
     )
     --Other weapons 2 index
     self.hud.weapon3Index = self.hud:newTextLabel(
-        "3", {840, 480}, 16, "++", "left", "disposable-droid", {1,1,1,1}
+        "3", {840, 480}, 20, "++", "left", "disposable-droid", {1,1,1,1}
     )
     --Other weapons 2 image
     self.hud.weapon3Img = self.hud:newImage(
@@ -121,7 +120,35 @@ function gameUi:updateHUDCanvas()
         self.hud.weaponMagAmmo.text = "-"
         self.hud.weaponAmmunition.text = "-"
     end
+    --Update current weapon image scaling if the image is too big
+    local imgWidth = self.hud.weaponImg.source:getWidth()
+    if imgWidth > 18 then
+        local newScale = 54/imgWidth
+        self.hud.weaponImg.scale = {newScale, newScale}
+    else
+        self.hud.weaponImg.scale = {3, 3}
+    end
     self.hud.weaponIndex.text = Player.inventory.slot
+    --Other weapon views
+    --Find smallest value in {1, 2, 3} excluding our current slot number
+    local numberList = {1, 2, 3} ; table.remove(numberList, Player.inventory.slot)
+    table.sort(numberList)
+    --Weapon 2
+    weapon = Player.inventory.weapons[numberList[1]]
+    self.hud.weapon2Index.text = numberList[1]
+    if weapon then
+        self.hud.weapon2Img.source = assets.images.ui[string.lower(weapon.name) .. "Img"]
+    else
+        self.hud.weapon2Img.source = nil
+    end
+    --Weapon 3
+    weapon = Player.inventory.weapons[numberList[2]]
+    self.hud.weapon3Index.text = numberList[2]
+    if weapon then
+        self.hud.weapon3Img.source = assets.images.ui[string.lower(weapon.name) .. "Img"]
+    else
+        self.hud.weapon3Img.source = nil
+    end
 end
 
 function gameUi:updatePauseCanvas(delta)

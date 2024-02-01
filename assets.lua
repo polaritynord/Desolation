@@ -13,7 +13,7 @@ function assets.load()
         ui = {
             healthBar = love.graphics.newImage("assets/images/hud/health_bar.png");
             pistolImg = love.graphics.newImage("assets/images/hud/pistol.png");
-            ARImg = love.graphics.newImage("assets/images/hud/assault_rifle.png");
+            assaultrifleImg = love.graphics.newImage("assets/images/hud/assault_rifle.png");
             shotgunImg = love.graphics.newImage("assets/images/hud/shotgun.png");
         }
     }
