@@ -27,6 +27,16 @@ function love.keypressed(key, _unicode)
     if key == "escape" then
         GamePaused = not GamePaused
     end
+    --Debug menu toggle key
+    if key == "f3" and GameState == "game" then
+        gameUi.debug.toggled = not gameUi.debug.toggled
+        --Disable verbose mode if closing menu
+        if not gameUi.debug.toggled then gameUi.debug.verboseMode = false end
+        --Check for verbose opening
+        if gameUi.debug.toggled and (love.keyboard.isDown("lctrl") or love.keyboard.isDown("rctrl")) then
+            gameUi.debug.verboseMode = true
+        end
+    end
 end
 
 function GameLoad()

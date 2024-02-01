@@ -98,6 +98,8 @@ end
 
 function gameUi:createDebugCanvas()
     self.debug = interfaceManager:newCanvas()
+    self.debug.toggled = false
+    self.debug.verboseMode = false
     self.debug.debugTexts = self.debug:newTextLabel(
         "FPS: 217", {0, 0}, 20, "xx", "left", "disposable-droid", {1,1,1,1}
     )
@@ -138,14 +140,13 @@ end
 function gameUi:setCanvasState()
     self.hud.enabled = GameState == "game"
     self.pauseMenu.enabled = GameState == "game" and GamePaused
-    self.debug.enabled = GameState == "game"
+    self.debug.enabled = GameState == "game" and self.debug.toggled
 end
 
 function gameUi:updateDebugCanvas()
     local fps = love.timer.getFPS()
     --write vsync next to fps counter if enabled
     local fps_suffix
-    print(love.window.getVSync())
     if love.window.getVSync() == 1 then
         fps_suffix = " (VSync ON)"
     else
@@ -153,8 +154,9 @@ function gameUi:updateDebugCanvas()
     end
     --Update debug text
     self.debug.debugTexts.text = GAME_NAME .. " " .. GAME_VERSION_STATE .. " " .. GAME_VERSION ..
-                                "\nFPS: " .. fps .. fps_suffix .. "\nPlayer Coordinates: X=" ..
+                                " - Made by PolarNord" .. "\nFPS: " .. fps .. fps_suffix .. "\nPlayer Coordinates: X=" ..
                                 math.floor(Player.position[1]) .. " Y=" .. math.floor(Player.position[2])
+    --TODO additional debug info to add: particle count, humanoid count
 end
 
 -- MAIN FUNCTIONS
