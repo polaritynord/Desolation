@@ -50,6 +50,12 @@ function coreFuncs.getRelativeElementPosition(position, align, parentCanvas)
     return {x + parentCanvas.position[1], y + parentCanvas.position[2]}
 end
 
+function coreFuncs.roundDecimal(number, decimals)
+    local power = 10^decimals
+    return math.floor(number * power) / power
+end
+
+
 -- Thanks to @pgimeno at https://love2d.org/forums/viewtopic.php?f=4&t=93768&p=250899#p250899
 function SetFont(fontname, size)
     local key = fontname .. "\0" .. size

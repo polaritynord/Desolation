@@ -12,9 +12,11 @@ function assets.load()
         };
         ui = {
             healthBar = love.graphics.newImage("assets/images/hud/health_bar.png");
-            pistolImg = love.graphics.newImage("assets/images/hud/pistol.png");
-            assaultrifleImg = love.graphics.newImage("assets/images/hud/assault_rifle.png");
-            shotgunImg = love.graphics.newImage("assets/images/hud/shotgun.png");
+        };
+        weapons = {
+            pistolImg = love.graphics.newImage("assets/images/weapons/pistol.png");
+            assaultrifleImg = love.graphics.newImage("assets/images/weapons/assault_rifle.png");
+            shotgunImg = love.graphics.newImage("assets/images/weapons/shotgun.png");
         }
     }
 

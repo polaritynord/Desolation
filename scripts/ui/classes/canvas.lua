@@ -14,13 +14,14 @@ function canvas.new()
         index = nil;
     }
 
-    function instance:newImage(source, position, scale, rotation, align)
+    function instance:newImage(source, position, scale, rotation, align, color)
         local instance2 = image.new()
         instance2.source = source
         instance2.position = position
         instance2.scale = scale
         instance2.rotation = rotation
         instance2.align = align
+        instance2.color = color or {1,1,1,1}
         instance2.parentCanvas = self
         self.elements[#self.elements+1] = instance2
         return instance2

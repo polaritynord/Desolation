@@ -1,5 +1,6 @@
 local assets = require("assets")
 local interfaceManager = require("scripts.ui.interfaceManager")
+local coreFuncs = require("coreFuncs")
 local gameUi = {}
 
 --Button event functions
@@ -112,21 +113,21 @@ function gameUi:updateHUDCanvas()
     --Current weapon
     local weapon = Player.inventory.weapons[Player.inventory.slot]
     if weapon then
-        self.hud.weaponImg.source = assets.images.ui[string.lower(weapon.name) .. "Img"]
+        self.hud.weaponImg.source = assets.images.weapons[string.lower(weapon.name) .. "Img"]
         self.hud.weaponMagAmmo.text = weapon.magAmmo
         self.hud.weaponAmmunition.text = Player.inventory.ammunition[weapon.ammoType]
+        --Update current weapon image scaling if the image is too big
+        local imgWidth = self.hud.weaponImg.source:getWidth()
+        if imgWidth > 18 then
+            local newScale = 54/imgWidth
+            self.hud.weaponImg.scale = {newScale, newScale}
+        else
+            self.hud.weaponImg.scale = {3, 3}
+        end
     else
         self.hud.weaponImg.source = nil
         self.hud.weaponMagAmmo.text = "-"
         self.hud.weaponAmmunition.text = "-"
-    end
-    --Update current weapon image scaling if the image is too big
-    local imgWidth = self.hud.weaponImg.source:getWidth()
-    if imgWidth > 18 then
-        local newScale = 54/imgWidth
-        self.hud.weaponImg.scale = {newScale, newScale}
-    else
-        self.hud.weaponImg.scale = {3, 3}
     end
     self.hud.weaponIndex.text = Player.inventory.slot
     --Other weapon views
@@ -182,7 +183,8 @@ function gameUi:updateDebugCanvas()
     --Update debug text
     self.debug.debugTexts.text = GAME_NAME .. " " .. GAME_VERSION_STATE .. " " .. GAME_VERSION ..
                                 " - Made by PolarNord" .. "\nFPS: " .. fps .. fps_suffix .. "\nPlayer Coordinates: X=" ..
-                                math.floor(Player.position[1]) .. " Y=" .. math.floor(Player.position[2])
+                                math.floor(Player.position[1]) .. " Y=" .. math.floor(Player.position[2]) .. "\n" ..
+                                "Memory Used(Excluding Love2D): " .. coreFuncs.roundDecimal(collectgarbage("count")/1024, 2) .. " MB"
     --TODO additional debug info to add: particle count, humanoid count
 end
 

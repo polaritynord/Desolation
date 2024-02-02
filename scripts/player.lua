@@ -117,8 +117,6 @@ function player.new()
         end
         --Some inventory testin stuff
         self.inventory.weapons[1] = weaponManager.Pistol.new()
-        self.inventory.weapons[2] = weaponManager.AssaultRifle.new()
-        self.inventory.weapons[3] = weaponManager.Shotgun.new()
         self.inventory.weapons[1].magAmmo = 6
         self.inventory.ammunition["light"] = 78
     end
