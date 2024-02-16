@@ -138,7 +138,7 @@ function gameUi:updateHUDCanvas()
     weapon = Player.inventory.weapons[numberList[1]]
     self.hud.weapon2Index.text = numberList[1]
     if weapon then
-        self.hud.weapon2Img.source = assets.images.ui[string.lower(weapon.name) .. "Img"]
+        self.hud.weapon2Img.source = assets.images.weapons[string.lower(weapon.name) .. "Img"]
     else
         self.hud.weapon2Img.source = nil
     end
@@ -146,7 +146,7 @@ function gameUi:updateHUDCanvas()
     weapon = Player.inventory.weapons[numberList[2]]
     self.hud.weapon3Index.text = numberList[2]
     if weapon then
-        self.hud.weapon3Img.source = assets.images.ui[string.lower(weapon.name) .. "Img"]
+        self.hud.weapon3Img.source = assets.images.weapons[string.lower(weapon.name) .. "Img"]
     else
         self.hud.weapon3Img.source = nil
     end

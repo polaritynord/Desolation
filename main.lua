@@ -7,6 +7,7 @@ local interfaceManager = require("scripts.ui.interfaceManager")
 local gameUi = require("scripts.ui.gameUi")
 local menuUi = require("scripts.ui.menuUi")
 local weaponManager = require("scripts.weaponManager")
+local weaponItem = require("scripts.weaponItem")
 
 local fullscreen = false
 local cursors = {

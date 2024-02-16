@@ -109,6 +109,11 @@ function player.new()
         end
     end
 
+    function instance:weaponDropping()
+        local weapon = self.inventory.weapons[self.inventory.slot]
+        if not love.keyboard.isDown("v") or not weapon then return end
+    end
+
     --Core functions
     function instance:load()
         --Create item slots in inventory
@@ -126,6 +131,7 @@ function player.new()
         self:movement(delta)
         self:pointTowardsMouse()
         self:slotSwitching()
+        self:weaponDropping()
         Camera:followTarget(self, 8, delta)
         self:changeCameraZoom(delta)
         self:doWalkingAnim()
