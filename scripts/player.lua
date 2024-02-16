@@ -47,7 +47,7 @@ function player.new()
     end
 
     function instance:movement(delta)
-        local speed = 140
+        local speed = GetGlobal("p_speed")
         self.velocity = {0, 0}
         --Get key input
         if love.keyboard.isDown("a") then

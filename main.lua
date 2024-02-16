@@ -6,6 +6,7 @@ local mapRenderer = require("scripts.mapRenderer")
 local interfaceManager = require("scripts.ui.interfaceManager")
 local gameUi = require("scripts.ui.gameUi")
 local menuUi = require("scripts.ui.menuUi")
+local globals = require("scripts.globals")
 local weaponManager = require("scripts.weaponManager")
 local weaponItem = require("scripts.weaponItem")
 
