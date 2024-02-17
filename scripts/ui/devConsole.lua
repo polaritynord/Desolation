@@ -3,6 +3,8 @@ local interfaceManager = require("scripts.ui.interfaceManager")
 local devConsole = {}
 
 function devConsole:load()
+    self.takingInput = true
+    self.commandInput = ""
     --SETUP CANVAS
     self.canvas = interfaceManager:newCanvas()
     --Window background
@@ -17,6 +19,14 @@ function devConsole:load()
     self.windowTitle = self.canvas:newTextLabel(
         "Developer Console", {0, 135}, 24, "xx", "left", "disposable-droid", {1,1,1,1}
     )
+    --Command entry bar
+    self.commandInputBar = self.canvas:newRectangle(
+        {0, 415}, {480, 20}, {1,1,1,0.1}, "xx"
+    )
+    --Command entry text
+    self.commandInputText = self.canvas:newTextLabel(
+        "> ", {0, 415}, 20, "xx", "left", "disposable-droid", {1,1,1,1}
+    )
 end
 
 function devConsole:update(delta)
@@ -30,6 +40,17 @@ function devConsole:update(delta)
         self.canvas.alpha = 0.25
     end
     if not DevConsoleOpen then return end
+    --Update command input text
+    self.commandInputText.text = "> " .. self.commandInput
+    if self.takingInput then
+        self.commandInputText.text = self.commandInputText.text .. "_"
+    end
+end
+
+function love.textinput(t)
+    if devConsole.takingInput and DevConsoleOpen then
+        devConsole.commandInput = devConsole.commandInput .. t
+    end
 end
 
 return devConsole

@@ -1,3 +1,4 @@
+local utf8 = require("utf8")
 local assets = require("assets")
 local player = require("scripts.player")
 local rgb = require("coreFuncs").rgb
@@ -20,7 +21,7 @@ local cursors = {
 DevConsoleOpen = false
 MenuUIOffset = 0
 
-function love.keypressed(key, _unicode)
+function love.keypressed(key, unicode)
     -- Fullscreen key
     if key == "f11" then
         fullscreen = not fullscreen
@@ -46,9 +47,22 @@ function love.keypressed(key, _unicode)
     --Developer console opening key
     if key == "\"" then
         print("dev console toggled")
+        if DevConsoleOpen and devConsoleUI.takingInput then return end
         DevConsoleOpen = not DevConsoleOpen
         if DevConsoleOpen and GameState == "game" then
             GamePaused = true
+        end
+    end
+
+    --Dev console text erasing
+    if key == "backspace" then
+        -- get the byte offset to the last UTF-8 character in the string.
+        local byteoffset = utf8.offset(devConsoleUI.commandInput, -1)
+
+        if byteoffset then
+            -- remove the last UTF-8 character.
+            -- string.sub operates on bytes rather than UTF-8 characters, so we couldn't do string.sub(text, 1, -2).
+            devConsoleUI.commandInput = string.sub(devConsoleUI.commandInput, 1, byteoffset - 1)
         end
     end
 end
@@ -90,6 +104,7 @@ function love.load()
     gameUi:load()
     devConsoleUI:load()
     GameState = "menu"
+    love.keyboard.setKeyRepeat(true)
 end
 
 function love.update(delta)
