@@ -13,6 +13,10 @@ function menuUi:setCanvasState()
     self.mainMenu.enabled = GameState == "menu"
 end
 
+function menuUi:updateCanvasOffseting(delta)
+    self.mainMenu.position[1] = MenuUIOffset
+end
+
 function menuUi:load()
     self.mainMenu = interfaceManager:newCanvas()
 
@@ -34,6 +38,7 @@ end
 
 function menuUi:update(delta)
     self:setCanvasState()
+    self:updateCanvasOffseting(delta)
 end
 
 return menuUi

@@ -9,12 +9,16 @@ local menuUi = require("scripts.ui.menuUi")
 local globals = require("scripts.globals")
 local weaponManager = require("scripts.weaponManager")
 local weaponItem = require("scripts.weaponItem")
+local devConsoleUI = require("scripts.ui.devConsole")
 
 local fullscreen = false
 local cursors = {
     arrow = love.mouse.getSystemCursor("arrow");
     crosshair = love.mouse.getSystemCursor("crosshair")
 }
+
+DevConsoleOpen = false
+MenuUIOffset = 0
 
 function love.keypressed(key, _unicode)
     -- Fullscreen key
@@ -39,6 +43,14 @@ function love.keypressed(key, _unicode)
             gameUi.debug.verboseMode = true
         end
     end
+    --Developer console opening key
+    if key == "\"" then
+        print("dev console toggled")
+        DevConsoleOpen = not DevConsoleOpen
+        if DevConsoleOpen and GameState == "game" then
+            GamePaused = true
+        end
+    end
 end
 
 function GameLoad()
@@ -61,6 +73,14 @@ local function setMouseCursor()
     end
 end
 
+local function updateUIOffset(delta)
+    local x = 0
+    if DevConsoleOpen then
+        x = -250
+    end
+    MenuUIOffset = MenuUIOffset + (x-MenuUIOffset)*8*delta
+end
+
 function love.load()
     love.graphics.setDefaultFilter("nearest", "nearest")
     assets.load()
@@ -68,6 +88,7 @@ function love.load()
     GameLoad()
     menuUi:load()
     gameUi:load()
+    devConsoleUI:load()
     GameState = "menu"
 end
 
@@ -78,7 +99,9 @@ function love.update(delta)
     elseif GameState == "menu" then end
     gameUi:update(delta)
     menuUi:update(delta)
+    devConsoleUI:update(delta)
     interfaceManager:update(delta)
+    updateUIOffset(delta)
     setMouseCursor()
 end
 

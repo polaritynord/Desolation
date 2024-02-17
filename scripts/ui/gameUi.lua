@@ -162,7 +162,7 @@ function gameUi:updatePauseCanvas(delta)
         self.pauseMenu.alpha = 0.4
     end
     --Scale background to fit screen
-    self.pauseMenu.background.size = {ScreenWidth, ScreenHeight}
+    self.pauseMenu.background.size = {ScreenWidth+500, ScreenHeight}
 end
 
 function gameUi:setCanvasState()
@@ -188,6 +188,10 @@ function gameUi:updateDebugCanvas()
     --TODO additional debug info to add: particle count, humanoid count
 end
 
+function gameUi:updateCanvasOffseting(delta)
+    self.pauseMenu.position[1] = MenuUIOffset
+end
+
 -- MAIN FUNCTIONS
 function gameUi:load()
     self:createHUDCanvas()
@@ -197,6 +201,7 @@ end
 
 function gameUi:update(delta)
     self:setCanvasState()
+    self:updateCanvasOffseting(delta)
     if GameState ~= "game" then return end
     self:updatePauseCanvas(delta)
     self:updateDebugCanvas()
