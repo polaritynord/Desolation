@@ -1,9 +1,13 @@
 local interfaceManager = require("scripts.ui.interfaceManager")
 
+function RunConsoleCommand(command)
+    print(8)
+end
+
 local devConsole = {}
 
 function devConsole:load()
-    self.takingInput = true
+    self.takingInput = false
     self.commandInput = ""
     --SETUP CANVAS
     self.canvas = interfaceManager:newCanvas()
@@ -27,6 +31,28 @@ function devConsole:load()
     self.commandInputText = self.canvas:newTextLabel(
         "> ", {0, 415}, 20, "xx", "left", "disposable-droid", {1,1,1,1}
     )
+    --"Press enter to send" text
+    self.commandSendHint = self.canvas:newTextLabel(
+        "Press ENTER to send written command. Write \"help\" for details.", {0, 400}, 15, "xx", "left", "disposable-droid", {1,1,1,0.6}
+    )
+end
+
+function devConsole:updateInputText()
+    self.commandInputText.text = "> " .. self.commandInput
+    if self.takingInput then
+        self.commandInputText.text = self.commandInputText.text .. "_"
+    end
+end
+
+function devConsole:checkForInputClick()
+    local mx, my = love.mouse.getPosition()
+    if mx > 350 and mx < 830 and my > 415 and my < 435 and love.mouse.isDown(1) then
+        self.takingInput = true
+    end
+end
+
+function devConsole:submitCommand()
+    if not devConsole.takingInput then return end
 end
 
 function devConsole:update(delta)
@@ -40,11 +66,12 @@ function devConsole:update(delta)
         self.canvas.alpha = 0.25
     end
     if not DevConsoleOpen then return end
-    --Update command input text
-    self.commandInputText.text = "> " .. self.commandInput
-    if self.takingInput then
-        self.commandInputText.text = self.commandInputText.text .. "_"
-    end
+    self:updateInputText()
+    self:checkForInputClick()
+    --Submit command
+    if not self.takingInput or not love.keyboard.isDown("return") then return end
+    RunConsoleCommand(self.commandInput)
+    self.commandInput = ""
 end
 
 function love.textinput(t)

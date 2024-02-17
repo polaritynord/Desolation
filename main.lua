@@ -31,7 +31,7 @@ function love.keypressed(key, unicode)
          love.window.setMode(960, 540, {resizable=true}) end
     end
     --Pause key
-    if key == "escape" then
+    if key == "escape" and not devConsoleUI.takingInput and not DevConsoleOpen then
         GamePaused = not GamePaused
     end
     --Debug menu toggle key
@@ -44,6 +44,7 @@ function love.keypressed(key, unicode)
             gameUi.debug.verboseMode = true
         end
     end
+
     --Developer console opening key
     if key == "\"" then
         print("dev console toggled")
@@ -63,6 +64,15 @@ function love.keypressed(key, unicode)
             -- remove the last UTF-8 character.
             -- string.sub operates on bytes rather than UTF-8 characters, so we couldn't do string.sub(text, 1, -2).
             devConsoleUI.commandInput = string.sub(devConsoleUI.commandInput, 1, byteoffset - 1)
+        end
+    end
+
+    --Dev console input mode exiting & stuff
+    if key == "escape" and DevConsoleOpen then
+        if devConsoleUI.takingInput then
+            devConsoleUI.takingInput = false
+        else
+            DevConsoleOpen = false
         end
     end
 end
