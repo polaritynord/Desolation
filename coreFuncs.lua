@@ -55,6 +55,15 @@ function coreFuncs.roundDecimal(number, decimals)
     return math.floor(number * power) / power
 end
 
+function coreFuncs.getLineCount(str)
+    local lines = 1
+    for i = 1, #str do
+        local c = str:sub(i, i)
+        if c == '\n' then lines = lines + 1 end
+    end
+
+    return lines
+end
 
 -- Thanks to @pgimeno at https://love2d.org/forums/viewtopic.php?f=4&t=93768&p=250899#p250899
 function SetFont(fontname, size)

@@ -9,5 +9,5 @@ function love.conf(t)
     --Some constants
     GAME_NAME = "Eternal Horizons"
     GAME_VERSION_STATE = "indev"
-    GAME_VERSION = "0.2.dev1"
+    GAME_VERSION = "0.2.dev2"
 end
