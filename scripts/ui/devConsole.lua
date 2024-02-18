@@ -29,7 +29,7 @@ function RunConsoleCommand(command)
             i = i + 1
         end
         --Check for cheat protection
-        if GetGlobalCheatValue(temp) and not GetGlobal("cheats") then return end
+        if GetGlobalCheatValue(temp) and GetGlobal("cheats") < 1 then return end
         --TODO: Toggle the global if no value is given
         if temp2 == "" then return end
         --Set value
@@ -38,6 +38,23 @@ function RunConsoleCommand(command)
 end
 
 local devConsole = {}
+
+function devConsole:readCommandsFromInput()
+    local i = 1
+    local temp = ""
+    local commands = {}
+    while i <= #self.commandInput do
+        if string.sub(self.commandInput, i, i+1) == "&&" then
+            commands[#commands+1] = temp
+            temp = ""
+            i = i + 2
+        end
+        temp = temp .. string.sub(self.commandInput, i, i)
+        i = i + 1
+    end
+    commands[#commands+1] = temp
+    return commands
+end
 
 function devConsole:load()
     self.takingInput = false
@@ -71,7 +88,6 @@ function devConsole:load()
 end
 
 function devConsole:updateInputText()
-    print(GetGlobal("freecam"))
     self.commandInputText.text = "> " .. self.commandInput
     if self.takingInput then
         self.commandInputText.text = self.commandInputText.text .. "_"
@@ -83,10 +99,6 @@ function devConsole:checkForInputClick()
     if mx > 350 and mx < 830 and my > 415 and my < 435 and love.mouse.isDown(1) then
         self.takingInput = true
     end
-end
-
-function devConsole:submitCommand()
-    if not devConsole.takingInput then return end
 end
 
 function devConsole:update(delta)

@@ -16,7 +16,7 @@ local globals = {
 
 function GetGlobal(name)
     if not globals[name] then return nil end
-    return globals[name][1]
+    return tonumber(globals[name][1])
 end
 
 function GetGlobalCheatValue(name)

@@ -47,7 +47,6 @@ function love.keypressed(key, unicode)
 
     --Developer console opening key
     if key == "\"" then
-        print("dev console toggled")
         if DevConsoleOpen and devConsoleUI.takingInput then return end
         DevConsoleOpen = not DevConsoleOpen
         if DevConsoleOpen and GameState == "game" then
@@ -78,7 +77,11 @@ function love.keypressed(key, unicode)
 
     --Dev console submitting command
     if key == "return" and DevConsoleOpen and devConsoleUI.takingInput then
-        RunConsoleCommand(devConsoleUI.commandInput)
+        --RunConsoleCommand(devConsoleUI.commandInput)
+        local commands = devConsoleUI:readCommandsFromInput()
+        for i = 1, #commands do
+            RunConsoleCommand(commands[i])
+        end
         devConsoleUI.commandInput = ""
     end
 end

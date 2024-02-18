@@ -132,8 +132,12 @@ function player.new()
         self:pointTowardsMouse()
         self:slotSwitching()
         self:weaponDropping()
-        Camera:followTarget(self, 8, delta)
-        self:changeCameraZoom(delta)
+        if GetGlobal("freecam") < 1 then
+            Camera:followTarget(self, 8, delta)
+            self:changeCameraZoom(delta)
+        else
+            Camera:freecamControls()
+        end
         self:doWalkingAnim()
         --Update hand offset
         self.handOffset = self.handOffset + (-self.handOffset) * 20 * delta
