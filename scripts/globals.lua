@@ -1,21 +1,27 @@
 local globals = {
     -- {value, cheatsEnabled}
-    cheats = {0, 0};
-    freecam = {0, 1};
-    p_speed = {140, 1};
-    s_vol_master = {1, 0};
-    s_vol_music = {1, 0};
-    s_vol_sfx = {1, 0};
-    s_graphics_vignette = {1, 0};
-    s_language = {"en", 0};
-    noclip = {0, 1};
-    god = {0, 1};
-    invisible = {0, 1};
-    inf_stamina = {0, 1};
+    cheats = {0, false};
+    freecam = {0, true};
+    p_speed = {140, true};
+    s_vol_master = {1, false};
+    s_vol_music = {1, false};
+    s_vol_sfx = {1, false};
+    s_graphics_vignette = {1, false};
+    s_language = {"en", false};
+    noclip = {0, true};
+    god = {0, true};
+    invisible = {0, true};
+    inf_stamina = {0, true};
 }
 
 function GetGlobal(name)
+    if not globals[name] then return nil end
     return globals[name][1]
+end
+
+function GetGlobalCheatValue(name)
+    if not globals[name] then return nil end
+    return globals[name][2]
 end
 
 function SetGlobal(name, value)

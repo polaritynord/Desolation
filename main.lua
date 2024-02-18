@@ -75,6 +75,12 @@ function love.keypressed(key, unicode)
             DevConsoleOpen = false
         end
     end
+
+    --Dev console submitting command
+    if key == "return" and DevConsoleOpen and devConsoleUI.takingInput then
+        RunConsoleCommand(devConsoleUI.commandInput)
+        devConsoleUI.commandInput = ""
+    end
 end
 
 function GameLoad()

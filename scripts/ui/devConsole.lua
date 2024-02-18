@@ -1,7 +1,40 @@
 local interfaceManager = require("scripts.ui.interfaceManager")
 
 function RunConsoleCommand(command)
-    print(8)
+    print("Ran console script: " .. command)
+    --command = tostring(command)
+    if command == "" then return end
+    local temp = "" ; local temp2 = ""
+    local i = 1
+    --Skip spaces
+    while string.sub(command, i, i) == " " do
+        i = i + 1
+    end
+    --Read first argument
+    while string.sub(command, i, i) ~= " " and i <= #command do
+        temp = temp .. string.sub(command, i, i)
+        i = i + 1
+    end
+    --If argument is a global variable:
+    if GetGlobal(temp) then
+        i = i + 1
+        --Skip spaces
+        while string.sub(command, i, i) == " " do
+            i = i + 1
+        end
+        --Read value
+        temp2 = ""
+        while i <= #command do
+            temp2 = temp2 .. string.sub(command, i, i)
+            i = i + 1
+        end
+        --Check for cheat protection
+        if GetGlobalCheatValue(temp) and not GetGlobal("cheats") then return end
+        --TODO: Toggle the global if no value is given
+        if temp2 == "" then return end
+        --Set value
+        SetGlobal(temp, temp2)
+    end
 end
 
 local devConsole = {}
@@ -38,6 +71,7 @@ function devConsole:load()
 end
 
 function devConsole:updateInputText()
+    print(GetGlobal("freecam"))
     self.commandInputText.text = "> " .. self.commandInput
     if self.takingInput then
         self.commandInputText.text = self.commandInputText.text .. "_"
@@ -68,10 +102,6 @@ function devConsole:update(delta)
     if not DevConsoleOpen then return end
     self:updateInputText()
     self:checkForInputClick()
-    --Submit command
-    if not self.takingInput or not love.keyboard.isDown("return") then return end
-    RunConsoleCommand(self.commandInput)
-    self.commandInput = ""
 end
 
 function love.textinput(t)
