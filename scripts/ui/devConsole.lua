@@ -1,23 +1,28 @@
 local interfaceManager = require("scripts.ui.interfaceManager")
 local coreFuncs = require("coreFuncs")
+local consoleFuncs = require("scripts.consoleFunctions")
 
 local devConsole = {
     takingInput = false;
     commandInput = "";
     logs = {};
+    assignedKeys = {};
+    assignedCommands = {};
 }
 
-function devConsole:readCommandsFromInput()
+function devConsole:readCommandsFromInput(commandInput, secondaryJoin)
     local i = 1
     local temp = ""
     local commands = {}
-    while i <= #self.commandInput do
-        if string.sub(self.commandInput, i, i+1) == "&&" then
+    local joinText = "&&"
+    if secondaryJoin then joinText = "//" end
+    while i <= #commandInput do
+        if string.sub(commandInput, i, i+1) == joinText then
             commands[#commands+1] = temp
             temp = ""
             i = i + 2
         end
-        temp = temp .. string.sub(self.commandInput, i, i)
+        temp = temp .. string.sub(commandInput, i, i)
         i = i + 1
     end
     commands[#commands+1] = temp
@@ -138,6 +143,10 @@ function RunConsoleCommand(command)
         --Set value
         SetGlobal(temp, temp2)
         return
+    end
+    -- If argument is a function:
+    if table.contains(consoleFuncs.funcsList, temp) then
+        consoleFuncs[temp .. "Script"](devConsole, command, i)
     end
 end
 

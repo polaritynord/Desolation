@@ -77,13 +77,23 @@ function love.keypressed(key, unicode)
 
     --Dev console submitting command
     if key == "return" and DevConsoleOpen and devConsoleUI.takingInput and devConsoleUI.commandInput ~= "" then
-        local commands = devConsoleUI:readCommandsFromInput()
+        local commands = devConsoleUI:readCommandsFromInput(devConsoleUI.commandInput)
         for i = 1, #commands do
             RunConsoleCommand(commands[i])
         end
         print("Ran console script: " .. devConsoleUI.commandInput)
         devConsoleUI:log("> " .. devConsoleUI.commandInput)
         devConsoleUI.commandInput = ""
+    end
+
+    --Check if the key is assigned to a devConsole command
+    if table.contains(devConsoleUI.assignedKeys, key) then
+        local commandInput = devConsoleUI.assignedCommands[table.contains(devConsoleUI.assignedKeys, key, true)]
+        local commands = devConsoleUI:readCommandsFromInput(commandInput, true)
+        for i = 1, #commands do
+            RunConsoleCommand(commands[i])
+        end
+        --RunConsoleCommand()
     end
 end
 
