@@ -1,6 +1,6 @@
 local consoleFunctions = {
     funcsList = {
-        "assign", "run_script",
+        "assign", "run_script", "give_ammo"
     }
 }
 
@@ -57,6 +57,16 @@ function consoleFunctions.run_scriptScript(devConsole, command, i)
             RunConsoleCommand(commands[k])
         end
     end
+end
+
+function consoleFunctions.give_ammoScript(devConsole, command, i)
+    --Return if cheats are disabled
+    if GetGlobal("cheats") < 1 then return end
+    --Get weapon, and make sure the weapon is ACTUALLY a weapon
+    local weapon = Player.inventory.weapons[Player.inventory.slot]
+    if weapon == nil then return end
+    --Add a magazine of ammunition to inventory
+    Player.inventory.ammunition[weapon.ammoType] = Player.inventory.ammunition[weapon.ammoType] + weapon.magSize
 end
 
 return consoleFunctions
