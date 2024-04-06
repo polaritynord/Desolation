@@ -21,6 +21,37 @@ local cursors = {
 DevConsoleOpen = false
 MenuUIOffset = 0
 
+function love.wheelmoved(x, y)
+    -- Mouse wheel slot switching
+    if not GamePaused and GameState == "game" then
+        -- Switching slots
+        local temp
+        if y > 0 then
+            --Backward
+            temp = Player.inventory.slot
+            Player.inventory.slot = Player.inventory.slot - 1
+            if Player.inventory.slot < 1 then Player.inventory.slot = 3 end
+            Player.oldSlot = Player.inventory.slot
+        elseif y < 0 then
+            --Forward
+            temp = Player.inventory.slot
+            Player.inventory.slot = Player.inventory.slot + 1
+            if Player.inventory.slot > 3 then Player.inventory.slot = 1 end
+            Player.oldSlot = temp
+        end
+    end
+    --DevConsole scrolling
+    if DevConsoleOpen then
+        if y > 0 then
+            devConsoleUI.logOffset = devConsoleUI.logOffset - 1
+            if devConsoleUI.logOffset < 0 then devConsoleUI.logOffset = 0 end
+        elseif y < 0 then
+            devConsoleUI.logOffset = devConsoleUI.logOffset + 1
+            if devConsoleUI.logOffset > #devConsoleUI.logs then devConsoleUI.logOffset = #devConsoleUI.logs end
+        end
+    end
+end
+
 function love.keypressed(key, unicode)
     -- Fullscreen key
     if key == "f11" then

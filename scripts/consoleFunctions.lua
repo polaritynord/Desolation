@@ -1,7 +1,7 @@
 local consoleFunctions = {
     funcsList = {
-        "assign", "run_script", "give_ammo"
-    }
+        "assign", "run_script", "give_ammo", "clear", "help"
+    };
 }
 
 function consoleFunctions.assignScript(devConsole, command, i)
@@ -67,6 +67,48 @@ function consoleFunctions.give_ammoScript(devConsole, command, i)
     if weapon == nil then return end
     --Add a magazine of ammunition to inventory
     Player.inventory.ammunition[weapon.ammoType] = Player.inventory.ammunition[weapon.ammoType] + weapon.magSize
+end
+
+function consoleFunctions.clearScript(devConsole, command, i)
+    for k, _ in pairs(devConsole.logs) do devConsole.logs[k] = nil end
+end
+
+function consoleFunctions.helpScript(devConsole, command, i)
+    i = i + 1
+    --Skip spaces
+    while string.sub(command, i, i) == " " do
+        i = i + 1
+    end
+    --Read title
+    local temp = ""
+    while string.sub(command, i, i) ~= " " do
+        --Check for incorrect writing
+        if i > #command then
+            break
+        end
+        temp = temp .. string.sub(command, i, i)
+        i = i + 1
+    end
+    --Check if its plain "help" or a staement is given
+    if temp == "" then
+        for k, v in ipairs(devConsole.helpTexts.titles) do
+            local statementType = "global"
+            if table.contains(consoleFunctions.funcsList, v, false) then
+                statementType = "function"
+            end
+            devConsole:log("\t(" .. statementType .. ") " .. v)
+        end
+        devConsole:log("List of statements:")
+        return
+    end
+
+    --Fetch description & make sure it exists
+    local descIndex = table.contains(devConsole.helpTexts.titles, temp, true)
+    if descIndex == false then
+        devConsole:log("Unknown statement \"" .. temp .. "\".\nWrite \"help\" to view the full list of globals and functions.")
+        return
+    end
+    devConsole:log(devConsole.helpTexts.descriptions[descIndex])
 end
 
 return consoleFunctions

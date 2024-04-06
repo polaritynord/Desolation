@@ -14,26 +14,6 @@ function player.new()
         ["q"] = false;
     }
 
-    -- Mouse wheel slot switching
-	function love.wheelmoved(x, y)
-		if GamePaused or GameState ~= "game" then return end
-		-- Switching slots
-		local temp
-		if y > 0 then
-			--Backward
-			temp = Player.inventory.slot
-			Player.inventory.slot = Player.inventory.slot - 1
-			if Player.inventory.slot < 1 then Player.inventory.slot = 3 end
-			Player.oldSlot = Player.inventory.slot
-		elseif y < 0 then
-			--Forward
-			temp = Player.inventory.slot
-			Player.inventory.slot = Player.inventory.slot + 1
-			if Player.inventory.slot > 3 then Player.inventory.slot = 1 end
-			Player.oldSlot = temp
-		end
-	end
-
     --Changes camera zoom dynamically depending on current sprinting state.
     function instance:changeCameraZoom(delta)
         local smoothness = 10

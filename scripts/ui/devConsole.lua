@@ -1,3 +1,4 @@
+local json = require("json")
 local interfaceManager = require("scripts.ui.interfaceManager")
 local coreFuncs = require("coreFuncs")
 local consoleFuncs = require("scripts.consoleFunctions")
@@ -8,6 +9,7 @@ local devConsole = {
     logs = {};
     assignedKeys = {};
     assignedCommands = {};
+    logOffset = 0;
 }
 
 function devConsole:readCommandsFromInput(commandInput, secondaryJoin)
@@ -34,6 +36,9 @@ function devConsole:log(text)
 end
 
 function devConsole:load()
+    --LOAD HELP DESCRIPTIONS
+    self.helpTexts = love.filesystem.read("assets/consoleHelpTexts.json")
+    self.helpTexts = json.decode(self.helpTexts)
     --SETUP CANVAS
     self.canvas = interfaceManager:newCanvas()
     --Window background
@@ -97,7 +102,7 @@ function devConsole:update(delta)
     if #self.logs < 1 then return end
     self.logTexts.text = ""
     local text
-    for i = #self.logs, 1, -1 do
+    for i = #self.logs-self.logOffset, 1, -1 do
         if coreFuncs.getLineCount(self.logTexts.text) > 13 then break end
         text = self.logs[i]
         self.logTexts.text = self.logTexts.text .. self.logs[i] .. "\n"

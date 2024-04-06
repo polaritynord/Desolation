@@ -1,0 +1,40 @@
+{
+    "titles": [
+        "cheats",
+        "freecam",
+        "p_speed",
+        "s_vol_master",
+        "s_vol_music",
+        "s_vol_sfx",
+        "g_vignette",
+        "s_language",
+        "noclip",
+        "god",
+        "invisible",
+        "inf_stamina",
+        "assign",
+        "run_script",
+        "give_ammo",
+        "clear"
+    ],
+
+    "descriptions": [
+        "(bool) cheats: Unlocks cheat commands. Advancements are disabled.",
+        "(bool) freecam: Allows the camera to move around freely using the mouse.",
+        "(number) p_speed: The speed of the player.",
+        "(number) s_vol_master: Master volume.",
+        "(number) s_vol_music: Music volume.",
+        "(number) s_vol_sfx: Sound effects volume.",
+        "(bool) g_vignette: Vignette effect.",
+        "(number) s_language: Has no use for now (v0.2.dev2).",
+        "(bool) noclip: Disables map collisions for player.",
+        "(bool) god: Makes the player invincible.",
+        "(bool) invisible: Makes NPC's unable to detect the presence of player.",
+        "(bool) inf_stamina: Enables endless sprinting.",
+        
+        "assign [key] [command]:\nAssigns a console command to a key to instantly run it in-game.",
+        "run_script [file_path]:\nRuns commands at the given text file.",
+        "give_ammo:\nAdds a magazine of ammo at the current weapon the player is holding.",
+        "clear:\nClears the developer console history."
+    ]
+}
