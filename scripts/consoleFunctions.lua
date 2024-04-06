@@ -1,6 +1,6 @@
 local consoleFunctions = {
     funcsList = {
-        "assign", "run_script", "give_ammo", "clear", "help"
+        "assign", "run_script", "give_ammo", "clear", "help", "lorem"
     };
 }
 
@@ -98,7 +98,7 @@ function consoleFunctions.helpScript(devConsole, command, i)
             end
             devConsole:log("\t(" .. statementType .. ") " .. v)
         end
-        devConsole:log("List of statements:")
+        devConsole:log("\tList of statements:")
         return
     end
 
@@ -108,7 +108,11 @@ function consoleFunctions.helpScript(devConsole, command, i)
         devConsole:log("Unknown statement \"" .. temp .. "\".\nWrite \"help\" to view the full list of globals and functions.")
         return
     end
-    devConsole:log(devConsole.helpTexts.descriptions[descIndex])
+    devConsole:log("\t" .. devConsole.helpTexts.descriptions[descIndex])
+end
+
+function consoleFunctions.loremScript(devConsole, command, i)
+    devConsole:log("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at libero ac elit eleifend bibendum eget eu odio. Donec tristique sodales efficitur. Donec bibendum, dui quis placerat ullamcorper, odio dolor feugiat quam, vel pretium orci eros eget risus. Vestibulum ligula nunc, lacinia ut augue nec, egestas consectetur lorem. Integer ante urna, posuere id arcu vel, fermentum feugiat sem. Morbi vehicula, ligula ac iaculis viverra, augue nisi dignissim metus, in vestibulum enim nisl aliquet nunc. Mauris euismod nibh quis aliquet interdum. Cras porttitor")
 end
 
 return consoleFunctions

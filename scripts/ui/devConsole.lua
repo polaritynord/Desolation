@@ -80,7 +80,7 @@ end
 
 function devConsole:checkForInputClick()
     local mx, my = love.mouse.getPosition()
-    if mx > 350 and mx < 830 and my > 415 and my < 435 and love.mouse.isDown(1) then
+    if mx > 350 and mx < 350+self.windowBase.size[1] and my > self.commandInputBar.position[2] and my < self.commandInputBar.position[2]+20 and love.mouse.isDown(1) then
         self.takingInput = true
     end
 end
@@ -89,6 +89,16 @@ function devConsole:update(delta)
     --Offsetting & canvas enabling
     self.canvas.position[1] = 600+MenuUIOffset
     self.canvas.enabled = DevConsoleOpen
+    --Change size dynamically by the window size
+    local widthRatio = ScreenWidth/960
+    local heightRatio = ScreenHeight/540
+    self.windowBase.size[1] = 480 * widthRatio
+    self.windowBase.size[2] = 300 * heightRatio
+    self.windowBar.size[1] = self.windowBase.size[1]
+    self.commandInputBar.size[1] = self.windowBase.size[1]
+    self.commandInputBar.position[2] = 115 + self.windowBase.size[2]
+    self.commandInputText.position[2] = self.commandInputBar.position[2]
+    self.commandSendHint.position[2] = 100 + self.windowBase.size[2]
     --Transparency animation
     if DevConsoleOpen then
         self.canvas.alpha = self.canvas.alpha + (1-self.canvas.alpha) * 12 * delta
@@ -100,10 +110,11 @@ function devConsole:update(delta)
     self:checkForInputClick()
     --Update logs text
     if #self.logs < 1 then return end
+    self.logTexts.wrapLimit = self.windowBase.size[1]-40
     self.logTexts.text = ""
     local text
     for i = #self.logs-self.logOffset, 1, -1 do
-        if coreFuncs.getLineCount(self.logTexts.text) > 13 then break end
+        if coreFuncs.getLineCount(self.logTexts.text) > math.floor(13*heightRatio) then break end
         text = self.logs[i]
         self.logTexts.text = self.logTexts.text .. self.logs[i] .. "\n"
     end

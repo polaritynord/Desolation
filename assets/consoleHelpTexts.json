@@ -32,9 +32,9 @@
         "(bool) invisible: Makes NPC's unable to detect the presence of player.",
         "(bool) inf_stamina: Enables endless sprinting.",
         
-        "assign [key] [command]:\nAssigns a console command to a key to instantly run it in-game.",
-        "run_script [file_path]:\nRuns commands at the given text file.",
-        "give_ammo:\nAdds a magazine of ammo at the current weapon the player is holding.",
-        "clear:\nClears the developer console history."
+        "assign [key] [command]:\n\tAssigns a console command to a key to instantly run it in-game.",
+        "run_script [file_path]:\n\tRuns commands at the given text file.",
+        "give_ammo:\n\tAdds a magazine of ammo at the current weapon the player is holding.",
+        "clear:\n\tClears the developer console history."
     ]
 }
