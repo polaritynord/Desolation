@@ -1,15 +1,12 @@
 local utf8 = require("utf8")
 local assets = require("assets")
-local player = require("scripts.player")
 local rgb = require("coreFuncs").rgb
-local camera = require("scripts.camera")
-local mapRenderer = require("scripts.mapRenderer")
+local mapManager = require("scripts.mapManager")
 local interfaceManager = require("scripts.ui.interfaceManager")
 local gameUi = require("scripts.ui.gameUi")
 local menuUi = require("scripts.ui.menuUi")
 local globals = require("scripts.globals")
 local weaponManager = require("scripts.weaponManager")
-local weaponItem = require("scripts.weaponItem")
 local devConsoleUI = require("scripts.ui.devConsole")
 
 local fullscreen = false
@@ -129,10 +126,7 @@ function love.keypressed(key, unicode)
 end
 
 function GameLoad()
-    Player = player.new()
-    Camera = camera.new()
-    Player:load()
-    mapRenderer:load()
+    mapManager:load()
     GamePaused = false
 end
 
@@ -171,8 +165,8 @@ end
 function love.update(delta)
     ScreenWidth, ScreenHeight = love.graphics.getDimensions()
     if GameState == "game" then
-        Player:update(delta)
-    elseif GameState == "menu" then end
+        mapManager:update(delta)
+    end
     gameUi:update(delta)
     menuUi:update(delta)
     devConsoleUI:update(delta)
@@ -184,9 +178,8 @@ end
 function love.draw()
     if GameState == "game" then
         love.graphics.setBackgroundColor(rgb(50))
-        --Game
-        mapRenderer:draw()
-        Player:draw()
+        --Game canvas
+        mapManager:draw()
     elseif GameState == "menu" then
         love.graphics.setBackgroundColor(rgb(75))
     end
