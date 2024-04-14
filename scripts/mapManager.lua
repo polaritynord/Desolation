@@ -1,30 +1,48 @@
 local assets = require("assets")
 local coreFuncs = require("coreFuncs")
 local weaponItem = require("scripts.weaponItem")
+local particleProp = require("scripts.props.particleProp")
 local player = require("scripts.player")
 local camera = require("scripts.camera")
 
 
-local mapRenderer = {
+local mapManager = {
     humanoids = {};
     props = {};
     tiles = {};
     weaponItems = {};
 }
 
-function mapRenderer:load()
+function mapManager:load()
+    self:resetTree()
+    Player = self:newHumanoid(player.new())
+    Camera = camera.new()
+    Player:load()
+    --Some prop tests over here
+    self.testParticles = self:newProp(particleProp.new())
+    self.testParticles.update = function (prop, delta)
+        print(prop)
+    end
+end
+
+function mapManager:resetTree()
     self.humanoids = {}
     self.props = {}
     self.tiles = {}
     self.weaponItems = {}
-    Player = player.new()
-    self.humanoids[#self.humanoids+1] = Player
-    Camera = camera.new()
-    Player:load()
-    --self.weaponItems[#self.weaponItems+1] = weaponItem.new()
 end
 
-function mapRenderer:update(delta)
+function mapManager:newHumanoid(humanoid)
+    self.humanoids[#self.humanoids+1] = humanoid
+    return humanoid
+end
+
+function mapManager:newProp(prop)
+    self.props[#self.props+1] = prop
+    return prop
+end
+
+function mapManager:update(delta)
     if GamePaused then return end
     --Humanoids
     for _, v in ipairs(self.humanoids) do
@@ -35,9 +53,14 @@ function mapRenderer:update(delta)
     for _, v in ipairs(self.weaponItems) do
         v:update(delta)
     end
+
+    --Props
+    for _, v in ipairs(self.props) do
+        if v.update then v:update(delta) end
+    end
 end
 
-function mapRenderer:draw()
+function mapManager:draw()
     --Placeholder tile
     local src = assets.images.tiles.prototypeGreen
     local width = src:getWidth() ;  local height = src:getHeight()
@@ -55,6 +78,11 @@ function mapRenderer:draw()
     for _, v in ipairs(self.humanoids) do
         v:draw()
     end
+
+    --Props
+    for _, v in ipairs(self.props) do
+        if v.draw then v:draw() end
+    end
 end
 
-return mapRenderer
+return mapManager
