@@ -1,6 +1,9 @@
+local weaponManager = require("scripts.weaponManager")
+
 local consoleFunctions = {
     funcsList = {
-        "assign", "run_script", "give_ammo", "clear", "help", "lorem"
+        "assign", "run_script", "give_ammo", "clear", "help", "lorem",
+        "give"
     };
 }
 
@@ -96,9 +99,9 @@ function consoleFunctions.helpScript(devConsole, command, i)
             if table.contains(consoleFunctions.funcsList, v, false) then
                 statementType = "function"
             end
-            devConsole:log("\t(" .. statementType .. ") " .. v)
+            devConsole:log("\t\t(" .. statementType .. ") " .. v)
         end
-        devConsole:log("\tList of statements:")
+        devConsole:log("\tWrite \"help [statement] to view detailed information.\n\tList of statements:")
         return
     end
 
@@ -113,6 +116,30 @@ end
 
 function consoleFunctions.loremScript(devConsole, command, i)
     devConsole:log("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at libero ac elit eleifend bibendum eget eu odio. Donec tristique sodales efficitur. Donec bibendum, dui quis placerat ullamcorper, odio dolor feugiat quam, vel pretium orci eros eget risus. Vestibulum ligula nunc, lacinia ut augue nec, egestas consectetur lorem. Integer ante urna, posuere id arcu vel, fermentum feugiat sem. Morbi vehicula, ligula ac iaculis viverra, augue nisi dignissim metus, in vestibulum enim nisl aliquet nunc. Mauris euismod nibh quis aliquet interdum. Cras porttitor")
+end
+
+function consoleFunctions.giveScript(devConsole, command, i)
+    --Return if cheats are disabled
+    if GetGlobal("cheats") < 1 then return end
+    i = i + 1
+    --Skip spaces
+    while string.sub(command, i, i) == " " do
+        i = i + 1
+    end
+    --Read weapon name
+    local temp = ""
+    while string.sub(command, i, i) ~= " " do
+        --Check for incorrect writing
+        if i > #command then
+            break
+        end
+        temp = temp .. string.sub(command, i, i)
+        i = i + 1
+    end
+    --Check if weapon exists & replace current slot with it
+    local weapon = weaponManager[temp]
+    if weapon == nil then return end
+    Player.inventory.weapons[Player.inventory.slot] = weapon.new()
 end
 
 return consoleFunctions

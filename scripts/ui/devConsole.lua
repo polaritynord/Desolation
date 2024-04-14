@@ -105,17 +105,17 @@ function devConsole:update(delta)
     else
         self.canvas.alpha = 0.25
     end
+
     if not DevConsoleOpen then return end
     self:updateInputText()
     self:checkForInputClick()
+
     --Update logs text
     if #self.logs < 1 then return end
     self.logTexts.wrapLimit = self.windowBase.size[1]-40
     self.logTexts.text = ""
-    local text
     for i = #self.logs-self.logOffset, 1, -1 do
         if coreFuncs.getLineCount(self.logTexts.text) > math.floor(13*heightRatio) then break end
-        text = self.logs[i]
         self.logTexts.text = self.logTexts.text .. self.logs[i] .. "\n"
     end
 end

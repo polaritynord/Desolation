@@ -13,6 +13,10 @@ local mapRenderer = {
 }
 
 function mapRenderer:load()
+    self.humanoids = {}
+    self.props = {}
+    self.tiles = {}
+    self.weaponItems = {}
     Player = player.new()
     self.humanoids[#self.humanoids+1] = Player
     Camera = camera.new()
