@@ -123,6 +123,23 @@ function love.keypressed(key, unicode)
         end
         --RunConsoleCommand()
     end
+    
+    --Dev console history
+    if key == "up" then
+        --Check if current input is in history, otherwise start from the most recent
+        local i 
+        if #devConsoleUI.logs > 0 then
+            --Find the most recent input in log history
+            i = #devConsoleUI.logs
+        else return end
+
+        while string.sub(devConsoleUI.logs[i], 1, 1) ~= ">" and i > 1 do
+            i = i -1
+        end
+        local log = string.sub(devConsoleUI.logs[i], 3, #devConsoleUI.logs[i])
+        --Replace current input with new log
+        devConsoleUI.commandInput = log
+    end
 end
 
 function GameLoad()
@@ -133,7 +150,7 @@ end
 local function setMouseCursor()
     if GameState == "game" then
         if not GamePaused then
-            love.mouse.setCursor(cursors.crosshair)
+            love.mouse.setCursor(assets.images.cursors.combat)
         else
             love.mouse.setCursor(cursors.arrow)
         end

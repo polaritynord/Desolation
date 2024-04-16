@@ -17,7 +17,10 @@ function assets.load()
             pistolImg = love.graphics.newImage("assets/images/weapons/pistol.png");
             assaultrifleImg = love.graphics.newImage("assets/images/weapons/assault_rifle.png");
             shotgunImg = love.graphics.newImage("assets/images/weapons/shotgun.png");
-        }
+        };
+        cursors = {
+            combat = love.mouse.newCursor("assets/images/cursor_combat.png", 12, 12);
+        };
     }
 
     assets.fonts = {}
