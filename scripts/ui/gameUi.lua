@@ -185,6 +185,7 @@ function gameUi:updateDebugCanvas()
                                 " - Made by PolarNord" .. "\nFPS: " .. fps .. fps_suffix .. "\nPlayer Coordinates: X=" ..
                                 math.floor(Player.position[1]) .. " Y=" .. math.floor(Player.position[2]) .. "\n" ..
                                 "Memory Used(Excluding Love2D): " .. coreFuncs.roundDecimal(collectgarbage("count")/1024, 2) .. " MB"
+                                .. "\nParticle Count: " .. MapManager.particleCount
     --TODO additional debug info to add: particle count, humanoid count
 end
 

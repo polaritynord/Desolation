@@ -11,6 +11,7 @@ local mapManager = {
     props = {};
     tiles = {};
     weaponItems = {};
+    particleCount = 0;
 }
 
 function mapManager:load()
@@ -20,8 +21,8 @@ function mapManager:load()
     Player:load()
     --Some prop tests over here
     self.testParticles = self:newProp(particleProp.new())
-    self.testParticles.update = function (prop, delta)
-        print(prop)
+    self.testParticles.propUpdate = function (prop, delta)
+        prop:newParticle("rect", {0, 0}, {50, 50}, 0)
     end
 end
 
@@ -44,6 +45,7 @@ end
 
 function mapManager:update(delta)
     if GamePaused then return end
+    local particleCount = 0
     --Humanoids
     for _, v in ipairs(self.humanoids) do
         v:update(delta)
@@ -57,7 +59,14 @@ function mapManager:update(delta)
     --Props
     for _, v in ipairs(self.props) do
         if v.update then v:update(delta) end
+        if v.propUpdate then v:propUpdate(v, delta) end
+        --Add up particle count to total
+        if v.particles then
+            particleCount = particleCount + #v.particles
+        end
     end
+
+    self.particleCount = particleCount
 end
 
 function mapManager:draw()

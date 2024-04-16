@@ -158,6 +158,7 @@ function love.load()
     menuUi:load()
     gameUi:load()
     devConsoleUI:load()
+    MapManager = mapManager
     GameState = "menu"
     love.keyboard.setKeyRepeat(true)
 end

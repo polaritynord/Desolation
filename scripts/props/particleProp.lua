@@ -9,8 +9,27 @@ function particleProp.new()
     newProp.particles = {}
 
     --Functions
+    function newProp:newParticle(attributes)
+        local particle = {
+            type = attributes.type or "rect";
+            position = attributes.position or {0, 0};
+            size = attributes.size or {40, 40};
+            rotation = attributes.rotation or 0;
+            despawnTime = attributes.despawnTime or 1;
+            timer = 0;
+        }
+
+        newProp.particles[#newProp.particles+1] = particle
+    end
+
     function newProp:update(delta)
-        for _, particle in ipairs(self.particles) do
+        for i, particle in ipairs(self.particles) do
+            --Particle despawning
+            particle.timer = particle.timer + delta
+            if particle.timer > particle.despawnTime then
+                table.remove(self.particles, i)
+            end
+            --Custom update function
             if particle.update then particle.update(particle, delta) end
         end
     end
@@ -18,7 +37,7 @@ function particleProp.new()
     function newProp:draw()
         for _, particle in ipairs(self.particles) do
             if particle.type == "rect" then
-                local offsettedPos = {pos+self.position[1], particle.position[2]+self.position[2]}
+                local offsettedPos = {particle.position[1]+self.position[1], particle.position[2]+self.position[2]}
                 local relativePos = coreFuncs.getRelativePosition(offsettedPos, Camera)
                 love.graphics.push()
                 love.graphics.translate(relativePos[1], relativePos[2])
