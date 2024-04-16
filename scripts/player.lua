@@ -16,10 +16,11 @@ function player.new()
 
     --Changes camera zoom dynamically depending on current sprinting state.
     function instance:changeCameraZoom(delta)
+        local sprintScale = 1.035
         local smoothness = 10
         local d
         if self.sprinting then
-            d = (1.035-Camera.zoom) * smoothness * delta
+            d = (sprintScale-Camera.zoom) * smoothness * delta
         else
             d = (1-Camera.zoom) * smoothness * delta
         end

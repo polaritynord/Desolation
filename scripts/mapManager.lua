@@ -22,7 +22,13 @@ function mapManager:load()
     --Some prop tests over here
     self.testParticles = self:newProp(particleProp.new())
     self.testParticles.propUpdate = function (prop, delta)
-        prop:newParticle("rect", {0, 0}, {50, 50}, 0)
+        prop:newParticle(
+            {
+                position = {200, -152};
+                type = "rect";
+                --size = {6, 3};
+            }
+        )
     end
 end
 
