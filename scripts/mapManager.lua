@@ -17,16 +17,16 @@ function mapManager:load()
     self:resetTree()
     Camera = camera.new()
     --Some prop tests over here
-    self.testParticles = self:newProp(particleProp.new())
-    self.testParticles.propUpdate = function (prop, delta)
-        prop:newParticle(
-            {
-                position = {200, -152};
-                type = "rect";
-                --size = {6, 3};
-            }
-        )
-    end
+    --self.testParticles = self:newProp(particleProp.new())
+    --self.testParticles.propUpdate = function (prop, delta)
+    --    prop:newParticle(
+    --        {
+    --            position = {200, -152};
+    --            type = "rect";
+    --            --size = {6, 3};
+    --        }
+    --    )
+    --end
 end
 
 function mapManager:resetTree()

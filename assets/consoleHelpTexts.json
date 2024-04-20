@@ -2,7 +2,7 @@
     "titles": [
         "cheats", "freecam", "p_speed", "s_vol_master", "s_vol_music", "s_vol_sfx",
         "g_vignette", "s_language", "noclip", "god", "invisible", "inf_stamina",
-        "assign", "run_script", "give_ammo", "clear", "give"
+        "assign", "run_script", "give_ammo", "clear", "give", "version"
     ],
 
     "descriptions": [
@@ -23,6 +23,7 @@
         "run_script [file_path]:\n\tRuns commands at the given text file.",
         "give_ammo:\n\tAdds a magazine of ammo at the current weapon the player is holding.",
         "clear:\n\tClears the developer console history.",
-        "give [weaponName]:\n\tReplaces the current slot of player with specified weapon."
+        "give [weaponName]:\n\tReplaces the current slot of player with specified weapon.",
+        "version:\n\tReturns the version of this build."
     ]
 }

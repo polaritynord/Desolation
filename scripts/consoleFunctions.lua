@@ -3,7 +3,7 @@ local weaponManager = require("scripts.weaponManager")
 local consoleFunctions = {
     funcsList = {
         "assign", "run_script", "give_ammo", "clear", "help", "lorem",
-        "give"
+        "give", "version"
     };
 }
 
@@ -140,6 +140,11 @@ function consoleFunctions.giveScript(devConsole, command, i)
     local weapon = weaponManager[temp]
     if weapon == nil then return end
     Player.inventory.weapons[Player.inventory.slot] = weapon.new()
+end
+
+function consoleFunctions.versionScript(devConsole, command, i)
+    devConsole:log("Made by Polaritynord")
+    devConsole:log("Eternal Horizons version " .. GAME_VERSION .. " (" .. GAME_VERSION_STATE .. ")")
 end
 
 return consoleFunctions
