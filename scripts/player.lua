@@ -2,6 +2,8 @@ local assets = require("assets")
 local coreFuncs = require("coreFuncs")
 local humanoid = require("scripts.humanoid")
 local weaponManager = require("scripts.weaponManager")
+local weaponItem = require("scripts.weaponItem")
+local mapManager = require("scripts.mapManager")
 
 local player = {}
 
@@ -93,6 +95,16 @@ function player.new()
     function instance:weaponDropping()
         local weapon = self.inventory.weapons[self.inventory.slot]
         if not love.keyboard.isDown("v") or not weapon then return end
+        --Create new weaponItem instance & pass the values to it
+        local itemInstance = weaponItem.new(weapon.new())
+        itemInstance.position = {self.position[1], self.position[2]}
+        itemInstance.velocity = 550
+        itemInstance.rotVelocity = math.random(-1, 1)*math.pi*3 --TODO this could've been better
+        itemInstance.realRot = self.rotation
+
+        mapManager:newWeaponItem(itemInstance)
+        --Get rid of the held weapon
+        self.inventory.weapons[self.inventory.slot] = nil
     end
 
     --Core functions

@@ -2,7 +2,6 @@ local assets = require("assets")
 local coreFuncs = require("coreFuncs")
 local weaponItem = require("scripts.weaponItem")
 local particleProp = require("scripts.props.particleProp")
-local player = require("scripts.player")
 local camera = require("scripts.camera")
 
 
@@ -16,9 +15,7 @@ local mapManager = {
 
 function mapManager:load()
     self:resetTree()
-    Player = self:newHumanoid(player.new())
     Camera = camera.new()
-    Player:load()
     --Some prop tests over here
     self.testParticles = self:newProp(particleProp.new())
     self.testParticles.propUpdate = function (prop, delta)
@@ -47,6 +44,11 @@ end
 function mapManager:newProp(prop)
     self.props[#self.props+1] = prop
     return prop
+end
+
+function mapManager:newWeaponItem(item)
+    self.weaponItems[#self.weaponItems+1] = item
+    return item
 end
 
 function mapManager:update(delta)

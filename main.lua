@@ -8,6 +8,7 @@ local menuUi = require("scripts.ui.menuUi")
 local globals = require("scripts.globals")
 local weaponManager = require("scripts.weaponManager")
 local devConsoleUI = require("scripts.ui.devConsole")
+local player = require("scripts.player")
 
 local fullscreen = false
 local cursors = {
@@ -144,6 +145,8 @@ end
 
 function GameLoad()
     mapManager:load()
+    Player = mapManager:newHumanoid(player.new())
+    Player:load()
     GamePaused = false
 end
 
