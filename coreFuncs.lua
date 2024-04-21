@@ -91,4 +91,8 @@ function table.contains(table, element, returnIndex)
     return false
 end
 
+function math.uniform(a,b)
+	return a + (math.random()*(b-a))
+end
+
 return coreFuncs

@@ -99,7 +99,7 @@ function player.new()
         local itemInstance = weaponItem.new(weapon.new())
         itemInstance.position = {self.position[1], self.position[2]}
         itemInstance.velocity = 550
-        itemInstance.rotVelocity = math.random(-1, 1)*math.pi*3 --TODO this could've been better
+        itemInstance.rotVelocity = math.uniform(-1, 1)*math.pi*12 --TODO this could've been better
         itemInstance.realRot = self.rotation
 
         mapManager:newWeaponItem(itemInstance)

@@ -60,8 +60,8 @@ function mapManager:update(delta)
     end
 
     --Weapon items
-    for _, v in ipairs(self.weaponItems) do
-        v:update(delta)
+    for i, v in ipairs(self.weaponItems) do
+        v:update(delta, i)
     end
 
     --Props
