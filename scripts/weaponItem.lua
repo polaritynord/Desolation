@@ -100,19 +100,23 @@ function weaponItem.new(weaponData)
         
         love.graphics.push()
             love.graphics.translate(pos[1], pos[2])
-            love.graphics.scale(2, 2)
+            love.graphics.scale(2*Camera.zoom, 2*Camera.zoom)
             love.graphics.rotate(self.rotation)
             self.test:draw(0.5, src, instance.quad, -width/2, -height/2)
         love.graphics.pop()
 
         --Draw "e to pick up" thing
-        --Base
+        --Base (offset=40)
         love.graphics.setColor(coreFuncs.rgb(220))
-        love.graphics.rectangle("fill", pos[1]-15, pos[2]-50, 30, 30)
+        love.graphics.rectangle("fill", pos[1]-52.5, pos[2]-50, 25, 25)
         --Key (TODO: Change this after adding bindings)
         love.graphics.setColor(coreFuncs.rgb(50))
         SetFont("assets/fonts/disposable-droid-bold.ttf", 32)
-        love.graphics.printf("E", pos[1]-8, pos[2]-50, 1000, "left")
+        love.graphics.printf("E", pos[1]-48, pos[2]-52, 1000, "left")
+        --Pick up text
+        SetFont("assets/fonts/disposable-droid-bold.ttf", 24)
+        love.graphics.setColor(coreFuncs.rgb(220))
+        love.graphics.printf("Pick Up", pos[1]-20, pos[2]-50, 1000, "left")
         
         love.graphics.setColor(1,1,1,1)
     end

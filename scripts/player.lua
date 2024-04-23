@@ -4,6 +4,7 @@ local humanoid = require("scripts.humanoid")
 local weaponManager = require("scripts.weaponManager")
 local weaponItem = require("scripts.weaponItem")
 local mapManager = require("scripts.mapManager")
+local playerSounds = require("scripts.playerSounds")
 
 local player = {}
 
@@ -117,6 +118,8 @@ function player.new()
         self.inventory.weapons[1] = weaponManager.Pistol.new()
         self.inventory.weapons[1].magAmmo = 6
         self.inventory.ammunition["light"] = 78
+        --Sound channel
+        playerSounds:load()
     end
 
     function instance:update(delta)
@@ -132,6 +135,7 @@ function player.new()
             Camera:freecamControls()
         end
         self:doWalkingAnim()
+        playerSounds:update(delta)
         --Update hand offset
         self.handOffset = self.handOffset + (-self.handOffset) * 20 * delta
     end

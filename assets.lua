@@ -24,6 +24,12 @@ function assets.load()
     }
 
     assets.fonts = {}
+
+    assets.sounds = {
+        ost = {
+            ambience = love.audio.newSource("assets/sounds/ost/ambience1.wav", "stream");
+        };
+    }
 end
 
 function assets.unloadAll()
