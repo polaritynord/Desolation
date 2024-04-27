@@ -3,6 +3,7 @@ local coreFuncs = require("coreFuncs")
 local weaponItem = require("scripts.weaponItem")
 local particleProp = require("scripts.props.particleProp")
 local camera = require("scripts.camera")
+local ostSounds = require("scripts.ostSounds")
 
 
 local mapManager = {
@@ -27,6 +28,7 @@ function mapManager:load()
     --        }
     --    )
     --end
+    ostSounds:load()
 end
 
 function mapManager:resetTree()
@@ -73,6 +75,8 @@ function mapManager:update(delta)
             particleCount = particleCount + #v.particles
         end
     end
+
+    ostSounds:update()
 
     self.particleCount = particleCount
 end

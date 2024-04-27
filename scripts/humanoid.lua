@@ -1,5 +1,6 @@
 local assets = require("assets")
 local coreFuncs = require("coreFuncs")
+local humanoidSounds = require("scripts.humanoidSounds")
 
 local humanoid = {}
 
@@ -24,6 +25,7 @@ function humanoid.new()
             };
             slot = 1;
         };
+        sounds = humanoidSounds.new()
     }
 
     --Changes the size of player with a sin wave.
