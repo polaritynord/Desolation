@@ -6,7 +6,7 @@
         "bulletSpread": 0,
         "bulletPerShot": 1,
         "reloadTime": 0,
-        "shootTime": 0.875,
+        "shootTime": 0.25,
         "magSize": 13,
         "bulletOffset": 15,
         "recoil": 0.35,

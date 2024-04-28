@@ -25,7 +25,8 @@ function humanoid.new()
             };
             slot = 1;
         };
-        sounds = humanoidSounds.new()
+        sounds = humanoidSounds.new();
+        shootTimer = 0;
     }
 
     --Changes the size of player with a sin wave.

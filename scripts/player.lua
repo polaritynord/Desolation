@@ -107,6 +107,20 @@ function player.new()
         self.inventory.weapons[self.inventory.slot] = nil
     end
 
+    function instance:shootingWeapon(delta)
+        self.shootTimer = self.shootTimer + delta
+        local weapon = self.inventory.weapons[self.inventory.slot]
+        if not weapon then return end
+        if love.mouse.isDown(1) and self.shootTimer > weapon.shootTime then
+            --Check if there is ammo available in magazine
+            if weapon.magAmmo > 0 then
+                --Fire weapon
+                self.sounds:shootWeapon(weapon.name)
+            end
+            self.shootTimer = 0
+        end
+    end
+
     --Core functions
     function instance:load()
         --Create item slots in inventory
@@ -127,6 +141,7 @@ function player.new()
         self:pointTowardsMouse()
         self:slotSwitching()
         self:weaponDropping()
+        self:shootingWeapon(delta)
         if GetGlobal("freecam") < 1 then
             Camera:followTarget(self, 8, delta)
             self:changeCameraZoom(delta)
