@@ -4,6 +4,8 @@ local humanoid = require("scripts.humanoid")
 local weaponManager = require("scripts.weaponManager")
 local weaponItem = require("scripts.weaponItem")
 local mapManager = require("scripts.mapManager")
+local particleProp = require("scripts.props.particleProp")
+local particleFunctions = require("scripts.particleFunctions")
 
 local player = {}
 
@@ -91,7 +93,13 @@ function player.new()
             self.handOffset = -15
         end
         --Cancel reload if slot switching is done
-        if oldSlot ~= self.inventory.slot then self.reloading = false end
+        if oldSlot ~= self.inventory.slot then
+            self.reloading = false
+            local weapon = self.inventory.weapons[self.inventory.previousSlot]
+            if weapon then
+                love.audio.stop(self.sounds.sources.reload[weapon.name])
+            end
+        end
     end
 
     function instance:weaponDropping()
@@ -122,6 +130,7 @@ function player.new()
                 end
                 self.handOffset = -weapon.handRecoilIntensity
                 self.sounds:shootWeapon(weapon.name)
+                self.shootParticles.createShootParticles(self.shootParticles)
             else
                 --Empty magazine
                 self.sounds:emptyMag()
@@ -157,6 +166,7 @@ function player.new()
             if love.keyboard.isDown("r") then
                 self.sounds:reloadWeapon(weapon.name)
                 self.reloading = true
+                self.reloadTimer = 0
             end
         end
     end
@@ -173,10 +183,28 @@ function player.new()
         self.inventory.ammunition["light"] = 78
         --Sound channel
         self.sounds:load()
+        --Shoot Particles
+        self.shootParticles = mapManager:newProp(particleProp.new())
+        self.shootParticles.createShootParticles = function(prop)
+            for _i = 1, 6 do
+                local size = math.uniform(5, 10)
+                prop:newParticle(
+                    {
+                        position = {60*math.cos(self.rotation), 60*math.sin(self.rotation)};
+                        size = {size, size};
+                        despawnTime = 0.1;
+                        color = {1, 0.47, 0.06, 0.85};
+                        rotation = self.rotation + math.uniform(-math.pi/3, math.pi/3);
+                        update = particleFunctions.shootParticleUpdate;
+                    }
+                )
+            end
+        end
     end
 
     function instance:update(delta)
         if GamePaused then return end
+        self.shootParticles.position = {self.position[1], self.position[2]}
         self:movement(delta)
         self:pointTowardsMouse()
         self:slotSwitching()

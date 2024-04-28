@@ -20,7 +20,7 @@ DevConsoleOpen = false
 MenuUIOffset = 0
 
 function love.wheelmoved(x, y)
-    -- Mouse wheel slot switching
+    --[[ Mouse wheel slot switching
     if not GamePaused and GameState == "game" then
         -- Switching slots
         local temp
@@ -40,6 +40,8 @@ function love.wheelmoved(x, y)
             Player.reloading = false
         end
     end
+    --]]
+    
     --DevConsole scrolling
     if DevConsoleOpen then
         if y > 0 then

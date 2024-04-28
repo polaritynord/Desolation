@@ -1,7 +1,5 @@
 local assets = require("assets")
 local coreFuncs = require("coreFuncs")
-local weaponItem = require("scripts.weaponItem")
-local particleProp = require("scripts.props.particleProp")
 local camera = require("scripts.camera")
 local ostSounds = require("scripts.ostSounds")
 
