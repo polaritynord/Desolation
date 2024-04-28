@@ -24,6 +24,7 @@ function weaponManager:load()
         instance.recoil = instanceData.recoil
         instance.screenShakeIntensity = instanceData.screenShakeIntensity
         instance.ammoType = instanceData.ammoType
+        instance.handRecoilIntensity = instanceData.handRecoilIntensity
         self[instance.name] = instance
     end
 end

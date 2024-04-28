@@ -90,6 +90,8 @@ function player.new()
         if oldSlot ~= self.inventory.slot and self.inventory.weapons[oldSlot] ~= self.inventory.weapons[self.inventory.slot] then
             self.handOffset = -15
         end
+        --Cancel reload if slot switching is done
+        if oldSlot ~= self.inventory.slot then self.reloading = false end
     end
 
     function instance:weaponDropping()
@@ -110,14 +112,52 @@ function player.new()
     function instance:shootingWeapon(delta)
         self.shootTimer = self.shootTimer + delta
         local weapon = self.inventory.weapons[self.inventory.slot]
-        if not weapon then return end
+        if not weapon or self.reloading then return end
         if love.mouse.isDown(1) and self.shootTimer > weapon.shootTime then
             --Check if there is ammo available in magazine
             if weapon.magAmmo > 0 then
                 --Fire weapon
+                for i = 1, weapon.bulletPerShot do
+                    weapon.magAmmo = weapon.magAmmo - 1
+                end
+                self.handOffset = -weapon.handRecoilIntensity
                 self.sounds:shootWeapon(weapon.name)
+            else
+                --Empty magazine
+                self.sounds:emptyMag()
             end
             self.shootTimer = 0
+        end
+    end
+
+    function instance:reloadingWeapon(delta)
+        local weapon = self.inventory.weapons[self.inventory.slot]
+        --Returning if no weapon is being held
+        if not weapon then return end
+        --Returning if: no ammunition is left, the mag is full
+        if weapon.magAmmo == weapon.magSize or self.inventory.ammunition[weapon.ammoType] < 1 then return end
+        if Player.reloading then
+            self.reloadTimer = self.reloadTimer + delta
+            if self.reloadTimer > weapon.reloadTime then
+                self.reloadTimer = 0
+                self.reloading = false
+                --Actual reloading stuff
+                local ammoNeeded = weapon.magSize - weapon.magAmmo
+                if ammoNeeded > self.inventory.ammunition[weapon.ammoType] then
+                    --If the place to fill is greater than the amount of ammunition
+                    weapon.magAmmo = weapon.magAmmo + self.inventory.ammunition[weapon.ammoType]
+                    self.inventory.ammunition[weapon.ammoType] = 0
+                else
+                    --..Or if there's more
+                    weapon.magAmmo = weapon.magAmmo + ammoNeeded
+                    self.inventory.ammunition[weapon.ammoType] = self.inventory.ammunition[weapon.ammoType] - ammoNeeded
+                end
+            end
+        else
+            if love.keyboard.isDown("r") then
+                self.sounds:reloadWeapon(weapon.name)
+                self.reloading = true
+            end
         end
     end
 
@@ -142,6 +182,7 @@ function player.new()
         self:slotSwitching()
         self:weaponDropping()
         self:shootingWeapon(delta)
+        self:reloadingWeapon(delta)
         if GetGlobal("freecam") < 1 then
             Camera:followTarget(self, 8, delta)
             self:changeCameraZoom(delta)

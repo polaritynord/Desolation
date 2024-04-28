@@ -30,12 +30,14 @@ function love.wheelmoved(x, y)
             Player.inventory.slot = Player.inventory.slot - 1
             if Player.inventory.slot < 1 then Player.inventory.slot = 3 end
             Player.oldSlot = Player.inventory.slot
+            Player.reloading = false
         elseif y < 0 then
             --Forward
             temp = Player.inventory.slot
             Player.inventory.slot = Player.inventory.slot + 1
             if Player.inventory.slot > 3 then Player.inventory.slot = 1 end
             Player.oldSlot = temp
+            Player.reloading = false
         end
     end
     --DevConsole scrolling

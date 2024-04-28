@@ -5,6 +5,7 @@ function humanoidSounds.new()
         sources = {
             step = {grass = {}};
             shoot = {};
+            reload = {};
         };
         stepTimer = 0;
     }
@@ -15,12 +16,24 @@ function humanoidSounds.new()
             self.sources.step.grass[#self.sources.step.grass+1] = love.audio.newSource("assets/sounds/footstep_grass" .. i .. ".wav", "static")
         end
         --Weapon sfx
+        self.sources.reload.Pistol = love.audio.newSource("assets/sounds/rld_pistol.wav", "static")
         self.sources.shoot.Pistol = love.audio.newSource("assets/sounds/shoot_pistol.wav", "static")
+        self.sources.shoot.empty = love.audio.newSource("assets/sounds/empty_mag.wav", "static")
     end
 
     function instance:shootWeapon(weaponName)
-        love.audio.stop(self.sources.shoot.Pistol)
+        love.audio.stop(self.sources.shoot[weaponName])
         love.audio.play(self.sources.shoot[weaponName])
+    end
+
+    function instance:reloadWeapon(weaponName)
+        love.audio.stop(self.sources.reload[weaponName])
+        love.audio.play(self.sources.reload[weaponName])
+    end
+
+    function instance:emptyMag()
+        love.audio.stop(self.sources.shoot.empty)
+        love.audio.play(self.sources.shoot.empty)
     end
 
     function instance:update(delta)

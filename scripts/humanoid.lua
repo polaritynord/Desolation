@@ -13,6 +13,7 @@ function humanoid.new()
         armor = 100;
         sprinting = false;
         moving = false;
+        reloading = false;
         animationSizeDiff = 0; --Used in walk animation
         handOffset = 0;
         inventory = {
@@ -27,6 +28,7 @@ function humanoid.new()
         };
         sounds = humanoidSounds.new();
         shootTimer = 0;
+        reloadTimer = 0;
     }
 
     --Changes the size of player with a sin wave.
