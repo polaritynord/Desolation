@@ -17,7 +17,7 @@ function image.new()
         if src == nil then return end
         local width = src:getWidth() ;  local height = src:getHeight()
         local pos = coreFuncs.getRelativeElementPosition(self.position, self.align, self.parentCanvas)
-        
+
         love.graphics.setColor(self.color[1], self.color[2], self.color[3], self.color[4]*self.parentCanvas.alpha)
         love.graphics.draw(
             src, pos[1], pos[2], self.rotation,

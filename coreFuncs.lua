@@ -23,7 +23,9 @@ end
 function coreFuncs.getRelativeElementPosition(position, align, parentCanvas)
     local x = position[1]
     local y = position[2]
-    -- Find x position
+
+    return {x + parentCanvas.position[1], y + parentCanvas.position[2]}
+    --[[ Find x position
     -- X Aligning
     if align:sub(1, 1) == "-" then
         -- Left align
@@ -48,6 +50,12 @@ function coreFuncs.getRelativeElementPosition(position, align, parentCanvas)
     end
 
     return {x + parentCanvas.position[1], y + parentCanvas.position[2]}
+    ]]--
+end
+
+function coreFuncs.getRelativeMousePosition()
+    local mX, mY = love.mouse.getPosition()
+    return mX/(ScreenWidth/960), mY/(ScreenHeight/540)
 end
 
 function coreFuncs.roundDecimal(number, decimals)

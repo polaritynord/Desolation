@@ -20,7 +20,7 @@ function button.new()
 
     function instance:update(delta)
         local pos = coreFuncs.getRelativeElementPosition(self.position, self.align, self.parentCanvas)
-        local mX, mY = love.mouse.getPosition()
+        local mX, mY = coreFuncs.getRelativeMousePosition()
 
         --Click event
         if love.mouse.isDown(1) and self.mouseHovering and not self.mouseClicking and self.clickEvent then

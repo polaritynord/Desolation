@@ -208,5 +208,9 @@ function love.draw()
     elseif GameState == "menu" then
         love.graphics.setBackgroundColor(rgb(75))
     end
-    interfaceManager:draw()
+
+    love.graphics.push()
+        love.graphics.scale(ScreenWidth/960, ScreenHeight/540)
+        interfaceManager:draw()
+    love.graphics.pop()
 end
