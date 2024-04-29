@@ -16,19 +16,18 @@ function player.new()
     instance.inventory.previousSlot = nil
     instance.keyPressData = {
         ["q"] = false;
+        ["e"] = false;
     }
+    instance.camZoom = 1;
 
     --Changes camera zoom dynamically depending on current sprinting state.
     function instance:changeCameraZoom(delta)
-        local sprintScale = 1.035
-        local smoothness = 10
-        local d
         if self.sprinting then
-            d = (sprintScale-Camera.zoom) * smoothness * delta
+            Camera.realZoom = self.camZoom+0.035
         else
-            d = (1-Camera.zoom) * smoothness * delta
+            Camera.realZoom = self.camZoom
         end
-        Camera.zoom = Camera.zoom + d
+        Camera.zoom = Camera.zoom + (Camera.realZoom-Camera.zoom) * 10 * delta
     end
 
     function instance:movement(delta)

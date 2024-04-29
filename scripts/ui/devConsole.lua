@@ -79,7 +79,7 @@ function devConsole:updateInputText()
 end
 
 function devConsole:checkForInputClick()
-    local mx, my = love.mouse.getPosition()
+    local mx, my = coreFuncs.getRelativeMousePosition()
     if mx > 350 and mx < 350+self.windowBase.size[1] and my > self.commandInputBar.position[2] and my < self.commandInputBar.position[2]+20 and love.mouse.isDown(1) then
         self.takingInput = true
     end

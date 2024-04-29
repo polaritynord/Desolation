@@ -41,6 +41,15 @@ function love.wheelmoved(x, y)
         end
     end
     --]]
+    if not GamePaused and GameState == "game" then
+        if y > 0 then
+            Player.camZoom = Player.camZoom + 0.1
+            if Player.camZoom > 2.5 then Player.camZoom = 2.5 end
+        elseif y < 0 then
+            Player.camZoom = Player.camZoom - 0.1
+            if Player.camZoom < 0.5 then Player.camZoom = 0.5 end
+        end
+    end
     
     --DevConsole scrolling
     if DevConsoleOpen then
@@ -185,6 +194,7 @@ function love.load()
     MapManager = mapManager
     GameState = "menu"
     love.keyboard.setKeyRepeat(true)
+    RunConsoleCommand("run_script dcsFiles/test.dcs")
 end
 
 function love.update(delta)

@@ -19,6 +19,7 @@ function weaponItem.new(weaponData)
         src;
         gettingPickedUp = false;
         alpha = 1;
+        nearPlayer = false;
     }
 
     --Loading up quads over here
@@ -65,7 +66,7 @@ function weaponItem.new(weaponData)
 
         if self.distanceToPlayer > 100 then return end
         --Picking up
-        if love.keyboard.isDown("e") and not self.gettingPickedUp then
+        if love.keyboard.isDown("e") and not Player.keyPressData["e"] and not self.gettingPickedUp then
             --check if player has an empty slot (TODO: optimize)
             local weaponInv = Player.inventory.weapons
             local emptySlot = 0
@@ -81,6 +82,7 @@ function weaponItem.new(weaponData)
             --Add self to player inventory
             weaponInv[emptySlot] = self.weaponData.new()
         end
+        Player.keyPressData["e"] = love.keyboard.isDown("e")
     end
 
     function instance:draw()
