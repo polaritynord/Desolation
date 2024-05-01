@@ -6,6 +6,7 @@ local weaponItem = require("scripts.weaponItem")
 local mapManager = require("scripts.mapManager")
 local particleProp = require("scripts.props.particleProp")
 local particleFunctions = require("scripts.particleFunctions")
+local bullet = require("scripts.bullet")
 
 local player = {}
 
@@ -127,9 +128,15 @@ function player.new()
                 for i = 1, weapon.bulletPerShot do
                     weapon.magAmmo = weapon.magAmmo - 1
                 end
+                --Sound effects & other
                 self.handOffset = -weapon.handRecoilIntensity
                 self.sounds:shootWeapon(weapon.name)
                 self.shootParticles.createShootParticles(self.shootParticles)
+                --Bullet instance creation
+                local bulletInstance = bullet.new()
+                bulletInstance.position = {self.position[1], self.position[2]}
+                bulletInstance.rotation = self.rotation
+                MapManager.bullets[#MapManager.bullets+1] = bulletInstance
             else
                 --Empty magazine
                 self.sounds:emptyMag()
@@ -231,7 +238,7 @@ function player.new()
         local pos = coreFuncs.getRelativePosition(self.position, Camera)
         love.graphics.draw(
             src, pos[1], pos[2], self.rotation,
-            4*Camera.zoom + self.animationSizeDiff, 4*Camera.zoom + self.animationSizeDiff, width/2, height/2
+            (4+self.animationSizeDiff)*Camera.zoom, (4+self.animationSizeDiff)*Camera.zoom, width/2, height/2
         )
     end
 

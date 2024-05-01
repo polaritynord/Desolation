@@ -8,6 +8,7 @@ local mapManager = {
     humanoids = {};
     props = {};
     tiles = {};
+    bullets = {};
     weaponItems = {};
     particleCount = 0;
 }
@@ -74,6 +75,11 @@ function mapManager:update(delta)
         end
     end
 
+    --Bullets
+    for i, v in ipairs(self.bullets) do
+        v:update(delta, i)
+    end
+
     ostSounds:update()
 
     self.particleCount = particleCount
@@ -88,19 +94,22 @@ function mapManager:draw()
         src, pos[1], pos[2], self.rotation,
         2*Camera.zoom, 2*Camera.zoom, width/2, height/2
     )
-    --Weapon items
-    for _, v in ipairs(self.weaponItems) do
-        v:draw()
-    end
 
     --Humanoids
     for _, v in ipairs(self.humanoids) do
         v:draw()
     end
-
     --Props
     for _, v in ipairs(self.props) do
         if v.draw then v:draw() end
+    end
+    --Weapon items
+    for _, v in ipairs(self.weaponItems) do
+        v:draw()
+    end
+    --Bullets
+    for _, v in ipairs(self.bullets) do
+        v:draw()
     end
 end
 
