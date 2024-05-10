@@ -9,7 +9,7 @@ function bullet.new()
         rotation = 0;
         lifetime = 1;
         timer = 0;
-        speed = 700;
+        speed = 3000;
     }
 
     function instance:update(delta, i)
@@ -25,7 +25,8 @@ function bullet.new()
     end
 
     function instance:draw()
-        local src = assets.images.player.body
+        love.graphics.setColor(1,1,1,1)
+        local src = assets.images.bullet
         local width = src:getWidth() ;  local height = src:getHeight()
         local pos = coreFuncs.getRelativePosition(self.position, Camera)
         --Draw image

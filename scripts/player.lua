@@ -134,7 +134,10 @@ function player.new()
                 self.shootParticles.createShootParticles(self.shootParticles)
                 --Bullet instance creation
                 local bulletInstance = bullet.new()
-                bulletInstance.position = {self.position[1], self.position[2]}
+                bulletInstance.position = {
+                    self.position[1]+math.cos(self.rotation)*weapon.bulletOffset,
+                    self.position[2]+math.sin(self.rotation)*weapon.bulletOffset
+                }
                 bulletInstance.rotation = self.rotation
                 MapManager.bullets[#MapManager.bullets+1] = bulletInstance
             else

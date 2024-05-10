@@ -17,6 +17,7 @@ function weaponManager:load()
         instance.bulletDamage = instanceData.bulletDamage
         instance.bulletSpread = instanceData.bulletSpread
         instance.bulletPerShot = instanceData.bulletPerShot
+        instance.bulletOffset = instanceData.bulletOffset
         instance.reloadTime = instanceData.reloadTime
         instance.shootTime = instanceData.shootTime
         instance.magSize = instanceData.magSize

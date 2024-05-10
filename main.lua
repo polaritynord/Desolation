@@ -18,6 +18,7 @@ local cursors = {
 
 DevConsoleOpen = false
 MenuUIOffset = 0
+UIScale = 1
 
 function love.wheelmoved(x, y)
     --[[ Mouse wheel slot switching

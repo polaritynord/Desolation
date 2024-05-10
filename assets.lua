@@ -21,6 +21,7 @@ function assets.load()
         cursors = {
             combat = love.mouse.newCursor("assets/images/cursor_combat.png", 12, 12);
         };
+        bullet = love.graphics.newImage("assets/images/bullet.png")
     }
 
     assets.fonts = {}
