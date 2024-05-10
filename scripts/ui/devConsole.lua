@@ -37,7 +37,7 @@ end
 
 function devConsole:load()
     --LOAD HELP DESCRIPTIONS
-    self.helpTexts = love.filesystem.read("assets/consoleHelpTexts.json")
+    self.helpTexts = love.filesystem.read("fdh/assets/consoleHelpTexts.json")
     self.helpTexts = json.decode(self.helpTexts)
     --SETUP CANVAS
     self.canvas = interfaceManager:newCanvas()

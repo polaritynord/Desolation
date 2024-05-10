@@ -1,0 +1,17 @@
+{
+    "keyboard": [
+        ["fullscreen", "f11"],
+        ["move_up", "w"],
+        ["move_down", "s"],
+        ["move_left", "a"],
+        ["move_right", "d"],
+        ["w_slot_1", "1"],
+        ["w_slot_2", "2"],
+        ["w_slot_3", "3"],
+        ["w_quickswitch", "q"],
+        ["drop_weapon", "v"],
+        ["pause_game", "escape"]
+    ],
+
+    "joytick": []
+}

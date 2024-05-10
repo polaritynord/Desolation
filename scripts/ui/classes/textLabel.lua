@@ -17,7 +17,7 @@ function textLabel.new()
 
     function instance:draw()
         local pos = coreFuncs.getRelativeElementPosition(self.position, self.align, self.parentCanvas)
-        SetFont("assets/fonts/" .. self.font .. ".ttf", self.size)
+        SetFont("fdh/assets/fonts/" .. self.font .. ".ttf", self.size)
         
         love.graphics.setColor(self.color[1], self.color[2], self.color[3], self.color[4]*self.parentCanvas.alpha)
         love.graphics.printf(self.text, pos[1], pos[2], self.wrapLimit, self.begin)

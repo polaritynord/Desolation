@@ -13,12 +13,12 @@ function humanoidSounds.new()
     function instance:load()
         --Load footsteps
         for i = 1, 10 do
-            self.sources.step.grass[#self.sources.step.grass+1] = love.audio.newSource("assets/sounds/footstep_grass" .. i .. ".wav", "static")
+            self.sources.step.grass[#self.sources.step.grass+1] = love.audio.newSource("fdh/assets/sounds/footstep_grass" .. i .. ".wav", "static")
         end
         --Weapon sfx
-        self.sources.reload.Pistol = love.audio.newSource("assets/sounds/rld_pistol.wav", "static")
-        self.sources.shoot.Pistol = love.audio.newSource("assets/sounds/shoot_pistol.wav", "static")
-        self.sources.shoot.empty = love.audio.newSource("assets/sounds/empty_mag.wav", "static")
+        self.sources.reload.Pistol = love.audio.newSource("fdh/assets/sounds/rld_pistol.wav", "static")
+        self.sources.shoot.Pistol = love.audio.newSource("fdh/assets/sounds/shoot_pistol.wav", "static")
+        self.sources.shoot.empty = love.audio.newSource("fdh/assets/sounds/empty_mag.wav", "static")
     end
 
     function instance:shootWeapon(weaponName)

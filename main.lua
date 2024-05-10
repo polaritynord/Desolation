@@ -1,5 +1,4 @@
 local utf8 = require("utf8")
-local assets = require("assets")
 local rgb = require("coreFuncs").rgb
 local mapManager = require("scripts.mapManager")
 local interfaceManager = require("scripts.ui.interfaceManager")
@@ -17,8 +16,9 @@ local cursors = {
 }
 
 DevConsoleOpen = false
+Assets = require("assets")
 MenuUIOffset = 0
-UIScale = 1
+CurrentScene = nil
 
 function love.wheelmoved(x, y)
     --[[ Mouse wheel slot switching
@@ -167,7 +167,7 @@ end
 local function setMouseCursor()
     if GameState == "game" then
         if not GamePaused then
-            love.mouse.setCursor(assets.images.cursors.combat)
+            love.mouse.setCursor(Assets.images.cursors.combat)
         else
             love.mouse.setCursor(cursors.arrow)
         end
@@ -186,7 +186,7 @@ end
 
 function love.load()
     love.graphics.setDefaultFilter("nearest", "nearest")
-    assets.load()
+    Assets.load()
     weaponManager:load()
     GameLoad()
     menuUi:load()

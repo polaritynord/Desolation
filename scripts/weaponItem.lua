@@ -113,10 +113,10 @@ function weaponItem.new(weaponData)
         love.graphics.rectangle("fill", pos[1]-52.5, pos[2]-50, 25, 25)
         --Key (TODO: Change this after adding bindings)
         love.graphics.setColor(coreFuncs.rgb(50))
-        SetFont("assets/fonts/disposable-droid-bold.ttf", 32)
+        SetFont("fdh/assets/fonts/disposable-droid-bold.ttf", 32)
         love.graphics.printf("E", pos[1]-48, pos[2]-52, 1000, "left")
         --Pick up text
-        SetFont("assets/fonts/disposable-droid-bold.ttf", 24)
+        SetFont("fdh/assets/fonts/disposable-droid-bold.ttf", 24)
         love.graphics.setColor(coreFuncs.rgb(220))
         love.graphics.printf("Pick Up", pos[1]-20, pos[2]-50, 1000, "left")
         

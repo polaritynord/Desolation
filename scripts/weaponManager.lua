@@ -5,7 +5,7 @@ local weaponManager = {}
 
 function weaponManager:load()
     --Read weapons.json
-    local weaponsFile = love.filesystem.read("assets/weapons.json")
+    local weaponsFile = love.filesystem.read("fdh/assets/weapons.json")
     local weaponsData = json.decode(weaponsFile)
     --Import classes
     for i = 1, #weaponsData.WEAPONS_LIST do
