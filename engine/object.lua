@@ -1,0 +1,36 @@
+local transformComponent = require "scripts.engine.components.transformComponent"
+
+local object = {}
+
+function object.new(parent)
+    local o = {
+        name = "Object";
+        parent = parent;
+        tree = {}
+    }
+    o.transformComponent = transformComponent.new(o)
+
+    function o:load()
+        if self.script then self.script:load() end
+    end
+
+    function o:update(delta)
+        if self.script then self.script:update(delta) end
+        if self.particleComponent then self.particleComponent:update(delta) end
+        for _, v in ipairs(self.tree) do
+            v:update(delta)
+        end
+    end
+
+    function o:draw()
+        if self.imageComponent then self.imageComponent:draw() end
+        if self.particleComponent then self.particleComponent:draw() end
+        for _, v in ipairs(self.tree) do
+            v:draw()
+        end
+    end
+
+    return o
+end
+
+return object
