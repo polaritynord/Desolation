@@ -128,8 +128,11 @@ function player.new()
                 for i = 1, weapon.bulletPerShot do
                     weapon.magAmmo = weapon.magAmmo - 1
                 end
-                --Sound effects & other
+                --Sound effects
                 self.handOffset = -weapon.handRecoilIntensity
+                --Screen shake
+                Camera.position[1] = Camera.position[1] + math.uniform(-weapon.screenShakeIntensity, weapon.screenShakeIntensity)
+                Camera.position[2] = Camera.position[2] + math.uniform(-weapon.screenShakeIntensity, weapon.screenShakeIntensity)
                 self.sounds:shootWeapon(weapon.name)
                 self.shootParticles.createShootParticles(self.shootParticles)
                 --Bullet instance creation
