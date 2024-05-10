@@ -1,4 +1,4 @@
-local json = require("json")
+local json = require("lib.json")
 local interfaceManager = require("scripts.ui.interfaceManager")
 local coreFuncs = require("coreFuncs")
 local consoleFuncs = require("scripts.consoleFunctions")

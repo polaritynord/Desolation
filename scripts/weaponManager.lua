@@ -1,4 +1,4 @@
-local json = require("json")
+local json = require("lib.json")
 local weapon = require("scripts.weapon")
 
 local weaponManager = {}

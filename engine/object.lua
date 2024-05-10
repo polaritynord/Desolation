@@ -1,4 +1,4 @@
-local transformComponent = require "scripts.engine.components.transformComponent"
+local transformComponent = require "engine.components.transform_component"
 
 local object = {}
 

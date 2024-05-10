@@ -1,8 +1,8 @@
-local json = require "scripts.lib.json"
-local object = require "scripts.engine.object"
+local json = require("lib.json")
+local object = require "engine.object"
 local components = {
-    imageComponent = require "scripts.engine.components.imageComponent";
-    particleComponent = require "scripts.engine.components.particleComponent";
+    imageComponent = require "engine.components.image_component";
+    particleComponent = require "engine.components.transform_component";
 }
 
 local scene = {}

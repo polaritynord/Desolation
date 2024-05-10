@@ -1,13 +1,5 @@
 local utf8 = require("utf8")
-local rgb = require("coreFuncs").rgb
-local mapManager = require("scripts.mapManager")
-local interfaceManager = require("scripts.ui.interfaceManager")
-local gameUi = require("scripts.ui.gameUi")
-local menuUi = require("scripts.ui.menuUi")
-local globals = require("scripts.globals")
-local weaponManager = require("scripts.weaponManager")
-local devConsoleUI = require("scripts.ui.devConsole")
-local player = require("scripts.player")
+local scene = require("engine.scene")
 
 local fullscreen = false
 local cursors = {
@@ -157,13 +149,6 @@ function love.keypressed(key, unicode)
     end
 end
 
-function GameLoad()
-    mapManager:load()
-    Player = mapManager:newHumanoid(player.new())
-    Player:load()
-    GamePaused = false
-end
-
 local function setMouseCursor()
     if GameState == "game" then
         if not GamePaused then
@@ -187,15 +172,16 @@ end
 function love.load()
     love.graphics.setDefaultFilter("nearest", "nearest")
     Assets.load()
-    weaponManager:load()
-    GameLoad()
-    menuUi:load()
-    gameUi:load()
-    devConsoleUI:load()
-    MapManager = mapManager
-    GameState = "menu"
     love.keyboard.setKeyRepeat(true)
-    RunConsoleCommand("run_script dcsFiles/test.dcs")
+    --weaponManager:load()
+    --GameLoad()
+    --menuUi:load()
+    --gameUi:load()
+    --devConsoleUI:load()
+    --MapManager = mapManager
+    --GameState = "menu"
+    --RunConsoleCommand("run_script dcsFiles/test.dcs")
+    GameScene = LoadScene("fdh/assets/scenes/game.json")
 end
 
 function love.update(delta)
