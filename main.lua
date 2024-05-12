@@ -199,7 +199,7 @@ function love.load()
     --MapManager = mapManager
     --GameState = "menu"
     --RunConsoleCommand("run_script dcsFiles/test.dcs")
-    
+
     --Read game directory & launch first scene (TODO: Add game launching from console args)
     local gameDirectory = "fdh"
     --Fetch game info
@@ -211,15 +211,17 @@ end
 
 function love.update(delta)
     ScreenWidth, ScreenHeight = love.graphics.getDimensions()
-    updateUIOffset(delta)
-    setMouseCursor()
+    if not CurrentScene then return end
+    CurrentScene:update(delta)
+    --updateUIOffset(delta)
+    --setMouseCursor()
 end
 
 function love.draw()
-    --Set background color
-    if CurrentScene then
-        love.graphics.setBackgroundColor(CurrentScene.backgroundColor)
-    end
+    if not CurrentScene then return end
+    --Objects
+    CurrentScene:draw()
+    --UI
     love.graphics.push()
         love.graphics.scale(ScreenWidth/960, ScreenHeight/540)
         --interfaceManager:draw()

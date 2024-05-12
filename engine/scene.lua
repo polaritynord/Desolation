@@ -26,7 +26,7 @@ function scene.new()
 
     function s:draw()
         local camTransform = self.camera.transformComponent
-        love.graphics.setBackgroundColor(ConvertColor(self.backgroundColor))
+        love.graphics.setBackgroundColor(self.backgroundColor)
         love.graphics.push()
             love.graphics.scale(camTransform.scale.x, camTransform.scale.y)
             love.graphics.translate(-camTransform.x+240/camTransform.scale.x, -camTransform.y+135/camTransform.scale.y)

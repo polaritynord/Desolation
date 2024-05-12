@@ -11,10 +11,9 @@ function imageComponent.new(parent, source)
         love.graphics.setColor(1, 1, 1, 1)
         local transform = self.parent.transformComponent
         local w, h = self.source:getWidth()/2, self.source:getHeight()/2
-        local pos = GetSceneRelativePosition(self.parent)
         local camTransform = CurrentScene.camera.transformComponent
         love.graphics.draw(
-            self.source, pos.x, pos.y, transform.rotation,
+            self.source, transform.x, transform.y, transform.rotation,
             transform.scale.x, transform.scale.y, w, h
         )
     end
