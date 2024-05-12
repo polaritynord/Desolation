@@ -1,5 +1,6 @@
 local utf8 = require("utf8")
 local scene = require("engine.scene")
+local json  = require("lib.json")
 
 local fullscreen = false
 local cursors = {
@@ -7,10 +8,25 @@ local cursors = {
     crosshair = love.mouse.getSystemCursor("crosshair")
 }
 
+InputManager = require("engine.input_manager")
 DevConsoleOpen = false
 Assets = require("assets")
 MenuUIOffset = 0
 CurrentScene = nil
+Scenes = {}
+
+function table.contains(table, element, returnIndex)
+    for i, value in pairs(table) do
+      if value == element then
+        if returnIndex then
+            return i
+        else
+            return true
+        end
+      end
+    end
+    return false
+end
 
 function love.wheelmoved(x, y)
     --[[ Mouse wheel slot switching
@@ -65,6 +81,7 @@ function love.keypressed(key, unicode)
         if not fullscreen and false then
          love.window.setMode(960, 540, {resizable=true}) end
     end
+    if true then return end
     --Pause key
     if key == "escape" and not devConsoleUI.takingInput and not DevConsoleOpen then
         GamePaused = not GamePaused
@@ -173,6 +190,7 @@ function love.load()
     love.graphics.setDefaultFilter("nearest", "nearest")
     Assets.load()
     love.keyboard.setKeyRepeat(true)
+    InputManager:loadBindingFile()
     --weaponManager:load()
     --GameLoad()
     --menuUi:load()
@@ -181,33 +199,29 @@ function love.load()
     --MapManager = mapManager
     --GameState = "menu"
     --RunConsoleCommand("run_script dcsFiles/test.dcs")
-    GameScene = LoadScene("fdh/assets/scenes/game.json")
+    
+    --Read game directory & launch first scene (TODO: Add game launching from console args)
+    local gameDirectory = "fdh"
+    --Fetch game info
+    local infoFile = love.filesystem.read(gameDirectory .. "/info.json")
+    local infoData = json.decode(infoFile)
+    local startScene = LoadScene(infoData.startScene)
+    SetScene(startScene)
 end
 
 function love.update(delta)
     ScreenWidth, ScreenHeight = love.graphics.getDimensions()
-    if GameState == "game" then
-        mapManager:update(delta)
-    end
-    gameUi:update(delta)
-    menuUi:update(delta)
-    devConsoleUI:update(delta)
-    interfaceManager:update(delta)
     updateUIOffset(delta)
     setMouseCursor()
 end
 
 function love.draw()
-    if GameState == "game" then
-        love.graphics.setBackgroundColor(rgb(50))
-        --Game canvas
-        mapManager:draw()
-    elseif GameState == "menu" then
-        love.graphics.setBackgroundColor(rgb(75))
+    --Set background color
+    if CurrentScene then
+        love.graphics.setBackgroundColor(CurrentScene.backgroundColor)
     end
-
     love.graphics.push()
         love.graphics.scale(ScreenWidth/960, ScreenHeight/540)
-        interfaceManager:draw()
+        --interfaceManager:draw()
     love.graphics.pop()
 end

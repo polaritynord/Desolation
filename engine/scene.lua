@@ -83,6 +83,7 @@ function LoadScene(file)
     end
     --Create new scene instance
     local instance = scene.new()
+    instance.name = sceneData.name
     --Set background color
     if sceneData.backgroundColor then
         instance.backgroundColor = sceneData.backgroundColor

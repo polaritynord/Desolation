@@ -1,4 +1,5 @@
 {
-    "backgroundColor": [50, 50, 50],
+    "name": "Game",
+    "backgroundColor": [0.2, 0.2, 0.2],
     "tree": []
 }

@@ -86,19 +86,6 @@ function SetFont(fontname, size)
     return font
 end
 
-function table.contains(table, element, returnIndex)
-    for i, value in pairs(table) do
-      if value == element then
-        if returnIndex then
-            return i
-        else
-            return true
-        end
-      end
-    end
-    return false
-end
-
 function math.uniform(a,b)
 	return a + (math.random()*(b-a))
 end
