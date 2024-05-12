@@ -29,7 +29,6 @@ function scene.new()
         love.graphics.setBackgroundColor(self.backgroundColor)
         love.graphics.push()
             love.graphics.scale(camTransform.scale.x, camTransform.scale.y)
-            love.graphics.translate(-camTransform.x+240/camTransform.scale.x, -camTransform.y+135/camTransform.scale.y)
             for _, v in ipairs(self.tree) do
                 v:draw()
             end
@@ -67,6 +66,7 @@ local function addObjectToScene(instance, v, isScene)
     --Setup camera if the scene doesn't have one yet
     if not instance.camera and isScene then
         instance.camera = object.new(instance)
+        instance.camera.zoom = 1
     end
     --Add new object to tree
     instance.tree[#instance.tree+1] = newObj

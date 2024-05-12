@@ -1,3 +1,5 @@
+local coreFuncs = require("coreFuncs")
+
 local imageComponent = {}
 
 function imageComponent.new(parent, source)
@@ -10,11 +12,11 @@ function imageComponent.new(parent, source)
         if not self.source then return end
         love.graphics.setColor(1, 1, 1, 1)
         local transform = self.parent.transformComponent
-        local w, h = self.source:getWidth()/2, self.source:getHeight()/2
-        local camTransform = CurrentScene.camera.transformComponent
+        local w, h = self.source:getWidth(), self.source:getHeight()
+        local pos = coreFuncs.getRelativePosition(transform, CurrentScene.camera)
         love.graphics.draw(
-            self.source, transform.x, transform.y, transform.rotation,
-            transform.scale.x, transform.scale.y, w, h
+            self.source, pos[1], pos[2], transform.rotation,
+            transform.scale.x, transform.scale.y, w/2, h/2
         )
     end
 

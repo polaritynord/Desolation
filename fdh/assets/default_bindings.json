@@ -1,6 +1,7 @@
 {
     "keyboard": [
         ["fullscreen", "f11"],
+        ["sprint", "lshift"],
         ["move_up", "w"],
         ["move_down", "s"],
         ["move_left", "a"],
@@ -13,5 +14,5 @@
         ["pause_game", "escape"]
     ],
 
-    "joytick": []
+    "joystick": []
 }

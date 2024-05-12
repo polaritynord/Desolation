@@ -1,6 +1,7 @@
 local utf8 = require("utf8")
 local scene = require("engine.scene")
 local json  = require("lib.json")
+local globals = require("engine.globals")
 
 local fullscreen = false
 local cursors = {
