@@ -10,6 +10,10 @@ function object.new(parent)
     }
     o.transformComponent = transformComponent.new(o)
 
+    function o:getPosition()
+        return {x=self.transformComponent.x, y=self.transformComponent.y}
+    end
+
     function o:load()
         if self.script then self.script:load() end
     end
@@ -23,7 +27,10 @@ function object.new(parent)
     end
 
     function o:draw()
-        if self.imageComponent then self.imageComponent:draw() end
+        if self.imageComponent then
+            --self.imageComponent:draw()
+            CurrentScene.drawLayers[self.imageComponent.layer][#CurrentScene.drawLayers[self.imageComponent.layer]+1] = self.imageComponent
+        end
         if self.particleComponent then self.particleComponent:draw() end
         for _, v in ipairs(self.tree) do
             v:draw()

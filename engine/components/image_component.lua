@@ -6,6 +6,7 @@ function imageComponent.new(parent, source)
     local component = {
         parent = parent;
         source = source or Assets.images.icon;
+        layer = 1;
     }
 
     function component:draw()

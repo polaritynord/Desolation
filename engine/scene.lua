@@ -9,7 +9,8 @@ local scene = {}
 
 function scene.new()
     local s = {
-        tree = {}
+        tree = {};
+        drawLayers = {{}, {}, {}};
     }
 
     function s:load()
@@ -30,11 +31,18 @@ function scene.new()
 
     function s:draw()
         local camTransform = self.camera.transformComponent
+        self.drawLayers = {{}, {}, {}}
         love.graphics.setBackgroundColor(self.backgroundColor)
         love.graphics.push()
             love.graphics.scale(camTransform.scale.x, camTransform.scale.y)
             for _, v in ipairs(self.tree) do
                 v:draw()
+            end
+            --Draw layers
+            for k = 1, 3 do
+                for _, v in ipairs(self.drawLayers[k]) do
+                    v:draw()
+                end
             end
         love.graphics.pop()
     end

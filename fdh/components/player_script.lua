@@ -90,6 +90,7 @@ function playerScript:load()
     local player = self.parent
     local transform = player.transformComponent
     player.imageComponent.source = Assets.images.player.body
+    player.imageComponent.layer = 2
     transform.scale = {x=4, y=4}
     --Script variables
     self.realCamZoom = 1
