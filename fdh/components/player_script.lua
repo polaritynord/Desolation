@@ -45,20 +45,85 @@ function playerScript:pointTowardsMouse(player)
     player.transformComponent.rotation = math.atan2(dy, dx)
 end
 
+function playerScript:changeCameraZoom(delta)
+    local camera = CurrentScene.camera
+    if self.sprinting then
+        self.realCamZoom = 1.035
+    else
+        self.realCamZoom = 1
+    end
+    camera.zoom = camera.zoom + (self.realCamZoom-camera.zoom) * 10 * delta
+end
+
+function playerScript:slotSwitching(player)
+    local oldSlot = player.inventory.slot
+    --Switch slot with number keys
+    for i = 1, 3 do
+        if InputManager:isPressed("w_slot_" .. tostring(i)) and i ~= player.inventory.slot then
+            player.inventory.previousSlot = player.inventory.slot
+            player.inventory.slot = i
+        end
+    end
+    --Quick slot switching
+    if InputManager:isPressed("w_quickswitch") and not player.keyPressData["q"] and player.inventory.previousSlot then
+        local temp = player.inventory.previousSlot
+        player.inventory.previousSlot = player.inventory.slot
+        player.inventory.slot = temp
+    end
+    player.keyPressData["q"] = InputManager:isPressed("w_quickswitch")
+    --Update hand offset
+    if oldSlot ~= player.inventory.slot and player.inventory.weapons[oldSlot] ~= player.inventory.weapons[player.inventory.slot] then
+        player.handOffset = -15
+    end
+    --Cancel reload if slot switching is done
+    if oldSlot ~= player.inventory.slot then
+        player.reloading = false
+        local weapon = player.inventory.weapons[player.inventory.previousSlot]
+        --if weapon then
+        --    love.audio.stop(self.sounds.sources.reload[weapon.name])
+        --end
+    end
+end
+
 --Engine funcs
 function playerScript:load()
     local player = self.parent
     local transform = player.transformComponent
     player.imageComponent.source = Assets.images.player.body
     transform.scale = {x=4, y=4}
-    --Variables
+    --Script variables
+    self.realCamZoom = 1
+    --Player variables
     player.velocity = {x=0, y=0}
+    player.health = 100 ; player.armor = 100
+    player.sprinting = false
+    player.moving = false
+    player.reloading = false
+    player.animationSizeDiff = 0
+    player.handOffset = 0
+    player.inventory = {
+        weapons = {nil, nil, nil};
+        items = {};
+        ammunition = {
+            light = 0;
+            medium = 0;
+            heavy = 0;
+        };
+        slot = 1;
+    }
+    player.shootTimer = 0
+    player.reloadTimer = 0
+    player.keyPressData = {
+        ["q"] = false;
+    }
 end
 
 function playerScript:update(delta)
     local player = self.parent
     self:movement(delta, player)
     self:pointTowardsMouse(player)
+    self:changeCameraZoom(delta)
+    self:slotSwitching(player)
 end
 
 return playerScript

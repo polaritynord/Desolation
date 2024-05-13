@@ -21,7 +21,8 @@ function assets.load()
         cursors = {
             combat = love.mouse.newCursor("fdh/assets/images/cursor_combat.png", 12, 12);
         };
-        bullet = love.graphics.newImage("fdh/assets/images/bullet.png")
+        bullet = love.graphics.newImage("fdh/assets/images/bullet.png");
+        icon = love.graphics.newImage("engine/assets/icon.png")
     }
 
     assets.fonts = {}

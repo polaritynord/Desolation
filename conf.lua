@@ -6,6 +6,7 @@ function love.conf(t)
     t.window.width = 960 ; t.window.height = 540
     t.window.title = "game"
     t.window.resizable = true
+    t.window.icon = "engine/assets/icon.png"
     t.window.minwidth = 960 ; t.window.minheight = 540
     t.console = true
     ScreenWidth, ScreenHeight = 960, 540

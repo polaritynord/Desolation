@@ -4,7 +4,13 @@
     "tree": [
         [
             "player",
-            ["imageComponent", "fdh/components/player_script"]
+            ["imageComponent", "fdh/components/player_script"],
+            [
+                [
+                    "hand",
+                    ["imageComponent", "fdh/components/player_hand_script"]
+                ]
+            ]
         ]
     ]
 }

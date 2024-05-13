@@ -15,6 +15,10 @@ function scene.new()
     function s:load()
         for _, v in ipairs(self.tree) do
             v:load()
+            --Load child objects
+            for _, child in ipairs(v.tree) do
+                child:load()
+            end
         end
     end
 
