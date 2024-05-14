@@ -11,6 +11,16 @@
                     ["imageComponent", "fdh/components/player_hand_script"]
                 ]
             ]
+        ],
+
+        [
+            "mapCreator",
+            ["fdh/components/map_creator"]
+        ],
+
+        [
+            "camera",
+            ["fdh/components/camera_controller"]
         ]
     ]
 }

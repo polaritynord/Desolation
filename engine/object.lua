@@ -14,12 +14,17 @@ function object.new(parent)
         return {x=self.transformComponent.x, y=self.transformComponent.y}
     end
 
+    function o:addChild(obj)
+        self.tree[#self.tree+1] = obj
+        self[obj.name] = obj
+    end
+
     function o:load()
         if self.script then self.script:load() end
     end
 
     function o:update(delta)
-        if self.script then self.script:update(delta) end
+        if self.script and self.script.update then self.script:update(delta) end
         if self.particleComponent then self.particleComponent:update(delta) end
         for _, v in ipairs(self.tree) do
             v:update(delta)

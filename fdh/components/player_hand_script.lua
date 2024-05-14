@@ -3,6 +3,7 @@ local playerHandScript = {}
 function playerHandScript:load()
     local hand = self.parent
     hand.imageComponent.source = Assets.images.player.handDefault
+    hand.imageComponent.layer = 2
 end
 
 function playerHandScript:update(delta)

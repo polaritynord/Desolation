@@ -30,34 +30,14 @@ function table.contains(table, element, returnIndex)
 end
 
 function love.wheelmoved(x, y)
-    --[[ Mouse wheel slot switching
-    if not GamePaused and GameState == "game" then
-        -- Switching slots
-        local temp
+    if not GamePaused and CurrentScene.name == "Game" then
+        local camController = CurrentScene.camera.script
         if y > 0 then
-            --Backward
-            temp = Player.inventory.slot
-            Player.inventory.slot = Player.inventory.slot - 1
-            if Player.inventory.slot < 1 then Player.inventory.slot = 3 end
-            Player.oldSlot = Player.inventory.slot
-            Player.reloading = false
+            camController.playerManualZoom = camController.playerManualZoom + 0.1
+            if camController.playerManualZoom > 2.5 then camController.playerManualZoom = 2.5 end
         elseif y < 0 then
-            --Forward
-            temp = Player.inventory.slot
-            Player.inventory.slot = Player.inventory.slot + 1
-            if Player.inventory.slot > 3 then Player.inventory.slot = 1 end
-            Player.oldSlot = temp
-            Player.reloading = false
-        end
-    end
-    --]]
-    if not GamePaused and GameState == "game" then
-        if y > 0 then
-            Player.camZoom = Player.camZoom + 0.1
-            if Player.camZoom > 2.5 then Player.camZoom = 2.5 end
-        elseif y < 0 then
-            Player.camZoom = Player.camZoom - 0.1
-            if Player.camZoom < 0.5 then Player.camZoom = 0.5 end
+            camController.playerManualZoom = camController.playerManualZoom - 0.1
+            if camController.playerManualZoom < 0.5 then camController.playerManualZoom = 0.5 end
         end
     end
     

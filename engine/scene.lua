@@ -13,6 +13,11 @@ function scene.new()
         drawLayers = {{}, {}, {}};
     }
 
+    function s:addChild(obj)
+        self.tree[#self.tree+1] = obj
+        self[obj.name] = obj
+    end
+
     function s:load()
         for _, v in ipairs(self.tree) do
             v:load()
@@ -40,7 +45,7 @@ function scene.new()
                 v:draw()
             end
             --Draw layers
-            for k = 1, 3 do
+            for k = #self.drawLayers, 1, -1 do
                 for _, v in ipairs(self.drawLayers[k]) do
                     v:draw()
                 end

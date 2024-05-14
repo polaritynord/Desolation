@@ -1,4 +1,4 @@
-local cameraController = require("fdh.components.camera_controller")
+--local cameraController = require("fdh.components.camera_controller")
 local coreFuncs = require("coreFuncs")
 
 local playerScript = {}
@@ -23,8 +23,8 @@ function playerScript:movement(delta, player)
     end
     --Sprinting
     local sprintMultiplier = 1.6
-    self.sprinting = InputManager:isPressed("sprint")
-    if self.sprinting then
+    player.sprinting = InputManager:isPressed("sprint")
+    if player.sprinting then
         self.velocity.x = self.velocity.x * sprintMultiplier
         self.velocity.y = self.velocity.y * sprintMultiplier
     end
@@ -44,16 +44,6 @@ function playerScript:pointTowardsMouse(player)
     local pos = coreFuncs.getRelativePosition(player.transformComponent, CurrentScene.camera)
     local dx = mouseX-pos[1] ; local dy = mouseY-pos[2]
     player.transformComponent.rotation = math.atan2(dy, dx)
-end
-
-function playerScript:changeCameraZoom(delta)
-    local camera = CurrentScene.camera
-    if self.sprinting then
-        self.realCamZoom = 1.035
-    else
-        self.realCamZoom = 1
-    end
-    camera.zoom = camera.zoom + (self.realCamZoom-camera.zoom) * 10 * delta
 end
 
 function playerScript:slotSwitching(player)
@@ -102,12 +92,10 @@ function playerScript:load()
     local player = self.parent
     local transform = player.transformComponent
     player.imageComponent.source = Assets.images.player.body
-    player.imageComponent.layer = 2
     transform.scale = {x=4, y=4}
     --Camera
-    CurrentScene.camera.script = cameraController
+    --CurrentScene.camera.script = cameraController
     --Script variables
-    self.realCamZoom = 1
     --Player variables
     player.velocity = {x=0, y=0}
     player.health = 100 ; player.armor = 100
@@ -137,7 +125,6 @@ function playerScript:update(delta)
     local player = self.parent
     self:movement(delta, player)
     self:pointTowardsMouse(player)
-    self:changeCameraZoom(delta)
     self:slotSwitching(player)
     self:doWalkingAnim(player)
 end
