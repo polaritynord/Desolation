@@ -27,6 +27,7 @@ function scene.new()
         for _, v in ipairs(self.tree) do
             v:update(delta)
         end
+        if self.camera.script then self.camera.script:update(delta) end
     end
 
     function s:draw()

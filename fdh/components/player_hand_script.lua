@@ -22,7 +22,10 @@ function playerHandScript:update(delta)
     hand.transformComponent.x = pos.x
     hand.transformComponent.y = pos.y
     hand.transformComponent.rotation = player.transformComponent.rotation
-    hand.transformComponent.scale = {x=2.8, y=2.8}
+    hand.transformComponent.scale = {
+        x=2.8 + player.animationSizeDiff/2,
+        y=2.8 + player.animationSizeDiff/2
+    }
 end
 
 return playerHandScript

@@ -1,3 +1,4 @@
+local cameraController = require("fdh.components.camera_controller")
 local coreFuncs = require("coreFuncs")
 
 local playerScript = {}
@@ -32,7 +33,7 @@ function playerScript:movement(delta, player)
         self.velocity.x = self.velocity.x * math.sin(math.pi/4)
         self.velocity.y = self.velocity.y * math.sin(math.pi/4)
     end
-    self.moving = math.abs(self.velocity.x) > 0 or math.abs(self.velocity.y) > 0
+    player.moving = math.abs(self.velocity.x) > 0 or math.abs(self.velocity.y) > 0
     --Move by velocity
     transform.x = transform.x + (self.velocity.x*speed*delta)
     transform.y = transform.y + (self.velocity.y*speed*delta)
@@ -85,6 +86,17 @@ function playerScript:slotSwitching(player)
     end
 end
 
+function playerScript:doWalkingAnim(player)
+    if not player.moving then return end
+    local time = love.timer.getTime()
+    local speed = 12
+    if player.sprinting then speed = speed + 4 end
+    player.animationSizeDiff = math.sin(time*speed)/5
+    --Set image component values
+    player.transformComponent.scale.x = 4 + player.animationSizeDiff
+    player.transformComponent.scale.y = 4 + player.animationSizeDiff
+end
+
 --Engine funcs
 function playerScript:load()
     local player = self.parent
@@ -92,6 +104,8 @@ function playerScript:load()
     player.imageComponent.source = Assets.images.player.body
     player.imageComponent.layer = 2
     transform.scale = {x=4, y=4}
+    --Camera
+    CurrentScene.camera.script = cameraController
     --Script variables
     self.realCamZoom = 1
     --Player variables
@@ -125,6 +139,7 @@ function playerScript:update(delta)
     self:pointTowardsMouse(player)
     self:changeCameraZoom(delta)
     self:slotSwitching(player)
+    self:doWalkingAnim(player)
 end
 
 return playerScript

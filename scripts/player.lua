@@ -240,7 +240,7 @@ function player.new()
         self:drawHands()
         -- Draw body
         local src = assets.images.player.body
-        local width = src:getWidth() ;  local height = src:getHeight()
+        local width = src:getWidth() ; local height = src:getHeight()
         local pos = coreFuncs.getRelativePosition(self.position, Camera)
         love.graphics.draw(
             src, pos[1], pos[2], self.rotation,
