@@ -2,7 +2,6 @@ local json = require("lib.json")
 local object = require "engine.object"
 local components = {
     imageComponent = require "engine.components.image_component";
-    particleComponent = require "engine.components.transform_component";
 }
 
 local scene = {}

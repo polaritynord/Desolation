@@ -21,37 +21,12 @@ function coreFuncs.getRelativePosition(transform, camera)
     return relativePos
 end
 
-function coreFuncs.getRelativeElementPosition(position, align, parentCanvas)
+function coreFuncs.getRelativeElementPosition(position, parentComp)
+    local parentPos = parentComp:getPosition()
     local x = position[1]
     local y = position[2]
 
-    return {x + parentCanvas.position[1], y + parentCanvas.position[2]}
-    --[[ Find x position
-    -- X Aligning
-    if align:sub(1, 1) == "-" then
-        -- Left align
-        x = x - (ScreenWidth-960)
-    elseif align:sub(1, 1) == "+" then
-        -- Right align
-        x = x + (ScreenWidth-960)
-    elseif align:sub(1, 1) == "0" then
-        -- Center align
-        x = x + (ScreenWidth-960)/2
-    end
-    -- Y Aligning
-    if align:sub(2, 2) == "-" then
-        -- Up align
-        y = y - (ScreenHeight-540)
-    elseif align:sub(2, 2) == "+" then
-        -- Down align
-        y = y + (ScreenHeight-540)
-    elseif align:sub(2, 2) == "0" then
-        -- Center align
-        y = y + (ScreenHeight-540)/2
-    end
-
-    return {x + parentCanvas.position[1], y + parentCanvas.position[2]}
-    ]]--
+    return {x + parentComp.position[1], y + parentComp.position[2]}
 end
 
 function coreFuncs.getRelativeMousePosition()
