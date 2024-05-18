@@ -3,7 +3,7 @@ local weaponManager = require("scripts.weaponManager")
 local consoleFunctions = {
     funcsList = {
         "assign", "run_script", "give_ammo", "clear", "help", "lorem",
-        "give", "version"
+        "give", "info"
     };
 }
 
@@ -99,23 +99,23 @@ function consoleFunctions.helpScript(devConsole, command, i)
             if table.contains(consoleFunctions.funcsList, v, false) then
                 statementType = "function"
             end
-            devConsole:log("\t\t(" .. statementType .. ") " .. v)
+            devConsole.script:log("\t\t(" .. statementType .. ") " .. v)
         end
-        devConsole:log("\tWrite \"help [statement] to view detailed information.\n\tList of statements:")
+        devConsole.script:log("\tWrite \"help [statement] to view detailed information.\n\tList of statements:")
         return
     end
 
     --Fetch description & make sure it exists
     local descIndex = table.contains(devConsole.helpTexts.titles, temp, true)
     if descIndex == false then
-        devConsole:log("Unknown statement \"" .. temp .. "\".\nWrite \"help\" to view the full list of globals and functions.")
+        devConsole.script:log("Unknown statement \"" .. temp .. "\".\nWrite \"help\" to view the full list of globals and functions.")
         return
     end
-    devConsole:log("\t" .. devConsole.helpTexts.descriptions[descIndex])
+    devConsole.script:log("\t" .. devConsole.helpTexts.descriptions[descIndex])
 end
 
 function consoleFunctions.loremScript(devConsole, command, i)
-    devConsole:log("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at libero ac elit eleifend bibendum eget eu odio. Donec tristique sodales efficitur. Donec bibendum, dui quis placerat ullamcorper, odio dolor feugiat quam, vel pretium orci eros eget risus. Vestibulum ligula nunc, lacinia ut augue nec, egestas consectetur lorem. Integer ante urna, posuere id arcu vel, fermentum feugiat sem. Morbi vehicula, ligula ac iaculis viverra, augue nisi dignissim metus, in vestibulum enim nisl aliquet nunc. Mauris euismod nibh quis aliquet interdum. Cras porttitor")
+    devConsole.script:log("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at libero ac elit eleifend bibendum eget eu odio. Donec tristique sodales efficitur. Donec bibendum, dui quis placerat ullamcorper, odio dolor feugiat quam, vel pretium orci eros eget risus. Vestibulum ligula nunc, lacinia ut augue nec, egestas consectetur lorem. Integer ante urna, posuere id arcu vel, fermentum feugiat sem. Morbi vehicula, ligula ac iaculis viverra, augue nisi dignissim metus, in vestibulum enim nisl aliquet nunc. Mauris euismod nibh quis aliquet interdum. Cras porttitor")
 end
 
 function consoleFunctions.giveScript(devConsole, command, i)
@@ -142,9 +142,10 @@ function consoleFunctions.giveScript(devConsole, command, i)
     Player.inventory.weapons[Player.inventory.slot] = weapon.new()
 end
 
-function consoleFunctions.versionScript(devConsole, command, i)
-    devConsole:log("Made by Polaritynord")
-    devConsole:log("Eternal Horizons version " .. GAME_VERSION .. " (" .. GAME_VERSION_STATE .. ")")
+function consoleFunctions.infoScript(devConsole, command, i)
+    devConsole.script:log("Made by Polaritynord")
+    devConsole.script:log("Using " .. ENGINE_NAME .. " build " .. ENGINE_VERSION)
+    devConsole.script:log(GAME_NAME .. " version " .. GAME_VERSION .. " (" .. GAME_VERSION_STATE .. ")")
 end
 
 return consoleFunctions

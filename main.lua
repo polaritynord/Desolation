@@ -30,18 +30,21 @@ function love.wheelmoved(x, y)
     end
     
     --DevConsole scrolling
-    if DevConsoleOpen and false then
+    local console = CurrentScene.devConsole
+    if console.open then
         if y > 0 then
-            devConsoleUI.logOffset = devConsoleUI.logOffset - 1
-            if devConsoleUI.logOffset < 0 then devConsoleUI.logOffset = 0 end
+            console.logOffset = console.logOffset - 1
+            if console.logOffset < 0 then console.logOffset = 0 end
         elseif y < 0 then
-            devConsoleUI.logOffset = devConsoleUI.logOffset + 1
-            if devConsoleUI.logOffset > #devConsoleUI.logs then devConsoleUI.logOffset = #devConsoleUI.logs end
+            console.logOffset = console.logOffset + 1
+            if console.logOffset > #console.logs then console.logOffset = #console.logs end
         end
     end
 end
 
 function love.keypressed(key, unicode)
+    local console = CurrentScene.devConsole
+    local consoleUI = console.UIComponent
     -- Fullscreen key
     if table.contains(InputManager:getKeys("fullscreen"), key) then
         fullscreen = not fullscreen
@@ -52,7 +55,7 @@ function love.keypressed(key, unicode)
     end
 
     --Pause key (not devConsoleUI.takingInput)
-    if table.contains(InputManager:getKeys("pause_game"), key) and not DevConsoleOpen then
+    if table.contains(InputManager:getKeys("pause_game"), key) and (console and not console.open) then
         GamePaused = not GamePaused
     end
 
@@ -69,8 +72,6 @@ function love.keypressed(key, unicode)
     end
 
     --***DEVCONSOLE RELATED STUFF DOWN HERE***
-    local console = CurrentScene.devConsole
-    local consoleUI = console.UIComponent
     --Developer console opening key
     if table.contains(InputManager:getKeys("dev_console"), key) then
         if console.open and consoleUI.takingInput then return end
@@ -79,41 +80,39 @@ function love.keypressed(key, unicode)
             GamePaused = true
         end
     end
-    if true then return end
+
     --Dev console text erasing
-    if key == "backspace" and false then
+    if key == "backspace" then
         -- get the byte offset to the last UTF-8 character in the string.
-        local byteoffset = utf8.offset(devConsoleUI.commandInput, -1)
+        local byteoffset = utf8.offset(console.commandInput, -1)
 
         if byteoffset then
             -- remove the last UTF-8 character.
             -- string.sub operates on bytes rather than UTF-8 characters, so we couldn't do string.sub(text, 1, -2).
-            devConsoleUI.commandInput = string.sub(devConsoleUI.commandInput, 1, byteoffset - 1)
+            console.commandInput = string.sub(console.commandInput, 1, byteoffset - 1)
         end
     end
 
     --Dev console input mode exiting & stuff
-    if false then
-        if key == "escape" and DevConsoleOpen then
-            if devConsoleUI.takingInput then
-                devConsoleUI.takingInput = false
-            else
-                DevConsoleOpen = false
-            end
+    if key == "escape" and console.open then
+        if console.takingInput then
+            console.takingInput = false
+        else
+            console.open = false
         end
     end
 
     --Dev console submitting command
-    if key == "return" and DevConsoleOpen and devConsoleUI.takingInput and devConsoleUI.commandInput ~= "" and false then
-        local commands = devConsoleUI:readCommandsFromInput(devConsoleUI.commandInput)
+    if key == "return" and console.open and console.takingInput and console.commandInput ~= "" then
+        local commands = console.script:readCommandsFromInput(console.commandInput)
         for i = 1, #commands do
             RunConsoleCommand(commands[i])
         end
-        print("Ran console script: " .. devConsoleUI.commandInput)
-        devConsoleUI:log("> " .. devConsoleUI.commandInput)
-        devConsoleUI.commandInput = ""
+        print("Ran console script: " .. console.commandInput)
+        console.script:log("> " .. console.commandInput)
+        console.commandInput = ""
     end
-
+    if true then return end
     --Check if the key is assigned to a devConsole command
     if table.contains(devConsoleUI.assignedKeys, key) and false then
         local commandInput = devConsoleUI.assignedCommands[table.contains(devConsoleUI.assignedKeys, key, true)]
