@@ -1,3 +1,5 @@
+local coreFuncs = require "coreFuncs"
+
 local rectangle = {}
 
 function rectangle.new()
@@ -9,8 +11,9 @@ function rectangle.new()
     }
 
     function instance:draw()
+        local pos = coreFuncs.getRelativeElementPosition(self.position, self.parentComp)
         love.graphics.setColor(self.color[1], self.color[2], self.color[3], self.color[4]*self.parentComp.alpha)
-        love.graphics.rectangle("fill", self.position[1], self.position[2], self.size[1], self.size[2])
+        love.graphics.rectangle("fill", pos[1], pos[2], self.size[1], self.size[2])
         love.graphics.setColor(1, 1, 1, 1)
     end
 

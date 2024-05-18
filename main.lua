@@ -30,7 +30,7 @@ function love.wheelmoved(x, y)
     end
     
     --DevConsole scrolling
-    if DevConsoleOpen then
+    if DevConsoleOpen and false then
         if y > 0 then
             devConsoleUI.logOffset = devConsoleUI.logOffset - 1
             if devConsoleUI.logOffset < 0 then devConsoleUI.logOffset = 0 end
@@ -43,7 +43,7 @@ end
 
 function love.keypressed(key, unicode)
     -- Fullscreen key
-    if key == "f11" then
+    if table.contains(InputManager:getKeys("fullscreen"), key) then
         fullscreen = not fullscreen
         love.window.setFullscreen(fullscreen, "desktop")
         -- Set window dimensions to default
@@ -52,12 +52,12 @@ function love.keypressed(key, unicode)
     end
 
     --Pause key (not devConsoleUI.takingInput)
-    if key == "escape" and not DevConsoleOpen then
+    if table.contains(InputManager:getKeys("pause_game"), key) and not DevConsoleOpen then
         GamePaused = not GamePaused
     end
 
     --Debug menu toggle key
-    if key == "f3" and CurrentScene.name == "Game" then
+    if table.contains(InputManager:getKeys("toggle_debug"), key) and CurrentScene.name == "Game" then
         local debugMenu = CurrentScene.debugMenu
         debugMenu.enabled = not debugMenu.enabled
         --Disable verbose mode if closing menu
@@ -68,16 +68,18 @@ function love.keypressed(key, unicode)
         end
     end
 
-    if true then return end
+    --***DEVCONSOLE RELATED STUFF DOWN HERE***
+    local console = CurrentScene.devConsole
+    local consoleUI = console.UIComponent
     --Developer console opening key
-    if key == "\"" and false then
-        if DevConsoleOpen and devConsoleUI.takingInput then return end
-        DevConsoleOpen = not DevConsoleOpen
-        if DevConsoleOpen and GameState == "game" then
+    if table.contains(InputManager:getKeys("dev_console"), key) then
+        if console.open and consoleUI.takingInput then return end
+        console.open = not console.open
+        if console.open and CurrentScene.name == "Game" then
             GamePaused = true
         end
     end
-
+    if true then return end
     --Dev console text erasing
     if key == "backspace" and false then
         -- get the byte offset to the last UTF-8 character in the string.
@@ -154,7 +156,7 @@ end
 
 local function updateUIOffset(delta)
     local x = 0
-    if DevConsoleOpen then
+    if CurrentScene.name == "Game" and CurrentScene.devConsole.open then
         x = -250
     end
     MenuUIOffset = MenuUIOffset + (x-MenuUIOffset)*8*delta
@@ -195,7 +197,7 @@ function love.update(delta)
     ScreenWidth, ScreenHeight = love.graphics.getDimensions()
     if not CurrentScene then return end
     CurrentScene:update(delta)
-    --updateUIOffset(delta)
+    updateUIOffset(delta)
     --setMouseCursor()
 end
 

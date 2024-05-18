@@ -61,6 +61,8 @@ function pauseScreen:update(delta)
     local ui = self.parent.UIComponent
     --Set enabled state
     ui.enabled = GamePaused
+    --UI Offsetting
+    self.parent.transformComponent.x = MenuUIOffset
     --Smooth alpha transitioning
     local smoothness = 7
     if GamePaused then

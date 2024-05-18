@@ -36,6 +36,11 @@
         [
             "pauseScreen",
             ["UIComponent", "fdh/components/ui/pause_screen"]
+        ],
+
+        [
+            "devConsole",
+            ["UIComponent", "fdh/components/ui/dev_console"]
         ]
     ]
 }

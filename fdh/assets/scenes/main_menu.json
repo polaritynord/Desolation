@@ -10,6 +10,11 @@
         [
             "mainMenu",
             ["UIComponent", "fdh/components/ui/main_menu"]
+        ],
+        
+        [
+            "devConsole",
+            ["UIComponent", "fdh/components/ui/dev_console"]
         ]
     ]
 }
