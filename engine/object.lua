@@ -25,7 +25,7 @@ function object.new(parent)
 
     function o:update(delta)
         if self.script and self.script.update then self.script:update(delta) end
-        if self.particleComponent then self.particleComponent:update(delta) end
+        if self.UIComponent then self.UIComponent:update(delta) end
         for _, v in ipairs(self.tree) do
             v:update(delta)
         end
@@ -36,7 +36,10 @@ function object.new(parent)
             --self.imageComponent:draw()
             CurrentScene.drawLayers[self.imageComponent.layer][#CurrentScene.drawLayers[self.imageComponent.layer]+1] = self.imageComponent
         end
-        if self.particleComponent then self.particleComponent:draw() end
+        if self.UIComponent then
+            --self.UIComponent:draw()
+            CurrentScene.uiLayer[#CurrentScene.uiLayer+1] = self.UIComponent
+        end
         for _, v in ipairs(self.tree) do
             v:draw()
         end

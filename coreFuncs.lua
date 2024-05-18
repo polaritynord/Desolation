@@ -22,11 +22,11 @@ function coreFuncs.getRelativePosition(transform, camera)
 end
 
 function coreFuncs.getRelativeElementPosition(position, parentComp)
-    local parentPos = parentComp:getPosition()
+    local parentPos = parentComp.parent:getPosition()
     local x = position[1]
     local y = position[2]
 
-    return {x + parentComp.position[1], y + parentComp.position[2]}
+    return {x + parentPos.x, y + parentPos.y}
 end
 
 function coreFuncs.getRelativeMousePosition()

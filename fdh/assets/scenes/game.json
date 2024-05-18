@@ -21,6 +21,11 @@
         [
             "camera",
             ["fdh/components/camera_controller"]
+        ],
+        
+        [
+            "pauseScreen",
+            ["UIComponent", "fdh/components/pause_screen"]
         ]
     ]
 }

@@ -2,6 +2,7 @@ local json = require("lib.json")
 local object = require "engine.object"
 local components = {
     imageComponent = require "engine.components.image_component";
+    UIComponent = require "engine.components.ui_component";
 }
 
 local scene = {}
@@ -10,6 +11,7 @@ function scene.new()
     local s = {
         tree = {};
         drawLayers = {{}, {}, {}};
+        uiLayer = {};
     }
 
     function s:addChild(obj)
@@ -37,6 +39,7 @@ function scene.new()
     function s:draw()
         local camTransform = self.camera.transformComponent
         self.drawLayers = {{}, {}, {}}
+        self.uiLayer = {}
         love.graphics.setBackgroundColor(self.backgroundColor)
         love.graphics.push()
             love.graphics.scale(camTransform.scale.x, camTransform.scale.y)
@@ -48,6 +51,10 @@ function scene.new()
                 for _, v in ipairs(self.drawLayers[k]) do
                     v:draw()
                 end
+            end
+            --Draw UI
+            for _, v in ipairs(self.uiLayer) do
+                v:draw()
             end
         love.graphics.pop()
     end
@@ -66,6 +73,7 @@ local function addObjectToScene(instance, v, isScene)
         --Check if component is an engine comp.
         if table.contains(ENGINE_COMPONENTS, compName) then
             newComp = components[compName].new(newObj)
+            newComp.parent = newObj
             newObj[compName] = newComp
         else
             --Import script component

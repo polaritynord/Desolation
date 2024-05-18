@@ -1,5 +1,5 @@
 ENGINE_COMPONENTS = {
-    "imageComponent", "transformComponent", "particleComponent"
+    "imageComponent", "transformComponent", "particleComponent", "UIComponent"
 }
 
 function love.conf(t)
