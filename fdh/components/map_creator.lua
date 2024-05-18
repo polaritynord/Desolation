@@ -4,6 +4,7 @@ local object = require("engine.object")
 local mapCreator = {}
 
 function mapCreator:load()
+    GamePaused = false
     --Create the placeholder tile
     local tile = object.new(self)
     tile.imageComponent = imageComponent.new(tile, Assets.images.tiles.prototypeGreen)

@@ -9,8 +9,15 @@ function pauseScreen:load()
     ui.title = ui:newImage(
         {
             source = Assets.images.logo;
-            position = {180, 100};
-            scale = {0.6, 0.6};
+            position = {210, 100};
+            scale = {3.7, 3.7};
+        }
+    )
+    ui.eternal = ui:newTextLabel(
+        {
+            text = "[ETERNAL HORIZONS]";
+            position = {95, 140};
+            font = "ticketing";
         }
     )
     ui.continueButton = ui:newTextButton(
@@ -33,9 +40,13 @@ function pauseScreen:load()
             position = {70, 280};
             buttonText = "Main Menu";
             buttonTextSize = 30;
+            clickEvent = function ()
+                local scene = LoadScene("fdh/assets/scenes/main_menu.json")
+                SetScene(scene)
+            end
         }
     )
-    ui.menuButton = ui:newTextButton(
+    ui.quitButton = ui:newTextButton(
         {
             position = {70, 320};
             buttonText = "Quit";
@@ -43,6 +54,7 @@ function pauseScreen:load()
             clickEvent = clickEvents.quitButtonClick;
         }
     )
+    ui.quitButton.confirmTimer = 0
 end
 
 function pauseScreen:update(delta)
@@ -57,6 +69,13 @@ function pauseScreen:update(delta)
         ui.background.size = {ScreenWidth+500, ScreenHeight}
     else
         ui.alpha = 0.4
+    end
+    --Are you sure text
+    if ui.quitButton.buttonText == "Are You Sure?" then
+        ui.quitButton.confirmTimer = ui.quitButton.confirmTimer - delta
+        if ui.quitButton.confirmTimer < 0 then
+            ui.quitButton.buttonText = "Quit"
+        end
     end
 end
 

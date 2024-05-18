@@ -24,6 +24,7 @@ function assets.load()
         };
         bullet = love.graphics.newImage("fdh/assets/images/bullet.png");
         icon = love.graphics.newImage("engine/assets/icon.png");
+        iconTransparent = love.graphics.newImage("engine/assets/icon_transparent.png");
         logo = love.graphics.newImage("fdh/assets/images/eh_logo.png");
     }
 

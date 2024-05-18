@@ -8,14 +8,21 @@ function mainMenu:load()
         {
             source = Assets.images.ui.menuBackground;
             scale = {0.7, 0.7};
-            position = {ScreenWidth/2, ScreenHeight/2};
+            position = {480, 270};
         }
     )
     ui.title = ui:newImage(
         {
             source = Assets.images.logo;
-            position = {180, 100};
-            scale = {0.6, 0.6};
+            position = {210, 100};
+            scale = {3.7, 3.7};
+        }
+    )
+    ui.eternal = ui:newTextLabel(
+        {
+            text = "[ETERNAL HORIZONS]";
+            position = {95, 140};
+            font = "ticketing";
         }
     )
     ui.campaignButton = ui:newTextButton(
@@ -30,6 +37,10 @@ function mainMenu:load()
             position = {70, 240};
             buttonText = "Extra Gamemodes";
             buttonTextSize = 30;
+            clickEvent = function ()
+                local scene = LoadScene("fdh/assets/scenes/game.json")
+                SetScene(scene)
+            end
         }
     )
     ui.achievementsButton = ui:newTextButton(
@@ -68,10 +79,33 @@ function mainMenu:load()
             clickEvent = clickEvents.quitButtonClick;
         }
     )
+    ui.quitButton.confirmTimer = 0
+    --Other things
+    ui.polarity = ui:newImage(
+        {
+            source = Assets.images.iconTransparent;
+            position = {920, 510};
+            scale = {0.5, 0.5};
+        }
+    )
+    ui.version = ui:newTextLabel(
+        {
+            text = GAME_VERSION_STATE .. " " .. GAME_VERSION;
+            position = {5, 512.5};
+            font = "disposable-droid"
+        }
+    )
 end
 
 function mainMenu:update(delta)
-    --local ui = self.parent.UIComponent
+    local ui = self.parent.UIComponent
+    --Are you sure text
+    if ui.quitButton.buttonText == "Are You Sure?" then
+        ui.quitButton.confirmTimer = ui.quitButton.confirmTimer - delta
+        if ui.quitButton.confirmTimer < 0 then
+            ui.quitButton.buttonText = "Quit"
+        end
+    end
 end
 
 return mainMenu
