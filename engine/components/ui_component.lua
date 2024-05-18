@@ -1,5 +1,6 @@
 local textLabel = require("engine.components.ui_elements.text_label")
 local rectangle = require("engine.components.ui_elements.rectangle")
+local image = require("engine.components.ui_elements.image")
 
 local UIComponent = {}
 
@@ -31,6 +32,20 @@ function UIComponent:new(parent)
         if attributes then
             instance2.position = attributes.position or instance2.position
             instance2.size = attributes.size or instance2.size
+            instance2.color = attributes.color or instance2.color
+        end
+        instance2.parentComp = self
+        self.elements[#self.elements+1] = instance2
+        return instance2
+    end
+
+    function instance:newImage(attributes)
+        local instance2 = image.new()
+        if attributes then
+            instance2.source = attributes.source or instance2.source
+            instance2.position = attributes.position or instance2.position
+            instance2.scale = attributes.scale or instance2.scale
+            instance2.rotation = attributes.rotation or instance2.rotation
             instance2.color = attributes.color or instance2.color
         end
         instance2.parentComp = self

@@ -4,7 +4,13 @@ function pauseScreen:load()
     local ui = self.parent.UIComponent
 
     ui.background = ui:newRectangle({color={0, 0, 0, 0.6}})
-    
+    ui.title = ui:newImage(
+        {
+            source = Assets.images.logo;
+            position = {180, 100};
+            scale = {0.6, 0.6};
+        }
+    )
 end
 
 function pauseScreen:update(delta)

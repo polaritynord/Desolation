@@ -22,7 +22,8 @@ function assets.load()
             combat = love.mouse.newCursor("fdh/assets/images/cursor_combat.png", 12, 12);
         };
         bullet = love.graphics.newImage("fdh/assets/images/bullet.png");
-        icon = love.graphics.newImage("engine/assets/icon.png")
+        icon = love.graphics.newImage("engine/assets/icon.png");
+        logo = love.graphics.newImage("fdh/assets/images/eh_logo.png")
     }
 
     assets.fonts = {}
