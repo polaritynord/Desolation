@@ -24,6 +24,11 @@
         ],
 
         [
+            "hud",
+            ["UIComponent", "fdh/components/ui/hud"]
+        ],
+
+        [
             "debugMenu",
             ["UIComponent", "fdh/components/ui/debug_menu"]
         ],

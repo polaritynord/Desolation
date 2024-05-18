@@ -1,5 +1,13 @@
 local pauseScreen = {}
 
+local function quitButtonClick(element)
+    if element.buttonText == "Quit" then
+        element.buttonText = "Are You Sure?"
+    else
+        love.event.quit()
+    end
+end
+
 function pauseScreen:load()
     local ui = self.parent.UIComponent
 
@@ -9,6 +17,36 @@ function pauseScreen:load()
             source = Assets.images.logo;
             position = {180, 100};
             scale = {0.6, 0.6};
+        }
+    )
+    ui.continueButton = ui:newTextButton(
+        {
+            position = {70, 200};
+            buttonText = "Continue";
+            buttonTextSize = 30;
+            clickEvent = function () GamePaused = false end;
+        }
+    )
+    ui.settingsButton = ui:newTextButton(
+        {
+            position = {70, 240};
+            buttonText = "Settings";
+            buttonTextSize = 30;
+        }
+    )
+    ui.menuButton = ui:newTextButton(
+        {
+            position = {70, 280};
+            buttonText = "Main Menu";
+            buttonTextSize = 30;
+        }
+    )
+    ui.menuButton = ui:newTextButton(
+        {
+            position = {70, 320};
+            buttonText = "Quit";
+            buttonTextSize = 30;
+            clickEvent = quitButtonClick;
         }
     )
 end
