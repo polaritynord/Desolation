@@ -175,12 +175,12 @@ function love.load()
     --RunConsoleCommand("run_script dcsFiles/test.dcs")
 
     --Read game directory & launch first scene (TODO: Add game launching from console args)
-    local gameDirectory = "fdh"
     --Fetch game info
-    local infoFile = love.filesystem.read(gameDirectory .. "/info.json")
-    local infoData = json.decode(infoFile)
     local engineInfoFile = love.filesystem.read("engine/info.json")
     local engineInfoData = json.decode(engineInfoFile)
+    local gameDirectory = engineInfoData.gameDirectory
+    local infoFile = love.filesystem.read(gameDirectory .. "/info.json")
+    local infoData = json.decode(infoFile)
     GAME_NAME = infoData.name
     GAME_VERSION = infoData.version
     GAME_VERSION_STATE = infoData.versionState

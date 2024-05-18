@@ -12,6 +12,7 @@ function assets.load()
         };
         ui = {
             healthBar = love.graphics.newImage("fdh/assets/images/hud/health_bar.png");
+            menuBackground = love.graphics.newImage("fdh/assets/images/menu_background.png");
         };
         weapons = {
             pistolImg = love.graphics.newImage("fdh/assets/images/weapons/pistol.png");
@@ -23,7 +24,7 @@ function assets.load()
         };
         bullet = love.graphics.newImage("fdh/assets/images/bullet.png");
         icon = love.graphics.newImage("engine/assets/icon.png");
-        logo = love.graphics.newImage("fdh/assets/images/eh_logo.png")
+        logo = love.graphics.newImage("fdh/assets/images/eh_logo.png");
     }
 
     assets.fonts = {}

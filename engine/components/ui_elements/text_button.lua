@@ -13,6 +13,7 @@ function textButton.new()
         mouseClicking = false;
         hoverOffset = 0;
         clickEvent = nil;
+        textFont = "disposable-droid";
     }
 
     function instance:update(delta)
@@ -36,7 +37,7 @@ function textButton.new()
 
     function instance:draw()
         love.graphics.setColor(self.color[1], self.color[2], self.color[3], self.color[4]*self.parentComp.alpha)
-        SetFont("fdh/assets/fonts/disposable-droid.ttf", self.buttonTextSize)
+        SetFont("fdh/assets/fonts/" .. self.textFont .. ".ttf", self.buttonTextSize)
         love.graphics.printf(self.buttonText, self.position[1]+self.hoverOffset, self.position[2], 1000, "left")
         love.graphics.setColor(1, 1, 1, 1)
     end

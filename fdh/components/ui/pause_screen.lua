@@ -1,12 +1,6 @@
-local pauseScreen = {}
+local clickEvents = require("fdh.button_clickevents")
 
-local function quitButtonClick(element)
-    if element.buttonText == "Quit" then
-        element.buttonText = "Are You Sure?"
-    else
-        love.event.quit()
-    end
-end
+local pauseScreen = {}
 
 function pauseScreen:load()
     local ui = self.parent.UIComponent
@@ -46,7 +40,7 @@ function pauseScreen:load()
             position = {70, 320};
             buttonText = "Quit";
             buttonTextSize = 30;
-            clickEvent = quitButtonClick;
+            clickEvent = clickEvents.quitButtonClick;
         }
     )
 end

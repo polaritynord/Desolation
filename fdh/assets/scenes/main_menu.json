@@ -1,0 +1,15 @@
+{
+    "name": "Main Menu",
+    "backgroundColor": [0.4, 0.6, 0.6],
+    "tree": [
+        [
+            "camera",
+            []
+        ],
+
+        [
+            "mainMenu",
+            ["UIComponent", "fdh/components/ui/main_menu"]
+        ]
+    ]
+}
