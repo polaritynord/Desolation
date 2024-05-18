@@ -17,19 +17,6 @@ CurrentScene = nil
 GamePaused = false
 Scenes = {}
 
-function table.contains(table, element, returnIndex)
-    for i, value in pairs(table) do
-      if value == element then
-        if returnIndex then
-            return i
-        else
-            return true
-        end
-      end
-    end
-    return false
-end
-
 function love.wheelmoved(x, y)
     if not GamePaused and CurrentScene.name == "Game" then
         local camController = CurrentScene.camera.script
@@ -63,22 +50,25 @@ function love.keypressed(key, unicode)
         if not fullscreen and false then
          love.window.setMode(960, 540, {resizable=true}) end
     end
+
     --Pause key (not devConsoleUI.takingInput)
     if key == "escape" and not DevConsoleOpen then
         GamePaused = not GamePaused
     end
-    if true then return end
+
     --Debug menu toggle key
-    if key == "f3" and GameState == "game" and false then
-        gameUi.debug.toggled = not gameUi.debug.toggled
+    if key == "f3" and CurrentScene.name == "Game" then
+        local debugMenu = CurrentScene.debugMenu
+        debugMenu.enabled = not debugMenu.enabled
         --Disable verbose mode if closing menu
-        if not gameUi.debug.toggled then gameUi.debug.verboseMode = false end
+        if not debugMenu.enabled then debugMenu.verboseMode = false end
         --Check for verbose opening
-        if gameUi.debug.toggled and (love.keyboard.isDown("lctrl") or love.keyboard.isDown("rctrl")) then
-            gameUi.debug.verboseMode = true
+        if debugMenu.enabled and (love.keyboard.isDown("lctrl") or love.keyboard.isDown("rctrl")) then
+            debugMenu.verboseMode = true
         end
     end
 
+    if true then return end
     --Developer console opening key
     if key == "\"" and false then
         if DevConsoleOpen and devConsoleUI.takingInput then return end
@@ -189,6 +179,14 @@ function love.load()
     --Fetch game info
     local infoFile = love.filesystem.read(gameDirectory .. "/info.json")
     local infoData = json.decode(infoFile)
+    local engineInfoFile = love.filesystem.read("engine/info.json")
+    local engineInfoData = json.decode(engineInfoFile)
+    GAME_NAME = infoData.name
+    GAME_VERSION = infoData.version
+    GAME_VERSION_STATE = infoData.versionState
+    AUTHOR = infoData.author
+    ENGINE_NAME = engineInfoData.name
+    ENGINE_VERSION = engineInfoData.version
     local startScene = LoadScene(infoData.startScene)
     SetScene(startScene)
 end

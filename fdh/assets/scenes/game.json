@@ -22,10 +22,15 @@
             "camera",
             ["fdh/components/camera_controller"]
         ],
+
+        [
+            "debugMenu",
+            ["UIComponent", "fdh/components/ui/debug_menu"]
+        ],
         
         [
             "pauseScreen",
-            ["UIComponent", "fdh/components/pause_screen"]
+            ["UIComponent", "fdh/components/ui/pause_screen"]
         ]
     ]
 }

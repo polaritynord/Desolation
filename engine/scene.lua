@@ -53,9 +53,12 @@ function scene.new()
                 end
             end
             --Draw UI
-            for _, v in ipairs(self.uiLayer) do
-                v:draw()
-            end
+            love.graphics.push()
+                love.graphics.scale(ScreenWidth/960, ScreenHeight/540)
+                for _, v in ipairs(self.uiLayer) do
+                    v:draw()
+                end
+            love.graphics.pop()
         love.graphics.pop()
     end
 
