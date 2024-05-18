@@ -1,4 +1,5 @@
 local textLabel = require("engine.components.ui_elements.text_label")
+local rectangle = require("engine.components.ui_elements.rectangle")
 
 local UIComponent = {}
 
@@ -18,6 +19,18 @@ function UIComponent:new(parent)
             instance2.size = attributes.size or instance2.size
             instance2.begin = attributes.begin or instance2.begin
             instance2.font = attributes.font or instance2.font
+            instance2.color = attributes.color or instance2.color
+        end
+        instance2.parentComp = self
+        self.elements[#self.elements+1] = instance2
+        return instance2
+    end
+
+    function instance:newRectangle(attributes)
+        local instance2 = rectangle.new()
+        if attributes then
+            instance2.position = attributes.position or instance2.position
+            instance2.size = attributes.size or instance2.size
             instance2.color = attributes.color or instance2.color
         end
         instance2.parentComp = self

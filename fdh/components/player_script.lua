@@ -122,6 +122,8 @@ function playerScript:load()
 end
 
 function playerScript:update(delta)
+    if GamePaused then return end
+
     local player = self.parent
     self:movement(delta, player)
     self:pointTowardsMouse(player)

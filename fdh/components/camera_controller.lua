@@ -31,6 +31,7 @@ function cameraController:load()
 end
 
 function cameraController:update(delta)
+    if GamePaused then return end
     local player = CurrentScene.player
     local camTransform = self.parent.transformComponent
     self:movement(delta, camTransform, player)

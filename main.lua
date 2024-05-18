@@ -14,6 +14,7 @@ DevConsoleOpen = false
 Assets = require("assets")
 MenuUIOffset = 0
 CurrentScene = nil
+GamePaused = false
 Scenes = {}
 
 function table.contains(table, element, returnIndex)
@@ -62,13 +63,13 @@ function love.keypressed(key, unicode)
         if not fullscreen and false then
          love.window.setMode(960, 540, {resizable=true}) end
     end
-    if true then return end
-    --Pause key
-    if key == "escape" and not devConsoleUI.takingInput and not DevConsoleOpen then
+    --Pause key (not devConsoleUI.takingInput)
+    if key == "escape" and not DevConsoleOpen then
         GamePaused = not GamePaused
     end
+    if true then return end
     --Debug menu toggle key
-    if key == "f3" and GameState == "game" then
+    if key == "f3" and GameState == "game" and false then
         gameUi.debug.toggled = not gameUi.debug.toggled
         --Disable verbose mode if closing menu
         if not gameUi.debug.toggled then gameUi.debug.verboseMode = false end
@@ -79,7 +80,7 @@ function love.keypressed(key, unicode)
     end
 
     --Developer console opening key
-    if key == "\"" then
+    if key == "\"" and false then
         if DevConsoleOpen and devConsoleUI.takingInput then return end
         DevConsoleOpen = not DevConsoleOpen
         if DevConsoleOpen and GameState == "game" then
@@ -88,7 +89,7 @@ function love.keypressed(key, unicode)
     end
 
     --Dev console text erasing
-    if key == "backspace" then
+    if key == "backspace" and false then
         -- get the byte offset to the last UTF-8 character in the string.
         local byteoffset = utf8.offset(devConsoleUI.commandInput, -1)
 
@@ -100,16 +101,18 @@ function love.keypressed(key, unicode)
     end
 
     --Dev console input mode exiting & stuff
-    if key == "escape" and DevConsoleOpen then
-        if devConsoleUI.takingInput then
-            devConsoleUI.takingInput = false
-        else
-            DevConsoleOpen = false
+    if false then
+        if key == "escape" and DevConsoleOpen then
+            if devConsoleUI.takingInput then
+                devConsoleUI.takingInput = false
+            else
+                DevConsoleOpen = false
+            end
         end
     end
 
     --Dev console submitting command
-    if key == "return" and DevConsoleOpen and devConsoleUI.takingInput and devConsoleUI.commandInput ~= "" then
+    if key == "return" and DevConsoleOpen and devConsoleUI.takingInput and devConsoleUI.commandInput ~= "" and false then
         local commands = devConsoleUI:readCommandsFromInput(devConsoleUI.commandInput)
         for i = 1, #commands do
             RunConsoleCommand(commands[i])
@@ -120,7 +123,7 @@ function love.keypressed(key, unicode)
     end
 
     --Check if the key is assigned to a devConsole command
-    if table.contains(devConsoleUI.assignedKeys, key) then
+    if table.contains(devConsoleUI.assignedKeys, key) and false then
         local commandInput = devConsoleUI.assignedCommands[table.contains(devConsoleUI.assignedKeys, key, true)]
         local commands = devConsoleUI:readCommandsFromInput(commandInput, true)
         for i = 1, #commands do
@@ -130,7 +133,7 @@ function love.keypressed(key, unicode)
     end
     
     --Dev console history
-    if key == "up" then
+    if key == "up" and false then
         --Check if current input is in history, otherwise start from the most recent
         local i 
         if #devConsoleUI.logs > 0 then

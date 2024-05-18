@@ -7,6 +7,8 @@ function playerHandScript:load()
 end
 
 function playerHandScript:update(delta)
+    if GamePaused then return end
+    
     local hand = self.parent
     local player = hand.parent
     --Set image for the hand

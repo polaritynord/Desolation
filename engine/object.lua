@@ -36,7 +36,7 @@ function object.new(parent)
             --self.imageComponent:draw()
             CurrentScene.drawLayers[self.imageComponent.layer][#CurrentScene.drawLayers[self.imageComponent.layer]+1] = self.imageComponent
         end
-        if self.UIComponent then
+        if self.UIComponent and self.UIComponent.enabled then
             --self.UIComponent:draw()
             CurrentScene.uiLayer[#CurrentScene.uiLayer+1] = self.UIComponent
         end
