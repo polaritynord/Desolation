@@ -12,6 +12,7 @@ local globals = {
     god = {0, true};
     invisible = {0, true};
     inf_stamina = {0, true};
+    slippiness = {12, true};
 }
 
 function GetGlobal(name)

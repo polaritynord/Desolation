@@ -43,10 +43,21 @@ end
 function inputManager:isPressed(name)
     local pressed = false
     if self.inputType == "keyboard" then
+        local inputTable = {}
         --Check for keyboard input
-        local keys = self:getKeys(name)
-        for i = 1, #keys do
-            if love.keyboard.isDown(keys[i]) then pressed = true end
+        if type(name) == "string" then
+            --One input
+            inputTable[#inputTable+1] = name
+        elseif type(name) == "table" then
+            --Multiple input names
+            inputTable = name
+        end
+
+        for _, v in ipairs(inputTable) do
+            local keys = self:getKeys(v)
+            for i = 1, #keys do
+                if love.keyboard.isDown(keys[i]) then pressed = true end
+            end
         end
     else
         --TODO Joystick input

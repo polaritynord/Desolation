@@ -1,4 +1,4 @@
-local weaponManager = require("scripts.weaponManager")
+local weaponManager = require("fdh.weapon_manager")
 
 local consoleFunctions = {
     funcsList = {

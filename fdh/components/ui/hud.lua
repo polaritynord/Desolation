@@ -72,6 +72,22 @@ function hud:update(delta)
     local player = CurrentScene.player
     ui.healthMonitor.text = player.health
     ui.armorMonitor.text = player.armor
+    --Current weapon
+    local weapon = player.inventory.weapons[player.inventory.slot]
+    if weapon then
+        ui.weaponAmmoImg.source = Assets.images.ui.ammo
+        ui.weaponImg.source = Assets.images.weapons[string.lower(weapon.name) .. "Img"]
+        ui.weaponName.text = weapon.name
+        ui.weaponAmmoText.text = weapon.magAmmo
+        ui.ammunitionText.text = player.inventory.ammunition[weapon.ammoType]
+        --TODO Add scaling fix
+    else
+        ui.weaponAmmoImg.source = nil
+        ui.weaponImg.source = nil
+        ui.weaponAmmoText.text = ""
+        ui.ammunitionText.text = ""
+        ui.weaponName.text = ""
+    end
 end
 
 return hud

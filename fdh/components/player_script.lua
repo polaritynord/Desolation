@@ -1,5 +1,5 @@
---local cameraController = require("fdh.components.camera_controller")
 local coreFuncs = require("coreFuncs")
+local weaponManager = require("fdh.weapon_manager")
 
 local playerScript = {}
 
@@ -7,36 +7,37 @@ function playerScript:movement(delta, player)
     local transform = player.transformComponent
 
     local speed = GetGlobal("p_speed")
-    self.velocity = {x=0, y=0}
+    local slippiness = GetGlobal("slippiness")
+    player.velocity.x = player.velocity.x + (-player.velocity.x)*slippiness*delta
+    player.velocity.y = player.velocity.y + (-player.velocity.y)*slippiness*delta
     --Get key input
-    if love.keyboard.isDown("a") then
-        self.velocity.x = self.velocity.x - 1
+    if InputManager:isPressed("move_left") then
+        player.velocity.x = -1
     end
-    if love.keyboard.isDown("d") then
-        self.velocity.x = self.velocity.x + 1
+    if InputManager:isPressed("move_right") then
+        player.velocity.x = 1
     end
-    if love.keyboard.isDown("w") then
-        self.velocity.y = self.velocity.y - 1
+    if InputManager:isPressed("move_up") then
+        player.velocity.y = -1
     end
-    if love.keyboard.isDown("s") then
-        self.velocity.y = self.velocity.y + 1
+    if InputManager:isPressed("move_down") then
+        player.velocity.y = 1
     end
+    player.moving = InputManager:isPressed({"move_left", "move_right", "move_up", "move_down"})
     --Sprinting
-    local sprintMultiplier = 1.6
     player.sprinting = InputManager:isPressed("sprint")
     if player.sprinting then
-        self.velocity.x = self.velocity.x * sprintMultiplier
-        self.velocity.y = self.velocity.y * sprintMultiplier
+        speed = speed * 1.6
     end
     --Normalize velocity
-    if math.abs(self.velocity.x) == math.abs(self.velocity.y) then
-        self.velocity.x = self.velocity.x * math.sin(math.pi/4)
-        self.velocity.y = self.velocity.y * math.sin(math.pi/4)
+    if InputManager:isPressed({"move_left", "move_right"}) == InputManager:isPressed({"move_up", "move_down"}) and player.moving then
+        player.velocity.x = player.velocity.x * math.sin(math.pi/4)
+        player.velocity.y = player.velocity.y * math.sin(math.pi/4)
     end
-    player.moving = math.abs(self.velocity.x) > 0 or math.abs(self.velocity.y) > 0
     --Move by velocity
-    transform.x = transform.x + (self.velocity.x*speed*delta)
-    transform.y = transform.y + (self.velocity.y*speed*delta)
+    print(player.velocity.x, player.velocity.y)
+    transform.x = transform.x + (player.velocity.x*speed*delta)
+    transform.y = transform.y + (player.velocity.y*speed*delta)
 end
 
 function playerScript:pointTowardsMouse(player)
@@ -116,9 +117,15 @@ function playerScript:load()
     }
     player.shootTimer = 0
     player.reloadTimer = 0
+    --TODO Find a better way to handle these key presses?
     player.keyPressData = {
         ["q"] = false;
     }
+    --Starter weapon
+    weaponManager:load()
+    player.inventory.weapons[1] = weaponManager.Pistol.new()
+    player.inventory.weapons[1].magAmmo = 18
+    player.inventory.ammunition.light = 78
 end
 
 function playerScript:update(delta)
@@ -129,6 +136,8 @@ function playerScript:update(delta)
     self:pointTowardsMouse(player)
     self:slotSwitching(player)
     self:doWalkingAnim(player)
+    --Update hand offset
+    player.handOffset = player.handOffset + (-player.handOffset) * 20 * delta
 end
 
 return playerScript
