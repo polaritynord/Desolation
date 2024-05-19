@@ -44,7 +44,7 @@ end
 
 function love.keypressed(key, unicode)
     local console = CurrentScene.devConsole
-    local consoleUI = console.UIComponent
+    if console then local consoleUI = console.UIComponent end
     -- Fullscreen key
     if table.contains(InputManager:getKeys("fullscreen"), key) then
         fullscreen = not fullscreen
@@ -72,6 +72,7 @@ function love.keypressed(key, unicode)
     end
 
     --***DEVCONSOLE RELATED STUFF DOWN HERE***
+    if not console then return end
     --Developer console opening key
     if table.contains(InputManager:getKeys("dev_console"), key) then
         if console.open and consoleUI.takingInput then return end

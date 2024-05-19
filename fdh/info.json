@@ -3,5 +3,5 @@
     "author": "Polaritynord",
     "version": "0.3.dev1",
     "versionState": "indev",
-    "startScene": "fdh/assets/scenes/game.json"
+    "startScene": "fdh/assets/scenes/intro.json"
 }

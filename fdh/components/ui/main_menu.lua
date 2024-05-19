@@ -108,6 +108,7 @@ function mainMenu:update(delta)
         ui.quitButton.confirmTimer = ui.quitButton.confirmTimer - delta
         if ui.quitButton.confirmTimer < 0 then
             ui.quitButton.buttonText = "Quit"
+            ui.quitButton.textFont = "disposable-droid"
         end
     end
 end

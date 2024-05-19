@@ -35,7 +35,6 @@ function playerScript:movement(delta, player)
         player.velocity.y = player.velocity.y * math.sin(math.pi/4)
     end
     --Move by velocity
-    print(player.velocity.x, player.velocity.y)
     transform.x = transform.x + (player.velocity.x*speed*delta)
     transform.y = transform.y + (player.velocity.y*speed*delta)
 end
