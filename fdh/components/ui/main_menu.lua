@@ -99,6 +99,10 @@ end
 
 function mainMenu:update(delta)
     local ui = self.parent.UIComponent
+    --UI Ofsetting
+    self.parent.transformComponent.x = MenuUIOffset
+    ui.polarity.position[1] = 920 - MenuUIOffset
+    ui.version.position[1] = 5 - MenuUIOffset
     --Are you sure text
     if ui.quitButton.buttonText == "Are You Sure?" then
         ui.quitButton.confirmTimer = ui.quitButton.confirmTimer - delta

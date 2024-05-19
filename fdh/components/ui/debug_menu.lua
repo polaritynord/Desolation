@@ -17,6 +17,7 @@ function debugMenu:update(delta)
     local fps = love.timer.getFPS()
     local playerPos = CurrentScene.player:getPosition()
     local averageFps = math.ceil(1/love.timer.getAverageDelta())
+    local mx, my = love.mouse.getPosition()
     --write vsync next to fps counter if enabled
     local fps_suffix
     if love.window.getVSync() == 1 then
@@ -29,7 +30,7 @@ function debugMenu:update(delta)
                         .. "FPS: " .. fps .. "/" .. averageFps .. fps_suffix ..
                         "\nPlayer Coordinates: X=" .. math.floor(playerPos.x) .. " Y=" .. math.floor(playerPos.y) .. "\n" ..
                         "Memory Used(Excluding Love2D): " .. coreFuncs.roundDecimal(collectgarbage("count")/1024, 2) .. " MB"
-                        .. "\nParticle Count: " .. "0"
+                        .. "\nMouse Position: X=" .. mx .. " Y=" .. my .. "\nParticle Count: " .. "0"
     ui.debugTextsRight.text = GAME_VERSION_STATE .. " " .. GAME_VERSION .. "\nPowered by " .. ENGINE_NAME .. " (Build " .. ENGINE_VERSION .. ")"
     --TODO additional debug info to add: particle count, humanoid count
 end

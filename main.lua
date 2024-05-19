@@ -112,32 +112,14 @@ function love.keypressed(key, unicode)
         console.script:log("> " .. console.commandInput)
         console.commandInput = ""
     end
-    if true then return end
+
     --Check if the key is assigned to a devConsole command
-    if table.contains(devConsoleUI.assignedKeys, key) and false then
-        local commandInput = devConsoleUI.assignedCommands[table.contains(devConsoleUI.assignedKeys, key, true)]
-        local commands = devConsoleUI:readCommandsFromInput(commandInput, true)
+    if table.contains(console.assignedKeys, key) then
+        local commandInput = console.assignedCommands[table.contains(console.assignedKeys, key, true)]
+        local commands = console.script:readCommandsFromInput(commandInput, true)
         for i = 1, #commands do
             RunConsoleCommand(commands[i])
         end
-        --RunConsoleCommand()
-    end
-    
-    --Dev console history
-    if key == "up" and false then
-        --Check if current input is in history, otherwise start from the most recent
-        local i 
-        if #devConsoleUI.logs > 0 then
-            --Find the most recent input in log history
-            i = #devConsoleUI.logs
-        else return end
-
-        while string.sub(devConsoleUI.logs[i], 1, 1) ~= ">" and i > 1 do
-            i = i -1
-        end
-        local log = string.sub(devConsoleUI.logs[i], 3, #devConsoleUI.logs[i])
-        --Replace current input with new log
-        devConsoleUI.commandInput = log
     end
 end
 
@@ -155,7 +137,7 @@ end
 
 local function updateUIOffset(delta)
     local x = 0
-    if CurrentScene.name == "Game" and CurrentScene.devConsole.open then
+    if CurrentScene.devConsole and CurrentScene.devConsole.open then
         x = -250
     end
     MenuUIOffset = MenuUIOffset + (x-MenuUIOffset)*8*delta

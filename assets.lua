@@ -13,6 +13,7 @@ function assets.load()
         ui = {
             healthBar = love.graphics.newImage("fdh/assets/images/hud/health_bar.png");
             menuBackground = love.graphics.newImage("fdh/assets/images/menu_background.png");
+            ammo = love.graphics.newImage("fdh/assets/images/hud/ammo.png");
         };
         weapons = {
             pistolImg = love.graphics.newImage("fdh/assets/images/weapons/pistol.png");

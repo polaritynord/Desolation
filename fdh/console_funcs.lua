@@ -64,12 +64,13 @@ end
 
 function consoleFunctions.give_ammoScript(devConsole, command, i)
     --Return if cheats are disabled
-    if GetGlobal("cheats") < 1 then return end
+    if GetGlobal("cheats") < 1 or CurrentScene.name ~= "Game" then return end
+    local player = CurrentScene.player
     --Get weapon, and make sure the weapon is ACTUALLY a weapon
-    local weapon = Player.inventory.weapons[Player.inventory.slot]
+    local weapon = player.inventory.weapons[player.inventory.slot]
     if weapon == nil then return end
     --Add a magazine of ammunition to inventory
-    Player.inventory.ammunition[weapon.ammoType] = Player.inventory.ammunition[weapon.ammoType] + weapon.magSize
+    player.inventory.ammunition[weapon.ammoType] = player.inventory.ammunition[weapon.ammoType] + weapon.magSize
 end
 
 function consoleFunctions.clearScript(devConsole, command, i)
