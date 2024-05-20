@@ -34,6 +34,7 @@ function assets.load()
     assets.sounds = {
         ost = {
             ambience = love.audio.newSource("fdh/assets/sounds/ost/ambience1.wav", "stream");
+            intro = love.audio.newSource("fdh/assets/sounds/ost/intro.wav", "stream");
         };
     }
 end

@@ -30,6 +30,7 @@ end
 function devConsole:load()
     local console = self.parent
     local ui = console.UIComponent
+    ui.alpha = 0
 
     --Load help descriptions
     console.helpTexts = love.filesystem.read("fdh/assets/console_help_texts.json")

@@ -87,6 +87,12 @@ function playerScript:doWalkingAnim(player)
     player.transformComponent.scale.y = 4 + player.animationSizeDiff
 end
 
+function playerScript:weaponDropping(player)
+    local weapon = player.inventory.wepaons[player.inventory.slot]
+    if not InputManager:isPressed("drop_weapon") or not weapon then return end
+    --Create new weaponItem instance & pass values to it
+end
+
 --Engine funcs
 function playerScript:load()
     local player = self.parent

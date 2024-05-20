@@ -65,7 +65,7 @@ function scene.new()
     return s
 end
 
-local function addObjectToScene(instance, v, isScene)
+local function addObjectToScene(instance, v, _isScene)
     --Create new object instance
     local newObj = object.new(instance)
     newObj.name = v[1]

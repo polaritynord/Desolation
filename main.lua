@@ -31,6 +31,7 @@ function love.wheelmoved(x, y)
     
     --DevConsole scrolling
     local console = CurrentScene.devConsole
+    if not console then return end
     if console.open then
         if y > 0 then
             console.logOffset = console.logOffset - 1
@@ -44,7 +45,10 @@ end
 
 function love.keypressed(key, unicode)
     local console = CurrentScene.devConsole
-    if console then local consoleUI = console.UIComponent end
+    local consoleUI
+    if console then
+        consoleUI = console.UIComponent
+    else consoleUI = nil end
     -- Fullscreen key
     if table.contains(InputManager:getKeys("fullscreen"), key) then
         fullscreen = not fullscreen
@@ -172,6 +176,9 @@ function love.load()
     ENGINE_NAME = engineInfoData.name
     ENGINE_VERSION = engineInfoData.version
     local startScene = LoadScene(infoData.startScene)
+    if startScene.name == "Intro" and table.contains(arg, "--skip-intro") then
+        startScene = LoadScene("fdh/assets/scenes/main_menu.json")
+    end
     SetScene(startScene)
 end
 

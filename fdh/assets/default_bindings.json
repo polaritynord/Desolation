@@ -13,7 +13,8 @@
         ["drop_weapon", "v"],
         ["pause_game", "escape"],
         ["dev_console", "\""],
-        ["toggle_debug", "f3"]
+        ["toggle_debug", "f3"],
+        ["drop_weapon", "v"]
     ],
 
     "joystick": []
