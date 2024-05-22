@@ -1,5 +1,10 @@
-ENGINE_COMPONENTS = {
+ENGINE_COMPONENT_NAMES = {
     "imageComponent", "transformComponent", "particleComponent", "UIComponent"
+}
+
+ENGINE_COMPONENTS = {
+    imageComponent = require "engine.components.image_component";
+    UIComponent = require "engine.components.ui_component";
 }
 
 function table.contains(table, element, returnIndex)
@@ -24,8 +29,4 @@ function love.conf(t)
     t.window.minwidth = 960 ; t.window.minheight = 540
     t.console = true
     ScreenWidth, ScreenHeight = 960, 540
-    --Some constants
-    --GAME_NAME = "Eternal Horizons"
-    --GAME_VERSION_STATE = "indev"
-    --GAME_VERSION = "0.3.dev1"
 end

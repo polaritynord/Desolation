@@ -4,7 +4,7 @@ local object = {}
 
 function object.new(parent)
     local o = {
-        name = "Object";
+        name = "object";
         parent = parent;
         tree = {}
     }

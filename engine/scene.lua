@@ -1,9 +1,5 @@
 local json = require("lib.json")
 local object = require "engine.object"
-local components = {
-    imageComponent = require "engine.components.image_component";
-    UIComponent = require "engine.components.ui_component";
-}
 
 local scene = {}
 
@@ -74,8 +70,8 @@ local function addObjectToScene(instance, v, _isScene)
     for _, compName in ipairs(compList) do
         local newComp = nil
         --Check if component is an engine comp.
-        if table.contains(ENGINE_COMPONENTS, compName) then
-            newComp = components[compName].new(newObj)
+        if table.contains(ENGINE_COMPONENT_NAMES, compName) then
+            newComp = ENGINE_COMPONENTS[compName].new(newObj)
             newComp.parent = newObj
             newObj[compName] = newComp
         else

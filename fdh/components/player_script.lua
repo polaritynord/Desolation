@@ -1,5 +1,7 @@
 local coreFuncs = require("coreFuncs")
 local weaponManager = require("fdh.weapon_manager")
+local weaponItemScript = require("fdh.components.weapon_item")
+local object = require("engine.object")
 
 local playerScript = {}
 
@@ -88,9 +90,22 @@ function playerScript:doWalkingAnim(player)
 end
 
 function playerScript:weaponDropping(player)
-    local weapon = player.inventory.wepaons[player.inventory.slot]
+    local weapon = player.inventory.weapons[player.inventory.slot]
     if not InputManager:isPressed("drop_weapon") or not weapon then return end
     --Create new weaponItem instance & pass values to it
+    --local itemInstance = weaponItem.new(weapon.new(), CurrentScene.item)
+    --itemInstance.position = player:getPosition()
+    --itemInstance.velocity = 550
+    --itemInstance.rotVelocity = math.uniform(-1, 1)*math.pi*12 --TODO this could've been better
+    --itemInstance.realRot = player.transformComponent.rotation
+    local itemInstance = object.new(CurrentScene.items)
+    local script = table.new(weaponItemScript)
+    script.parent = itemInstance
+    itemInstance.script = script
+    script:load()
+    CurrentScene.items:addChild(itemInstance)
+    --Get rid of the held weapon
+    player.inventory.weapons[player.inventory.slot] = nil
 end
 
 --Engine funcs
@@ -131,6 +146,9 @@ function playerScript:load()
     player.inventory.weapons[1] = weaponManager.Pistol.new()
     player.inventory.weapons[1].magAmmo = 18
     player.inventory.ammunition.light = 78
+    if player.name == "player2" then
+        player.transformComponent.x = 100
+    end
 end
 
 function playerScript:update(delta)
@@ -141,6 +159,7 @@ function playerScript:update(delta)
     self:pointTowardsMouse(player)
     self:slotSwitching(player)
     self:doWalkingAnim(player)
+    self:weaponDropping(player)
     --Update hand offset
     player.handOffset = player.handOffset + (-player.handOffset) * 20 * delta
 end
