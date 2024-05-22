@@ -7,11 +7,12 @@ function imageComponent.new(parent, source)
         parent = parent;
         source = source or Assets.images.icon;
         layer = 1;
+        color = {1, 1, 1, 1};
     }
 
     function component:draw()
         if not self.source then return end
-        love.graphics.setColor(1, 1, 1, 1)
+        love.graphics.setColor(self.color)
         local transform = self.parent.transformComponent
         local camera = CurrentScene.camera
         local w, h = self.source:getWidth(), self.source:getHeight()

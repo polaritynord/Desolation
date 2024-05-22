@@ -98,11 +98,23 @@ function playerScript:weaponDropping(player)
     --itemInstance.velocity = 550
     --itemInstance.rotVelocity = math.uniform(-1, 1)*math.pi*12 --TODO this could've been better
     --itemInstance.realRot = player.transformComponent.rotation
+
+    --Create object data
     local itemInstance = object.new(CurrentScene.items)
     local script = table.new(weaponItemScript)
+    local playerPos = player:getPosition()
+    itemInstance.weaponData = weapon.new()
     script.parent = itemInstance
     itemInstance.script = script
     script:load()
+
+    --Set some variables
+    itemInstance.transformComponent.x = playerPos.x
+    itemInstance.transformComponent.y = playerPos.y
+    script.velocity = 550
+    script.rotVelocity = math.uniform(-1, 1)*math.pi*12 --TODO this could've been better
+    script.realRot = player.transformComponent.rotation
+
     CurrentScene.items:addChild(itemInstance)
     --Get rid of the held weapon
     player.inventory.weapons[player.inventory.slot] = nil
