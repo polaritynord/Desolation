@@ -1,5 +1,3 @@
-local uiComponent = require("engine.components.ui_component")
-
 local weaponItem = {}
 
 function weaponItem:movement(delta, item)

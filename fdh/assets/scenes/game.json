@@ -18,6 +18,10 @@
         ],
 
         [
+            "bullets", []
+        ],
+
+        [
             "mapCreator",
             ["fdh/components/map_creator"]
         ],

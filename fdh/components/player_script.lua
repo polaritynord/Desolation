@@ -1,6 +1,7 @@
 local coreFuncs = require("coreFuncs")
 local weaponManager = require("fdh.weapon_manager")
-local weaponItemScript = require("fdh.components.weapon_item")
+local weaponItemScript = require("fdh.components.weapon_item_script")
+local bulletScript = require("fdh.components.bullet_script")
 local particleFuncs = require("fdh.particle_funcs")
 local object = require("engine.object")
 
@@ -142,6 +143,16 @@ function playerScript:shootingWeapon(delta, player)
         --particles
         local shootParticles = player.particleComponent
         particleFuncs.createShootParticles(shootParticles, player.transformComponent.rotation)
+        --Bullet instance creation
+        local playerPos = player:getPosition()
+        local bullet = object.new(CurrentScene.bullets)
+        bullet.transformComponent.x = playerPos.x + math.cos(player.transformComponent.rotation)*weapon.bulletOffset
+        bullet.transformComponent.y = playerPos.y + math.sin(player.transformComponent.rotation)*weapon.bulletOffset
+        bullet.transformComponent.rotation = player.transformComponent.rotation
+        bullet.script = table.new(bulletScript)
+        bullet.script.parent = bullet
+        bullet.script:load()
+        CurrentScene.bullets:addChild(bullet)
 
         player.shootTimer = 0
     end
