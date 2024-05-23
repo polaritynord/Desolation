@@ -104,6 +104,8 @@ function playerScript:weaponDropping(player)
     local script = table.new(weaponItemScript)
     local playerPos = player:getPosition()
     itemInstance.weaponData = weapon.new()
+    --send current magAmmo to players ammunition because i couldnt get it to work
+    player.inventory.ammunition[weapon.ammoType] = player.inventory.ammunition[weapon.ammoType] + weapon.magAmmo
     script.parent = itemInstance
     itemInstance.script = script
     script:load()
@@ -116,6 +118,7 @@ function playerScript:weaponDropping(player)
     script.realRot = player.transformComponent.rotation
 
     CurrentScene.items:addChild(itemInstance)
+    script.treeIndex = #CurrentScene.items.tree
     --Get rid of the held weapon
     player.inventory.weapons[player.inventory.slot] = nil
 end

@@ -1,3 +1,5 @@
+local uiComponent = require("engine.components.ui_component")
+
 local weaponItem = {}
 
 function weaponItem:movement(delta, item)
@@ -30,15 +32,57 @@ function weaponItem:load()
         item,
         Assets.images.weapons[string.lower(item.weaponData.name) .. "Img"]
     )
-    self.parent.imageComponent.layer = 2
-    self.parent.transformComponent.scale = {x=2, y=2}
+    --Component setup
+    item.imageComponent.layer = 2
+    item.transformComponent.scale = {x=2, y=2}
     --Some vars
     self.gettingPickedUp = false
+    self.distanceToPlayer = 1000
 end
 
 function weaponItem:update(delta)
+    --Remove self if getting picked up is complete
+    if self.distanceToPlayer < 10 and self.gettingPickedUp then
+        table.removeValue(CurrentScene.items.tree, self.parent)
+        return
+    end
+
     local item = self.parent
+    local player = CurrentScene.player
+
     self:movement(delta, item)
+    --Distance calculation
+    local itemPos = item:getPosition()
+    local playerPos = player:getPosition()
+    self.distanceToPlayer = math.sqrt(
+        (itemPos.x-playerPos.x)*(itemPos.x-playerPos.x)
+        + (itemPos.y-playerPos.y)*(itemPos.y-playerPos.y)
+    )
+    --set sum colors & return if player is far away
+    --TODO better indicator
+    if self.distanceToPlayer > 100 then
+        item.imageComponent.color = {1, 1, 1, 1}
+        return
+    end
+    item.imageComponent.color = {1, 0, 0, 1}
+    --Picking up
+    if InputManager:isPressed("interact") and not player.keyPressData["e"] and not self.gettingPickedUp then
+        --check if player has an empty slot (TODO: optimize)
+        local weaponInv = player.inventory.weapons
+        local emptySlot = 0
+        if weaponInv[player.inventory.slot] == nil then
+            emptySlot = player.inventory.slot
+        else
+            for i = 1, 3 do
+                if weaponInv[i] == nil then emptySlot = i; break end
+            end
+        end
+        --continue the process if an empty slot exists
+        if emptySlot < 1 then return end
+        self.gettingPickedUp = true
+        --add self to player inventory
+        weaponInv[emptySlot] = item.weaponData.new()
+    end
 end
 
 return weaponItem

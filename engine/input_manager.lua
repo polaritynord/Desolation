@@ -35,9 +35,10 @@ function inputManager:getKeys(inputName)
     for i = 1, #self.bindings.keyboard do
         if self.bindings.keyboard[i][1] == inputName then
             keys = {self.bindings.keyboard[i][2], self.bindings.keyboard[i][3]}
+            return keys
         end
     end
-    return keys
+    return nil
 end
 
 function inputManager:isPressed(name)
@@ -55,6 +56,7 @@ function inputManager:isPressed(name)
 
         for _, v in ipairs(inputTable) do
             local keys = self:getKeys(v)
+            if not keys then return end
             for i = 1, #keys do
                 if love.keyboard.isDown(keys[i]) then pressed = true end
             end

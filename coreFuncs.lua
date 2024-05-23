@@ -82,4 +82,13 @@ function table.new(t)
     return copy
 end
 
+function table.removeValue(tbl, val)
+    for i,v in pairs(tbl) do
+        if v == val then
+            table.remove(tbl,i)
+            break
+        end
+    end
+end
+
 return coreFuncs
