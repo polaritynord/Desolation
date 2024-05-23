@@ -45,6 +45,11 @@
         [
             "devConsole",
             ["UIComponent", "fdh/components/ui/dev_console"]
+        ],
+
+        [
+            "particlesTest",
+            ["particleComponent"]
         ]
     ]
 }

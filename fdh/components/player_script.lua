@@ -177,6 +177,13 @@ function playerScript:update(delta)
     self:weaponDropping(player)
     --Update hand offset
     player.handOffset = player.handOffset + (-player.handOffset) * 20 * delta
+    --Particles test
+    local test = CurrentScene.particlesTest
+    test.particleComponent:newParticle(
+        {
+            position = {player:getPosition().x, player:getPosition().y}
+        }
+    )
 end
 
 return playerScript

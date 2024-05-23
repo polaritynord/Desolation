@@ -5,6 +5,7 @@ ENGINE_COMPONENT_NAMES = {
 ENGINE_COMPONENTS = {
     imageComponent = require "engine.components.image_component";
     UIComponent = require "engine.components.ui_component";
+    particleComponent = require("engine.components.particle_component");
 }
 
 function table.contains(table, element, returnIndex)

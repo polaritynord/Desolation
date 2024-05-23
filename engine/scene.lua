@@ -8,6 +8,8 @@ function scene.new()
         tree = {};
         drawLayers = {{}, {}, {}};
         uiLayer = {};
+        particleLayer = {};
+        particleCount = 0;
     }
 
     function s:addChild(obj)
@@ -36,17 +38,23 @@ function scene.new()
         local camTransform = self.camera.transformComponent
         self.drawLayers = {{}, {}, {}}
         self.uiLayer = {}
+        self.particleLayer = {}
+        self.particleCount = 0
         love.graphics.setBackgroundColor(self.backgroundColor)
         love.graphics.push()
             love.graphics.scale(camTransform.scale.x, camTransform.scale.y)
             for _, v in ipairs(self.tree) do
                 v:draw()
             end
-            --Draw layers
+            --Draw image layers
             for k = #self.drawLayers, 1, -1 do
                 for _, v in ipairs(self.drawLayers[k]) do
                     v:draw()
                 end
+            end
+            --Draw particles
+            for _, v in ipairs(self.particleLayer) do
+                v:draw()
             end
             --Draw UI
             love.graphics.push()
