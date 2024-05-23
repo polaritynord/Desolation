@@ -49,6 +49,8 @@ function hud:load()
             font = "disposable-droid-bold";
         }
     )
+    ui.weaponAmmoText.oldNum = 0
+    ui.weaponAmmoText.scaleNumber = 2.35
     ui.weaponAmmoImg = ui:newImage(
         {
             source = Assets.images.ui.ammo;
@@ -80,7 +82,7 @@ function hud:update(delta)
         ui.weaponName.text = weapon.name
         ui.weaponAmmoText.text = weapon.magAmmo
         ui.ammunitionText.text = player.inventory.ammunition[weapon.ammoType]
-        --TODO Add scaling fix
+        --TODO Add scaling fix for weaponImg
     else
         ui.weaponAmmoImg.source = nil
         ui.weaponImg.source = nil

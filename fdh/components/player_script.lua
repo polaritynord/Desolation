@@ -158,6 +158,37 @@ function playerScript:shootingWeapon(delta, player)
     end
 end
 
+function playerScript:reloadingWeapon(delta, player)
+    local weapon = player.inventory.weapons[player.inventory.slot]
+    --Returning if no weapon is being held
+    if not weapon then return end
+    --Returning if: no ammunition is left, the mag is full
+    if weapon.magAmmo == weapon.magSize or player.inventory.ammunition[weapon.ammoType] < 1 then return end
+    if player.reloading then
+        player.reloadTimer = player.reloadTimer + delta
+        if player.reloadTimer > weapon.reloadTime then
+            player.reloadTimer = 0
+            player.reloading = false
+            --Actual reloading stuff
+            local ammoNeeded = weapon.magSize - weapon.magAmmo
+            if ammoNeeded > player.inventory.ammunition[weapon.ammoType] then
+                --If the place to fill is greater than the amount of ammunition
+                weapon.magAmmo = weapon.magAmmo + player.inventory.ammunition[weapon.ammoType]
+                player.inventory.ammunition[weapon.ammoType] = 0
+            else
+                --..Or if there's more
+                weapon.magAmmo = weapon.magAmmo + ammoNeeded
+                player.inventory.ammunition[weapon.ammoType] = player.inventory.ammunition[weapon.ammoType] - ammoNeeded
+            end
+        end
+    else
+        if InputManager:isPressed("reload") then
+            player.reloading = true
+            player.reloadTimer = 0
+        end
+    end
+end
+
 --Engine funcs
 function playerScript:load()
     local player = self.parent
@@ -194,11 +225,8 @@ function playerScript:load()
     --Starter weapon
     weaponManager:load()
     player.inventory.weapons[1] = weaponManager.Pistol.new()
-    player.inventory.weapons[1].magAmmo = 18
+    player.inventory.weapons[1].magAmmo = 7
     player.inventory.ammunition.light = 78
-    if player.name == "player2" then
-        player.transformComponent.x = 100
-    end
 end
 
 function playerScript:update(delta)
@@ -211,6 +239,7 @@ function playerScript:update(delta)
     self:doWalkingAnim(player)
     self:weaponDropping(player)
     self:shootingWeapon(delta, player)
+    self:reloadingWeapon(delta, player)
     --Update hand offset
     player.handOffset = player.handOffset + (-player.handOffset) * 20 * delta
 end

@@ -15,7 +15,8 @@
         ["dev_console", "\""],
         ["toggle_debug", "f3"],
         ["drop_weapon", "v"],
-        ["interact", "e"]
+        ["interact", "e"],
+        ["reload", "r"]
     ],
 
     "joystick": []

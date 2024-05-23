@@ -39,6 +39,7 @@ function weaponItem:load()
 end
 
 function weaponItem:update(delta)
+    if GamePaused then return end
     --Remove self if getting picked up is complete
     if self.distanceToPlayer < 10 and self.gettingPickedUp then
         table.removeValue(CurrentScene.items.tree, self.parent)

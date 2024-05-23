@@ -1,7 +1,5 @@
 local imageComponent = require("engine.components.image_component")
 local object = require("engine.object")
-local weaponItem = require("fdh.weapon_item")
-local weaponManager = require("fdh.weapon_manager")
 
 local mapCreator = {}
 
