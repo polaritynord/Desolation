@@ -1,6 +1,7 @@
 local coreFuncs = require("coreFuncs")
 local weaponManager = require("fdh.weapon_manager")
 local weaponItemScript = require("fdh.components.weapon_item")
+local particleFuncs = require("fdh.particle_funcs")
 local object = require("engine.object")
 
 local playerScript = {}
@@ -123,6 +124,29 @@ function playerScript:weaponDropping(player)
     player.inventory.weapons[player.inventory.slot] = nil
 end
 
+function playerScript:shootingWeapon(delta, player)
+    player.shootTimer = player.shootTimer + delta
+    local weapon = player.inventory.weapons[player.inventory.slot]
+    if not weapon or player.reloading then return end
+    if love.mouse.isDown(1) and player.shootTimer > weapon.shootTime then
+        --Check if there is ammo available in magazine
+        if weapon.magAmmo < 1 then return end
+        --Fire weapon
+        weapon.magAmmo = weapon.magAmmo - weapon.bulletPerShot
+        --effects
+        player.handOffset = -weapon.handRecoilIntensity
+        local camPos = CurrentScene.camera:getPosition()
+        camPos.x = camPos.x + math.uniform(-weapon.screenShakeIntensity, weapon.screenShakeIntensity)
+        camPos.y = camPos.y + math.uniform(-weapon.screenShakeIntensity, weapon.screenShakeIntensity)
+        CurrentScene.camera:setPosition(camPos)
+        --particles
+        local shootParticles = player.particleComponent
+        particleFuncs.createShootParticles(shootParticles, player.transformComponent.rotation)
+
+        player.shootTimer = 0
+    end
+end
+
 --Engine funcs
 function playerScript:load()
     local player = self.parent
@@ -175,15 +199,9 @@ function playerScript:update(delta)
     self:slotSwitching(player)
     self:doWalkingAnim(player)
     self:weaponDropping(player)
+    self:shootingWeapon(delta, player)
     --Update hand offset
     player.handOffset = player.handOffset + (-player.handOffset) * 20 * delta
-    --Particles test
-    local test = CurrentScene.particlesTest
-    test.particleComponent:newParticle(
-        {
-            position = {player:getPosition().x, player:getPosition().y}
-        }
-    )
 end
 
 return playerScript

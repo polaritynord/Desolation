@@ -14,6 +14,11 @@ function object.new(parent)
         return {x=self.transformComponent.x, y=self.transformComponent.y}
     end
 
+    function o:setPosition(pos)
+        self.transformComponent.x = pos.x
+        self.transformComponent.y = pos.y
+    end
+
     function o:addChild(obj)
         self.tree[#self.tree+1] = obj
         self[obj.name] = obj
