@@ -81,6 +81,9 @@ function weaponItem:update(delta)
         self.gettingPickedUp = true
         --add self to player inventory
         weaponInv[emptySlot] = item.weaponData.new()
+        --play sound effect
+        local playerSounds = player.soundManager.script
+        playerSounds:acquire()
     end
 end
 

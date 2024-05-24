@@ -74,9 +74,10 @@ function playerScript:slotSwitching(player)
     if oldSlot ~= player.inventory.slot then
         player.reloading = false
         local weapon = player.inventory.weapons[player.inventory.previousSlot]
-        --if weapon then
-        --    love.audio.stop(self.sounds.sources.reload[weapon.name])
-        --end
+        if weapon then
+            local playerSounds = player.soundManager.script
+            love.audio.stop(playerSounds.sounds.reload[weapon.name])
+        end
     end
 end
 
@@ -94,13 +95,6 @@ end
 function playerScript:weaponDropping(player)
     local weapon = player.inventory.weapons[player.inventory.slot]
     if not InputManager:isPressed("drop_weapon") or not weapon then return end
-    --Create new weaponItem instance & pass values to it
-    --local itemInstance = weaponItem.new(weapon.new(), CurrentScene.item)
-    --itemInstance.position = player:getPosition()
-    --itemInstance.velocity = 550
-    --itemInstance.rotVelocity = math.uniform(-1, 1)*math.pi*12 --TODO this could've been better
-    --itemInstance.realRot = player.transformComponent.rotation
-
     --Create object data
     local itemInstance = object.new(CurrentScene.items)
     local script = table.new(weaponItemScript)
@@ -121,6 +115,12 @@ function playerScript:weaponDropping(player)
 
     CurrentScene.items:addChild(itemInstance)
     script.treeIndex = #CurrentScene.items.tree
+    --Cancel reloading
+    player.reloading = false
+    if weapon then
+        local playerSounds = player.soundManager.script
+        love.audio.stop(playerSounds.sounds.reload[weapon.name])
+    end
     --Get rid of the held weapon
     player.inventory.weapons[player.inventory.slot] = nil
 end
@@ -129,11 +129,17 @@ function playerScript:shootingWeapon(delta, player)
     player.shootTimer = player.shootTimer + delta
     local weapon = player.inventory.weapons[player.inventory.slot]
     if not weapon or player.reloading then return end
+    local playerSounds = player.soundManager.script
     if love.mouse.isDown(1) and player.shootTimer > weapon.shootTime then
+        player.shootTimer = 0
         --Check if there is ammo available in magazine
-        if weapon.magAmmo < 1 then return end
+        if weapon.magAmmo < 1 then
+            playerSounds:emptyMag()
+            return
+        end
         --Fire weapon
         weapon.magAmmo = weapon.magAmmo - weapon.bulletPerShot
+        playerSounds:shootWeapon(weapon.name)
         --effects
         player.handOffset = -weapon.handRecoilIntensity
         local camPos = CurrentScene.camera:getPosition()
@@ -157,8 +163,6 @@ function playerScript:shootingWeapon(delta, player)
         bullet.script.parent = bullet
         bullet.script:load()
         CurrentScene.bullets:addChild(bullet)
-
-        player.shootTimer = 0
     end
 end
 
@@ -187,6 +191,8 @@ function playerScript:reloadingWeapon(delta, player)
         end
     else
         if InputManager:isPressed("reload") then
+            local playerSounds = self.parent.soundManager.script
+            playerSounds:reloadWeapon(weapon.name)
             player.reloading = true
             player.reloadTimer = 0
         end
