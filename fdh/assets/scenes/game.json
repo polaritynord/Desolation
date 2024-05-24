@@ -9,6 +9,11 @@
                 [
                     "hand",
                     ["imageComponent", "fdh/components/player_hand_script"]
+                ],
+
+                [
+                    "soundManager",
+                    ["fdh/components/player_sounds"]
                 ]
             ]
         ],

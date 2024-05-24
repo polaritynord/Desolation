@@ -137,8 +137,12 @@ function playerScript:shootingWeapon(delta, player)
         --effects
         player.handOffset = -weapon.handRecoilIntensity
         local camPos = CurrentScene.camera:getPosition()
-        camPos.x = camPos.x + math.uniform(-weapon.screenShakeIntensity, weapon.screenShakeIntensity)
-        camPos.y = camPos.y + math.uniform(-weapon.screenShakeIntensity, weapon.screenShakeIntensity)
+        local a = 1
+        if math.random() < 0.5 then a = -1 end
+        camPos.x = camPos.x + weapon.screenShakeIntensity*a
+        a = 1
+        if math.random() < 0.5 then a = -1 end
+        camPos.y = camPos.y + weapon.screenShakeIntensity*a
         CurrentScene.camera:setPosition(camPos)
         --particles
         local shootParticles = player.particleComponent

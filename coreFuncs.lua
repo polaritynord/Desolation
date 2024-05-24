@@ -34,6 +34,10 @@ function coreFuncs.getRelativeMousePosition()
     return mX/(ScreenWidth/960), mY/(ScreenHeight/540)
 end
 
+function coreFuncs.boolToNum(bool)
+    if bool then return 1 else return 0 end
+end
+
 function coreFuncs.roundDecimal(number, decimals)
     local power = 10^decimals
     return math.floor(number * power) / power

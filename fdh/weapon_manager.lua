@@ -1,5 +1,5 @@
 local json = require("lib.json")
-local weapon = require("scripts.weapon")
+local weapon = require("fdh.weapon")
 
 local weaponManager = {}
 

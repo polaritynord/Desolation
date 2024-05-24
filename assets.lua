@@ -36,6 +36,8 @@ function assets.load()
             ambience = love.audio.newSource("fdh/assets/sounds/ost/ambience1.wav", "stream");
             intro = love.audio.newSource("fdh/assets/sounds/ost/intro.wav", "stream");
         };
+
+        sfx = {};
     }
 end
 
