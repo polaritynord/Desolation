@@ -12,6 +12,7 @@ function textLabel.new()
         color = {1,1,1,1};
         parentComp = nil;
         wrapLimit = 1000;
+        enabled = true;
     }
 
     function instance:draw()

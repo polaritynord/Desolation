@@ -5,9 +5,11 @@ function settings:load()
     local ui = s.UIComponent
 
     s.open = false
-    s.menu = "video"
+    s.menu = nil
 
     --Element creation
+    --Video menu
+    --Other
     ui.window = ui:newRectangle(
         {
             position = {0, 135};
@@ -34,6 +36,7 @@ function settings:load()
             baseScale = {80, 35};
             baseColor = {0.25, 0.25, 0.25, 1};
             position = {15, 170};
+            clickEvent = function() s.menu = ui.videoMenu end;
         }
     )
     ui.audioButton = ui:newImageButton(
@@ -42,6 +45,7 @@ function settings:load()
             baseScale = {80, 35};
             baseColor = {0.25, 0.25, 0.25, 1};
             position = {105, 170};
+            clickEvent = function() s.menu = nil end;
         }
     )
     ui.keysButton = ui:newImageButton(
@@ -50,15 +54,16 @@ function settings:load()
             baseScale = {80, 35};
             baseColor = {0.25, 0.25, 0.25, 1};
             position = {195, 170};
+            clickEvent = function() s.menu = nil end;
         }
     )
-    self.backButton = ui:newImageButton(
+    ui.backButton = ui:newImageButton(
         {
             text = "Return";
             baseScale = {80, 35};
             baseColor = {0.25, 0.25, 0.25, 1};
             position = {15, 390};
-            clickEvent = function () s.open = false end
+            clickEvent = function () s.open = false end;
         }
     )
 end

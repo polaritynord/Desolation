@@ -16,6 +16,7 @@ function imageButton.new()
         font = "disposable-droid";
         baseScale = {100, 50};
         wrapLimit = 1000;
+        enabled = true;
     }
 
     function instance:update(delta)

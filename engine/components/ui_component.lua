@@ -86,16 +86,18 @@ function UIComponent:new(parent)
     end
 
     function instance:update(delta)
+        if not self.enabled then return end
         --Update elements
         for _, v in ipairs(self.elements) do
-            if v.update then v:update(delta) end
+            if v.update and v.enabled then v:update(delta) end
         end
     end
 
     function instance:draw()
+        if not self.enabled then return end
         --Draw elements
         for _, v in ipairs(self.elements) do
-            v:draw()
+            if v.enabled then v:draw() end
         end
     end
 

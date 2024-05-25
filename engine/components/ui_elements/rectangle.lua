@@ -8,6 +8,7 @@ function rectangle.new()
         size = {50, 50};
         color = {1, 1, 1, 1};
         parentComp = nil;
+        enabled = true;
     }
 
     function instance:draw()

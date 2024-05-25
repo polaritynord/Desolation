@@ -14,6 +14,7 @@ function textButton.new()
         hoverOffset = 0;
         clickEvent = nil;
         textFont = "disposable-droid";
+        enabled = true;
     }
 
     function instance:update(delta)

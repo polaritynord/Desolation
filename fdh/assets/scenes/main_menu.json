@@ -19,7 +19,7 @@
 
         [
             "settings",
-            ["UIComponent", "fdh/components/ui/settings"]
+            ["UIComponent", "fdh/components/ui/settings_menu"]
         ]
     ]
 }

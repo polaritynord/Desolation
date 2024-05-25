@@ -10,6 +10,7 @@ function image.new()
         rotation = 0;
         parentComp = nil;
         color = {1, 1, 1, 1};
+        enabled = true;
     }
 
     function instance:draw()

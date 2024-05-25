@@ -33,6 +33,7 @@ function pauseScreen:load()
             position = {70, 240};
             buttonText = "Settings";
             buttonTextSize = 30;
+            clickEvent = clickEvents.settingsButtonClick;
         }
     )
     ui.menuButton = ui:newTextButton(
