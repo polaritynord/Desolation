@@ -28,6 +28,39 @@ function settings:load()
             text = "Settings Menu";
         }
     )
+    ui.videoButton = ui:newImageButton(
+        {
+            text = "Video";
+            baseScale = {80, 35};
+            baseColor = {0.25, 0.25, 0.25, 1};
+            position = {15, 170};
+        }
+    )
+    ui.audioButton = ui:newImageButton(
+        {
+            text = "Audio";
+            baseScale = {80, 35};
+            baseColor = {0.25, 0.25, 0.25, 1};
+            position = {105, 170};
+        }
+    )
+    ui.keysButton = ui:newImageButton(
+        {
+            text = "Keys";
+            baseScale = {80, 35};
+            baseColor = {0.25, 0.25, 0.25, 1};
+            position = {195, 170};
+        }
+    )
+    self.backButton = ui:newImageButton(
+        {
+            text = "Return";
+            baseScale = {80, 35};
+            baseColor = {0.25, 0.25, 0.25, 1};
+            position = {15, 390};
+            clickEvent = function () s.open = false end
+        }
+    )
 end
 
 function settings:update(delta)
