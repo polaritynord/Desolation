@@ -15,6 +15,11 @@
         [
             "devConsole",
             ["UIComponent", "fdh/components/ui/dev_console"]
+        ],
+
+        [
+            "settings",
+            ["UIComponent", "fdh/components/ui/settings"]
         ]
     ]
 }

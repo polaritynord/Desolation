@@ -1,7 +1,7 @@
 {
     "name": "Fight: Eternal Horizons",
     "author": "Polaritynord",
-    "version": "0.3.dev2",
+    "version": "0.3",
     "versionState": "indev",
-    "startScene": "fdh/assets/scenes/game.json"
+    "startScene": "fdh/assets/scenes/intro.json"
 }

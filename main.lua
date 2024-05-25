@@ -2,6 +2,7 @@ local utf8 = require("utf8")
 local scene = require("engine.scene")
 local json  = require("lib.json")
 local globals = require("engine.globals")
+local coreFuncs = require("coreFuncs")
 
 local fullscreen = false
 local cursors = {
@@ -78,7 +79,7 @@ function love.keypressed(key, unicode)
     --***DEVCONSOLE RELATED STUFF DOWN HERE***
     if not console then return end
     --Developer console opening key
-    if table.contains(InputManager:getKeys("dev_console"), key) then
+    if table.contains(InputManager:getKeys("dev_console"), key) and not AltMenuOpen then
         if console.open and consoleUI.takingInput then return end
         console.open = not console.open
         if console.open and CurrentScene.name == "Game" then
@@ -129,7 +130,7 @@ function love.keypressed(key, unicode)
 end
 
 local function setMouseCursor()
-    if GameState == "game" then
+    if CurrentScene.name == "Game" then
         if not GamePaused then
             love.mouse.setCursor(Assets.images.cursors.combat)
         else
@@ -141,10 +142,8 @@ local function setMouseCursor()
 end
 
 local function updateUIOffset(delta)
-    local x = 0
-    if CurrentScene.devConsole and CurrentScene.devConsole.open then
-        x = -250
-    end
+    AltMenuOpen = (CurrentScene.devConsole and CurrentScene.devConsole.open) or (CurrentScene.settings and CurrentScene.settings.open)
+    local x = -coreFuncs.boolToNum(AltMenuOpen)*250
     MenuUIOffset = MenuUIOffset + (x-MenuUIOffset)*8*delta
 end
 
@@ -153,16 +152,6 @@ function love.load()
     Assets.load()
     love.keyboard.setKeyRepeat(true)
     InputManager:loadBindingFile()
-    --weaponManager:load()
-    --GameLoad()
-    --menuUi:load()
-    --gameUi:load()
-    --devConsoleUI:load()
-    --MapManager = mapManager
-    --GameState = "menu"
-    --RunConsoleCommand("run_script dcsFiles/test.dcs")
-
-    --Read game directory & launch first scene (TODO: Add game launching from console args)
     --Fetch game info
     local engineInfoFile = love.filesystem.read("engine/info.json")
     local engineInfoData = json.decode(engineInfoFile)
@@ -187,16 +176,10 @@ function love.update(delta)
     if not CurrentScene then return end
     CurrentScene:update(delta)
     updateUIOffset(delta)
-    --setMouseCursor()
+    setMouseCursor()
 end
 
 function love.draw()
     if not CurrentScene then return end
-    --Objects
     CurrentScene:draw()
-    --UI
-    love.graphics.push()
-        love.graphics.scale(ScreenWidth/960, ScreenHeight/540)
-        --interfaceManager:draw()
-    love.graphics.pop()
 end

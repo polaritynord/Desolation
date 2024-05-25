@@ -55,6 +55,7 @@ function mainMenu:load()
             position = {70, 320};
             buttonText = "Settings";
             buttonTextSize = 30;
+            clickEvent = clickEvents.settingsButtonClick;
         }
     )
     ui.aboutButton = ui:newTextButton(

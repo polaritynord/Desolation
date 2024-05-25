@@ -1,3 +1,4 @@
+local coreFuncs = require "coreFuncs"
 local hud = {}
 
 function hud:load()
@@ -66,6 +67,54 @@ function hud:load()
             size = 28;
         }
     )
+    --Bottom (weapon slots)
+    ui.slot1Base = ui:newRectangle(
+        {
+            position = {220, 510};
+            size = {165, 75};
+            color = {0.4, 0.4, 0.4, 0};
+        }
+    )
+    ui.slot2Base = ui:newRectangle(
+        {
+            position = {395, 510};
+            size = {165, 75};
+            color = {0.4, 0.4, 0.4, 0};
+        }
+    )
+    ui.slot3Base = ui:newRectangle(
+        {
+            position = {570, 510};
+            size = {165, 75};
+            color = {0.4, 0.4, 0.4, 0};
+        }
+    )
+    ui.slot1Img = ui:newImage(
+        {
+            position = {300, 540};
+            source = Assets.images.weapons.pistolImg;
+            scale = {3, 3};
+            color = {1,1,1,0};
+        }
+    )
+    ui.slot2Img = ui:newImage(
+        {
+            position = {475, 540};
+            source = Assets.images.weapons.pistolImg;
+            scale = {3, 3};
+            color = {1,1,1,0};
+        }
+    )
+    ui.slot3Img = ui:newImage(
+        {
+            position = {650, 540};
+            source = Assets.images.weapons.pistolImg;
+            scale = {3, 3};
+            color = {1,1,1,0};
+        }
+    )
+    ui.slotSwitchTimer = 0
+    ui.oldSlot = 1
 end
 
 function hud:update(delta)
@@ -89,6 +138,38 @@ function hud:update(delta)
         ui.weaponAmmoText.text = ""
         ui.ammunitionText.text = ""
         ui.weaponName.text = ""
+    end
+    --Check for recent slot switch
+    ui.slotSwitchTimer = ui.slotSwitchTimer - delta
+    if ui.oldSlot ~= player.inventory.slot then
+        ui.slotSwitchTimer = 4
+    end
+    ui.oldSlot = player.inventory.slot
+
+    if ui.slotSwitchTimer > 0 then
+        for i = 1, 3 do
+            --update base alpha
+            ui["slot" .. i .. "Base"].color[4] = ui["slot" .. i .. "Base"].color[4] + (0.75-ui["slot" .. i .. "Base"].color[4])*16*delta
+            ui["slot" .. i .. "Img"].color[4] = ui["slot" .. i .. "Img"].color[4] + (1-ui["slot" .. i .. "Img"].color[4])*16*delta
+            --update base position
+            local isSlot = coreFuncs.boolToNum(i == player.inventory.slot)
+            ui["slot" .. i .. "Base"].position[2] = ui["slot" .. i .. "Base"].position[2] +
+                (510-(isSlot*30)-ui["slot" .. i .. "Base"].position[2])*10*delta
+            --update image position
+            ui["slot" .. i .. "Img"].position[2] = ui["slot" .. i .. "Img"].position[2] +
+                (540-(isSlot*30)-ui["slot" .. i .. "Img"].position[2])*10*delta
+            if player.inventory.weapons[i] then
+                local name = player.inventory.weapons[i].name
+                ui["slot" .. i .. "Img"].source = Assets.images.weapons[string.lower(name) .. "Img"]
+            else
+                ui["slot" .. i .. "Img"].source = nil
+            end
+        end
+    else
+        for i = 1, 3 do
+            ui["slot" .. i .. "Base"].color[4] = ui["slot" .. i .. "Base"].color[4] + (-ui["slot" .. i .. "Base"].color[4])*16*delta
+            ui["slot" .. i .. "Img"].color[4] = ui["slot" .. i .. "Img"].color[4] + (-ui["slot" .. i .. "Img"].color[4])*16*delta
+        end
     end
 end
 
