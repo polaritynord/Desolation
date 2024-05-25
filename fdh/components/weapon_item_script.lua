@@ -83,7 +83,7 @@ function weaponItem:update(delta)
         weaponInv[emptySlot] = item.weaponData.new()
         --play sound effect
         local playerSounds = player.soundManager.script
-        playerSounds:acquire()
+        playerSounds:playSound(playerSounds.sounds.acquire)
     end
 end
 

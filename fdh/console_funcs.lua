@@ -140,7 +140,8 @@ function consoleFunctions.giveScript(devConsole, command, i)
     --Check if weapon exists & replace current slot with it
     local weapon = weaponManager[temp]
     if weapon == nil then return end
-    Player.inventory.weapons[Player.inventory.slot] = weapon.new()
+    local player = CurrentScene.player
+    player.inventory.weapons[player.inventory.slot] = weapon.new()
 end
 
 function consoleFunctions.infoScript(devConsole, command, i)

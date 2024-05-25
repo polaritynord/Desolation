@@ -123,6 +123,9 @@ function playerScript:weaponDropping(player)
     end
     --Get rid of the held weapon
     player.inventory.weapons[player.inventory.slot] = nil
+    --play sound
+    local playerSounds = player.soundManager.script
+    playerSounds:playSound(playerSounds.sounds.drop)
 end
 
 function playerScript:shootingWeapon(delta, player)
@@ -134,12 +137,12 @@ function playerScript:shootingWeapon(delta, player)
         player.shootTimer = 0
         --Check if there is ammo available in magazine
         if weapon.magAmmo < 1 then
-            playerSounds:emptyMag()
+            playerSounds:playSound(playerSounds.sounds.shoot.empty)
             return
         end
         --Fire weapon
         weapon.magAmmo = weapon.magAmmo - weapon.bulletPerShot
-        playerSounds:shootWeapon(weapon.name)
+        playerSounds:playSound(playerSounds.sounds.shoot[weapon.name])
         --effects
         player.handOffset = -weapon.handRecoilIntensity
         local camPos = CurrentScene.camera:getPosition()
@@ -191,8 +194,8 @@ function playerScript:reloadingWeapon(delta, player)
         end
     else
         if InputManager:isPressed("reload") then
-            local playerSounds = self.parent.soundManager.script
-            playerSounds:reloadWeapon(weapon.name)
+            local playerSounds = player.soundManager.script
+            playerSounds:playSound(playerSounds.sounds.reload[weapon.name])
             player.reloading = true
             player.reloadTimer = 0
         end
@@ -205,9 +208,6 @@ function playerScript:load()
     local transform = player.transformComponent
     player.imageComponent.source = Assets.images.player.body
     transform.scale = {x=4, y=4}
-    --Camera
-    --CurrentScene.camera.script = cameraController
-    --Script variables
     --Player variables
     player.velocity = {x=0, y=0}
     player.health = 100 ; player.armor = 100

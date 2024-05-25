@@ -1,24 +1,10 @@
 local coreFuncs = require "coreFuncs"
 local playerSounds = {}
 
-function playerSounds:shootWeapon(weaponName)
-    love.audio.stop(self.sounds.shoot[weaponName])
-    love.audio.play(self.sounds.shoot[weaponName])
-end
-
-function playerSounds:reloadWeapon(weaponName)
-    love.audio.stop(self.sounds.reload[weaponName])
-    love.audio.play(self.sounds.reload[weaponName])
-end
-
-function playerSounds:emptyMag()
-    love.audio.stop(self.sounds.shoot.empty)
-    love.audio.play(self.sounds.shoot.empty)
-end
-
-function playerSounds:acquire()
-    love.audio.stop(self.sounds.acquire)
-    love.audio.play(self.sounds.acquire)
+function playerSounds:playSound(source)
+    if not source then return end
+    love.audio.stop(source)
+    love.audio.play(source)
 end
 
 function playerSounds:load()
@@ -38,6 +24,7 @@ function playerSounds:load()
     self.sounds.shoot.empty = love.audio.newSource("fdh/assets/sounds/empty_mag.wav", "static")
     --Item sfx
     self.sounds.acquire = love.audio.newSource("fdh/assets/sounds/acquire.wav", "static")
+    self.sounds.drop = love.audio.newSource("fdh/assets/sounds/drop.wav", "static")
 end
 
 function playerSounds:update(delta)
