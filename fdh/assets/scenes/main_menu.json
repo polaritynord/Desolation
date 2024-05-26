@@ -1,0 +1,31 @@
+{
+    "name": "Main Menu",
+    "backgroundColor": [0.4, 0.4, 0.4],
+    "tree": [
+        [
+            "camera",
+            []
+        ],
+
+        [
+            "mainMenu",
+            ["UIComponent", "fdh/components/ui/main_menu"]
+        ],
+        
+        [
+            "devConsole",
+            ["UIComponent", "fdh/components/ui/dev_console"]
+        ],
+
+        [
+            "settings",
+            ["UIComponent", "fdh/components/ui/settings_menu"],
+            [
+                [
+                    "videoMenu",
+                    ["UIComponent", "fdh/components/ui/alt_menus/video_menu"]
+                ]
+            ]
+        ]
+    ]
+}

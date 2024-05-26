@@ -1,0 +1,17 @@
+{
+    "campaignButton": "Hikaye Modu",
+    "extraButton": "Ek Oyun Modlari",
+    "achievementsButton": "Basarimlar",
+    "settingsButton": "Ayarlar",
+    "aboutButton": "Hakkinda",
+    "changelogButton": "Guncellemeler",
+    "quitButton": "Oyundan Cik",
+    "settingsVideoButton": "Video",
+    "settingsAudioButton": "Ses",
+    "settingsKeysButton": "Tuslar",
+    "settingsLangButton": "Dil: ",
+    "settingsReturnButton": "Geri Don",
+    "continueButton": "Devam Et",
+    "mainMenuButton": "Ana Menu",
+    "quitConfirmation": "Emin Misin?"
+}

@@ -1,0 +1,23 @@
+{
+    "keyboard": [
+        ["fullscreen", "f11"],
+        ["sprint", "lshift"],
+        ["move_up", "w"],
+        ["move_down", "s"],
+        ["move_left", "a"],
+        ["move_right", "d"],
+        ["w_slot_1", "1"],
+        ["w_slot_2", "2"],
+        ["w_slot_3", "3"],
+        ["w_quickswitch", "q"],
+        ["drop_weapon", "v"],
+        ["pause_game", "escape"],
+        ["dev_console", "\""],
+        ["toggle_debug", "f3"],
+        ["drop_weapon", "v"],
+        ["interact", "e"],
+        ["reload", "r"]
+    ],
+
+    "joystick": []
+}

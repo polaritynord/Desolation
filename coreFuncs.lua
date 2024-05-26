@@ -12,50 +12,30 @@ function coreFuncs.rgb(r, g, b)
     return val
 end
 
-function coreFuncs.getRelativePosition(pos1, camera)
+function coreFuncs.getRelativePosition(transform, camera)
+    local camTransform = camera.transformComponent
     local relativePos = {
-        (pos1[1]-camera.position[1]+(ScreenWidth/2)/camera.zoom)*camera.zoom,
-        (pos1[2]-camera.position[2]+(ScreenHeight/2)/camera.zoom)*camera.zoom
+        (transform.x-camTransform.x+(ScreenWidth/2)/camera.zoom)*camera.zoom,
+        (transform.y-camTransform.y+(ScreenHeight/2)/camera.zoom)*camera.zoom
     }
     return relativePos
 end
 
-function coreFuncs.getRelativeElementPosition(position, align, parentCanvas)
+function coreFuncs.getRelativeElementPosition(position, parentComp)
+    local parentPos = parentComp.parent:getPosition()
     local x = position[1]
     local y = position[2]
 
-    return {x + parentCanvas.position[1], y + parentCanvas.position[2]}
-    --[[ Find x position
-    -- X Aligning
-    if align:sub(1, 1) == "-" then
-        -- Left align
-        x = x - (ScreenWidth-960)
-    elseif align:sub(1, 1) == "+" then
-        -- Right align
-        x = x + (ScreenWidth-960)
-    elseif align:sub(1, 1) == "0" then
-        -- Center align
-        x = x + (ScreenWidth-960)/2
-    end
-    -- Y Aligning
-    if align:sub(2, 2) == "-" then
-        -- Up align
-        y = y - (ScreenHeight-540)
-    elseif align:sub(2, 2) == "+" then
-        -- Down align
-        y = y + (ScreenHeight-540)
-    elseif align:sub(2, 2) == "0" then
-        -- Center align
-        y = y + (ScreenHeight-540)/2
-    end
-
-    return {x + parentCanvas.position[1], y + parentCanvas.position[2]}
-    ]]--
+    return {x + parentPos.x, y + parentPos.y}
 end
 
 function coreFuncs.getRelativeMousePosition()
     local mX, mY = love.mouse.getPosition()
     return mX/(ScreenWidth/960), mY/(ScreenHeight/540)
+end
+
+function coreFuncs.boolToNum(bool)
+    if bool then return 1 else return 0 end
 end
 
 function coreFuncs.roundDecimal(number, decimals)
@@ -86,21 +66,33 @@ function SetFont(fontname, size)
     return font
 end
 
-function table.contains(table, element, returnIndex)
-    for i, value in pairs(table) do
-      if value == element then
-        if returnIndex then
-            return i
-        else
-            return true
-        end
-      end
-    end
-    return false
-end
-
 function math.uniform(a,b)
 	return a + (math.random()*(b-a))
+end
+
+function table.new(t)
+        -- Taken from http://lua-users.org/wiki/CopyTable/
+    local orig = t
+    local orig_type = type(orig)
+    local copy
+    if orig_type == 'table' then
+        copy = {}
+        for orig_key, orig_value in pairs(orig) do
+        copy[orig_key] = orig_value
+        end
+    else -- number, string, boolean, etc
+        copy = orig
+    end
+    return copy
+end
+
+function table.removeValue(tbl, val)
+    for i,v in pairs(tbl) do
+        if v == val then
+            table.remove(tbl,i)
+            break
+        end
+    end
 end
 
 return coreFuncs

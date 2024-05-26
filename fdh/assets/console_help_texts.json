@@ -1,0 +1,30 @@
+{
+    "titles": [
+        "cheats", "freecam", "p_speed", "s_vol_master", "s_vol_music", "s_vol_sfx",
+        "g_vignette", "s_language", "noclip", "god", "invisible", "inf_stamina", "slippiness",
+        "assign", "run_script", "give_ammo", "clear", "give", "info"
+    ],
+
+    "descriptions": [
+        "(bool) cheats: Unlocks cheat commands. Advancements are disabled.",
+        "(bool) freecam: Allows the camera to move around freely using the mouse.",
+        "(number) p_speed: The speed of the player.",
+        "(number) s_vol_master: Master volume.",
+        "(number) s_vol_music: Music volume.",
+        "(number) s_vol_sfx: Sound effects volume.",
+        "(bool) g_vignette: Vignette effect.",
+        "(number) s_language: Has no use for now (v0.2.dev2).",
+        "(bool) noclip: Disables map collisions for player.",
+        "(bool) god: Makes the player invincible.",
+        "(bool) invisible: Makes NPC's unable to detect the presence of player.",
+        "(bool) inf_stamina: Enables endless sprinting.",
+        "(number) slippiness: Determines how slippery the player movement is.",
+        
+        "assign [key] [command]:\n\tAssigns a console command to a key to instantly run it in-game.",
+        "run_script [file_path]:\n\tRuns commands at the given text file.",
+        "give_ammo:\n\tAdds a magazine of ammo at the current weapon the player is holding.",
+        "clear:\n\tClears the developer console history.",
+        "give [weaponName]:\n\tReplaces the current slot of player with specified weapon.",
+        "info:\n\tReturns some information about the game and the engine."
+    ]
+}

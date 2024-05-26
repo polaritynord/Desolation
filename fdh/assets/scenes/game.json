@@ -1,0 +1,70 @@
+{
+    "name": "Game",
+    "backgroundColor": [0.2, 0.2, 0.2],
+    "tree": [
+        [
+            "player",
+            ["imageComponent", "particleComponent", "fdh/components/player_script"],
+            [
+                [
+                    "hand",
+                    ["imageComponent", "fdh/components/player_hand_script"]
+                ],
+
+                [
+                    "soundManager",
+                    ["fdh/components/player_sounds"]
+                ]
+            ]
+        ],
+
+        [
+            "items", []
+        ],
+
+        [
+            "bullets", []
+        ],
+
+        [
+            "mapCreator",
+            ["fdh/components/map_creator"]
+        ],
+
+        [
+            "camera",
+            ["fdh/components/camera_controller"]
+        ],
+
+        [
+            "hud",
+            ["UIComponent", "fdh/components/ui/hud"]
+        ],
+
+        [
+            "debugMenu",
+            ["UIComponent", "fdh/components/ui/debug_menu"]
+        ],
+        
+        [
+            "pauseScreen",
+            ["UIComponent", "fdh/components/ui/pause_screen"]
+        ],
+
+        [
+            "devConsole",
+            ["UIComponent", "fdh/components/ui/dev_console"]
+        ],
+
+        [
+            "settings",
+            ["UIComponent", "fdh/components/ui/settings_menu"],
+            [
+                [
+                    "videoMenu",
+                    ["UIComponent", "fdh/components/ui/alt_menus/video_menu"]
+                ]
+            ]
+        ]
+    ]
+}

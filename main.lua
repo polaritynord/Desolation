@@ -1,14 +1,8 @@
 local utf8 = require("utf8")
-local assets = require("assets")
-local rgb = require("coreFuncs").rgb
-local mapManager = require("scripts.mapManager")
-local interfaceManager = require("scripts.ui.interfaceManager")
-local gameUi = require("scripts.ui.gameUi")
-local menuUi = require("scripts.ui.menuUi")
-local globals = require("scripts.globals")
-local weaponManager = require("scripts.weaponManager")
-local devConsoleUI = require("scripts.ui.devConsole")
-local player = require("scripts.player")
+local scene = require("engine.scene")
+local json  = require("lib.json")
+local globals = require("engine.globals")
+local coreFuncs = require("coreFuncs")
 
 local fullscreen = false
 local cursors = {
@@ -16,83 +10,79 @@ local cursors = {
     crosshair = love.mouse.getSystemCursor("crosshair")
 }
 
+InputManager = require("engine.input_manager")
 DevConsoleOpen = false
+Assets = require("assets")
 MenuUIOffset = 0
-UIScale = 1
+CurrentScene = nil
+GamePaused = false
+Scenes = {}
 
 function love.wheelmoved(x, y)
-    --[[ Mouse wheel slot switching
-    if not GamePaused and GameState == "game" then
-        -- Switching slots
-        local temp
+    if not GamePaused and CurrentScene.name == "Game" then
+        local camController = CurrentScene.camera.script
         if y > 0 then
-            --Backward
-            temp = Player.inventory.slot
-            Player.inventory.slot = Player.inventory.slot - 1
-            if Player.inventory.slot < 1 then Player.inventory.slot = 3 end
-            Player.oldSlot = Player.inventory.slot
-            Player.reloading = false
+            camController.playerManualZoom = camController.playerManualZoom + 0.1
+            if camController.playerManualZoom > 2.5 then camController.playerManualZoom = 2.5 end
         elseif y < 0 then
-            --Forward
-            temp = Player.inventory.slot
-            Player.inventory.slot = Player.inventory.slot + 1
-            if Player.inventory.slot > 3 then Player.inventory.slot = 1 end
-            Player.oldSlot = temp
-            Player.reloading = false
-        end
-    end
-    --]]
-    if not GamePaused and GameState == "game" then
-        if y > 0 then
-            Player.camZoom = Player.camZoom + 0.1
-            if Player.camZoom > 2.5 then Player.camZoom = 2.5 end
-        elseif y < 0 then
-            Player.camZoom = Player.camZoom - 0.1
-            if Player.camZoom < 0.5 then Player.camZoom = 0.5 end
+            camController.playerManualZoom = camController.playerManualZoom - 0.1
+            if camController.playerManualZoom < 0.5 then camController.playerManualZoom = 0.5 end
         end
     end
     
     --DevConsole scrolling
-    if DevConsoleOpen then
+    local console = CurrentScene.devConsole
+    if not console then return end
+    if console.open then
         if y > 0 then
-            devConsoleUI.logOffset = devConsoleUI.logOffset - 1
-            if devConsoleUI.logOffset < 0 then devConsoleUI.logOffset = 0 end
+            console.logOffset = console.logOffset - 1
+            if console.logOffset < 0 then console.logOffset = 0 end
         elseif y < 0 then
-            devConsoleUI.logOffset = devConsoleUI.logOffset + 1
-            if devConsoleUI.logOffset > #devConsoleUI.logs then devConsoleUI.logOffset = #devConsoleUI.logs end
+            console.logOffset = console.logOffset + 1
+            if console.logOffset > #console.logs then console.logOffset = #console.logs end
         end
     end
 end
 
 function love.keypressed(key, unicode)
+    local console = CurrentScene.devConsole
+    local consoleUI
+    if console then
+        consoleUI = console.UIComponent
+    else consoleUI = nil end
     -- Fullscreen key
-    if key == "f11" then
+    if table.contains(InputManager:getKeys("fullscreen"), key) then
         fullscreen = not fullscreen
         love.window.setFullscreen(fullscreen, "desktop")
         -- Set window dimensions to default
         if not fullscreen and false then
          love.window.setMode(960, 540, {resizable=true}) end
     end
-    --Pause key
-    if key == "escape" and not devConsoleUI.takingInput and not DevConsoleOpen then
+
+    --Pause key (not devConsoleUI.takingInput)
+    if table.contains(InputManager:getKeys("pause_game"), key) and (console and not console.open) then
         GamePaused = not GamePaused
     end
+
     --Debug menu toggle key
-    if key == "f3" and GameState == "game" then
-        gameUi.debug.toggled = not gameUi.debug.toggled
+    if table.contains(InputManager:getKeys("toggle_debug"), key) and CurrentScene.name == "Game" then
+        local debugMenu = CurrentScene.debugMenu
+        debugMenu.enabled = not debugMenu.enabled
         --Disable verbose mode if closing menu
-        if not gameUi.debug.toggled then gameUi.debug.verboseMode = false end
+        if not debugMenu.enabled then debugMenu.verboseMode = false end
         --Check for verbose opening
-        if gameUi.debug.toggled and (love.keyboard.isDown("lctrl") or love.keyboard.isDown("rctrl")) then
-            gameUi.debug.verboseMode = true
+        if debugMenu.enabled and (love.keyboard.isDown("lctrl") or love.keyboard.isDown("rctrl")) then
+            debugMenu.verboseMode = true
         end
     end
 
+    --***DEVCONSOLE RELATED STUFF DOWN HERE***
+    if not console then return end
     --Developer console opening key
-    if key == "\"" then
-        if DevConsoleOpen and devConsoleUI.takingInput then return end
-        DevConsoleOpen = not DevConsoleOpen
-        if DevConsoleOpen and GameState == "game" then
+    if table.contains(InputManager:getKeys("dev_console"), key) and not AltMenuOpen then
+        if console.open and consoleUI.takingInput then return end
+        console.open = not console.open
+        if console.open and CurrentScene.name == "Game" then
             GamePaused = true
         end
     end
@@ -100,74 +90,49 @@ function love.keypressed(key, unicode)
     --Dev console text erasing
     if key == "backspace" then
         -- get the byte offset to the last UTF-8 character in the string.
-        local byteoffset = utf8.offset(devConsoleUI.commandInput, -1)
+        local byteoffset = utf8.offset(console.commandInput, -1)
 
         if byteoffset then
             -- remove the last UTF-8 character.
             -- string.sub operates on bytes rather than UTF-8 characters, so we couldn't do string.sub(text, 1, -2).
-            devConsoleUI.commandInput = string.sub(devConsoleUI.commandInput, 1, byteoffset - 1)
+            console.commandInput = string.sub(console.commandInput, 1, byteoffset - 1)
         end
     end
 
     --Dev console input mode exiting & stuff
-    if key == "escape" and DevConsoleOpen then
-        if devConsoleUI.takingInput then
-            devConsoleUI.takingInput = false
+    if key == "escape" and console.open then
+        if console.takingInput then
+            console.takingInput = false
         else
-            DevConsoleOpen = false
+            console.open = false
         end
     end
 
     --Dev console submitting command
-    if key == "return" and DevConsoleOpen and devConsoleUI.takingInput and devConsoleUI.commandInput ~= "" then
-        local commands = devConsoleUI:readCommandsFromInput(devConsoleUI.commandInput)
+    if key == "return" and console.open and console.takingInput and console.commandInput ~= "" then
+        local commands = console.script:readCommandsFromInput(console.commandInput)
         for i = 1, #commands do
             RunConsoleCommand(commands[i])
         end
-        print("Ran console script: " .. devConsoleUI.commandInput)
-        devConsoleUI:log("> " .. devConsoleUI.commandInput)
-        devConsoleUI.commandInput = ""
+        print("Ran console script: " .. console.commandInput)
+        console.script:log("> " .. console.commandInput)
+        console.commandInput = ""
     end
 
     --Check if the key is assigned to a devConsole command
-    if table.contains(devConsoleUI.assignedKeys, key) then
-        local commandInput = devConsoleUI.assignedCommands[table.contains(devConsoleUI.assignedKeys, key, true)]
-        local commands = devConsoleUI:readCommandsFromInput(commandInput, true)
+    if table.contains(console.assignedKeys, key) then
+        local commandInput = console.assignedCommands[table.contains(console.assignedKeys, key, true)]
+        local commands = console.script:readCommandsFromInput(commandInput, true)
         for i = 1, #commands do
             RunConsoleCommand(commands[i])
         end
-        --RunConsoleCommand()
     end
-    
-    --Dev console history
-    if key == "up" then
-        --Check if current input is in history, otherwise start from the most recent
-        local i 
-        if #devConsoleUI.logs > 0 then
-            --Find the most recent input in log history
-            i = #devConsoleUI.logs
-        else return end
-
-        while string.sub(devConsoleUI.logs[i], 1, 1) ~= ">" and i > 1 do
-            i = i -1
-        end
-        local log = string.sub(devConsoleUI.logs[i], 3, #devConsoleUI.logs[i])
-        --Replace current input with new log
-        devConsoleUI.commandInput = log
-    end
-end
-
-function GameLoad()
-    mapManager:load()
-    Player = mapManager:newHumanoid(player.new())
-    Player:load()
-    GamePaused = false
 end
 
 local function setMouseCursor()
-    if GameState == "game" then
+    if CurrentScene.name == "Game" then
         if not GamePaused then
-            love.mouse.setCursor(assets.images.cursors.combat)
+            love.mouse.setCursor(Assets.images.cursors.combat)
         else
             love.mouse.setCursor(cursors.arrow)
         end
@@ -177,51 +142,66 @@ local function setMouseCursor()
 end
 
 local function updateUIOffset(delta)
-    local x = 0
-    if DevConsoleOpen then
-        x = -250
-    end
+    AltMenuOpen = (CurrentScene.devConsole and CurrentScene.devConsole.open) or (CurrentScene.settings and CurrentScene.settings.open)
+    --TODO this code is ass
+    local x = (coreFuncs.boolToNum(AltMenuOpen) + coreFuncs.boolToNum(CurrentScene.settings and CurrentScene.settings.menu))*-250
     MenuUIOffset = MenuUIOffset + (x-MenuUIOffset)*8*delta
 end
 
 function love.load()
     love.graphics.setDefaultFilter("nearest", "nearest")
-    assets.load()
-    weaponManager:load()
-    GameLoad()
-    menuUi:load()
-    gameUi:load()
-    devConsoleUI:load()
-    MapManager = mapManager
-    GameState = "menu"
+    Assets.load()
     love.keyboard.setKeyRepeat(true)
-    RunConsoleCommand("run_script dcsFiles/test.dcs")
+    InputManager:loadBindingFile()
+    --Fetch game info
+    local engineInfoFile = love.filesystem.read("engine/info.json")
+    local engineInfoData = json.decode(engineInfoFile)
+    local gameDirectory = engineInfoData.gameDirectory
+    local infoFile = love.filesystem.read(gameDirectory .. "/info.json")
+    local infoData = json.decode(infoFile)
+    GAME_NAME = infoData.name
+    GAME_VERSION = infoData.version
+    GAME_VERSION_STATE = infoData.versionState
+    AUTHOR = infoData.author
+    ENGINE_NAME = engineInfoData.name
+    ENGINE_VERSION = engineInfoData.version
+
+    --Load settings data
+    local settingsExists = love.filesystem.getInfo("settings.json")
+    local defaultSettingsFile = love.filesystem.read("fdh/assets/default_settings.json")
+    local defaultSettings = json.decode(defaultSettingsFile)
+    if settingsExists and not table.contains(arg, "--default-settings") then
+        --read settings file & save it as table
+        local file = love.filesystem.read("settings.json")
+        Settings = json.decode(file)
+        --TODO compare to default binding file & see if there is anything missing
+    else
+        --write new settings file
+        love.filesystem.write("settings.json", defaultSettingsFile)
+        Settings = json.decode(defaultSettingsFile)
+    end
+
+    --Load localization data
+    Loca = love.filesystem.read("fdh/assets/loca_" .. Settings.language .. ".json")
+    Loca = json.decode(Loca)
+
+    --Open up the default scene
+    local startScene = LoadScene(infoData.startScene)
+    if startScene.name == "Intro" and table.contains(arg, "--skip-intro") then
+        startScene = LoadScene("fdh/assets/scenes/main_menu.json")
+    end
+    SetScene(startScene)
 end
 
 function love.update(delta)
     ScreenWidth, ScreenHeight = love.graphics.getDimensions()
-    if GameState == "game" then
-        mapManager:update(delta)
-    end
-    gameUi:update(delta)
-    menuUi:update(delta)
-    devConsoleUI:update(delta)
-    interfaceManager:update(delta)
+    if not CurrentScene then return end
+    CurrentScene:update(delta)
     updateUIOffset(delta)
     setMouseCursor()
 end
 
 function love.draw()
-    if GameState == "game" then
-        love.graphics.setBackgroundColor(rgb(50))
-        --Game canvas
-        mapManager:draw()
-    elseif GameState == "menu" then
-        love.graphics.setBackgroundColor(rgb(75))
-    end
-
-    love.graphics.push()
-        love.graphics.scale(ScreenWidth/960, ScreenHeight/540)
-        interfaceManager:draw()
-    love.graphics.pop()
+    if not CurrentScene then return end
+    CurrentScene:draw()
 end

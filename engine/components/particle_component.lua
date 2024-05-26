@@ -1,0 +1,70 @@
+local coreFuncs = require("coreFuncs")
+
+local particleComponent = {}
+
+function particleComponent.new(parent, particleUpdate)
+    local component = {
+        parent = parent;
+        particles = {};
+        enabled = true;
+    }
+
+    function component:newParticle(attributes)
+        local particle = {
+            type = attributes.type or "rect";
+            position = attributes.position or {0, 0};
+            size = attributes.size or {40, 40};
+            rotation = attributes.rotation or 0;
+            despawnTime = attributes.despawnTime or 1;
+            color = attributes.color or {1,1,1,1};
+            update = attributes.update or nil;
+            sourceImage = attributes.sourceImage or nil;
+            timer = 0;
+        }
+
+        component.particles[#component.particles+1] = particle
+    end
+
+    function component:update(delta)
+        if not self.enabled then return end
+        for i, particle in ipairs(self.particles) do
+            --Particle despawning
+            particle.timer = particle.timer + delta
+            if particle.timer > particle.despawnTime then
+                table.remove(self.particles, i)
+            end
+            --Custom update function
+            if particle.update then particle.update(particle, delta) end
+        end
+    end
+
+    function component:draw()
+        local objPos = self.parent:getPosition()
+        local camera = CurrentScene.camera
+        for _, particle in ipairs(self.particles) do
+            local offsettedPos = {x=particle.position[1]+objPos.x, y=particle.position[2]+objPos.y}
+            local relativePos = coreFuncs.getRelativePosition(offsettedPos, camera)
+
+            if particle.type == "rect" then
+                love.graphics.push()
+                    love.graphics.setColor(particle.color)
+                    love.graphics.translate(relativePos[1], relativePos[2])
+                    love.graphics.rotate(particle.rotation+self.parent.transformComponent.rotation)
+                    love.graphics.rectangle("fill", -particle.size[1]/2*camera.zoom, -particle.size[2]/2*camera.zoom, particle.size[1]*camera.zoom, particle.size[2]*camera.zoom)
+                love.graphics.pop()
+            elseif particle.type == "image" then
+                local src = Assets.images.player.body
+                local width = src:getWidth() ;  local height = src:getHeight()
+                love.graphics.draw(
+                    src, relativePos[1], relativePos[2], self.parent.transformComponent.rotation,
+                    particle.size[1]*camera.zoom, particle.size[2]*camera.zoom, width/2, height/2
+                )
+            end
+        end
+        CurrentScene.particleCount = CurrentScene.particleCount + #self.particles
+    end
+
+    return component
+end
+
+return particleComponent
