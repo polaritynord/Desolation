@@ -1,3 +1,4 @@
+local json = require "lib.json"
 local clickEvents = {}
 
 function clickEvents.quitButtonClick(element)
@@ -11,6 +12,7 @@ function clickEvents.quitButtonClick(element)
         end
         element.confirmTimer = 2.4
     else
+        love.filesystem.write("settings.json", json.encode(Settings))
         love.event.quit()
     end
 end

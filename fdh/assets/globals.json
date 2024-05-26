@@ -1,0 +1,10 @@
+[
+    ["cheats", 0, false, false],
+    ["freecam", 0, true, false],
+    ["p_speed", 140, true, false],
+    ["noclip", 0, true, false],
+    ["god", 0, true, false],
+    ["invisible", 0, true, false],
+    ["inf_stanina", 0, true, false],
+    ["slippiness", 12, true, false]
+]

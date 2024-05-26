@@ -10,6 +10,7 @@ function videoMenu:load()
             buttonText = "Test";
             buttonTextSize = 30;
             position = {0, 200};
+            clickEvent = function() Settings["vol_master"] = math.random() end;
         }
     )
     ui.returnButton = ui:newTextButton(
@@ -38,6 +39,7 @@ function videoMenu:update(delta)
     end
 
     if not ui.enabled then return end
+    ui.testButton.buttonText = Settings["vol_master"]
 end
 
 return videoMenu
