@@ -19,7 +19,13 @@
 
         [
             "settings",
-            ["UIComponent", "fdh/components/ui/settings_menu"]
+            ["UIComponent", "fdh/components/ui/settings_menu"],
+            [
+                [
+                    "videoMenu",
+                    ["UIComponent", "fdh/components/ui/alt_menus/video_menu"]
+                ]
+            ]
         ]
     ]
 }

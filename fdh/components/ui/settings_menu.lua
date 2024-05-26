@@ -8,62 +8,41 @@ function settings:load()
     s.menu = nil
 
     --Element creation
-    --Video menu
-    --Other
-    ui.window = ui:newRectangle(
+    ui.videoButton = ui:newTextButton(
         {
-            position = {0, 135};
-            size = {480, 300};
-            color = {0.1, 0.1, 0.1, 0.75};
+            buttonText = "Video";
+            buttonTextSize = 30;
+            position = {0, 200};
+            clickEvent = function() s.menu = "video" end;
         }
     )
-    ui.windowBar = ui:newRectangle(
+    ui.audioButton = ui:newTextButton(
         {
-            position = {0, 135};
-            size = {480, 25};
-            color = {0.1, 0.1, 0.1, 1};
+            buttonText = "Audio";
+            buttonTextSize = 30;
+            position = {0, 240};
         }
     )
-    ui.windowTitle = ui:newTextLabel(
+    ui.keysButton = ui:newTextButton(
         {
-            position = {0, 135};
-            text = "Settings Menu";
+            buttonText = "Keys";
+            buttonTextSize = 30;
+            position = {0, 280};
         }
     )
-    ui.videoButton = ui:newImageButton(
+    ui.languageButton = ui:newTextButton(
         {
-            text = "Video";
-            baseScale = {80, 35};
-            baseColor = {0.25, 0.25, 0.25, 1};
-            position = {15, 170};
-            clickEvent = function() s.menu = ui.videoMenu end;
+            buttonText = "Language: EN";
+            buttonTextSize = 30;
+            position = {0, 320};
         }
     )
-    ui.audioButton = ui:newImageButton(
+    ui.returnButton = ui:newTextButton(
         {
-            text = "Audio";
-            baseScale = {80, 35};
-            baseColor = {0.25, 0.25, 0.25, 1};
-            position = {105, 170};
-            clickEvent = function() s.menu = nil end;
-        }
-    )
-    ui.keysButton = ui:newImageButton(
-        {
-            text = "Keys";
-            baseScale = {80, 35};
-            baseColor = {0.25, 0.25, 0.25, 1};
-            position = {195, 170};
-            clickEvent = function() s.menu = nil end;
-        }
-    )
-    ui.backButton = ui:newImageButton(
-        {
-            text = "Return";
-            baseScale = {80, 35};
-            baseColor = {0.25, 0.25, 0.25, 1};
-            position = {15, 390};
-            clickEvent = function () s.open = false end;
+            buttonText = "Return";
+            buttonTextSize = 30;
+            position = {0, 440};
+            clickEvent = function() s.open = false; s.menu = nil end;
         }
     )
 end

@@ -143,7 +143,8 @@ end
 
 local function updateUIOffset(delta)
     AltMenuOpen = (CurrentScene.devConsole and CurrentScene.devConsole.open) or (CurrentScene.settings and CurrentScene.settings.open)
-    local x = -coreFuncs.boolToNum(AltMenuOpen)*250
+    --TODO this code is ass
+    local x = (coreFuncs.boolToNum(AltMenuOpen) + coreFuncs.boolToNum(CurrentScene.settings and CurrentScene.settings.menu))*-250
     MenuUIOffset = MenuUIOffset + (x-MenuUIOffset)*8*delta
 end
 
