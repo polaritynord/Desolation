@@ -1,3 +1,5 @@
+local json = require("lib.json")
+
 local settings = {}
 
 function settings:load()
@@ -6,11 +8,12 @@ function settings:load()
 
     s.open = false
     s.menu = nil
+    ui.languages = {"en", "tr"}
 
     --Element creation
     ui.videoButton = ui:newTextButton(
         {
-            buttonText = "Video";
+            buttonText = Loca.settingsVideoButton;
             buttonTextSize = 30;
             position = {0, 200};
             clickEvent = function() s.menu = "video" end;
@@ -18,14 +21,14 @@ function settings:load()
     )
     ui.audioButton = ui:newTextButton(
         {
-            buttonText = "Audio";
+            buttonText = Loca.settingsAudioButton;
             buttonTextSize = 30;
             position = {0, 240};
         }
     )
     ui.keysButton = ui:newTextButton(
         {
-            buttonText = "Keys";
+            buttonText = Loca.settingsKeysButton;
             buttonTextSize = 30;
             position = {0, 280};
         }
@@ -35,11 +38,19 @@ function settings:load()
             buttonText = "Language: EN";
             buttonTextSize = 30;
             position = {0, 320};
+            clickEvent = function()
+                local i = table.contains(ui.languages, Settings.language, true) + 1
+                if i > #ui.languages then i = 1 end
+                Settings.language = ui.languages[i]
+                love.filesystem.write("settings.json", json.encode(Settings))
+                --TODO restart game
+                love.load()
+            end;
         }
     )
     ui.returnButton = ui:newTextButton(
         {
-            buttonText = "Return";
+            buttonText = Loca.settingsReturnButton;
             buttonTextSize = 30;
             position = {0, 440};
             clickEvent = function() s.open = false; s.menu = nil end;
@@ -62,6 +73,7 @@ function settings:update(delta)
     end
 
     if not s.open then return end
+    ui.languageButton.buttonText = Loca.settingsLangButton .. string.upper(Settings["language"])
 end
 
 return settings

@@ -28,14 +28,14 @@ function mainMenu:load()
     ui.campaignButton = ui:newTextButton(
         {
             position = {70, 200};
-            buttonText = "Campaign";
+            buttonText = Loca.campaignButton;
             buttonTextSize = 30;
         }
     )
     ui.extrasButton = ui:newTextButton(
         {
             position = {70, 240};
-            buttonText = "Extra Gamemodes";
+            buttonText = Loca.extraButton;
             buttonTextSize = 30;
             clickEvent = function ()
                 local scene = LoadScene("fdh/assets/scenes/game.json")
@@ -46,14 +46,14 @@ function mainMenu:load()
     ui.achievementsButton = ui:newTextButton(
         {
             position = {70, 280};
-            buttonText = "Achievements";
+            buttonText = Loca.achievementsButton;
             buttonTextSize = 30;
         }
     )
     ui.settingsButton = ui:newTextButton(
         {
             position = {70, 320};
-            buttonText = "Settings";
+            buttonText = Loca.settingsButton;
             buttonTextSize = 30;
             clickEvent = clickEvents.settingsButtonClick;
         }
@@ -61,21 +61,21 @@ function mainMenu:load()
     ui.aboutButton = ui:newTextButton(
         {
             position = {70, 360};
-            buttonText = "About";
+            buttonText = Loca.aboutButton;
             buttonTextSize = 30;
         }
     )
     ui.changelogButton = ui:newTextButton(
         {
             position = {70, 400};
-            buttonText = "Changelog";
+            buttonText = Loca.changelogButton;
             buttonTextSize = 30;
         }
     )
     ui.quitButton = ui:newTextButton(
         {
             position = {70, 440};
-            buttonText = "Quit";
+            buttonText = Loca.quitButton;
             buttonTextSize = 30;
             clickEvent = clickEvents.quitButtonClick;
         }
@@ -115,10 +115,10 @@ function mainMenu:update(delta)
         ui.blackCover.color[4] = ui.blackCover.color[4] - 1.5*delta
     end
     --Are you sure text
-    if ui.quitButton.buttonText == "Are You Sure?" then
+    if ui.quitButton.buttonText == Loca.quitConfirmation then
         ui.quitButton.confirmTimer = ui.quitButton.confirmTimer - delta
         if ui.quitButton.confirmTimer < 0 then
-            ui.quitButton.buttonText = "Quit"
+            ui.quitButton.buttonText = Loca.quitButton
             ui.quitButton.textFont = "disposable-droid"
         end
     end

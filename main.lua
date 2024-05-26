@@ -165,7 +165,8 @@ function love.load()
     AUTHOR = infoData.author
     ENGINE_NAME = engineInfoData.name
     ENGINE_VERSION = engineInfoData.version
-    --Load game save
+
+    --Load settings data
     local settingsExists = love.filesystem.getInfo("settings.json")
     local defaultSettingsFile = love.filesystem.read("fdh/assets/default_settings.json")
     local defaultSettings = json.decode(defaultSettingsFile)
@@ -179,6 +180,12 @@ function love.load()
         love.filesystem.write("settings.json", defaultSettingsFile)
         Settings = json.decode(defaultSettingsFile)
     end
+
+    --Load localization data
+    Loca = love.filesystem.read("fdh/assets/loca_" .. Settings.language .. ".json")
+    Loca = json.decode(Loca)
+
+    --Open up the default scene
     local startScene = LoadScene(infoData.startScene)
     if startScene.name == "Intro" and table.contains(arg, "--skip-intro") then
         startScene = LoadScene("fdh/assets/scenes/main_menu.json")

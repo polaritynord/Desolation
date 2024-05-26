@@ -2,13 +2,13 @@ local json = require "lib.json"
 local clickEvents = {}
 
 function clickEvents.quitButtonClick(element)
-    if element.buttonText == "Quit" then
+    if element.buttonText == Loca.quitButton then
         if math.random() < 0.05 then
             element.textFont = "pryonkalsov"
             element.buttonText = "Obey the regime for the greater good"
         else
             element.textFont = "disposable-droid-italic"
-            element.buttonText = "Are You Sure?"
+            element.buttonText = Loca.quitConfirmation
         end
         element.confirmTimer = 2.4
     else

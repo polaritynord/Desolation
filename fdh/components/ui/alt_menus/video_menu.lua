@@ -15,7 +15,7 @@ function videoMenu:load()
     )
     ui.returnButton = ui:newTextButton(
         {
-            buttonText = "Back";
+            buttonText = Loca.settingsReturnButton;
             buttonTextSize = 30;
             position = {0, 440};
             clickEvent = function() settings.menu = nil end;

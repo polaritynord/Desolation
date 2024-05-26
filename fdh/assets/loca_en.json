@@ -1,0 +1,17 @@
+{
+    "campaignButton": "Campaign",
+    "extraButton": "Extra Gamemodes",
+    "achievementsButton": "Achievements",
+    "settingsButton": "Settings",
+    "aboutButton": "About",
+    "changelogButton": "Changelog",
+    "quitButton": "Quit",
+    "settingsVideoButton": "Video",
+    "settingsAudioButton": "Audio",
+    "settingsKeysButton": "Keys",
+    "settingsLangButton": "Language: ",
+    "settingsReturnButton": "Return",
+    "continueButton": "Continue",
+    "mainMenuButton": "Main Menu",
+    "quitConfirmation": "Are You Sure?"
+}
