@@ -39,11 +39,9 @@ function object.new(parent)
 
     function o:draw()
         if self.imageComponent then
-            --self.imageComponent:draw()
             CurrentScene.drawLayers[self.imageComponent.layer][#CurrentScene.drawLayers[self.imageComponent.layer]+1] = self.imageComponent
         end
         if self.UIComponent and self.UIComponent.enabled then
-            --self.UIComponent:draw()
             CurrentScene.uiLayer[#CurrentScene.uiLayer+1] = self.UIComponent
         end
         if self.particleComponent and self.particleComponent.enabled then

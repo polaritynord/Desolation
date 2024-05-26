@@ -95,11 +95,6 @@ local function addObjectToScene(instance, v, _isScene)
             addObjectToScene(newObj, v[3][i], false)
         end
     end
-    --Setup camera if the scene doesn't have one yet
-    --if not instance.camera and isScene then
-    --    instance.camera = object.new(instance)
-    --    instance.camera.zoom = 1
-    --end
     --Add new object to tree
     instance.tree[#instance.tree+1] = newObj
     instance[newObj.name] = newObj

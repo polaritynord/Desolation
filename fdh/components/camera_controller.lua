@@ -11,8 +11,8 @@ function cameraController:movement(delta, camTransform, player)
         --Freecam
         local mx, my = love.mouse.getPosition()
         if love.mouse.isDown(3) then
-            camTransform.x = camTransform.x + (self.oldMouseX-mx)
-            camTransform.y = camTransform.y + (self.oldMouseY-my)
+            camTransform.x = camTransform.x + (self.oldMouseX-mx)/self.parent.zoom
+            camTransform.y = camTransform.y + (self.oldMouseY-my)/self.parent.zoom
         end
         self.oldMouseX = mx
         self.oldMouseY = my

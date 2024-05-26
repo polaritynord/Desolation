@@ -57,8 +57,9 @@ function intro:update(delta)
     if self.timer > 8.1 then
         ui.alpha = ui.alpha - 4*delta
     end
-    --Launch main menu
-    if self.timer > 10 then
+    --Launch main menu if intro is done or skipped
+    if self.timer > 10 or love.keyboard.isDown("space") then
+        Assets.sounds.ost.intro:stop()
         local scene = LoadScene("fdh/assets/scenes/main_menu.json")
         SetScene(scene)
     end

@@ -37,7 +37,9 @@ function assets.load()
             intro = love.audio.newSource("fdh/assets/sounds/ost/intro.wav", "stream");
         };
 
-        sfx = {};
+        sfx = {
+            buttonClick = love.audio.newSource("fdh/assets/sounds/button_click.wav", "static");
+        };
     }
 end
 

@@ -55,7 +55,7 @@ function consoleFunctions.run_scriptScript(devConsole, command, i)
     --Read file from given path
     local scriptFile = love.filesystem.read(temp)
     if scriptFile then
-        local commands = devConsole:readCommandsFromInput(scriptFile)
+        local commands = devConsole.script:readCommandsFromInput(scriptFile)
         for k = 1, #commands do
             RunConsoleCommand(commands[k])
         end

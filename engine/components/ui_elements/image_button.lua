@@ -25,6 +25,7 @@ function imageButton.new()
 
         --Click event
         if love.mouse.isDown(1) and self.mouseHovering and not self.mouseClicking and self.clickEvent then
+            love.audio.play(Assets.sounds.sfx.buttonClick)
             self.clickEvent(self)
         end
 
