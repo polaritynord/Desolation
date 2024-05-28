@@ -13,5 +13,7 @@
     "settingsReturnButton": "Geri Don",
     "continueButton": "Devam Et",
     "mainMenuButton": "Ana Menu",
+    "extrasPlaygroundButton": "Oyun Alani",
+    "extrasPlaygroundDesc": "Ne halt yiyorsan ye.",
     "quitConfirmation": "Emin Misin?"
 }

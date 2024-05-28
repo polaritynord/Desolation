@@ -13,5 +13,7 @@
     "settingsReturnButton": "Return",
     "continueButton": "Continue",
     "mainMenuButton": "Main Menu",
+    "extrasPlaygroundButton": "Playground",
+    "extrasPlaygroundDesc": "Do whatever you want.",
     "quitConfirmation": "Are You Sure?"
 }

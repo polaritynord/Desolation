@@ -26,6 +26,11 @@
                     ["UIComponent", "fdh/components/ui/alt_menus/video_menu"]
                 ]
             ]
+        ],
+
+        [
+            "extras",
+            ["UIComponent", "fdh/components/ui/extras_menu"]
         ]
     ]
 }

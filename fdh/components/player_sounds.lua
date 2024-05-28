@@ -1,7 +1,13 @@
 local coreFuncs = require "coreFuncs"
 local playerSounds = {}
 
-function playerSounds:playSound(source)
+function playerSounds:sPlaySound(source)
+    if not source then return end
+    love.audio.stop(source)
+    love.audio.play(source)
+end
+
+function playerSounds:stopSound(source)
     if not source then return end
     love.audio.stop(source)
     love.audio.play(source)
@@ -16,12 +22,12 @@ function playerSounds:load()
     }
     --Load footsteps
     for i = 1, 10 do
-        self.sounds.step.grass[#self.sounds.step.grass+1] = love.audio.newSource("fdh/assets/sounds/footstep_grass" .. i .. ".wav", "static")
+        self.sounds.step.grass[#self.sounds.step.grass+1] = love.audio.newSource("fdh/assets/sounds/footstep/grass" .. i .. ".wav", "static")
     end
     --Weapon sfx
-    self.sounds.reload.Pistol = love.audio.newSource("fdh/assets/sounds/rld_pistol.wav", "static")
-    self.sounds.shoot.Pistol = love.audio.newSource("fdh/assets/sounds/shoot_pistol.wav", "static")
-    self.sounds.shoot.empty = love.audio.newSource("fdh/assets/sounds/empty_mag.wav", "static")
+    self.sounds.reload.Pistol = love.audio.newSource("fdh/assets/sounds/weapons/rld_pistol.wav", "static")
+    self.sounds.shoot.Pistol = love.audio.newSource("fdh/assets/sounds/weapons/shoot_pistol.wav", "static")
+    self.sounds.shoot.empty = love.audio.newSource("fdh/assets/sounds/weapons/empty_mag.wav", "static")
     --Item sfx
     self.sounds.acquire = love.audio.newSource("fdh/assets/sounds/acquire.wav", "static")
     self.sounds.drop = love.audio.newSource("fdh/assets/sounds/drop.wav", "static")

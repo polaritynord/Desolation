@@ -17,6 +17,12 @@ function clickEvents.quitButtonClick(element)
     end
 end
 
+function clickEvents.extrasButtonClick(element)
+    if AltMenuOpen then return end
+    local extras = CurrentScene.extras
+    extras.open = true
+end
+
 function clickEvents.settingsButtonClick(element)
     if AltMenuOpen then return end
     local settings = CurrentScene.settings

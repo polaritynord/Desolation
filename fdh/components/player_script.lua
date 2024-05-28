@@ -119,7 +119,9 @@ function playerScript:weaponDropping(player)
     player.reloading = false
     if weapon then
         local playerSounds = player.soundManager.script
-        love.audio.stop(playerSounds.sounds.reload[weapon.name])
+        if playerSounds.sounds.reload[weapon.name] then 
+            love.audio.stop(playerSounds.sounds.reload[weapon.name])
+        end
     end
     --Get rid of the held weapon
     player.inventory.weapons[player.inventory.slot] = nil
@@ -237,6 +239,7 @@ function playerScript:load()
     player.inventory.weapons[1] = weaponManager.Pistol.new()
     player.inventory.weapons[1].magAmmo = 7
     player.inventory.ammunition.light = 78
+    player.inventory.weapons[2] = weaponManager.Shotgun.new()
 end
 
 function playerScript:update(delta)
