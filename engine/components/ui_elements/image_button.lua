@@ -13,6 +13,7 @@ function imageButton.new()
         mouseHovering = false;
         mouseClicking = false;
         clickEvent = nil;
+        hoverEvent = nil;
         font = "disposable-droid";
         baseScale = {100, 50};
         wrapLimit = 1000;
@@ -31,6 +32,7 @@ function imageButton.new()
 
         --check for mouse touch
         if my > pos[2] and my < pos[2] + self.baseScale[2] and mx > pos[1] and mx < pos[1] + self.baseScale[1] then
+            if self.hoverEvent then self.hoverEvent(self) end
             self.mouseHovering = true
             self.mouseClicking = love.mouse.isDown(1)
         else

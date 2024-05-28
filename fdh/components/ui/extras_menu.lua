@@ -13,12 +13,49 @@ function extrasMenu:load()
             clickEvent = function ()
                 local scene = LoadScene("fdh/assets/scenes/game.json")
                 SetScene(scene)
-            end
+            end;
+            hoverEvent = function (element)
+                ui.modeDescription.text = Loca.extrasPlaygroundDesc
+                ui.modeDescription.position[2] = element.position[2]
+            end;
+        }
+    )
+    ui.endlessButton = ui:newTextButton(
+        {
+            buttonText = "Extra Mode 1";
+            buttonTextSize = 30;
+            position = {0, 240};
+            hoverEvent = function (element)
+                ui.modeDescription.text = "Description goes here";
+                ui.modeDescription.position[2] = element.position[2]
+            end;
+        }
+    )
+    ui.endlessButton2 = ui:newTextButton(
+        {
+            buttonText = "Extra Mode 2";
+            buttonTextSize = 30;
+            position = {0, 280};
+            hoverEvent = function (element)
+                ui.modeDescription.text = "Description goes here";
+                ui.modeDescription.position[2] = element.position[2]
+            end;
+        }
+    )
+    ui.endlessButton3 = ui:newTextButton(
+        {
+            buttonText = "Extra Mode 3";
+            buttonTextSize = 30;
+            position = {0, 320};
+            hoverEvent = function (element)
+                ui.modeDescription.text = "Description goes here";
+                ui.modeDescription.position[2] = element.position[2]
+            end;
         }
     )
     ui.modeDescription = ui:newTextLabel(
         {
-            text = Loca.extrasPlaygroundDesc;
+            text = "";
             position = {200, 200};
             size = 30;
         }

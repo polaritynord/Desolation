@@ -13,6 +13,7 @@ function textButton.new()
         mouseClicking = false;
         hoverOffset = 0;
         clickEvent = nil;
+        hoverEvent = nil;
         textFont = "disposable-droid";
         enabled = true;
     }
@@ -28,8 +29,10 @@ function textButton.new()
         end
         --Check for mouse touch
         if my > pos[2] and my < pos[2] + self.buttonTextSize and mx > pos[1] and mx < pos[1] + 200 then
+            if self.hoverEvent then self.hoverEvent(self) end
             self.mouseHovering = true
             self.mouseClicking = love.mouse.isDown(1)
+            --TODO move these hovering stuff to hoverEvent?
             self.hoverOffset = self.hoverOffset + (14-self.hoverOffset) * 27 * delta
         else
             self.mouseHovering = false

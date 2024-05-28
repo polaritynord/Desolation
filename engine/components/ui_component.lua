@@ -63,6 +63,7 @@ function UIComponent:new(parent)
             instance2.buttonText = attributes.buttonText or instance2.buttonText
             instance2.buttonTextSize = attributes.buttonTextSize or instance2.buttonTextSize
             instance2.clickEvent = attributes.clickEvent or instance2.clickEvent
+            instance2.hoverEvent = attributes.hoverEvent or instance2.hoverEvent
         end
         instance2.parentComp = self
         self.elements[#self.elements+1] = instance2
@@ -79,6 +80,7 @@ function UIComponent:new(parent)
             instance2.textSize = attributes.textSize or instance2.textSize
             instance2.baseScale = attributes.baseScale or instance2.baseScale
             instance2.clickEvent = attributes.clickEvent or instance2.clickEvent
+            instance2.hoverEvent = attributes.hoverEvent or instance2.hoverEvent
         end
         instance2.parentComp = self
         self.elements[#self.elements+1] = instance2

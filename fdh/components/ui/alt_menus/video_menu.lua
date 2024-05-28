@@ -5,12 +5,39 @@ function videoMenu:load()
     local settings = video.parent
     local ui = video.UIComponent
 
-    ui.testButton = ui:newTextButton(
+    ui.vsyncText = ui:newTextLabel(
         {
-            buttonText = "Test";
-            buttonTextSize = 30;
+            text = "VSync: ";
             position = {0, 200};
-            clickEvent = function() Settings["vol_master"] = math.random() end;
+            size = 30;
+        }
+    )
+    ui.vignetteText = ui:newTextLabel(
+        {
+            text = "Vignette: ";
+            position = {0, 240};
+            size = 30;
+        }
+    )
+    ui.brightnessText = ui:newTextLabel(
+        {
+            text = "Brightness: ";
+            position = {0, 280};
+            size = 30;
+        }
+    )
+    ui.weaponParticlesText = ui:newTextLabel(
+        {
+            text = "Weapon Flame Particles: ";
+            position = {0, 320};
+            size = 30;
+        }
+    )
+    ui.playerTrailText = ui:newTextLabel(
+        {
+            text = "Player Trail Particles: ";
+            position = {0, 360};
+            size = 30;
         }
     )
     ui.returnButton = ui:newTextButton(
@@ -39,7 +66,6 @@ function videoMenu:update(delta)
     end
 
     if not ui.enabled then return end
-    ui.testButton.buttonText = Settings["vol_master"]
 end
 
 return videoMenu

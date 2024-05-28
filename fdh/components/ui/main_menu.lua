@@ -37,10 +37,6 @@ function mainMenu:load()
             position = {70, 240};
             buttonText = Loca.extraButton;
             buttonTextSize = 30;
-            --clickEvent = function ()
-            --    local scene = LoadScene("fdh/assets/scenes/game.json")
-            --    SetScene(scene)
-            --end
             clickEvent = clickEvents.extrasButtonClick;
         }
     )
