@@ -3,5 +3,8 @@
     "vol_music": 1,
     "vol_sfx": 1,
     "vignette": 1,
-    "language": "en"
+    "language": "en",
+    "vsync": true,
+    "weapon_flame_particles": true,
+    "player_trail_particles": true
 }

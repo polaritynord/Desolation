@@ -12,11 +12,23 @@ function videoMenu:load()
             size = 30;
         }
     )
+    ui.vsyncBox = ui:newCheckbox(
+        {
+            position = {400, 215};
+            toggled = Settings.vsync;
+        }
+    )
     ui.vignetteText = ui:newTextLabel(
         {
             text = "Vignette: ";
             position = {0, 240};
             size = 30;
+        }
+    )
+    ui.vignetteBox = ui:newCheckbox(
+        {
+            position = {400, 255};
+            toggled = Settings.vignette;
         }
     )
     ui.brightnessText = ui:newTextLabel(
@@ -33,11 +45,23 @@ function videoMenu:load()
             size = 30;
         }
     )
+    ui.weaponParticlesBox = ui:newCheckbox(
+        {
+            position = {400, 295};
+            toggled = Settings.weapon_flame_particles;
+        }
+    )
     ui.playerTrailText = ui:newTextLabel(
         {
             text = "Player Trail Particles: ";
             position = {0, 360};
             size = 30;
+        }
+    )
+    ui.playerTrailBox = ui:newCheckbox(
+        {
+            position = {400, 335};
+            toggled = Settings.player_trail_particles;
         }
     )
     ui.returnButton = ui:newTextButton(
@@ -66,6 +90,10 @@ function videoMenu:update(delta)
     end
 
     if not ui.enabled then return end
+    Settings.vsync = ui.vsyncBox.toggled
+    Settings.vignette = ui.vignetteBox.toggled
+    Settings.weapon_flame_particles = ui.weaponParticlesBox.toggled
+    Settings.player_trail_particles = ui.playerTrailBox.toggled
 end
 
 return videoMenu

@@ -26,7 +26,7 @@ function extrasMenu:load()
             buttonTextSize = 30;
             position = {0, 240};
             hoverEvent = function (element)
-                ui.modeDescription.text = "Description goes here";
+                ui.modeDescription.text = "Description goes here"
                 ui.modeDescription.position[2] = element.position[2]
             end;
         }
@@ -56,6 +56,7 @@ function extrasMenu:load()
     ui.modeDescription = ui:newTextLabel(
         {
             text = "";
+            font = "disposable-droid-italic";
             position = {200, 200};
             size = 30;
         }
