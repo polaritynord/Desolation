@@ -150,6 +150,8 @@ local function updateUIOffset(delta)
 end
 
 function love.load()
+    --TODO Move this dude to somewhere else
+    coreFuncs.invertShader = love.graphics.newShader[[ vec4 effect(vec4 color, Image texture, vec2 texture_coords, vec2 pixel_coords) { vec4 col = texture2D( texture, texture_coords ); return vec4(1-col.r, 1-col.g, 1-col.b, col.a); } ]]
     love.graphics.setDefaultFilter("nearest", "nearest")
     Assets.load()
     love.keyboard.setKeyRepeat(true)

@@ -38,6 +38,12 @@ function videoMenu:load()
             size = 30;
         }
     )
+    ui.brightnessSlider = ui:newSlider(
+        {
+            position = {300, 285};
+            baseColor = {0.5, 0.5, 0.5, 1};
+        }
+    )
     ui.weaponParticlesText = ui:newTextLabel(
         {
             text = "Weapon Flame Particles: ";
@@ -47,7 +53,7 @@ function videoMenu:load()
     )
     ui.weaponParticlesBox = ui:newCheckbox(
         {
-            position = {400, 295};
+            position = {400, 375};
             toggled = Settings.weapon_flame_particles;
         }
     )
