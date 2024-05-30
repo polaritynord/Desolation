@@ -19,6 +19,15 @@ GamePaused = false
 Scenes = {}
 
 function love.wheelmoved(x, y)
+    --Keys menu scrolling (TODO, make this work for all menus?)
+    if CurrentScene.settings then
+        local menu = CurrentScene.settings.keysMenu
+        menu.transformComponent.y = menu.transformComponent.y + 35*y
+        if menu.transformComponent.y > 0 then menu.transformComponent.y = 0 end
+        if menu.transformComponent.y < 540-menu.length then menu.transformComponent.y = 540-menu.length end
+    end
+
+    --Ingame zooming
     if not GamePaused and CurrentScene.name == "Game" then
         local camController = CurrentScene.camera.script
         if y > 0 then
@@ -126,6 +135,18 @@ function love.keypressed(key, unicode)
         for i = 1, #commands do
             RunConsoleCommand(commands[i])
         end
+    end
+
+    --Check if a button is selected in keys menu
+    if CurrentScene.settings and CurrentScene.settings.keysMenu.selectedBinding[1] then
+        local keysMenu = CurrentScene.settings.keysMenu
+        RunConsoleCommand("bind " .. keysMenu.selectedBinding[2][1] .. " " .. key)
+        local element = keysMenu.selectedBinding[1]
+        element.buttonText = string.upper(element.binding[1]) .. ": " .. element.binding[2]
+        element.textFont = "disposable-droid"
+        --save bindings data
+        love.filesystem.write("bindings.json", json.encode(InputManager.bindings))
+        keysMenu.selectedBinding = {nil, nil}
     end
 end
 
