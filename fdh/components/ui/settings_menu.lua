@@ -24,6 +24,7 @@ function settings:load()
             buttonText = Loca.settingsAudioButton;
             buttonTextSize = 30;
             position = {0, 240};
+            clickEvent = function() s.menu = "audio" end;
         }
     )
     ui.keysButton = ui:newTextButton(

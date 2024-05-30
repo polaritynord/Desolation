@@ -172,7 +172,6 @@ function love.load()
     --Load settings data
     local settingsExists = love.filesystem.getInfo("settings.json")
     local defaultSettingsFile = love.filesystem.read("fdh/assets/default_settings.json")
-    local defaultSettings = json.decode(defaultSettingsFile)
     if settingsExists and not table.contains(arg, "--default-settings") then
         --read settings file & save it as table
         local file = love.filesystem.read("settings.json")

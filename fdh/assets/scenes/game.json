@@ -63,6 +63,11 @@
                 [
                     "videoMenu",
                     ["UIComponent", "fdh/components/ui/alt_menus/video_menu"]
+                ],
+
+                [
+                    "audioMenu",
+                    ["UIComponent", "fdh/components/ui/alt_menus/audio_menu"]
                 ]
             ]
         ]

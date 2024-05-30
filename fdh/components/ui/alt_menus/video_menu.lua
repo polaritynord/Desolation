@@ -42,6 +42,7 @@ function videoMenu:load()
         {
             position = {300, 285};
             baseColor = {0.5, 0.5, 0.5, 1};
+            value = Settings.brightness;
         }
     )
     ui.weaponParticlesText = ui:newTextLabel(
@@ -100,6 +101,7 @@ function videoMenu:update(delta)
     Settings.vignette = ui.vignetteBox.toggled
     Settings.weapon_flame_particles = ui.weaponParticlesBox.toggled
     Settings.player_trail_particles = ui.playerTrailBox.toggled
+    Settings.brightness = ui.brightnessSlider.value
 end
 
 return videoMenu
