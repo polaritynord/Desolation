@@ -18,6 +18,11 @@ function textButton.new()
         enabled = true;
     }
 
+    function instance.hoverEvent(element)
+        if element.mouseHovering then return end
+        love.audio.play(Assets.sounds.sfx.buttonHover)
+    end
+
     function instance:update(delta)
         local mx, my = coreFuncs.getRelativeMousePosition()
         local pos = coreFuncs.getRelativeElementPosition(self.position, self.parentComp)

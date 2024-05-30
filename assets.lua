@@ -39,6 +39,7 @@ function assets.load()
 
         sfx = {
             buttonClick = love.audio.newSource("fdh/assets/sounds/button_click.wav", "static");
+            buttonHover = love.audio.newSource("fdh/assets/sounds/button_hover.wav", "static");
         };
     }
 end

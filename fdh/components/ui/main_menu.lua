@@ -14,15 +14,8 @@ function mainMenu:load()
     ui.title = ui:newImage(
         {
             source = Assets.images.logo;
-            position = {210, 100};
-            scale = {3.7, 3.7};
-        }
-    )
-    ui.eternal = ui:newTextLabel(
-        {
-            text = "[ETERNAL HORIZONS]";
-            position = {95, 140};
-            font = "ticketing";
+            position = {320, 100};
+            scale = {2.5, 2.5};
         }
     )
     ui.campaignButton = ui:newTextButton(
