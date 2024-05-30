@@ -32,6 +32,7 @@ function settings:load()
             buttonText = Loca.settingsKeysButton;
             buttonTextSize = 30;
             position = {0, 280};
+            clickEvent = function() s.menu = "keys" end;
         }
     )
     ui.languageButton = ui:newTextButton(

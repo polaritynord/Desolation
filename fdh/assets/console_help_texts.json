@@ -2,7 +2,7 @@
     "titles": [
         "cheats", "freecam", "p_speed", "s_vol_master", "s_vol_music", "s_vol_sfx",
         "g_vignette", "s_language", "noclip", "god", "invisible", "inf_stamina", "slippiness",
-        "assign", "run_script", "give_ammo", "clear", "give", "info"
+        "assign", "run_script", "give_ammo", "clear", "give", "info", "bind"
     ],
 
     "descriptions": [
@@ -25,6 +25,7 @@
         "give_ammo:\n\tAdds a magazine of ammo at the current weapon the player is holding.",
         "clear:\n\tClears the developer console history.",
         "give [weaponName]:\n\tReplaces the current slot of player with specified weapon.",
-        "info:\n\tReturns some information about the game and the engine."
+        "info:\n\tReturns some information about the game and the engine.",
+        "bind [inputName] [key]:\n\tChanges the primary input key of a binding."
     ]
 }

@@ -3,7 +3,7 @@ local weaponManager = require("fdh.weapon_manager")
 local consoleFunctions = {
     funcsList = {
         "assign", "run_script", "give_ammo", "clear", "help", "lorem",
-        "give", "info"
+        "give", "info", "bind"
     };
 }
 
@@ -148,6 +148,38 @@ function consoleFunctions.infoScript(devConsole, command, i)
     devConsole.script:log("Made by Polaritynord")
     devConsole.script:log("Using " .. ENGINE_NAME .. " build " .. ENGINE_VERSION)
     devConsole.script:log(GAME_NAME .. " version " .. GAME_VERSION .. " (" .. GAME_VERSION_STATE .. ")")
+end
+
+function consoleFunctions.bindScript(devConsole, command, i)
+    i = i + 1
+    --Skip spaces
+    while string.sub(command, i, i) == " " do
+        i = i + 1
+    end
+    --Read binding name
+    local temp = ""
+    while string.sub(command, i, i) ~= " " do
+        --Check for incorrect writing
+        if i > #command then
+            break
+        end
+        temp = temp .. string.sub(command, i, i)
+        i = i + 1
+    end
+    local name = temp
+    --Read the key
+    i = i + 1
+    temp = ""
+    while i <= #command do
+        temp = temp .. string.sub(command, i, i)
+        i = i + 1
+    end
+    local key = temp
+    for k = 1, #InputManager.bindings.keyboard do
+        if InputManager.bindings.keyboard[k][1] == name then
+            InputManager.bindings.keyboard[k][2] = key
+        end
+    end
 end
 
 return consoleFunctions

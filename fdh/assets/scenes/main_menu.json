@@ -29,6 +29,11 @@
                 [
                     "audioMenu",
                     ["UIComponent", "fdh/components/ui/alt_menus/audio_menu"]
+                ],
+
+                [
+                    "keysMenu",
+                    ["UIComponent", "fdh/components/ui/alt_menus/keys_menu"]
                 ]
             ]
         ],
