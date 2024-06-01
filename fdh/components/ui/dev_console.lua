@@ -1,5 +1,5 @@
 local coreFuncs = require("coreFuncs")
-local json = require("lib.json")
+local json = require("engine.lib.json")
 local consoleFuncs = require("fdh.console_funcs")
 
 local devConsole = {}

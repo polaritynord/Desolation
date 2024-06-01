@@ -1,8 +1,7 @@
 local utf8 = require("utf8")
-local scene = require("engine.scene")
-local json  = require("lib.json")
-local globals = require("engine.globals")
+local json  = require("engine.lib.json")
 local coreFuncs = require("coreFuncs")
+local startupManager = require("engine.startup_manager")
 
 local fullscreen = false
 local cursors = {
@@ -171,49 +170,11 @@ local function updateUIOffset(delta)
 end
 
 function love.load()
-    --TODO Move this dude to somewhere else
-    coreFuncs.invertShader = love.graphics.newShader[[ vec4 effect(vec4 color, Image texture, vec2 texture_coords, vec2 pixel_coords) { vec4 col = texture2D( texture, texture_coords ); return vec4(1-col.r, 1-col.g, 1-col.b, col.a); } ]]
     love.graphics.setDefaultFilter("nearest", "nearest")
     Assets.load()
     love.keyboard.setKeyRepeat(true)
     InputManager:loadBindingFile()
-    --Fetch game info
-    local engineInfoFile = love.filesystem.read("engine/info.json")
-    local engineInfoData = json.decode(engineInfoFile)
-    local gameDirectory = engineInfoData.gameDirectory
-    local infoFile = love.filesystem.read(gameDirectory .. "/info.json")
-    local infoData = json.decode(infoFile)
-    GAME_NAME = infoData.name
-    GAME_VERSION = infoData.version
-    GAME_VERSION_STATE = infoData.versionState
-    AUTHOR = infoData.author
-    ENGINE_NAME = engineInfoData.name
-    ENGINE_VERSION = engineInfoData.version
-
-    --Load settings data
-    local settingsExists = love.filesystem.getInfo("settings.json")
-    local defaultSettingsFile = love.filesystem.read("fdh/assets/default_settings.json")
-    if settingsExists and not table.contains(arg, "--default-settings") then
-        --read settings file & save it as table
-        local file = love.filesystem.read("settings.json")
-        Settings = json.decode(file)
-        --TODO compare to default binding file & see if there is anything missing
-    else
-        --write new settings file
-        love.filesystem.write("settings.json", defaultSettingsFile)
-        Settings = json.decode(defaultSettingsFile)
-    end
-
-    --Load localization data
-    Loca = love.filesystem.read("fdh/assets/loca_" .. Settings.language .. ".json")
-    Loca = json.decode(Loca)
-
-    --Open up the default scene
-    local startScene = LoadScene(infoData.startScene)
-    if startScene.name == "Intro" and table.contains(arg, "--skip-intro") then
-        startScene = LoadScene("fdh/assets/scenes/main_menu.json")
-    end
-    SetScene(startScene)
+    startupManager:load()
 end
 
 function love.update(delta)

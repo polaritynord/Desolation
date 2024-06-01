@@ -23,6 +23,9 @@ function assets.load()
         cursors = {
             combat = love.mouse.newCursor("fdh/assets/images/cursor_combat.png", 12, 12);
         };
+        items = {
+            ammoLight = love.graphics.newImage("fdh/assets/images/item_ammo_light.png");
+        };
         bullet = love.graphics.newImage("fdh/assets/images/bullet.png");
         icon = love.graphics.newImage("engine/assets/icon.png");
         iconTransparent = love.graphics.newImage("engine/assets/icon_transparent.png");

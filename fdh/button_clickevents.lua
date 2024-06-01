@@ -1,4 +1,4 @@
-local json = require "lib.json"
+local json = require "engine.lib.json"
 local clickEvents = {}
 
 function clickEvents.quitButtonClick(element)

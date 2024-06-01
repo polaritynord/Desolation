@@ -1,5 +1,6 @@
 local imageComponent = require("engine.components.image_component")
 local object = require("engine.object")
+local ammoItemScript = require("fdh.components.item_script")
 
 local mapCreator = {}
 
@@ -11,6 +12,12 @@ function mapCreator:load()
     tile.transformComponent.scale = {x=2, y=2}
     tile.imageComponent.layer = 3
     self.parent:addChild(tile)
+    --Ammunition item test
+    local ammo = object.new(self)
+    ammo.script = table.new(ammoItemScript)
+    ammo.script.parent = ammo
+    ammo.script:load()
+    CurrentScene.items:addChild(ammo)
 end
 
 return mapCreator

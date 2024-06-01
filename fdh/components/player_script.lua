@@ -114,7 +114,6 @@ function playerScript:weaponDropping(player)
     script.realRot = player.transformComponent.rotation
 
     CurrentScene.items:addChild(itemInstance)
-    script.treeIndex = #CurrentScene.items.tree
     --Cancel reloading
     player.reloading = false
     if weapon then
@@ -127,7 +126,8 @@ function playerScript:weaponDropping(player)
     player.inventory.weapons[player.inventory.slot] = nil
     --play sound
     local playerSounds = player.soundManager.script
-    playerSounds:playSound(playerSounds.sounds.drop)
+    love.audio.stop(playerSounds.sounds.drop)
+    love.audio.play(playerSounds.sounds.drop)
 end
 
 function playerScript:shootingWeapon(delta, player)
@@ -139,12 +139,13 @@ function playerScript:shootingWeapon(delta, player)
         player.shootTimer = 0
         --Check if there is ammo available in magazine
         if weapon.magAmmo < 1 then
-            playerSounds:playSound(playerSounds.sounds.shoot.empty)
+            love.audio.stop(playerSounds.sounds.shoot.empty)
             return
         end
         --Fire weapon
         weapon.magAmmo = weapon.magAmmo - weapon.bulletPerShot
-        playerSounds:playSound(playerSounds.sounds.shoot[weapon.name])
+        love.audio.stop(playerSounds.sounds.shoot[weapon.name])
+        love.audio.play(playerSounds.sounds.shoot[weapon.name])
         --effects
         player.handOffset = -weapon.handRecoilIntensity
         local camPos = CurrentScene.camera:getPosition()
@@ -197,7 +198,8 @@ function playerScript:reloadingWeapon(delta, player)
     else
         if InputManager:isPressed("reload") then
             local playerSounds = player.soundManager.script
-            playerSounds:playSound(playerSounds.sounds.reload[weapon.name])
+            love.audio.stop(playerSounds.sounds.reload[weapon.name])
+            love.audio.play(playerSounds.sounds.reload[weapon.name])
             player.reloading = true
             player.reloadTimer = 0
         end

@@ -1,18 +1,6 @@
 local coreFuncs = require "coreFuncs"
 local playerSounds = {}
 
-function playerSounds:sPlaySound(source)
-    if not source then return end
-    love.audio.stop(source)
-    love.audio.play(source)
-end
-
-function playerSounds:stopSound(source)
-    if not source then return end
-    love.audio.stop(source)
-    love.audio.play(source)
-end
-
 function playerSounds:load()
     self.stepTimer = 0
     self.sounds = {
