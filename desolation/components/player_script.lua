@@ -8,24 +8,23 @@ local object = require("engine.object")
 local playerScript = {}
 
 function playerScript:movement(delta, player)
-    local transform = player.transformComponent
-
     local speed = GetGlobal("p_speed")
     local slippiness = GetGlobal("slippiness")
-    player.velocity.x = player.velocity.x + (-player.velocity.x)*slippiness*delta
-    player.velocity.y = player.velocity.y + (-player.velocity.y)*slippiness*delta
+
+    player.velocity[1] = player.velocity[1] + (-player.velocity[1])*slippiness*delta
+    player.velocity[2] = player.velocity[2] + (-player.velocity[2])*slippiness*delta
     --Get key input
     if InputManager:isPressed("move_left") then
-        player.velocity.x = -1
+        player.velocity[1] = -1
     end
     if InputManager:isPressed("move_right") then
-        player.velocity.x = 1
+        player.velocity[1] = 1
     end
     if InputManager:isPressed("move_up") then
-        player.velocity.y = -1
+        player.velocity[2] = -1
     end
     if InputManager:isPressed("move_down") then
-        player.velocity.y = 1
+        player.velocity[2] = 1
     end
     player.moving = InputManager:isPressed({"move_left", "move_right", "move_up", "move_down"})
     --Sprinting
@@ -35,17 +34,17 @@ function playerScript:movement(delta, player)
     end
     --Normalize velocity
     if InputManager:isPressed({"move_left", "move_right"}) == InputManager:isPressed({"move_up", "move_down"}) and player.moving then
-        player.velocity.x = player.velocity.x * math.sin(math.pi/4)
-        player.velocity.y = player.velocity.y * math.sin(math.pi/4)
+        player.velocity[1] = player.velocity[1] * math.sin(math.pi/4)
+        player.velocity[2] = player.velocity[2] * math.sin(math.pi/4)
     end
     --Move by velocity
-    transform.x = transform.x + (player.velocity.x*speed*delta)
-    transform.y = transform.y + (player.velocity.y*speed*delta)
+    player.position[1] = player.position[1] + (player.velocity[1]*speed*delta)
+    player.position[2] = player.position[2] + (player.velocity[2]*speed*delta)
 end
 
 function playerScript:pointTowardsMouse(player)
     local mouseX, mouseY = love.mouse.getPosition()
-    local pos = coreFuncs.getRelativePosition(player.transformComponent, CurrentScene.camera)
+    local pos = coreFuncs.getRelativePosition(player.position, CurrentScene.camera)
     local dx = mouseX-pos[1] ; local dy = mouseY-pos[2]
     player.transformComponent.rotation = math.atan2(dy, dx)
 end
@@ -88,8 +87,8 @@ function playerScript:doWalkingAnim(player)
     if player.sprinting then speed = speed + 4 end
     player.animationSizeDiff = math.sin(time*speed)/5
     --Set image component values
-    player.transformComponent.scale.x = 4 + player.animationSizeDiff
-    player.transformComponent.scale.y = 4 + player.animationSizeDiff
+    player.scale[1] = 4 + player.animationSizeDiff
+    player.scale[2] = 4 + player.animationSizeDiff
 end
 
 function playerScript:weaponDropping(player)
@@ -98,7 +97,6 @@ function playerScript:weaponDropping(player)
     --Create object data
     local itemInstance = object.new(CurrentScene.items)
     local script = table.new(weaponItemScript)
-    local playerPos = player:getPosition()
     itemInstance.weaponData = weapon.new()
     --send current magAmmo to players ammunition because i couldnt get it to work
     player.inventory.ammunition[weapon.ammoType] = player.inventory.ammunition[weapon.ammoType] + weapon.magAmmo
@@ -107,8 +105,8 @@ function playerScript:weaponDropping(player)
     script:load()
 
     --Set some variables
-    itemInstance.transformComponent.x = playerPos.x
-    itemInstance.transformComponent.y = playerPos.y
+    itemInstance.position[1] = player.position[1]
+    itemInstance.position[2] = player.position[2]
     script.velocity = 550
     script.rotVelocity = math.uniform(-1, 1)*math.pi*12 --TODO this could've been better
     script.realRot = player.transformComponent.rotation
@@ -118,7 +116,7 @@ function playerScript:weaponDropping(player)
     player.reloading = false
     if weapon then
         local playerSounds = player.soundManager.script
-        if playerSounds.sounds.reload[weapon.name] then 
+        if playerSounds.sounds.reload[weapon.name] then
             love.audio.stop(playerSounds.sounds.reload[weapon.name])
         end
     end
@@ -148,22 +146,20 @@ function playerScript:shootingWeapon(delta, player)
         love.audio.play(playerSounds.sounds.shoot[weapon.name])
         --effects
         player.handOffset = -weapon.handRecoilIntensity
-        local camPos = CurrentScene.camera:getPosition()
+        local camera = CurrentScene.camera
         local a = 1
         if math.random() < 0.5 then a = -1 end
-        camPos.x = camPos.x + weapon.screenShakeIntensity*a
+        camera.position[1] = camera.position[1] + weapon.screenShakeIntensity*a
         a = 1
         if math.random() < 0.5 then a = -1 end
-        camPos.y = camPos.y + weapon.screenShakeIntensity*a
-        CurrentScene.camera:setPosition(camPos)
+        camera.position[2] = camera.position[2] + weapon.screenShakeIntensity*a
         --particles
         local shootParticles = player.particleComponent
-        particleFuncs.createShootParticles(shootParticles, player.transformComponent.rotation)
+        particleFuncs.createShootParticles(shootParticles, player.rotation)
         --Bullet instance creation
-        local playerPos = player:getPosition()
         local bullet = object.new(CurrentScene.bullets)
-        bullet.transformComponent.x = playerPos.x + math.cos(player.transformComponent.rotation)*weapon.bulletOffset
-        bullet.transformComponent.y = playerPos.y + math.sin(player.transformComponent.rotation)*weapon.bulletOffset
+        bullet.transformComponent.x = player.position[1] + math.cos(player.transformComponent.rotation)*weapon.bulletOffset
+        bullet.transformComponent.y = player.position[1] + math.sin(player.transformComponent.rotation)*weapon.bulletOffset
         bullet.transformComponent.rotation = player.transformComponent.rotation
         bullet.script = table.new(bulletScript)
         bullet.script.parent = bullet
@@ -211,9 +207,9 @@ function playerScript:load()
     local player = self.parent
     local transform = player.transformComponent
     player.imageComponent.source = Assets.images.player.body
-    transform.scale = {x=4, y=4}
+    player.scale = {4, 4}
     --Player variables
-    player.velocity = {x=0, y=0}
+    player.velocity = {0, 0}
     player.health = 100 ; player.armor = 100
     player.sprinting = false
     player.moving = false

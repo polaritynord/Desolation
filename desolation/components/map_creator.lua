@@ -9,7 +9,7 @@ function mapCreator:load()
     --Create the placeholder tile
     local tile = object.new(self)
     tile.imageComponent = imageComponent.new(tile, Assets.images.tiles.prototypeGreen)
-    tile.transformComponent.scale = {x=2, y=2}
+    tile.scale = {2, 2}
     tile.imageComponent.layer = 3
     self.parent:addChild(tile)
     --Ammunition item test

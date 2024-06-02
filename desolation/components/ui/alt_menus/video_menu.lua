@@ -87,7 +87,7 @@ function videoMenu:update(delta)
     local ui = video.UIComponent
 
     --UI Offsetting & canvas enabling
-    video.transformComponent.x = 950 + MenuUIOffset
+    video.position[1] = 950 + MenuUIOffset
     ui.enabled = settings.menu == "video"
     --Transparency animation
     if ui.enabled then

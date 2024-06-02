@@ -1,27 +1,27 @@
 local weaponItem = {}
 
 function weaponItem:movement(delta, item)
-    local itemPos = item:getPosition()
-    local playerPos = CurrentScene.player:getPosition()
+    local itemPos = item.position
+    local playerPos = CurrentScene.player.position
     if self.gettingPickedUp then
-        itemPos.x = itemPos.x + (playerPos.x-itemPos.x)*10*delta
-        itemPos.y = itemPos.y + (playerPos.y-itemPos.y)*10*delta
+        itemPos[1] = itemPos[1] + (playerPos[1]-itemPos[1])*10*delta
+        itemPos[2] = itemPos[2] + (playerPos[2]-itemPos[2])*10*delta
         --Set alpha
         item.imageComponent.color[4] = self.distanceToPlayer/100
     else
         --Move
-        itemPos.x = itemPos.x + self.velocity*math.cos(self.realRot)*delta
-        itemPos.y = itemPos.y + self.velocity*math.sin(self.realRot)*delta
+        itemPos[1] = itemPos[1] + self.velocity*math.cos(self.realRot)*delta
+        itemPos[2] = itemPos[2] + self.velocity*math.sin(self.realRot)*delta
         --Slow down
         self.velocity = self.velocity - 2000*delta
         if self.velocity < 0 then self.velocity = 0 end
         --Turn & velocity decrease
-        item.transformComponent.rotation = item.transformComponent.rotation - self.rotVelocity*delta
+        item.rotation = item.rotation - self.rotVelocity*delta
         self.rotVelocity = self.rotVelocity + (-self.rotVelocity)*math.pi*2*delta
     end
     --Set new position
-    item.transformComponent.x = itemPos.x
-    item.transformComponent.y = itemPos.y
+    --item.transformComponent.x = itemPos[1]
+    --item.transformComponent.y = itemPos[2]
 end
 
 function weaponItem:load()
@@ -32,7 +32,7 @@ function weaponItem:load()
     )
     --Component setup
     item.imageComponent.layer = 2
-    item.transformComponent.scale = {x=2, y=2}
+    item.scale = {2, 2}
     --Some vars
     self.gettingPickedUp = false
     self.distanceToPlayer = 1000
@@ -51,12 +51,7 @@ function weaponItem:update(delta)
 
     self:movement(delta, item)
     --Distance calculation
-    local itemPos = item:getPosition()
-    local playerPos = player:getPosition()
-    self.distanceToPlayer = math.sqrt(
-        (itemPos.x-playerPos.x)*(itemPos.x-playerPos.x)
-        + (itemPos.y-playerPos.y)*(itemPos.y-playerPos.y)
-    )
+    self.distanceToPlayer = coreFuncs.pointDistance(item.position, player.position)
     --set sum colors & return if player is far away
     --TODO better indicator
     if self.distanceToPlayer > 100 then

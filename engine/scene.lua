@@ -35,14 +35,13 @@ function scene.new()
     end
 
     function s:draw()
-        local camTransform = self.camera.transformComponent
         self.drawLayers = {{}, {}, {}}
         self.uiLayer = {}
         self.particleLayer = {}
         self.particleCount = 0
         love.graphics.setBackgroundColor(self.backgroundColor)
         love.graphics.push()
-            love.graphics.scale(camTransform.scale.x, camTransform.scale.y)
+            love.graphics.scale(self.camera.scale[1], self.camera.scale[2])
             for _, v in ipairs(self.tree) do
                 v:draw()
             end

@@ -45,7 +45,7 @@ function keysMenu:update(delta)
     local ui = keys.UIComponent
 
     --UI Offsetting & canvas enabling
-    keys.transformComponent.x = 950 + MenuUIOffset
+    keys.position[1] = 950 + MenuUIOffset
     ui.enabled = settings.menu == "keys"
     --Transparency animation
     if ui.enabled then

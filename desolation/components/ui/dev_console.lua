@@ -116,7 +116,7 @@ function devConsole:update(delta)
     local ui = console.UIComponent
 
     --UI Offsetting & canvas enabling
-    console.transformComponent.x = 600 + MenuUIOffset
+    console.position[1] = 600 + MenuUIOffset
     ui.enabled = console.open
 
     --Transparency animation

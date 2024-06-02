@@ -65,7 +65,7 @@ function settings:update(delta)
     local ui = s.UIComponent
 
     --UI Offsetting & canvas enabling
-    s.transformComponent.x = 600 + MenuUIOffset
+    s.position[1] = 600 + MenuUIOffset
     ui.enabled = s.open
     --Transparency animation
     if s.open then

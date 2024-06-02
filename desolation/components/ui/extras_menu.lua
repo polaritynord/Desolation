@@ -76,7 +76,7 @@ function extrasMenu:update(delta)
     local ui = menu.UIComponent
 
     --UI Offsetting & canvas enabling
-    menu.transformComponent.x = 600 + MenuUIOffset
+    menu.position[1] = 600 + MenuUIOffset
     ui.enabled = menu.open
     --Transparency animation
     if menu.open then

@@ -64,7 +64,7 @@ function audioMenu:update(delta)
     local ui = audio.UIComponent
 
     --UI Offsetting & canvas enabling
-    audio.transformComponent.x = 950 + MenuUIOffset
+    audio.position[1] = 950 + MenuUIOffset
     ui.enabled = settings.menu == "audio"
     --Transparency animation
     if ui.enabled then

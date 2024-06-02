@@ -12,21 +12,18 @@ function coreFuncs.rgb(r, g, b)
     return val
 end
 
-function coreFuncs.getRelativePosition(transform, camera)
-    local camTransform = camera.transformComponent
+function coreFuncs.getRelativePosition(position, camera)
     local relativePos = {
-        (transform.x-camTransform.x+(ScreenWidth/2)/camera.zoom)*camera.zoom,
-        (transform.y-camTransform.y+(ScreenHeight/2)/camera.zoom)*camera.zoom
+        (position[1]-camera.position[1]+(ScreenWidth/2)/camera.zoom)*camera.zoom,
+        (position[2]-camera.position[2]+(ScreenHeight/2)/camera.zoom)*camera.zoom
     }
     return relativePos
 end
 
 function coreFuncs.getRelativeElementPosition(position, parentComp)
-    local parentPos = parentComp.parent:getPosition()
-    local x = position[1]
-    local y = position[2]
+    local objectPos = parentComp.parent.position
 
-    return {x + parentPos.x, y + parentPos.y}
+    return {position[1] + objectPos[1], position[2] + objectPos[2]}
 end
 
 function coreFuncs.getRelativeMousePosition()
@@ -51,6 +48,12 @@ function coreFuncs.getLineCount(str)
     end
 
     return lines
+end
+
+function coreFuncs.pointDistance(pos1, pos2)
+    return math.sqrt(
+        (pos1[1]-pos2[1])^2 + (pos1[2]-pos2[2])^2
+    )
 end
 
 -- Thanks to @pgimeno at https://love2d.org/forums/viewtopic.php?f=4&t=93768&p=250899#p250899

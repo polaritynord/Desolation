@@ -97,7 +97,7 @@ end
 function mainMenu:update(delta)
     local ui = self.parent.UIComponent
     --UI Ofsetting
-    self.parent.transformComponent.x = MenuUIOffset
+    self.parent.position[1] = MenuUIOffset
     ui.polarity.position[1] = 920 - MenuUIOffset
     ui.version.position[1] = 5 - MenuUIOffset
     --Change alpha of black cover
