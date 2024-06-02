@@ -46,7 +46,7 @@ function playerScript:pointTowardsMouse(player)
     local mouseX, mouseY = love.mouse.getPosition()
     local pos = coreFuncs.getRelativePosition(player.position, CurrentScene.camera)
     local dx = mouseX-pos[1] ; local dy = mouseY-pos[2]
-    player.transformComponent.rotation = math.atan2(dy, dx)
+    player.rotation = math.atan2(dy, dx)
 end
 
 function playerScript:slotSwitching(player)
@@ -109,7 +109,7 @@ function playerScript:weaponDropping(player)
     itemInstance.position[2] = player.position[2]
     script.velocity = 550
     script.rotVelocity = math.uniform(-1, 1)*math.pi*12 --TODO this could've been better
-    script.realRot = player.transformComponent.rotation
+    script.realRot = player.rotation
 
     CurrentScene.items:addChild(itemInstance)
     --Cancel reloading
@@ -158,9 +158,9 @@ function playerScript:shootingWeapon(delta, player)
         particleFuncs.createShootParticles(shootParticles, player.rotation)
         --Bullet instance creation
         local bullet = object.new(CurrentScene.bullets)
-        bullet.transformComponent.x = player.position[1] + math.cos(player.transformComponent.rotation)*weapon.bulletOffset
-        bullet.transformComponent.y = player.position[1] + math.sin(player.transformComponent.rotation)*weapon.bulletOffset
-        bullet.transformComponent.rotation = player.transformComponent.rotation
+        bullet.position[1] = player.position[1] + math.cos(player.rotation)*weapon.bulletOffset
+        bullet.position[2] = player.position[2] + math.sin(player.rotation)*weapon.bulletOffset
+        bullet.rotation = player.rotation
         bullet.script = table.new(bulletScript)
         bullet.script.parent = bullet
         bullet.script:load()

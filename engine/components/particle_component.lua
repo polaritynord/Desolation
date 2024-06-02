@@ -39,24 +39,24 @@ function particleComponent.new(parent, particleUpdate)
     end
 
     function component:draw()
-        local objPos = self.parent:getPosition()
+        local objPos = self.parent.position
         local camera = CurrentScene.camera
         for _, particle in ipairs(self.particles) do
-            local offsettedPos = {x=particle.position[1]+objPos.x, y=particle.position[2]+objPos.y}
+            local offsettedPos = {particle.position[1]+objPos[1], particle.position[2]+objPos[2]}
             local relativePos = coreFuncs.getRelativePosition(offsettedPos, camera)
 
             if particle.type == "rect" then
                 love.graphics.push()
                     love.graphics.setColor(particle.color)
                     love.graphics.translate(relativePos[1], relativePos[2])
-                    love.graphics.rotate(particle.rotation+self.parent.transformComponent.rotation)
+                    love.graphics.rotate(particle.rotation+self.parent.rotation)
                     love.graphics.rectangle("fill", -particle.size[1]/2*camera.zoom, -particle.size[2]/2*camera.zoom, particle.size[1]*camera.zoom, particle.size[2]*camera.zoom)
                 love.graphics.pop()
             elseif particle.type == "image" then
                 local src = Assets.images.player.body
                 local width = src:getWidth() ;  local height = src:getHeight()
                 love.graphics.draw(
-                    src, relativePos[1], relativePos[2], self.parent.transformComponent.rotation,
+                    src, relativePos[1], relativePos[2], self.parent.rotation,
                     particle.size[1]*camera.zoom, particle.size[2]*camera.zoom, width/2, height/2
                 )
             end

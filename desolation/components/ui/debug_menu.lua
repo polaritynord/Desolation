@@ -15,7 +15,7 @@ function debugMenu:update(delta)
     ui.enabled = self.parent.enabled
     --Update texts
     local fps = love.timer.getFPS()
-    local playerPos = CurrentScene.player:getPosition()
+    local playerPos = CurrentScene.player.position
     local averageFps = math.ceil(1/love.timer.getAverageDelta())
     local mx, my = love.mouse.getPosition()
     local rmx, rmy = coreFuncs.getRelativeMousePosition()
@@ -29,7 +29,7 @@ function debugMenu:update(delta)
     --Update debug text
     ui.debugTextsLeft.text = GAME_NAME .. " - Made by " .. AUTHOR .. "\n"
                         .. "FPS: " .. fps .. "/" .. averageFps .. fps_suffix ..
-                        "\nPlayer Coordinates: X=" .. math.floor(playerPos.x) .. " Y=" .. math.floor(playerPos.y) .. "\n" ..
+                        "\nPlayer Coordinates: X=" .. math.floor(playerPos[1]) .. " Y=" .. math.floor(playerPos[2]) .. "\n" ..
                         "Memory Used(Excluding Love2D): " .. coreFuncs.roundDecimal(collectgarbage("count")/1024, 2) .. " MB"
                         .. "\nMouse Position: X=" .. mx .. " Y=" .. my .. "\nRelative Mouse Position: X=" .. rmx .. " Y=" .. rmy ..
                         "\nParticle Count: " .. CurrentScene.particleCount .. "\nItem Count: " .. #CurrentScene.items.tree ..

@@ -1,18 +1,18 @@
 local cameraController = {}
 
-function cameraController:movement(delta, camTransform, player)
+function cameraController:movement(delta, camera, player)
     if GetGlobal("freecam") < 1 then
         --Non-freecam (follow player around)
-        local dx = player.transformComponent.x - camTransform.x
-        local dy = player.transformComponent.y - camTransform.y
-        camTransform.x = camTransform.x + dx*8*delta
-        camTransform.y = camTransform.y + dy*8*delta
+        local dx = player.position[1] - camera.position[1]
+        local dy = player.position[2] - camera.position[2]
+        camera.position[1] = camera.position[1] + dx*8*delta
+        camera.position[2] = camera.position[2] + dy*8*delta
     else
         --Freecam
         local mx, my = love.mouse.getPosition()
         if love.mouse.isDown(3) then
-            camTransform.x = camTransform.x + (self.oldMouseX-mx)/self.parent.zoom
-            camTransform.y = camTransform.y + (self.oldMouseY-my)/self.parent.zoom
+            camera.position[1] = camera.position[1] + (self.oldMouseX-mx)/camera.zoom
+            camera.position[2] = camera.position[2] + (self.oldMouseY-my)/camera.zoom
         end
         self.oldMouseX = mx
         self.oldMouseY = my
@@ -42,8 +42,7 @@ end
 function cameraController:update(delta)
     if GamePaused then return end
     local player = CurrentScene.player
-    local camTransform = self.parent.transformComponent
-    self:movement(delta, camTransform, player)
+    self:movement(delta, self.parent, player)
     self:updateZoom(delta, self.parent, player)
 end
 

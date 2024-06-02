@@ -13,13 +13,13 @@ function imageComponent.new(parent, source)
     function component:draw()
         if not self.source then return end
         love.graphics.setColor(self.color)
-        local transform = self.parent.transformComponent
+        local object = self.parent
         local camera = CurrentScene.camera
         local w, h = self.source:getWidth(), self.source:getHeight()
-        local pos = coreFuncs.getRelativePosition(transform, camera)
+        local pos = coreFuncs.getRelativePosition(object.position, camera)
         love.graphics.draw(
-            self.source, pos[1], pos[2], transform.rotation,
-            transform.scale.x*camera.zoom, transform.scale.y*camera.zoom, w/2, h/2
+            self.source, pos[1], pos[2], object.rotation,
+            object.scale[1]*camera.zoom, object.scale[2]*camera.zoom, w/2, h/2
         )
     end
 

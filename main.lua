@@ -21,9 +21,9 @@ function love.wheelmoved(x, y)
     --Keys menu scrolling (TODO, make this work for all menus?)
     if CurrentScene.settings then
         local menu = CurrentScene.settings.keysMenu
-        menu.transformComponent.y = menu.transformComponent.y + 35*y
-        if menu.transformComponent.y > 0 then menu.transformComponent.y = 0 end
-        if menu.transformComponent.y < 540-menu.length then menu.transformComponent.y = 540-menu.length end
+        menu.position[2] = menu.position[2] + 35*y
+        if menu.position[2] > 0 then menu.position[2] = 0 end
+        if menu.position[2] < 540-menu.length then menu.position[2] = 540-menu.length end
     end
 
     --Ingame zooming

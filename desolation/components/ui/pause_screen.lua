@@ -63,7 +63,7 @@ function pauseScreen:update(delta)
     --Set enabled state
     ui.enabled = GamePaused
     --UI Offsetting
-    self.parent.transformComponent.x = MenuUIOffset
+    self.parent.position[1] = MenuUIOffset
     --Smooth alpha transitioning
     local smoothness = 7
     if GamePaused then

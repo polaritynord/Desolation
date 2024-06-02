@@ -9,6 +9,7 @@ function object.new(parent)
         components = {};
         position = {0, 0};
         scale = {1, 1};
+        rotation = 0;
     }
 
     function o:addChild(obj)

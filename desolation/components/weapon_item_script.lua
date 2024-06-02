@@ -1,3 +1,5 @@
+local coreFuncs = require("coreFuncs")
+
 local weaponItem = {}
 
 function weaponItem:movement(delta, item)

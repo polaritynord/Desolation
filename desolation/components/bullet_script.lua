@@ -19,10 +19,8 @@ function bulletScript:update(delta)
         return
     end
     --Movement
-    local pos = bullet:getPosition()
-    pos.x = pos.x + math.cos(bullet.transformComponent.rotation)*3000*delta
-    pos.y = pos.y + math.sin(bullet.transformComponent.rotation)*3000*delta
-    bullet:setPosition(pos)
+    bullet.position[1] = bullet.position[1] + math.cos(bullet.rotation)*3000*delta
+    bullet.position[2] = bullet.position[2] + math.sin(bullet.rotation)*3000*delta
 end
 
 return bulletScript
