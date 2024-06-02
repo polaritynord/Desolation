@@ -1,6 +1,6 @@
 local imageComponent = require("engine.components.image_component")
 local object = require("engine.object")
-local ammoItemScript = require("fdh.components.item_script")
+local ammoItemScript = require("desolation.components.item_script")
 
 local mapCreator = {}
 

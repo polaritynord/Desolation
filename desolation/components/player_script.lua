@@ -1,8 +1,8 @@
 local coreFuncs = require("coreFuncs")
-local weaponManager = require("fdh.weapon_manager")
-local weaponItemScript = require("fdh.components.weapon_item_script")
-local bulletScript = require("fdh.components.bullet_script")
-local particleFuncs = require("fdh.particle_funcs")
+local weaponManager = require("desolation.weapon_manager")
+local weaponItemScript = require("desolation.components.weapon_item_script")
+local bulletScript = require("desolation.components.bullet_script")
+local particleFuncs = require("desolation.particle_funcs")
 local object = require("engine.object")
 
 local playerScript = {}

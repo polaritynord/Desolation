@@ -3,46 +3,46 @@ local assets = {}
 function assets.load()
     assets.images = {
         player = {
-            body = love.graphics.newImage("fdh/assets/images/player/body.png");
-            handDefault = love.graphics.newImage("fdh/assets/images/player/hand_default.png");
-            handWeapon = love.graphics.newImage("fdh/assets/images/player/hand_placeholder.png");
+            body = love.graphics.newImage("desolation/assets/images/player/body.png");
+            handDefault = love.graphics.newImage("desolation/assets/images/player/hand_default.png");
+            handWeapon = love.graphics.newImage("desolation/assets/images/player/hand_placeholder.png");
         };
         tiles = {
-            prototypeGreen = love.graphics.newImage("fdh/assets/images/texture_09.png");
+            prototypeGreen = love.graphics.newImage("desolation/assets/images/texture_09.png");
         };
         ui = {
-            healthBar = love.graphics.newImage("fdh/assets/images/hud/health_bar.png");
-            menuBackground = love.graphics.newImage("fdh/assets/images/menu_background.png");
-            ammo = love.graphics.newImage("fdh/assets/images/hud/ammo.png");
+            healthBar = love.graphics.newImage("desolation/assets/images/hud/health_bar.png");
+            menuBackground = love.graphics.newImage("desolation/assets/images/menu_background.png");
+            ammo = love.graphics.newImage("desolation/assets/images/hud/ammo.png");
         };
         weapons = {
-            pistolImg = love.graphics.newImage("fdh/assets/images/weapons/pistol.png");
-            assaultrifleImg = love.graphics.newImage("fdh/assets/images/weapons/assault_rifle.png");
-            shotgunImg = love.graphics.newImage("fdh/assets/images/weapons/shotgun.png");
+            pistolImg = love.graphics.newImage("desolation/assets/images/weapons/pistol.png");
+            assaultrifleImg = love.graphics.newImage("desolation/assets/images/weapons/assault_rifle.png");
+            shotgunImg = love.graphics.newImage("desolation/assets/images/weapons/shotgun.png");
         };
         cursors = {
-            combat = love.mouse.newCursor("fdh/assets/images/cursor_combat.png", 12, 12);
+            combat = love.mouse.newCursor("desolation/assets/images/cursor_combat.png", 12, 12);
         };
         items = {
-            ammoLight = love.graphics.newImage("fdh/assets/images/item_ammo_light.png");
+            ammoLight = love.graphics.newImage("desolation/assets/images/item_ammo_light.png");
         };
-        bullet = love.graphics.newImage("fdh/assets/images/bullet.png");
+        bullet = love.graphics.newImage("desolation/assets/images/bullet.png");
         icon = love.graphics.newImage("engine/assets/icon.png");
         iconTransparent = love.graphics.newImage("engine/assets/icon_transparent.png");
-        logo = love.graphics.newImage("fdh/assets/images/eh_logo.png");
+        logo = love.graphics.newImage("desolation/assets/images/eh_logo.png");
     }
 
     assets.fonts = {}
 
     assets.sounds = {
         ost = {
-            ambience = love.audio.newSource("fdh/assets/sounds/ost/ambience1.wav", "stream");
-            intro = love.audio.newSource("fdh/assets/sounds/ost/intro.wav", "stream");
+            ambience = love.audio.newSource("desolation/assets/sounds/ost/ambience1.wav", "stream");
+            intro = love.audio.newSource("desolation/assets/sounds/ost/intro.wav", "stream");
         };
 
         sfx = {
-            buttonClick = love.audio.newSource("fdh/assets/sounds/button_click.wav", "static");
-            buttonHover = love.audio.newSource("fdh/assets/sounds/button_hover.wav", "static");
+            buttonClick = love.audio.newSource("desolation/assets/sounds/button_click.wav", "static");
+            buttonHover = love.audio.newSource("desolation/assets/sounds/button_hover.wav", "static");
         };
     }
 end

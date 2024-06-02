@@ -6,7 +6,7 @@
 
         [
             "intro",
-            ["UIComponent", "fdh/components/ui/intro"]
+            ["UIComponent", "desolation/components/ui/intro"]
         ]
     ]
 }

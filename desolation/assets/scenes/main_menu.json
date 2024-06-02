@@ -9,38 +9,38 @@
 
         [
             "mainMenu",
-            ["UIComponent", "fdh/components/ui/main_menu"]
+            ["UIComponent", "desolation/components/ui/main_menu"]
         ],
         
         [
             "devConsole",
-            ["UIComponent", "fdh/components/ui/dev_console"]
+            ["UIComponent", "desolation/components/ui/dev_console"]
         ],
 
         [
             "settings",
-            ["UIComponent", "fdh/components/ui/settings_menu"],
+            ["UIComponent", "desolation/components/ui/settings_menu"],
             [
                 [
                     "videoMenu",
-                    ["UIComponent", "fdh/components/ui/alt_menus/video_menu"]
+                    ["UIComponent", "desolation/components/ui/alt_menus/video_menu"]
                 ],
 
                 [
                     "audioMenu",
-                    ["UIComponent", "fdh/components/ui/alt_menus/audio_menu"]
+                    ["UIComponent", "desolation/components/ui/alt_menus/audio_menu"]
                 ],
 
                 [
                     "keysMenu",
-                    ["UIComponent", "fdh/components/ui/alt_menus/keys_menu"]
+                    ["UIComponent", "desolation/components/ui/alt_menus/keys_menu"]
                 ]
             ]
         ],
 
         [
             "extras",
-            ["UIComponent", "fdh/components/ui/extras_menu"]
+            ["UIComponent", "desolation/components/ui/extras_menu"]
         ]
     ]
 }

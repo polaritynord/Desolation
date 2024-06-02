@@ -7,7 +7,7 @@ local inputManager = {
 
 function inputManager:loadBindingFile()
     local fileExists = love.filesystem.getInfo("bindings.json")
-    local defaultBindingsFile = love.filesystem.read("fdh/assets/default_bindings.json")
+    local defaultBindingsFile = love.filesystem.read("desolation/assets/default_bindings.json")
     local defaultBindings = json.decode(defaultBindingsFile)
     --Check if binding file exists
     if fileExists and not table.contains(arg, "--default-bindings") then

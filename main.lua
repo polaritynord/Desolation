@@ -70,6 +70,8 @@ function love.keypressed(key, unicode)
     --Pause key (not devConsoleUI.takingInput)
     if table.contains(InputManager:getKeys("pause_game"), key) and (console and not console.open) then
         GamePaused = not GamePaused
+        CurrentScene.settings.menu = nil
+        CurrentScene.settings.open = false
     end
 
     --Debug menu toggle key

@@ -48,7 +48,7 @@ function imageButton.new()
         love.graphics.rectangle("fill", pos[1], pos[2], self.baseScale[1], self.baseScale[2])
         
         --draw text
-        SetFont("fdh/assets/fonts/" .. self.font .. ".ttf", self.textSize)
+        SetFont("desolation/assets/fonts/" .. self.font .. ".ttf", self.textSize)
         love.graphics.setColor(self.textColor[1], self.textColor[2], self.textColor[3], self.textColor[4]*self.parentComp.alpha)
         love.graphics.printf(self.text, pos[1], pos[2], self.wrapLimit, "left")
         love.graphics.setColor(1, 1, 1, 1)

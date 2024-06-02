@@ -60,7 +60,7 @@ function intro:update(delta)
     --Launch main menu if intro is done or skipped
     if self.timer > 10 or love.keyboard.isDown("space") then
         Assets.sounds.ost.intro:stop()
-        local scene = LoadScene("fdh/assets/scenes/main_menu.json")
+        local scene = LoadScene("desolation/assets/scenes/main_menu.json")
         SetScene(scene)
     end
 end

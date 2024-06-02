@@ -1,6 +1,6 @@
 local json = require("engine.lib.json")
 
-local clickEvents = require("fdh.button_clickevents")
+local clickEvents = require("desolation.button_clickevents")
 
 local pauseScreen = {}
 
@@ -20,7 +20,11 @@ function pauseScreen:load()
             position = {70, 200};
             buttonText = Loca.continueButton;
             buttonTextSize = 30;
-            clickEvent = function () GamePaused = false end;
+            clickEvent = function ()
+                GamePaused = false
+                CurrentScene.settings.menu = nil
+                CurrentScene.settings.open = false
+            end;
         }
     )
     ui.settingsButton = ui:newTextButton(
@@ -38,7 +42,7 @@ function pauseScreen:load()
             buttonTextSize = 30;
             clickEvent = function ()
                 love.filesystem.write("settings.json", json.encode(Settings))
-                local scene = LoadScene("fdh/assets/scenes/main_menu.json")
+                local scene = LoadScene("desolation/assets/scenes/main_menu.json")
                 SetScene(scene)
             end
         }

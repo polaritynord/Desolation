@@ -37,7 +37,7 @@ function slider.new()
         love.graphics.rectangle("fill", pos[1], pos[2], self.value*self.baseSize[1], self.baseSize[2])
         --draw value percentage
         love.graphics.setColor(0, 0, 0, 1)
-        SetFont("fdh/assets/fonts/" .. self.font .. ".ttf", 12)
+        SetFont("desolation/assets/fonts/" .. self.font .. ".ttf", 12)
         love.graphics.printf(math.floor(self.value*100) .. "%", pos[1], pos[2], 1000, "left")
         love.graphics.setColor(1, 1, 1, 1)
     end

@@ -1,11 +1,11 @@
 local json = require("engine.lib.json")
-local weapon = require("fdh.weapon")
+local weapon = require("desolation.weapon")
 
 local weaponManager = {}
 
 function weaponManager:load()
     --Read weapons.json
-    local weaponsFile = love.filesystem.read("fdh/assets/weapons.json")
+    local weaponsFile = love.filesystem.read("desolation/assets/weapons.json")
     local weaponsData = json.decode(weaponsFile)
     --Import classes
     for i = 1, #weaponsData.WEAPONS_LIST do

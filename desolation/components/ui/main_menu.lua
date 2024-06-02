@@ -1,4 +1,4 @@
-local clickEvents = require("fdh.button_clickevents")
+local clickEvents = require("desolation.button_clickevents")
 
 local mainMenu = {}
 

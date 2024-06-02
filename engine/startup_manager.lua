@@ -20,7 +20,7 @@ function startupManager:load()
 
     --Load settings data
     local settingsExists = love.filesystem.getInfo("settings.json")
-    local defaultSettingsFile = love.filesystem.read("fdh/assets/default_settings.json")
+    local defaultSettingsFile = love.filesystem.read("desolation/assets/default_settings.json")
     if settingsExists and not table.contains(arg, "--default-settings") then
         --read settings file & save it as table
         local file = love.filesystem.read("settings.json")
@@ -33,13 +33,13 @@ function startupManager:load()
     end
 
     --Load localization data
-    Loca = love.filesystem.read("fdh/assets/loca_" .. Settings.language .. ".json")
+    Loca = love.filesystem.read("desolation/assets/loca_" .. Settings.language .. ".json")
     Loca = json.decode(Loca)
 
     --Open up the default scene
     local startScene = LoadScene(infoData.startScene)
     if startScene.name == "Intro" and table.contains(arg, "--skip-intro") then
-        startScene = LoadScene("fdh/assets/scenes/main_menu.json")
+        startScene = LoadScene("desolation/assets/scenes/main_menu.json")
     end
     SetScene(startScene)
 end

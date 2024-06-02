@@ -11,7 +11,7 @@ function extrasMenu:load()
             buttonTextSize = 30;
             position = {0, 200};
             clickEvent = function ()
-                local scene = LoadScene("fdh/assets/scenes/game.json")
+                local scene = LoadScene("desolation/assets/scenes/game.json")
                 SetScene(scene)
             end;
             hoverEvent = function (element)

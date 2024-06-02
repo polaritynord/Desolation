@@ -1,6 +1,6 @@
 local coreFuncs = require("coreFuncs")
 local json = require("engine.lib.json")
-local consoleFuncs = require("fdh.console_funcs")
+local consoleFuncs = require("desolation.console_funcs")
 
 local devConsole = {}
 
@@ -33,7 +33,7 @@ function devConsole:load()
     ui.alpha = 0
 
     --Load help descriptions
-    console.helpTexts = love.filesystem.read("fdh/assets/console_help_texts.json")
+    console.helpTexts = love.filesystem.read("desolation/assets/console_help_texts.json")
     console.helpTexts = json.decode(console.helpTexts)
     --Variables
     console.open = false
