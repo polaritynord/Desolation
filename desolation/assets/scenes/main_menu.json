@@ -34,6 +34,11 @@
                 [
                     "keysMenu",
                     ["UIComponent", "desolation/components/ui/alt_menus/keys_menu"]
+                ],
+
+                [
+                    "gameplayMenu",
+                    ["UIComponent", "desolation/components/ui/alt_menus/gameplay_menu"]
                 ]
             ]
         ],

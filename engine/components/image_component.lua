@@ -5,7 +5,7 @@ local imageComponent = {}
 function imageComponent.new(parent, source)
     local component = {
         parent = parent;
-        source = source or Assets.images.icon;
+        source = source or Assets.images.missingTexture;
         layer = 1;
         color = {1, 1, 1, 1};
     }

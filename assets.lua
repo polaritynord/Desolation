@@ -30,6 +30,7 @@ function assets.load()
         icon = love.graphics.newImage("engine/assets/icon.png");
         iconTransparent = love.graphics.newImage("engine/assets/icon_transparent.png");
         logo = love.graphics.newImage("desolation/assets/images/eh_logo.png");
+        missingTexture = love.graphics.newImage("engine/assets/missing_texture.png")
     }
 
     assets.fonts = {}

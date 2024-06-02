@@ -11,11 +11,19 @@ function settings:load()
     ui.languages = {"en", "tr"}
 
     --Element creation
+    ui.gameplayButton = ui:newTextButton(
+        {
+            buttonText = Loca.settingsGameplayButton;
+            buttonTextSize = 30;
+            position = {0, 200};
+            clickEvent = function() s.menu = "gameplay" end;
+        }
+    )
     ui.videoButton = ui:newTextButton(
         {
             buttonText = Loca.settingsVideoButton;
             buttonTextSize = 30;
-            position = {0, 200};
+            position = {0, 240};
             clickEvent = function() s.menu = "video" end;
         }
     )
@@ -23,7 +31,7 @@ function settings:load()
         {
             buttonText = Loca.settingsAudioButton;
             buttonTextSize = 30;
-            position = {0, 240};
+            position = {0, 280};
             clickEvent = function() s.menu = "audio" end;
         }
     )
@@ -31,7 +39,7 @@ function settings:load()
         {
             buttonText = Loca.settingsKeysButton;
             buttonTextSize = 30;
-            position = {0, 280};
+            position = {0, 320};
             clickEvent = function() s.menu = "keys" end;
         }
     )
@@ -39,7 +47,7 @@ function settings:load()
         {
             buttonText = "Language: EN";
             buttonTextSize = 30;
-            position = {0, 320};
+            position = {0, 360};
             clickEvent = function()
                 local i = table.contains(ui.languages, Settings.language, true) + 1
                 if i > #ui.languages then i = 1 end

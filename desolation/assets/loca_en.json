@@ -6,6 +6,7 @@
     "aboutButton": "About",
     "changelogButton": "Changelog",
     "quitButton": "Quit",
+    "settingsGameplayButton": "Gameplay",
     "settingsVideoButton": "Video",
     "settingsAudioButton": "Audio",
     "settingsKeysButton": "Keys",
