@@ -5,6 +5,7 @@ local particleComponent = {}
 function particleComponent.new(parent, particleUpdate)
     local component = {
         parent = parent;
+        name = "particleComponent";
         particles = {};
         enabled = true;
     }

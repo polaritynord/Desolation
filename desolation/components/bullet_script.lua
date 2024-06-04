@@ -1,6 +1,6 @@
 local imageComponent = require("engine.components.image_component")
 
-local bulletScript = {}
+local bulletScript = ENGINE_COMPONENTS.scriptComponent.new()
 
 function bulletScript:load()
     local bullet = self.parent

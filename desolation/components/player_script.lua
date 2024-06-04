@@ -5,7 +5,7 @@ local bulletScript = require("desolation.components.bullet_script")
 local particleFuncs = require("desolation.particle_funcs")
 local object = require("engine.object")
 
-local playerScript = {}
+local playerScript = ENGINE_COMPONENTS.scriptComponent.new()
 
 function playerScript:movement(delta, player)
     local speed = GetGlobal("p_speed")
@@ -161,8 +161,9 @@ function playerScript:shootingWeapon(delta, player)
         bullet.position[1] = player.position[1] + math.cos(player.rotation)*weapon.bulletOffset
         bullet.position[2] = player.position[2] + math.sin(player.rotation)*weapon.bulletOffset
         bullet.rotation = player.rotation
-        bullet.script = table.new(bulletScript)
-        bullet.script.parent = bullet
+        bullet:addComponent(table.new(bulletScript))
+        --bullet.script = table.new(bulletScript)
+        --bullet.script.parent = bullet
         bullet.script:load()
         CurrentScene.bullets:addChild(bullet)
     end

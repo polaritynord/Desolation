@@ -1,4 +1,4 @@
-local cameraController = {}
+local cameraController = ENGINE_COMPONENTS.scriptComponent.new()
 
 function cameraController:movement(delta, camera, player)
     if GetGlobal("freecam") < 1 then

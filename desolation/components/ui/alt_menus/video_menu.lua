@@ -1,4 +1,4 @@
-local videoMenu = {}
+local videoMenu = ENGINE_COMPONENTS.scriptComponent.new()
 
 function videoMenu:load()
     local video = self.parent

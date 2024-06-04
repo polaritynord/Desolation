@@ -79,13 +79,12 @@ local function addObjectToScene(instance, v, _isScene)
         --Check if component is an engine comp.
         if table.contains(ENGINE_COMPONENT_NAMES, compName) then
             newComp = ENGINE_COMPONENTS[compName].new(newObj)
-            newComp.parent = newObj
-            newObj[compName] = newComp
+            newObj:addComponent(newComp)
         else
             --Import script component
             newComp = dofile(compName .. ".lua")
-            newComp.parent = newObj
-            newObj.script = newComp
+            newComp.name = "script"
+            newObj:addComponent(newComp)
         end
     end
     --Add children objects

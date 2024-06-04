@@ -5,6 +5,7 @@ local imageComponent = {}
 function imageComponent.new(parent, source)
     local component = {
         parent = parent;
+        name = "imageComponent";
         source = source or Assets.images.missingTexture;
         layer = 1;
         color = {1, 1, 1, 1};

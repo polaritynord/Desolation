@@ -2,7 +2,7 @@ local imageComponent = require("engine.components.image_component")
 local object = require("engine.object")
 local ammoItemScript = require("desolation.components.item_script")
 
-local mapCreator = {}
+local mapCreator = ENGINE_COMPONENTS.scriptComponent.new()
 
 function mapCreator:load()
     GamePaused = false

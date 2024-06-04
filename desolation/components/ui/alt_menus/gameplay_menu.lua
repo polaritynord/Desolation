@@ -1,4 +1,4 @@
-local gameplayMenu = {}
+local gameplayMenu = ENGINE_COMPONENTS.scriptComponent.new()
 
 function gameplayMenu:load()
     local gameplay = self.parent

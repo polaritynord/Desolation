@@ -10,6 +10,7 @@ local UIComponent = {}
 
 function UIComponent:new(parent)
     local instance = {
+        name = "UIComponent";
         parent = parent;
         elements = {};
         enabled = true;

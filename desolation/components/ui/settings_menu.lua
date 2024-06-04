@@ -1,6 +1,6 @@
 local json = require("engine.lib.json")
 
-local settings = {}
+local settings = ENGINE_COMPONENTS.scriptComponent.new()
 
 function settings:load()
     local s = self.parent

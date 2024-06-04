@@ -17,14 +17,26 @@ function object.new(parent)
         self[obj.name] = obj
     end
 
+    function o:addComponent(comp)
+        comp.parent = self
+        self.components[#self.components+1] = comp
+        self[comp.name] = comp
+    end
+
     function o:load()
-        if self.script then self.script:load() end
+        for _, component in ipairs(self.components) do
+            if component.load then component:load() end
+        end
+        --if self.script then self.script:load() end
     end
 
     function o:update(delta)
-        if self.script and self.script.update then self.script:update(delta) end
-        if self.UIComponent then self.UIComponent:update(delta) end
-        if self.particleComponent then self.particleComponent:update(delta) end
+        --if self.script and self.script.update then self.script:update(delta) end
+        --if self.UIComponent then self.UIComponent:update(delta) end
+        --if self.particleComponent then self.particleComponent:update(delta) end
+        for _, v in ipairs(self.components) do
+            if v.update then v:update(delta) end
+        end
         for _, v in ipairs(self.tree) do
             v:update(delta)
         end

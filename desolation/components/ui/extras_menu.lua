@@ -1,4 +1,4 @@
-local extrasMenu = {}
+local extrasMenu = ENGINE_COMPONENTS.scriptComponent.new()
 
 function extrasMenu:load()
     local menu = self.parent

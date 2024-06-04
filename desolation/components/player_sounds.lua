@@ -1,5 +1,6 @@
 local coreFuncs = require "coreFuncs"
-local playerSounds = {}
+
+local playerSounds = ENGINE_COMPONENTS.scriptComponent.new()
 
 function playerSounds:load()
     self.stepTimer = 0

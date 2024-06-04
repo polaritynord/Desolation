@@ -1,5 +1,5 @@
 local coreFuncs = require "coreFuncs"
-local hud = {}
+local hud = ENGINE_COMPONENTS.scriptComponent.new()
 
 function hud:load()
     local ui = self.parent.UIComponent

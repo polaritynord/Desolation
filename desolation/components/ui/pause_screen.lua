@@ -2,7 +2,7 @@ local json = require("engine.lib.json")
 
 local clickEvents = require("desolation.button_clickevents")
 
-local pauseScreen = {}
+local pauseScreen = ENGINE_COMPONENTS.scriptComponent.new()
 
 function pauseScreen:load()
     local ui = self.parent.UIComponent

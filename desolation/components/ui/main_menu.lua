@@ -1,6 +1,6 @@
 local clickEvents = require("desolation.button_clickevents")
 
-local mainMenu = {}
+local mainMenu = ENGINE_COMPONENTS.scriptComponent.new()
 
 function mainMenu:load()
     local ui = self.parent.UIComponent

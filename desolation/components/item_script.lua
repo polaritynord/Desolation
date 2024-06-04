@@ -1,4 +1,4 @@
-local itemScript = {}
+local itemScript = ENGINE_COMPONENTS.scriptComponent.new()
 
 function itemScript:load()
     local item = self.parent

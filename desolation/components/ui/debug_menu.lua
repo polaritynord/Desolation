@@ -1,6 +1,6 @@
 local coreFuncs = require("coreFuncs")
 
-local debugMenu = {}
+local debugMenu = ENGINE_COMPONENTS.scriptComponent.new()
 
 function debugMenu:load()
     local ui = self.parent.UIComponent

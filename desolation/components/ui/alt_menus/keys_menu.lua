@@ -1,4 +1,4 @@
-local keysMenu = {}
+local keysMenu = ENGINE_COMPONENTS.scriptComponent.new()
 
 function keysMenu:load()
     local keys = self.parent

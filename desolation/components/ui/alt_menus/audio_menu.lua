@@ -1,4 +1,4 @@
-local audioMenu = {}
+local audioMenu = ENGINE_COMPONENTS.scriptComponent.new()
 
 function audioMenu:load()
     local audio = self.parent

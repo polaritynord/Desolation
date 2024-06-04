@@ -1,6 +1,6 @@
 local coreFuncs = require("coreFuncs")
 
-local weaponItem = {}
+local weaponItem = ENGINE_COMPONENTS.scriptComponent.new()
 
 function weaponItem:movement(delta, item)
     local itemPos = item.position

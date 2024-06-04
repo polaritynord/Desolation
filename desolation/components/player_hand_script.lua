@@ -1,4 +1,4 @@
-local playerHandScript = {}
+local playerHandScript = ENGINE_COMPONENTS.scriptComponent.new()
 
 function playerHandScript:load()
     local hand = self.parent

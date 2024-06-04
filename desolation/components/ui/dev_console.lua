@@ -2,7 +2,7 @@ local coreFuncs = require("coreFuncs")
 local json = require("engine.lib.json")
 local consoleFuncs = require("desolation.console_funcs")
 
-local devConsole = {}
+local devConsole = ENGINE_COMPONENTS.scriptComponent.new()
 
 function devConsole:readCommandsFromInput(commandInput, secondaryJoin)
     local i = 1

@@ -1,4 +1,4 @@
-local intro = {}
+local intro = ENGINE_COMPONENTS.scriptComponent.new()
 
 function intro:load()
     local ui = self.parent.UIComponent

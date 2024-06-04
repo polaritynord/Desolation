@@ -1,4 +1,4 @@
-local mouseSensivity = {}
+local mouseSensivity = ENGINE_COMPONENTS.scriptComponent.new()
 
 function mouseSensivity:load()
     self.oldX, self.oldY = love.mouse.getPosition()
