@@ -2,6 +2,7 @@ local utf8 = require("utf8")
 local json  = require("engine.lib.json")
 local coreFuncs = require("coreFuncs")
 local startupManager = require("engine.startup_manager")
+local moonshine = require("engine.lib.moonshine")
 
 local fullscreen = false
 local cursors = {
@@ -61,10 +62,12 @@ function love.keypressed(key, unicode)
     -- Fullscreen key
     if table.contains(InputManager:getKeys("fullscreen"), key) then
         fullscreen = not fullscreen
+        --love.window.setMode(love.window.getDesktopDimensions())
         love.window.setFullscreen(fullscreen, "desktop")
+        --love.window.setFullscreen(fullscreen, "desktop")
         -- Set window dimensions to default
-        if not fullscreen and false then
-         love.window.setMode(960, 540, {resizable=true}) end
+        --if not fullscreen and false then
+        -- love.window.setMode(960, 540, {resizable=true}) end
     end
 
     --Pause key (not devConsoleUI.takingInput)
@@ -177,6 +180,8 @@ function love.load()
     love.keyboard.setKeyRepeat(true)
     InputManager:loadBindingFile()
     startupManager:load()
+
+    effect = moonshine(moonshine.effects.vignette)
 end
 
 function love.update(delta)
@@ -189,5 +194,7 @@ end
 
 function love.draw()
     if not CurrentScene then return end
-    CurrentScene:draw()
+    effect(function ()
+        CurrentScene:draw()
+    end)
 end

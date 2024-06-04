@@ -55,13 +55,18 @@ function scene.new()
             for _, v in ipairs(self.particleLayer) do
                 v:draw()
             end
-            --Draw UI
-            love.graphics.push()
-                love.graphics.scale(ScreenWidth/960, ScreenHeight/540)
-                for _, v in ipairs(self.uiLayer) do
-                    v:draw()
-                end
-            love.graphics.pop()
+        love.graphics.pop()
+        --Draw UI
+        self:drawUI()
+    end
+
+    function s:drawUI()
+        love.graphics.push()
+        love.graphics.scale(1, 1)
+        --love.graphics.scale(ScreenWidth/960, ScreenHeight/540)
+        for _, v in ipairs(self.uiLayer) do
+            v:draw()
+        end
         love.graphics.pop()
     end
 

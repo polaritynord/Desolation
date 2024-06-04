@@ -5,6 +5,7 @@ local particleFuncs = require("desolation.particle_funcs")
 local object = require("engine.object")
 local itemEventFuncs = require("desolation.components.item.item_event_funcs")
 local itemScript = require("desolation.components.item.item_script")
+local moonshine = require("engine.lib.moonshine")
 
 local playerScript = ENGINE_COMPONENTS.scriptComponent.new()
 

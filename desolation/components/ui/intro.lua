@@ -1,3 +1,5 @@
+local moonshine = require("engine.lib.moonshine")
+
 local intro = ENGINE_COMPONENTS.scriptComponent.new()
 
 function intro:load()
