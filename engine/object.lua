@@ -21,7 +21,6 @@ function object.new(parent)
         comp.parent = self
         self.components[#self.components+1] = comp
         self[comp.name] = comp
-        --if comp.load then comp:load() end
     end
 
     function o:load()

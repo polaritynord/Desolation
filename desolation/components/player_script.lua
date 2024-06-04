@@ -1,10 +1,10 @@
 local coreFuncs = require("coreFuncs")
 local weaponManager = require("desolation.weapon_manager")
-local weaponItemScript = require("desolation.components.weapon_item_script")
 local bulletScript = require("desolation.components.bullet_script")
 local particleFuncs = require("desolation.particle_funcs")
 local object = require("engine.object")
 local itemEventFuncs = require("desolation.components.item.item_event_funcs")
+local itemScript = require("desolation.components.item.item_script")
 
 local playerScript = ENGINE_COMPONENTS.scriptComponent.new()
 
@@ -99,8 +99,10 @@ function playerScript:weaponDropping(player)
     local itemInstance = object.new(CurrentScene.items)
     itemInstance.name = "weapon"
     itemInstance.weaponData = weapon.new()
-    itemInstance:addComponent(weaponItemScript.new())
-    itemInstance.script.pickupEvent = itemEventFuncs.weaponPickup
+    itemInstance:addComponent(table.new(itemScript))
+    itemInstance.pickupEvent = itemEventFuncs.weaponPickup
+    itemInstance.script:load()
+    itemInstance.imageComponent.source = Assets.images.weapons[string.lower(weapon.name) .. "Img"]
     --send current magAmmo to players ammunition because i couldnt get it to work
     player.inventory.ammunition[weapon.ammoType] = player.inventory.ammunition[weapon.ammoType] + weapon.magAmmo
 
@@ -206,7 +208,6 @@ end
 --Engine funcs
 function playerScript:load()
     local player = self.parent
-    local transform = player.transformComponent
     player.imageComponent.source = Assets.images.player.body
     player.scale = {4, 4}
     --Player variables

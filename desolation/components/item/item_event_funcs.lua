@@ -14,9 +14,14 @@ function itemEventFuncs.weaponPickup(item)
     end
     --continue the process if an empty slot exists
     if emptySlot < 1 then return end
-    self.gettingPickedUp = true
     --add self to player inventory
     weaponInv[emptySlot] = item.weaponData.new()
+end
+
+function itemEventFuncs.ammoPickup(item)
+    local player = CurrentScene.player
+    local ammoType = string.sub(item.name, 6, #item.name)
+    player.inventory.ammunition[ammoType] = player.inventory.ammunition[ammoType] + 20
 end
 
 return itemEventFuncs

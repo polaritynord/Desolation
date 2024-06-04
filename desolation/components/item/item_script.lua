@@ -3,10 +3,13 @@ local coreFuncs = require("coreFuncs")
 local itemScript = ENGINE_COMPONENTS.scriptComponent.new()
 
 function itemScript:load()
-    print("robert fuvking nelson")
     local item = self.parent
-    item:newComponent(ENGINE_COMPONENTS.imageComponent.new(item))
-    item.imageComponent.scale = {2, 2}
+    item:addComponent(ENGINE_COMPONENTS.imageComponent.new(item))
+    if item.name == "weapon" then
+        item.scale = {2, 2}
+    elseif string.sub(item.name, 1, 5) == "ammo_" then
+        item.scale = {0.35, 0.35}
+    end
 
     item.distanceToPlayer = 1000
     item.gettingPickedUp = false
@@ -18,6 +21,7 @@ end
 function itemScript:movement(delta)
     local item = self.parent
     local playerPos = CurrentScene.player.position
+    local itemPos = item.position
     if item.gettingPickedUp then
         itemPos[1] = itemPos[1] + (playerPos[1]-itemPos[1])*10*delta
         itemPos[2] = itemPos[2] + (playerPos[2]-itemPos[2])*10*delta
@@ -38,28 +42,29 @@ end
 
 function itemScript:update(delta)
     if GamePaused then return end
+    local item = self.parent
     --Remove self if getting picked up is complete
-    if self.distanceToPlayer < 10 and self.gettingPickedUp then
-        table.removeValue(CurrentScene.items.tree, self.parent)
+    if item.distanceToPlayer < 10 and item.gettingPickedUp then
+        table.removeValue(CurrentScene.items.tree, item)
         return
     end
-
-    local item = self.parent
+    
     local player = CurrentScene.player
     self:movement(delta)
     --Distance calculation
-    self.distanceToPlayer = coreFuncs.pointDistance(item.position, player.position)
+    item.distanceToPlayer = coreFuncs.pointDistance(item.position, player.position)
     --set sum colors & return if player is far away
     --TODO better indicator
-    if self.distanceToPlayer > 100 then
+    if item.distanceToPlayer > 100 then
         item.imageComponent.color = {1, 1, 1, 1}
         return
     end
     item.imageComponent.color = {1, 0, 0, 1}
     --Picking up
-    if InputManager:isPressed("interact") and not player.keyPressData["e"] and not self.gettingPickedUp then
+    if InputManager:isPressed("interact") and not player.keyPressData["e"] and not item.gettingPickedUp then
         if item.pickupEvent ~= nil then
             item.pickupEvent(item)
+            item.gettingPickedUp = true
         end
         --play sound effect
         local playerSounds = player.soundManager.script

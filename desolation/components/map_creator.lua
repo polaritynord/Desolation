@@ -15,9 +15,12 @@ function mapCreator:load()
     self.parent:addChild(tile)
     --Ammo test
     local ammo = object.new(CurrentScene.items)
+    ammo.position = {220, 100}
     ammo.name = "ammo_light"
-    ammo:addComponent(itemScript.new())
-    ammo.pickupEvent = nil
+    ammo:addComponent(table.new(itemScript))
+    ammo.pickupEvent = itemUpdateFuncs.ammoPickup
+    ammo.script:load()
+    ammo.imageComponent.source = Assets.images.items.ammoLight
     CurrentScene.items:addChild(ammo)
 end
 
