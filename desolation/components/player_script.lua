@@ -45,7 +45,7 @@ function playerScript:movement(delta, player)
 end
 
 function playerScript:pointTowardsMouse(player)
-    local mouseX, mouseY = love.mouse.getPosition()
+    local mouseX, mouseY = coreFuncs.getRelativeMousePosition()
     local pos = coreFuncs.getRelativePosition(player.position, CurrentScene.camera)
     local dx = mouseX-pos[1] ; local dy = mouseY-pos[2]
     player.rotation = math.atan2(dy, dx)

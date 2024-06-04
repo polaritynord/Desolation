@@ -62,8 +62,6 @@ function scene.new()
 
     function s:drawUI()
         love.graphics.push()
-        love.graphics.scale(1, 1)
-        --love.graphics.scale(ScreenWidth/960, ScreenHeight/540)
         for _, v in ipairs(self.uiLayer) do
             v:draw()
         end

@@ -34,7 +34,7 @@ moonshine.draw_shader = function(buffer, shader)
     love.graphics.setShader(shader)
   end
   love.graphics.draw(back)
-  love.graphics.scale(ScreenWidth/960, ScreenHeight/540) --added by me btw
+  love.graphics.scale(ScreenWidth/960, ScreenHeight/540)
 end
 
 moonshine.chain = function(w,h,effect)

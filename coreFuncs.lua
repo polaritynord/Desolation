@@ -14,8 +14,8 @@ end
 
 function coreFuncs.getRelativePosition(position, camera)
     local relativePos = {
-        (position[1]-camera.position[1]+(ScreenWidth/2)/camera.zoom)*camera.zoom,
-        (position[2]-camera.position[2]+(ScreenHeight/2)/camera.zoom)*camera.zoom
+        (position[1]-camera.position[1]+(ScreenWidth/2)/(ScreenWidth/960)/camera.zoom)*camera.zoom,
+        (position[2]-camera.position[2]+(ScreenHeight/2)/(ScreenHeight/540)/camera.zoom)*camera.zoom
     }
     return relativePos
 end
