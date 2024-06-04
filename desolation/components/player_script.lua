@@ -4,6 +4,7 @@ local weaponItemScript = require("desolation.components.weapon_item_script")
 local bulletScript = require("desolation.components.bullet_script")
 local particleFuncs = require("desolation.particle_funcs")
 local object = require("engine.object")
+local itemEventFuncs = require("desolation.components.item.item_event_funcs")
 
 local playerScript = ENGINE_COMPONENTS.scriptComponent.new()
 
@@ -93,23 +94,22 @@ end
 
 function playerScript:weaponDropping(player)
     local weapon = player.inventory.weapons[player.inventory.slot]
-    if not InputManager:isPressed("drop_weapon") or not weapon then return end
+    if not InputManager:isPressed("drop_weapon") or weapon == nil then return end
     --Create object data
     local itemInstance = object.new(CurrentScene.items)
-    local script = table.new(weaponItemScript)
+    itemInstance.name = "weapon"
     itemInstance.weaponData = weapon.new()
+    itemInstance:addComponent(weaponItemScript.new())
+    itemInstance.script.pickupEvent = itemEventFuncs.weaponPickup
     --send current magAmmo to players ammunition because i couldnt get it to work
     player.inventory.ammunition[weapon.ammoType] = player.inventory.ammunition[weapon.ammoType] + weapon.magAmmo
-    script.parent = itemInstance
-    itemInstance.script = script
-    script:load()
 
     --Set some variables
     itemInstance.position[1] = player.position[1]
     itemInstance.position[2] = player.position[2]
-    script.velocity = 550
-    script.rotVelocity = math.uniform(-1, 1)*math.pi*12 --TODO this could've been better
-    script.realRot = player.rotation
+    itemInstance.velocity = 550
+    itemInstance.rotVelocity = math.uniform(-1, 1)*math.pi*12 --TODO this could've been better
+    itemInstance.realRot = player.rotation
 
     CurrentScene.items:addChild(itemInstance)
     --Cancel reloading

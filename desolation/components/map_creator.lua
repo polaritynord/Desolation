@@ -1,6 +1,7 @@
 local imageComponent = require("engine.components.image_component")
 local object = require("engine.object")
-local ammoItemScript = require("desolation.components.item_script")
+local itemScript = require("desolation.components.item.item_script")
+local itemUpdateFuncs = require("desolation.components.item.item_event_funcs")
 
 local mapCreator = ENGINE_COMPONENTS.scriptComponent.new()
 
@@ -12,11 +13,11 @@ function mapCreator:load()
     tile.scale = {2, 2}
     tile.imageComponent.layer = 3
     self.parent:addChild(tile)
-    --Ammunition item test
-    local ammo = object.new(self)
-    ammo.script = table.new(ammoItemScript)
-    ammo.script.parent = ammo
-    ammo.script:load()
+    --Ammo test
+    local ammo = object.new(CurrentScene.items)
+    ammo.name = "ammo_light"
+    ammo:addComponent(itemScript.new())
+    ammo.pickupEvent = nil
     CurrentScene.items:addChild(ammo)
 end
 
