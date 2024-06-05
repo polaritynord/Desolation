@@ -1,4 +1,5 @@
 local json = require("engine.lib.json")
+local moonshine = require("engine.lib.moonshine")
 local object = require "engine.object"
 
 local scene = {}
@@ -10,6 +11,8 @@ function scene.new()
         uiLayer = {};
         particleLayer = {};
         particleCount = 0;
+        uiShader = nil;
+        gameShader = nil;
     }
 
     function s:addChild(obj)
@@ -18,6 +21,7 @@ function scene.new()
     end
 
     function s:load()
+        love.graphics.setBackgroundColor(self.backgroundColor)
         for _, v in ipairs(self.tree) do
             v:load()
             --Load child objects
@@ -39,33 +43,54 @@ function scene.new()
         self.uiLayer = {}
         self.particleLayer = {}
         self.particleCount = 0
-        love.graphics.setBackgroundColor(self.backgroundColor)
         love.graphics.push()
-            love.graphics.scale(self.camera.scale[1], self.camera.scale[2])
-            for _, v in ipairs(self.tree) do
-                v:draw()
-            end
-            --Draw image layers
-            for k = #self.drawLayers, 1, -1 do
-                for _, v in ipairs(self.drawLayers[k]) do
-                    v:draw()
-                end
-            end
-            --Draw particles
-            for _, v in ipairs(self.particleLayer) do
-                v:draw()
+            if self.gameShader == nil then
+                love.graphics.scale(ScreenWidth/960, ScreenHeight/540)
+                self:drawGame()
+            else
+                self.gameShader.draw(
+                    function ()
+                        self:drawGame()
+                    end
+                )
             end
         love.graphics.pop()
         --Draw UI
-        self:drawUI()
+        love.graphics.push()
+            if self.uiShader == nil then
+                love.graphics.scale(ScreenWidth/960, ScreenHeight/540)
+                self:drawUI()
+            else
+                self.uiShader.draw(
+                    function ()
+                        self:drawUI()
+                    end
+                )
+            end
+        love.graphics.pop()
     end
 
     function s:drawUI()
-        love.graphics.push()
         for _, v in ipairs(self.uiLayer) do
             v:draw()
         end
-        love.graphics.pop()
+    end
+
+    function s:drawGame()
+        love.graphics.scale(self.camera.scale[1], self.camera.scale[2])
+        for _, v in ipairs(self.tree) do
+            v:draw()
+        end
+        --Draw image layers
+        for k = #self.drawLayers, 1, -1 do
+            for _, v in ipairs(self.drawLayers[k]) do
+                v:draw()
+            end
+        end
+        --Draw particles
+        for _, v in ipairs(self.particleLayer) do
+            v:draw()
+        end
     end
 
     return s

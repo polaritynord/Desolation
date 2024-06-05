@@ -4,7 +4,7 @@ function gameplayMenu:load()
     local gameplay = self.parent
     local settings = gameplay.parent
     local ui = gameplay.UIComponent
-
+    --[[
     ui.sensivityText = ui:newTextLabel(
         {
             text = "Sensivity: ";
@@ -19,6 +19,7 @@ function gameplayMenu:load()
             value = (Settings.sensivity-1)/3;
         }
     )
+    ]]--
 
     ui.returnButton = ui:newTextButton(
         {
@@ -46,7 +47,6 @@ function gameplayMenu:update(delta)
     end
 
     if not ui.enabled then return end
-    Settings.sensivity = (ui.sensivitySlider.value*3)+1
 end
 
 return gameplayMenu

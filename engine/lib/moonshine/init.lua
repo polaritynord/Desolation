@@ -34,7 +34,6 @@ moonshine.draw_shader = function(buffer, shader)
     love.graphics.setShader(shader)
   end
   love.graphics.draw(back)
-  love.graphics.scale(ScreenWidth/960, ScreenHeight/540)
 end
 
 moonshine.chain = function(w,h,effect)
@@ -83,6 +82,7 @@ moonshine.chain = function(w,h,effect)
     -- present result
     love.graphics.setShader()
     love.graphics.setCanvas(canvas)
+    love.graphics.scale(ScreenWidth/960, ScreenHeight/540)
     love.graphics.draw(front,0,0)
 
     -- restore state

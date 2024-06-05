@@ -180,8 +180,6 @@ function love.load()
     love.keyboard.setKeyRepeat(true)
     InputManager:loadBindingFile()
     startupManager:load()
-    
-    ShaderEffects = moonshine(ScreenWidth, ScreenHeight, moonshine.effects.crt)
 end
 
 function love.update(delta)
@@ -190,15 +188,9 @@ function love.update(delta)
     CurrentScene:update(delta)
     updateUIOffset(delta)
     setMouseCursor()
-    --ShaderEffects.resize(ScreenWidth, ScreenHeight)
 end
 
 function love.draw()
     if not CurrentScene then return end
-    --love.graphics.scale(ScreenWidth/960, ScreenHeight/540)
-    ShaderEffects(
-        function ()
-            CurrentScene:draw()
-        end
-    )
+    CurrentScene:draw()
 end

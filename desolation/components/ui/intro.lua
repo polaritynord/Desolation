@@ -27,6 +27,7 @@ function intro:load()
     )
     self.timer = 0
     self.soundPlayed = false
+    CurrentScene.uiShader = moonshine.chain(960, 540, moonshine.effects.glow)
 end
 
 function intro:update(delta)
