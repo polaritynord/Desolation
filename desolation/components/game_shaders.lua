@@ -21,8 +21,19 @@ function gameShaders:updateVignette(chain)
     chain.vignette.opacity = 0.3/CurrentScene.camera.zoom
 end
 
+function gameShaders:updateCrt(chain)
+    --enable & disable
+    if GamePaused then
+        chain.disable("crt")
+        return
+    else
+        chain.enable("crt")
+    end
+end
+
 function gameShaders:load()
     CurrentScene.gameShader = moonshine.chain(960, 540, moonshine.effects.vignette)
+    --CurrentScene.uiShader = moonshine.chain(960, 540, moonshine.effects.crt)
 end
 
 function gameShaders:update(delta)
@@ -30,8 +41,9 @@ function gameShaders:update(delta)
     -- 1 frame more after scene changes, causing the game to crash!
     -- i simply hardcoded to make it ignore it but might research more later
     if CurrentScene.name ~= "Game" then return end
-    local chain = CurrentScene.gameShader
-    self:updateVignette(chain)
+    self:updateVignette(CurrentScene.gameShader)
+    --TODO it may be nice to have seperate shaders for uicomponents in the future
+    --self:updateCrt(CurrentScene.uiShader)
 end
 
 return gameShaders

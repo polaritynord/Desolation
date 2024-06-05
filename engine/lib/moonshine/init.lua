@@ -64,7 +64,7 @@ moonshine.chain = function(w,h,effect)
 
     -- draw scene to front buffer
     love.graphics.setCanvas((buffer())) -- parens are needed: take only front buffer
-    love.graphics.clear(love.graphics.getBackgroundColor())
+    love.graphics.clear()
     func(...)
 
     -- save more state

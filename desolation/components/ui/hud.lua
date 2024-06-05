@@ -1,8 +1,25 @@
 local coreFuncs = require "coreFuncs"
+local moonshine = require("engine.lib.moonshine")
+
 local hud = ENGINE_COMPONENTS.scriptComponent.new()
+
+function hud.customDraw(component)
+    if not component.enabled then return end
+    component.parent.crtShader.draw(
+        function ()
+            love.graphics.scale(960/ScreenWidth, 540/ScreenHeight)
+            --Draw elements
+            for _, v in ipairs(component.elements) do
+                if v.enabled then v:draw() end
+            end
+        end
+    )
+end
 
 function hud:load()
     local ui = self.parent.UIComponent
+    self.parent.crtShader = moonshine.chain(960, 540, moonshine.effects.crt)
+    ui.draw = self.customDraw
     --Left side (health etc.)
     ui.healthBar = ui:newImage(
         {
