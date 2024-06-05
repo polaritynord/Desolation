@@ -2,6 +2,22 @@ local coreFuncs = require "coreFuncs"
 
 local playerSounds = ENGINE_COMPONENTS.scriptComponent.new()
 
+function playerSounds:playStopSound(sound)
+    if sound == nil then return end
+    love.audio.stop(sound)
+    love.audio.play(sound)
+end
+
+function playerSounds:stopSound(sound)
+    if sound == nil then return end
+    love.audio.stop(sound)
+end
+
+function playerSounds:playSound(sound)
+    if sound == nil then return end
+    love.audio.play(sound)
+end
+
 function playerSounds:load()
     self.stepTimer = 0
     self.sounds = {

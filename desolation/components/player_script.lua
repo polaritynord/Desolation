@@ -77,7 +77,7 @@ function playerScript:slotSwitching(player)
         local weapon = player.inventory.weapons[player.inventory.previousSlot]
         if weapon then
             local playerSounds = player.soundManager.script
-            love.audio.stop(playerSounds.sounds.reload[weapon.name])
+            playerSounds:stopSound(playerSounds.sounds.reload[weapon.name])
         end
     end
 end
@@ -120,15 +120,14 @@ function playerScript:weaponDropping(player)
     if weapon then
         local playerSounds = player.soundManager.script
         if playerSounds.sounds.reload[weapon.name] then
-            love.audio.stop(playerSounds.sounds.reload[weapon.name])
+            playerSounds:stopSound(playerSounds.sounds.reload[weapon.name])
         end
     end
     --Get rid of the held weapon
     player.inventory.weapons[player.inventory.slot] = nil
     --play sound
     local playerSounds = player.soundManager.script
-    love.audio.stop(playerSounds.sounds.drop)
-    love.audio.play(playerSounds.sounds.drop)
+    playerSounds:stopSound(playerSounds.sounds.drop)
 end
 
 function playerScript:shootingWeapon(delta, player)
@@ -140,13 +139,12 @@ function playerScript:shootingWeapon(delta, player)
         player.shootTimer = 0
         --Check if there is ammo available in magazine
         if weapon.magAmmo < 1 then
-            love.audio.stop(playerSounds.sounds.shoot.empty)
+            playerSounds:stopSound(playerSounds.sounds.shoot.empty)
             return
         end
         --Fire weapon
         weapon.magAmmo = weapon.magAmmo - weapon.bulletPerShot
-        love.audio.stop(playerSounds.sounds.shoot[weapon.name])
-        love.audio.play(playerSounds.sounds.shoot[weapon.name])
+        playerSounds:playStopSound(playerSounds.sounds.shoot[weapon.name])
         --effects
         player.handOffset = -weapon.handRecoilIntensity
         local camera = CurrentScene.camera
@@ -198,8 +196,7 @@ function playerScript:reloadingWeapon(delta, player)
     else
         if InputManager:isPressed("reload") then
             local playerSounds = player.soundManager.script
-            love.audio.stop(playerSounds.sounds.reload[weapon.name])
-            love.audio.play(playerSounds.sounds.reload[weapon.name])
+            playerSounds:playStopSound(playerSounds.sounds.reload[weapon.name])
             player.reloading = true
             player.reloadTimer = 0
         end
@@ -241,6 +238,9 @@ function playerScript:load()
     player.inventory.weapons[1].magAmmo = 7
     player.inventory.ammunition.light = 78
     player.inventory.weapons[2] = weaponManager.Shotgun.new()
+    player.inventory.weapons[3] = weaponManager.AssaultRifle.new()
+
+    RunConsoleCommand("cheats 1")
 end
 
 function playerScript:update(delta)
