@@ -31,6 +31,32 @@ function gameplayMenu:load()
             toggled = Settings.screen_shake;
         }
     )
+    ui.alwaysSprintText = ui:newTextLabel(
+        {
+            text = "Always Sprint: ";
+            position = {0, 280};
+            size = 30;
+        }
+    )
+    ui.alwaysSprintBox = ui:newCheckbox(
+        {
+            position = {400, 295};
+            toggled = Settings.always_sprint;
+        }
+    )
+    ui.curvedHudText = ui:newTextLabel(
+        {
+            text = "Curved HUD: ";
+            position = {0, 320};
+            size = 30;
+        }
+    )
+    ui.curvedHudBox = ui:newCheckbox(
+        {
+            position = {400, 335};
+            toggled = Settings.curved_hud;
+        }
+    )
     --[[
     ui.sensivityText = ui:newTextLabel(
         {
@@ -76,6 +102,8 @@ function gameplayMenu:update(delta)
     if not ui.enabled then return end
     Settings.camera_sway = ui.cameraSwayBox.toggled
     Settings.screen_shake = ui.screenShakeBox.toggled
+    Settings.always_sprint = ui.alwaysSprintBox.toggled
+    Settings.curved_hud = ui.curvedHudBox.toggled
 end
 
 return gameplayMenu

@@ -5,15 +5,22 @@ local hud = ENGINE_COMPONENTS.scriptComponent.new()
 
 function hud.customDraw(component)
     if not component.enabled then return end
-    component.parent.crtShader.draw(
-        function ()
-            love.graphics.scale(960/ScreenWidth, 540/ScreenHeight)
-            --Draw elements
-            for _, v in ipairs(component.elements) do
-                if v.enabled then v:draw() end
+    if Settings.curved_hud then
+        component.parent.crtShader.draw(
+            function ()
+                love.graphics.scale(960/ScreenWidth, 540/ScreenHeight)
+                --Draw elements
+                for _, v in ipairs(component.elements) do
+                    if v.enabled then v:draw() end
+                end
             end
+        )
+    else
+        --Draw elements
+        for _, v in ipairs(component.elements) do
+            if v.enabled then v:draw() end
         end
-    )
+    end
 end
 
 function hud:load()
@@ -89,21 +96,21 @@ function hud:load()
         {
             position = {220, 510};
             size = {165, 75};
-            color = {0.4, 0.4, 0.4, 0};
+            color = {0.7, 0.7, 0.7, 0};
         }
     )
     ui.slot2Base = ui:newRectangle(
         {
             position = {395, 510};
             size = {165, 75};
-            color = {0.4, 0.4, 0.4, 0};
+            color = {0.7, 0.7, 0.7, 0};
         }
     )
     ui.slot3Base = ui:newRectangle(
         {
             position = {570, 510};
             size = {165, 75};
-            color = {0.4, 0.4, 0.4, 0};
+            color = {0.7, 0.7, 0.7, 0};
         }
     )
     ui.slot1Img = ui:newImage(
@@ -130,11 +137,19 @@ function hud:load()
             color = {1,1,1,0};
         }
     )
+    ui.acquireNotif = ui:newTextLabel(
+        {
+            text = "Pistol Acquired";
+            position = {-100, 50};
+            begin = "right";
+        }
+    )
     ui.slotSwitchTimer = 0
     ui.oldSlot = 1
 end
 
 function hud:update(delta)
+    if GamePaused then return end
     local ui = self.parent.UIComponent
     --Update monitors
     local player = CurrentScene.player

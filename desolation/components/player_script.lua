@@ -30,7 +30,7 @@ function playerScript:movement(delta, player)
     end
     player.moving = InputManager:isPressed({"move_left", "move_right", "move_up", "move_down"})
     --Sprinting
-    player.sprinting = InputManager:isPressed("sprint")
+    player.sprinting = (InputManager:isPressed("sprint") and not Settings.always_sprint) or (player.moving and Settings.always_sprint and not InputManager:isPressed("sprint"))
     if player.sprinting then
         speed = speed * 1.6
     end
@@ -127,7 +127,7 @@ function playerScript:weaponDropping(player)
     player.inventory.weapons[player.inventory.slot] = nil
     --play sound
     local playerSounds = player.soundManager.script
-    playerSounds:stopSound(playerSounds.sounds.drop)
+    playerSounds:playStopSound(playerSounds.sounds.drop)
 end
 
 function playerScript:shootingWeapon(delta, player)

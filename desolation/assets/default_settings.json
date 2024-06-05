@@ -11,5 +11,7 @@
     "weapon_flame_particles": true,
     "player_trail_particles": true,
     "camera_sway": true,
-    "screen_shake": true
+    "screen_shake": true,
+    "always_sprint": false,
+    "curved_hud": true
 }

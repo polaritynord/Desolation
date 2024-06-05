@@ -5,6 +5,7 @@ local itemScript = ENGINE_COMPONENTS.scriptComponent.new()
 function itemScript:load()
     local item = self.parent
     item:addComponent(ENGINE_COMPONENTS.imageComponent.new(item))
+    --other
     if item.name == "weapon" then
         item.scale = {2, 2}
     elseif string.sub(item.name, 1, 5) == "ammo_" then
@@ -48,7 +49,7 @@ function itemScript:update(delta)
         table.removeValue(CurrentScene.items.tree, item)
         return
     end
-    
+
     local player = CurrentScene.player
     self:movement(delta)
     --Distance calculation
@@ -68,8 +69,7 @@ function itemScript:update(delta)
         end
         --play sound effect
         local playerSounds = player.soundManager.script
-        love.audio.stop(playerSounds.sounds.acquire)
-        love.audio.play(playerSounds.sounds.acquire)
+        playerSounds:playStopSound(playerSounds.sounds.acquire)
     end
 end
 
