@@ -102,6 +102,8 @@ function videoMenu:update(delta)
     Settings.weapon_flame_particles = ui.weaponParticlesBox.toggled
     Settings.player_trail_particles = ui.playerTrailBox.toggled
     Settings.brightness = ui.brightnessSlider.value
+
+    love.window.setVSync(Settings.vsync)
 end
 
 return videoMenu

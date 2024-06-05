@@ -48,6 +48,20 @@ function audioMenu:load()
             value = Settings.vol_music;
         }
     )
+    ui.worldVolText = ui:newTextLabel(
+        {
+            text = "World Volume: ";
+            position = {0, 320};
+            size = 30;
+        }
+    )
+    ui.worldVolSlider = ui:newSlider(
+        {
+            position = {300, 325};
+            baseColor = {0.5, 0.5, 0.5, 1};
+            value = Settings.vol_world;
+        }
+    )
     ui.returnButton = ui:newTextButton(
         {
             buttonText = Loca.settingsReturnButton;
@@ -77,6 +91,7 @@ function audioMenu:update(delta)
     Settings.vol_master = ui.masterVolSlider.value
     Settings.vol_sfx = ui.sfxVolSlider.value
     Settings.vol_music = ui.musicVolSlider.value
+    Settings.vol_world = ui.worldVolSlider.value
 end
 
 return audioMenu

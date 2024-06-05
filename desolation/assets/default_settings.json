@@ -2,11 +2,14 @@
     "brightness": 1,
     "vol_master": 1,
     "vol_music": 1,
+    "vol_world": 1,
     "vol_sfx": 1,
     "vignette": 1,
     "sensivity": 1,
     "language": "en",
     "vsync": true,
     "weapon_flame_particles": true,
-    "player_trail_particles": true
+    "player_trail_particles": true,
+    "camera_sway": true,
+    "screen_shake": true
 }

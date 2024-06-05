@@ -180,6 +180,7 @@ function love.load()
     love.keyboard.setKeyRepeat(true)
     InputManager:loadBindingFile()
     startupManager:load()
+    love.window.setVSync(Settings.vsync)
 end
 
 function love.update(delta)
@@ -188,6 +189,7 @@ function love.update(delta)
     CurrentScene:update(delta)
     updateUIOffset(delta)
     setMouseCursor()
+    love.window.setVSync(Settings.vsync)
 end
 
 function love.draw()

@@ -147,13 +147,15 @@ function playerScript:shootingWeapon(delta, player)
         playerSounds:playStopSound(playerSounds.sounds.shoot[weapon.name])
         --effects
         player.handOffset = -weapon.handRecoilIntensity
-        local camera = CurrentScene.camera
-        local a = 1
-        if math.random() < 0.5 then a = -1 end
-        camera.position[1] = camera.position[1] + weapon.screenShakeIntensity*a
-        a = 1
-        if math.random() < 0.5 then a = -1 end
-        camera.position[2] = camera.position[2] + weapon.screenShakeIntensity*a
+        if Settings.screen_shake then
+            local camera = CurrentScene.camera
+            local a = 1
+            if math.random() < 0.5 then a = -1 end
+            camera.position[1] = camera.position[1] + weapon.screenShakeIntensity*a
+            a = 1
+            if math.random() < 0.5 then a = -1 end
+            camera.position[2] = camera.position[2] + weapon.screenShakeIntensity*a
+        end
         --particles
         local shootParticles = player.particleComponent
         particleFuncs.createShootParticles(shootParticles, player.rotation)
@@ -247,6 +249,8 @@ function playerScript:update(delta)
     if GamePaused then return end
 
     local player = self.parent
+    player.imageComponent.color = {Settings.brightness, Settings.brightness, Settings.brightness, 1}
+
     self:movement(delta, player)
     self:pointTowardsMouse(player)
     self:slotSwitching(player)

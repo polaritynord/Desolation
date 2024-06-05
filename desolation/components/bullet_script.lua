@@ -12,6 +12,7 @@ end
 
 function bulletScript:update(delta)
     local bullet = self.parent
+    bullet.imageComponent.color = {Settings.brightness, Settings.brightness, Settings.brightness, 1}
     bullet.timer = bullet.timer + delta
     --Check for despawn
     if bullet.timer > bullet.lifetime then

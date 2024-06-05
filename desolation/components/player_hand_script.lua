@@ -11,6 +11,7 @@ function playerHandScript:update(delta)
     
     local hand = self.parent
     local player = hand.parent
+    hand.imageComponent.color = {Settings.brightness, Settings.brightness, Settings.brightness, 1}
     --Set image for the hand
     local src = Assets.images.player.handDefault
     if player.inventory.weapons[player.inventory.slot] then

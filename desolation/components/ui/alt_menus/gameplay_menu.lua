@@ -3,7 +3,34 @@ local gameplayMenu = ENGINE_COMPONENTS.scriptComponent.new()
 function gameplayMenu:load()
     local gameplay = self.parent
     local settings = gameplay.parent
+
     local ui = gameplay.UIComponent
+    ui.cameraSwayText = ui:newTextLabel(
+        {
+            text = "Camera Sway: ";
+            position = {0, 200};
+            size = 30;
+        }
+    )
+    ui.cameraSwayBox = ui:newCheckbox(
+        {
+            position = {400, 215};
+            toggled = Settings.camera_sway;
+        }
+    )
+    ui.screenShakeText = ui:newTextLabel(
+        {
+            text = "Screen Shake: ";
+            position = {0, 240};
+            size = 30;
+        }
+    )
+    ui.screenShakeBox = ui:newCheckbox(
+        {
+            position = {400, 255};
+            toggled = Settings.screen_shake;
+        }
+    )
     --[[
     ui.sensivityText = ui:newTextLabel(
         {
@@ -47,6 +74,8 @@ function gameplayMenu:update(delta)
     end
 
     if not ui.enabled then return end
+    Settings.camera_sway = ui.cameraSwayBox.toggled
+    Settings.screen_shake = ui.screenShakeBox.toggled
 end
 
 return gameplayMenu

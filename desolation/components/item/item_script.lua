@@ -56,10 +56,10 @@ function itemScript:update(delta)
     --set sum colors & return if player is far away
     --TODO better indicator
     if item.distanceToPlayer > 100 then
-        item.imageComponent.color = {1, 1, 1, 1}
+        item.imageComponent.color = {Settings.brightness, Settings.brightness, Settings.brightness, 1}
         return
     end
-    item.imageComponent.color = {1, 0, 0, 1}
+    item.imageComponent.color = {Settings.brightness, 0, 0, 1}
     --Picking up
     if InputManager:isPressed("interact") and not player.keyPressData["e"] and not item.gettingPickedUp then
         if item.pickupEvent ~= nil then

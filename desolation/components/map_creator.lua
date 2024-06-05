@@ -9,6 +9,7 @@ function mapCreator:load()
     GamePaused = false
     --Create the placeholder tile
     local tile = object.new(self)
+    tile.name = "tile"
     tile.imageComponent = imageComponent.new(tile, Assets.images.tiles.prototypeGreen)
     tile.scale = {2, 2}
     tile.imageComponent.layer = 3
@@ -22,6 +23,11 @@ function mapCreator:load()
     ammo.script:load()
     ammo.imageComponent.source = Assets.images.items.ammoLight
     CurrentScene.items:addChild(ammo)
+end
+
+function mapCreator:update(delta)
+    if GamePaused then return end
+    self.parent.tile.imageComponent.color = {Settings.brightness, Settings.brightness, Settings.brightness, 1}
 end
 
 return mapCreator
