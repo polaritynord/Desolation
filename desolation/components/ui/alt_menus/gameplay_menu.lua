@@ -7,7 +7,7 @@ function gameplayMenu:load()
     local ui = gameplay.UIComponent
     ui.cameraSwayText = ui:newTextLabel(
         {
-            text = "Camera Sway: ";
+            text = Loca.gameplayMenu.cameraSway;
             position = {0, 200};
             size = 30;
         }
@@ -20,7 +20,7 @@ function gameplayMenu:load()
     )
     ui.screenShakeText = ui:newTextLabel(
         {
-            text = "Screen Shake: ";
+            text = Loca.gameplayMenu.screenShake;
             position = {0, 240};
             size = 30;
         }
@@ -33,7 +33,7 @@ function gameplayMenu:load()
     )
     ui.alwaysSprintText = ui:newTextLabel(
         {
-            text = "Always Sprint: ";
+            text = Loca.gameplayMenu.alwaysSprint;
             position = {0, 280};
             size = 30;
         }
@@ -46,7 +46,7 @@ function gameplayMenu:load()
     )
     ui.curvedHudText = ui:newTextLabel(
         {
-            text = "Curved HUD: ";
+            text = Loca.gameplayMenu.curvedHud;
             position = {0, 320};
             size = 30;
         }

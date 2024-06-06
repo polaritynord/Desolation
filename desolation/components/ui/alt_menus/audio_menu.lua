@@ -8,7 +8,7 @@ function audioMenu:load()
 
     ui.masterVolText = ui:newTextLabel(
         {
-            text = "Master Volume: ";
+            text = Loca.audioMenu.masterVolume;
             position = {0, 200};
             size = 30;
         }
@@ -22,7 +22,7 @@ function audioMenu:load()
     )
     ui.sfxVolText = ui:newTextLabel(
         {
-            text = "SFX Volume: ";
+            text = Loca.audioMenu.sfxVolume;
             position = {0, 240};
             size = 30;
         }
@@ -36,7 +36,7 @@ function audioMenu:load()
     )
     ui.musicVolText = ui:newTextLabel(
         {
-            text = "Music Volume: ";
+            text = Loca.audioMenu.musicVolume;
             position = {0, 280};
             size = 30;
         }
@@ -50,7 +50,7 @@ function audioMenu:load()
     )
     ui.worldVolText = ui:newTextLabel(
         {
-            text = "World Volume: ";
+            text = Loca.audioMenu.worldVolume;
             position = {0, 320};
             size = 30;
         }

@@ -1,7 +1,7 @@
 {
     "mainMenu": {
         "campaign": "Hikaye Modu",
-        "extra": "Ek oyun Modlari",
+        "extra": "Ek Oyun Modlari",
         "achievements": "Basarimlar",
         "settings": "Ayarlar",
         "about": "Hakkinda",
@@ -24,5 +24,24 @@
     "extrasMenu": {
         "playground": "Oyun Alani",
         "playgroundDesc": "Ne halt yersen ye."
+    },
+    "gameplayMenu": {
+        "cameraSway": "Kamera Sallantisi: ",
+        "screenShake": "Ekran Sarsintisi: ",
+        "alwaysSprint": "Her Zaman Kos: ",
+        "curvedHud": "Bombeli Arayuz: "
+    },
+    "videoMenu": {
+        "vsync": "VSync: ",
+        "vignette": "Ekran Karartisi: ",
+        "brightness": "Parlaklik: ",
+        "weaponFlameParticles": "Silah Ates Parcaciklari: ",
+        "playerTrailParticles": "Oyuncu Iz Parcaciklari: "
+    },
+    "audioMenu": {
+        "masterVolume": "Ana Ses: ",
+        "sfxVolume": "Ses Efektleri: ",
+        "musicVolume": "Muzik Sesi: ",
+        "worldVolume": "Dunya Sesi: "
     }
 }

@@ -7,7 +7,7 @@ function videoMenu:load()
 
     ui.vsyncText = ui:newTextLabel(
         {
-            text = "VSync: ";
+            text = Loca.videoMenu.vsync;
             position = {0, 200};
             size = 30;
         }
@@ -20,7 +20,7 @@ function videoMenu:load()
     )
     ui.vignetteText = ui:newTextLabel(
         {
-            text = "Vignette: ";
+            text = Loca.videoMenu.vignette;
             position = {0, 240};
             size = 30;
         }
@@ -33,7 +33,7 @@ function videoMenu:load()
     )
     ui.brightnessText = ui:newTextLabel(
         {
-            text = "Brightness: ";
+            text = Loca.videoMenu.brightness;
             position = {0, 280};
             size = 30;
         }
@@ -47,7 +47,7 @@ function videoMenu:load()
     )
     ui.weaponParticlesText = ui:newTextLabel(
         {
-            text = "Weapon Flame Particles: ";
+            text = Loca.videoMenu.weaponFlameParticles;
             position = {0, 320};
             size = 30;
         }
@@ -60,7 +60,7 @@ function videoMenu:load()
     )
     ui.playerTrailText = ui:newTextLabel(
         {
-            text = "Player Trail Particles: ";
+            text = Loca.videoMenu.playerTrailParticles;
             position = {0, 360};
             size = 30;
         }

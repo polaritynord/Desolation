@@ -24,5 +24,24 @@
     "extrasMenu": {
         "playground": "Playground",
         "playgroundDesc": "Do whatever you want."
+    },
+    "gameplayMenu": {
+        "cameraSway": "Camera Sway: ",
+        "screenShake": "Screen Shake: ",
+        "alwaysSprint": "Always Sprint: ",
+        "curvedHud": "Curved HUD: "
+    },
+    "videoMenu": {
+        "vsync": "VSync: ",
+        "vignette": "Vignette: ",
+        "brightness": "Brightness: ",
+        "weaponFlameParticles": "Weapon Flame Particles: ",
+        "playerTrailParticles": "Player Trail Particles: "
+    },
+    "audioMenu": {
+        "masterVolume": "Master Volume: ",
+        "sfxVolume": "SFX Volume: ",
+        "musicVolume": "Music Volume: ",
+        "worldVolume": "World Volume: "
     }
 }
