@@ -1,20 +1,28 @@
 {
-    "campaignButton": "Hikaye Modu",
-    "extraButton": "Ek Oyun Modlari",
-    "achievementsButton": "Basarimlar",
-    "settingsButton": "Ayarlar",
-    "aboutButton": "Hakkinda",
-    "changelogButton": "Guncellemeler",
-    "quitButton": "Oyundan Cik",
-    "settingsGameplayButton": "Oynanis",
-    "settingsVideoButton": "Video",
-    "settingsAudioButton": "Ses",
-    "settingsKeysButton": "Tuslar",
-    "settingsLangButton": "Dil: ",
-    "settingsReturnButton": "Geri Don",
-    "continueButton": "Devam Et",
-    "mainMenuButton": "Ana Menu",
-    "extrasPlaygroundButton": "Oyun Alani",
-    "extrasPlaygroundDesc": "Ne halt yiyorsan ye.",
-    "quitConfirmation": "Emin Misin?"
+    "mainMenu": {
+        "campaign": "Hikaye Modu",
+        "extra": "Ek oyun Modlari",
+        "achievements": "Basarimlar",
+        "settings": "Ayarlar",
+        "about": "Hakkinda",
+        "changelog": "Guncellemeler",
+        "quit": "Oyuncan Cik",
+        "quitConfirmation": "Emin Misin?"
+    },
+    "settings": {
+        "gameplay": "Oynanis",
+        "video": "Video",
+        "audio": "Ses",
+        "keys": "Tuslar",
+        "lang": "Dil: ",
+        "returnButton": "Geri Don"
+    },
+    "pauseScreen": {
+        "continue": "Devam Et",
+        "mainMenu": "Ana Menu"
+    },
+    "extrasMenu": {
+        "playground": "Oyun Alani",
+        "playgroundDesc": "Ne halt yersen ye."
+    }
 }

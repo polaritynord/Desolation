@@ -1,14 +1,14 @@
 local json = require "engine.lib.json"
 local clickEvents = {}
 
-function clickEvents.quitButtonClick(element)
-    if element.buttonText == Loca.quitButton then
+function clickEvents.quitButtonClick()
+    if element.buttonText == Loca.mainMenu.quit then
         if math.random() < 0.05 then
             element.textFont = "pryonkalsov"
             element.buttonText = "Obey the regime for the greater good"
         else
             element.textFont = "disposable-droid-italic"
-            element.buttonText = Loca.quitConfirmation
+            element.buttonText = Loca.mainMenu.quitConfirmation
         end
         element.confirmTimer = 2.4
     else

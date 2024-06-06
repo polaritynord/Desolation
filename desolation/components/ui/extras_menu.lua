@@ -7,7 +7,7 @@ function extrasMenu:load()
     --Element creation
     ui.playgroundButton = ui:newTextButton(
         {
-            buttonText = Loca.extrasPlaygroundButton;
+            buttonText = Loca.extrasMenu.playground;
             buttonTextSize = 30;
             position = {0, 200};
             clickEvent = function ()
@@ -15,7 +15,7 @@ function extrasMenu:load()
                 SetScene(scene)
             end;
             hoverEvent = function (element)
-                ui.modeDescription.text = Loca.extrasPlaygroundDesc
+                ui.modeDescription.text = Loca.extrasMenu.playgroundDesc
                 ui.modeDescription.position[2] = element.position[2]
             end;
         }
@@ -63,7 +63,7 @@ function extrasMenu:load()
     )
     ui.returnButton = ui:newTextButton(
         {
-            buttonText = Loca.settingsReturnButton;
+            buttonText = Loca.settings.returnButton;
             buttonTextSize = 30;
             position = {0, 440};
             clickEvent = function() menu.open = false end;

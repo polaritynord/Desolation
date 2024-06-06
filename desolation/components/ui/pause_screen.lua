@@ -18,7 +18,7 @@ function pauseScreen:load()
     ui.continueButton = ui:newTextButton(
         {
             position = {70, 200};
-            buttonText = Loca.continueButton;
+            buttonText = Loca.pauseScreen.continue;
             buttonTextSize = 30;
             clickEvent = function ()
                 GamePaused = false
@@ -30,7 +30,7 @@ function pauseScreen:load()
     ui.settingsButton = ui:newTextButton(
         {
             position = {70, 240};
-            buttonText = Loca.settingsButton;
+            buttonText = Loca.mainMenu.settings;
             buttonTextSize = 30;
             clickEvent = clickEvents.settingsButtonClick;
         }
@@ -38,7 +38,7 @@ function pauseScreen:load()
     ui.menuButton = ui:newTextButton(
         {
             position = {70, 280};
-            buttonText = Loca.mainMenuButton;
+            buttonText = Loca.pauseScreen.mainMenu;
             buttonTextSize = 30;
             clickEvent = function ()
                 love.filesystem.write("settings.json", json.encode(Settings))
@@ -50,7 +50,7 @@ function pauseScreen:load()
     ui.quitButton = ui:newTextButton(
         {
             position = {70, 320};
-            buttonText = Loca.quitButton;
+            buttonText = Loca.mainMenu.quit;
             buttonTextSize = 30;
             clickEvent = clickEvents.quitButtonClick;
         }
@@ -74,10 +74,10 @@ function pauseScreen:update(delta)
         ui.alpha = 0.4
     end
     --Are you sure text
-    if ui.quitButton.buttonText == Loca.quitConfirmation then
+    if ui.quitButton.buttonText == Loca.mainMenu.quitConfirmation then
         ui.quitButton.confirmTimer = ui.quitButton.confirmTimer - delta
         if ui.quitButton.confirmTimer < 0 then
-            ui.quitButton.buttonText = Loca.quitButton
+            ui.quitButton.buttonText = Loca.mainMenu.quitButton
             ui.quitButton.textFont = "disposable-droid"
         end
     end

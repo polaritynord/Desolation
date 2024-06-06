@@ -21,14 +21,14 @@ function mainMenu:load()
     ui.campaignButton = ui:newTextButton(
         {
             position = {70, 200};
-            buttonText = Loca.campaignButton;
+            buttonText = Loca.mainMenu.campaign;
             buttonTextSize = 30;
         }
     )
     ui.extrasButton = ui:newTextButton(
         {
             position = {70, 240};
-            buttonText = Loca.extraButton;
+            buttonText = Loca.mainMenu.extra;
             buttonTextSize = 30;
             clickEvent = clickEvents.extrasButtonClick;
         }
@@ -36,14 +36,14 @@ function mainMenu:load()
     ui.achievementsButton = ui:newTextButton(
         {
             position = {70, 280};
-            buttonText = Loca.achievementsButton;
+            buttonText = Loca.mainMenu.achievements;
             buttonTextSize = 30;
         }
     )
     ui.settingsButton = ui:newTextButton(
         {
             position = {70, 320};
-            buttonText = Loca.settingsButton;
+            buttonText = Loca.mainMenu.settings;
             buttonTextSize = 30;
             clickEvent = clickEvents.settingsButtonClick;
         }
@@ -51,21 +51,21 @@ function mainMenu:load()
     ui.aboutButton = ui:newTextButton(
         {
             position = {70, 360};
-            buttonText = Loca.aboutButton;
+            buttonText = Loca.mainMenu.about;
             buttonTextSize = 30;
         }
     )
     ui.changelogButton = ui:newTextButton(
         {
             position = {70, 400};
-            buttonText = Loca.changelogButton;
+            buttonText = Loca.mainMenu.changelog;
             buttonTextSize = 30;
         }
     )
     ui.quitButton = ui:newTextButton(
         {
             position = {70, 440};
-            buttonText = Loca.quitButton;
+            buttonText = Loca.mainMenu.quit;
             buttonTextSize = 30;
             clickEvent = clickEvents.quitButtonClick;
         }
@@ -105,10 +105,10 @@ function mainMenu:update(delta)
         ui.blackCover.color[4] = ui.blackCover.color[4] - 1.5*delta
     end
     --Are you sure text
-    if ui.quitButton.buttonText == Loca.quitConfirmation then
+    if ui.quitButton.buttonText == Loca.mainMenu.quitConfirmation then
         ui.quitButton.confirmTimer = ui.quitButton.confirmTimer - delta
         if ui.quitButton.confirmTimer < 0 then
-            ui.quitButton.buttonText = Loca.quitButton
+            ui.quitButton.buttonText = Loca.mainMenu.quit
             ui.quitButton.textFont = "disposable-droid"
         end
     end

@@ -13,7 +13,7 @@ function settings:load()
     --Element creation
     ui.gameplayButton = ui:newTextButton(
         {
-            buttonText = Loca.settingsGameplayButton;
+            buttonText = Loca.settings.gameplay;
             buttonTextSize = 30;
             position = {0, 200};
             clickEvent = function() s.menu = "gameplay" end;
@@ -21,7 +21,7 @@ function settings:load()
     )
     ui.videoButton = ui:newTextButton(
         {
-            buttonText = Loca.settingsVideoButton;
+            buttonText = Loca.settings.video;
             buttonTextSize = 30;
             position = {0, 240};
             clickEvent = function() s.menu = "video" end;
@@ -29,7 +29,7 @@ function settings:load()
     )
     ui.audioButton = ui:newTextButton(
         {
-            buttonText = Loca.settingsAudioButton;
+            buttonText = Loca.settings.audio;
             buttonTextSize = 30;
             position = {0, 280};
             clickEvent = function() s.menu = "audio" end;
@@ -37,7 +37,7 @@ function settings:load()
     )
     ui.keysButton = ui:newTextButton(
         {
-            buttonText = Loca.settingsKeysButton;
+            buttonText = Loca.settings.keys;
             buttonTextSize = 30;
             position = {0, 320};
             clickEvent = function() s.menu = "keys" end;
@@ -60,7 +60,7 @@ function settings:load()
     )
     ui.returnButton = ui:newTextButton(
         {
-            buttonText = Loca.settingsReturnButton;
+            buttonText = Loca.settings.returnButton;
             buttonTextSize = 30;
             position = {0, 440};
             clickEvent = function() s.open = false; s.menu = nil end;
@@ -83,7 +83,7 @@ function settings:update(delta)
     end
 
     if not s.open then return end
-    ui.languageButton.buttonText = Loca.settingsLangButton .. string.upper(Settings["language"])
+    ui.languageButton.buttonText = Loca.settings.lang .. string.upper(Settings["language"])
 end
 
 return settings

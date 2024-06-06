@@ -29,7 +29,7 @@ function keysMenu:load()
 
     ui.returnButton = ui:newTextButton(
         {
-            buttonText = Loca.settingsReturnButton;
+            buttonText = Loca.settings.returnButton;
             buttonTextSize = 30;
             position = {0, 160};
             clickEvent = function() settings.menu = nil end;

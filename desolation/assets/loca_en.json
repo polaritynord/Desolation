@@ -1,20 +1,28 @@
 {
-    "campaignButton": "Campaign",
-    "extraButton": "Extra Gamemodes",
-    "achievementsButton": "Achievements",
-    "settingsButton": "Settings",
-    "aboutButton": "About",
-    "changelogButton": "Changelog",
-    "quitButton": "Quit",
-    "settingsGameplayButton": "Gameplay",
-    "settingsVideoButton": "Video",
-    "settingsAudioButton": "Audio",
-    "settingsKeysButton": "Keys",
-    "settingsLangButton": "Language: ",
-    "settingsReturnButton": "Return",
-    "continueButton": "Continue",
-    "mainMenuButton": "Main Menu",
-    "extrasPlaygroundButton": "Playground",
-    "extrasPlaygroundDesc": "Do whatever you want.",
-    "quitConfirmation": "Are You Sure?"
+    "mainMenu": {
+        "campaign": "Campaign",
+        "extra": "Extra Gamemodes",
+        "achievements": "Achievements",
+        "settings": "Settings",
+        "about": "About",
+        "changelog": "Changelog",
+        "quit": "Quit",
+        "quitConfirmation": "Are You Sure?"
+    },
+    "settings": {
+        "gameplay": "Gameplay",
+        "video": "Video",
+        "audio": "Audio",
+        "keys": "Keys",
+        "lang": "Language: ",
+        "returnButton": "Return"
+    },
+    "pauseScreen": {
+        "continue": "Continue",
+        "mainMenu": "Main Menu"
+    },
+    "extrasMenu": {
+        "playground": "Playground",
+        "playgroundDesc": "Do whatever you want."
+    }
 }
