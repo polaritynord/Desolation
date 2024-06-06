@@ -147,7 +147,7 @@ function playerScript:shootingWeapon(delta, player)
         playerSounds:playStopSound(playerSounds.sounds.shoot[weapon.name])
         --effects
         player.handOffset = -weapon.handRecoilIntensity
-        if Settings.screen_shake then
+        if Settings.screen_shake and GetGlobal("freecam") < 1 then
             local camera = CurrentScene.camera
             local a = 1
             if math.random() < 0.5 then a = -1 end

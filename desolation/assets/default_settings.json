@@ -13,5 +13,6 @@
     "camera_sway": true,
     "screen_shake": true,
     "always_sprint": false,
-    "curved_hud": true
+    "curved_hud": true,
+    "first_time_playing": true
 }

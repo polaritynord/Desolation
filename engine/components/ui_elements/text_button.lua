@@ -14,14 +14,22 @@ function textButton.new()
         hoverOffset = 0;
         clickEvent = nil;
         hoverEvent = nil;
+        unhoverEvent = nil;
         textFont = "disposable-droid";
         enabled = true;
     }
 
     function instance.hoverEvent(element)
+        local delta = love.timer.getDelta()
+        element.hoverOffset = element.hoverOffset + (14-element.hoverOffset) * 27 * delta
         if element.mouseHovering then return end
         love.audio.setVolume(Settings.vol_master * Settings.vol_sfx)
         love.audio.play(Assets.sounds.sfx.buttonHover)
+    end
+
+    function instance.unhoverEvent(element)
+        local delta = love.timer.getDelta()
+        element.hoverOffset = element.hoverOffset + (0-element.hoverOffset) * 27 * delta
     end
 
     function instance:update(delta)
@@ -40,11 +48,10 @@ function textButton.new()
             self.mouseHovering = true
             self.mouseClicking = love.mouse.isDown(1)
             --TODO move these hovering stuff to hoverEvent?
-            self.hoverOffset = self.hoverOffset + (14-self.hoverOffset) * 27 * delta
         else
+            if self.unhoverEvent then self.unhoverEvent(self) end
             self.mouseHovering = false
             self.mouseClicking = false
-            self.hoverOffset = self.hoverOffset + (0-self.hoverOffset) * 27 * delta
         end
     end
 

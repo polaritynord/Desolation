@@ -53,6 +53,9 @@ function UIComponent:new(parent)
             instance2.rotation = attributes.rotation or instance2.rotation
             instance2.color = attributes.color or instance2.color
         end
+        if attributes.source == "none" then
+            instance2.source = nil
+        end
         instance2.parentComp = self
         self.elements[#self.elements+1] = instance2
         return instance2
@@ -67,6 +70,7 @@ function UIComponent:new(parent)
             instance2.buttonTextSize = attributes.buttonTextSize or instance2.buttonTextSize
             instance2.clickEvent = attributes.clickEvent or instance2.clickEvent
             instance2.hoverEvent = attributes.hoverEvent or instance2.hoverEvent
+            instance2.unhoverEvent = attributes.unhoverEvent or instance2.unhoverEvent
         end
         instance2.parentComp = self
         self.elements[#self.elements+1] = instance2

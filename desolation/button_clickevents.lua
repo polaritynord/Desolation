@@ -1,7 +1,7 @@
 local json = require "engine.lib.json"
 local clickEvents = {}
 
-function clickEvents.quitButtonClick()
+function clickEvents.quitButtonClick(element)
     if element.buttonText == Loca.mainMenu.quit then
         if math.random() < 0.05 then
             element.textFont = "pryonkalsov"

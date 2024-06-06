@@ -53,7 +53,7 @@ function settings:load()
                 if i > #ui.languages then i = 1 end
                 Settings.language = ui.languages[i]
                 love.filesystem.write("settings.json", json.encode(Settings))
-                --TODO restart game
+                --TODO restart game warning
                 love.load()
             end;
         }

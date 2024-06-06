@@ -5,22 +5,30 @@ local intro = ENGINE_COMPONENTS.scriptComponent.new()
 function intro:load()
     local ui = self.parent.UIComponent
     ui.alpha = 0
+    ui.logo = ui:newImage(
+        {
+            position = {480, 270}; --dunno if this is centered, if not, sorry perfectionists
+            source = Assets.images.logo;
+            scale = {3, 3};
+        }
+    )
     ui.polarity = ui:newImage(
         {
             position = {350, 270};
             scale = {0.3, 0.3};
+            source = "none";
         }
     )
     ui.title = ui:newTextLabel(
         {
-            text = "Made by \nPolarity";
+            text = "";--"Made by \nPolarity";
             position = {415, 220};
             size = 54;
         }
     )
     ui.titleNord = ui:newTextLabel(
         {
-            text = "nord";
+            text = "";--"nord";
             position = {595, 270};
             size = 36;
         }
@@ -38,22 +46,21 @@ function intro:update(delta)
         Assets.sounds.ost.intro:play()
         self.soundPlayed = true
     end
-    --Reveal da nord
+    --Reveal da desolation
     if self.timer > 1.6 and self.timer < 4.2 then
         ui.alpha = ui.alpha + 4*delta
         if ui.alpha > 1 then ui.alpha = 1 end
     end
-    --Hide da nord
+    --Hide da desolation
     if self.timer > 4.2 and self.timer < 5.5 then
         ui.alpha = ui.alpha - 4*delta
     end
     --Engine stuff
     if self.timer > 5.5 and self.timer < 8.1 then
-        ui.polarity.source = nil
-        ui.titleNord.text = "engine"
-        ui.title.text = "Powered by Polarity"
-        ui.title.position = {200, 220}
-        ui.titleNord.position = {653, 219}
+        ui.polarity.source = Assets.images.icon
+        ui.logo.source = nil
+        ui.title.text = "Made by\nPolarity"
+        ui.titleNord.text = "nord"
         ui.alpha = ui.alpha + 4*delta
     end
     --Hide everything else
