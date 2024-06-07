@@ -1,0 +1,19 @@
+{
+    "playerSpawnData": {
+        "position": [0, 0]
+    },
+    "walls": [],
+    "tiles": [
+        ["prototype_green", -1, -1],
+        ["prototype_green", 0, -1],
+        ["prototype_green", 1, -1],
+        ["prototype_green", -1, 0],
+        ["prototype_green", 0, 0],
+        ["prototype_green", 1, 0],
+        ["prototype_green", -1, 1],
+        ["prototype_green", 0, 1],
+        ["prototype_green", 1, 1]
+    ],
+    "props": [],
+    "items": []
+}

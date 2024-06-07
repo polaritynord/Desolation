@@ -13,6 +13,7 @@ function extrasMenu:load()
             clickEvent = function ()
                 local scene = LoadScene("desolation/assets/scenes/game.json")
                 SetScene(scene)
+                scene.mapCreator.script:loadMap("desolation/assets/maps/playground.json")
             end;
             hoverEvent = function (element)
                 ui.modeDescription.text = Loca.extrasMenu.playgroundDesc

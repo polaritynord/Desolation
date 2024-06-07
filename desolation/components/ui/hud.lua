@@ -137,13 +137,13 @@ function hud:load()
             color = {1,1,1,0};
         }
     )
-    ui.acquireNotif = ui:newTextLabel(
-        {
-            text = "Pistol Acquired";
-            position = {-100, 50};
-            begin = "right";
-        }
-    )
+    --ui.acquireNotif = ui:newTextLabel(
+    --    {
+    --        text = "Pistol Acquired";
+    --        position = {-100, 50};
+    --        begin = "right";
+    --    }
+    --)
     ui.slotSwitchTimer = 0
     ui.oldSlot = 1
 end
