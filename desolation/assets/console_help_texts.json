@@ -2,7 +2,7 @@
     "titles": [
         "cheats", "freecam", "p_speed", "s_vol_master", "s_vol_music", "s_vol_sfx",
         "g_vignette", "s_language", "noclip", "god", "invisible", "inf_stamina", "slippiness",
-        "assign", "run_script", "give_ammo", "clear", "give", "info", "bind"
+        "assign", "run_script", "give_ammo", "clear", "give", "info", "bind", "map", "maps"
     ],
 
     "descriptions": [
@@ -26,6 +26,8 @@
         "clear:\n\tClears the developer console history.",
         "give [weaponName]:\n\tReplaces the current slot of player with specified weapon.",
         "info:\n\tReturns some information about the game and the engine.",
-        "bind [inputName] [key]:\n\tChanges the primary input key of a binding."
+        "bind [inputName] [key]:\n\tChanges the primary input key of a binding.",
+        "map [mapName]:\n\tLoads a map file contained in \"assets/maps\".",
+        "maps:\n\tReturns a list of maps in game directory."
     ]
 }

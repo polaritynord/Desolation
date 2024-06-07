@@ -1,5 +1,5 @@
 {
-    "playerSpawnData": {
+    "playerData": {
         "position": [0, 0]
     },
     "walls": [],
@@ -15,5 +15,7 @@
         ["prototype_green", 1, 1]
     ],
     "props": [],
-    "items": []
+    "items": [
+        ["ammo_light", [150, 50], 40, [0.35, 0.35]]
+    ]
 }

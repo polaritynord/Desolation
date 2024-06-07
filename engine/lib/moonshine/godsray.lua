@@ -62,7 +62,7 @@ return function(moonshine)
     }]]
 
 
-  local setters, light_position = {}
+  local setters, light_position = {}, {}
 
   for _,k in ipairs{"exposure", "decay", "density", "weight"} do
     setters[k] = function(v)

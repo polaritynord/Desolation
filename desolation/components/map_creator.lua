@@ -23,6 +23,22 @@ function mapCreator:loadMap(path)
             CurrentScene.tiles:addChild(tile)
         end
     end
+    --load items
+    if data.items ~= nil then
+        for _, v in ipairs(data.items) do
+            local item = object.new(CurrentScene.itemss)
+            item.imageComponent = ENGINE_COMPONENTS.imageComponent.new(item, Assets.images.items[v[1]])
+            item:addComponent(table.new(itemScript))
+            item.script:load()
+            item.scale = v[4]
+            item.position = v[2]
+            item.rotation = math.pi*2 * (v[3]/360)
+            CurrentScene.items:addChild(item)
+        end
+    end
+    --player data
+    local player = CurrentScene.player
+    player.position = data.playerData.position
 end
 
 function mapCreator:load()

@@ -24,7 +24,7 @@ function assets.load()
             combat = love.mouse.newCursor("desolation/assets/images/cursor_combat.png", 12, 12);
         };
         items = {
-            ammoLight = love.graphics.newImage("desolation/assets/images/item_ammo_light.png");
+            ["ammo_light"] = love.graphics.newImage("desolation/assets/images/item_ammo_light.png");
         };
         bullet = love.graphics.newImage("desolation/assets/images/bullet.png");
         icon = love.graphics.newImage("engine/assets/icon.png");

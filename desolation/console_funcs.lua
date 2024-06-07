@@ -3,7 +3,7 @@ local weaponManager = require("desolation.weapon_manager")
 local consoleFunctions = {
     funcsList = {
         "assign", "run_script", "give_ammo", "clear", "help", "lorem",
-        "give", "info", "bind"
+        "give", "info", "bind", "map", "maps"
     };
 }
 
@@ -180,6 +180,41 @@ function consoleFunctions.bindScript(devConsole, command, i)
             InputManager.bindings.keyboard[k][2] = key
         end
     end
+end
+
+function consoleFunctions.mapScript(devConsole, command, i)
+    i = i + 1
+    --Skip spaces
+    while string.sub(command, i, i) == " " do
+        i = i + 1
+    end
+    --Read map name
+    local temp = ""
+    while string.sub(command, i, i) ~= " " do
+        --Check for incorrect writing
+        if i > #command then
+            break
+        end
+        temp = temp .. string.sub(command, i, i)
+        i = i + 1
+    end
+    --check if map exists
+    local path = string.lower(GAME_NAME) .. "/assets/maps/" .. temp .. ".json"
+    if love.filesystem.getInfo(path) == nil then
+        devConsole.script:log("couldn't find map \"" .. temp .. "\".")
+        return
+    end
+    local scene = LoadScene("desolation/assets/scenes/game.json")
+    SetScene(scene)
+    scene.mapCreator.script:loadMap(path)
+end
+
+function consoleFunctions.mapsScript(devConsole, command, i)
+    local files = love.filesystem.getDirectoryItems(string.lower(GAME_NAME) .. "/assets/maps")
+    for k = 1, #files do
+        devConsole.script:log(files[k])
+    end
+    devConsole.script:log("List of maps:")
 end
 
 return consoleFunctions

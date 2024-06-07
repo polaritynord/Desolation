@@ -4,13 +4,7 @@ local itemScript = ENGINE_COMPONENTS.scriptComponent.new()
 
 function itemScript:load()
     local item = self.parent
-    item:addComponent(ENGINE_COMPONENTS.imageComponent.new(item))
-    --other
-    if item.name == "weapon" then
-        item.scale = {2, 2}
-    elseif string.sub(item.name, 1, 5) == "ammo_" then
-        item.scale = {0.35, 0.35}
-    end
+    print("yoo")
 
     item.distanceToPlayer = 1000
     item.gettingPickedUp = false
