@@ -1,6 +1,7 @@
 {
     "playerData": {
-        "position": [0, 100]
+        "position": [0, 100],
+        "cameraPosition": [0, 100]
     },
     "walls": [
         ["test_gray", [0, -4], [12, 2]]
@@ -16,7 +17,15 @@
         ["prototype_green", 0, 1],
         ["prototype_green", 1, 1]
     ],
-    "props": [],
+    "props": [
+        [
+            "exp_text", [0, -256], 0,
+            [
+                ["text", "Hello"],
+                ["font", "disposable-droid"]
+            ]
+        ]
+    ],
     "items": [
         ["ammo_light", [150, 50], 40],
         ["weapon", [200, 100], 75, "Pistol"]

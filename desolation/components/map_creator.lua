@@ -12,7 +12,6 @@ function mapCreator:loadMap(path)
     --read & convert to lua table
     local data = love.filesystem.read(path)
     data = json.decode(data)
-    creator.mapData = {tiles={}}
     --load tiles
     if data.tiles ~= nil then
         for _, v in ipairs(data.tiles) do
@@ -32,7 +31,7 @@ function mapCreator:loadMap(path)
         items = json.decode(items)
         --load items
         for _, v in ipairs(data.items) do
-            local item = object.new(CurrentScene.itemss)
+            local item = object.new(CurrentScene.items)
             item.name = v[1]
             item:addComponent(table.new(itemScript))
             item.position = v[2]
@@ -59,32 +58,38 @@ function mapCreator:loadMap(path)
             CurrentScene.walls:addChild(wall)
         end
     end
+    --load props
+    if data.props ~= nil then
+        --load items list & decode it
+        local props = love.filesystem.read(GAME_NAME .. "/assets/props.json")
+        props = json.decode(props)
+        for _, v in ipairs(data.props) do
+            local prop = object.new(CurrentScene.props)
+            prop.name = v[1]
+            --load custom script file
+            if props[prop.name] ~= nil and props[prop.name].script ~= nil then
+                local comp = dofile(props[prop.name].script .. ".lua")
+                prop:addComponent(comp)
+                comp:load()
+            end
+            --custom variables
+            for _, k in ipairs(v[4]) do
+                prop[k[1]] = k[2]
+            end
+            prop.position = v[2]
+            prop.rotation = v[3]
+            CurrentScene.props:addChild(prop)
+        end
+    end
     --player data
     local player = CurrentScene.player
     player.position = data.playerData.position
+    CurrentScene.camera.position = data.playerData.cameraPosition
 end
 
 function mapCreator:load()
     local obj = self.parent
     GamePaused = false
-    obj.mapData = nil
-    --[[Create the placeholder tile
-    local tile = object.new(self)
-    tile.name = "tile"
-    tile.imageComponent = imageComponent.new(tile, Assets.images.tiles.prototypeGreen)
-    tile.scale = {2, 2}
-    tile.imageComponent.layer = 3
-    self.parent:addChild(tile)
-    --Ammo test
-    local ammo = object.new(CurrentScene.items)
-    ammo.position = {220, 100}
-    ammo.name = "ammo_light"
-    ammo:addComponent(table.new(itemScript))
-    ammo.pickupEvent = itemUpdateFuncs.ammoPickup
-    ammo.script:load()
-    ammo.imageComponent.source = Assets.images.items.ammoLight
-    CurrentScene.items:addChild(ammo)
-    ]]--
 end
 
 function mapCreator:update(delta)
