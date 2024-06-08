@@ -1,10 +1,15 @@
 local coreFuncs = require("coreFuncs")
+local itemEventFuncs = require("desolation.components.item.item_event_funcs")
 
 local itemScript = ENGINE_COMPONENTS.scriptComponent.new()
 
 function itemScript:load()
     local item = self.parent
-    print("yoo")
+    if item.name == "weapon" then
+        item.imageComponent = ENGINE_COMPONENTS.imageComponent.new(item, Assets.images.weapons[string.lower(item.weaponData.name) .. "Img"])
+    else
+        item.imageComponent = ENGINE_COMPONENTS.imageComponent.new(item, Assets.images.items[item.name])
+    end
 
     item.distanceToPlayer = 1000
     item.gettingPickedUp = false

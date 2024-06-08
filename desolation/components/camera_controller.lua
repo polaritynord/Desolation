@@ -1,3 +1,4 @@
+local coreFuncs = require "coreFuncs"
 local cameraController = ENGINE_COMPONENTS.scriptComponent.new()
 
 function cameraController:idleCamera(delta, camera, player)
@@ -21,8 +22,10 @@ end
 function cameraController:movement(delta, camera, player)
     if GetGlobal("freecam") < 1 then
         --Non-freecam (follow player around)
-        local dx = player.position[1] - camera.position[1]
-        local dy = player.position[2] - camera.position[2]
+        local peekX = coreFuncs.boolToNum(InputManager:isPressed("peek"))*math.cos(player.rotation)*300
+        local peekY = coreFuncs.boolToNum(InputManager:isPressed("peek"))*math.sin(player.rotation)*300
+        local dx = player.position[1]+peekX - camera.position[1]
+        local dy = player.position[2]+peekY - camera.position[2]
         camera.position[1] = camera.position[1] + dx*8*delta
         camera.position[2] = camera.position[2] + dy*8*delta
     else

@@ -99,6 +99,7 @@ function playerScript:weaponDropping(player)
     --Create object data
     local itemInstance = object.new(CurrentScene.items)
     itemInstance.name = "weapon"
+    itemInstance.scale = {2, 2}
     itemInstance.weaponData = weapon.new()
     itemInstance:addComponent(table.new(itemScript))
     itemInstance.pickupEvent = itemEventFuncs.weaponPickup

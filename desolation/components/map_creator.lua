@@ -1,7 +1,8 @@
 local object = require("engine.object")
 local itemScript = require("desolation.components.item.item_script")
-local itemUpdateFuncs = require("desolation.components.item.item_event_funcs")
+local itemEventFuncs = require("desolation.components.item.item_event_funcs")
 local json = require("engine.lib.json")
+local weaponManager = require("desolation.weapon_manager")
 
 local mapCreator = ENGINE_COMPONENTS.scriptComponent.new()
 
@@ -25,14 +26,23 @@ function mapCreator:loadMap(path)
     end
     --load items
     if data.items ~= nil then
+        --load items list & decode it
+        local items = love.filesystem.read(GAME_NAME .. "/assets/items.json")
+        items = json.decode(items)
+        --load items
         for _, v in ipairs(data.items) do
             local item = object.new(CurrentScene.itemss)
-            item.imageComponent = ENGINE_COMPONENTS.imageComponent.new(item, Assets.images.items[v[1]])
+            item.name = v[1]
             item:addComponent(table.new(itemScript))
-            item.script:load()
-            item.scale = v[4]
             item.position = v[2]
             item.rotation = math.pi*2 * (v[3]/360)
+            item.scale = items[item.name].scale
+            item.pickupEvent = itemEventFuncs[items[item.name].pickupEvent]
+            --weapon data
+            if item.name == "weapon" then
+                item.weaponData = weaponManager[v[4]].new()
+            end
+            item.script:load()
             CurrentScene.items:addChild(item)
         end
     end

@@ -1,0 +1,11 @@
+{
+    "ammo_light": {
+        "scale": [0.35, 0.35],
+        "pickupEvent": "ammoPickup"
+    },
+
+    "weapon": {
+        "scale": [2, 2],
+        "pickupEvent": "weaponPickup"
+    }
+}
