@@ -8,7 +8,10 @@ function assets.load()
             handWeapon = love.graphics.newImage("desolation/assets/images/player/hand_placeholder.png");
         };
         tiles = {
-            ["prototype_green"] = love.graphics.newImage("desolation/assets/images/texture_09.png");
+            prototype_green = love.graphics.newImage("desolation/assets/images/texture_09.png");
+        };
+        walls = {
+            test_gray = love.graphics.newImage("desolation/assets/images/test_gray.png");
         };
         ui = {
             healthBar = love.graphics.newImage("desolation/assets/images/hud/health_bar.png");

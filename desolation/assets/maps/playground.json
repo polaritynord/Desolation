@@ -1,8 +1,10 @@
 {
     "playerData": {
-        "position": [0, 0]
+        "position": [0, 100]
     },
-    "walls": [],
+    "walls": [
+        ["test_gray", [0, -4], [12, 2]]
+    ],
     "tiles": [
         ["prototype_green", -1, -1],
         ["prototype_green", 0, -1],

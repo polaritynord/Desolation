@@ -1,5 +1,4 @@
 local coreFuncs = require("coreFuncs")
-local itemEventFuncs = require("desolation.components.item.item_event_funcs")
 
 local itemScript = ENGINE_COMPONENTS.scriptComponent.new()
 

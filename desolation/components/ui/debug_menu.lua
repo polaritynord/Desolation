@@ -33,7 +33,7 @@ function debugMenu:update(delta)
                         "Memory Used(Excluding Love2D): " .. coreFuncs.roundDecimal(collectgarbage("count")/1024, 2) .. " MB"
                         .. "\nMouse Position: X=" .. mx .. " Y=" .. my .. "\nRelative Mouse Position: X=" .. rmx .. " Y=" .. rmy ..
                         "\nParticle Count: " .. CurrentScene.particleCount .. "\nItem Count: " .. #CurrentScene.items.tree ..
-                        "\nBullet Count: " .. #CurrentScene.bullets.tree
+                        "\nBullet Count: " .. #CurrentScene.bullets.tree .. "\nWall Count: " .. #CurrentScene.walls.tree
     ui.debugTextsRight.text = GAME_VERSION_STATE .. " " .. GAME_VERSION .. "\nPowered by " .. ENGINE_NAME .. " (Build " .. ENGINE_VERSION .. ")"
     --TODO additional debug info to add: particle count, humanoid count
 end

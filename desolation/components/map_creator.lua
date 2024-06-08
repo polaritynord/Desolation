@@ -1,5 +1,6 @@
 local object = require("engine.object")
 local itemScript = require("desolation.components.item.item_script")
+local wallScript = require("desolation.components.wall_script")
 local itemEventFuncs = require("desolation.components.item.item_event_funcs")
 local json = require("engine.lib.json")
 local weaponManager = require("desolation.weapon_manager")
@@ -44,6 +45,18 @@ function mapCreator:loadMap(path)
             end
             item.script:load()
             CurrentScene.items:addChild(item)
+        end
+    end
+    --load walls
+    if data.walls ~= nil then
+        for _, v in ipairs(data.walls) do
+            local wall = object.new(CurrentScene.walls)
+            wall.name = v[1]
+            wall:addComponent(table.new(wallScript))
+            wall.position = {v[2][1]*64, v[2][2]*64}
+            wall.scale = v[3]
+            wall.script:load()
+            CurrentScene.walls:addChild(wall)
         end
     end
     --player data
