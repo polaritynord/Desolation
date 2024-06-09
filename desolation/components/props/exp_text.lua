@@ -15,6 +15,11 @@ function expText:load()
     local prop = self.parent
     prop.imageComponent = ENGINE_COMPONENTS.imageComponent.new(prop)
     prop.imageComponent.draw = textDraw
+    --localization
+    if string.sub(prop.text, 1, 1) == "$" then
+        local t = string.sub(prop.text, 2, #prop.text)
+        prop.text = Loca.game[t]
+    end
 end
 
 function expText:update(delta)

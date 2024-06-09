@@ -4,7 +4,7 @@
         "cameraPosition": [0, 100]
     },
     "walls": [
-        ["test_gray", [0, -4], [12, 2]]
+        ["test_gray", [5, 0], [1, 1]]
     ],
     "tiles": [
         ["prototype_green", -1, -1],
@@ -21,7 +21,7 @@
         [
             "exp_text", [0, -256], 0,
             [
-                ["text", "Hello"],
+                ["text", "$playgroundWelcome"],
                 ["font", "disposable-droid"]
             ]
         ]

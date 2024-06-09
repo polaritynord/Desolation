@@ -66,15 +66,15 @@ function mapCreator:loadMap(path)
         for _, v in ipairs(data.props) do
             local prop = object.new(CurrentScene.props)
             prop.name = v[1]
+            --custom variables
+            for _, k in ipairs(v[4]) do
+                prop[k[1]] = k[2]
+            end
             --load custom script file
             if props[prop.name] ~= nil and props[prop.name].script ~= nil then
                 local comp = dofile(props[prop.name].script .. ".lua")
                 prop:addComponent(comp)
                 comp:load()
-            end
-            --custom variables
-            for _, k in ipairs(v[4]) do
-                prop[k[1]] = k[2]
             end
             prop.position = v[2]
             prop.rotation = v[3]

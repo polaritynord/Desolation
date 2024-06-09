@@ -63,11 +63,7 @@ function itemScript:update(delta)
     if InputManager:isPressed("interact") and not player.keyPressData["e"] and not item.gettingPickedUp then
         if item.pickupEvent ~= nil then
             item.pickupEvent(item)
-            item.gettingPickedUp = true
         end
-        --play sound effect
-        local playerSounds = player.soundManager.script
-        playerSounds:playStopSound(playerSounds.sounds.acquire)
     end
 end
 

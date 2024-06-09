@@ -43,5 +43,8 @@
         "sfxVolume": "Ses Efektleri: ",
         "musicVolume": "Muzik Sesi: ",
         "worldVolume": "Dunya Sesi: "
+    },
+    "game": {
+        "playgroundWelcome": "Bu sadece bir test. Lütfen sakin durun."
     }
 }

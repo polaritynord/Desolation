@@ -1,6 +1,7 @@
 {
     "playerData": {
-        "position": [100, 120]
+        "position": [100, 120],
+        "cameraPosition": [0, 100]
     },
     "walls": [],
     "tiles": [

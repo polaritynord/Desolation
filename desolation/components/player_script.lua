@@ -44,6 +44,23 @@ function playerScript:movement(delta, player)
     player.position[2] = player.position[2] + (player.velocity[2]*speed*delta)
 end
 
+function playerScript:collisionCheck(player)
+    if true then return end
+    --iterate through walls
+    local w, h = 48, 48
+    local playerPos = {player.position[1]-24, player.position[2]-24}
+    player.imageComponent.color = {1, 1, 1, 1}
+    for _, wall in ipairs(CurrentScene.walls.tree) do
+        local wallSize = {wall.scale[1]*64, wall.scale[2]*64}
+        if playerPos[1] < wall.position[1]+wallSize[1] and playerPos[1]+w < wall.position[1] and
+            playerPos[2] < wall.position[2]+wallSize[2] and playerPos[2]+h < wall.position[2] then
+            player.imageComponent.color = {0, 1, 0, 1}
+        else
+            
+        end
+    end
+end
+
 function playerScript:pointTowardsMouse(player)
     local mouseX, mouseY = coreFuncs.getRelativeMousePosition()
     local pos = coreFuncs.getRelativePosition(player.position, CurrentScene.camera)
@@ -253,6 +270,7 @@ function playerScript:update(delta)
     player.imageComponent.color = {Settings.brightness, Settings.brightness, Settings.brightness, 1}
 
     self:movement(delta, player)
+    self:collisionCheck(player)
     self:pointTowardsMouse(player)
     self:slotSwitching(player)
     self:doWalkingAnim(player)

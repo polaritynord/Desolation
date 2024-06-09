@@ -43,5 +43,8 @@
         "sfxVolume": "SFX Volume: ",
         "musicVolume": "Music Volume: ",
         "worldVolume": "World Volume: "
+    },
+    "game": {
+        "playgroundWelcome": "This is a testing. Please remain calm."
     }
 }
