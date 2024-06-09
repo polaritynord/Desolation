@@ -46,5 +46,8 @@
     },
     "game": {
         "playgroundWelcome": "This is a testing. Please remain calm."
+    },
+    "intro": {
+        "betaText": "This game is in early development. Everything is subject to change."
     }
 }

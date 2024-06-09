@@ -33,6 +33,13 @@ function intro:load()
             size = 36;
         }
     )
+    ui.beta = ui:newTextLabel(
+        {
+            text = "";
+            begin = "center";
+            position = {0, 480};
+        }
+    )
     self.timer = 0
     self.soundPlayed = false
     CurrentScene.uiShader = moonshine.chain(960, 540, moonshine.effects.glow)
@@ -61,6 +68,7 @@ function intro:update(delta)
         ui.logo.source = nil
         ui.title.text = "Made by\nPolarity"
         ui.titleNord.text = "nord"
+        ui.beta.text = Loca.intro.betaText
         ui.alpha = ui.alpha + 4*delta
     end
     --Hide everything else

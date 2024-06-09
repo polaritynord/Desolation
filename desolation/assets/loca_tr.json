@@ -46,5 +46,8 @@
     },
     "game": {
         "playgroundWelcome": "Bu sadece bir test. Lütfen sakin durun."
+    },
+    "intro": {
+        "betaText": "Bu oyun erken gelistirme asamasindadir. Her sey degisime aciktir."
     }
 }

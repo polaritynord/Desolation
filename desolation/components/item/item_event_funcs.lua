@@ -32,4 +32,26 @@ function itemEventFuncs.ammoPickup(item)
     playerSounds:playStopSound(playerSounds.sounds.acquire)
 end
 
+function itemEventFuncs.medkitPickup(item)
+    local player = CurrentScene.player
+    if player.health == 100 then return end
+    player.health = player.health + 25
+    if player.health > 100 then player.health = 100 end
+    --play sound (TODO: find a healing sound)
+    local playerSounds = player.soundManager.script
+    playerSounds:playStopSound(playerSounds.sounds.acquire)
+    item.gettingPickedUp = true
+end
+
+function itemEventFuncs.batteryPickup(item)
+    local player = CurrentScene.player
+    if player.armor == 100 then return end
+    player.armor = player.armor + 25
+    if player.armor > 100 then player.armor = 100 end
+    --play sound (TODO: find a healing sound)
+    local playerSounds = player.soundManager.script
+    playerSounds:playStopSound(playerSounds.sounds.acquire)
+    item.gettingPickedUp = true
+end
+
 return itemEventFuncs

@@ -29,6 +29,7 @@ function assets.load()
         items = {
             ammo_light = love.graphics.newImage("desolation/assets/images/item_ammo_light.png");
             medkit = love.graphics.newImage("desolation/assets/images/item_medkit.png");
+            battery = love.graphics.newImage("desolation/assets/images/item_battery.png");
         };
         bullet = love.graphics.newImage("desolation/assets/images/bullet.png");
         icon = love.graphics.newImage("engine/assets/icon.png");
