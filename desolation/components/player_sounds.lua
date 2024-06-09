@@ -26,6 +26,7 @@ function playerSounds:load()
         step = {grass = {}};
         shoot = {};
         reload = {};
+        hurt = {};
     }
     --Load footsteps
     for i = 1, 10 do
@@ -38,6 +39,10 @@ function playerSounds:load()
     --Item sfx
     self.sounds.acquire = love.audio.newSource("desolation/assets/sounds/acquire.wav", "static")
     self.sounds.drop = love.audio.newSource("desolation/assets/sounds/drop.wav", "static")
+    --Hurt sfx
+    for i = 1, 3 do
+        self.sounds.hurt[i] = love.audio.newSource("desolation/assets/sounds/hurt" .. i .. ".wav", "static")
+    end
 end
 
 function playerSounds:update(delta)

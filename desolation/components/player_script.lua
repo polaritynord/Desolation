@@ -55,8 +55,6 @@ function playerScript:collisionCheck(player)
         if playerPos[1] < wall.position[1]+wallSize[1] and playerPos[1]+w < wall.position[1] and
             playerPos[2] < wall.position[2]+wallSize[2] and playerPos[2]+h < wall.position[2] then
             player.imageComponent.color = {0, 1, 0, 1}
-        else
-            
         end
     end
 end

@@ -3,7 +3,7 @@ local weaponManager = require("desolation.weapon_manager")
 local consoleFunctions = {
     funcsList = {
         "assign", "run_script", "give_ammo", "clear", "help", "lorem",
-        "give", "info", "bind", "map", "maps"
+        "give", "info", "bind", "map", "maps", "hurtme", "hurtarmor"
     };
 }
 
@@ -215,6 +215,20 @@ function consoleFunctions.mapsScript(devConsole, command, i)
         devConsole.script:log(files[k])
     end
     devConsole.script:log("List of maps:")
+end
+
+function consoleFunctions.hurtmeScript(devConsole, command, i)
+    if CurrentScene.name ~= "Game" then return end
+    CurrentScene.player.health = CurrentScene.player.health - 20
+    local playerSounds = CurrentScene.player.soundManager.script
+    playerSounds:playStopSound(playerSounds.sounds.hurt[math.random(1, 3)])
+end
+
+function consoleFunctions.hurtarmorScript(devConsole, command, i)
+    if CurrentScene.name ~= "Game" then return end
+    CurrentScene.player.armor = CurrentScene.player.armor - 20
+    local playerSounds = CurrentScene.player.soundManager.script
+    playerSounds:playStopSound(playerSounds.sounds.hurt[math.random(1, 3)])
 end
 
 return consoleFunctions
