@@ -31,6 +31,7 @@ function videoMenu:load()
             toggled = Settings.vignette;
         }
     )
+    --[[
     ui.brightnessText = ui:newTextLabel(
         {
             text = Loca.videoMenu.brightness;
@@ -45,23 +46,24 @@ function videoMenu:load()
             value = Settings.brightness;
         }
     )
+        ]]--
     ui.weaponParticlesText = ui:newTextLabel(
         {
             text = Loca.videoMenu.weaponFlameParticles;
-            position = {0, 320};
+            position = {0, 280};
             size = 30;
         }
     )
     ui.weaponParticlesBox = ui:newCheckbox(
         {
-            position = {400, 375};
+            position = {400, 295};
             toggled = Settings.weapon_flame_particles;
         }
     )
     ui.playerTrailText = ui:newTextLabel(
         {
             text = Loca.videoMenu.playerTrailParticles;
-            position = {0, 360};
+            position = {0, 320};
             size = 30;
         }
     )
@@ -101,7 +103,7 @@ function videoMenu:update(delta)
     Settings.vignette = ui.vignetteBox.toggled
     Settings.weapon_flame_particles = ui.weaponParticlesBox.toggled
     Settings.player_trail_particles = ui.playerTrailBox.toggled
-    Settings.brightness = ui.brightnessSlider.value
+    --Settings.brightness = ui.brightnessSlider.value
 
     love.window.setVSync(Settings.vsync)
 end

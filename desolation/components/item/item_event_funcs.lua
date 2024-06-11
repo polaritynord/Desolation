@@ -40,6 +40,7 @@ function itemEventFuncs.medkitPickup(item)
     --play sound (TODO: find a healing sound)
     local playerSounds = player.soundManager.script
     playerSounds:playStopSound(playerSounds.sounds.acquire)
+    CurrentScene.gameShader.blueOffset = 10000
     item.gettingPickedUp = true
 end
 
@@ -51,6 +52,7 @@ function itemEventFuncs.batteryPickup(item)
     --play sound (TODO: find a healing sound)
     local playerSounds = player.soundManager.script
     playerSounds:playStopSound(playerSounds.sounds.acquire)
+    CurrentScene.gameShader.blueOffset = 10000
     item.gettingPickedUp = true
 end
 

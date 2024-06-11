@@ -42,7 +42,7 @@ end
 
 function cameraController:updateZoom(delta, camera, player)
     --Zoom in slightly by sprinting
-    if player.sprinting and GetGlobal("freecam") < 1 then
+    if player.sprinting and GetGlobal("freecam") < 1 and player.moving then
         camera.realZoom = self.playerManualZoom + 0.035
     else
         camera.realZoom = self.playerManualZoom
@@ -62,7 +62,7 @@ function cameraController:load()
 end
 
 function cameraController:update(delta)
-    if GamePaused then return end
+    if GamePaused or CurrentScene.name ~= "Game" then return end
     local player = CurrentScene.player
     self:movement(delta, self.parent, player)
     self:updateZoom(delta, self.parent, player)

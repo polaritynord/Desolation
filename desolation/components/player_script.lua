@@ -173,8 +173,10 @@ function playerScript:shootingWeapon(delta, player)
             camera.position[2] = camera.position[2] + weapon.screenShakeIntensity*a
         end
         --particles
-        local shootParticles = player.particleComponent
-        particleFuncs.createShootParticles(shootParticles, player.rotation)
+        if Settings.weapon_flame_particles then
+            local shootParticles = player.particleComponent
+            particleFuncs.createShootParticles(shootParticles, player.rotation)
+        end
         --Bullet instance creation
         local bullet = object.new(CurrentScene.bullets)
         bullet.position[1] = player.position[1] + math.cos(player.rotation)*weapon.bulletOffset
@@ -259,6 +261,7 @@ function playerScript:load()
     player.inventory.weapons[3] = weaponManager.AssaultRifle.new()
 
     RunConsoleCommand("cheats 1")
+    player.health = 40
 end
 
 function playerScript:update(delta)

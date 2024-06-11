@@ -39,7 +39,7 @@ function startupManager:load()
     --Open up the default scene
     local startScene = LoadScene(infoData.startScene)
     if startScene.name == "Intro" and table.contains(arg, "--skip-intro") then
-        startScene = LoadScene("desolation/assets/scenes/main_menu.json")
+        startScene = LoadScene("desolation/assets/scenes/main_menu2.json")
     end
     SetScene(startScene)
 end

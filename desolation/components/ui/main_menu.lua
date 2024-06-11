@@ -4,6 +4,7 @@ local mainMenu = ENGINE_COMPONENTS.scriptComponent.new()
 
 function mainMenu:load()
     local ui = self.parent.UIComponent
+    --[[
     ui.background = ui:newImage(
         {
             source = Assets.images.ui.menuBackground;
@@ -11,6 +12,7 @@ function mainMenu:load()
             position = {480, 270};
         }
     )
+    ]]--
     ui.title = ui:newImage(
         {
             source = Assets.images.logo;

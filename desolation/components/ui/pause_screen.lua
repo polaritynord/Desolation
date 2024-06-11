@@ -43,7 +43,7 @@ function pauseScreen:load()
             buttonTextSize = 30;
             clickEvent = function ()
                 love.filesystem.write("settings.json", json.encode(Settings))
-                local scene = LoadScene("desolation/assets/scenes/main_menu.json")
+                local scene = LoadScene("desolation/assets/scenes/main_menu2.json")
                 SetScene(scene)
             end
         }

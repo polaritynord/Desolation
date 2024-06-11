@@ -40,6 +40,7 @@ function mapCreator:loadMap(path)
             item.pickupEvent = itemEventFuncs[items[item.name].pickupEvent]
             --weapon data
             if item.name == "weapon" then
+                print(v[1])
                 item.weaponData = weaponManager[v[4]].new()
             end
             item.script:load()
@@ -82,6 +83,7 @@ function mapCreator:loadMap(path)
         end
     end
     --player data
+    if CurrentScene.player == nil then return end
     local player = CurrentScene.player
     player.position = data.playerData.position
     CurrentScene.camera.position = data.playerData.cameraPosition

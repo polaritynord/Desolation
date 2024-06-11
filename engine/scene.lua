@@ -145,6 +145,7 @@ function LoadScene(file)
     for _, v in ipairs(sceneData.tree) do
         addObjectToScene(instance, v, true)
     end
+    instance.camera.zoom = 1
     return instance
 end
 

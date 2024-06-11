@@ -155,6 +155,12 @@ function hud:update(delta)
     local player = CurrentScene.player
     ui.healthMonitor.text = player.health
     ui.armorMonitor.text = player.armor
+    --update health monitor color
+    local temp = coreFuncs.boolToNum(player.health > 30)
+    ui.healthMonitor.color = {1, temp, temp, 1}
+    --update armor monitor color
+    temp = coreFuncs.boolToNum(player.armor > 30)
+    ui.armorMonitor.color = {1, temp, temp, 1}
     --Current weapon
     local weapon = player.inventory.weapons[player.inventory.slot]
     if weapon then

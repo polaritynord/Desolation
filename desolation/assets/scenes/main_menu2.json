@@ -1,0 +1,96 @@
+{
+    "name": "Game",
+    "backgroundColor": [0.2, 0.2, 0.2],
+    "tree": [
+        [
+            "camera", []
+        ],
+        
+        [
+            "player",
+            ["imageComponent", "particleComponent", "desolation/components/player_script"],
+            [
+                [
+                    "hand",
+                    ["imageComponent", "desolation/components/player_hand_script"]
+                ],
+
+                [
+                    "soundManager",
+                    ["desolation/components/player_sounds"]
+                ]
+            ]
+        ],
+
+        [
+            "items", []
+        ],
+
+        [
+            "walls", []
+        ],
+
+        [
+            "props", []
+        ],
+
+        [
+            "tiles", []
+        ],
+
+        [
+            "bullets", []
+        ],
+
+        [
+            "mapCreator",
+            ["desolation/components/map_creator"]
+        ],
+
+        [
+            "gameShaders",
+            ["desolation/components/game_shaders"]
+        ],
+
+        [
+            "mainMenu",
+            ["UIComponent", "desolation/components/ui/main_menu"]
+        ],
+        
+        [
+            "devConsole",
+            ["UIComponent", "desolation/components/ui/dev_console"]
+        ],
+
+        [
+            "settings",
+            ["UIComponent", "desolation/components/ui/settings_menu"],
+            [
+                [
+                    "videoMenu",
+                    ["UIComponent", "desolation/components/ui/alt_menus/video_menu"]
+                ],
+
+                [
+                    "audioMenu",
+                    ["UIComponent", "desolation/components/ui/alt_menus/audio_menu"]
+                ],
+
+                [
+                    "keysMenu",
+                    ["UIComponent", "desolation/components/ui/alt_menus/keys_menu"]
+                ],
+
+                [
+                    "gameplayMenu",
+                    ["UIComponent", "desolation/components/ui/alt_menus/gameplay_menu"]
+                ]
+            ]
+        ],
+
+        [
+            "extras",
+            ["UIComponent", "desolation/components/ui/extras_menu"]
+        ]
+    ]
+}
