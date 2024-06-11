@@ -18,6 +18,7 @@ function itemScript:load()
 end
 
 function itemScript:movement(delta)
+    if CurrentScene.player == nil then return end
     local item = self.parent
     local playerPos = CurrentScene.player.position
     local itemPos = item.position
@@ -51,7 +52,9 @@ function itemScript:update(delta)
     local player = CurrentScene.player
     self:movement(delta)
     --Distance calculation
-    item.distanceToPlayer = coreFuncs.pointDistance(item.position, player.position)
+    if player ~= nil then
+        item.distanceToPlayer = coreFuncs.pointDistance(item.position, player.position)
+    end
     --set sum colors & return if player is far away
     --TODO better indicator
     if item.distanceToPlayer > 100 then

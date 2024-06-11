@@ -1,25 +1,9 @@
 {
-    "name": "Game",
+    "name": "Main Menu",
     "backgroundColor": [0.2, 0.2, 0.2],
     "tree": [
         [
             "camera", []
-        ],
-        
-        [
-            "player",
-            ["imageComponent", "particleComponent", "desolation/components/player_script"],
-            [
-                [
-                    "hand",
-                    ["imageComponent", "desolation/components/player_hand_script"]
-                ],
-
-                [
-                    "soundManager",
-                    ["desolation/components/player_sounds"]
-                ]
-            ]
         ],
 
         [

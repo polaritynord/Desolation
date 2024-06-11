@@ -3,7 +3,7 @@ local weaponManager = require("desolation.weapon_manager")
 local consoleFunctions = {
     funcsList = {
         "assign", "run_script", "give_ammo", "clear", "help", "lorem",
-        "give", "info", "bind", "map", "maps", "hurtme", "hurtarmor"
+        "give", "info", "bind", "map", "maps", "hurtme", "hurtarmor", "restart"
     };
 }
 
@@ -229,6 +229,10 @@ function consoleFunctions.hurtarmorScript(devConsole, command, i)
     CurrentScene.player.armor = CurrentScene.player.armor - 20
     local playerSounds = CurrentScene.player.soundManager.script
     playerSounds:playStopSound(playerSounds.sounds.hurt[math.random(1, 3)])
+end
+
+function consoleFunctions.restartScript(devConsole, command, i)
+    love.load()
 end
 
 return consoleFunctions

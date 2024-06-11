@@ -9,6 +9,7 @@ function assets.load()
         };
         tiles = {
             prototype_green = love.graphics.newImage("desolation/assets/images/texture_09.png");
+            prototype_black = love.graphics.newImage("desolation/assets/images/texture_08.png");
         };
         walls = {
             test_gray = love.graphics.newImage("desolation/assets/images/test_gray.png");

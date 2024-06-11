@@ -40,7 +40,6 @@ function mapCreator:loadMap(path)
             item.pickupEvent = itemEventFuncs[items[item.name].pickupEvent]
             --weapon data
             if item.name == "weapon" then
-                print(v[1])
                 item.weaponData = weaponManager[v[4]].new()
             end
             item.script:load()

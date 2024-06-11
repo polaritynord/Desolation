@@ -253,7 +253,6 @@ function playerScript:load()
         ["q"] = false;
     }
     --Starter weapon
-    weaponManager:load()
     player.inventory.weapons[1] = weaponManager.Pistol.new()
     player.inventory.weapons[1].magAmmo = 7
     player.inventory.ammunition.light = 78

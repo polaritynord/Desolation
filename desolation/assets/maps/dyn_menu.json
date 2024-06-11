@@ -1,0 +1,20 @@
+{
+    "playerData": {
+        "position": [0, 0],
+        "cameraPosition": [0, 0]
+    },
+    "walls": [
+        ["test_gray", [-10, -5], [20, 2]],
+        ["test_gray", [14, -5], [5, 10]],
+        ["test_gray", [-8, 3], [22, 2]]
+    ],
+    "tiles": [
+        ["prototype_black", 0, 0]
+    ],
+    "props": [
+
+    ],
+    "items": [
+
+    ]
+}

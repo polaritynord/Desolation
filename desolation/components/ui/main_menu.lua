@@ -1,4 +1,6 @@
 local clickEvents = require("desolation.button_clickevents")
+local weaponManager = require("desolation.weapon_manager")
+
 
 local mainMenu = ENGINE_COMPONENTS.scriptComponent.new()
 
@@ -94,6 +96,9 @@ function mainMenu:load()
             size = {960, 540};
         }
     )
+    --inital loading stuff
+    weaponManager:load()
+    CurrentScene.mapCreator.script:loadMap("desolation/assets/maps/dyn_menu.json")
 end
 
 function mainMenu:update(delta)
@@ -114,6 +119,8 @@ function mainMenu:update(delta)
             ui.quitButton.textFont = "disposable-droid"
         end
     end
+    --camera parallax thing
+    CurrentScene.camera.position[1] = -MenuUIOffset
 end
 
 return mainMenu

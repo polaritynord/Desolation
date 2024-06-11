@@ -1,9 +1,11 @@
 local json = require("engine.lib.json")
 local weapon = require("desolation.weapon")
 
-local weaponManager = {}
+local weaponManager = {loaded=false}
 
 function weaponManager:load()
+    if self.loaded then return end
+    self.loaded = true
     --Read weapons.json
     local weaponsFile = love.filesystem.read("desolation/assets/weapons.json")
     local weaponsData = json.decode(weaponsFile)

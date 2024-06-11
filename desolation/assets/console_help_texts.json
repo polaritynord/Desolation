@@ -3,7 +3,7 @@
         "cheats", "freecam", "p_speed", "s_vol_master", "s_vol_music", "s_vol_sfx",
         "g_vignette", "s_language", "noclip", "god", "invisible", "inf_stamina", "slippiness",
         "assign", "run_script", "give_ammo", "clear", "give", "info", "bind", "map", "maps",
-        "hurtme", "hurtarmor"
+        "hurtme", "hurtarmor", "restart"
     ],
 
     "descriptions": [
@@ -31,6 +31,7 @@
         "map [mapName]:\n\tLoads a map file contained in \"assets/maps\".",
         "maps:\n\tReturns a list of maps in game directory.",
         "hurtme:\n\tDamages the player.",
-        "hurtarmor:\n\tDamages player armor."
+        "hurtarmor:\n\tDamages player armor.",
+        "restart:\n\tRestarts the game."
     ]
 }
