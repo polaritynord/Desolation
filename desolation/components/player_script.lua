@@ -51,21 +51,20 @@ function playerScript:movement(delta, player)
         player.velocity[2] = player.velocity[2] * math.sin(math.pi/4)
     end
     --Move by velocity
+    player.oldPos = {player.position[1], player.position[2]}
     player.position[1] = player.position[1] + (player.velocity[1]*speed*delta)
     player.position[2] = player.position[2] + (player.velocity[2]*speed*delta)
 end
 
 function playerScript:collisionCheck(player)
-    if true then return end
+    if GetGlobal("noclip") > 0 then return end
     --iterate through walls
-    local w, h = 48, 48
-    local playerPos = {player.position[1]-24, player.position[2]-24}
-    player.imageComponent.color = {1, 1, 1, 1}
+    local size = {48, 48}
+    local playerPos = {player.position[1]-size[1]/2, player.position[2]-size[2]/2}
     for _, wall in ipairs(CurrentScene.walls.tree) do
         local wallSize = {wall.scale[1]*64, wall.scale[2]*64}
-        if playerPos[1] < wall.position[1]+wallSize[1] and playerPos[1]+w < wall.position[1] and
-            playerPos[2] < wall.position[2]+wallSize[2] and playerPos[2]+h < wall.position[2] then
-            player.imageComponent.color = {0, 1, 0, 1}
+        if coreFuncs.aabbCollision(playerPos, wall.position, size, wallSize) then
+            player.position = {player.oldPos[1], player.oldPos[2]}
         end
     end
 end
@@ -121,8 +120,10 @@ function playerScript:slotSwitching(player)
         player.inventory.slot = temp
     end
     player.keyPressData["q"] = InputManager:isPressed("w_quickswitch")
-    player.keyPressData.leftSlot = InputManager.joystick:isDown(10)
-    player.keyPressData.rightSlot = InputManager.joystick:isDown(11)
+    if InputManager.inputType == "joystick" then
+        player.keyPressData.leftSlot = InputManager.joystick:isDown(10)
+        player.keyPressData.rightSlot = InputManager.joystick:isDown(11)
+    end
     --Update hand offset
     if oldSlot ~= player.inventory.slot and player.inventory.weapons[oldSlot] ~= player.inventory.weapons[player.inventory.slot] then
         player.handOffset = -15
@@ -289,6 +290,7 @@ function playerScript:load()
     }
     player.shootTimer = 0
     player.reloadTimer = 0
+    player.oldPos = table.new(player.position)
     --TODO Find a better way to handle these key presses?
     player.keyPressData = {
         ["q"] = false;

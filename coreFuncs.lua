@@ -56,6 +56,13 @@ function coreFuncs.pointDistance(pos1, pos2)
     )
 end
 
+function coreFuncs.aabbCollision(pos1, pos2, size1, size2)
+    return pos1[1] < pos2[1]+size2[1] and
+            pos1[1]+size1[1] > pos2[1] and
+            pos1[2] < pos2[2]+size2[2] and
+            pos1[2]+size1[2] > pos2[2]
+end
+
 -- Thanks to @pgimeno at https://love2d.org/forums/viewtopic.php?f=4&t=93768&p=250899#p250899
 function SetFont(fontname, size)
     local key = fontname .. "\0" .. size
