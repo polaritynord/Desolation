@@ -1,18 +1,7 @@
+local buttonEvents = require("desolation.button_clickevents")
 local json = require("engine.lib.json")
 
 local startup = {}
-
-local function hover(element)
-    local delta = love.timer.getDelta()
-    element.color[2] = element.color[2] + (-element.color[2])*8*delta
-    element.color[3] = element.color[3] + (-element.color[3])*8*delta
-end
-
-local function unhover(element)
-    local delta = love.timer.getDelta()
-    element.color[2] = element.color[2] + (1-element.color[2])*8*delta
-    element.color[3] = element.color[3] + (1-element.color[3])*8*delta
-end
 
 function startup:load()
     --skip if this is not the first time playing
@@ -43,8 +32,8 @@ function startup:load()
                 Settings.language = ui.languages[i]
                 love.filesystem.write("settings.json", json.encode(Settings))
             end;
-            hoverEvent = hover;
-            unhoverEvent = unhover;
+            hoverEvent = buttonEvents.redHover;
+            unhoverEvent = buttonEvents.redUnhover;
         }
     )
     ui.continueButton = ui:newTextButton(

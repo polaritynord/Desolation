@@ -14,5 +14,6 @@
     "screen_shake": true,
     "always_sprint": false,
     "curved_hud": true,
-    "first_time_playing": true
+    "first_time_playing": true,
+    "sprint_type": "hold"
 }

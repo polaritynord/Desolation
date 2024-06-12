@@ -1,3 +1,5 @@
+local buttonEvents = require("desolation.button_clickevents")
+
 local gameplayMenu = ENGINE_COMPONENTS.scriptComponent.new()
 
 function gameplayMenu:load()
@@ -57,6 +59,27 @@ function gameplayMenu:load()
             toggled = Settings.curved_hud;
         }
     )
+    ui.sprintTypeText = ui:newTextLabel(
+        {
+            text = "Sprint Type: ";
+            position = {0, 360};
+            size = 30;
+        }
+    )
+    ui.sprintTypeButton = ui:newTextButton(
+        {
+            position = {370, 360};
+            buttonText = string.upper(Settings.sprint_type);
+            buttonTextSize = 30;
+            hoverEvent = buttonEvents.redHover;
+            unhoverEvent = buttonEvents.redUnhover;
+            clickEvent = function()
+                if Settings.sprint_type == "hold" then
+                    Settings.sprint_type = "toggle"
+                else Settings.sprint_type = "hold" end
+            end
+        }
+    )
     --[[
     ui.sensivityText = ui:newTextLabel(
         {
@@ -104,6 +127,7 @@ function gameplayMenu:update(delta)
     Settings.screen_shake = ui.screenShakeBox.toggled
     Settings.always_sprint = ui.alwaysSprintBox.toggled
     Settings.curved_hud = ui.curvedHudBox.toggled
+    ui.sprintTypeButton.buttonText = string.upper(Settings.sprint_type)
 end
 
 return gameplayMenu

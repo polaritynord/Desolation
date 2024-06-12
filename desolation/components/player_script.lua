@@ -11,26 +11,37 @@ local playerScript = ENGINE_COMPONENTS.scriptComponent.new()
 
 function playerScript:movement(delta, player)
     local speed = GetGlobal("p_speed")
-    local slippiness = GetGlobal("slippiness")
-
-    player.velocity[1] = player.velocity[1] + (-player.velocity[1])*slippiness*delta
-    player.velocity[2] = player.velocity[2] + (-player.velocity[2])*slippiness*delta
-    --Get key input
-    if InputManager:isPressed("move_left") then
-        player.velocity[1] = -1
+    player.velocity = {0, 0}
+    --Get input:
+    if InputManager.inputType == "keyboard" then
+        --KEYBOARD
+        player.velocity[1] = coreFuncs.boolToNum(InputManager:isPressed("move_right")) - coreFuncs.boolToNum(InputManager:isPressed("move_left"))
+        player.velocity[2] = coreFuncs.boolToNum(InputManager:isPressed("move_down")) - coreFuncs.boolToNum(InputManager:isPressed("move_up"))
+    elseif InputManager.inputType == "joystick" then
+        --JOYSTICK
+        local axis1, axis2 = InputManager:getAxis(1), InputManager:getAxis(2)
+        if math.abs(axis1) > 0.1 then
+            player.velocity[1] = axis1
+        end
+        if math.abs(axis2) > 0.1 then
+            player.velocity[2] = axis2
+        end
     end
-    if InputManager:isPressed("move_right") then
-        player.velocity[1] = 1
-    end
-    if InputManager:isPressed("move_up") then
-        player.velocity[2] = -1
-    end
-    if InputManager:isPressed("move_down") then
-        player.velocity[2] = 1
-    end
-    player.moving = InputManager:isPressed({"move_left", "move_right", "move_up", "move_down"})
+    player.moving = math.abs(player.velocity[1]) > 0 or math.abs(player.velocity[2]) > 0
     --Sprinting
-    player.sprinting = (InputManager:isPressed("sprint") and not Settings.always_sprint) or (player.moving and Settings.always_sprint and not InputManager:isPressed("sprint"))
+    if Settings.sprint_type == "hold" and InputManager.inputType == "keyboard" then
+        player.sprinting = (InputManager:isPressed("sprint") and not Settings.always_sprint) or (player.moving and Settings.always_sprint and not InputManager:isPressed("sprint"))
+    else
+        if Settings.always_sprint then
+            player.sprinting = not InputManager:isPressed("sprint")
+        else
+            if not player.moving then
+                player.sprinting = false
+            elseif InputManager:isPressed("sprint") and player.moving then
+                player.sprinting = true
+            end
+        end
+    end
     if player.sprinting then
         speed = speed * 1.6
     end
@@ -60,9 +71,25 @@ function playerScript:collisionCheck(player)
 end
 
 function playerScript:pointTowardsMouse(player)
-    local mouseX, mouseY = coreFuncs.getRelativeMousePosition()
     local pos = coreFuncs.getRelativePosition(player.position, CurrentScene.camera)
-    local dx = mouseX-pos[1] ; local dy = mouseY-pos[2]
+    local x, y
+    if InputManager.inputType == "keyboard" then
+        x, y = coreFuncs.getRelativeMousePosition()
+    elseif InputManager.inputType == "joystick" then
+        local axis1, axis2 = InputManager:getAxis(3), InputManager:getAxis(4)
+        if math.abs(axis1) > 0.1 then
+            print("yo")
+            x = pos[1] + axis1*50
+        else
+            x = pos[1] + math.cos(player.rotation)*50
+        end
+        if math.abs(axis2) > 0.1 then
+            y = pos[2] + axis2*50
+        else
+            y = pos[2] + math.sin(player.rotation)*50
+        end
+    end
+    local dx = x-pos[1] ; local dy = y-pos[2]
     player.rotation = math.atan2(dy, dx)
 end
 

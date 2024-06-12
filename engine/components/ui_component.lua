@@ -71,6 +71,7 @@ function UIComponent:new(parent)
             instance2.clickEvent = attributes.clickEvent or instance2.clickEvent
             instance2.hoverEvent = attributes.hoverEvent or instance2.hoverEvent
             instance2.unhoverEvent = attributes.unhoverEvent or instance2.unhoverEvent
+            instance2.begin = attributes.begin or instance2.begin
         end
         instance2.parentComp = self
         self.elements[#self.elements+1] = instance2

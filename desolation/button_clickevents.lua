@@ -1,6 +1,18 @@
 local json = require "engine.lib.json"
 local clickEvents = {}
 
+function clickEvents.redHover(element)
+    local delta = love.timer.getDelta()
+    element.color[2] = element.color[2] + (-element.color[2])*8*delta
+    element.color[3] = element.color[3] + (-element.color[3])*8*delta
+end
+
+function clickEvents.redUnhover(element)
+    local delta = love.timer.getDelta()
+    element.color[2] = element.color[2] + (1-element.color[2])*8*delta
+    element.color[3] = element.color[3] + (1-element.color[3])*8*delta
+end
+
 function clickEvents.quitButtonClick(element)
     if element.buttonText == Loca.mainMenu.quit then
         if math.random() < 0.05 then

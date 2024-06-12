@@ -102,4 +102,11 @@ function inputManager:isPressed(name)
     return pressed
 end
 
+function inputManager:getAxis(num, deadzone)
+    if inputManager.inputType == "keyboard" then return 0 end
+    local axis = self.joystick:getAxis(num)
+    if deadzone ~= nil and math.abs(axis) < deadzone then return 0 end
+    return axis
+end
+
 return inputManager

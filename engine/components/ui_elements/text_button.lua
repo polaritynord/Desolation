@@ -17,6 +17,7 @@ function textButton.new()
         unhoverEvent = nil;
         textFont = "disposable-droid";
         enabled = true;
+        begin = "left";
     }
 
     function instance.hoverEvent(element)
@@ -59,7 +60,7 @@ function textButton.new()
         local pos = coreFuncs.getRelativeElementPosition(self.position, self.parentComp)
         love.graphics.setColor(self.color[1], self.color[2], self.color[3], self.color[4]*self.parentComp.alpha)
         SetFont("desolation/assets/fonts/" .. self.textFont .. ".ttf", self.buttonTextSize)
-        love.graphics.printf(self.buttonText, pos[1]+self.hoverOffset, pos[2], 1000, "left")
+        love.graphics.printf(self.buttonText, pos[1]+self.hoverOffset, pos[2], 1000, self.begin)
         love.graphics.setColor(1, 1, 1, 1)
     end
 
