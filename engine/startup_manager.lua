@@ -1,10 +1,12 @@
 local json = require("engine.lib.json")
 local scene = require("engine.scene")
 local globals = require("engine.globals")
+local weaponManager = require("desolation.weapon_manager")
 
 local startupManager = {}
 
 function startupManager:load()
+    weaponManager:load()
     --Fetch game info
     local engineInfoFile = love.filesystem.read("engine/info.json")
     local engineInfoData = json.decode(engineInfoFile)

@@ -1,6 +1,5 @@
 local clickEvents = require("desolation.button_clickevents")
-local weaponManager = require("desolation.weapon_manager")
-
+local moonshine = require("engine.lib.moonshine")
 
 local mainMenu = ENGINE_COMPONENTS.scriptComponent.new()
 
@@ -97,8 +96,12 @@ function mainMenu:load()
         }
     )
     --inital loading stuff
-    weaponManager:load()
-    CurrentScene.mapCreator.script:loadMap("desolation/assets/maps/dyn_menu.json")
+    if CurrentScene.mapCreator ~= nil then
+        CurrentScene.mapCreator.script:loadMap("desolation/assets/maps/dyn_menu.json")
+    end
+    CurrentScene.uiShader = moonshine.chain(960, 540, moonshine.effects.glow)
+    CurrentScene.uiShader.glow.strength = 5
+    CurrentScene.uiShader.glow.min_luma = 0.1
 end
 
 function mainMenu:update(delta)
@@ -119,8 +122,12 @@ function mainMenu:update(delta)
             ui.quitButton.textFont = "disposable-droid"
         end
     end
-    --camera parallax thing
-    CurrentScene.camera.position[1] = -MenuUIOffset
+    --camera positioning
+    local camera = CurrentScene.camera
+    --local x = -MenuUIOffset + math.cos((love.timer.getTime()))*10
+    local y = math.sin((love.timer.getTime()))*10
+    camera.position[1] = -MenuUIOffset--camera.position[1] + (x-camera.position[1])*2.5*delta
+    camera.position[2] = camera.position[2] + (y-camera.position[2])*2.5*delta
 end
 
 return mainMenu

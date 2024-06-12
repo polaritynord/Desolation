@@ -137,6 +137,13 @@ function hud:load()
             color = {1,1,1,0};
         }
     )
+    ui.joystickImg = ui:newImage(
+        {
+            position = {480, 450};
+            source = "none";
+            scale = {2, 2};
+        }
+    )
     --ui.acquireNotif = ui:newTextLabel(
     --    {
     --        text = "Pistol Acquired";
@@ -208,6 +215,11 @@ function hud:update(delta)
             ui["slot" .. i .. "Base"].color[4] = ui["slot" .. i .. "Base"].color[4] + (-ui["slot" .. i .. "Base"].color[4])*16*delta
             ui["slot" .. i .. "Img"].color[4] = ui["slot" .. i .. "Img"].color[4] + (-ui["slot" .. i .. "Img"].color[4])*16*delta
         end
+    end
+    --Joystick indicator
+    ui.joystickImg.source = nil
+    if InputManager.inputType == "joystick" then
+        ui.joystickImg.source = Assets.images.ui.joystick
     end
 end
 

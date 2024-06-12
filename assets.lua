@@ -18,6 +18,7 @@ function assets.load()
             healthBar = love.graphics.newImage("desolation/assets/images/hud/health_bar.png");
             menuBackground = love.graphics.newImage("desolation/assets/images/menu_background.png");
             ammo = love.graphics.newImage("desolation/assets/images/hud/ammo.png");
+            joystick = love.graphics.newImage("desolation/assets/images/joystick.png");
         };
         weapons = {
             pistolImg = love.graphics.newImage("desolation/assets/images/weapons/pistol.png");

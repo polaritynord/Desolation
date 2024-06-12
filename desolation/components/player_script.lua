@@ -46,7 +46,7 @@ function playerScript:movement(delta, player)
         speed = speed * 1.6
     end
     --Normalize velocity
-    if InputManager:isPressed({"move_left", "move_right"}) == InputManager:isPressed({"move_up", "move_down"}) and player.moving then
+    if InputManager.inputType == "keyboard" and InputManager:isPressed({"move_left", "move_right"}) == InputManager:isPressed({"move_up", "move_down"}) and player.moving then
         player.velocity[1] = player.velocity[1] * math.sin(math.pi/4)
         player.velocity[2] = player.velocity[2] * math.sin(math.pi/4)
     end
@@ -78,7 +78,6 @@ function playerScript:pointTowardsMouse(player)
     elseif InputManager.inputType == "joystick" then
         local axis1, axis2 = InputManager:getAxis(3), InputManager:getAxis(4)
         if math.abs(axis1) > 0.1 then
-            print("yo")
             x = pos[1] + axis1*50
         else
             x = pos[1] + math.cos(player.rotation)*50
@@ -102,6 +101,19 @@ function playerScript:slotSwitching(player)
             player.inventory.slot = i
         end
     end
+    --Switch slot using joystick
+    if InputManager.inputType == "joystick" then
+        if InputManager.joystick:isDown(10) and not player.keyPressData.leftSlot then
+            player.inventory.previousSlot = player.inventory.slot
+            player.inventory.slot = player.inventory.slot - 1
+            if player.inventory.slot < 1 then player.inventory.slot = 3 end
+        end
+        if InputManager.joystick:isDown(11) and not player.keyPressData.rightSlot then
+            player.inventory.previousSlot = player.inventory.slot
+            player.inventory.slot = player.inventory.slot + 1
+            if player.inventory.slot > 3 then player.inventory.slot = 1 end
+        end
+    end
     --Quick slot switching
     if InputManager:isPressed("w_quickswitch") and not player.keyPressData["q"] and player.inventory.previousSlot then
         local temp = player.inventory.previousSlot
@@ -109,6 +121,8 @@ function playerScript:slotSwitching(player)
         player.inventory.slot = temp
     end
     player.keyPressData["q"] = InputManager:isPressed("w_quickswitch")
+    player.keyPressData.leftSlot = InputManager.joystick:isDown(10)
+    player.keyPressData.rightSlot = InputManager.joystick:isDown(11)
     --Update hand offset
     if oldSlot ~= player.inventory.slot and player.inventory.weapons[oldSlot] ~= player.inventory.weapons[player.inventory.slot] then
         player.handOffset = -15
@@ -178,7 +192,7 @@ function playerScript:shootingWeapon(delta, player)
     local weapon = player.inventory.weapons[player.inventory.slot]
     if not weapon or player.reloading then return end
     local playerSounds = player.soundManager.script
-    if love.mouse.isDown(1) and player.shootTimer > weapon.shootTime then
+    if (love.mouse.isDown(1) or InputManager:getAxis(6) > 0.4) and player.shootTimer > weapon.shootTime then
         player.shootTimer = 0
         --Check if there is ammo available in magazine
         if weapon.magAmmo < 1 then
@@ -287,7 +301,6 @@ function playerScript:load()
     player.inventory.weapons[3] = weaponManager.AssaultRifle.new()
 
     RunConsoleCommand("cheats 1")
-    player.health = 40
 end
 
 function playerScript:update(delta)
