@@ -54,11 +54,17 @@ function love.wheelmoved(x, y)
 end
 
 function love.keypressed(key, unicode)
+    --console shit
     local console = CurrentScene.devConsole
     local consoleUI
     if console then
         consoleUI = console.UIComponent
     else consoleUI = nil end
+    --input type check
+    if InputManager.inputType == "joystick" then
+        print("keyboard input mode active")
+        InputManager.inputType = "keyboard"
+    end
     -- Fullscreen key
     if table.contains(InputManager:getKeys("fullscreen"), key) then
         fullscreen = not fullscreen
@@ -190,6 +196,7 @@ function love.update(delta)
     updateUIOffset(delta)
     setMouseCursor()
     love.window.setVSync(Settings.vsync)
+    --print(InputManager.inputType)
 end
 
 function love.draw()
