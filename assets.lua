@@ -1,6 +1,25 @@
 local assets = {}
 
 function assets.load()
+    assets.map = {}
+    assets.fonts = {}
+
+    assets.default = {
+        images = {
+            missing_texture = love.graphics.newImage("engine/assets/missing_texture.png");
+        };
+
+        cursors = {
+            combat = love.mouse.newCursor("desolation/assets/images/cursor_combat.png", 12, 12);
+        };
+
+        sounds = {
+            button_click = love.audio.newSource("desolation/assets/sounds/button_click.wav", "static");
+            button_hover = love.audio.newSource("desolation/assets/sounds/button_hover.wav", "static");
+        }
+    }
+
+    if true then return end
     assets.images = {
         player = {
             body = love.graphics.newImage("desolation/assets/images/player/body.png");
