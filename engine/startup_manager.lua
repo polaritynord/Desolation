@@ -10,8 +10,8 @@ function startupManager:load()
     --Fetch game info
     local engineInfoFile = love.filesystem.read("engine/info.json")
     local engineInfoData = json.decode(engineInfoFile)
-    local gameDirectory = engineInfoData.gameDirectory
-    local infoFile = love.filesystem.read(gameDirectory .. "/info.json")
+    GAME_DIRECTORY = engineInfoData.gameDirectory
+    local infoFile = love.filesystem.read(GAME_DIRECTORY .. "/info.json")
     local infoData = json.decode(infoFile)
     GAME_NAME = infoData.name
     GAME_VERSION = infoData.version

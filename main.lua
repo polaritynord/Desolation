@@ -2,13 +2,8 @@ local utf8 = require("utf8")
 local json  = require("engine.lib.json")
 local coreFuncs = require("coreFuncs")
 local startupManager = require("engine.startup_manager")
-local moonshine = require("engine.lib.moonshine")
 
 local fullscreen = false
-local cursors = {
-    arrow = love.mouse.getSystemCursor("arrow");
-    crosshair = love.mouse.getSystemCursor("crosshair")
-}
 
 InputManager = require("engine.input_manager")
 DevConsoleOpen = false
@@ -160,18 +155,6 @@ function love.keypressed(key, unicode)
     end
 end
 
-local function setMouseCursor()
-    if CurrentScene.name == "Game" then
-        if not GamePaused then
-            love.mouse.setCursor(Assets.images.cursors.combat)
-        else
-            love.mouse.setCursor(cursors.arrow)
-        end
-    else
-        love.mouse.setCursor(cursors.arrow)
-    end
-end
-
 local function updateUIOffset(delta)
     AltMenuOpen = (CurrentScene.devConsole and CurrentScene.devConsole.open) or (CurrentScene.settings and CurrentScene.settings.open) or
                     (CurrentScene.extras and CurrentScene.extras.open)
@@ -194,9 +177,7 @@ function love.update(delta)
     if not CurrentScene then return end
     CurrentScene:update(delta)
     updateUIOffset(delta)
-    setMouseCursor()
     love.window.setVSync(Settings.vsync)
-    --print(InputManager.inputType)
 end
 
 function love.draw()

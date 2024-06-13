@@ -225,6 +225,7 @@ function playerScript:shootingWeapon(delta, player)
         bullet.position[2] = player.position[2] + math.sin(player.rotation)*weapon.bulletOffset
         bullet.rotation = player.rotation
         bullet:addComponent(table.new(bulletScript))
+        bullet:addComponent(ENGINE_COMPONENTS.particleComponent.new(bullet))
         --bullet.script = table.new(bulletScript)
         --bullet.script.parent = bullet
         bullet.script:load()
@@ -303,6 +304,8 @@ function playerScript:load()
     player.inventory.weapons[3] = weaponManager.AssaultRifle.new()
 
     RunConsoleCommand("cheats 1")
+    player.health = 10
+    player.armor = 15
 end
 
 function playerScript:update(delta)

@@ -8,7 +8,6 @@ local weaponManager = require("desolation.weapon_manager")
 local mapCreator = ENGINE_COMPONENTS.scriptComponent.new()
 
 function mapCreator:loadMap(path)
-    local creator = self.parent
     --read & convert to lua table
     local data = love.filesystem.read(path)
     data = json.decode(data)
@@ -27,7 +26,7 @@ function mapCreator:loadMap(path)
     --load items
     if data.items ~= nil then
         --load items list & decode it
-        local items = love.filesystem.read(GAME_NAME .. "/assets/items.json")
+        local items = love.filesystem.read(GAME_DIRECTORY .. "/assets/items.json")
         items = json.decode(items)
         --load items
         for _, v in ipairs(data.items) do
@@ -61,7 +60,7 @@ function mapCreator:loadMap(path)
     --load props
     if data.props ~= nil then
         --load items list & decode it
-        local props = love.filesystem.read(GAME_NAME .. "/assets/props.json")
+        local props = love.filesystem.read(GAME_DIRECTORY .. "/assets/props.json")
         props = json.decode(props)
         for _, v in ipairs(data.props) do
             local prop = object.new(CurrentScene.props)
