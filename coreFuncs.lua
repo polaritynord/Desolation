@@ -1,5 +1,3 @@
-local assets = require("assets")
-
 local coreFuncs = {}
 
 function coreFuncs.rgb(r, g, b)
@@ -66,12 +64,12 @@ end
 -- Thanks to @pgimeno at https://love2d.org/forums/viewtopic.php?f=4&t=93768&p=250899#p250899
 function SetFont(fontname, size)
     local key = fontname .. "\0" .. size
-    local font = assets.fonts[key]
+    local font = Assets.fonts[key]
     if font then
       love.graphics.setFont(font)
     else
       font = love.graphics.setNewFont(fontname, size)
-      assets.fonts[key] = font
+      Assets.fonts[key] = font
     end
     return font
 end

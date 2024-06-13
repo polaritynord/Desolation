@@ -76,5 +76,12 @@
             "extras",
             ["UIComponent", "desolation/components/ui/extras_menu"]
         ]
-    ]
+    ],
+
+    "assets": {
+        "images": [
+            ["logo", "desolation/assets/images/eh_logo.png"],
+            ["nord_transparent", "engine/assets/icon_transparent.png"]
+        ]
+    }
 }

@@ -5,7 +5,7 @@ local itemScript = ENGINE_COMPONENTS.scriptComponent.new()
 function itemScript:load()
     local item = self.parent
     if item.name == "weapon" then
-        item.imageComponent = ENGINE_COMPONENTS.imageComponent.new(item, Assets.images.weapons[string.lower(item.weaponData.name) .. "Img"])
+        item.imageComponent = ENGINE_COMPONENTS.imageComponent.new(item, Assets.images["weapon_" .. string.lower(item.weaponData.name)])
     else
         item.imageComponent = ENGINE_COMPONENTS.imageComponent.new(item, Assets.images.items[item.name])
     end

@@ -8,5 +8,16 @@
             "intro",
             ["UIComponent", "desolation/components/ui/intro"]
         ]
-    ]
+    ],
+
+    "assets": {
+        "images": [
+            ["logo", "desolation/assets/images/eh_logo.png"],
+            ["nord", "engine/assets/icon.png"]
+        ],
+
+        "sounds": [
+            ["ost_intro", "desolation/assets/sounds/ost/intro.wav", "static"]
+        ]
+    }
 }

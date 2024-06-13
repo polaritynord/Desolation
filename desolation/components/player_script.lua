@@ -161,7 +161,7 @@ function playerScript:weaponDropping(player)
     itemInstance:addComponent(table.new(itemScript))
     itemInstance.pickupEvent = itemEventFuncs.weaponPickup
     itemInstance.script:load()
-    itemInstance.imageComponent.source = Assets.images.weapons[string.lower(weapon.name) .. "Img"]
+    itemInstance.imageComponent.source = Assets.images["weapon_" .. string.lower(weapon.name)]
     --send current magAmmo to players ammunition because i couldnt get it to work
     player.inventory.ammunition[weapon.ammoType] = player.inventory.ammunition[weapon.ammoType] + weapon.magAmmo
 
@@ -269,7 +269,7 @@ end
 --Engine funcs
 function playerScript:load()
     local player = self.parent
-    player.imageComponent.source = Assets.images.player.body
+    player.imageComponent.source = Assets.images.player_body
     player.scale = {4, 4}
     --Player variables
     player.velocity = {0, 0}
