@@ -1,6 +1,7 @@
 local assets = {}
 
 function assets.load()
+    assets.map = {}
     assets.fonts = {}
 
     assets.default = {

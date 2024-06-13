@@ -2,7 +2,7 @@ local playerHandScript = ENGINE_COMPONENTS.scriptComponent.new()
 
 function playerHandScript:load()
     local hand = self.parent
-    hand.imageComponent.source = Assets.images.player.handDefault
+    hand.imageComponent.source = Assets.images.player_hand_empty
     hand.imageComponent.layer = 2
 end
 
@@ -13,9 +13,9 @@ function playerHandScript:update(delta)
     local player = hand.parent
     hand.imageComponent.color = {Settings.brightness, Settings.brightness, Settings.brightness, 1}
     --Set image for the hand
-    local src = Assets.images.player.handDefault
+    local src = Assets.images.player_hand_empty
     if player.inventory.weapons[player.inventory.slot] then
-        src = Assets.images.player.handWeapon -- Placeholder.
+        src = Assets.images.player_hand_placeholder -- Placeholder.
     end
     hand.imageComponent.source = src
     --Move hands forward a bit

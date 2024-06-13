@@ -17,7 +17,7 @@
         ],
 
         "sounds": [
-            ["ost_intro", "desolation/assets/sounds/ost/intro.wav"]
+            ["ost_intro", "desolation/assets/sounds/ost/intro.wav", "static"]
         ]
     }
 }

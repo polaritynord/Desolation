@@ -130,10 +130,6 @@ function LoadScene(file)
     --Read & decode scene file
     local sceneFile = love.filesystem.read(file)
     local sceneData = json.decode(sceneFile)
-    --Load assets from asset file
-    if sceneData.assetFile then
-        Assets:loadAssetsFromFile(sceneData.assetFile)
-    end
     --Create new scene instance
     local instance = scene.new()
     instance.name = sceneData.name
@@ -141,6 +137,23 @@ function LoadScene(file)
     if sceneData.backgroundColor then
         instance.backgroundColor = sceneData.backgroundColor
     else instance.backgroundColor = {1, 1, 1} end
+    --Load asset files
+    Assets.images = {}
+    Assets.sounds = {}
+    if sceneData.assets ~= nil then
+        --Load images
+        if sceneData.assets.images ~= nil then
+            for _, v in ipairs(sceneData.assets.images) do
+                Assets.images[v[1]] = love.graphics.newImage(v[2])
+            end
+        end
+        --Load sounds
+        if sceneData.assets.sounds ~= nil then
+            for _, v in ipairs(sceneData.assets.sounds) do
+                Assets.sounds[v[1]] = love.audio.newSource(v[2], v[3])
+            end
+        end
+    end
     --Load objects to tree
     for _, v in ipairs(sceneData.tree) do
         addObjectToScene(instance, v, true)

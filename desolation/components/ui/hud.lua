@@ -30,7 +30,7 @@ function hud:load()
     --Left side (health etc.)
     ui.healthBar = ui:newImage(
         {
-            source = Assets.images.ui.healthBar;
+            source = Assets.images.hud_healthbar;
             position = {97, 465};
             scale = {2.35, 2.35};
         }
@@ -52,7 +52,7 @@ function hud:load()
     --Right side (inventory stuff)
     ui.weaponImg = ui:newImage(
         {
-            source = Assets.images.weapons.pistolImg;
+            source = "none";
             position = {880, 420};
             scale = {-3.4, 3.4};
         }
@@ -78,7 +78,7 @@ function hud:load()
     ui.weaponAmmoText.scaleNumber = 2.35
     ui.weaponAmmoImg = ui:newImage(
         {
-            source = Assets.images.ui.ammo;
+            source = Assets.images.hud_ammo;
             position = {875, 500};
             scale = {0.8, 0.8};
         }
@@ -116,7 +116,7 @@ function hud:load()
     ui.slot1Img = ui:newImage(
         {
             position = {300, 540};
-            source = Assets.images.weapons.pistolImg;
+            source = "none";
             scale = {3, 3};
             color = {1,1,1,0};
         }
@@ -124,7 +124,7 @@ function hud:load()
     ui.slot2Img = ui:newImage(
         {
             position = {475, 540};
-            source = Assets.images.weapons.pistolImg;
+            source = "none";
             scale = {3, 3};
             color = {1,1,1,0};
         }
@@ -132,7 +132,7 @@ function hud:load()
     ui.slot3Img = ui:newImage(
         {
             position = {650, 540};
-            source = Assets.images.weapons.pistolImg;
+            source = "none";
             scale = {3, 3};
             color = {1,1,1,0};
         }
@@ -171,8 +171,8 @@ function hud:update(delta)
     --Current weapon
     local weapon = player.inventory.weapons[player.inventory.slot]
     if weapon then
-        ui.weaponAmmoImg.source = Assets.images.ui.ammo
-        ui.weaponImg.source = Assets.images.weapons[string.lower(weapon.name) .. "Img"]
+        ui.weaponAmmoImg.source = Assets.images.hud_ammo
+        ui.weaponImg.source = Assets.images["weapon_" .. string.lower(weapon.name)]
         ui.weaponName.text = weapon.name
         ui.weaponAmmoText.text = weapon.magAmmo
         ui.ammunitionText.text = player.inventory.ammunition[weapon.ammoType]
@@ -205,7 +205,7 @@ function hud:update(delta)
                 (540-(isSlot*30)-ui["slot" .. i .. "Img"].position[2])*10*delta
             if player.inventory.weapons[i] then
                 local name = player.inventory.weapons[i].name
-                ui["slot" .. i .. "Img"].source = Assets.images.weapons[string.lower(name) .. "Img"]
+                ui["slot" .. i .. "Img"].source = Assets.images["weapon_" .. string.lower(name)]
             else
                 ui["slot" .. i .. "Img"].source = nil
             end
@@ -219,7 +219,7 @@ function hud:update(delta)
     --Joystick indicator
     ui.joystickImg.source = nil
     if InputManager.inputType == "joystick" then
-        ui.joystickImg.source = Assets.images.ui.joystick
+        ui.joystickImg.source = Assets.images.hud_joystick
     end
 end
 

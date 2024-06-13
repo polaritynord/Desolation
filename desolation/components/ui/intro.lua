@@ -50,7 +50,7 @@ function intro:update(delta)
     self.timer = self.timer + delta
     --Play the sound
     if not self.soundPlayed then
-        Assets.sounds.ost.intro:play()
+        Assets.sounds.ost_intro:play()
         self.soundPlayed = true
     end
     --Reveal da desolation
@@ -64,7 +64,7 @@ function intro:update(delta)
     end
     --Engine stuff
     if self.timer > 5.5 and self.timer < 8.1 then
-        ui.polarity.source = Assets.images.icon
+        ui.polarity.source = Assets.images.nord
         ui.logo.source = nil
         ui.title.text = "Made by\nPolarity"
         ui.titleNord.text = "nord"
@@ -77,7 +77,7 @@ function intro:update(delta)
     end
     --Launch main menu if intro is done or skipped
     if self.timer > 10 or love.keyboard.isDown("space") then
-        Assets.sounds.ost.intro:stop()
+        Assets.sounds.ost_intro:stop()
         local scene = LoadScene("desolation/assets/scenes/main_menu2.json")
         SetScene(scene)
     end

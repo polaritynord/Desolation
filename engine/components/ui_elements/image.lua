@@ -4,7 +4,7 @@ local image = {}
 
 function image.new()
     local instance = {
-        source = Assets.images.icon,
+        source = Assets.default.images.missing_texture,
         position = {0, 0};
         scale = {1, 1};
         rotation = 0;
