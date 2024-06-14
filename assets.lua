@@ -1,25 +1,51 @@
-local assets = {}
+local assets = {
+    images = {};
+    sounds = {};
+    fonts = {};
+    defaultImages = {};
+    defaultSounds = {};
+    mapImages = {};
+    mapSounds = {};
+}
+
+function assets:unloadSceneAssets()
+    --remove images
+    for k, v in pairs(assets.images) do
+        assets.images[k]:release()
+        assets.images[k] = nil
+    end
+    assets.images = {}
+    --remove sounds
+    for k, v in pairs(assets.sounds) do
+        assets.sounds[k]:release()
+        assets.sounds[k] = nil
+    end
+    assets.sounds = {}
+end
+
+function assets:unloadMapAssets()
+    --remove images
+    for k, v in pairs(assets.mapImages) do
+        assets.mapImages[k]:release()
+        assets.mapImages[k] = nil
+    end
+    assets.mapImages = {}
+    --remove sounds
+    for k, v in pairs(assets.mapSounds) do
+        assets.mapSounds[k]:release()
+        assets.mapSounds[k] = nil
+    end
+    assets.mapSounds = {}
+end
 
 function assets.load()
-    assets.map = {}
-    assets.fonts = {}
-
-    assets.default = {
-        images = {
-            missing_texture = love.graphics.newImage("engine/assets/missing_texture.png");
-        };
-
-        cursors = {
-            combat = love.mouse.newCursor("desolation/assets/images/cursor_combat.png", 12, 12);
-        };
-
-        sounds = {
-            button_click = love.audio.newSource("desolation/assets/sounds/button_click.wav", "static");
-            button_hover = love.audio.newSource("desolation/assets/sounds/button_hover.wav", "static");
-        }
-    }
-
-    if true then return end
+    assets.defaultSounds.button_click = love.audio.newSource("desolation/assets/sounds/button_click.wav", "static")
+    assets.defaultSounds.button_hover = love.audio.newSource("desolation/assets/sounds/button_hover.wav", "static")
+    assets.defaultImages.missing_texture = love.graphics.newImage("engine/assets/missing_texture.png")
+    assets.cursors = {
+        combat = love.mouse.newCursor("desolation/assets/images/cursor_combat.png", 12, 12);
+    };
+    --[[if true then return end
     assets.images = {
         player = {
             body = love.graphics.newImage("desolation/assets/images/player/body.png");
@@ -72,10 +98,7 @@ function assets.load()
             buttonHover = love.audio.newSource("desolation/assets/sounds/button_hover.wav", "static");
         };
     }
-end
-
-function assets.unloadAll()
-    assets = {}
+    ]]--
 end
 
 return assets

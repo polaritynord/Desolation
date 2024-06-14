@@ -12,7 +12,7 @@
 
     "assets": {
         "images": [
-            ["logo", "desolation/assets/images/eh_logo.png"],
+            ["logo", "desolation/assets/images/logo.png"],
             ["nord", "engine/assets/icon.png"]
         ],
 

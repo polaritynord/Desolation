@@ -138,8 +138,7 @@ function LoadScene(file)
         instance.backgroundColor = sceneData.backgroundColor
     else instance.backgroundColor = {1, 1, 1} end
     --Load asset files
-    Assets.images = {}
-    Assets.sounds = {}
+    Assets:unloadSceneAssets()
     if sceneData.assets ~= nil then
         --Load images
         if sceneData.assets.images ~= nil then

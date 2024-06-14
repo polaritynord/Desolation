@@ -108,9 +108,9 @@
 
     "assets": {
         "images": [
-            ["logo", "desolation/assets/images/eh_logo.png"],
+            ["logo", "desolation/assets/images/logo.png"],
             ["player_body", "desolation/assets/images/player/body.png"],
-            ["player_hand_empty", "desolation/assets/images/player/hand_default.png"],
+            ["player_hand_empty", "desolation/assets/images/player/hand_empty.png"],
             ["player_hand_placeholder", "desolation/assets/images/player/hand_placeholder.png"],
 
             ["weapon_pistol", "desolation/assets/images/weapons/pistol.png"],
@@ -121,7 +121,7 @@
             
             ["hud_healthbar", "desolation/assets/images/hud/health_bar.png"],
             ["hud_ammo", "desolation/assets/images/hud/ammo.png"],
-            ["hud_joystick", "desolation/assets/images/joystick.png"]
+            ["hud_joystick", "desolation/assets/images/hud/joystick.png"]
         ]
     }
 }

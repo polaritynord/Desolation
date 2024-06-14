@@ -25,7 +25,7 @@ function textButton.new()
         element.hoverOffset = element.hoverOffset + (14-element.hoverOffset) * 27 * delta
         if element.mouseHovering then return end
         love.audio.setVolume(Settings.vol_master * Settings.vol_sfx)
-        love.audio.play(Assets.default.sounds.button_hover)
+        love.audio.play(Assets.defaultSounds.button_hover)
     end
 
     function instance.unhoverEvent(element)
@@ -40,7 +40,7 @@ function textButton.new()
         --Click event
         if love.mouse.isDown(1) and self.mouseHovering and not self.mouseClicking and self.clickEvent then
             love.audio.setVolume(Settings.vol_master * Settings.vol_sfx)
-            love.audio.play(Assets.default.sounds.button_click)
+            love.audio.play(Assets.defaultSounds.button_click)
             self.clickEvent(self)
         end
         --Check for mouse touch

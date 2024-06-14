@@ -8,7 +8,7 @@ local cursors = {
 function mouseSensivity.setMouseCursor()
     if CurrentScene.name == "Game" then
         if not GamePaused then
-            love.mouse.setCursor(Assets.default.cursors.combat)
+            love.mouse.setCursor(Assets.cursors.combat)
         else
             love.mouse.setCursor(cursors.arrow)
         end

@@ -16,7 +16,7 @@ end
 
 function wallScript:load()
     local wall = self.parent
-    wall.imageComponent = ENGINE_COMPONENTS.imageComponent.new(wall, Assets.images.walls[wall.name])
+    wall.imageComponent = ENGINE_COMPONENTS.imageComponent.new(wall, Assets.mapImages["wall_" .. wall.name])
     wall.imageComponent.layer = 2
     wall.imageComponent.source:setWrap("repeat", "repeat")
     wall.imageComponent.quad = love.graphics.newQuad(0, 0, wall.scale[1]*64, wall.scale[2]*64, 64, 64)

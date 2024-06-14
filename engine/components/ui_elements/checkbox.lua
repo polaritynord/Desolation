@@ -39,7 +39,7 @@ function checkbox.new()
         if love.mouse.isDown(1) and self.mouseHovering and not self.mouseClicking then
             --TODO change this sound to something else?
             self.toggled = not self.toggled
-            love.audio.play(Assets.sounds.sfx.buttonClick)
+            love.audio.play(Assets.defaultSounds["button_click"])
             if self.clickEvent then self.clickEvent(self) end
         end
         

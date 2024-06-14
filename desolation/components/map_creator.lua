@@ -11,12 +11,17 @@ function mapCreator:loadMap(path)
     --read & convert to lua table
     local data = love.filesystem.read(path)
     data = json.decode(data)
+    Assets:unloadMapAssets()
     --load tiles
     if data.tiles ~= nil then
         for _, v in ipairs(data.tiles) do
             local tile = object.new(CurrentScene.tiles)
             --maybe set name?
-            tile.imageComponent = ENGINE_COMPONENTS.imageComponent.new(tile, Assets.images.tiles[v[1]])
+            --Load image if nonexistant
+            if Assets.mapImages["tile_" .. v[1]] == nil then
+                Assets.mapImages["tile_" .. v[1]] = love.graphics.newImage(GAME_DIRECTORY .. "/assets/images/tiles/" .. v[1] .. ".png")
+            end
+            tile.imageComponent = ENGINE_COMPONENTS.imageComponent.new(tile, Assets.mapImages["tile_" .. v[1]])
             tile.imageComponent.layer = 3
             tile.scale = {2, 2}
             tile.position = {v[2]*1024, v[3]*1024}
@@ -51,6 +56,10 @@ function mapCreator:loadMap(path)
             local wall = object.new(CurrentScene.walls)
             wall.name = v[1]
             wall:addComponent(table.new(wallScript))
+            --Load image if nonexistant
+            if Assets.mapImages["wall_" .. v[1]] == nil then
+                Assets.mapImages["wall_" .. v[1]] = love.graphics.newImage(GAME_DIRECTORY .. "/assets/images/walls/" .. v[1] .. ".png")
+            end
             wall.position = {v[2][1]*64, v[2][2]*64}
             wall.scale = v[3]
             wall.script:load()

@@ -77,7 +77,7 @@ function mainMenu:load()
     --Other things
     ui.polarity = ui:newImage(
         {
-            source = Assets.images.iconTransparent;
+            source = Assets.images["nord_transparent"];
             position = {920, 510};
             scale = {0.5, 0.5};
         }
@@ -97,7 +97,7 @@ function mainMenu:load()
     )
     --inital loading stuff
     if CurrentScene.mapCreator ~= nil then
-        CurrentScene.mapCreator.script:loadMap("desolation/assets/maps/dyn_menu.json")
+        CurrentScene.mapCreator.script:loadMap("desolation/assets/maps/" .. Settings.menu_background .. ".json")
     end
     CurrentScene.uiShader = moonshine.chain(960, 540, moonshine.effects.glow)
     CurrentScene.uiShader.glow.strength = 5
