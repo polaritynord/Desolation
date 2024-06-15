@@ -208,7 +208,7 @@ function playerScript:shootingWeapon(delta, player)
             local bullet = object.new(CurrentScene.bullets)
             bullet.position[1] = player.position[1] + math.cos(player.rotation)*weapon.bulletOffset
             bullet.position[2] = player.position[2] + math.sin(player.rotation)*weapon.bulletOffset
-            bullet.rotation = player.rotation
+            bullet.rotation = player.rotation + math.uniform(-weapon.bulletSpread, weapon.bulletSpread)
             bullet:addComponent(table.new(bulletScript))
             bullet:addComponent(ENGINE_COMPONENTS.particleComponent.new(bullet))
             bullet.script:load()
