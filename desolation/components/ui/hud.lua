@@ -26,6 +26,7 @@ end
 function hud:load()
     local ui = self.parent.UIComponent
     self.parent.crtShader = moonshine.chain(960, 540, moonshine.effects.crt)
+    self.parent.crtShader.crt.feather = 0
     ui.draw = self.customDraw
     --Left side (health etc.)
     ui.healthBar = ui:newImage(
@@ -113,6 +114,24 @@ function hud:load()
             color = {0.7, 0.7, 0.7, 0};
         }
     )
+    ui.slot1Ammo = ui:newTextLabel(
+        {
+            position = {-190, 484};
+            begin = "center";
+        }
+    )
+    ui.slot2Ammo = ui:newTextLabel(
+        {
+            position = {-15, 484};
+            begin = "center";
+        }
+    )
+    ui.slot3Ammo = ui:newTextLabel(
+        {
+            position = {160, 484};
+            begin = "center";
+        }
+    )
     ui.slot1Img = ui:newImage(
         {
             position = {300, 540};
@@ -173,7 +192,7 @@ function hud:update(delta)
     if weapon then
         ui.weaponAmmoImg.source = Assets.images.hud_ammo
         ui.weaponImg.source = Assets.images["weapon_" .. string.lower(weapon.name)]
-        ui.weaponName.text = weapon.name
+        ui.weaponName.text = Loca.weapons[string.lower(weapon.name)]
         ui.weaponAmmoText.text = weapon.magAmmo
         ui.ammunitionText.text = player.inventory.ammunition[weapon.ammoType]
         --TODO Add scaling fix for weaponImg
@@ -212,6 +231,7 @@ function hud:update(delta)
             --update base alpha
             ui["slot" .. i .. "Base"].color[4] = ui["slot" .. i .. "Base"].color[4] + (0.75-ui["slot" .. i .. "Base"].color[4])*16*delta
             ui["slot" .. i .. "Img"].color[4] = ui["slot" .. i .. "Img"].color[4] + (1-ui["slot" .. i .. "Img"].color[4])*16*delta
+            ui["slot" .. i .. "Ammo"].color[4] = ui["slot" .. i .. "Ammo"].color[4] + (1-ui["slot" .. i .. "Ammo"].color[4])*16*delta
             --update base position
             local isSlot = coreFuncs.boolToNum(i == player.inventory.slot)
             ui["slot" .. i .. "Base"].position[2] = ui["slot" .. i .. "Base"].position[2] +
@@ -219,17 +239,26 @@ function hud:update(delta)
             --update image position
             ui["slot" .. i .. "Img"].position[2] = ui["slot" .. i .. "Img"].position[2] +
                 (540-(isSlot*30)-ui["slot" .. i .. "Img"].position[2])*10*delta
-            if player.inventory.weapons[i] then
-                local name = player.inventory.weapons[i].name
+            --update ammo position
+            ui["slot" .. i .. "Ammo"].position[2] = ui["slot" .. i .. "Ammo"].position[2] +
+                (484-(isSlot*30)-ui["slot" .. i .. "Ammo"].position[2])*10*delta
+            --if slot has a weapon
+            local w = player.inventory.weapons[i]
+            if w ~= nil then
+                local name = w.name
                 ui["slot" .. i .. "Img"].source = Assets.images["weapon_" .. string.lower(name)]
+                ui["slot" .. i .. "Ammo"].text = player.inventory.ammunition[w.ammoType] + w.magAmmo
             else
                 ui["slot" .. i .. "Img"].source = nil
+                ui["slot" .. i .. "Ammo"].text = ""
             end
+            --update ammo position
         end
     else
         for i = 1, 3 do
             ui["slot" .. i .. "Base"].color[4] = ui["slot" .. i .. "Base"].color[4] + (-ui["slot" .. i .. "Base"].color[4])*16*delta
             ui["slot" .. i .. "Img"].color[4] = ui["slot" .. i .. "Img"].color[4] + (-ui["slot" .. i .. "Img"].color[4])*16*delta
+            ui["slot" .. i .. "Ammo"].color[4] = ui["slot" .. i .. "Ammo"].color[4] + (-ui["slot" .. i .. "Ammo"].color[4])*16*delta
         end
     end
     --Joystick indicator

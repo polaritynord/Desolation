@@ -49,5 +49,10 @@
     },
     "intro": {
         "betaText": "This game is in early development. Everything is subject to change."
+    },
+    "weapons": {
+        "pistol": "Pistol",
+        "assaultrifle": "Assault Rifle",
+        "shotgun": "Shotgun"
     }
 }

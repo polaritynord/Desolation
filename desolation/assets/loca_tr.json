@@ -49,5 +49,10 @@
     },
     "intro": {
         "betaText": "Bu oyun erken gelistirme asamasindadir. Her sey degisime aciktir."
+    },
+    "weapons": {
+        "pistol": "Tabanca",
+        "assaultrifle": "Taramali T.",
+        "shotgun": "Pompali T."
     }
 }
