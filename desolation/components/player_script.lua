@@ -200,9 +200,38 @@ function playerScript:shootingWeapon(delta, player)
             playerSounds:stopSound(playerSounds.sounds.shoot.empty)
             return
         end
-        --Fire weapon
-        weapon.magAmmo = weapon.magAmmo - weapon.bulletPerShot
-        playerSounds:playStopSound(playerSounds.sounds.shoot[weapon.name])
+        if weapon.ammoType == "auto" then
+            --Fire weapon
+            weapon.magAmmo = weapon.magAmmo - weapon.bulletPerShot
+            playerSounds:playStopSound(playerSounds.sounds.shoot[weapon.name])
+            --Bullet instance creation
+            local bullet = object.new(CurrentScene.bullets)
+            bullet.position[1] = player.position[1] + math.cos(player.rotation)*weapon.bulletOffset
+            bullet.position[2] = player.position[2] + math.sin(player.rotation)*weapon.bulletOffset
+            bullet.rotation = player.rotation
+            bullet:addComponent(table.new(bulletScript))
+            bullet:addComponent(ENGINE_COMPONENTS.particleComponent.new(bullet))
+            bullet.script:load()
+            bullet.speed = weapon.bulletSpeed
+            CurrentScene.bullets:addChild(bullet)
+        elseif weapon.ammoType == "shotgun" then
+            --Fire weapon
+            weapon.magAmmo = weapon.magAmmo - 1
+            playerSounds:playStopSound(playerSounds.sounds.shoot[weapon.name])
+            --Bullet instance creation
+            local radians = math.pi*2 * (weapon.bulletSpread/360) --turn into radians
+            for i = 1, weapon.bulletPerShot do
+                local bullet = object.new(CurrentScene.bullets)
+                bullet.position[1] = player.position[1] + math.cos(player.rotation)*weapon.bulletOffset
+                bullet.position[2] = player.position[2] + math.sin(player.rotation)*weapon.bulletOffset
+                bullet.rotation = player.rotation + (i-2)*(radians/weapon.bulletPerShot)
+                bullet:addComponent(table.new(bulletScript))
+                bullet:addComponent(ENGINE_COMPONENTS.particleComponent.new(bullet))
+                bullet.script:load()
+                bullet.speed = weapon.bulletSpeed
+                CurrentScene.bullets:addChild(bullet)
+            end
+        end
         --effects
         player.handOffset = -weapon.handRecoilIntensity
         if Settings.screen_shake and GetGlobal("freecam") < 1 then
@@ -219,17 +248,6 @@ function playerScript:shootingWeapon(delta, player)
             local shootParticles = player.particleComponent
             particleFuncs.createShootParticles(shootParticles, player.rotation)
         end
-        --Bullet instance creation
-        local bullet = object.new(CurrentScene.bullets)
-        bullet.position[1] = player.position[1] + math.cos(player.rotation)*weapon.bulletOffset
-        bullet.position[2] = player.position[2] + math.sin(player.rotation)*weapon.bulletOffset
-        bullet.rotation = player.rotation
-        bullet:addComponent(table.new(bulletScript))
-        bullet:addComponent(ENGINE_COMPONENTS.particleComponent.new(bullet))
-        --bullet.script = table.new(bulletScript)
-        --bullet.script.parent = bullet
-        bullet.script:load()
-        CurrentScene.bullets:addChild(bullet)
     end
 end
 
@@ -285,7 +303,8 @@ function playerScript:load()
         ammunition = {
             light = 0;
             medium = 0;
-            heavy = 0;
+            revolver = 0;
+            shotgun = 0;
         };
         slot = 1;
     }

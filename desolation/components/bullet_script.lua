@@ -46,8 +46,8 @@ function bulletScript:update(delta)
         table.remove(bullet.oldPositions, 1)
     end
     --Movement
-    bullet.position[1] = bullet.position[1] + math.cos(bullet.rotation)*3000*delta
-    bullet.position[2] = bullet.position[2] + math.sin(bullet.rotation)*3000*delta
+    bullet.position[1] = bullet.position[1] + math.cos(bullet.rotation)*bullet.speed*delta
+    bullet.position[2] = bullet.position[2] + math.sin(bullet.rotation)*bullet.speed*delta
     self:collisionCheck(bullet)
 end
 

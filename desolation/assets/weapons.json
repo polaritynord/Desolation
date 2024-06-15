@@ -1,7 +1,7 @@
 {
     "Pistol": {
         "weaponType": "auto",
-        "bulletSpeed": 780,
+        "bulletSpeed": 3000,
         "bulletDamage": 0,
         "bulletSpread": 0,
         "bulletPerShot": 1,
@@ -32,19 +32,19 @@
     },
 
     "Shotgun": {
-        "weaponType": "auto",
-        "bulletSpeed": 780,
+        "weaponType": "shotgun",
+        "bulletSpeed": 3000,
         "bulletDamage": 0,
-        "bulletSpread": 0,
-        "bulletPerShot": 1,
-        "reloadTime": 0,
-        "shootTime": 0.875,
-        "magSize": 13,
+        "bulletSpread": 45,
+        "bulletPerShot": 3,
+        "reloadTime": 0.35,
+        "shootTime": 0.7,
+        "magSize": 6,
         "bulletOffset": 15,
-        "recoil": 0.35,
-        "screenShakeIntensity": 0,
-        "ammoType": "light",
-        "handRecoilIntensity":  15
+        "recoil": 0.8,
+        "screenShakeIntensity": 6.8,
+        "ammoType": "shotgun",
+        "handRecoilIntensity":  20
     },
 
     "WEAPONS_LIST": ["Pistol", "AssaultRifle", "Shotgun"]
