@@ -27,14 +27,18 @@ function playerSounds:load()
         shoot = {};
         reload = {};
         hurt = {};
+        progress = {};
     }
     --Load footsteps
     for i = 1, 10 do
         self.sounds.step.grass[#self.sounds.step.grass+1] = love.audio.newSource("desolation/assets/sounds/footstep/grass" .. i .. ".wav", "static")
     end
     --Weapon sfx
-    self.sounds.reload.Pistol = love.audio.newSource("desolation/assets/sounds/weapons/rld_pistol.wav", "static")
+    self.sounds.reload.Pistol = love.audio.newSource("desolation/assets/sounds/weapons/reload_pistol.wav", "static")
     self.sounds.shoot.Pistol = love.audio.newSource("desolation/assets/sounds/weapons/shoot_pistol.wav", "static")
+    self.sounds.reload.Shotgun = love.audio.newSource("desolation/assets/sounds/weapons/reload_shotgun.wav", "static")
+    self.sounds.shoot.Shotgun = love.audio.newSource("desolation/assets/sounds/weapons/shoot_shotgun.wav", "static")
+    self.sounds.progress.Shotgun = love.audio.newSource("desolation/assets/sounds/weapons/progress_shotgun.wav", "static")
     self.sounds.shoot.empty = love.audio.newSource("desolation/assets/sounds/weapons/empty_mag.wav", "static")
     --Item sfx
     self.sounds.acquire = love.audio.newSource("desolation/assets/sounds/acquire.wav", "static")

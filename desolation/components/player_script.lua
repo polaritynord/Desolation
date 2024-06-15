@@ -191,7 +191,7 @@ end
 function playerScript:shootingWeapon(delta, player)
     player.shootTimer = player.shootTimer + delta
     local weapon = player.inventory.weapons[player.inventory.slot]
-    if not weapon or player.reloading then return end
+    if weapon == nil then return end
     local playerSounds = player.soundManager.script
     if (love.mouse.isDown(1) or InputManager:getAxis(6) > 0.4) and player.shootTimer > weapon.shootTime then
         player.shootTimer = 0
@@ -200,7 +200,7 @@ function playerScript:shootingWeapon(delta, player)
             playerSounds:stopSound(playerSounds.sounds.shoot.empty)
             return
         end
-        if weapon.ammoType == "auto" then
+        if weapon.weaponType == "auto" then
             --Fire weapon
             weapon.magAmmo = weapon.magAmmo - weapon.bulletPerShot
             playerSounds:playStopSound(playerSounds.sounds.shoot[weapon.name])
@@ -215,6 +215,7 @@ function playerScript:shootingWeapon(delta, player)
             bullet.speed = weapon.bulletSpeed
             CurrentScene.bullets:addChild(bullet)
         elseif weapon.ammoType == "shotgun" then
+            player.reloading = false
             --Fire weapon
             weapon.magAmmo = weapon.magAmmo - 1
             playerSounds:playStopSound(playerSounds.sounds.shoot[weapon.name])
@@ -261,23 +262,45 @@ function playerScript:reloadingWeapon(delta, player)
         player.reloadTimer = player.reloadTimer + delta
         if player.reloadTimer > weapon.reloadTime then
             player.reloadTimer = 0
-            player.reloading = false
-            --Actual reloading stuff
-            local ammoNeeded = weapon.magSize - weapon.magAmmo
-            if ammoNeeded > player.inventory.ammunition[weapon.ammoType] then
-                --If the place to fill is greater than the amount of ammunition
-                weapon.magAmmo = weapon.magAmmo + player.inventory.ammunition[weapon.ammoType]
-                player.inventory.ammunition[weapon.ammoType] = 0
-            else
-                --..Or if there's more
-                weapon.magAmmo = weapon.magAmmo + ammoNeeded
-                player.inventory.ammunition[weapon.ammoType] = player.inventory.ammunition[weapon.ammoType] - ammoNeeded
+            if weapon.weaponType == "auto" then
+                player.reloading = false
+                --Actual reloading stuff
+                local ammoNeeded = weapon.magSize - weapon.magAmmo
+                if ammoNeeded > player.inventory.ammunition[weapon.ammoType] then
+                    --If the place to fill is greater than the amount of ammunition
+                    weapon.magAmmo = weapon.magAmmo + player.inventory.ammunition[weapon.ammoType]
+                    player.inventory.ammunition[weapon.ammoType] = 0
+                else
+                    --..Or if there's more
+                    weapon.magAmmo = weapon.magAmmo + ammoNeeded
+                    player.inventory.ammunition[weapon.ammoType] = player.inventory.ammunition[weapon.ammoType] - ammoNeeded
+                end
+            elseif weapon.ammoType == "shotgun" then
+                --Actual reloading stuff
+                if player.inventory.ammunition[weapon.ammoType] < 1 then
+                    --end reload since no more shells are left
+                    player.reloading = false
+                else
+                    --add one shell to weapon
+                    player.inventory.ammunition[weapon.ammoType] = player.inventory.ammunition[weapon.ammoType] - 1
+                    weapon.magAmmo = weapon.magAmmo + 1
+                    --sound effects
+                    local playerSounds = player.soundManager.script
+                    if weapon.magAmmo == weapon.magSize then
+                        playerSounds:playStopSound(playerSounds.sounds.reload[weapon.name])
+                        player.reloading = false
+                    else
+                        playerSounds:playStopSound(playerSounds.sounds.progress[weapon.name])
+                    end
+                end
             end
         end
     else
         if InputManager:isPressed("reload") then
             local playerSounds = player.soundManager.script
-            playerSounds:playStopSound(playerSounds.sounds.reload[weapon.name])
+            if weapon.weaponType == "auto" then
+                playerSounds:playStopSound(playerSounds.sounds.reload[weapon.name])
+            end
             player.reloading = true
             player.reloadTimer = 0
         end
