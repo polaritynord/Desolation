@@ -177,6 +177,22 @@ function hud:update(delta)
         ui.weaponAmmoText.text = weapon.magAmmo
         ui.ammunitionText.text = player.inventory.ammunition[weapon.ammoType]
         --TODO Add scaling fix for weaponImg
+        --weaponImg shooting effects
+        ui.weaponImg.rotation = ui.weaponImg.rotation + (-ui.weaponImg.rotation)*8*delta
+        ui.weaponImg.scale[1] = ui.weaponImg.scale[1] + (-3.4-ui.weaponImg.scale[1])*8*delta
+        ui.weaponImg.scale[2] = ui.weaponImg.scale[2] + (3.4-ui.weaponImg.scale[2])*8*delta
+        --color (depleted ammo)
+        if weapon.magAmmo < 1 and player.inventory.ammunition[weapon.ammoType] < 1 then
+            ui.weaponImg.color = {1, 0, 0, 1}
+        else
+            ui.weaponImg.color = {1, 1, 1, 1}
+        end
+        --alpha
+        if player.reloading then
+            ui.weaponImg.color[4] = player.reloadTimer/weapon.reloadTime
+        else
+            ui.weaponImg.color[4] = 1
+        end
     else
         ui.weaponAmmoImg.source = nil
         ui.weaponImg.source = nil

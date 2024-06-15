@@ -17,6 +17,7 @@ function bulletScript:collisionCheck(bullet)
                 --create particles (TODO: different material types, particle setting)
                 local particleComp = CurrentScene.bullets.particleComponent
                 particleFuncs.createWallHitParticles(particleComp, bullet, i)
+                particleFuncs.createBulletHoleParticles(particleComp, bullet, i)
             end
         end
     end

@@ -249,6 +249,10 @@ function playerScript:shootingWeapon(delta, player)
             local shootParticles = player.particleComponent
             particleFuncs.createShootParticles(shootParticles, player.rotation)
         end
+        --hud stuff
+        local hud = CurrentScene.hud.UIComponent
+        hud.weaponImg.rotation = math.pi/8
+        hud.weaponImg.scale = {-4, 4}
     end
 end
 

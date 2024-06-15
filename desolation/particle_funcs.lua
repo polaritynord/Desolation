@@ -39,6 +39,24 @@ function particleFuncs.createWallHitParticles(comp, bullet, i)
     end
 end
 
+function particleFuncs.createBulletHoleParticles(comp, bullet, i)
+    if not Settings.bullet_holes then return end
+    --determine rotation
+    local rot = bullet.rotation
+    if rot > math.pi/4 and rot < 3*math.pi/4 then
+        rot = math.pi/2
+    end
+    comp:newParticle(
+        {
+            position = table.new(bullet.oldPositions[i]);
+            size = {6, 6};
+            color = {0, 0, 0, 0.6};
+            rotation = rot;
+            despawnTime = 30;
+        }
+    )
+end
+
 function particleFuncs.wallHitParticleUpdate(particle, delta)
     local speed = 400
     particle.position[1] = particle.position[1] + math.cos(particle.rotation)*speed*delta
