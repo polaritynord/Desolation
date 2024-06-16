@@ -23,5 +23,11 @@
         "pushable": true,
         "collidable": true,
         "material": "concrete"
+    },
+
+    "radio": {
+        "script": "desolation/components/props/radio",
+        "pushable": false,
+        "collidable": false
     }
 }

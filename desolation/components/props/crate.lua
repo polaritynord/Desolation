@@ -67,7 +67,7 @@ function crateScript:collisionCheck(crate)
             if coreFuncs.aabbCollision(cratePos, propPos, crateSize, propSize) then
                 crate.position = table.new(crate.oldPos)
                 --pushing crates
-                if string.sub(prop.name, 1, 5) == "crate" then
+                if string.sub(prop.name, 1, 5) == "crate" or prop.name == "barrel" then
                     --calculate push rotation
                     local dx, dy = cratePos[1]-propPos[1], cratePos[2]-propPos[2]
                     local pushRot = math.atan2(dy, dx) + math.pi
@@ -100,6 +100,7 @@ function crateScript:load()
 end
 
 function crateScript:update(delta)
+    if GamePaused then return end
     local crate = self.parent
     --movement
     crate.oldPos = table.new(crate.position)

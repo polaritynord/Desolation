@@ -68,6 +68,7 @@ function crateScript:load()
 end
 
 function crateScript:update(delta)
+    if GamePaused then return end
     local barrel = self.parent
     --movement
     barrel.oldPos = table.new(barrel.position)

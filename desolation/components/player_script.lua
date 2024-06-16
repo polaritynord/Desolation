@@ -364,6 +364,7 @@ function playerScript:load()
     --TODO Find a better way to handle these key presses?
     player.keyPressData = {
         ["q"] = false;
+        ["e"] = false;
     }
     --Starter weapon
     player.inventory.weapons[1] = weaponManager.Pistol.new()
