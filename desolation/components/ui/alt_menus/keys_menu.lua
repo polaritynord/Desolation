@@ -20,7 +20,7 @@ function keysMenu:load()
                     keys.selectedBinding[1] = element
                     keys.selectedBinding[2] = element.binding
                     element.textFont = "disposable-droid-italic"
-                    element.buttonText = "Press a key..."
+                    element.buttonText = Loca.keysMenu.pressAKey
                 end;
             }
         )
@@ -53,8 +53,6 @@ function keysMenu:update(delta)
     else
         ui.alpha = 0.25
     end
-
-    if not ui.enabled then return end
 end
 
 return keysMenu

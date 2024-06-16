@@ -11,6 +11,7 @@ function startup:load()
         return
     end
     Settings.first_time_playing = false
+    love.filesystem.write("settings.json", json.encode(Settings))
     --elements
     local ui = self.parent.UIComponent
     ui.languages = {"en", "tr"}
@@ -18,7 +19,7 @@ function startup:load()
         {
             text = "Select a Language:";
             size = 30;
-            position = {365, 300}
+            position = {365, 300};
         }
     )
     ui.selectButton = ui:newTextButton(

@@ -284,6 +284,7 @@ function playerScript:reloadingWeapon(delta, player)
                 if player.inventory.ammunition[weapon.ammoType] < 1 then
                     --end reload since no more shells are left
                     player.reloading = false
+                    player.reloadTimer = weapon.reloadTime
                 else
                     --add one shell to weapon
                     player.inventory.ammunition[weapon.ammoType] = player.inventory.ammunition[weapon.ammoType] - 1

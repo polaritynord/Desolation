@@ -38,6 +38,9 @@
         "weaponFlameParticles": "Weapon Flame Particles: ",
         "playerTrailParticles": "Player Trail Particles: "
     },
+    "keysMenu": {
+        "pressAKey": "Press a key..."
+    },
     "audioMenu": {
         "masterVolume": "Master Volume: ",
         "sfxVolume": "SFX Volume: ",

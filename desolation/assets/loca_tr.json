@@ -38,6 +38,9 @@
         "weaponFlameParticles": "Silah Ates Parcaciklari: ",
         "playerTrailParticles": "Oyuncu Iz Parcaciklari: "
     },
+    "keysMenu": {
+        "pressAKey": "Bir tusa tikla..."
+    },
     "audioMenu": {
         "masterVolume": "Ana Ses: ",
         "sfxVolume": "Ses Efektleri: ",

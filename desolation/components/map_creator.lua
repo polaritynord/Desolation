@@ -94,6 +94,12 @@ function mapCreator:loadMap(path)
     local player = CurrentScene.player
     player.position = data.playerData.position
     CurrentScene.camera.position = data.playerData.cameraPosition
+    --ambience
+    if data.ambience ~= nil then
+        self.ambience = love.audio.newSource(data.ambience, "stream")
+        self.ambience:setLooping(true)
+        self.ambience:play()
+    end
 end
 
 function mapCreator:load()
@@ -102,7 +108,12 @@ function mapCreator:load()
 end
 
 function mapCreator:update(delta)
-    if GamePaused then return end
+    if self.ambience == nil then return end
+    if GamePaused then
+        self.ambience:pause()
+    else
+        self.ambience:play()
+    end
     --self.parent.tile.imageComponent.color = {Settings.brightness, Settings.brightness, Settings.brightness, 1}
 end
 
