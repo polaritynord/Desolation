@@ -112,6 +112,7 @@
             ["player_body", "desolation/assets/images/player/body.png"],
             ["player_hand_empty", "desolation/assets/images/player/hand_empty.png"],
             ["player_hand_placeholder", "desolation/assets/images/player/hand_placeholder.png"],
+            ["crate_wood", "desolation/assets/images/props/crate_wood.png"],
 
             ["weapon_pistol", "desolation/assets/images/weapons/pistol.png"],
             ["weapon_assaultrifle", "desolation/assets/images/weapons/assault_rifle.png"],

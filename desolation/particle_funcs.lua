@@ -6,6 +6,18 @@ function particleFuncs.shootParticleUpdate(particle, delta)
     particle.position[2] = particle.position[2] + math.sin(particle.rotation)*speed*delta
 end
 
+function particleFuncs.wallHitParticleUpdate(particle, delta)
+    local speed = 400
+    particle.position[1] = particle.position[1] + math.cos(particle.rotation)*speed*delta
+    particle.position[2] = particle.position[2] + math.sin(particle.rotation)*speed*delta
+end
+
+function particleFuncs.crateWoodUpdate(particle, delta)
+    particle.position[1] = particle.position[1] + math.cos(particle.rotation)*particle.velocity*delta
+    particle.position[2] = particle.position[2] + math.sin(particle.rotation)*particle.velocity*delta
+    particle.velocity = particle.velocity + (-particle.velocity)*10*delta
+end
+
 function particleFuncs.createShootParticles(comp, rotation)
     for _ = 1, 6 do
         local size = math.uniform(5, 10)
@@ -64,10 +76,22 @@ function particleFuncs.createBulletHoleParticles(comp, bullet, i)
     )
 end
 
-function particleFuncs.wallHitParticleUpdate(particle, delta)
-    local speed = 400
-    particle.position[1] = particle.position[1] + math.cos(particle.rotation)*speed*delta
-    particle.position[2] = particle.position[2] + math.sin(particle.rotation)*speed*delta
+function particleFuncs.createCrateWoodParticles(comp, position)
+    for _ = 1, 4 do
+        local temp = math.uniform(0.7, 1.1)
+        local p = comp:newParticle(
+            {
+                position = table.new(position);
+                sourceImage = Assets.images["crate_wood"];
+                type = "image";
+                size = {2*temp, 2*temp};
+                rotation = math.uniform(0, math.pi*2);
+                despawnTime = 5;
+                update = particleFuncs.crateWoodUpdate;
+            }
+        )
+        p.velocity = math.uniform(200, 400);
+    end
 end
 
 return particleFuncs

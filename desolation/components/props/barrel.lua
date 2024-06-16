@@ -33,7 +33,7 @@ function crateScript:collisionCheck(barrel)
             if coreFuncs.aabbCollision(cratePos, propPos, crateSize, propSize) then
                 barrel.position = table.new(barrel.oldPos)
                 --pushing crates
-                if string.sub(prop.name, 1, 5) == "barrel" then
+                if string.sub(prop.name, 1, 6) == "barrel" or string.sub(prop.name, 1, 5) == "crate" then
                     --calculate push rotation
                     local dx, dy = cratePos[1]-propPos[1], cratePos[2]-propPos[2]
                     local pushRot = math.atan2(dy, dx) + math.pi

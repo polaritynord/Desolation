@@ -2,7 +2,7 @@ local coreFuncs = require("coreFuncs")
 
 local particleComponent = {}
 
-function particleComponent.new(parent, particleUpdate)
+function particleComponent.new(parent)
     local component = {
         parent = parent;
         name = "particleComponent";
@@ -19,11 +19,12 @@ function particleComponent.new(parent, particleUpdate)
             despawnTime = attributes.despawnTime or 1;
             color = attributes.color or {1,1,1,1};
             update = attributes.update or nil;
-            sourceImage = attributes.sourceImage or nil;
+            sourceImage = attributes.sourceImage or Assets.defaultImages.missing_texture;
             timer = 0;
         }
 
         component.particles[#component.particles+1] = particle
+        return particle
     end
 
     function component:update(delta)
@@ -52,12 +53,13 @@ function particleComponent.new(parent, particleUpdate)
                     love.graphics.translate(relativePos[1], relativePos[2])
                     love.graphics.rotate(particle.rotation+self.parent.rotation)
                     love.graphics.rectangle("fill", -particle.size[1]/2*camera.zoom, -particle.size[2]/2*camera.zoom, particle.size[1]*camera.zoom, particle.size[2]*camera.zoom)
+                    love.graphics.setColor(1, 1, 1, 1)
                 love.graphics.pop()
             elseif particle.type == "image" then
-                local src = Assets.images.player.body
+                local src = particle.sourceImage
                 local width = src:getWidth() ;  local height = src:getHeight()
                 love.graphics.draw(
-                    src, relativePos[1], relativePos[2], self.parent.rotation,
+                    src, relativePos[1], relativePos[2], self.parent.rotation+particle.rotation,
                     particle.size[1]*camera.zoom, particle.size[2]*camera.zoom, width/2, height/2
                 )
             end
