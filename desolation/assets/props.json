@@ -5,5 +5,9 @@
 
     "crate": {
         "script": "desolation/components/props/crate"
+    },
+    
+    "crate_big": {
+        "script": "desolation/components/props/crate"
     }
 }

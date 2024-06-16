@@ -225,6 +225,7 @@ function playerScript:shootingWeapon(delta, player)
             bullet:addComponent(ENGINE_COMPONENTS.particleComponent.new(bullet))
             bullet.script:load()
             bullet.speed = weapon.bulletSpeed
+            bullet.damage = weapon.bulletDamage
             CurrentScene.bullets:addChild(bullet)
         elseif weapon.ammoType == "shotgun" then
             player.reloading = false
@@ -242,6 +243,7 @@ function playerScript:shootingWeapon(delta, player)
                 bullet:addComponent(ENGINE_COMPONENTS.particleComponent.new(bullet))
                 bullet.script:load()
                 bullet.speed = weapon.bulletSpeed
+                bullet.damage = weapon.bulletDamage
                 CurrentScene.bullets:addChild(bullet)
             end
         end

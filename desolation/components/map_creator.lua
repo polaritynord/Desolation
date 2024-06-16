@@ -77,6 +77,7 @@ function mapCreator:loadMap(path)
             prop.name = v[1]
             prop.collidable = false
             prop.material = "wood"
+            prop.health = 100
             --custom variables
             for _, k in ipairs(v[4]) do
                 prop[k[1]] = k[2]

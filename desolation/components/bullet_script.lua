@@ -14,10 +14,10 @@ function bulletScript:collisionCheck(bullet)
             if coreFuncs.aabbCollision(bulletPos, wall.position, size, wallSize) then
                 --remove bullet
                 table.removeValue(CurrentScene.bullets.tree, bullet)
-                --create particles (TODO: different material types, particle setting)
+                --create particles (TODO: particle setting)
                 local particleComp = CurrentScene.bullets.particleComponent
-                particleFuncs.createWallHitParticles(particleComp, bullet, i)
-                particleFuncs.createBulletHoleParticles(particleComp, bullet, i)
+                particleFuncs.createWallHitParticles(particleComp, bullet, i, wall.material)
+                --particleFuncs.createBulletHoleParticles(particleComp, bullet, i)
             end
         end
         --iterate through props
@@ -30,10 +30,13 @@ function bulletScript:collisionCheck(bullet)
                 if coreFuncs.aabbCollision(bulletPos, propPos, size, propSize) then
                     --remove bullet
                     table.removeValue(CurrentScene.bullets.tree, bullet)
-                    --create particles (TODO: different material types, particle setting)
+                    --create particles (TODO: particle setting)
                     local particleComp = CurrentScene.bullets.particleComponent
-                    particleFuncs.createWallHitParticles(particleComp, bullet, i)
-                    particleFuncs.createBulletHoleParticles(particleComp, bullet, i)
+                    particleFuncs.createWallHitParticles(particleComp, bullet, i, prop.material)
+                    --bullet hit event
+                    if prop.script.bulletHitEvent ~= nil then
+                        prop.script:bulletHitEvent(bullet)
+                    end
                 end
             end
         end

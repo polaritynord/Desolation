@@ -22,15 +22,22 @@ function particleFuncs.createShootParticles(comp, rotation)
     end
 end
 
-function particleFuncs.createWallHitParticles(comp, bullet, i)
+function particleFuncs.createWallHitParticles(comp, bullet, i, material)
     for _ = 1, 4 do
-        local c = math.uniform(0.2, 0.4)
         local s = math.uniform(4, 10)
+        --determine color based on material
+        local color = {0, 0, 0, 1}
+        if material == "wood" then
+            color = {0.5, 0.3, 0.1, math.uniform(0.6, 0.8)} -- NOTE varying colors like concrete?
+        elseif material == "concrete" then
+            local c = math.uniform(0.2, 0.4)
+            color = {c, c, c, math.uniform(0.6, 0.8)}
+        end
         comp:newParticle(
             {
                 position = table.new(bullet.oldPositions[i]);
                 size = {s, s};
-                color = {c, c, c, math.uniform(0.6, 0.8)};
+                color = color;
                 update = particleFuncs.wallHitParticleUpdate;
                 rotation = bullet.rotation + math.pi + math.uniform(-math.pi/6, math.pi/6);
                 despawnTime = 0.1;

@@ -2,7 +2,7 @@
     "Pistol": {
         "weaponType": "auto",
         "bulletSpeed": 3000,
-        "bulletDamage": 0,
+        "bulletDamage": 10,
         "bulletSpread": 0.07,
         "bulletPerShot": 1,
         "reloadTime": 0.7,
@@ -18,7 +18,7 @@
     "AssaultRifle": {
         "weaponType": "auto",
         "bulletSpeed": 3000,
-        "bulletDamage": 0,
+        "bulletDamage": 18,
         "bulletSpread": 0.14,
         "bulletPerShot": 1,
         "reloadTime": 1.26,
@@ -34,7 +34,7 @@
     "Shotgun": {
         "weaponType": "shotgun",
         "bulletSpeed": 3000,
-        "bulletDamage": 0,
+        "bulletDamage": 30,
         "bulletSpread": 45,
         "bulletPerShot": 3,
         "reloadTime": 0.35,
