@@ -31,6 +31,12 @@
             [
                 ["collidable", true]
             ]
+        ],
+        [
+            "crate_big", [-180, -65], 29,
+            [
+                ["collidable", true]
+            ]
         ]
     ],
     "items": [

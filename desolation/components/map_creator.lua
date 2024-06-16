@@ -78,6 +78,8 @@ function mapCreator:loadMap(path)
             prop.collidable = false
             prop.material = "wood"
             prop.health = 100
+            prop.position = v[2]
+            prop.rotation = v[3]
             --custom variables
             for _, k in ipairs(v[4]) do
                 prop[k[1]] = k[2]
@@ -88,8 +90,6 @@ function mapCreator:loadMap(path)
                 prop:addComponent(comp)
                 comp:load()
             end
-            prop.position = v[2]
-            prop.rotation = v[3]
             CurrentScene.props:addChild(prop)
         end
     end

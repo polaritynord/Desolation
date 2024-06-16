@@ -76,6 +76,14 @@ function playerScript:collisionCheck(player)
             local propPos = {prop.position[1]-propSize[1]/2, prop.position[2]-propSize[2]/2}
             if coreFuncs.aabbCollision(playerPos, propPos, size, propSize) then
                 player.position = {player.oldPos[1], player.oldPos[2]}
+                --pushing crates
+                if string.sub(prop.name, 1, 5) == "crate" then
+                    --calculate push rotation
+                    local dx, dy = playerPos[1]-propPos[1], playerPos[2]-propPos[2]
+                    local pushRot = math.atan2(dy, dx) + math.pi
+                    prop.velocity[1] = prop.velocity[1] + 20*math.cos(pushRot)
+                    prop.velocity[2] = prop.velocity[2] + 20*math.sin(pushRot)
+                end
             end
         end
     end
