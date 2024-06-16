@@ -4,7 +4,7 @@ local playerSounds = ENGINE_COMPONENTS.scriptComponent.new()
 
 function playerSounds:playStopSound(sound)
     if sound == nil then return end
-    love.audio.setVolume(Settings.vol_master * Settings.vol_world)
+    sound:setVolume(Settings.vol_master * Settings.vol_world)
     love.audio.stop(sound)
     love.audio.play(sound)
 end
@@ -16,7 +16,7 @@ end
 
 function playerSounds:playSound(sound)
     if sound == nil then return end
-    love.audio.setVolume(Settings.vol_master * Settings.vol_world)
+    sound:setVolume(Settings.vol_master * Settings.vol_world)
     love.audio.play(sound)
 end
 

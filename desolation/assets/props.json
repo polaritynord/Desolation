@@ -1,5 +1,9 @@
 {
     "exp_text": {
         "script": "desolation/components/props/exp_text"
+    },
+
+    "crate": {
+        "script": "desolation/components/props/crate"
     }
 }

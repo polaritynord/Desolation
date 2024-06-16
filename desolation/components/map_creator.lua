@@ -55,6 +55,7 @@ function mapCreator:loadMap(path)
         for _, v in ipairs(data.walls) do
             local wall = object.new(CurrentScene.walls)
             wall.name = v[1]
+            wall.material = "concrete" --TODO mater,al types for walls
             wall:addComponent(table.new(wallScript))
             --Load image if nonexistant
             if Assets.mapImages["wall_" .. v[1]] == nil then
@@ -74,6 +75,8 @@ function mapCreator:loadMap(path)
         for _, v in ipairs(data.props) do
             local prop = object.new(CurrentScene.props)
             prop.name = v[1]
+            prop.collidable = false
+            prop.material = "wood"
             --custom variables
             for _, k in ipairs(v[4]) do
                 prop[k[1]] = k[2]
@@ -103,7 +106,6 @@ function mapCreator:loadMap(path)
 end
 
 function mapCreator:load()
-    local obj = self.parent
     GamePaused = false
 end
 
@@ -112,6 +114,7 @@ function mapCreator:update(delta)
     if GamePaused then
         self.ambience:pause()
     else
+        self.ambience:setVolume(Settings.vol_master * Settings.vol_music)
         self.ambience:play()
     end
     --self.parent.tile.imageComponent.color = {Settings.brightness, Settings.brightness, Settings.brightness, 1}

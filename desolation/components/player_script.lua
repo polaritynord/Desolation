@@ -58,13 +58,25 @@ end
 
 function playerScript:collisionCheck(player)
     if GetGlobal("noclip") > 0 then return end
-    --iterate through walls
     local size = {48, 48}
     local playerPos = {player.position[1]-size[1]/2, player.position[2]-size[2]/2}
+    --iterate through walls
     for _, wall in ipairs(CurrentScene.walls.tree) do
         local wallSize = {wall.scale[1]*64, wall.scale[2]*64}
         if coreFuncs.aabbCollision(playerPos, wall.position, size, wallSize) then
             player.position = {player.oldPos[1], player.oldPos[2]}
+        end
+    end
+    --iterate through props
+    for _, prop in ipairs(CurrentScene.props.tree) do
+        if prop.collidable then
+            local src = prop.imageComponent.source
+            local w, h = src:getWidth(), src:getHeight()
+            local propSize = {prop.scale[1]*w, prop.scale[2]*h}
+            local propPos = {prop.position[1]-propSize[1]/2, prop.position[2]-propSize[2]/2}
+            if coreFuncs.aabbCollision(playerPos, propPos, size, propSize) then
+                player.position = {player.oldPos[1], player.oldPos[2]}
+            end
         end
     end
 end
@@ -197,7 +209,7 @@ function playerScript:shootingWeapon(delta, player)
         player.shootTimer = 0
         --Check if there is ammo available in magazine
         if weapon.magAmmo < 1 then
-            playerSounds:stopSound(playerSounds.sounds.shoot.empty)
+            playerSounds:playStopSound(playerSounds.sounds.shoot.empty)
             return
         end
         if weapon.weaponType == "auto" then

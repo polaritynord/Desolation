@@ -25,6 +25,12 @@
                 ["text", "$playgroundWelcome"],
                 ["font", "disposable-droid"]
             ]
+        ],
+        [
+            "crate", [-262, -65], 45,
+            [
+                ["collidable", true]
+            ]
         ]
     ],
     "items": [

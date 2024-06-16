@@ -20,6 +20,23 @@ function bulletScript:collisionCheck(bullet)
                 particleFuncs.createBulletHoleParticles(particleComp, bullet, i)
             end
         end
+        --iterate through props
+        for _ ,prop in ipairs(CurrentScene.props.tree) do
+            if prop.collidable then
+                local src = prop.imageComponent.source
+                local w, h = src:getWidth(), src:getHeight()
+                local propSize = {prop.scale[1]*w, prop.scale[2]*h}
+                local propPos = {prop.position[1]-propSize[1]/2, prop.position[2]-propSize[2]/2}
+                if coreFuncs.aabbCollision(bulletPos, propPos, size, propSize) then
+                    --remove bullet
+                    table.removeValue(CurrentScene.bullets.tree, bullet)
+                    --create particles (TODO: different material types, particle setting)
+                    local particleComp = CurrentScene.bullets.particleComponent
+                    particleFuncs.createWallHitParticles(particleComp, bullet, i)
+                    particleFuncs.createBulletHoleParticles(particleComp, bullet, i)
+                end
+            end
+        end
     end
 end
 
