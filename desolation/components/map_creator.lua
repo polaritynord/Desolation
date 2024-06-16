@@ -75,9 +75,10 @@ function mapCreator:loadMap(path)
         for _, v in ipairs(data.props) do
             local prop = object.new(CurrentScene.props)
             prop.name = v[1]
-            prop.collidable = false
-            prop.material = "wood"
-            prop.health = 100
+            prop.collidable = props[prop.name].collidable or false
+            prop.pushable = props[prop.name].pushable or false
+            prop.material = props[prop.name].material or "wood"
+            prop.health = props[prop.name].health or 100
             prop.position = v[2]
             prop.rotation = v[3]
             --custom variables
