@@ -30,7 +30,10 @@
             "crate", [-262, -65], 45, []
         ],
         [
-            "crate_big", [-180, -65], 29, []
+            "crate_big", [-180, -65], 29,
+            [
+                ["loot", ["medkit", "battery", "ammo_revolver"]]
+            ]
         ],
         [
             "barrel", [80, -160], 0, []

@@ -31,8 +31,8 @@ function mapCreator:loadMap(path)
     --load items
     if data.items ~= nil then
         --load items list & decode it
-        local items = love.filesystem.read(GAME_DIRECTORY .. "/assets/items.json")
-        items = json.decode(items)
+        self.parent.itemData = love.filesystem.read(GAME_DIRECTORY .. "/assets/items.json")
+        self.parent.itemData = json.decode(self.parent.itemData)
         --load items
         for _, v in ipairs(data.items) do
             local item = object.new(CurrentScene.items)
@@ -40,8 +40,8 @@ function mapCreator:loadMap(path)
             item:addComponent(table.new(itemScript))
             item.position = v[2]
             item.rotation = math.pi*2 * (v[3]/360)
-            item.scale = items[item.name].scale
-            item.pickupEvent = itemEventFuncs[items[item.name].pickupEvent]
+            item.scale = self.parent.itemData[item.name].scale
+            item.pickupEvent = itemEventFuncs[self.parent.itemData[item.name].pickupEvent]
             --weapon data
             if item.name == "weapon" then
                 item.weaponData = weaponManager[v[4]].new()

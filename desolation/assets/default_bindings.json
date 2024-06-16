@@ -16,7 +16,8 @@
         ["toggle_debug", "f3"],
         ["interact", "e"],
         ["reload", "r"],
-        ["peek", "z"]
+        ["peek", "z"],
+        ["toggle_hud", "f1"]
     ],
 
     "joystick": [
@@ -36,6 +37,7 @@
         ["drop_weapon", 2],
         ["interact", 1],
         ["reload", 3],
-        ["peek", 0]
+        ["peek", 0],
+        ["toggle_hud", 0]
     ]
 }

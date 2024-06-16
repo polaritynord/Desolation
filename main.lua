@@ -90,6 +90,11 @@ function love.keypressed(key, unicode)
         end
     end
 
+    --Toggle HUD key
+    if table.contains(InputManager:getKeys("toggle_hud"), key) and CurrentScene.name == "Game" then
+        CurrentScene.hud.UIComponent.enabled = not CurrentScene.hud.UIComponent.enabled
+    end
+
     --***DEVCONSOLE RELATED STUFF DOWN HERE***
     if not console then return end
     --Developer console opening key

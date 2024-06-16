@@ -1,5 +1,8 @@
+local object = require("engine.object")
 local coreFuncs = require("coreFuncs")
 local crateScript = ENGINE_COMPONENTS.scriptComponent.new()
+local itemEventFuncs = require("desolation.components.item.item_event_funcs")
+local itemScript = require("desolation.components.item.item_script")
 
 function crateScript:bulletHitEvent(bullet)
     local crate = self.parent
@@ -9,6 +12,25 @@ function crateScript:bulletHitEvent(bullet)
     if crate.health <= 0 then
         crate.destroyed = true
         crate.collidable = false
+        --summon loot (if exists)
+        if crate.loot == nil then return end
+        local mapCreator = CurrentScene.mapCreator
+        for _, loot in ipairs(crate.loot) do
+            --Create object data
+            local itemInstance = object.new(CurrentScene.items)
+            itemInstance.name = loot
+            itemInstance:addComponent(table.new(itemScript))
+            itemInstance.scale = mapCreator.itemData[itemInstance.name].scale
+            itemInstance.pickupEvent = itemEventFuncs[mapCreator.itemData[itemInstance.name].pickupEvent]
+            itemInstance.script:load()
+            --randomize position & rotation
+            itemInstance.position = {
+                crate.position[1]+math.uniform(-40, 40), crate.position[2]+math.uniform(-40, 40)
+            }
+            itemInstance.rotation = math.uniform(0, math.pi)
+            CurrentScene.items:addChild(itemInstance)
+        end
+        --particle effects
     end
 end
 
