@@ -55,6 +55,7 @@
     },
     "weapons": {
         "pistol": "Pistol",
+        "revolver": "Revolver",
         "assaultrifle": "Assault Rifle",
         "shotgun": "Shotgun"
     }

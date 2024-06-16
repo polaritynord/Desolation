@@ -115,6 +115,7 @@
             ["crate_wood", "desolation/assets/images/props/crate_wood.png"],
 
             ["weapon_pistol", "desolation/assets/images/weapons/pistol.png"],
+            ["weapon_revolver", "desolation/assets/images/weapons/revolver.png"],
             ["weapon_assaultrifle", "desolation/assets/images/weapons/assault_rifle.png"],
             ["weapon_shotgun", "desolation/assets/images/weapons/shotgun.png"],
 

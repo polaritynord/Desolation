@@ -55,6 +55,7 @@
     },
     "weapons": {
         "pistol": "Tabanca",
+        "revolver": "Altipatlar",
         "assaultrifle": "Taramali T.",
         "shotgun": "Pompali T."
     }

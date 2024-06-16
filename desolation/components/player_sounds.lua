@@ -36,6 +36,8 @@ function playerSounds:load()
     --Weapon sfx
     self.sounds.reload.Pistol = love.audio.newSource("desolation/assets/sounds/weapons/reload_pistol.wav", "static")
     self.sounds.shoot.Pistol = love.audio.newSource("desolation/assets/sounds/weapons/shoot_pistol.wav", "static")
+    self.sounds.reload.Revolver = love.audio.newSource("desolation/assets/sounds/weapons/reload_revolver.wav", "static")
+    self.sounds.shoot.Revolver = love.audio.newSource("desolation/assets/sounds/weapons/shoot_revolver.wav", "static")
     self.sounds.reload.AssaultRifle = love.audio.newSource("desolation/assets/sounds/weapons/reload_assault_rifle.wav", "static")
     self.sounds.shoot.AssaultRifle = love.audio.newSource("desolation/assets/sounds/weapons/shoot_assault_rifle.wav", "static")
     self.sounds.reload.Shotgun = love.audio.newSource("desolation/assets/sounds/weapons/reload_shotgun.wav", "static")

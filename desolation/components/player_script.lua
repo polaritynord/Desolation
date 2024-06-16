@@ -221,6 +221,7 @@ function playerScript:shootingWeapon(delta, player)
             return
         end
         if weapon.weaponType == "auto" then
+            if player.reloading then return end
             --Fire weapon
             weapon.magAmmo = weapon.magAmmo - weapon.bulletPerShot
             playerSounds:playStopSound(playerSounds.sounds.shoot[weapon.name])
@@ -367,8 +368,8 @@ function playerScript:load()
         ["e"] = false;
     }
     --Starter weapon
-    player.inventory.weapons[1] = weaponManager.Pistol.new()
-    player.inventory.weapons[1].magAmmo = 7
+    player.inventory.weapons[1] = weaponManager.Revolver.new()
+    player.inventory.weapons[1].magAmmo = 6
     player.inventory.ammunition.light = 78
     player.inventory.weapons[2] = weaponManager.Shotgun.new()
     player.inventory.weapons[3] = weaponManager.AssaultRifle.new()

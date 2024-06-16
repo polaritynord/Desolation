@@ -15,6 +15,22 @@
         "handRecoilIntensity":  15
     },
 
+    "Revolver": {
+        "weaponType": "auto",
+        "bulletSpeed": 3000,
+        "bulletDamage": 32,
+        "bulletSpread": 0.04,
+        "bulletPerShot": 1,
+        "reloadTime": 2.9,
+        "shootTime": 0.75,
+        "magSize": 6,
+        "bulletOffset": 65,
+        "recoil": 0.45,
+        "screenShakeIntensity": 4.2,
+        "ammoType": "revolver",
+        "handRecoilIntensity":  20
+    },
+
     "AssaultRifle": {
         "weaponType": "auto",
         "bulletSpeed": 3000,
@@ -47,5 +63,5 @@
         "handRecoilIntensity": 20
     },
 
-    "WEAPONS_LIST": ["Pistol", "AssaultRifle", "Shotgun"]
+    "WEAPONS_LIST": ["Pistol", "Revolver", "AssaultRifle", "Shotgun"]
 }
