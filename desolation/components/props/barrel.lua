@@ -5,6 +5,10 @@ local crateScript = ENGINE_COMPONENTS.scriptComponent.new()
 
 function crateScript:bulletHitEvent(bullet)
     local barrel = self.parent
+    --sound effect
+    local source = Assets.mapSounds["hit_barrel" .. math.random(1, 3)]
+    source:setVolume(Settings.vol_master * Settings.vol_world)
+    source:stop() ; source:play()
     barrel.velocity[1] = 100*math.cos(bullet.rotation)
     barrel.velocity[2] = 100*math.sin(bullet.rotation)
 end
@@ -50,6 +54,12 @@ function crateScript:load()
     --load image if nonexistant
     if Assets.mapImages["prop_barrel"] == nil then
         Assets.mapImages["prop_barrel"] = love.graphics.newImage("desolation/assets/images/props/barrel.png")
+    end
+    --load hit sounds
+    for i = 1, 3 do
+        if Assets.mapSounds["hit_barrel" .. i] == nil then
+            Assets.mapSounds["hit_barrel" .. i] = love.audio.newSource("desolation/assets/sounds/hit_barrel" .. i .. ".wav", "static")
+        end
     end
     barrel.imageComponent = ENGINE_COMPONENTS.imageComponent.new(barrel, Assets.mapImages["prop_barrel"])
     barrel.scale = {2.5, 2.5}

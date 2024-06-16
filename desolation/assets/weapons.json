@@ -35,7 +35,7 @@
         "weaponType": "shotgun",
         "bulletSpeed": 3000,
         "bulletDamage": 30,
-        "bulletSpread": 45,
+        "bulletSpread": 20,
         "bulletPerShot": 3,
         "reloadTime": 0.35,
         "shootTime": 0.7,

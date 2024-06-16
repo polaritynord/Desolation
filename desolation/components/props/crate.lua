@@ -11,6 +11,11 @@ function crateScript:bulletHitEvent(bullet)
     crate.velocity[1] = 100*math.cos(bullet.rotation)
     crate.velocity[2] = 100*math.sin(bullet.rotation)
     crate.rotVelocity = math.uniform(-5, 5)
+    --sound effect
+    local source = Assets.mapSounds["hit_crate" .. math.random(1, 2)]
+    source:setVolume(Settings.vol_master * Settings.vol_world)
+    source:stop() ; source:play()
+    --if crate is fully destroyed:
     if crate.health <= 0 then
         crate.destroyed = true
         crate.collidable = false
@@ -79,6 +84,12 @@ function crateScript:load()
     --load image if nonexistant
     if Assets.mapImages["prop_crate"] == nil then
         Assets.mapImages["prop_crate"] = love.graphics.newImage("desolation/assets/images/props/crate.png")
+    end
+    --load hit sounds
+    for i = 1, 2 do
+        if Assets.mapSounds["hit_crate" .. i] == nil then
+            Assets.mapSounds["hit_crate" .. i] = love.audio.newSource("desolation/assets/sounds/hit_crate" .. i .. ".wav", "static")
+        end
     end
     crate.imageComponent = ENGINE_COMPONENTS.imageComponent.new(crate, Assets.mapImages["prop_crate"])
     crate.scale = {2.5+coreFuncs.boolToNum(crate.name == "crate_big"), 2.5+coreFuncs.boolToNum(crate.name == "crate_big")}
