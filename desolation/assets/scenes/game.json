@@ -123,7 +123,10 @@
             
             ["hud_healthbar", "desolation/assets/images/hud/health_bar.png"],
             ["hud_ammo", "desolation/assets/images/hud/ammo.png"],
-            ["hud_joystick", "desolation/assets/images/hud/joystick.png"]
+            ["hud_joystick", "desolation/assets/images/hud/joystick.png"],
+            ["hud_acquire_medkit", "desolation/assets/images/hud/acquire_medkit.png"],
+            ["hud_acquire_battery", "desolation/assets/images/hud/acquire_battery.png"],
+            ["hud_acquire_ammo", "desolation/assets/images/hud/acquire_ammo.png"]
         ]
     }
 }

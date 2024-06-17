@@ -30,6 +30,19 @@ function itemEventFuncs.ammoPickup(item)
     --play sound
     local playerSounds = player.soundManager.script
     playerSounds:playStopSound(playerSounds.sounds.acquire)
+    --notification in hud
+    local hud = CurrentScene.hud.UIComponent
+    local newNotif = hud:newImage(
+        {
+            position = {25, 420};
+            source = Assets.images["hud_acquire_ammo"];
+            color = {1, 1, 1, 0.7};
+        }
+    )
+    newNotif.scale = {1.7, 1.7}
+    newNotif.timer = 0
+    hud.acquireNotifs[#hud.acquireNotifs+1] = newNotif
+    newNotif.index = #hud.acquireNotifs
 end
 
 function itemEventFuncs.medkitPickup(item)
@@ -40,6 +53,20 @@ function itemEventFuncs.medkitPickup(item)
     --play sound (TODO: find a healing sound)
     local playerSounds = player.soundManager.script
     playerSounds:playStopSound(playerSounds.sounds.acquire)
+    --notification in hud
+    local hud = CurrentScene.hud.UIComponent
+    local newNotif = hud:newImage(
+        {
+            position = {25, 420};
+            source = Assets.images["hud_acquire_medkit"];
+            color = {1, 1, 1, 0.7};
+        }
+    )
+    newNotif.scale = {1.7, 1.7}
+    newNotif.timer = 0
+    hud.acquireNotifs[#hud.acquireNotifs+1] = newNotif
+    newNotif.index = #hud.acquireNotifs
+    --vignette effects & misc
     CurrentScene.gameShaders.script.blueOffset = 255
     item.gettingPickedUp = true
 end
@@ -52,6 +79,19 @@ function itemEventFuncs.batteryPickup(item)
     --play sound (TODO: find a healing sound)
     local playerSounds = player.soundManager.script
     playerSounds:playStopSound(playerSounds.sounds.acquire)
+    --notification in hud
+    local hud = CurrentScene.hud.UIComponent
+    local newNotif = hud:newImage(
+        {
+            position = {25, 420};
+            source = Assets.images["hud_acquire_battery"];
+            color = {1, 1, 1, 0.7};
+        }
+    )
+    newNotif.scale = {1.7, 1.7}
+    newNotif.timer = 0
+    hud.acquireNotifs[#hud.acquireNotifs+1] = newNotif
+    newNotif.index = #hud.acquireNotifs
     CurrentScene.gameShaders.script.blueOffset = 255
     item.gettingPickedUp = true
 end

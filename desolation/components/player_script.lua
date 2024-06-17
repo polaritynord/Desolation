@@ -343,6 +343,7 @@ function playerScript:load()
     --Player variables
     player.velocity = {0, 0}
     player.health = 100 ; player.armor = 100
+    player.armorAcquired = true
     player.sprinting = false
     player.moving = false
     player.reloading = false

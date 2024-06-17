@@ -163,13 +163,7 @@ function hud:load()
             scale = {2, 2};
         }
     )
-    --ui.acquireNotif = ui:newTextLabel(
-    --    {
-    --        text = "Pistol Acquired";
-    --        position = {-100, 50};
-    --        begin = "right";
-    --    }
-    --)
+    ui.acquireNotifs = {}
     ui.slotSwitchTimer = 0
     ui.oldSlot = 1
 end
@@ -177,8 +171,12 @@ end
 function hud:update(delta)
     if GamePaused then return end
     local ui = self.parent.UIComponent
-    --Update monitors
     local player = CurrentScene.player
+    if not player.armorAcquired then
+        ui.enabled = false
+        return
+    end
+    --Update monitors
     ui.healthMonitor.text = player.health
     ui.armorMonitor.text = player.armor
     --update health monitor color
@@ -265,6 +263,28 @@ function hud:update(delta)
     ui.joystickImg.source = nil
     if InputManager.inputType == "joystick" then
         ui.joystickImg.source = Assets.images.hud_joystick
+    end
+    --Notifications
+    for i, notif in ipairs(ui.acquireNotifs) do
+        --Move notification smoothly
+        notif.realY = 460 - (notif.index*40)
+        notif.position[2] = notif.position[2] + (notif.realY-notif.position[2])*16*delta
+        notif.scale[1] = notif.scale[1] + (1-notif.scale[1])*10*delta
+        notif.scale[2] = notif.scale[2] + (1-notif.scale[2])*10*delta
+        notif.timer = notif.timer + delta
+        --start decay
+        if notif.timer > 2.5 then
+            notif.color[4] = notif.color[4] - 4*delta
+            if notif.color[4] < 0 then
+                --remove self
+                table.remove(ui.acquireNotifs, i)
+                table.removeValue(ui.elements, notif)
+                --change index of upper(newer) notifs
+                for k = i, #ui.acquireNotifs do
+                    ui.acquireNotifs[k].index = ui.acquireNotifs[k].index - 1
+                end
+            end
+        end
     end
 end
 
