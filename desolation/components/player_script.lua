@@ -56,7 +56,7 @@ function playerScript:movement(delta, player)
     player.position[2] = player.position[2] + (player.velocity[2]*speed*delta)
 end
 
-function playerScript:collisionCheck(player)
+function playerScript:collisionCheck(player, delta)
     if GetGlobal("noclip") > 0 then return end
     local size = {48, 48}
     local playerPos = {player.position[1]-size[1]/2, player.position[2]-size[2]/2}
@@ -77,12 +77,15 @@ function playerScript:collisionCheck(player)
             if coreFuncs.aabbCollision(playerPos, propPos, size, propSize) then
                 player.position = {player.oldPos[1], player.oldPos[2]}
                 --pushing crates
-                if string.sub(prop.name, 1, 5) == "crate" or prop.name == "barrel" then
+                if prop.movable then
                     --calculate push rotation
                     local dx, dy = playerPos[1]-propPos[1], playerPos[2]-propPos[2]
                     local pushRot = math.atan2(dy, dx) + math.pi
-                    prop.velocity[1] = prop.velocity[1] + 20*math.cos(pushRot)
-                    prop.velocity[2] = prop.velocity[2] + 20*math.sin(pushRot)
+                    local playerSpeed = GetGlobal("p_speed")
+                    if player.sprinting then playerSpeed = playerSpeed*1.6 end
+                    local vel = math.getVecValue(player.velocity)
+                    prop.velocity[1] = prop.velocity[1] + vel*math.cos(pushRot)*playerSpeed/prop.mass*delta
+                    prop.velocity[2] = prop.velocity[2] + vel*math.sin(pushRot)*playerSpeed/prop.mass*delta
                 end
             end
         end
@@ -154,7 +157,7 @@ function playerScript:slotSwitching(player)
         local weapon = player.inventory.weapons[player.inventory.previousSlot]
         if weapon then
             local playerSounds = player.soundManager.script
-            playerSounds:stopSound(playerSounds.sounds.reload[weapon.name])
+            playerSounds:stopSound(Assets.sounds["reload_" .. string.lower(weapon.name)])
         end
     end
 end
@@ -197,15 +200,15 @@ function playerScript:weaponDropping(player)
     player.reloading = false
     if weapon then
         local playerSounds = player.soundManager.script
-        if playerSounds.sounds.reload[weapon.name] then
-            playerSounds:stopSound(playerSounds.sounds.reload[weapon.name])
+        if Assets.sounds["reload_" .. string.lower(weapon.name)] then
+            playerSounds:stopSound(Assets.sounds["reload_" .. string.lower(weapon.name)])
         end
     end
     --Get rid of the held weapon
     player.inventory.weapons[player.inventory.slot] = nil
     --play sound
     local playerSounds = player.soundManager.script
-    playerSounds:playStopSound(playerSounds.sounds.drop)
+    playerSounds:playStopSound(Assets.sounds["drop"])
 end
 
 function playerScript:shootingWeapon(delta, player)
@@ -217,14 +220,14 @@ function playerScript:shootingWeapon(delta, player)
         player.shootTimer = 0
         --Check if there is ammo available in magazine
         if weapon.magAmmo < 1 then
-            playerSounds:playStopSound(playerSounds.sounds.shoot.empty)
+            playerSounds:playStopSound(Assets.sounds["empty_mag"])
             return
         end
         if weapon.weaponType == "auto" then
             if player.reloading then return end
             --Fire weapon
             weapon.magAmmo = weapon.magAmmo - weapon.bulletPerShot
-            playerSounds:playStopSound(playerSounds.sounds.shoot[weapon.name])
+            playerSounds:playStopSound(Assets.sounds["shoot_" .. string.lower(weapon.name)])
             --Bullet instance creation
             local bullet = object.new(CurrentScene.bullets)
             bullet.position[1] = player.position[1] + math.cos(player.rotation)*weapon.bulletOffset
@@ -240,7 +243,7 @@ function playerScript:shootingWeapon(delta, player)
             player.reloading = false
             --Fire weapon
             weapon.magAmmo = weapon.magAmmo - 1
-            playerSounds:playStopSound(playerSounds.sounds.shoot[weapon.name])
+            playerSounds:playStopSound(Assets.sounds["shoot_" .. string.lower(weapon.name)])
             --Bullet instance creation
             local radians = math.pi*2 * (weapon.bulletSpread/360) --turn into radians
             for i = 1, weapon.bulletPerShot do
@@ -315,10 +318,10 @@ function playerScript:reloadingWeapon(delta, player)
                     --sound effects
                     local playerSounds = player.soundManager.script
                     if weapon.magAmmo == weapon.magSize then
-                        playerSounds:playStopSound(playerSounds.sounds.reload[weapon.name])
+                        playerSounds:playStopSound(Assets.sounds["reload_" .. string.lower(weapon.name)])
                         player.reloading = false
                     else
-                        playerSounds:playStopSound(playerSounds.sounds.progress[weapon.name])
+                        playerSounds:playStopSound(Assets.sounds["progress_" .. string.lower(weapon.name)])
                     end
                 end
             end
@@ -327,7 +330,7 @@ function playerScript:reloadingWeapon(delta, player)
         if InputManager:isPressed("reload") then
             local playerSounds = player.soundManager.script
             if weapon.weaponType == "auto" then
-                playerSounds:playStopSound(playerSounds.sounds.reload[weapon.name])
+                playerSounds:playStopSound(Assets.sounds["reload_" .. string.lower(weapon.name)])
             end
             player.reloading = true
             player.reloadTimer = 0
@@ -387,7 +390,7 @@ function playerScript:update(delta)
     player.imageComponent.color = {Settings.brightness, Settings.brightness, Settings.brightness, 1}
 
     self:movement(delta, player)
-    self:collisionCheck(player)
+    self:collisionCheck(player, delta)
     self:pointTowardsMouse(player)
     self:slotSwitching(player)
     self:doWalkingAnim(player)

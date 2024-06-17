@@ -5,22 +5,23 @@
 
     "crate": {
         "script": "desolation/components/props/crate",
-        "pushable": true,
+        "movable": true,
         "collidable": true,
         "material": "wood"
     },
     
     "crate_big": {
         "script": "desolation/components/props/crate",
-        "pushable": true,
+        "movable": true,
         "collidable": true,
         "material": "wood",
-        "health": 150
+        "health": 150,
+        "mass": 0.16
     },
 
     "barrel": {
         "script": "desolation/components/props/barrel",
-        "pushable": true,
+        "movable": true,
         "collidable": true,
         "material": "concrete"
     },

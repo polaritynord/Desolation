@@ -31,25 +31,27 @@ function playerSounds:load()
     }
     --Load footsteps
     for i = 1, 10 do
-        self.sounds.step.grass[#self.sounds.step.grass+1] = love.audio.newSource("desolation/assets/sounds/footstep/grass" .. i .. ".wav", "static")
+        local src = love.audio.newSource("desolation/assets/sounds/footstep/grass" .. i .. ".wav", "static")
+        Assets.sounds["step_grass" .. i] = src
+        --self.sounds.step[#self.sounds.step+1] = src
     end
     --Weapon sfx
-    self.sounds.reload.Pistol = love.audio.newSource("desolation/assets/sounds/weapons/reload_pistol.wav", "static")
-    self.sounds.shoot.Pistol = love.audio.newSource("desolation/assets/sounds/weapons/shoot_pistol.wav", "static")
-    self.sounds.reload.Revolver = love.audio.newSource("desolation/assets/sounds/weapons/reload_revolver.wav", "static")
-    self.sounds.shoot.Revolver = love.audio.newSource("desolation/assets/sounds/weapons/shoot_revolver.wav", "static")
-    self.sounds.reload.AssaultRifle = love.audio.newSource("desolation/assets/sounds/weapons/reload_assault_rifle.wav", "static")
-    self.sounds.shoot.AssaultRifle = love.audio.newSource("desolation/assets/sounds/weapons/shoot_assault_rifle.wav", "static")
-    self.sounds.reload.Shotgun = love.audio.newSource("desolation/assets/sounds/weapons/reload_shotgun.wav", "static")
-    self.sounds.shoot.Shotgun = love.audio.newSource("desolation/assets/sounds/weapons/shoot_shotgun.wav", "static")
-    self.sounds.progress.Shotgun = love.audio.newSource("desolation/assets/sounds/weapons/progress_shotgun.wav", "static")
-    self.sounds.shoot.empty = love.audio.newSource("desolation/assets/sounds/weapons/empty_mag.wav", "static")
+    Assets.sounds["reload_pistol"] = love.audio.newSource("desolation/assets/sounds/weapons/reload_pistol.wav", "static")
+    Assets.sounds["shoot_pistol"] = love.audio.newSource("desolation/assets/sounds/weapons/shoot_pistol.wav", "static")
+    Assets.sounds["reload_revolver"] = love.audio.newSource("desolation/assets/sounds/weapons/reload_revolver.wav", "static")
+    Assets.sounds["shoot_revolver"] = love.audio.newSource("desolation/assets/sounds/weapons/shoot_revolver.wav", "static")
+    Assets.sounds["reload_assaultrifle"] = love.audio.newSource("desolation/assets/sounds/weapons/reload_assault_rifle.wav", "static")
+    Assets.sounds["shoot_assaultrifle"] = love.audio.newSource("desolation/assets/sounds/weapons/shoot_assault_rifle.wav", "static")
+    Assets.sounds["reload_shotgun"] = love.audio.newSource("desolation/assets/sounds/weapons/reload_shotgun.wav", "static")
+    Assets.sounds["shoot_shotgun"] = love.audio.newSource("desolation/assets/sounds/weapons/shoot_shotgun.wav", "static")
+    Assets.sounds["progress_shotgun"] = love.audio.newSource("desolation/assets/sounds/weapons/progress_shotgun.wav", "static")
+    Assets.sounds["empty_mag"] = love.audio.newSource("desolation/assets/sounds/weapons/empty_mag.wav", "static")
     --Item sfx
-    self.sounds.acquire = love.audio.newSource("desolation/assets/sounds/acquire.wav", "static")
-    self.sounds.drop = love.audio.newSource("desolation/assets/sounds/drop.wav", "static")
+    Assets.sounds["acquire"] = love.audio.newSource("desolation/assets/sounds/acquire.wav", "static")
+    Assets.sounds["drop"] = love.audio.newSource("desolation/assets/sounds/drop.wav", "static")
     --Hurt sfx
     for i = 1, 3 do
-        self.sounds.hurt[i] = love.audio.newSource("desolation/assets/sounds/hurt" .. i .. ".wav", "static")
+        Assets.sounds["hurt" .. i] = love.audio.newSource("desolation/assets/sounds/hurt" .. i .. ".wav", "static")
     end
 end
 
@@ -59,8 +61,8 @@ function playerSounds:update(delta)
     if player.moving then
         self.stepTimer = self.stepTimer + delta
         if self.stepTimer > 0.4 - coreFuncs.boolToNum(player.sprinting)*0.15 then
-            love.audio.stop(self.sounds.step.grass)
-            love.audio.play(self.sounds.step.grass[math.random(1, #self.sounds.step.grass)])
+            --love.audio.stop(self.sounds.step)
+            love.audio.play(Assets.sounds["step_grass" .. math.random(1, 10)])
             self.stepTimer = 0
         end
     else

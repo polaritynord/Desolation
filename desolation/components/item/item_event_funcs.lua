@@ -19,7 +19,7 @@ function itemEventFuncs.weaponPickup(item)
     weaponInv[emptySlot] = item.weaponData.new()
     --play sound
     local playerSounds = player.soundManager.script
-    playerSounds:playStopSound(playerSounds.sounds.acquire)
+    playerSounds:playStopSound(Assets.sounds["acquire"])
 end
 
 function itemEventFuncs.ammoPickup(item)
@@ -29,7 +29,7 @@ function itemEventFuncs.ammoPickup(item)
     item.gettingPickedUp = true
     --play sound
     local playerSounds = player.soundManager.script
-    playerSounds:playStopSound(playerSounds.sounds.acquire)
+    playerSounds:playStopSound(Assets.sounds["acquire"])
     --notification in hud
     local hud = CurrentScene.hud.UIComponent
     local newNotif = hud:newImage(
@@ -52,7 +52,7 @@ function itemEventFuncs.medkitPickup(item)
     if player.health > 100 then player.health = 100 end
     --play sound (TODO: find a healing sound)
     local playerSounds = player.soundManager.script
-    playerSounds:playStopSound(playerSounds.sounds.acquire)
+    playerSounds:playStopSound(Assets.sounds["acquire"])
     --notification in hud
     local hud = CurrentScene.hud.UIComponent
     local newNotif = hud:newImage(
@@ -78,7 +78,7 @@ function itemEventFuncs.batteryPickup(item)
     if player.armor > 100 then player.armor = 100 end
     --play sound (TODO: find a healing sound)
     local playerSounds = player.soundManager.script
-    playerSounds:playStopSound(playerSounds.sounds.acquire)
+    playerSounds:playStopSound(Assets.sounds["acquire"])
     --notification in hud
     local hud = CurrentScene.hud.UIComponent
     local newNotif = hud:newImage(

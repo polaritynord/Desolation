@@ -78,6 +78,10 @@ function math.uniform(a,b)
 	return a + (math.random()*(b-a))
 end
 
+function math.getVecValue(vector)
+    return math.sqrt((vector[1]*vector[1]) + (vector[2]*vector[2]))
+end
+
 function table.new(t)
         -- Taken from http://lua-users.org/wiki/CopyTable/
     local orig = t

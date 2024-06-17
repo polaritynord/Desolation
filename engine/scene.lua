@@ -162,6 +162,10 @@ function LoadScene(file)
 end
 
 function SetScene(sceneTable)
+    if CurrentScene ~= nil then
+        CurrentScene.tree = nil
+        CurrentScene = nil
+    end
     CurrentScene = sceneTable
     CurrentScene:load()
 end
