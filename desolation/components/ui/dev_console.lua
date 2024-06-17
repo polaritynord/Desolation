@@ -161,7 +161,7 @@ function RunConsoleCommand(command)
         i = i + 1
     end
     --If argument is a global variable:
-    if GetGlobal(temp) then
+    if GetGlobal(temp) ~= nil then
         i = i + 1
         --Skip spaces
         while string.sub(command, i, i) == " " do
@@ -175,11 +175,20 @@ function RunConsoleCommand(command)
         end
         --Check for cheat protection
         if GetGlobalCheatValue(temp) and GetGlobal("cheats") < 1 then return end
-        --TODO: Toggle the global if no value is given
-        if temp2 == "" then return end
-        --Set value
-        SetGlobal(temp, temp2)
-        return
+        if temp2 == "" then
+            if not GetGlobalCheatValue(temp) then return end
+            if GetGlobal(temp) < 1 then
+                SetGlobal(temp, 1)
+                devConsole:log(temp .. " ON")
+            else
+                SetGlobal(temp, 0)
+                devConsole:log(temp .. " OFF")
+            end
+        else
+            --Set value
+            SetGlobal(temp, temp2)
+            return
+        end
     end
     -- If argument is a function:
     if table.contains(consoleFuncs.funcsList, temp) then

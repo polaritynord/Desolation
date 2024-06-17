@@ -23,15 +23,32 @@ function startupManager:load()
     --Load settings data
     local settingsExists = love.filesystem.getInfo("settings.json")
     local defaultSettingsFile = love.filesystem.read("desolation/assets/default_settings.json")
+    local defaultSettingsData = json.decode(defaultSettingsFile)
     if settingsExists and not table.contains(arg, "--default-settings") then
         --read settings file & save it as table
         local file = love.filesystem.read("settings.json")
         Settings = json.decode(file)
-        --TODO compare to default binding file & see if there is anything missing
+        --compare to default binding file & see if there is anything missing
+        local currentSettingsList = {}
+        for k, v in pairs(Settings) do
+            currentSettingsList[#currentSettingsList+1] = k
+        end
+        local defaultSettingsList = {}
+        for k, v in pairs(defaultSettingsData) do
+            defaultSettingsList[#defaultSettingsList+1] = k
+        end
+        if #currentSettingsList ~= #defaultSettingsList then
+            --write new settings file
+            love.filesystem.write("settings.json", defaultSettingsFile)
+            Settings = defaultSettingsData
+        end
+        --NOTE: this is kinda lazy of me to scrap the users current settings file just because
+        --of an update, when I could compare the keys and add if anything is missing
+        --this works for now , I guess
     else
         --write new settings file
         love.filesystem.write("settings.json", defaultSettingsFile)
-        Settings = json.decode(defaultSettingsFile)
+        Settings = defaultSettingsData
     end
 
     --Load localization data

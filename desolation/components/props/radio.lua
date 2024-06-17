@@ -15,6 +15,7 @@ function radioScript:load()
     radio.scale = {1.7, 1.7}
     radio.distanceToPlayer = 1000
     radio.playing = false
+    radio.playerPressing = false
 end
 
 function radioScript:update(delta)
@@ -22,14 +23,14 @@ function radioScript:update(delta)
     local player = CurrentScene.player
     radio.distanceToPlayer = coreFuncs.pointDistance(radio.position, player.position)
     if radio.distanceToPlayer > 80 then return end
-    if InputManager:isPressed("interact") and not player.keyPressData["e"] then
+    if InputManager:isPressed("interact") and not radio.playerPressing then
         radio.playing = not radio.playing
         if radio.playing then
             Assets.mapSounds["wakeup"]:setVolume(Settings.vol_master * Settings.vol_world)
             Assets.mapSounds["wakeup"]:stop() ; Assets.mapSounds["wakeup"]:play()
         else Assets.mapSounds["wakeup"]:stop() end
     end
-    player.keyPressData["e"] = InputManager:isPressed("interact")
+    radio.playerPressing = InputManager:isPressed("interact")
 end
 
 return radioScript

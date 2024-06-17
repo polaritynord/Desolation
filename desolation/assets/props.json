@@ -31,7 +31,7 @@
 
     "radio": {
         "script": "desolation/components/props/radio",
-        "pushable": false,
+        "movable": false,
         "collidable": false
     }
 }

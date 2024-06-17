@@ -19,6 +19,7 @@ function itemScript:load()
     item.velocity = 0
     item.rotVelocity = 0
     item.realRot = 0
+    item.defaultScale = table.new(item.scale)
 end
 
 function itemScript:movement(delta)
@@ -62,13 +63,18 @@ function itemScript:update(delta)
     --set sum colors & return if player is far away
     --TODO better indicator
     if item.distanceToPlayer > 100 then
-        item.imageComponent.color = {Settings.brightness, Settings.brightness, Settings.brightness, 1}
+        item.scale[1] = item.scale[1] + (item.defaultScale[1]-item.scale[1])*8*delta
+        item.scale[2] = item.scale[2] + (item.defaultScale[2]-item.scale[2])*8*delta
+        if player.nearItem == item then player.nearItem = nil end
         return
     end
-    item.imageComponent.color = {Settings.brightness, 0, 0, 1}
+    if player.nearItem == nil and not item.gettingPickedUp then player.nearItem = item end
+    item.scale[1] = item.scale[1] + (item.defaultScale[1]*1.4-item.scale[1])*8*delta
+    item.scale[2] = item.scale[2] + (item.defaultScale[2]*1.4-item.scale[2])*8*delta
     --Picking up
-    if InputManager:isPressed("interact") and not player.keyPressData["e"] and not item.gettingPickedUp then
+    if InputManager:isPressed("interact") and not item.gettingPickedUp and player.nearItem == item then
         if item.pickupEvent ~= nil then
+            player.nearItem = nil
             item.pickupEvent(item)
         end
     end

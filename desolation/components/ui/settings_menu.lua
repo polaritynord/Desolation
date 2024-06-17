@@ -53,9 +53,16 @@ function settings:load()
                 if i > #ui.languages then i = 1 end
                 Settings.language = ui.languages[i]
                 love.filesystem.write("settings.json", json.encode(Settings))
-                --TODO restart game warning
-                love.load()
+                ui.restartWarning.text = Loca.settings.restartWarning
             end;
+        }
+    )
+    ui.restartWarning = ui:newTextLabel(
+        {
+            text = "";
+            position = {0, 400};
+            size = 15;
+            color = {1, 0, 0, 1};
         }
     )
     ui.returnButton = ui:newTextButton(

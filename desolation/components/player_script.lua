@@ -84,8 +84,8 @@ function playerScript:collisionCheck(player, delta)
                     local playerSpeed = GetGlobal("p_speed")
                     if player.sprinting then playerSpeed = playerSpeed*1.6 end
                     local vel = math.getVecValue(player.velocity)
-                    prop.velocity[1] = prop.velocity[1] + vel*math.cos(pushRot)*playerSpeed/prop.mass/4
-                    prop.velocity[2] = prop.velocity[2] + vel*math.sin(pushRot)*playerSpeed/prop.mass/4
+                    prop.velocity[1] = prop.velocity[1] + vel*math.cos(pushRot)*playerSpeed/prop.mass*delta*100
+                    prop.velocity[2] = prop.velocity[2] + vel*math.sin(pushRot)*playerSpeed/prop.mass*delta*100
                 end
             end
         end
@@ -371,6 +371,7 @@ function playerScript:load()
         ["q"] = false;
         ["e"] = false;
     }
+    player.nearItem = nil
     --Starter weapon
     player.inventory.weapons[1] = weaponManager.Revolver.new()
     player.inventory.weapons[1].magAmmo = 6
@@ -399,6 +400,7 @@ function playerScript:update(delta)
     self:reloadingWeapon(delta, player)
     --Update hand offset
     player.handOffset = player.handOffset + (-player.handOffset) * 20 * delta
+    player.keyPressData["e"] = InputManager:isPressed("interact")
 end
 
 return playerScript

@@ -48,7 +48,6 @@ function textButton.new()
             if self.hoverEvent then self.hoverEvent(self) end
             self.mouseHovering = true
             self.mouseClicking = love.mouse.isDown(1)
-            --TODO move these hovering stuff to hoverEvent?
         else
             if self.unhoverEvent then self.unhoverEvent(self) end
             self.mouseHovering = false
