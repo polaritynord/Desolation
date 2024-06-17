@@ -7,7 +7,8 @@
         "script": "desolation/components/props/crate",
         "movable": true,
         "collidable": true,
-        "material": "wood"
+        "material": "wood",
+        "mass": 10
     },
     
     "crate_big": {
@@ -16,14 +17,16 @@
         "collidable": true,
         "material": "wood",
         "health": 150,
-        "mass": 0.16
+        "mass": 20
     },
 
     "barrel": {
         "script": "desolation/components/props/barrel",
         "movable": true,
         "collidable": true,
-        "material": "concrete"
+        "material": "concrete",
+        "invincible": true,
+        "mass": 12
     },
 
     "radio": {

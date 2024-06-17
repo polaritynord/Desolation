@@ -1,4 +1,7 @@
 local coreFuncs = require("coreFuncs")
+local object = require("engine.object")
+local itemScript = require("desolation.components.item.item_script")
+local itemEventFuncs = require("desolation.components.item.item_event_funcs")
 
 local physicsProp = ENGINE_COMPONENTS.scriptComponent.new()
 
@@ -8,6 +11,39 @@ function physicsProp:setup()
     prop.rotVelocity = 0
     prop.oldPos = table.new(prop.position)
     prop.destroyed = false
+end
+
+function physicsProp:physBulletHitEvent(bullet)
+    local prop = self.parent
+    prop.health = prop.health - bullet.damage
+    prop.velocity[1] = prop.velocity[1] + bullet.speed*math.cos(bullet.rotation)/prop.mass
+    prop.velocity[2] = prop.velocity[2] + bullet.speed*math.sin(bullet.rotation)/prop.mass
+    prop.rotVelocity = math.uniform(-5, 5)
+    if prop.script.bulletHitEvent then prop.script:bulletHitEvent() end
+    --if prop is fully destroyed:
+    if prop.health <= 0 and not prop.invincible then
+        prop.destroyed = true
+        prop.collidable = false
+        if prop.script.destroyEvent then prop.script:destroyEvent(prop) end
+        --summon loots (if exists)
+        if prop.loot == nil then return end
+        local mapCreator = CurrentScene.mapCreator
+        for _, loot in ipairs(prop.loot) do
+            --Create object data
+            local itemInstance = object.new(CurrentScene.items)
+            itemInstance.name = loot
+            itemInstance:addComponent(table.new(itemScript))
+            itemInstance.scale = mapCreator.itemData[itemInstance.name].scale
+            itemInstance.pickupEvent = itemEventFuncs[mapCreator.itemData[itemInstance.name].pickupEvent]
+            itemInstance.script:load()
+            --randomize position & rotation
+            itemInstance.position = table.new(prop.position)
+            itemInstance.velocity = math.uniform(250, 400)
+            itemInstance.rotation = math.uniform(0, math.pi)
+            itemInstance.realRot = itemInstance.rotation
+            CurrentScene.items:addChild(itemInstance)
+        end
+    end
 end
 
 function physicsProp:collisionCheck(prop, delta)
@@ -21,7 +57,7 @@ function physicsProp:collisionCheck(prop, delta)
         local wallSize = {wall.scale[1]*64, wall.scale[2]*64}
         if coreFuncs.aabbCollision(propPos, wall.position, propSize, wallSize) then
             prop.position = table.new(prop.oldPos)
-            --FIXME crates get stuck on walls!!!
+            prop.velocity = {-prop.velocity[1], -prop.velocity[2]}
         end
     end
     --iterate through props
@@ -39,8 +75,8 @@ function physicsProp:collisionCheck(prop, delta)
                     local dx, dy = propPos[1]-propPos2[1], propPos[2]-propPos2[2]
                     local pushRot = math.atan2(dy, dx) + math.pi
                     local vel = math.getVecValue(prop.velocity)
-                    prop2.velocity[1] = prop2.velocity[1] + vel*math.cos(pushRot)/prop2.mass*delta
-                    prop2.velocity[2] = prop2.velocity[2] + vel*math.sin(pushRot)/prop2.mass*delta
+                    prop2.velocity[1] = prop2.velocity[1] + vel*math.cos(pushRot)/prop2.mass
+                    prop2.velocity[2] = prop2.velocity[2] + vel*math.sin(pushRot)/prop2.mass
                 end
             end
         end

@@ -84,8 +84,8 @@ function playerScript:collisionCheck(player, delta)
                     local playerSpeed = GetGlobal("p_speed")
                     if player.sprinting then playerSpeed = playerSpeed*1.6 end
                     local vel = math.getVecValue(player.velocity)
-                    prop.velocity[1] = prop.velocity[1] + vel*math.cos(pushRot)*playerSpeed/prop.mass*delta
-                    prop.velocity[2] = prop.velocity[2] + vel*math.sin(pushRot)*playerSpeed/prop.mass*delta
+                    prop.velocity[1] = prop.velocity[1] + vel*math.cos(pushRot)*playerSpeed/prop.mass/4
+                    prop.velocity[2] = prop.velocity[2] + vel*math.sin(pushRot)*playerSpeed/prop.mass/4
                 end
             end
         end

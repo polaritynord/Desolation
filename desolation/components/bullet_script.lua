@@ -34,8 +34,8 @@ function bulletScript:collisionCheck(bullet)
                     local particleComp = CurrentScene.bullets.particleComponent
                     particleFuncs.createWallHitParticles(particleComp, bullet, i, prop.material)
                     --bullet hit event
-                    if prop.script.bulletHitEvent ~= nil then
-                        prop.script:bulletHitEvent(bullet)
+                    if prop.script.physBulletHitEvent ~= nil then
+                        prop.script:physBulletHitEvent(bullet)
                     end
                 end
             end

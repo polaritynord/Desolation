@@ -77,6 +77,7 @@ function mapCreator:loadMap(path)
             prop.name = v[1]
             prop.collidable = props[prop.name].collidable or false
             prop.movable = props[prop.name].movable or false
+            prop.invincible = props[prop.name].invincible or false
             prop.material = props[prop.name].material or "wood"
             prop.health = props[prop.name].health or 100
             prop.mass = props[prop.name].mass or 0.05
