@@ -8,7 +8,7 @@ function slider.new()
         position = {600, 40};
         baseSize = {200, 20};
         baseColor = {0, 0, 0, 1};
-        stickColor = {1, 1, 1, 1};
+        stickColor = {1, 0, 0, 1};
         value = 0;
         enabled = true;
         font = "disposable-droid";
@@ -36,7 +36,7 @@ function slider.new()
         love.graphics.setColor(self.stickColor[1], self.stickColor[2], self.stickColor[3], self.stickColor[4]*self.parentComp.alpha)
         love.graphics.rectangle("fill", pos[1], pos[2], self.value*self.baseSize[1], self.baseSize[2])
         --draw value percentage
-        love.graphics.setColor(0, 0, 0, 1)
+        love.graphics.setColor(1, 1, 1, 1)
         SetFont("desolation/assets/fonts/" .. self.font .. ".ttf", 12)
         love.graphics.printf(math.floor(self.value*100) .. "%", pos[1], pos[2], 1000, "left")
         love.graphics.setColor(1, 1, 1, 1)

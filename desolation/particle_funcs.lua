@@ -18,6 +18,16 @@ function particleFuncs.crateWoodUpdate(particle, delta)
     particle.velocity = particle.velocity + (-particle.velocity)*10*delta
 end
 
+function particleFuncs.explosionBaseUpdate(particle, delta)
+    particle.size[1] = particle.size[1] + 400*delta
+    particle.color[4] = particle.color[4] - 3*delta
+end
+
+function particleFuncs.explosionPieceUpdate(particle, delta)
+    particle.position[1] = particle.position[1] + math.cos(particle.rotation)*1000*delta
+    particle.position[2] = particle.position[2] + math.sin(particle.rotation)*1000*delta
+end
+
 function particleFuncs.createShootParticles(comp, rotation)
     for _ = 1, 6 do
         local size = math.uniform(5, 10)
@@ -91,6 +101,33 @@ function particleFuncs.createCrateWoodParticles(comp, position)
             }
         )
         p.velocity = math.uniform(200, 400);
+    end
+end
+
+function particleFuncs.createExplosionParticles(comp, position)
+    --base
+    comp:newParticle(
+        {
+            position = table.new(position);
+            type = "circle";
+            color = {1, 0.4, 0.2, 0.85};
+            update = particleFuncs.explosionBaseUpdate;
+            despawnTime = 0.7;
+        }
+    )
+    --small thingies (idk what to call them) (shrapnel? is that how its written?)
+    for _ = 1, 12 do
+        local s = math.uniform(10, 25)
+        local particle = comp:newParticle(
+            {
+                position = {position[1] + math.uniform(-40, 40), position[2] + math.uniform(-40, 40)};
+                color = {1, 0.64, 0.2, 1};
+                size = {s, s};
+                update = particleFuncs.explosionPieceUpdate;
+                despawnTime = 0.3;
+            }
+        )
+        particle.rotation = math.atan2(particle.position[2]-position[2], particle.position[1]-position[1])
     end
 end
 

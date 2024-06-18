@@ -29,6 +29,7 @@ function playerScript:movement(delta, player)
     end
     player.moving = math.abs(player.velocity[1]) > 0 or math.abs(player.velocity[2]) > 0
     --Sprinting
+    player.sprintCooldown = player.sprintCooldown - delta
     if Settings.sprint_type == "hold" and InputManager.inputType == "keyboard" then
         player.sprinting = (InputManager:isPressed("sprint") and not Settings.always_sprint) or (player.moving and Settings.always_sprint and not InputManager:isPressed("sprint"))
     else
@@ -42,8 +43,15 @@ function playerScript:movement(delta, player)
             end
         end
     end
+    if player.stamina < 0 or player.sprintCooldown > 0 then player.sprinting = false end
     if player.sprinting then
+        if GetGlobal("inf_stamina") < 1 then player.stamina = player.stamina - 25*delta end
         speed = speed * 1.6
+        --make a sprint cooldown
+        if player.stamina < 0 then
+            player.stamina = 0
+            player.sprintCooldown = 3
+        end
     end
     --Normalize velocity
     if InputManager.inputType == "keyboard" and InputManager:isPressed({"move_left", "move_right"}) == InputManager:isPressed({"move_up", "move_down"}) and player.moving then
@@ -54,6 +62,10 @@ function playerScript:movement(delta, player)
     player.oldPos = {player.position[1], player.position[2]}
     player.position[1] = player.position[1] + (player.velocity[1]*speed*delta)
     player.position[2] = player.position[2] + (player.velocity[2]*speed*delta)
+    --Recharge stamina
+    if player.sprinting then return end
+    player.stamina = player.stamina + 18*delta
+    if player.stamina > 100 then player.stamina = 100 end
 end
 
 function playerScript:collisionCheck(player, delta)
@@ -345,7 +357,8 @@ function playerScript:load()
     player.scale = {4, 4}
     --Player variables
     player.velocity = {0, 0}
-    player.health = 100 ; player.armor = 100
+    player.health = 100 ; player.armor = 100 ; player.stamina = 100
+    player.sprintCooldown = 0
     player.armorAcquired = true
     player.sprinting = false
     player.moving = false

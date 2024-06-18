@@ -4,6 +4,7 @@ local wallScript = require("desolation.components.wall_script")
 local itemEventFuncs = require("desolation.components.item.item_event_funcs")
 local json = require("engine.lib.json")
 local weaponManager = require("desolation.weapon_manager")
+local particleFuncs = require("desolation.particle_funcs")
 local coreFuncs = require("coreFuncs")
 
 local mapCreator = ENGINE_COMPONENTS.scriptComponent.new()
@@ -119,6 +120,9 @@ function mapCreator:createExplosion(position, radius, intensity)
     for _, item in ipairs(CurrentScene.items.tree) do
         item.script:explosionEvent(position, radius, intensity)
     end
+    --explosion effects
+    local particleComp = CurrentScene.bullets.particleComponent
+    particleFuncs.createExplosionParticles(particleComp, position)
     --determine the volume of sound based on distance
     local camDistance = coreFuncs.pointDistance(CurrentScene.camera.position, position)
     local volume = Settings.vol_master * Settings.vol_world * (radius/camDistance)
@@ -126,6 +130,7 @@ function mapCreator:createExplosion(position, radius, intensity)
     local sound = Assets.sounds["explosion"]
     sound:stop()
     sound:setVolume(volume)
+    --sound:setPosition((position[1]-CurrentScene.camera.position[1])/100, 1, 0) --TODO too quiet, needs fix
     sound:play()
 end
 

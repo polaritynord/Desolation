@@ -62,6 +62,14 @@ function particleComponent.new(parent)
                     src, relativePos[1], relativePos[2], self.parent.rotation+particle.rotation,
                     particle.size[1]*camera.zoom, particle.size[2]*camera.zoom, width/2, height/2
                 )
+            elseif particle.type == "circle" then
+                love.graphics.push()
+                    love.graphics.setColor(particle.color)
+                    love.graphics.translate(relativePos[1], relativePos[2])
+                    love.graphics.rotate(particle.rotation+self.parent.rotation)
+                    love.graphics.circle("fill", 0, 0, particle.size[1])
+                    love.graphics.setColor(1, 1, 1, 1)
+                love.graphics.pop()
             end
         end
         CurrentScene.particleCount = CurrentScene.particleCount + #self.particles

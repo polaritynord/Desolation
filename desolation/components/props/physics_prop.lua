@@ -13,14 +13,8 @@ function physicsProp:setup()
     prop.destroyed = false
 end
 
-function physicsProp:physBulletHitEvent(bullet)
+function physicsProp:destroyCheck()
     local prop = self.parent
-    prop.health = prop.health - bullet.damage
-    prop.velocity[1] = prop.velocity[1] + bullet.speed*math.cos(bullet.rotation)/prop.mass
-    prop.velocity[2] = prop.velocity[2] + bullet.speed*math.sin(bullet.rotation)/prop.mass
-    prop.rotVelocity = math.uniform(-5, 5)
-    if prop.script.bulletHitEvent then prop.script:bulletHitEvent() end
-    --if prop is fully destroyed:
     if prop.health <= 0 and not prop.invincible then
         prop.destroyed = true
         prop.collidable = false
@@ -44,6 +38,17 @@ function physicsProp:physBulletHitEvent(bullet)
             CurrentScene.items:addChild(itemInstance)
         end
     end
+end
+
+function physicsProp:physBulletHitEvent(bullet)
+    local prop = self.parent
+    prop.health = prop.health - bullet.damage
+    prop.velocity[1] = prop.velocity[1] + bullet.speed*math.cos(bullet.rotation)/prop.mass
+    prop.velocity[2] = prop.velocity[2] + bullet.speed*math.sin(bullet.rotation)/prop.mass
+    prop.rotVelocity = math.uniform(-5, 5)
+    if prop.script.bulletHitEvent then prop.script:bulletHitEvent() end
+    --if prop is fully destroyed:
+    self:destroyCheck()
 end
 
 function physicsProp:collisionCheck(prop, delta)
@@ -87,10 +92,14 @@ function physicsProp:explosionEvent(position, radius, intensity)
     local prop = self.parent
     local distance = coreFuncs.pointDistance(position, prop.position)
     if distance > radius then return end
+    --add up velocity
     local dx, dy = prop.position[1]-position[1], prop.position[2]-position[2]
     local rot = math.atan2(dy, dx)
     prop.velocity[1] = prop.velocity[1] + math.cos(rot)*intensity*(radius/distance)*100
     prop.velocity[2] = prop.velocity[2] + math.sin(rot)*intensity*(radius/distance)*100
+    --damage
+    prop.health = prop.health - 10*(radius/distance)*intensity
+    self:destroyCheck()
 end
 
 function physicsProp:physicsUpdate(delta)

@@ -32,29 +32,36 @@ function hud:load()
     ui.healthBar = ui:newImage(
         {
             source = Assets.images.hud_healthbar;
-            position = {97, 465};
+            position = {140, 487};
             scale = {2.35, 2.35};
         }
     )
     ui.healthMonitor = ui:newTextLabel(
         {
             text = "100";
-            position = {55, 490};
+            position = {55, 487};
             size = 48;
         }
     )
     ui.armorMonitor = ui:newTextLabel(
         {
             text = "100";
-            position = {44, 448};
+            position = {190, 487};
+            size = 48;
+        }
+    )
+    ui.staminaMonitor = ui:newTextLabel(
+        {
+            text = "100";
             size = 32;
+            position = {44, 444};
         }
     )
     --Right side (inventory stuff)
     ui.weaponImg = ui:newImage(
         {
             source = "none";
-            position = {880, 420};
+            position = {880, 430};
             scale = {-3.4, 3.4};
         }
     )
@@ -62,7 +69,7 @@ function hud:load()
         {
             text = "Pistol";
             begin = "center";
-            position = {380, 450};
+            position = {380, 460};
             size = 30;
         }
     )
@@ -70,7 +77,7 @@ function hud:load()
         {
             text = 18;
             begin = "right";
-            position = {-138, 495};
+            position = {-138, 505};
             size = 28;
             font = "disposable-droid-bold";
         }
@@ -80,14 +87,14 @@ function hud:load()
     ui.weaponAmmoImg = ui:newImage(
         {
             source = Assets.images.hud_ammo;
-            position = {875, 500};
+            position = {875, 510};
             scale = {0.8, 0.8};
         }
     )
     ui.ammunitionText = ui:newTextLabel(
         {
             text = 150;
-            position = {890, 485};
+            position = {890, 495};
             font = "disposable-droid-bold";
             size = 28;
         }
@@ -192,12 +199,16 @@ function hud:update(delta)
     --Update monitors
     ui.healthMonitor.text = player.health
     ui.armorMonitor.text = player.armor
+    ui.staminaMonitor.text = math.ceil(player.stamina)
     --update health monitor color
     local temp = coreFuncs.boolToNum(player.health > 30)
     ui.healthMonitor.color = {1, temp, temp, 1}
     --update armor monitor color
     temp = coreFuncs.boolToNum(player.armor > 30)
     ui.armorMonitor.color = {1, temp, temp, 1}
+    --update stamina monitor color
+    temp = coreFuncs.boolToNum(player.stamina > 30)
+    ui.staminaMonitor.color = {1, temp, temp, 1}
     --Current weapon
     local weapon = player.inventory.weapons[player.inventory.slot]
     if weapon then
