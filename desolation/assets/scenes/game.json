@@ -1,6 +1,6 @@
 {
     "name": "Game",
-    "backgroundColor": [1, 1, 1],
+    "backgroundColor": [0.2, 0.2, 0.2],
     "tree": [
         [
             "player",
@@ -118,6 +118,7 @@
             ["weapon_revolver", "desolation/assets/images/weapons/revolver.png"],
             ["weapon_assaultrifle", "desolation/assets/images/weapons/assault_rifle.png"],
             ["weapon_shotgun", "desolation/assets/images/weapons/shotgun.png"],
+            ["weapon_grenade", "desolation/assets/images/weapons/grenade.png"],
 
             ["bullet", "desolation/assets/images/bullet.png"],
             
@@ -131,7 +132,9 @@
         ],
 
         "sounds": [
-            ["explosion", "desolation/assets/sounds/explosion.wav", "static"]   
+            ["explosion", "desolation/assets/sounds/explosion.wav", "static"],
+            ["sprint", "desolation/assets/sounds/sprint2.wav", "static"],
+            ["slot_switch", "desolation/assets/sounds/slot_switch.wav", "static"]
         ]
     }
 }

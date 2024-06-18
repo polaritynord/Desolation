@@ -99,49 +99,52 @@ function hud:load()
             size = 28;
         }
     )
-    --Bottom (weapon slots)
+    --Right side weapon slots
     ui.slot1Base = ui:newRectangle(
         {
-            position = {220, 510};
+            position = {220, -60};
             size = {165, 75};
             color = {0.7, 0.7, 0.7, 0};
         }
     )
     ui.slot2Base = ui:newRectangle(
         {
-            position = {395, 510};
+            position = {395, -60};
             size = {165, 75};
             color = {0.7, 0.7, 0.7, 0};
         }
     )
     ui.slot3Base = ui:newRectangle(
         {
-            position = {570, 510};
+            position = {570, -60};
             size = {165, 75};
             color = {0.7, 0.7, 0.7, 0};
         }
     )
     ui.slot1Ammo = ui:newTextLabel(
         {
-            position = {-190, 484};
+            position = {-190, 20};
             begin = "center";
+            text = "";
         }
     )
     ui.slot2Ammo = ui:newTextLabel(
         {
-            position = {-15, 484};
+            position = {-15, 20};
             begin = "center";
+            text = "";
         }
     )
     ui.slot3Ammo = ui:newTextLabel(
         {
-            position = {160, 484};
+            position = {160, 20};
             begin = "center";
+            text = "";
         }
     )
     ui.slot1Img = ui:newImage(
         {
-            position = {300, 540};
+            position = {300, -10};
             source = "none";
             scale = {3, 3};
             color = {1,1,1,0};
@@ -149,7 +152,7 @@ function hud:load()
     )
     ui.slot2Img = ui:newImage(
         {
-            position = {475, 540};
+            position = {475, -10};
             source = "none";
             scale = {3, 3};
             color = {1,1,1,0};
@@ -157,7 +160,7 @@ function hud:load()
     )
     ui.slot3Img = ui:newImage(
         {
-            position = {650, 540};
+            position = {650, -10};
             source = "none";
             scale = {3, 3};
             color = {1,1,1,0};
@@ -183,6 +186,16 @@ function hud:load()
             size = 36;
         }
     )
+    --Grenade slot images
+    for i = 1, 3 do
+        ui["grenadeSlot" .. i] = ui:newImage(
+            {
+                source = Assets.images["weapon_grenade"];
+                position = {790-(i-1)*30, 510};
+                scale = {1, 1};
+            }
+        )
+    end
     ui.acquireNotifs = {}
     ui.slotSwitchTimer = 0
     ui.oldSlot = 1
@@ -244,6 +257,8 @@ function hud:update(delta)
     --Check for recent slot switch
     ui.slotSwitchTimer = ui.slotSwitchTimer - delta
     if ui.oldSlot ~= player.inventory.slot then
+        Assets.sounds["slot_switch"]:stop()
+        Assets.sounds["slot_switch"]:play()
         ui.slotSwitchTimer = 4
     end
     ui.oldSlot = player.inventory.slot
@@ -257,13 +272,13 @@ function hud:update(delta)
             --update base position
             local isSlot = coreFuncs.boolToNum(i == player.inventory.slot)
             ui["slot" .. i .. "Base"].position[2] = ui["slot" .. i .. "Base"].position[2] +
-                (510-(isSlot*30)-ui["slot" .. i .. "Base"].position[2])*10*delta
+                (-60+(isSlot*30)-ui["slot" .. i .. "Base"].position[2])*10*delta
             --update image position
             ui["slot" .. i .. "Img"].position[2] = ui["slot" .. i .. "Img"].position[2] +
-                (540-(isSlot*30)-ui["slot" .. i .. "Img"].position[2])*10*delta
+                (-10+(isSlot*30)-ui["slot" .. i .. "Img"].position[2])*10*delta
             --update ammo position
             ui["slot" .. i .. "Ammo"].position[2] = ui["slot" .. i .. "Ammo"].position[2] +
-                (484-(isSlot*30)-ui["slot" .. i .. "Ammo"].position[2])*10*delta
+                (20+(isSlot*30)-ui["slot" .. i .. "Ammo"].position[2])*10*delta
             --if slot has a weapon
             local w = player.inventory.weapons[i]
             if w ~= nil then
@@ -274,7 +289,6 @@ function hud:update(delta)
                 ui["slot" .. i .. "Img"].source = nil
                 ui["slot" .. i .. "Ammo"].text = ""
             end
-            --update ammo position
         end
     else
         for i = 1, 3 do
@@ -328,6 +342,11 @@ function hud:update(delta)
             (item.position[2]-CurrentScene.camera.position[2]-50)*CurrentScene.camera.zoom+252
         }
         ui.itemPickupImg.color[4] = ui.itemPickupImg.color[4] + (1-ui.itemPickupImg.color[4])*20*delta
+    end
+    --Grenade slots
+    for i = 1, 3 do
+        local element = ui["grenadeSlot" .. i]
+        element.enabled = player.inventory.grenades >= i
     end
 end
 

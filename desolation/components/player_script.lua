@@ -5,7 +5,6 @@ local particleFuncs = require("desolation.particle_funcs")
 local object = require("engine.object")
 local itemEventFuncs = require("desolation.components.item.item_event_funcs")
 local itemScript = require("desolation.components.item.item_script")
-local moonshine = require("engine.lib.moonshine")
 
 local playerScript = ENGINE_COMPONENTS.scriptComponent.new()
 
@@ -28,6 +27,7 @@ function playerScript:movement(delta, player)
         end
     end
     player.moving = math.abs(player.velocity[1]) > 0 or math.abs(player.velocity[2]) > 0
+    if not player.sprinting then player.sprintSoundPlayed = false end
     --Sprinting
     player.sprintCooldown = player.sprintCooldown - delta
     if Settings.sprint_type == "hold" and InputManager.inputType == "keyboard" then
@@ -43,8 +43,14 @@ function playerScript:movement(delta, player)
             end
         end
     end
-    if player.stamina < 0 or player.sprintCooldown > 0 then player.sprinting = false end
+    if player.stamina < 0 or player.sprintCooldown > 0 or not player.moving then player.sprinting = false end
     if player.sprinting then
+        --play sprint sound
+        if not player.sprintSoundPlayed then
+            local playerSounds = player.soundManager.script
+            playerSounds:playStopSound(Assets.sounds["sprint"])
+            player.sprintSoundPlayed = true
+        end
         if GetGlobal("inf_stamina") < 1 then player.stamina = player.stamina - 25*delta end
         speed = speed * 1.6
         --make a sprint cooldown
@@ -77,6 +83,7 @@ function playerScript:collisionCheck(player, delta)
         local wallSize = {wall.scale[1]*64, wall.scale[2]*64}
         if coreFuncs.aabbCollision(playerPos, wall.position, size, wallSize) then
             player.position = {player.oldPos[1], player.oldPos[2]}
+            player.velocity = {-player.velocity[1], -player.velocity[2]}
         end
     end
     --iterate through props
@@ -359,6 +366,7 @@ function playerScript:load()
     player.velocity = {0, 0}
     player.health = 100 ; player.armor = 100 ; player.stamina = 100
     player.sprintCooldown = 0
+    player.sprintSoundPlayed = false
     player.armorAcquired = true
     player.sprinting = false
     player.moving = false
@@ -368,6 +376,7 @@ function playerScript:load()
     player.inventory = {
         weapons = {nil, nil, nil};
         items = {};
+        grenades = 3;
         ammunition = {
             light = 0;
             medium = 0;

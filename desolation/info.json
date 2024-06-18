@@ -1,7 +1,7 @@
 {
     "name": "Desolation",
     "author": "Polaritynord",
-    "version": "1.3.dev1",
+    "version": "1.3",
     "versionState": "polarized",
     "startScene": "desolation/assets/scenes/game.json",
     "icon": "desolation/assets/images/icon.png"
