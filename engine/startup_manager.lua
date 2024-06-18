@@ -55,6 +55,11 @@ function startupManager:load()
     Loca = love.filesystem.read("desolation/assets/loca_" .. Settings.language .. ".json")
     Loca = json.decode(Loca)
 
+    --Screenshots folder
+    if love.filesystem.getInfo("screenshots") == nil then
+        love.filesystem.createDirectory("screenshots")
+    end
+
     --Open up the default scene
     local startScene = LoadScene(infoData.startScene)
     if startScene.name == "Intro" and table.contains(arg, "--skip-intro") then

@@ -1,9 +1,11 @@
 local mouseSensivity = ENGINE_COMPONENTS.scriptComponent.new()
 
-local cursors = {
-    arrow = love.mouse.getSystemCursor("arrow");
-    crosshair = love.mouse.getSystemCursor("crosshair")
-}
+function love.mousemoved(x, y, dx, dy, istouch)
+    if GamePaused then return end
+    x = x + dx*Settings.sensivity
+    y = y + dy*Settings.sensivity
+    love.mouse.setPosition(x, y)
+end
 
 function mouseSensivity.setMouseCursor()
     if CurrentScene.name == "Game" then
@@ -18,18 +20,18 @@ function mouseSensivity.setMouseCursor()
 end
 
 function mouseSensivity:load()
-    self.oldX, self.oldY = love.mouse.getPosition()
+    local obj = self.parent
+    obj.imageComponent = ENGINE_COMPONENTS.imageComponent.new(obj, Assets.cursors.combat)
 end
 
 function mouseSensivity:update(delta)
-    self:setMouseCursor()
-    if GamePaused or Settings.sensivity == 1 then return end
-    --TODO too buggy!!!
+    local obj = self.parent
+    love.mouse.setRelativeMode(not GamePaused)
+    obj.imageComponent.enabled = not GamePaused
+    --set position of virtual cursor
     local mx, my = love.mouse.getPosition()
-    mx = mx + (mx-self.oldX)*Settings.sensivity
-    my = my + (my-self.oldY)*Settings.sensivity
-    love.mouse.setPosition(mx, my)
-    self.oldX, self.oldY = love.mouse.getPosition()
+    obj.position = {mx+CurrentScene.camera.position[1]-480, my+CurrentScene.camera.position[2]-270}
+    obj.scale = {1/CurrentScene.camera.zoom, 1/CurrentScene.camera.zoom}
 end
 
 return mouseSensivity

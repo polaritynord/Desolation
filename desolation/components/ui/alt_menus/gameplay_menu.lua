@@ -80,22 +80,20 @@ function gameplayMenu:load()
             end
         }
     )
-    --[[
     ui.sensivityText = ui:newTextLabel(
         {
             text = "Sensivity: ";
-            position = {0, 200};
+            position = {0, 400};
             size = 30;
         }
     )
     ui.sensivitySlider = ui:newSlider(
         {
-            position = {300, 205};
+            position = {300, 405};
             baseColor = {0.5, 0.5, 0.5, 1};
             value = (Settings.sensivity-1)/3;
         }
     )
-    ]]--
 
     ui.returnButton = ui:newTextButton(
         {
@@ -127,6 +125,7 @@ function gameplayMenu:update(delta)
     Settings.screen_shake = ui.screenShakeBox.toggled
     Settings.always_sprint = ui.alwaysSprintBox.toggled
     Settings.curved_hud = ui.curvedHudBox.toggled
+    Settings.sensivity = ui.sensivitySlider.value+1
     ui.sprintTypeButton.buttonText = string.upper(Settings.sprint_type)
 end
 

@@ -20,6 +20,16 @@ function itemScript:load()
     item.rotVelocity = 0
     item.realRot = 0
     item.defaultScale = table.new(item.scale)
+    item.oldPos = table.new(item.position)
+end
+
+function itemScript:explosionEvent(position, radius, intensity)
+    local item = self.parent
+    local distance = coreFuncs.pointDistance(position, item.position)
+    if distance > radius then return end
+    local dx, dy = item.position[1]-position[1], item.position[2]-position[2]
+    item.realRot = math.atan2(dy, dx)
+    item.velocity = (radius/distance)*intensity*1000
 end
 
 function itemScript:movement(delta)
@@ -27,6 +37,7 @@ function itemScript:movement(delta)
     local item = self.parent
     local playerPos = CurrentScene.player.position
     local itemPos = item.position
+    item.oldPos = table.new(item.position)
     if item.gettingPickedUp then
         itemPos[1] = itemPos[1] + (playerPos[1]-itemPos[1])*10*delta
         itemPos[2] = itemPos[2] + (playerPos[2]-itemPos[2])*10*delta
@@ -37,11 +48,26 @@ function itemScript:movement(delta)
         itemPos[1] = itemPos[1] + item.velocity*math.cos(item.realRot)*delta
         itemPos[2] = itemPos[2] + item.velocity*math.sin(item.realRot)*delta
         --Slow down
-        item.velocity = item.velocity - 2000*delta
+        item.velocity = item.velocity + (-item.velocity)*8*delta
         if item.velocity < 0 then item.velocity = 0 end
         --Turn & velocity decrease
         item.rotation = item.rotation - item.rotVelocity*delta
         item.rotVelocity = item.rotVelocity + (-item.rotVelocity)*math.pi*2*delta
+    end
+end
+
+function itemScript:collisionCheck()
+    local item = self.parent
+    local size = {25, 25}
+    local itemPos = {item.position[1]-size[1]/2, item.position[2]-size[2]/2}
+    --iterate through walls
+    for _, wall in ipairs(CurrentScene.walls.tree) do
+        local wallSize = {wall.scale[1]*64, wall.scale[2]*64}
+        if coreFuncs.aabbCollision(itemPos, wall.position, size, wallSize) then
+            item.position = table.new(item.oldPos)
+            item.velocity = -item.velocity
+            item.realRot = item.realRot
+        end
     end
 end
 
@@ -56,12 +82,12 @@ function itemScript:update(delta)
 
     local player = CurrentScene.player
     self:movement(delta)
+    self:collisionCheck()
     --Distance calculation
     if player ~= nil then
         item.distanceToPlayer = coreFuncs.pointDistance(item.position, player.position)
     end
-    --set sum colors & return if player is far away
-    --TODO better indicator
+    --change size & return if player is far away
     if item.distanceToPlayer > 100 then
         item.scale[1] = item.scale[1] + (item.defaultScale[1]-item.scale[1])*8*delta
         item.scale[2] = item.scale[2] + (item.defaultScale[2]-item.scale[2])*8*delta

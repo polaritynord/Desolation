@@ -83,6 +83,16 @@ function physicsProp:collisionCheck(prop, delta)
     end
 end
 
+function physicsProp:explosionEvent(position, radius, intensity)
+    local prop = self.parent
+    local distance = coreFuncs.pointDistance(position, prop.position)
+    if distance > radius then return end
+    local dx, dy = prop.position[1]-position[1], prop.position[2]-position[2]
+    local rot = math.atan2(dy, dx)
+    prop.velocity[1] = prop.velocity[1] + math.cos(rot)*intensity*(radius/distance)*100
+    prop.velocity[2] = prop.velocity[2] + math.sin(rot)*intensity*(radius/distance)*100
+end
+
 function physicsProp:physicsUpdate(delta)
     local prop = self.parent
     --movement

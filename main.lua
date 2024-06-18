@@ -95,6 +95,16 @@ function love.keypressed(key, unicode)
         CurrentScene.hud.UIComponent.enabled = not CurrentScene.hud.UIComponent.enabled
     end
 
+    --Take screenshot key
+    if table.contains(InputManager:getKeys("screenshot"), key) then
+        love.graphics.captureScreenshot("screenshots/" .. os.date("%Y%m%d%H%m%S") .. ".png")
+    end
+
+    --(Test) explosion
+    if key == "space" and CurrentScene.name == "Game" then
+        CurrentScene.mapCreator.script:createExplosion(CurrentScene.player.position, 100, 10)
+    end
+
     --***DEVCONSOLE RELATED STUFF DOWN HERE***
     if not console then return end
     --Developer console opening key

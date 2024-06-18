@@ -308,13 +308,13 @@ function hud:update(delta)
         local item = CurrentScene.player.nearItem
         ui.itemPickupImg.source = Assets.images["hud_item_pickup"]
         ui.itemPickupImg.position = {
-            item.position[1]-CurrentScene.camera.position[1]+480,
-            item.position[2]-CurrentScene.camera.position[2]+220
+            (item.position[1]-CurrentScene.camera.position[1])*CurrentScene.camera.zoom+480,
+            (item.position[2]-CurrentScene.camera.position[2]-50)*CurrentScene.camera.zoom+270
         }
         ui.itemPickupKey.text = string.upper(InputManager:getKeys("interact")[1])
         ui.itemPickupKey.position = {
-            item.position[1]-CurrentScene.camera.position[1]+470,
-            item.position[2]-CurrentScene.camera.position[2]+202
+            (item.position[1]-CurrentScene.camera.position[1])*CurrentScene.camera.zoom+470,
+            (item.position[2]-CurrentScene.camera.position[2]-50)*CurrentScene.camera.zoom+252
         }
         ui.itemPickupImg.color[4] = ui.itemPickupImg.color[4] + (1-ui.itemPickupImg.color[4])*20*delta
     end

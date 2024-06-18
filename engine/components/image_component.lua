@@ -9,10 +9,11 @@ function imageComponent.new(parent, source)
         source = source or Assets.images.missingTexture;
         layer = 1;
         color = {1, 1, 1, 1};
+        enabled = true;
     }
 
     function component:draw()
-        if not self.source then return end
+        if not self.source or not self.enabled then return end
         love.graphics.setColor(self.color)
         local object = self.parent
         local camera = CurrentScene.camera

@@ -17,7 +17,8 @@
         ["interact", "e"],
         ["reload", "r"],
         ["peek", "z"],
-        ["toggle_hud", "f1"]
+        ["toggle_hud", "f1"],
+        ["screenshot", "f12"]
     ],
 
     "joystick": [
@@ -38,6 +39,7 @@
         ["interact", 1],
         ["reload", 3],
         ["peek", 0],
-        ["toggle_hud", 0]
+        ["toggle_hud", 0],
+        ["screenshot", 0]
     ]
 }

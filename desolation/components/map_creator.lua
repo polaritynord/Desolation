@@ -4,6 +4,7 @@ local wallScript = require("desolation.components.wall_script")
 local itemEventFuncs = require("desolation.components.item.item_event_funcs")
 local json = require("engine.lib.json")
 local weaponManager = require("desolation.weapon_manager")
+local coreFuncs = require("coreFuncs")
 
 local mapCreator = ENGINE_COMPONENTS.scriptComponent.new()
 
@@ -55,7 +56,7 @@ function mapCreator:loadMap(path)
         for _, v in ipairs(data.walls) do
             local wall = object.new(CurrentScene.walls)
             wall.name = v[1]
-            wall.material = "concrete" --TODO mater,al types for walls
+            wall.material = "concrete" --TODO material types for walls
             wall:addComponent(table.new(wallScript))
             --Load image if nonexistant
             if Assets.mapImages["wall_" .. v[1]] == nil then
@@ -107,6 +108,25 @@ function mapCreator:loadMap(path)
         self.ambience:setLooping(true)
         self.ambience:play()
     end
+end
+
+function mapCreator:createExplosion(position, radius, intensity)
+    --iterate through props
+    for _, prop in ipairs(CurrentScene.props.tree) do
+        if prop.script.explosionEvent then prop.script:explosionEvent(position, radius, intensity) end
+    end
+    --iterate through items
+    for _, item in ipairs(CurrentScene.items.tree) do
+        item.script:explosionEvent(position, radius, intensity)
+    end
+    --determine the volume of sound based on distance
+    local camDistance = coreFuncs.pointDistance(CurrentScene.camera.position, position)
+    local volume = Settings.vol_master * Settings.vol_world * (radius/camDistance)
+    --play sound
+    local sound = Assets.sounds["explosion"]
+    sound:stop()
+    sound:setVolume(volume)
+    sound:play()
 end
 
 function mapCreator:load()
