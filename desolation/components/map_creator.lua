@@ -13,7 +13,16 @@ function mapCreator:loadMap(path)
     --read & convert to lua table
     local data = love.filesystem.read(path)
     data = json.decode(data)
+    --Load map assets
     Assets:unloadMapAssets()
+    if data.assets ~= nil then
+        --Load images
+        if data.assets.images ~= nil then
+            for _, img in ipairs(data.assets.images) do
+                Assets.mapImages[img[1]] = love.graphics.newImage(img[2])
+            end
+        end
+    end
     --load tiles
     if data.tiles ~= nil then
         for _, v in ipairs(data.tiles) do
@@ -120,6 +129,8 @@ function mapCreator:createExplosion(position, radius, intensity)
     for _, item in ipairs(CurrentScene.items.tree) do
         item.script:explosionEvent(position, radius, intensity)
     end
+    --alert the player (todo: move this to humanoid scripts)
+    CurrentScene.player.script:explosionEvent(position, radius, intensity)
     --explosion effects
     local particleComp = CurrentScene.bullets.particleComponent
     particleFuncs.createExplosionParticles(particleComp, position)

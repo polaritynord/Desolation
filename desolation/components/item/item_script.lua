@@ -29,7 +29,7 @@ function itemScript:explosionEvent(position, radius, intensity)
     if distance > radius then return end
     local dx, dy = item.position[1]-position[1], item.position[2]-position[2]
     item.realRot = math.atan2(dy, dx)
-    item.velocity = (radius/distance)*intensity*1000
+    item.velocity = (radius/distance)*intensity*10
 end
 
 function itemScript:movement(delta)

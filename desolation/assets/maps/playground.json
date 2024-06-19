@@ -32,11 +32,14 @@
         [
             "crate_big", [-180, -65], 29,
             [
-                ["loot", ["medkit","medkit","medkit","medkit","medkit"]]
+                ["loot", ["medkit","battery","ammo_medium","ammo_medium","ammo_medium","ammo_medium"]]
             ]
         ],
         [
             "barrel", [80, -160], 0, []
+        ],
+        [
+            "explosive_barrel", [150, -140], 0, []
         ],
         [
             "radio", [-242, 100], 0, []
@@ -51,5 +54,11 @@
         ["medkit", [-120, -80], 25],
         ["battery", [-120, -170], 25]
     ],
-    "ambience": "desolation/assets/sounds/ost/ambience.wav"
+    "ambience": "desolation/assets/sounds/ost/ambience.wav",
+    "assets": {
+        "images": [
+            ["prop_explosive_barrel", "desolation/assets/images/props/explosive_barrel.png"],
+            ["prop_barrel", "desolation/assets/images/props/barrel.png"]
+        ]
+    }
 }

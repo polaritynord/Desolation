@@ -10,6 +10,7 @@ function imageComponent.new(parent, source)
         layer = 1;
         color = {1, 1, 1, 1};
         enabled = true;
+        depth = 1;
     }
 
     function component:draw()
@@ -19,10 +20,13 @@ function imageComponent.new(parent, source)
         local camera = CurrentScene.camera
         local w, h = self.source:getWidth(), self.source:getHeight()
         local pos = coreFuncs.getRelativePosition(object.position, camera)
-        love.graphics.draw(
-            self.source, pos[1], pos[2], object.rotation,
-            object.scale[1]*camera.zoom, object.scale[2]*camera.zoom, w/2, h/2
-        )
+        for i = 1, self.depth do
+            love.graphics.draw(
+                self.source, pos[1], pos[2], object.rotation,
+                object.scale[1]*camera.zoom, object.scale[2]*camera.zoom, w/2, h/2
+            )
+            pos[2] = pos[2] + 10
+        end
     end
 
     return component

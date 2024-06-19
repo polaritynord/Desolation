@@ -357,6 +357,10 @@ function playerScript:reloadingWeapon(delta, player)
     end
 end
 
+function playerScript:explosionEvent(position, radius, intensity)
+    
+end
+
 --Engine funcs
 function playerScript:load()
     local player = self.parent

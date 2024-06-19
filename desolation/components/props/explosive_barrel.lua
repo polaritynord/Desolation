@@ -1,5 +1,4 @@
 local physicsProp = require("desolation.components.props.physics_prop")
-local coreFuncs = require("coreFuncs")
 
 local crateScript = table.new(physicsProp)
 
@@ -7,6 +6,13 @@ function crateScript:bulletHitEvent(bullet)
     local source = Assets.mapSounds["hit_barrel" .. math.random(1, 3)]
     source:setVolume(Settings.vol_master * Settings.vol_world)
     source:stop() ; source:play()
+end
+
+function crateScript:destroyEvent(prop)
+    --remove self so this shit doesnt crash the game
+    table.removeValue(CurrentScene.props.tree, prop)
+    local mapCreator = CurrentScene.mapCreator.script
+    mapCreator:createExplosion(prop.position, 400, 10)
 end
 
 function crateScript:load()
@@ -18,7 +24,7 @@ function crateScript:load()
             Assets.mapSounds["hit_barrel" .. i] = love.audio.newSource("desolation/assets/sounds/hit_barrel" .. i .. ".wav", "static")
         end
     end
-    barrel.imageComponent = ENGINE_COMPONENTS.imageComponent.new(barrel, Assets.mapImages["prop_barrel"])
+    barrel.imageComponent = ENGINE_COMPONENTS.imageComponent.new(barrel, Assets.mapImages["prop_explosive_barrel"])
     barrel.scale = {2.5, 2.5}
 end
 

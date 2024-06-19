@@ -29,6 +29,16 @@
         "mass": 12
     },
 
+    "explosive_barrel": {
+        "script": "desolation/components/props/explosive_barrel",
+        "movable": true,
+        "collidable": true,
+        "material": "concrete",
+        "invincible": false,
+        "health": 20,
+        "mass": 12
+    },
+
     "radio": {
         "script": "desolation/components/props/radio",
         "movable": false,
