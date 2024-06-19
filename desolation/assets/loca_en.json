@@ -31,14 +31,19 @@
         "screenShake": "Screen Shake: ",
         "alwaysSprint": "Always Sprint: ",
         "curvedHud": "Curved HUD: ",
-        "sensivity": "Sensivity: "
+        "sensivity": "Sensivity: ",
+        "sprintType": "Sprint Type: ",
+        "hold": "HOLD",
+        "toggle": "TOGGLE"
     },
     "videoMenu": {
         "vsync": "VSync: ",
         "vignette": "Vignette: ",
         "brightness": "Brightness: ",
         "weaponFlameParticles": "Weapon Flame Particles: ",
-        "playerTrailParticles": "Player Trail Particles: "
+        "playerTrailParticles": "Player Trail Particles: ",
+        "destructionParticles": "Destruction Particles: ",
+        "explosionParticles": "Explosion Particles: "
     },
     "keysMenu": {
         "pressAKey": "Press a key..."

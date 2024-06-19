@@ -5,6 +5,7 @@ local object = require("engine.object")
 local humanoidScript = ENGINE_COMPONENTS.scriptComponent.new()
 
 function humanoidScript:collisionCheck(delta, humanoid)
+    if humanoid.name == "player" and GetGlobal("noclip") > 0 then return end
     local size = {48, 48}
     local humanoidPos = {humanoid.position[1]-size[1]/2, humanoid.position[2]-size[2]/2}
     --iterate through walls
@@ -85,6 +86,10 @@ function humanoidScript:damage(amount, sourcePosition)
         }
         CurrentScene.hud:addChild(hitmarkerInstance)
     end
+    --play sound
+    local src = Assets.sounds["hurt" .. math.random(1, 3)]
+    src:setVolume(Settings.vol_master * Settings.vol_world)
+    src:stop() ; src:play()
     --damage humanoid
     if humanoid.armor > amount then
         humanoid.armor = humanoid.armor - amount

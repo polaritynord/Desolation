@@ -139,7 +139,7 @@
 
         "sounds": [
             ["explosion", "desolation/assets/sounds/explosion.wav", "static"],
-            ["sprint", "desolation/assets/sounds/sprint2.wav", "static"],
+            ["sprint", "desolation/assets/sounds/sprint.wav", "static"],
             ["slot_switch", "desolation/assets/sounds/slot_switch.wav", "static"]
         ]
     }

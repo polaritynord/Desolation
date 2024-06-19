@@ -31,14 +31,19 @@
         "screenShake": "Ekran Sarsintisi: ",
         "alwaysSprint": "Her Zaman Kos: ",
         "curvedHud": "Bombeli Arayuz: ",
-        "sensivity": "Hassasiyet: "
+        "sensivity": "Hassasiyet: ",
+        "sprintType": "Kosma Tipi: ",
+        "hold": "BASILI TUT",
+        "toggle": "AC/KAPA"
     },
     "videoMenu": {
         "vsync": "VSync: ",
         "vignette": "Ekran Karartisi: ",
         "brightness": "Parlaklik: ",
         "weaponFlameParticles": "Silah Ates Parcaciklari: ",
-        "playerTrailParticles": "Oyuncu Iz Parcaciklari: "
+        "playerTrailParticles": "Oyuncu Iz Parcaciklari: ",
+        "destructionParticles": "Yikim Parcaciklari: ",
+        "explosionParticles": "Patlama Parcaciklari: "
     },
     "keysMenu": {
         "pressAKey": "Bir tusa tikla..."

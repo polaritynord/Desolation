@@ -75,7 +75,7 @@ function videoMenu:load()
     )
     ui.destructionParticlesText = ui:newTextLabel(
         {
-            text = "Destruction Particles: ";
+            text = Loca.videoMenu.destructionParticles;
             position = {0, 360};
             size = 30;
         }
@@ -88,7 +88,7 @@ function videoMenu:load()
     )
     ui.explosionParticlesText = ui:newTextLabel(
         {
-            text = "Explosion Particles: ";
+            text = Loca.videoMenu.explosionParticles;
             position = {0, 400};
             size = 30;
         }

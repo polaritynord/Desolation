@@ -328,6 +328,7 @@ function playerScript:load()
     player.inventory.ammunition.light = 78
     player.inventory.weapons[2] = weaponManager.Shotgun.new()
     player.inventory.weapons[3] = weaponManager.AssaultRifle.new()
+    player.armor = 25
 
     RunConsoleCommand("cheats 1")
 end

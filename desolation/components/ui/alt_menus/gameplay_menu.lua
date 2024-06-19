@@ -61,7 +61,7 @@ function gameplayMenu:load()
     )
     ui.sprintTypeText = ui:newTextLabel(
         {
-            text = "Sprint Type: ";
+            text = Loca.gameplayMenu.sprintType;
             position = {0, 360};
             size = 30;
         }
@@ -69,7 +69,7 @@ function gameplayMenu:load()
     ui.sprintTypeButton = ui:newTextButton(
         {
             position = {370, 360};
-            buttonText = string.upper(Settings.sprint_type);
+            buttonText = "";
             buttonTextSize = 30;
             hoverEvent = buttonEvents.redHover;
             unhoverEvent = buttonEvents.redUnhover;
@@ -117,7 +117,7 @@ function gameplayMenu:update(delta)
     Settings.always_sprint = ui.alwaysSprintBox.toggled
     Settings.curved_hud = ui.curvedHudBox.toggled
     Settings.sensivity = ui.sensivitySlider.value+1
-    ui.sprintTypeButton.buttonText = string.upper(Settings.sprint_type)
+    ui.sprintTypeButton.buttonText = Loca.gameplayMenu[Settings.sprint_type]
 end
 
 return gameplayMenu
