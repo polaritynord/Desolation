@@ -10,25 +10,25 @@ local humanoidScript = require("desolation.components.humanoid_script")
 local playerScript = table.new(humanoidScript)
 
 function playerScript:movement(delta, player)
-    --TODO MOVEMENT CODE NEEDS REWRITING WITH PROPER VELOCITY STUFF!!!
     local speed = GetGlobal("p_speed")
-    local moveVelocity = {0, 0}
-    --Get input:
+    player.moveVelocity = {0, 0}
+    --Get input
     if InputManager.inputType == "keyboard" then
         --KEYBOARD
-        moveVelocity[1] = coreFuncs.boolToNum(InputManager:isPressed("move_right")) - coreFuncs.boolToNum(InputManager:isPressed("move_left"))
-        moveVelocity[2] = coreFuncs.boolToNum(InputManager:isPressed("move_down")) - coreFuncs.boolToNum(InputManager:isPressed("move_up"))
+        player.moveVelocity[1] = coreFuncs.boolToNum(InputManager:isPressed("move_right")) - coreFuncs.boolToNum(InputManager:isPressed("move_left"))
+        player.moveVelocity[2] = coreFuncs.boolToNum(InputManager:isPressed("move_down")) - coreFuncs.boolToNum(InputManager:isPressed("move_up"))
     elseif InputManager.inputType == "joystick" then
         --JOYSTICK
         local axis1, axis2 = InputManager:getAxis(1), InputManager:getAxis(2)
         if math.abs(axis1) > 0.1 then
-            moveVelocity[1] = axis1
+            player.moveVelocity[1] = axis1
         end
         if math.abs(axis2) > 0.1 then
-            moveVelocity[2] = axis2
+            player.moveVelocity[2] = axis2
         end
     end
-    player.moving = math.abs(moveVelocity[1]) > 0 or math.abs(moveVelocity[2]) > 0
+    player.moving = math.abs(player.moveVelocity[1]) > 0 or math.abs(player.moveVelocity[2]) > 0
+    --Sprinting
     if not player.sprinting then player.sprintSoundPlayed = false end
     --Sprinting
     player.sprintCooldown = player.sprintCooldown - delta
@@ -63,15 +63,11 @@ function playerScript:movement(delta, player)
     end
     --Normalize velocity
     if InputManager.inputType == "keyboard" and InputManager:isPressed({"move_left", "move_right"}) == InputManager:isPressed({"move_up", "move_down"}) and player.moving then
-        moveVelocity[1] = moveVelocity[1] * math.sin(math.pi/4)
-        moveVelocity[2] = moveVelocity[2] * math.sin(math.pi/4)
+        player.moveVelocity[1] = player.moveVelocity[1] * math.sin(math.pi/4)
+        player.moveVelocity[2] = player.moveVelocity[2] * math.sin(math.pi/4)
     end
-    --Move by velocity
-    player.oldPos = {player.position[1], player.position[2]}
-    player.position[1] = player.position[1] + (moveVelocity[1]*speed*delta)+(player.velocity[1]*delta)
-    player.position[2] = player.position[2] + (moveVelocity[2]*speed*delta)+(player.velocity[2]*delta)
-    player.velocity[1] = player.velocity[1] + (-player.velocity[1])*8*delta
-    player.velocity[2] = player.velocity[2] + (-player.velocity[2])*8*delta
+    player.moveVelocity[1] = player.moveVelocity[1] * speed
+    player.moveVelocity[2] = player.moveVelocity[2] * speed
     --Recharge stamina
     if player.sprinting then return end
     player.stamina = player.stamina + 18*delta

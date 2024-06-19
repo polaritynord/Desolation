@@ -1,9 +1,10 @@
 local coreFuncs = require("coreFuncs")
+local hitmarkerScript = require("desolation.components.hitmarker_script")
+local object = require("engine.object")
 
 local humanoidScript = ENGINE_COMPONENTS.scriptComponent.new()
 
 function humanoidScript:collisionCheck(delta, humanoid)
-    print(humanoid.name) --add noclip
     local size = {48, 48}
     local humanoidPos = {humanoid.position[1]-size[1]/2, humanoid.position[2]-size[2]/2}
     --iterate through walls
@@ -29,7 +30,7 @@ function humanoidScript:collisionCheck(delta, humanoid)
                     local pushRot = math.atan2(dy, dx) + math.pi
                     local playerSpeed = 140 --NOTE speed??
                     if humanoid.sprinting then playerSpeed = playerSpeed*1.6 end
-                    local vel = math.getVecValue(humanoid.velocity)
+                    local vel = math.getVecValue(humanoid.velocity) + math.getVecValue(humanoid.moveVelocity)/140
                     prop.velocity[1] = prop.velocity[1] + vel*math.cos(pushRot)*playerSpeed/prop.mass*delta*100
                     prop.velocity[2] = prop.velocity[2] + vel*math.sin(pushRot)*playerSpeed/prop.mass*delta*100
                 end
@@ -43,8 +44,8 @@ function humanoidScript:humanoidUpdate(delta, humanoid)
     humanoid.handOffset = humanoid.handOffset + (-humanoid.handOffset) * 20 * delta
     --movement
     humanoid.oldPos = table.new(humanoid.position)
-    humanoid.position[1] = humanoid.position[1] + humanoid.velocity[1]*delta
-    humanoid.position[2] = humanoid.position[2] + humanoid.velocity[2]*delta
+    humanoid.position[1] = humanoid.position[1] + (humanoid.velocity[1]*delta) + (humanoid.moveVelocity[1]*delta)
+    humanoid.position[2] = humanoid.position[2] + (humanoid.velocity[2]*delta) + (humanoid.moveVelocity[2]*delta)
     humanoid.velocity[1] = humanoid.velocity[1] + (-humanoid.velocity[1])*8*delta
     humanoid.velocity[2] = humanoid.velocity[2] + (-humanoid.velocity[2])*8*delta
     self:collisionCheck(delta, humanoid)
@@ -54,6 +55,7 @@ function humanoidScript:humanoidUpdate(delta, humanoid)
     humanoid.scale[1] = humanoid.scale[1] + 20 * delta
     humanoid.scale[2] = humanoid.scale[2] + 20 * delta
     humanoid.imageComponent.color[4] = humanoid.imageComponent.color[4] - 25 * delta
+    humanoid.hand.imageComponent.color[4] = humanoid.imageComponent.color[4]
 end
 
 function humanoidScript:doWalkingAnim(humanoid)
@@ -67,8 +69,18 @@ function humanoidScript:doWalkingAnim(humanoid)
     humanoid.scale[2] = 4 + humanoid.animationSizeDiff
 end
 
-function humanoidScript:damage(amount)
+function humanoidScript:damage(amount, sourcePosition)
     local humanoid = self.parent
+    if humanoid.name == "player" and GetGlobal("god") > 0 then return end
+    if humanoid.name == "player" then
+        --create hitmarker
+        local hitmarkerInstance = object.new(CurrentScene.hud.tree)
+        hitmarkerInstance:addComponent(table.new(hitmarkerScript))
+        hitmarkerInstance.sourcePos = {sourcePosition[1]-CurrentScene.camera.position[1], sourcePosition[2]-CurrentScene.camera.position[2]}
+        hitmarkerInstance.script:load()
+        CurrentScene.hud:addChild(hitmarkerInstance)
+    end
+    --damage humanoid
     if humanoid.armor > amount then
         humanoid.armor = humanoid.armor - amount
         return
@@ -90,13 +102,14 @@ function humanoidScript:explosionEvent(position, radius, intensity)
     humanoid.velocity[2] = humanoid.velocity[2] + math.sin(rot)*intensity*(radius/distance)*100
     --hurt player
     local damageAmount = 2*(radius/distance)*intensity
-    self:damage(damageAmount)
+    self:damage(damageAmount, position)
 end
 
 function humanoidScript:humanoidSetup()
     local humanoid = self.parent
     humanoid.imageComponent.source = Assets.images["player_body"]
     humanoid.velocity = {0, 0}
+    humanoid.moveVelocity = {0, 0}
     humanoid.health = 100
     humanoid.armor = 100
     humanoid.stamina = 100

@@ -71,6 +71,19 @@ function consoleFunctions.give_ammoScript(devConsole, command, i)
     if weapon == nil then return end
     --Add a magazine of ammunition to inventory
     player.inventory.ammunition[weapon.ammoType] = player.inventory.ammunition[weapon.ammoType] + weapon.magSize
+    --notification in hud
+    local hud = CurrentScene.hud.UIComponent
+    local newNotif = hud:newImage(
+        {
+            position = {25, 420};
+            source = Assets.images["hud_acquire_ammo"];
+            color = {1, 1, 1, 0.7};
+        }
+    )
+    newNotif.scale = {1.7, 1.7}
+    newNotif.timer = 0
+    hud.acquireNotifs[#hud.acquireNotifs+1] = newNotif
+    newNotif.index = #hud.acquireNotifs
 end
 
 function consoleFunctions.clearScript(devConsole, command, i)
