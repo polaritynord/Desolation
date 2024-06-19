@@ -12,7 +12,9 @@ end
 
 function crateScript:destroyEvent(crate)
     local comp = CurrentScene.bullets.particleComponent
-    particleFuncs.createCrateWoodParticles(comp, crate.position)
+    if Settings.destruction_particles then
+        particleFuncs.createCrateWoodParticles(comp, crate.position)
+    end
 end
 
 function crateScript:load()

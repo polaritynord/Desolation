@@ -90,6 +90,7 @@ end
 
 function physicsProp:explosionEvent(position, radius, intensity)
     local prop = self.parent
+    if prop.destroyed then return end
     local distance = coreFuncs.pointDistance(position, prop.position)
     if distance > radius then return end
     --add up velocity

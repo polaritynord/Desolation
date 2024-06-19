@@ -330,8 +330,6 @@ function playerScript:load()
     player.inventory.weapons[3] = weaponManager.AssaultRifle.new()
 
     RunConsoleCommand("cheats 1")
-    player.health = 10
-    player.armor = 15
 end
 
 function playerScript:update(delta)

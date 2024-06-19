@@ -73,12 +73,30 @@ function videoMenu:load()
             toggled = Settings.player_trail_particles;
         }
     )
-    ui.returnButton = ui:newTextButton(
+    ui.destructionParticlesText = ui:newTextLabel(
         {
-            buttonText = Loca.settings.returnButton;
-            buttonTextSize = 30;
-            position = {0, 440};
-            clickEvent = function() settings.menu = nil end;
+            text = "Destruction Particles: ";
+            position = {0, 360};
+            size = 30;
+        }
+    )
+    ui.destructionParticlesBox = ui:newCheckbox(
+        {
+            position = {400, 375};
+            toggled = Settings.destruction_particles;
+        }
+    )
+    ui.explosionParticlesText = ui:newTextLabel(
+        {
+            text = "Explosion Particles: ";
+            position = {0, 400};
+            size = 30;
+        }
+    )
+    ui.explosionParticlesBox = ui:newCheckbox(
+        {
+            position = {400, 415};
+            toggled = Settings.explosion_particles;
         }
     )
 end
@@ -103,6 +121,8 @@ function videoMenu:update(delta)
     Settings.vignette = ui.vignetteBox.toggled
     Settings.weapon_flame_particles = ui.weaponParticlesBox.toggled
     Settings.player_trail_particles = ui.playerTrailBox.toggled
+    Settings.destruction_particles = ui.destructionParticlesBox.toggled
+    Settings.explosion_particles = ui.explosionParticlesBox.toggled
     --Settings.brightness = ui.brightnessSlider.value
 
     love.window.setVSync(Settings.vsync)

@@ -16,7 +16,7 @@ function settings:load()
             buttonText = Loca.settings.gameplay;
             buttonTextSize = 30;
             position = {0, 200};
-            clickEvent = function() s.menu = "gameplay" end;
+            clickEvent = function() if s.menu == "gameplay" then s.menu = nil else s.menu = "gameplay" end end;
         }
     )
     ui.videoButton = ui:newTextButton(
@@ -24,7 +24,7 @@ function settings:load()
             buttonText = Loca.settings.video;
             buttonTextSize = 30;
             position = {0, 240};
-            clickEvent = function() s.menu = "video" end;
+            clickEvent = function() if s.menu == "video" then s.menu = nil else s.menu = "video" end end;
         }
     )
     ui.audioButton = ui:newTextButton(
@@ -32,7 +32,7 @@ function settings:load()
             buttonText = Loca.settings.audio;
             buttonTextSize = 30;
             position = {0, 280};
-            clickEvent = function() s.menu = "audio" end;
+            clickEvent = function() if s.menu == "audio" then s.menu = nil else s.menu = "audio" end end;
         }
     )
     ui.keysButton = ui:newTextButton(
@@ -40,7 +40,7 @@ function settings:load()
             buttonText = Loca.settings.keys;
             buttonTextSize = 30;
             position = {0, 320};
-            clickEvent = function() s.menu = "keys" end;
+            clickEvent = function() if s.menu == "keys" then s.menu = nil else s.menu = "keys" end end;
         }
     )
     ui.languageButton = ui:newTextButton(

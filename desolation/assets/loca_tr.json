@@ -30,7 +30,8 @@
         "cameraSway": "Kamera Sallantisi: ",
         "screenShake": "Ekran Sarsintisi: ",
         "alwaysSprint": "Her Zaman Kos: ",
-        "curvedHud": "Bombeli Arayuz: "
+        "curvedHud": "Bombeli Arayuz: ",
+        "sensivity": "Hassasiyet: "
     },
     "videoMenu": {
         "vsync": "VSync: ",

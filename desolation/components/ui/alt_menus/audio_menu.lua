@@ -62,14 +62,6 @@ function audioMenu:load()
             value = Settings.vol_world;
         }
     )
-    ui.returnButton = ui:newTextButton(
-        {
-            buttonText = Loca.settings.returnButton;
-            buttonTextSize = 30;
-            position = {0, 440};
-            clickEvent = function() settings.menu = nil end;
-        }
-    )
 end
 
 function audioMenu:update(delta)

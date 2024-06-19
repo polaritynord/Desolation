@@ -129,11 +129,13 @@ function mapCreator:createExplosion(position, radius, intensity)
     for _, item in ipairs(CurrentScene.items.tree) do
         item.script:explosionEvent(position, radius, intensity)
     end
-    --alert the player (todo: move this to humanoid scripts)
+    --alert the player (TODO: make this warn all humanoids)
     CurrentScene.player.script:explosionEvent(position, radius, intensity)
     --explosion effects
-    local particleComp = CurrentScene.bullets.particleComponent
-    particleFuncs.createExplosionParticles(particleComp, position)
+    if Settings.explosion_particles then
+        local particleComp = CurrentScene.bullets.particleComponent
+        particleFuncs.createExplosionParticles(particleComp, position)
+    end
     --determine the volume of sound based on distance
     local camDistance = coreFuncs.pointDistance(CurrentScene.camera.position, position)
     local volume = Settings.vol_master * Settings.vol_world * (radius/camDistance)

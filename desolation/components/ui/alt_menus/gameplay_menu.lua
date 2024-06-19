@@ -82,7 +82,7 @@ function gameplayMenu:load()
     )
     ui.sensivityText = ui:newTextLabel(
         {
-            text = "Sensivity: ";
+            text = Loca.gameplayMenu.sensivity;
             position = {0, 400};
             size = 30;
         }
@@ -92,15 +92,6 @@ function gameplayMenu:load()
             position = {300, 405};
             baseColor = {0.5, 0.5, 0.5, 1};
             value = (Settings.sensivity-1)/3;
-        }
-    )
-
-    ui.returnButton = ui:newTextButton(
-        {
-            buttonText = Loca.settings.returnButton;
-            buttonTextSize = 30;
-            position = {0, 440};
-            clickEvent = function() settings.menu = nil end;
         }
     )
 end

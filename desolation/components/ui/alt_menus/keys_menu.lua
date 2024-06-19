@@ -27,15 +27,6 @@ function keysMenu:load()
         ui[binding[1]].binding = binding
     end
 
-    ui.returnButton = ui:newTextButton(
-        {
-            buttonText = Loca.settings.returnButton;
-            buttonTextSize = 30;
-            position = {0, 160};
-            clickEvent = function() settings.menu = nil end;
-        }
-    )
-
     keys.length = 200 + #InputManager.bindings.keyboard*40
 end
 

@@ -14,14 +14,16 @@ function bulletScript:collisionCheck(bullet)
             if coreFuncs.aabbCollision(bulletPos, wall.position, size, wallSize) then
                 --remove bullet
                 table.removeValue(CurrentScene.bullets.tree, bullet)
-                --create particles (TODO: particle setting)
-                local particleComp = CurrentScene.bullets.particleComponent
-                particleFuncs.createWallHitParticles(particleComp, bullet, i, wall.material)
+                --create particles
+                if Settings.destruction_particles then
+                    local particleComp = CurrentScene.bullets.particleComponent
+                    particleFuncs.createWallHitParticles(particleComp, bullet, i, wall.material)
+                end
                 --particleFuncs.createBulletHoleParticles(particleComp, bullet, i)
             end
         end
         --iterate through props
-        for _ ,prop in ipairs(CurrentScene.props.tree) do
+        for _, prop in ipairs(CurrentScene.props.tree) do
             if prop.collidable then
                 local src = prop.imageComponent.source
                 local w, h = src:getWidth(), src:getHeight()
@@ -30,9 +32,11 @@ function bulletScript:collisionCheck(bullet)
                 if coreFuncs.aabbCollision(bulletPos, propPos, size, propSize) then
                     --remove bullet
                     table.removeValue(CurrentScene.bullets.tree, bullet)
-                    --create particles (TODO: particle setting)
-                    local particleComp = CurrentScene.bullets.particleComponent
-                    particleFuncs.createWallHitParticles(particleComp, bullet, i, prop.material)
+                    --create particles
+                    if Settings.destruction_particles then
+                        local particleComp = CurrentScene.bullets.particleComponent
+                        particleFuncs.createWallHitParticles(particleComp, bullet, i, prop.material)
+                    end
                     --bullet hit event
                     if prop.script.physBulletHitEvent ~= nil then
                         prop.script:physBulletHitEvent(bullet)

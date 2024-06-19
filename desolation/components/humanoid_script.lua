@@ -30,7 +30,7 @@ function humanoidScript:collisionCheck(delta, humanoid)
                     local pushRot = math.atan2(dy, dx) + math.pi
                     local playerSpeed = 140 --NOTE speed??
                     if humanoid.sprinting then playerSpeed = playerSpeed*1.6 end
-                    local vel = math.getVecValue(humanoid.velocity) + math.getVecValue(humanoid.moveVelocity)/140
+                    local vel =  math.getVecValue(humanoid.moveVelocity)/140
                     prop.velocity[1] = prop.velocity[1] + vel*math.cos(pushRot)*playerSpeed/prop.mass*delta*100
                     prop.velocity[2] = prop.velocity[2] + vel*math.sin(pushRot)*playerSpeed/prop.mass*delta*100
                 end
@@ -76,8 +76,13 @@ function humanoidScript:damage(amount, sourcePosition)
         --create hitmarker
         local hitmarkerInstance = object.new(CurrentScene.hud.tree)
         hitmarkerInstance:addComponent(table.new(hitmarkerScript))
-        hitmarkerInstance.sourcePos = {sourcePosition[1]-CurrentScene.camera.position[1], sourcePosition[2]-CurrentScene.camera.position[2]}
         hitmarkerInstance.script:load()
+        local rotation = math.atan2(sourcePosition[2]-CurrentScene.camera.position[2], sourcePosition[1]-CurrentScene.camera.position[1]) + math.pi
+        hitmarkerInstance.UIComponent.img.rotation = rotation
+        hitmarkerInstance.UIComponent.img.position = {
+            480-math.cos(rotation)*70,
+            270-math.sin(rotation)*70
+        }
         CurrentScene.hud:addChild(hitmarkerInstance)
     end
     --damage humanoid
@@ -103,6 +108,15 @@ function humanoidScript:explosionEvent(position, radius, intensity)
     --hurt player
     local damageAmount = 2*(radius/distance)*intensity
     self:damage(damageAmount, position)
+    --screen shake (if humanoid is player)
+    if humanoid.name ~= "player" then return end
+    if Settings.screen_shake and GetGlobal("freecam") < 1 then
+        local camera = CurrentScene.camera
+        local temp = {-1, 1}
+        local max = intensity*(radius/distance)
+        camera.position[1] = camera.position[1] + temp[math.random(1,2)]*max
+        camera.position[2] = camera.position[2] + temp[math.random(1,2)]*max
+    end
 end
 
 function humanoidScript:humanoidSetup()

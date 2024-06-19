@@ -36,10 +36,16 @@
             ]
         ],
         [
-            "barrel", [80, -160], 0, []
+            "barrel", [-60, -232], 0, []
         ],
         [
-            "explosive_barrel", [150, -140], 0, []
+            "explosive_barrel", [160, -130], 0, []
+        ],
+        [
+            "explosive_barrel", [116, -212], 0, []
+        ],
+        [
+            "explosive_barrel", [41, -131], 0, []
         ],
         [
             "radio", [-242, 100], 0, []

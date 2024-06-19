@@ -30,7 +30,8 @@
         "cameraSway": "Camera Sway: ",
         "screenShake": "Screen Shake: ",
         "alwaysSprint": "Always Sprint: ",
-        "curvedHud": "Curved HUD: "
+        "curvedHud": "Curved HUD: ",
+        "sensivity": "Sensivity: "
     },
     "videoMenu": {
         "vsync": "VSync: ",
