@@ -210,8 +210,8 @@ function hud:update(delta)
         return
     end
     --Update monitors
-    ui.healthMonitor.text = player.health
-    ui.armorMonitor.text = player.armor
+    ui.healthMonitor.text = math.ceil(player.health)
+    ui.armorMonitor.text = math.ceil(player.armor)
     ui.staminaMonitor.text = math.ceil(player.stamina)
     --update health monitor color
     local temp = coreFuncs.boolToNum(player.health > 30)

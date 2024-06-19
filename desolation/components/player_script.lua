@@ -5,28 +5,30 @@ local particleFuncs = require("desolation.particle_funcs")
 local object = require("engine.object")
 local itemEventFuncs = require("desolation.components.item.item_event_funcs")
 local itemScript = require("desolation.components.item.item_script")
+local humanoidScript = require("desolation.components.humanoid_script")
 
-local playerScript = ENGINE_COMPONENTS.scriptComponent.new()
+local playerScript = table.new(humanoidScript)
 
 function playerScript:movement(delta, player)
+    --TODO MOVEMENT CODE NEEDS REWRITING WITH PROPER VELOCITY STUFF!!!
     local speed = GetGlobal("p_speed")
-    player.velocity = {0, 0}
+    local moveVelocity = {0, 0}
     --Get input:
     if InputManager.inputType == "keyboard" then
         --KEYBOARD
-        player.velocity[1] = coreFuncs.boolToNum(InputManager:isPressed("move_right")) - coreFuncs.boolToNum(InputManager:isPressed("move_left"))
-        player.velocity[2] = coreFuncs.boolToNum(InputManager:isPressed("move_down")) - coreFuncs.boolToNum(InputManager:isPressed("move_up"))
+        moveVelocity[1] = coreFuncs.boolToNum(InputManager:isPressed("move_right")) - coreFuncs.boolToNum(InputManager:isPressed("move_left"))
+        moveVelocity[2] = coreFuncs.boolToNum(InputManager:isPressed("move_down")) - coreFuncs.boolToNum(InputManager:isPressed("move_up"))
     elseif InputManager.inputType == "joystick" then
         --JOYSTICK
         local axis1, axis2 = InputManager:getAxis(1), InputManager:getAxis(2)
         if math.abs(axis1) > 0.1 then
-            player.velocity[1] = axis1
+            moveVelocity[1] = axis1
         end
         if math.abs(axis2) > 0.1 then
-            player.velocity[2] = axis2
+            moveVelocity[2] = axis2
         end
     end
-    player.moving = math.abs(player.velocity[1]) > 0 or math.abs(player.velocity[2]) > 0
+    player.moving = math.abs(moveVelocity[1]) > 0 or math.abs(moveVelocity[2]) > 0
     if not player.sprinting then player.sprintSoundPlayed = false end
     --Sprinting
     player.sprintCooldown = player.sprintCooldown - delta
@@ -61,54 +63,19 @@ function playerScript:movement(delta, player)
     end
     --Normalize velocity
     if InputManager.inputType == "keyboard" and InputManager:isPressed({"move_left", "move_right"}) == InputManager:isPressed({"move_up", "move_down"}) and player.moving then
-        player.velocity[1] = player.velocity[1] * math.sin(math.pi/4)
-        player.velocity[2] = player.velocity[2] * math.sin(math.pi/4)
+        moveVelocity[1] = moveVelocity[1] * math.sin(math.pi/4)
+        moveVelocity[2] = moveVelocity[2] * math.sin(math.pi/4)
     end
     --Move by velocity
     player.oldPos = {player.position[1], player.position[2]}
-    player.position[1] = player.position[1] + (player.velocity[1]*speed*delta)
-    player.position[2] = player.position[2] + (player.velocity[2]*speed*delta)
+    player.position[1] = player.position[1] + (moveVelocity[1]*speed*delta)+(player.velocity[1]*delta)
+    player.position[2] = player.position[2] + (moveVelocity[2]*speed*delta)+(player.velocity[2]*delta)
+    player.velocity[1] = player.velocity[1] + (-player.velocity[1])*8*delta
+    player.velocity[2] = player.velocity[2] + (-player.velocity[2])*8*delta
     --Recharge stamina
     if player.sprinting then return end
     player.stamina = player.stamina + 18*delta
     if player.stamina > 100 then player.stamina = 100 end
-end
-
-function playerScript:collisionCheck(player, delta)
-    if GetGlobal("noclip") > 0 then return end
-    local size = {48, 48}
-    local playerPos = {player.position[1]-size[1]/2, player.position[2]-size[2]/2}
-    --iterate through walls
-    for _, wall in ipairs(CurrentScene.walls.tree) do
-        local wallSize = {wall.scale[1]*64, wall.scale[2]*64}
-        if coreFuncs.aabbCollision(playerPos, wall.position, size, wallSize) then
-            player.position = {player.oldPos[1], player.oldPos[2]}
-            player.velocity = {-player.velocity[1], -player.velocity[2]}
-        end
-    end
-    --iterate through props
-    for _, prop in ipairs(CurrentScene.props.tree) do
-        if prop.collidable then
-            local src = prop.imageComponent.source
-            local w, h = src:getWidth(), src:getHeight()
-            local propSize = {prop.scale[1]*w, prop.scale[2]*h}
-            local propPos = {prop.position[1]-propSize[1]/2, prop.position[2]-propSize[2]/2}
-            if coreFuncs.aabbCollision(playerPos, propPos, size, propSize) then
-                player.position = {player.oldPos[1], player.oldPos[2]}
-                --pushing crates
-                if prop.movable then
-                    --calculate push rotation
-                    local dx, dy = playerPos[1]-propPos[1], playerPos[2]-propPos[2]
-                    local pushRot = math.atan2(dy, dx) + math.pi
-                    local playerSpeed = GetGlobal("p_speed")
-                    if player.sprinting then playerSpeed = playerSpeed*1.6 end
-                    local vel = math.getVecValue(player.velocity)
-                    prop.velocity[1] = prop.velocity[1] + vel*math.cos(pushRot)*playerSpeed/prop.mass*delta*100
-                    prop.velocity[2] = prop.velocity[2] + vel*math.sin(pushRot)*playerSpeed/prop.mass*delta*100
-                end
-            end
-        end
-    end
 end
 
 function playerScript:pointTowardsMouse(player)
@@ -179,17 +146,6 @@ function playerScript:slotSwitching(player)
             playerSounds:stopSound(Assets.sounds["reload_" .. string.lower(weapon.name)])
         end
     end
-end
-
-function playerScript:doWalkingAnim(player)
-    if not player.moving then return end
-    local time = love.timer.getTime()
-    local speed = 12
-    if player.sprinting then speed = speed + 4 end
-    player.animationSizeDiff = math.sin(time*speed)/5
-    --Set image component values
-    player.scale[1] = 4 + player.animationSizeDiff
-    player.scale[2] = 4 + player.animationSizeDiff
 end
 
 function playerScript:weaponDropping(player)
@@ -357,45 +313,17 @@ function playerScript:reloadingWeapon(delta, player)
     end
 end
 
-function playerScript:explosionEvent(position, radius, intensity)
-    
-end
-
 --Engine funcs
 function playerScript:load()
+    self:humanoidSetup()
     local player = self.parent
-    player.imageComponent.source = Assets.images.player_body
-    player.scale = {4, 4}
     --Player variables
-    player.velocity = {0, 0}
-    player.health = 100 ; player.armor = 100 ; player.stamina = 100
     player.sprintCooldown = 0
     player.sprintSoundPlayed = false
     player.armorAcquired = true
-    player.sprinting = false
-    player.moving = false
-    player.reloading = false
-    player.animationSizeDiff = 0
-    player.handOffset = 0
-    player.inventory = {
-        weapons = {nil, nil, nil};
-        items = {};
-        grenades = 3;
-        ammunition = {
-            light = 0;
-            medium = 0;
-            revolver = 0;
-            shotgun = 0;
-        };
-        slot = 1;
-    }
-    player.shootTimer = 0
-    player.reloadTimer = 0
-    player.oldPos = table.new(player.position)
     --TODO Find a better way to handle these key presses?
     player.keyPressData = {
         ["q"] = false;
-        ["e"] = false;
     }
     player.nearItem = nil
     --Starter weapon
@@ -412,21 +340,16 @@ end
 
 function playerScript:update(delta)
     if GamePaused then return end
-
     local player = self.parent
-    player.imageComponent.color = {Settings.brightness, Settings.brightness, Settings.brightness, 1}
+    self:humanoidUpdate(delta, player)
 
+    if player.health <= 0 then return end
     self:movement(delta, player)
-    self:collisionCheck(player, delta)
     self:pointTowardsMouse(player)
     self:slotSwitching(player)
-    self:doWalkingAnim(player)
     self:weaponDropping(player)
     self:shootingWeapon(delta, player)
     self:reloadingWeapon(delta, player)
-    --Update hand offset
-    player.handOffset = player.handOffset + (-player.handOffset) * 20 * delta
-    player.keyPressData["e"] = InputManager:isPressed("interact")
 end
 
 return playerScript

@@ -58,6 +58,11 @@
             "debugMenu",
             ["UIComponent", "desolation/components/ui/debug_menu"]
         ],
+
+        [
+            "gameOver",
+            ["UIComponent", "desolation/components/ui/game_over"]
+        ],
         
         [
             "pauseScreen",

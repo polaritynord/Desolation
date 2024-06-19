@@ -3,14 +3,14 @@ local moonshine = require("engine.lib.moonshine")
 local gameShaders = {}
 
 function gameShaders:updateVignette(chain, delta)
+    local player = CurrentScene.player
     --enable & disable
-    if Settings.vignette then
+    if Settings.vignette and player.health > 0 then
         chain.enable("vignette")
     else
         chain.disable("vignette")
         return
     end
-    local player = CurrentScene.player
     --change color based on health
     if player.health < 30 then
         self.pulseTimer = self.pulseTimer + delta
