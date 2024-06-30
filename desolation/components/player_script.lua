@@ -187,69 +187,8 @@ function playerScript:shootingWeapon(delta, player)
     local weapon = player.inventory.weapons[player.inventory.slot]
     if weapon == nil then return end
     local playerSounds = player.soundManager.script
-    if (love.mouse.isDown(1) or InputManager:getAxis(6) > 0.4) and player.shootTimer > weapon.shootTime then
-        player.shootTimer = 0
-        --Check if there is ammo available in magazine
-        if weapon.magAmmo < 1 then
-            playerSounds:playStopSound(Assets.sounds["empty_mag"])
-            return
-        end
-        if weapon.weaponType == "auto" then
-            if player.reloading then return end
-            --Fire weapon
-            weapon.magAmmo = weapon.magAmmo - weapon.bulletPerShot
-            playerSounds:playStopSound(Assets.sounds["shoot_" .. string.lower(weapon.name)])
-            --Bullet instance creation
-            local bullet = object.new(CurrentScene.bullets)
-            bullet.position[1] = player.position[1] + math.cos(player.rotation)*weapon.bulletOffset
-            bullet.position[2] = player.position[2] + math.sin(player.rotation)*weapon.bulletOffset
-            bullet.rotation = player.rotation + math.uniform(-weapon.bulletSpread, weapon.bulletSpread)
-            bullet:addComponent(table.new(bulletScript))
-            bullet:addComponent(ENGINE_COMPONENTS.particleComponent.new(bullet))
-            bullet.script:load()
-            bullet.speed = weapon.bulletSpeed
-            bullet.damage = weapon.bulletDamage
-            CurrentScene.bullets:addChild(bullet)
-        elseif weapon.ammoType == "shotgun" then
-            player.reloading = false
-            --Fire weapon
-            weapon.magAmmo = weapon.magAmmo - 1
-            playerSounds:playStopSound(Assets.sounds["shoot_" .. string.lower(weapon.name)])
-            --Bullet instance creation
-            local radians = math.pi*2 * (weapon.bulletSpread/360) --turn into radians
-            for i = 1, weapon.bulletPerShot do
-                local bullet = object.new(CurrentScene.bullets)
-                bullet.position[1] = player.position[1] + math.cos(player.rotation)*weapon.bulletOffset
-                bullet.position[2] = player.position[2] + math.sin(player.rotation)*weapon.bulletOffset
-                bullet.rotation = player.rotation + (i-2)*(radians/weapon.bulletPerShot)
-                bullet:addComponent(table.new(bulletScript))
-                bullet:addComponent(ENGINE_COMPONENTS.particleComponent.new(bullet))
-                bullet.script:load()
-                bullet.speed = weapon.bulletSpeed
-                bullet.damage = weapon.bulletDamage
-                CurrentScene.bullets:addChild(bullet)
-            end
-        end
-        --effects
-        player.handOffset = -weapon.handRecoilIntensity
-        if Settings.screen_shake and GetGlobal("freecam") < 1 then
-            local camera = CurrentScene.camera
-            local a = 1
-            if math.random() < 0.5 then a = -1 end
-            camera.position[1] = camera.position[1] + weapon.screenShakeIntensity*a
-            a = 1
-            if math.random() < 0.5 then a = -1 end
-            camera.position[2] = camera.position[2] + weapon.screenShakeIntensity*a
-        end
-        --particles
-        if Settings.weapon_flame_particles then
-            local shootParticles = player.particleComponent
-            particleFuncs.createShootParticles(shootParticles, player.rotation)
-        end
-        --hud stuff
-        local hud = CurrentScene.hud.UIComponent
-        hud.weaponImg.rotation = math.pi/8
-        hud.weaponImg.scale = {-4, 4}
+    if (love.mouse.isDown(1) or InputManager:getAxis(6) > 0.4) then
+        self:humanoidShootWeapon(weapon)
     end
 end
 

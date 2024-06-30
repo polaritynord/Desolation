@@ -13,7 +13,7 @@ function playerHandScript:update(delta)
     local player = hand.parent
     --Set image for the hand
     local src = Assets.images.player_hand_empty
-    if player.inventory.weapons[player.inventory.slot] then
+    if player.inventory.weapons[player.inventory.slot] and not player.unarmed then
         src = Assets.images.player_hand_placeholder -- Placeholder.
     end
     hand.imageComponent.source = src

@@ -1,3 +1,6 @@
+local object = require("engine.object")
+local bulletScript = require("desolation.components.bullet_script")
+local particleFuncs = require("desolation.particle_funcs")
 local coreFuncs = require("coreFuncs")
 
 local humanoidScript = ENGINE_COMPONENTS.scriptComponent.new()
@@ -96,6 +99,14 @@ function humanoidScript:damage(amount, sourcePosition)
             270-math.sin(rotation)*70
         }
         uiComp.hitmarkers[#uiComp.hitmarkers+1] = hitmarkerInstance
+        --Screen shake
+        if Settings.screen_shake and GetGlobal("freecam") < 1 then
+            local camera = CurrentScene.camera
+            local temp = {-1, 1}
+            local max = 8.5
+            camera.position[1] = camera.position[1] + temp[math.random(1,2)]*max
+            camera.position[2] = camera.position[2] + temp[math.random(1,2)]*max
+        end
     end
     --damage humanoid
     if humanoid.armor > amount then
@@ -120,7 +131,7 @@ function humanoidScript:explosionEvent(position, radius, intensity)
     --hurt player
     local damageAmount = 2*(radius/distance)*intensity
     self:damage(damageAmount, position)
-    --screen shake (if humanoid is player)
+    --[[screen shake (if humanoid is player)
     if humanoid.name ~= "player" then return end
     if Settings.screen_shake and GetGlobal("freecam") < 1 then
         local camera = CurrentScene.camera
@@ -129,6 +140,80 @@ function humanoidScript:explosionEvent(position, radius, intensity)
         camera.position[1] = camera.position[1] + temp[math.random(1,2)]*max
         camera.position[2] = camera.position[2] + temp[math.random(1,2)]*max
     end
+    ]]--
+end
+
+function humanoidScript:humanoidShootWeapon(weapon)
+    local humanoid = self.parent
+    if weapon == nil or humanoid.shootTimer < weapon.shootTime then return end
+
+    humanoid.shootTimer = 0
+    --Check if there is ammo available in magazine
+    if weapon.magAmmo < 1 then
+        Assets.sounds["empty_mag"]:stop()
+        Assets.sounds["empty_mag"]:play()
+        return
+    end
+    if weapon.weaponType == "auto" then
+        if humanoid.reloading then return end
+        --Fire weapon
+        weapon.magAmmo = weapon.magAmmo - weapon.bulletPerShot
+        --Sound effect
+        Assets.sounds["shoot_" .. string.lower(weapon.name)]:stop()
+        Assets.sounds["shoot_" .. string.lower(weapon.name)]:play()
+        --Bullet instance creation
+        local bullet = object.new(CurrentScene.bullets)
+        bullet.owner = humanoid.name
+        bullet.position[1] = humanoid.position[1] + math.cos(humanoid.rotation)*weapon.bulletOffset
+        bullet.position[2] = humanoid.position[2] + math.sin(humanoid.rotation)*weapon.bulletOffset
+        bullet.rotation = humanoid.rotation + math.uniform(-weapon.bulletSpread, weapon.bulletSpread)
+        bullet:addComponent(table.new(bulletScript))
+        bullet.script:load()
+        bullet.speed = weapon.bulletSpeed
+        bullet.damage = weapon.bulletDamage
+        CurrentScene.bullets:addChild(bullet)
+    elseif weapon.ammoType == "shotgun" then
+        humanoid.reloading = false
+        --Fire weapon
+        weapon.magAmmo = weapon.magAmmo - 1
+        Assets.sounds["shoot_" .. string.lower(weapon.name)]:stop()
+        Assets.sounds["shoot_" .. string.lower(weapon.name)]:play()
+        --Bullet instance creation
+        local radians = math.pi*2 * (weapon.bulletSpread/360) --turn into radians
+        for i = 1, weapon.bulletPerShot do
+            local bullet = object.new(CurrentScene.bullets)
+            bullet.owner = humanoid.name
+            bullet.position[1] = humanoid.position[1] + math.cos(humanoid.rotation)*weapon.bulletOffset
+            bullet.position[2] = humanoid.position[2] + math.sin(humanoid.rotation)*weapon.bulletOffset
+            bullet.rotation = humanoid.rotation + (i-2)*(radians/weapon.bulletPerShot)
+            bullet:addComponent(table.new(bulletScript))
+            bullet.script:load()
+            bullet.speed = weapon.bulletSpeed
+            bullet.damage = weapon.bulletDamage
+            CurrentScene.bullets:addChild(bullet)
+        end
+    end
+    --particles
+    if Settings.weapon_flame_particles then
+        local shootParticles = CurrentScene.bullets.particleComponent
+        particleFuncs.createShootParticles(humanoid, shootParticles, humanoid.rotation)
+    end
+    --player stuff down here
+    if humanoid.name ~= "player" then return end
+    humanoid.handOffset = -weapon.handRecoilIntensity
+    if Settings.screen_shake and GetGlobal("freecam") < 1 then
+        local camera = CurrentScene.camera
+        local a = 1
+        if math.random() < 0.5 then a = -1 end
+        camera.position[1] = camera.position[1] + weapon.screenShakeIntensity*a
+        a = 1
+        if math.random() < 0.5 then a = -1 end
+        camera.position[2] = camera.position[2] + weapon.screenShakeIntensity*a
+    end
+    --hud stuff
+    local hud = CurrentScene.hud.UIComponent
+    hud.weaponImg.rotation = math.pi/8
+    hud.weaponImg.scale = {-4, 4}
 end
 
 function humanoidScript:humanoidSetup()
@@ -160,6 +245,7 @@ function humanoidScript:humanoidSetup()
     humanoid.oldPos = table.new(humanoid.position)
     humanoid.animationSizeDiff = 0
     humanoid.handOffset = 0
+    humanoid.unarmed = false
 end
 
 return humanoidScript

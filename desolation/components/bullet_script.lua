@@ -46,17 +46,34 @@ function bulletScript:collisionCheck(bullet)
         end
         --iterate through NPC's
         for _, npc in ipairs(CurrentScene.npcs.tree) do
-            local src = npc.imageComponent.source
-            local w, h = src:getWidth(), src:getHeight()
-            local npcSize = {npc.scale[1]*w, npc.scale[2]*h}
-            local propPos = {npc.position[1]-npcSize[1]/2, npc.position[2]-npcSize[2]/2}
-            if coreFuncs.aabbCollision(bulletPos, propPos, size, npcSize) then
-                --remove bullet
-                table.removeValue(CurrentScene.bullets.tree, bullet)
-                --damage npc
-                npc.script:damage(bullet.damage)
-                --TODO: bullet hit sfx?
+            if npc.name ~= bullet.owner then
+                local src = npc.imageComponent.source
+                local w, h = src:getWidth(), src:getHeight()
+                local npcSize = {npc.scale[1]*w, npc.scale[2]*h}
+                local propPos = {npc.position[1]-npcSize[1]/2, npc.position[2]-npcSize[2]/2}
+                if coreFuncs.aabbCollision(bulletPos, propPos, size, npcSize) then
+                    --remove bullet
+                    table.removeValue(CurrentScene.bullets.tree, bullet)
+                    --damage npc
+                    npc.script:damage(bullet.damage)
+                    if npc.script.bulletHitEvent ~= nil then npc.script:bulletHitEvent(bullet) end
+                    --TODO: bullet hit sfx?
+                end
             end
+        end
+        --check player collision
+        if bullet.owner == "player" then return end
+        local player = CurrentScene.player
+        local src = player.imageComponent.source
+        local w, h = src:getWidth(), src:getHeight()
+        local npcSize = {player.scale[1]*w, player.scale[2]*h}
+        local propPos = {player.position[1]-npcSize[1]/2, player.position[2]-npcSize[2]/2}
+        if coreFuncs.aabbCollision(bulletPos, propPos, size, npcSize) then
+            --remove bullet
+            table.removeValue(CurrentScene.bullets.tree, bullet)
+            --damage npc
+            player.script:damage(bullet.damage, bullet.oldPositions[1])
+            if player.script.bulletHitEvent ~= nil then player.script:bulletHitEvent(bullet) end
         end
     end
 end

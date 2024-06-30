@@ -28,12 +28,12 @@ function particleFuncs.explosionPieceUpdate(particle, delta)
     particle.position[2] = particle.position[2] + math.sin(particle.rotation)*1000*delta
 end
 
-function particleFuncs.createShootParticles(comp, rotation)
+function particleFuncs.createShootParticles(humanoid, comp, rotation)
     for _ = 1, 6 do
         local size = math.uniform(5, 10)
         comp:newParticle(
             {
-                position = {60*math.cos(rotation), 60*math.sin(rotation)};
+                position = {humanoid.position[1] + 60*math.cos(rotation), humanoid.position[2] + 60*math.sin(rotation)};
                 size = {size, size};
                 despawnTime = 0.1;
                 color = {1, 0.47, 0.06, 0.85};
