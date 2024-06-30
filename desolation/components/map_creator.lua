@@ -107,6 +107,25 @@ function mapCreator:loadMap(path)
             CurrentScene.props:addChild(prop)
         end
     end
+    --load npc's
+    if data.npcs ~= nil then
+        --load npcs list & decode it
+        local npcs = love.filesystem.read(GAME_DIRECTORY .. "/assets/npcs.json")
+        npcs = json.decode(npcs)
+        for _, v in ipairs(data.npcs) do
+            local npc = object.new(CurrentScene.npcs)
+            npc.name = v[1]
+            npc.position = v[2]
+            npc.imageComponent = ENGINE_COMPONENTS.imageComponent.new(npc)
+            --load custom script file
+            if npcs[npc.name] ~= nil and npcs[npc.name].script ~= nil then
+                local comp = dofile(npcs[npc.name].script .. ".lua")
+                npc:addComponent(comp)
+                comp:load()
+            end
+            CurrentScene.npcs:addChild(npc)
+        end
+    end
     --player data
     if CurrentScene.player == nil then return end
     local player = CurrentScene.player

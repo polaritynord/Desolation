@@ -26,8 +26,8 @@ function mouseSensivity:load()
     --obj.imageComponent = ENGINE_COMPONENTS.imageComponent.new(obj, Assets.cursors.combat)
 end
 
+--[[
 function mouseSensivity:update(delta)
-    if true then return end
     local obj = self.parent
     obj.imageComponent.enabled = not GamePaused
     --set position of virtual cursor
@@ -35,5 +35,6 @@ function mouseSensivity:update(delta)
     obj.position = {(mx+CurrentScene.camera.position[1])-ScreenWidth/2, (my+CurrentScene.camera.position[2]-ScreenHeight/2)}
     obj.scale = {1/CurrentScene.camera.zoom, 1/CurrentScene.camera.zoom}
 end
+]]--
 
 return mouseSensivity

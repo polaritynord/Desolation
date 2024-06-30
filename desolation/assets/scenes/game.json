@@ -8,7 +8,7 @@
             [
                 [
                     "hand",
-                    ["imageComponent", "desolation/components/player_hand_script"]
+                    ["imageComponent", "desolation/components/humanoid_hand_script"]
                 ],
 
                 [
@@ -16,6 +16,10 @@
                     ["desolation/components/player_sounds"]
                 ]
             ]
+        ],
+
+        [
+            "npcs", []
         ],
 
         [
