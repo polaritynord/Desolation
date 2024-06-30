@@ -197,6 +197,7 @@ function hud:load()
         )
     end
     ui.acquireNotifs = {}
+    ui.hitmarkers = {}
     ui.slotSwitchTimer = 0
     ui.oldSlot = 1
 end
@@ -347,6 +348,17 @@ function hud:update(delta)
     for i = 1, 3 do
         local element = ui["grenadeSlot" .. i]
         element.enabled = player.inventory.grenades >= i
+    end
+    --Hitmarkers update
+    for i, v in ipairs(ui.hitmarkers) do
+        -- Change scale
+        v.scale[1] = v.scale[1] - 8 * delta
+        v.scale[2] = v.scale[2] - 8 * delta
+        -- Despawn
+        if v.scale[1] < 0.2 then
+            table.remove(ui.hitmarkers, i)
+            table.removeValue(ui.elements, v)
+        end
     end
 end
 

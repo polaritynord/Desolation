@@ -148,8 +148,12 @@ function mapCreator:createExplosion(position, radius, intensity)
     for _, item in ipairs(CurrentScene.items.tree) do
         item.script:explosionEvent(position, radius, intensity)
     end
-    --alert the player (TODO: make this warn all humanoids)
+    --alert the player
     CurrentScene.player.script:explosionEvent(position, radius, intensity)
+    --iterate through NPC's
+    for _, npc in ipairs(CurrentScene.npcs.tree) do
+        npc.script:explosionEvent(position, radius, intensity)
+    end
     --explosion effects
     if Settings.explosion_particles then
         local particleComp = CurrentScene.bullets.particleComponent

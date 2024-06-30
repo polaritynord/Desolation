@@ -1,6 +1,4 @@
 local coreFuncs = require("coreFuncs")
-local hitmarkerScript = require("desolation.components.hitmarker_script")
-local object = require("engine.object")
 
 local humanoidScript = ENGINE_COMPONENTS.scriptComponent.new()
 
@@ -75,16 +73,21 @@ function humanoidScript:damage(amount, sourcePosition)
     if humanoid.name == "player" and GetGlobal("god") > 0 then return end
     if humanoid.name == "player" then
         --create hitmarker
-        local hitmarkerInstance = object.new(CurrentScene.hud.tree)
-        hitmarkerInstance:addComponent(table.new(hitmarkerScript))
-        hitmarkerInstance.script:load()
+        local uiComp = CurrentScene.hud.UIComponent
+        local hitmarkerInstance = uiComp:newImage(
+            {
+                source = Assets.images["hud_hitmarker"];
+                scale = {1, 2};
+                color = {1, 0, 0, 1};
+            }
+        )
         local rotation = math.atan2(sourcePosition[2]-CurrentScene.camera.position[2], sourcePosition[1]-CurrentScene.camera.position[1]) + math.pi
-        hitmarkerInstance.UIComponent.img.rotation = rotation
-        hitmarkerInstance.UIComponent.img.position = {
+        hitmarkerInstance.rotation = rotation
+        hitmarkerInstance.position = {
             480-math.cos(rotation)*70,
             270-math.sin(rotation)*70
         }
-        CurrentScene.hud:addChild(hitmarkerInstance)
+        uiComp.hitmarkers[#uiComp.hitmarkers+1] = hitmarkerInstance
     end
     --play sound
     local src = Assets.sounds["hurt" .. math.random(1, 3)]

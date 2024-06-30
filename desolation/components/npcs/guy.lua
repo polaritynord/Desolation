@@ -7,6 +7,8 @@ function guyScript:load()
 end
 
 function guyScript:update(delta)
+    local npc = self.parent
+    self:humanoidUpdate(delta, npc)
 end
 
 return guyScript
