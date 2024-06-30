@@ -1,6 +1,7 @@
 local object = require("engine.object")
 local itemScript = require("desolation.components.item.item_script")
 local wallScript = require("desolation.components.wall_script")
+local humanoidHandScript = require("desolation.components.humanoid_hand_script")
 local itemEventFuncs = require("desolation.components.item.item_event_funcs")
 local json = require("engine.lib.json")
 local weaponManager = require("desolation.weapon_manager")
@@ -117,6 +118,13 @@ function mapCreator:loadMap(path)
             npc.name = v[1]
             npc.position = v[2]
             npc.imageComponent = ENGINE_COMPONENTS.imageComponent.new(npc)
+            --add hand object
+            local hand = object.new(npc)
+            hand.name = "hand"
+            hand.imageComponent = ENGINE_COMPONENTS.imageComponent.new(hand)
+            hand:addComponent(table.new(humanoidHandScript))
+            hand.script:load()
+            npc:addChild(hand)
             --load custom script file
             if npcs[npc.name] ~= nil and npcs[npc.name].script ~= nil then
                 local comp = dofile(npcs[npc.name].script .. ".lua")

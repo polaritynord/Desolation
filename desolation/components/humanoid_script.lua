@@ -42,6 +42,7 @@ function humanoidScript:humanoidUpdate(delta, humanoid)
     --Update hand offset
     humanoid.handOffset = humanoid.handOffset + (-humanoid.handOffset) * 20 * delta
     --movement
+    humanoid.moving = math.abs(humanoid.moveVelocity[1]) > 0 or math.abs(humanoid.moveVelocity[2]) > 0
     humanoid.oldPos = table.new(humanoid.position)
     humanoid.position[1] = humanoid.position[1] + (humanoid.velocity[1]*delta) + (humanoid.moveVelocity[1]*delta)
     humanoid.position[2] = humanoid.position[2] + (humanoid.velocity[2]*delta) + (humanoid.moveVelocity[2]*delta)
@@ -55,6 +56,9 @@ function humanoidScript:humanoidUpdate(delta, humanoid)
     humanoid.scale[2] = humanoid.scale[2] + 20 * delta
     humanoid.imageComponent.color[4] = humanoid.imageComponent.color[4] - 25 * delta
     humanoid.hand.imageComponent.color[4] = humanoid.imageComponent.color[4]
+    --remove from npc list
+    if humanoid.imageComponent.color[4] > 0 or humanoid.name == "player" then return end
+    table.removeValue(CurrentScene.npcs.tree, humanoid)
 end
 
 function humanoidScript:doWalkingAnim(humanoid)
@@ -72,6 +76,10 @@ function humanoidScript:damage(amount, sourcePosition)
     local humanoid = self.parent
     if humanoid.name == "player" and GetGlobal("god") > 0 then return end
     if humanoid.name == "player" then
+        --play sound
+        local src = Assets.sounds["hurt" .. math.random(1, 3)]
+        src:setVolume(Settings.vol_master * Settings.vol_world)
+        src:stop() ; src:play()
         --create hitmarker
         local uiComp = CurrentScene.hud.UIComponent
         local hitmarkerInstance = uiComp:newImage(
@@ -89,10 +97,6 @@ function humanoidScript:damage(amount, sourcePosition)
         }
         uiComp.hitmarkers[#uiComp.hitmarkers+1] = hitmarkerInstance
     end
-    --play sound
-    local src = Assets.sounds["hurt" .. math.random(1, 3)]
-    src:setVolume(Settings.vol_master * Settings.vol_world)
-    src:stop() ; src:play()
     --damage humanoid
     if humanoid.armor > amount then
         humanoid.armor = humanoid.armor - amount
@@ -133,7 +137,7 @@ function humanoidScript:humanoidSetup()
     humanoid.velocity = {0, 0}
     humanoid.moveVelocity = {0, 0}
     humanoid.health = 100
-    humanoid.armor = 100
+    humanoid.armor = 0
     humanoid.stamina = 100
     humanoid.scale = {4, 4}
     humanoid.reloading = false

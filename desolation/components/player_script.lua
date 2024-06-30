@@ -27,7 +27,7 @@ function playerScript:movement(delta, player)
             player.moveVelocity[2] = axis2
         end
     end
-    player.moving = math.abs(player.moveVelocity[1]) > 0 or math.abs(player.moveVelocity[2]) > 0
+    --player.moving = math.abs(player.moveVelocity[1]) > 0 or math.abs(player.moveVelocity[2]) > 0
     --Sprinting
     if not player.sprinting then player.sprintSoundPlayed = false end
     --Sprinting
