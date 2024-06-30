@@ -15,15 +15,35 @@ function guyScript:neutralState(npc)
     --check player interaction
     local distance = coreFuncs.pointDistance(CurrentScene.player.position, npc.position)
     if distance > 160 then return end
-    if not npc.interactPressed and InputManager:isPressed("interact") then
+    if not npc.interactPressed and InputManager:isPressed("toggle_follow") then
         npc.state = "follow"
+        --add following marker to HUD
+        local uiComp = CurrentScene.hud.UIComponent
+        local img = uiComp:newImage(
+            {
+                source =  Assets.images["hud_hitmarker"];
+                scale = {1.2, 1.2};
+                rotation = -math.pi/2;
+                position = {
+                    (npc.position[1]-CurrentScene.camera.position[1])*CurrentScene.camera.zoom+480,
+                    (npc.position[2]-CurrentScene.camera.position[2]-50)*CurrentScene.camera.zoom+270
+                }
+            }
+        )
+        img.parentHumanoid = npc
+        img.parentIndex = table.contains(CurrentScene.npcs.tree, npc, true)
+        uiComp.followingImgs[#uiComp.followingImgs+1] = img
     end
-    npc.interactPressed = InputManager:isPressed("interact")
 end
 
 function guyScript:followState(npc)
     local player = CurrentScene.player
     self:pointTowardsPlayer(npc)
+    --check player interaction
+    if not npc.interactPressed and InputManager:isPressed("toggle_follow") then
+        npc.state = "neutral"
+        return
+    end
     --move towards player if distant enough
     local distance = coreFuncs.pointDistance(player.position, npc.position)
     npc.moveVelocity = {0, 0}
@@ -52,6 +72,7 @@ function guyScript:update(delta)
     elseif npc.state == "follow" then
         self:followState(npc)
     end
+    npc.interactPressed = InputManager:isPressed("toggle_follow")
 end
 
 return guyScript

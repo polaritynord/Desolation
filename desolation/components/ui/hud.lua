@@ -198,6 +198,7 @@ function hud:load()
     end
     ui.acquireNotifs = {}
     ui.hitmarkers = {}
+    ui.followingImgs = {}
     ui.slotSwitchTimer = 0
     ui.oldSlot = 1
 end
@@ -358,6 +359,27 @@ function hud:update(delta)
         if v.scale[1] < 0.2 then
             table.remove(ui.hitmarkers, i)
             table.removeValue(ui.elements, v)
+        end
+    end
+    --Follow markers update
+    for i, v in ipairs(ui.followingImgs) do
+        local npc = CurrentScene.npcs.tree[v.parentIndex]
+        --remove if NPC is gone
+        if npc ~= v.parentHumanoid then
+            table.removeValue(ui.elements, v)
+            table.remove(ui.followingImgs, i)
+            return
+        end
+        --remove if NPC is not in follow state anymore
+        if npc.state == "follow" then
+            --Update position
+            v.position = {
+                (npc.position[1]-CurrentScene.camera.position[1])*CurrentScene.camera.zoom+480,
+                (npc.position[2]-CurrentScene.camera.position[2]-50)*CurrentScene.camera.zoom+270
+            }
+        else
+            table.removeValue(ui.elements, v)
+            table.remove(ui.followingImgs, i)
         end
     end
 end
