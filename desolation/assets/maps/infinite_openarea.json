@@ -13,7 +13,9 @@
             "ammunition": [
                 ["light", 52]
             ]
-        }
+        },
+        "health": 100,
+        "armor": 25
     },
     "walls": [
         ["test_gray", [-42, -26], [4, 52]],
@@ -39,7 +41,7 @@
         ["prototype_green", 2, 1]
     ],
     "props": [
-        ["openarea_loot_spawner", [0, 0], 0, []]
+        ["openarea_manager", [0, 0], 0, []]
     ],
     "items": [
     ],
@@ -50,7 +52,9 @@
         "images": [
             ["tile_prototype_green", "desolation/assets/images/tiles/prototype_green.png"],
             ["wall_test_gray", "desolation/assets/images/walls/test_gray.png"],
-            ["prop_crate", "desolation/assets/images/props/crate.png"]
+            ["prop_crate", "desolation/assets/images/props/crate.png"],
+            ["prop_barrel", "desolation/assets/images/props/barrel.png"],
+            ["prop_explosive_barrel", "desolation/assets/images/props/explosive_barrel.png"]
         ]
     }
 }

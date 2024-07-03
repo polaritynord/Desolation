@@ -5,6 +5,22 @@ local itemEventFuncs = require("desolation.components.item.item_event_funcs")
 
 local physicsProp = ENGINE_COMPONENTS.scriptComponent.new()
 
+function physicsProp:determineDynamicLoot()
+    --this function is to pick a loot the player most needs.
+    --For example, if the player is critically low on health,
+    --It is more likely for a crate to drop medkits.
+    -- DESCENDING PRIORITY LIST: Health, Ammunition, Armor
+    local player = CurrentScene.player
+    local healthChance = 0
+    local armorChance = 0
+    local ammoChance = {}
+    --Determine health chance
+    if player.health < 50 then
+        return "medkit"
+    end
+    return "battery"
+end
+
 function physicsProp:setup()
     local prop = self.parent
     prop.velocity = {0, 0}
@@ -25,10 +41,14 @@ function physicsProp:destroyCheck()
         for _, loot in ipairs(prop.loot) do
             --Create object data
             local itemInstance = object.new(CurrentScene.items)
-            itemInstance.name = loot
+            local lootType = loot
+            if loot == "dynamic_loot" then
+                lootType = self:determineDynamicLoot()
+            end
+            itemInstance.name = lootType
             itemInstance:addComponent(table.new(itemScript))
-            itemInstance.scale = mapCreator.itemData[itemInstance.name].scale
-            itemInstance.pickupEvent = itemEventFuncs[mapCreator.itemData[itemInstance.name].pickupEvent]
+            itemInstance.scale = mapCreator.itemData[lootType].scale
+            itemInstance.pickupEvent = itemEventFuncs[mapCreator.itemData[lootType].pickupEvent]
             itemInstance.script:load()
             --randomize position & rotation
             itemInstance.position = table.new(prop.position)

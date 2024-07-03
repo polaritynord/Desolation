@@ -10,15 +10,16 @@ local coreFuncs = require("coreFuncs")
 
 local mapCreator = ENGINE_COMPONENTS.scriptComponent.new()
 
-function mapCreator:spawnProp(v, propDatabase)
+function mapCreator:spawnProp(v)
+    local propData = self.parent.propData
     local prop = object.new(CurrentScene.props)
     prop.name = v[1]
-    prop.collidable = propDatabase[prop.name].collidable or false
-    prop.movable = propDatabase[prop.name].movable or false
-    prop.invincible = propDatabase[prop.name].invincible or false
-    prop.material = propDatabase[prop.name].material or "wood"
-    prop.health = propDatabase[prop.name].health or 100
-    prop.mass = propDatabase[prop.name].mass or 0.05
+    prop.collidable = propData[prop.name].collidable or false
+    prop.movable = propData[prop.name].movable or false
+    prop.invincible = propData[prop.name].invincible or false
+    prop.material = propData[prop.name].material or "wood"
+    prop.health = propData[prop.name].health or 100
+    prop.mass = propData[prop.name].mass or 0.05
     prop.position = v[2]
     prop.rotation = v[3]
     --custom variables
@@ -27,8 +28,8 @@ function mapCreator:spawnProp(v, propDatabase)
     end
     --load custom script file
     --TODO: make these scripts get stored in a pool to prevent loading it over and over again!
-    if propDatabase[prop.name] ~= nil and propDatabase[prop.name].script ~= nil then
-        local comp = dofile(propDatabase[prop.name].script .. ".lua")
+    if propData[prop.name] ~= nil and propData[prop.name].script ~= nil then
+        local comp = dofile(propData[prop.name].script .. ".lua")
         prop:addComponent(comp)
         comp:load()
     end
@@ -63,9 +64,6 @@ function mapCreator:loadMap(path)
     end
     --load items
     if data.items ~= nil then
-        --load items list & decode it
-        self.parent.itemData = love.filesystem.read(GAME_DIRECTORY .. "/assets/items.json")
-        self.parent.itemData = json.decode(self.parent.itemData)
         --load items
         for _, v in ipairs(data.items) do
             local item = object.new(CurrentScene.items)
@@ -98,11 +96,8 @@ function mapCreator:loadMap(path)
     end
     --load props
     if data.props ~= nil then
-        --load items list & decode it
-        self.parent.props = love.filesystem.read(GAME_DIRECTORY .. "/assets/props.json")
-        self.parent.props = json.decode(self.parent.props)
         for _, v in ipairs(data.props) do
-            self:spawnProp(v, self.parent.props)
+            self:spawnProp(v)
         end
     end
     --load npc's
@@ -156,7 +151,13 @@ function mapCreator:loadMap(path)
                 player.inventory.weapons[i].magAmmo = v[2]
             end
         end
+        --load ammunition
+        for _, v in ipairs(inv.ammunition) do
+            player.inventory.ammunition[v[1]] = v[2]
+        end
     end
+    player.health = data.playerData.health
+    player.armor = data.playerData.armor
 end
 
 function mapCreator:createExplosion(position, radius, intensity)
@@ -192,6 +193,10 @@ end
 
 function mapCreator:load()
     GamePaused = false
+    self.parent.propData = love.filesystem.read(GAME_DIRECTORY .. "/assets/props.json")
+    self.parent.propData = json.decode(self.parent.propData)
+    self.parent.itemData = love.filesystem.read(GAME_DIRECTORY .. "/assets/items.json")
+    self.parent.itemData = json.decode(self.parent.itemData)
 end
 
 function mapCreator:update(delta)

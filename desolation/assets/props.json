@@ -45,7 +45,7 @@
         "collidable": false
     },
 
-    "openarea_loot_spawner": {
-        "script": "desolation/components/props/openarea_loot_spawner"
+    "openarea_manager": {
+        "script": "desolation/components/props/openarea_manager"
     }
 }

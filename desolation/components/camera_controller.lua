@@ -48,7 +48,7 @@ function cameraController:updateZoom(delta, camera, player)
         camera.realZoom = self.playerManualZoom
     end
     --Change zoom smoothly
-    camera.zoom = camera.zoom + (camera.realZoom-camera.zoom) * 5 * delta
+    camera.zoom = camera.zoom + (camera.realZoom-camera.zoom) * self.zoomSmoothness * delta
 end
 
 function cameraController:mapBoundaryCheck(camera)
@@ -76,7 +76,8 @@ end
 function cameraController:load()
     self.parent.zoom = 1
     self.parent.realZoom = 1
-    self.playerManualZoom = 0.1
+    self.playerManualZoom = 1
+    self.zoomSmoothness = 5
     self.oldMouseX = 0
     self.oldMouseY = 0
     self.idleTimer = 0

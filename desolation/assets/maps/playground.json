@@ -4,7 +4,9 @@
         "cameraPosition": [0, 100],
         "cameraBoundaries": [
             [-400, 400], [-400, 400]
-        ]
+        ],
+        "health": 100,
+        "armor": 100
     },
     "walls": [
         ["test_gray", [5, -6], [1, 9]],
