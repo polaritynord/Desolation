@@ -1,9 +1,25 @@
 {
     "playerData": {
         "position": [0, 0],
-        "cameraPosition": [0, 0]
+        "cameraPosition": [0, 0],
+        "cameraBoundaries": [
+            [-2100, 2100], [-1300, 1300]
+        ],
+        "allowZoom": false,
+        "beginnerInventory": {
+            "weapons": [
+                ["Pistol", 13], null, null
+            ],
+            "ammunition": [
+                ["light", 52]
+            ]
+        }
     },
     "walls": [
+        ["test_gray", [-42, -26], [4, 52]],
+        ["test_gray", [-38, -26], [81, 4]],
+        ["test_gray", [39, -22], [4, 48]],
+        ["test_gray", [-38, 22], [77, 4]]
     ],
     "tiles": [
         ["prototype_green", -2, -1],
@@ -23,6 +39,7 @@
         ["prototype_green", 2, 1]
     ],
     "props": [
+        ["openarea_loot_spawner", [0, 0], 0, []]
     ],
     "items": [
     ],
@@ -31,7 +48,9 @@
     "ambience": "desolation/assets/sounds/ost/ambience.wav",
     "assets": {
         "images": [
-            ["tile_prototype_green", "desolation/assets/images/tiles/prototype_green.png"]
+            ["tile_prototype_green", "desolation/assets/images/tiles/prototype_green.png"],
+            ["wall_test_gray", "desolation/assets/images/walls/test_gray.png"],
+            ["prop_crate", "desolation/assets/images/props/crate.png"]
         ]
     }
 }

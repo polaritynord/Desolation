@@ -10,6 +10,31 @@ local coreFuncs = require("coreFuncs")
 
 local mapCreator = ENGINE_COMPONENTS.scriptComponent.new()
 
+function mapCreator:spawnProp(v, propDatabase)
+    local prop = object.new(CurrentScene.props)
+    prop.name = v[1]
+    prop.collidable = propDatabase[prop.name].collidable or false
+    prop.movable = propDatabase[prop.name].movable or false
+    prop.invincible = propDatabase[prop.name].invincible or false
+    prop.material = propDatabase[prop.name].material or "wood"
+    prop.health = propDatabase[prop.name].health or 100
+    prop.mass = propDatabase[prop.name].mass or 0.05
+    prop.position = v[2]
+    prop.rotation = v[3]
+    --custom variables
+    for _, k in ipairs(v[4]) do
+        prop[k[1]] = k[2]
+    end
+    --load custom script file
+    --TODO: make these scripts get stored in a pool to prevent loading it over and over again!
+    if propDatabase[prop.name] ~= nil and propDatabase[prop.name].script ~= nil then
+        local comp = dofile(propDatabase[prop.name].script .. ".lua")
+        prop:addComponent(comp)
+        comp:load()
+    end
+    CurrentScene.props:addChild(prop)
+end
+
 function mapCreator:loadMap(path)
     --read & convert to lua table
     local data = love.filesystem.read(path)
@@ -74,30 +99,10 @@ function mapCreator:loadMap(path)
     --load props
     if data.props ~= nil then
         --load items list & decode it
-        local props = love.filesystem.read(GAME_DIRECTORY .. "/assets/props.json")
-        props = json.decode(props)
+        self.parent.props = love.filesystem.read(GAME_DIRECTORY .. "/assets/props.json")
+        self.parent.props = json.decode(self.parent.props)
         for _, v in ipairs(data.props) do
-            local prop = object.new(CurrentScene.props)
-            prop.name = v[1]
-            prop.collidable = props[prop.name].collidable or false
-            prop.movable = props[prop.name].movable or false
-            prop.invincible = props[prop.name].invincible or false
-            prop.material = props[prop.name].material or "wood"
-            prop.health = props[prop.name].health or 100
-            prop.mass = props[prop.name].mass or 0.05
-            prop.position = v[2]
-            prop.rotation = v[3]
-            --custom variables
-            for _, k in ipairs(v[4]) do
-                prop[k[1]] = k[2]
-            end
-            --load custom script file
-            if props[prop.name] ~= nil and props[prop.name].script ~= nil then
-                local comp = dofile(props[prop.name].script .. ".lua")
-                prop:addComponent(comp)
-                comp:load()
-            end
-            CurrentScene.props:addChild(prop)
+            self:spawnProp(v, self.parent.props)
         end
     end
     --load npc's
@@ -136,6 +141,21 @@ function mapCreator:loadMap(path)
         self.ambience = love.audio.newSource(data.ambience, "stream")
         self.ambience:setLooping(true)
         self.ambience:play()
+    end
+    self.parent.allowZoom = data.playerData.allowZoom
+    self.parent.cameraBoundaries = data.playerData.cameraBoundaries
+    --load up beginner inventory
+    local inv = data.playerData.beginnerInventory
+    if inv ~= nil then
+        --load wepaons
+        for i, v in ipairs(inv.weapons) do
+            if v == nil then
+                player.inventory.weapons[i] = nil
+            else
+                player.inventory.weapons[i] = weaponManager[v[1]].new()
+                player.inventory.weapons[i].magAmmo = v[2]
+            end
+        end
     end
 end
 

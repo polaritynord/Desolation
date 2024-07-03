@@ -51,6 +51,27 @@ function cameraController:updateZoom(delta, camera, player)
     camera.zoom = camera.zoom + (camera.realZoom-camera.zoom) * 5 * delta
 end
 
+function cameraController:mapBoundaryCheck(camera)
+    local camBoundaries = CurrentScene.mapCreator.cameraBoundaries
+    if camBoundaries == nil or GetGlobal("freecam") > 0 then return end
+    --X left
+    if camera.position[1] < camBoundaries[1][1] then
+        camera.position[1] = camBoundaries[1][1]
+    end
+    --X right
+    if camera.position[1] > camBoundaries[1][2] then
+        camera.position[1] = camBoundaries[1][2]
+    end
+    --Y up
+    if camera.position[2] < camBoundaries[2][1] then
+        camera.position[2] = camBoundaries[2][1]
+    end
+    --Y down
+    if camera.position[2] > camBoundaries[2][2] then
+        camera.position[2] = camBoundaries[2][2]
+    end
+end
+
 --Engine funcs
 function cameraController:load()
     self.parent.zoom = 1
@@ -67,6 +88,7 @@ function cameraController:update(delta)
     self:movement(delta, self.parent, player)
     self:updateZoom(delta, self.parent, player)
     self:idleCamera(delta, self.parent, player)
+    self:mapBoundaryCheck(self.parent)
 end
 
 return cameraController

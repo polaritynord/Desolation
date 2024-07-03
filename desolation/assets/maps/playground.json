@@ -1,7 +1,10 @@
 {
     "playerData": {
         "position": [0, 100],
-        "cameraPosition": [0, 100]
+        "cameraPosition": [0, 100],
+        "cameraBoundaries": [
+            [-400, 400], [-400, 400]
+        ]
     },
     "walls": [
         ["test_gray", [5, -6], [1, 9]],

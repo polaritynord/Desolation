@@ -26,6 +26,11 @@ function extrasMenu:load()
             buttonText = Loca.extrasMenu.infinite;
             buttonTextSize = 30;
             position = {0, 240};
+            clickEvent = function ()
+                local scene = LoadScene("desolation/assets/scenes/game.json")
+                SetScene(scene)
+                scene.mapCreator.script:loadMap("desolation/assets/maps/infinite_openarea.json")
+            end;
             hoverEvent = function (element)
                 ui.modeDescription.text = Loca.extrasMenu.infiniteDesc
                 ui.modeDescription.position[2] = element.position[2]

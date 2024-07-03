@@ -261,16 +261,10 @@ function playerScript:load()
         ["q"] = false;
     }
     player.nearItem = nil
-    --Starter weapon
-    player.inventory.weapons[1] = weaponManager.Revolver.new()
-    player.inventory.weapons[1].magAmmo = 6
-    player.inventory.ammunition.light = 78
-    player.inventory.weapons[2] = weaponManager.Shotgun.new()
-    player.inventory.weapons[3] = weaponManager.AssaultRifle.new()
-    player.armor = 25
 
     RunConsoleCommand("cheats 1")
-    CurrentScene.mapCreator.script:loadMap("desolation/assets/maps/infinite_openarea.json")
+    RunConsoleCommand("p_speed 999")
+    --CurrentScene.mapCreator.script:loadMap("desolation/assets/maps/infinite_openarea.json")
 end
 
 function playerScript:update(delta)
