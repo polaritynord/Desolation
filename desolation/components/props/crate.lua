@@ -20,10 +20,6 @@ end
 function crateScript:load()
     local crate = self.parent
     self:setup()
-    --load image if nonexistant
-    if Assets.mapImages["prop_crate"] == nil then
-        Assets.mapImages["prop_crate"] = love.graphics.newImage("desolation/assets/images/props/crate.png")
-    end
     --load hit sounds
     for i = 1, 2 do
         if Assets.mapSounds["hit_crate" .. i] == nil then

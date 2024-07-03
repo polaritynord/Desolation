@@ -55,7 +55,7 @@ end
 function cameraController:load()
     self.parent.zoom = 1
     self.parent.realZoom = 1
-    self.playerManualZoom = 1
+    self.playerManualZoom = 0.1
     self.oldMouseX = 0
     self.oldMouseY = 0
     self.idleTimer = 0

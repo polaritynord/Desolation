@@ -23,8 +23,10 @@
         "mainMenu": "Main Menu"
     },
     "extrasMenu": {
-        "playground": "Playground",
-        "playgroundDesc": "Do whatever you want."
+    "playground": "Playground",
+        "playgroundDesc": "Do whatever you want.",
+        "infinite": "Infinite",
+        "infiniteDesc": "Survive as long as you can."
     },
     "gameplayMenu": {
         "cameraSway": "Camera Sway: ",

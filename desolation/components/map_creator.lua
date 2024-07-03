@@ -29,10 +29,6 @@ function mapCreator:loadMap(path)
         for _, v in ipairs(data.tiles) do
             local tile = object.new(CurrentScene.tiles)
             --maybe set name?
-            --Load image if nonexistant
-            if Assets.mapImages["tile_" .. v[1]] == nil then
-                Assets.mapImages["tile_" .. v[1]] = love.graphics.newImage(GAME_DIRECTORY .. "/assets/images/tiles/" .. v[1] .. ".png")
-            end
             tile.imageComponent = ENGINE_COMPONENTS.imageComponent.new(tile, Assets.mapImages["tile_" .. v[1]])
             tile.imageComponent.layer = 3
             tile.scale = {2, 2}
@@ -69,10 +65,6 @@ function mapCreator:loadMap(path)
             wall.name = v[1]
             wall.material = "concrete" --TODO material types for walls
             wall:addComponent(table.new(wallScript))
-            --Load image if nonexistant
-            if Assets.mapImages["wall_" .. v[1]] == nil then
-                Assets.mapImages["wall_" .. v[1]] = love.graphics.newImage(GAME_DIRECTORY .. "/assets/images/walls/" .. v[1] .. ".png")
-            end
             wall.position = {v[2][1]*64, v[2][2]*64}
             wall.scale = v[3]
             wall.script:load()

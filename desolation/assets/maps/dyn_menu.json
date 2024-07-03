@@ -24,5 +24,12 @@
     ],
     "items": [
 
-    ]
+    ],
+    "assets": {
+        "images": [
+            ["prop_crate", "desolation/assets/images/props/crate.png"],
+            ["wall_test_gray", "desolation/assets/images/walls/test_gray.png"],
+            ["tile_prototype_black", "desolation/assets/images/tiles/prototype_black.png"]
+        ]
+    }
 }

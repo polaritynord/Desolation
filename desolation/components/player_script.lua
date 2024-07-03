@@ -270,6 +270,7 @@ function playerScript:load()
     player.armor = 25
 
     RunConsoleCommand("cheats 1")
+    CurrentScene.mapCreator.script:loadMap("desolation/assets/maps/infinite_openarea.json")
 end
 
 function playerScript:update(delta)

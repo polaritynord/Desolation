@@ -24,7 +24,9 @@
     },
     "extrasMenu": {
         "playground": "Oyun Alani",
-        "playgroundDesc": "Ne halt yersen ye."
+        "playgroundDesc": "Ne halt yersen ye.",
+        "infinite": "Sonsuz",
+        "infiniteDesc": "Olabildigince hayatta kal."
     },
     "gameplayMenu": {
         "cameraSway": "Kamera Sallantisi: ",

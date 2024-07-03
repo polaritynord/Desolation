@@ -76,6 +76,7 @@ function love.keypressed(key, unicode)
         GamePaused = not GamePaused
         CurrentScene.settings.menu = nil
         CurrentScene.settings.open = false
+        CurrentScene.player.shootTimer = 0
     end
 
     --Debug menu toggle key

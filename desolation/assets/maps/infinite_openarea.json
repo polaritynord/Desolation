@@ -1,0 +1,37 @@
+{
+    "playerData": {
+        "position": [0, 0],
+        "cameraPosition": [0, 0]
+    },
+    "walls": [
+    ],
+    "tiles": [
+        ["prototype_green", -2, -1],
+        ["prototype_green", -1, -1],
+        ["prototype_green", 0, -1],
+        ["prototype_green", 1, -1],
+        ["prototype_green", 2, -1],
+        ["prototype_green", -2, 0],
+        ["prototype_green", -1, 0],
+        ["prototype_green", 0, 0],
+        ["prototype_green", 1, 0],
+        ["prototype_green", 2, 0],
+        ["prototype_green", -2, 1],
+        ["prototype_green", -1, 1],
+        ["prototype_green", 0, 1],
+        ["prototype_green", 1, 1],
+        ["prototype_green", 2, 1]
+    ],
+    "props": [
+    ],
+    "items": [
+    ],
+    "npcs": [
+    ],
+    "ambience": "desolation/assets/sounds/ost/ambience.wav",
+    "assets": {
+        "images": [
+            ["tile_prototype_green", "desolation/assets/images/tiles/prototype_green.png"]
+        ]
+    }
+}

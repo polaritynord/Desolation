@@ -149,7 +149,7 @@ function humanoidScript:humanoidShootWeapon(weapon)
 
     humanoid.shootTimer = 0
     --Check if there is ammo available in magazine
-    if weapon.magAmmo < 1 then
+    if weapon.magAmmo < 1 and not humanoid.reloading then
         Assets.sounds["empty_mag"]:stop()
         Assets.sounds["empty_mag"]:play()
         return

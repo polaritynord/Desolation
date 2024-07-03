@@ -21,13 +21,13 @@ function extrasMenu:load()
             end;
         }
     )
-    ui.endlessButton = ui:newTextButton(
+    ui.infiniteButton = ui:newTextButton(
         {
-            buttonText = "Extra Mode 1";
+            buttonText = Loca.extrasMenu.infinite;
             buttonTextSize = 30;
             position = {0, 240};
             hoverEvent = function (element)
-                ui.modeDescription.text = "Description goes here"
+                ui.modeDescription.text = Loca.extrasMenu.infiniteDesc
                 ui.modeDescription.position[2] = element.position[2]
             end;
         }
