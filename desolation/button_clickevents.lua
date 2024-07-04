@@ -17,7 +17,7 @@ function clickEvents.quitButtonClick(element)
     if element.buttonText == Loca.mainMenu.quit then
         if math.random() < 0.05 then
             element.textFont = "pryonkalsov"
-            element.buttonText = "Obey the regime for the greater good"
+            element.buttonText = "I woke you up for a reason"
         else
             element.textFont = "disposable-droid-italic"
             element.buttonText = Loca.mainMenu.quitConfirmation

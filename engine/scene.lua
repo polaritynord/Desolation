@@ -36,6 +36,7 @@ function scene.new()
             v:update(delta)
         end
         if self.camera.script then self.camera.script:update(delta) end
+        InputManager.leftMouseTimer = InputManager.leftMouseTimer + delta
     end
 
     function s:draw()

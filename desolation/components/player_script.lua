@@ -261,10 +261,6 @@ function playerScript:load()
         ["q"] = false;
     }
     player.nearItem = nil
-
-    RunConsoleCommand("cheats 1")
-    RunConsoleCommand("p_speed 999")
-    --CurrentScene.mapCreator.script:loadMap("desolation/assets/maps/infinite_openarea.json")
 end
 
 function playerScript:update(delta)

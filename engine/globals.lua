@@ -1,14 +1,17 @@
-local globals = {
+local globals = {}
+
+function globals:load()
     -- {value, cheatsEnabled, toggleable}
-    cheats = {0, false, true};
-    freecam = {0, true, true};
-    p_speed = {140, true, false};
-    noclip = {0, true, true};
-    god = {0, true, true};
-    invisible = {0, true, true};
-    inf_stamina = {0, true, true};
-    slippiness = {12, true, false};
-}
+    --NOTE might as well move this to a json file later
+    self.cheats = {0, false, true};
+    self.freecam = {0, true, true};
+    self.p_speed = {140, true, false};
+    self.noclip = {0, true, true};
+    self.god = {0, true, true};
+    self.invisible = {0, true, true};
+    self.inf_stamina = {0, true, true};
+    self.slippiness = {12, true, false};
+end
 
 function GetGlobal(name)
     if not globals[name] then return nil end

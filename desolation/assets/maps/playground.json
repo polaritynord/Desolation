@@ -6,7 +6,8 @@
             [-400, 400], [-400, 400]
         ],
         "health": 100,
-        "armor": 100
+        "armor": 100,
+        "allowZoom": true
     },
     "walls": [
         ["test_gray", [5, -6], [1, 9]],

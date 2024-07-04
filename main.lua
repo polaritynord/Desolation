@@ -6,6 +6,7 @@ local startupManager = require("engine.startup_manager")
 local fullscreen = false
 
 InputManager = require("engine.input_manager")
+Globals = require("engine.globals")
 DevConsoleOpen = false
 Assets = require("assets")
 MenuUIOffset = 0

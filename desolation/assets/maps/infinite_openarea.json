@@ -3,7 +3,7 @@
         "position": [0, 0],
         "cameraPosition": [0, 0],
         "cameraBoundaries": [
-            [-2100, 2100], [-1300, 1300]
+            [-2000, 2100], [-1150, 1150]
         ],
         "allowZoom": false,
         "beginnerInventory": {
@@ -47,7 +47,6 @@
     ],
     "npcs": [
     ],
-    "ambience": "desolation/assets/sounds/ost/ambience.wav",
     "assets": {
         "images": [
             ["tile_prototype_green", "desolation/assets/images/tiles/prototype_green.png"],
@@ -55,6 +54,11 @@
             ["prop_crate", "desolation/assets/images/props/crate.png"],
             ["prop_barrel", "desolation/assets/images/props/barrel.png"],
             ["prop_explosive_barrel", "desolation/assets/images/props/explosive_barrel.png"]
+        ],
+
+        "sounds": [
+            ["new_wave", "desolation/assets/sounds/new_wave.wav", "static"],
+            ["wave_clear", "desolation/assets/sounds/wave_clear.wav", "static"]
         ]
     }
 }

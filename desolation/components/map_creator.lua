@@ -37,6 +37,7 @@ function mapCreator:spawnProp(v)
 end
 
 function mapCreator:loadMap(path)
+    Globals:load()
     --read & convert to lua table
     local data = love.filesystem.read(path)
     data = json.decode(data)
@@ -47,6 +48,12 @@ function mapCreator:loadMap(path)
         if data.assets.images ~= nil then
             for _, img in ipairs(data.assets.images) do
                 Assets.mapImages[img[1]] = love.graphics.newImage(img[2])
+            end
+        end
+        --Load sounds
+        if data.assets.sounds ~= nil then
+            for _, sound in ipairs(data.assets.sounds) do
+                Assets.mapSounds[sound[1]] = love.audio.newSource(sound[2], sound[3])
             end
         end
     end

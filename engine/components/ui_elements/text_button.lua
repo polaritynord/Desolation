@@ -38,7 +38,8 @@ function textButton.new()
         local pos = coreFuncs.getRelativeElementPosition(self.position, self.parentComp)
 
         --Click event
-        if love.mouse.isDown(1) and self.mouseHovering and not self.mouseClicking and self.clickEvent then
+        if love.mouse.isDown(1) and self.mouseHovering and not self.mouseClicking and self.clickEvent and InputManager.leftMouseTimer > 0.25 then
+            InputManager.leftMouseTimer = 0
             love.audio.setVolume(Settings.vol_master * Settings.vol_sfx)
             love.audio.play(Assets.defaultSounds.button_click)
             self.clickEvent(self)

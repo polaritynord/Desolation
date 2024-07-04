@@ -4,6 +4,7 @@ local inputManager = {
     bindings = nil;
     inputType = "keyboard";
     joystick = nil;
+    leftMouseTimer = 0;
 }
 
 function love.joystickadded(joystick)
