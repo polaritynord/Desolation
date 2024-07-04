@@ -1,5 +1,9 @@
 {
     "guy": {
         "script": "desolation/components/npcs/guy"
+    },
+
+    "robot": {
+        "script": "desolation/components/npcs/robot"
     }
 }

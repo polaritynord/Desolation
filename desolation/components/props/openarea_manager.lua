@@ -30,7 +30,7 @@ function openareaManager:setupUI()
     ui.infinite.waveName = ui:newTextLabel(
         {
             text = "--- WAVE " .. self.wave .. " ---";
-            position = {-30, 100};
+            position = {-10, 100};
             begin = "center";
             size = 48;
             color = {1, 1, 1, 0};
@@ -39,7 +39,7 @@ function openareaManager:setupUI()
     ui.infinite.waveDesc = ui:newTextLabel(
         {
             text = "ELIMINATE ALL ROBOTS";
-            position = {-30, 140};
+            position = {-10, 140};
             begin = "center";
             color = {1, 1, 1, 0};
         }
@@ -48,9 +48,14 @@ end
 
 function openareaManager:load()
     self.wave = 1
-    self.waveTimer = 7
+    self.waveTimer = 14
     self.wavePrep = true
-    self.newWaveSoundPlayed = false
+    self.newWaveSoundPlayed = true
+    self.clearWaveSoundPlayed = true
+    self.spawnedEnemies = 0
+    self.enemySpawnCount = 0
+    self.spawnCooldown = 0
+    self.spawnTimer = 0
     self:setupUI()
     --Spawn beginning crates
     local beginningCrateAmount = 15
@@ -93,45 +98,92 @@ function openareaManager:load()
 end
 
 function openareaManager:update(delta)
-    print(self.waveTimer, self.wavePrep)
-    --Wave cycle
+    if GamePaused then return end
+    local ui = CurrentScene.hud.UIComponent
+
     self.waveTimer = self.waveTimer + delta
     if self.wavePrep then
-        self.newWaveSoundPlayed = false
-        if self.waveTimer > 8 then
+        if self.waveTimer > 15 then
+            self.newWaveSoundPlayed = false
             self.wavePrep = false
             self.waveTimer = 0
+            self.spawnedEnemies = 0
+            self.enemySpawnCount = 4 + (self.wave*(self.wave-1))/2
+            self.spawnCooldown = 3--TODO
+            ui.infinite.waveName.text = "--- WAVE " .. self.wave .. " ---"
+            ui.infinite.waveDesc.text = "ELIMINATE ALL ROBOTS"
+        end
+    else
+        if self.spawnedEnemies < self.enemySpawnCount then
+            self.spawnTimer = self.spawnTimer + delta
+            if self.spawnTimer > self.spawnCooldown then
+                --TODO spawn cooldown, spawn enemy codes here
+                self.spawnTimer = 0
+                self.spawnedEnemies = self.spawnedEnemies + 1
+            end
+        else
+            --Wait for player to clear all enemies
+            if #CurrentScene.npcs.tree < 1 then
+                self.wavePrep = true
+                self.waveTimer = 0
+                self.wave = self.wave + 1
+                self.clearWaveSoundPlayed = false
+                ui.infinite.waveName.text = "WAVE CLEARED"
+                ui.infinite.waveDesc.text = "PREPARE FOR THE NEXT WAVE"
+            end
         end
     end
-    local ui = CurrentScene.hud.UIComponent
-    --Update UI stuff
-    if not self.wavePrep then
-        if self.waveTimer > 1 then
-            --Play sound effect
-            if not self.newWaveSoundPlayed then
-                self.newWaveSoundPlayed = true
-                love.audio.setVolume(Settings.vol_master * Settings.vol_music)
-                Assets.mapSounds["new_wave"]:play()
-            end
-            --Make texts visible
-            if self.waveTimer < 7 then
+
+    --Update UI & sound effects
+    if not self.newWaveSoundPlayed then
+        self.newWaveSoundPlayed = true
+        love.audio.setVolume(Settings.vol_master * Settings.vol_music)
+        Assets.mapSounds["new_wave"]:stop()
+        Assets.mapSounds["new_wave"]:play()
+    end
+    if not self.clearWaveSoundPlayed then
+        self.clearWaveSoundPlayed = true
+        love.audio.setVolume(Settings.vol_master * Settings.vol_music)
+        Assets.mapSounds["wave_clear"]:stop()
+        Assets.mapSounds["wave_clear"]:play()
+    end
+    --Wave cleared text
+    if self.wavePrep then
+        if self.waveTimer > 0.4 then
+            if self.waveTimer < 7.4 then
                 ui.infinite.waveName.color[4] = ui.infinite.waveName.color[4] + 4*delta
-            end
-            if self.waveTimer > 3 and self.waveTimer < 7 then
-                ui.infinite.waveDesc.color[4] = ui.infinite.waveDesc.color[4] + 4*delta
-            end
-            --Hide both of the texts
-            if self.waveTimer > 7 then
+            else
                 ui.infinite.waveName.color[4] = ui.infinite.waveName.color[4] - 2.5*delta
+            end
+        end
+        --Prepare for next wave
+        if self.waveTimer > 2.9 then
+            if self.waveTimer < 7.4 then
+                ui.infinite.waveDesc.color[4] = ui.infinite.waveDesc.color[4] + 4*delta
+            else
                 ui.infinite.waveDesc.color[4] = ui.infinite.waveDesc.color[4] - 2.5*delta
             end
-            --Make sure alpha is limited to 0 or 1
-            if ui.infinite.waveName.color[4] < 0 then ui.infinite.waveName.color[4] = 0 end
-            if ui.infinite.waveDesc.color[4] < 0 then ui.infinite.waveDesc.color[4] = 0 end
-            if ui.infinite.waveName.color[4] > 1 then ui.infinite.waveName.color[4] = 1 end
-            if ui.infinite.waveDesc.color[4] > 1 then ui.infinite.waveDesc.color[4] = 1 end
+        end
+    else
+        --Wave "x" text
+        if self.waveTimer < 7 then
+            ui.infinite.waveName.color[4] = ui.infinite.waveName.color[4] + 4*delta
+        else
+            ui.infinite.waveName.color[4] = ui.infinite.waveName.color[4] - 2.5*delta
+        end
+        if self.waveTimer > 2.5 then
+            if self.waveTimer < 7 then
+                ui.infinite.waveDesc.color[4] = ui.infinite.waveDesc.color[4] + 4*delta
+            else
+                ui.infinite.waveDesc.color[4] = ui.infinite.waveDesc.color[4] - 2.5*delta
+            end
         end
     end
+    --Make sure alpha is limited to 0 or 1
+    if ui.infinite.waveName.color[4] < 0 then ui.infinite.waveName.color[4] = 0 end
+    if ui.infinite.waveDesc.color[4] < 0 then ui.infinite.waveDesc.color[4] = 0 end
+    if ui.infinite.waveName.color[4] > 1 then ui.infinite.waveName.color[4] = 1 end
+    if ui.infinite.waveDesc.color[4] > 1 then ui.infinite.waveDesc.color[4] = 1 end
 end
 
 return openareaManager

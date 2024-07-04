@@ -33,10 +33,9 @@ function debugMenu:update(delta)
                         .. "\nMouse Position: X=" .. mx .. " Y=" .. my .. "\nRelative Mouse Position: X=" .. rmx .. " Y=" .. rmy ..
                         "\nParticle Count: " .. CurrentScene.particleCount .. "\nItem Count: " .. #CurrentScene.items.tree ..
                         "\nBullet Count: " .. #CurrentScene.bullets.tree .. "\nWall Count: " .. #CurrentScene.walls.tree ..
-                        "\nProp Count: " .. #CurrentScene.props.tree .. "\nPlayer near item: " ..
-                        ((CurrentScene.player.nearItem and CurrentScene.player.nearItem.name) or "nil")
+                        "\nProp Count: " .. #CurrentScene.props.tree .. "\nNPC Count: " .. #CurrentScene.npcs.tree ..
+                        "\nPlayer near item: " .. ((CurrentScene.player.nearItem and CurrentScene.player.nearItem.name) or "nil")
     ui.debugTextsRight.text = GAME_VERSION_STATE .. " " .. GAME_VERSION .. "\nPowered by " .. ENGINE_NAME .. " (Build " .. ENGINE_VERSION .. ")"
-    --TODO additional debug info to add: humanoid count
 end
 
 return debugMenu

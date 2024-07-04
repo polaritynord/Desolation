@@ -24,7 +24,7 @@ function love.wheelmoved(x, y)
     end
 
     --Ingame zooming
-    if not GamePaused and CurrentScene.name == "Game" and CurrentScene.mapCreator.allowZoom then
+    if not GamePaused and CurrentScene.name == "Game" and (CurrentScene.mapCreator.allowZoom or GetGlobal("freecam") > 0) then
         local camController = CurrentScene.camera.script
         if y > 0 then
             camController.playerManualZoom = camController.playerManualZoom + 0.1

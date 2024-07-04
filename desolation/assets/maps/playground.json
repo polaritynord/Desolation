@@ -2,9 +2,6 @@
     "playerData": {
         "position": [0, 100],
         "cameraPosition": [0, 100],
-        "cameraBoundaries": [
-            [-400, 400], [-400, 400]
-        ],
         "health": 100,
         "armor": 100,
         "allowZoom": true
@@ -64,7 +61,8 @@
         ["battery", [-120, -170], 25]
     ],
     "npcs": [
-        ["guy", [-119, 118]]
+        ["guy", [-119, 118]],
+        ["robot", [184, 340]]
     ],
     "ambience": "desolation/assets/sounds/ost/ambience.wav",
     "assets": {
@@ -73,7 +71,8 @@
             ["prop_barrel", "desolation/assets/images/props/barrel.png"],
             ["prop_crate", "desolation/assets/images/props/crate.png"],
             ["wall_test_gray", "desolation/assets/images/walls/test_gray.png"],
-            ["tile_prototype_orange", "desolation/assets/images/tiles/prototype_orange.png"]
+            ["tile_prototype_orange", "desolation/assets/images/tiles/prototype_orange.png"],
+            ["robot_body", "desolation/assets/images/player/robot_body.png"]
         ]
     }
 }
