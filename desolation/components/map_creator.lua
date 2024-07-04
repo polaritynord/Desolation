@@ -36,6 +36,28 @@ function mapCreator:spawnProp(v)
     CurrentScene.props:addChild(prop)
 end
 
+function mapCreator:spawnNPC(v)
+    local npcData = self.parent.npcData
+    local npc = object.new(CurrentScene.npcs)
+    npc.name = v[1]
+    npc.position = v[2]
+    npc.imageComponent = ENGINE_COMPONENTS.imageComponent.new(npc)
+    --add hand object
+    local hand = object.new(npc)
+    hand.name = "hand"
+    hand.imageComponent = ENGINE_COMPONENTS.imageComponent.new(hand)
+    hand:addComponent(table.new(humanoidHandScript))
+    hand.script:load()
+    npc:addChild(hand)
+    --load custom script file
+    if npcData[npc.name] ~= nil and npcData[npc.name].script ~= nil then
+        local comp = dofile(npcData[npc.name].script .. ".lua")
+        npc:addComponent(comp)
+        comp:load()
+    end
+    CurrentScene.npcs:addChild(npc)
+end
+
 function mapCreator:loadMap(path)
     Globals:load()
     --read & convert to lua table
@@ -109,28 +131,8 @@ function mapCreator:loadMap(path)
     end
     --load npc's
     if data.npcs ~= nil then
-        --load npcs list & decode it
-        local npcs = love.filesystem.read(GAME_DIRECTORY .. "/assets/npcs.json")
-        npcs = json.decode(npcs)
         for _, v in ipairs(data.npcs) do
-            local npc = object.new(CurrentScene.npcs)
-            npc.name = v[1]
-            npc.position = v[2]
-            npc.imageComponent = ENGINE_COMPONENTS.imageComponent.new(npc)
-            --add hand object
-            local hand = object.new(npc)
-            hand.name = "hand"
-            hand.imageComponent = ENGINE_COMPONENTS.imageComponent.new(hand)
-            hand:addComponent(table.new(humanoidHandScript))
-            hand.script:load()
-            npc:addChild(hand)
-            --load custom script file
-            if npcs[npc.name] ~= nil and npcs[npc.name].script ~= nil then
-                local comp = dofile(npcs[npc.name].script .. ".lua")
-                npc:addComponent(comp)
-                comp:load()
-            end
-            CurrentScene.npcs:addChild(npc)
+            self:spawnNPC(v)
         end
     end
     --player data
@@ -204,6 +206,8 @@ function mapCreator:load()
     self.parent.propData = json.decode(self.parent.propData)
     self.parent.itemData = love.filesystem.read(GAME_DIRECTORY .. "/assets/items.json")
     self.parent.itemData = json.decode(self.parent.itemData)
+    self.parent.npcData = love.filesystem.read(GAME_DIRECTORY .. "/assets/npcs.json")
+    self.parent.npcData = json.decode(self.parent.npcData)
 end
 
 function mapCreator:update(delta)

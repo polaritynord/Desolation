@@ -16,8 +16,9 @@ function robotScript:load()
     self:humanoidSetup()
     robot.imageComponent.color = {0.4, 0.4, 0.4, 1}
     robot.hand.imageComponent.color = robot.imageComponent.color
-    robot.inventory.weapons[1] = weaponManager.Shotgun.new()
+    robot.inventory.weapons[1] = weaponManager.Pistol.new()
     robot.inventory.weapons[1].magAmmo = 100
+    robot.health = 40
 end
 
 function robotScript:update(delta)
@@ -26,12 +27,19 @@ function robotScript:update(delta)
     self:humanoidUpdate(delta, robot)
 
     if robot.health <= 0 then return end
-    --point & shoot at player
     self:pointTowardsPlayer(robot)
     robot.shootTimer = robot.shootTimer + delta/3
     local distance = coreFuncs.pointDistance(robot.position, CurrentScene.player.position)
-    if distance > 500 then return end
-    self:humanoidShootWeapon(robot.inventory.weapons[robot.inventory.slot])
+    if distance > 500 then
+        --walk towards player
+        local dx, dy = CurrentScene.player.position[1]-robot.position[1], CurrentScene.player.position[2]-robot.position[2]
+        local angle = math.atan2(dy, dx)
+        robot.moveVelocity[1] = 140 * math.cos(angle)
+        robot.moveVelocity[2] = 140 * math.sin(angle)
+    end
+    if distance < 620 then
+        self:humanoidShootWeapon(robot.inventory.weapons[robot.inventory.slot])
+    end
 end
 
 return robotScript

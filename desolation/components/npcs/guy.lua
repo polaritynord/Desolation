@@ -12,6 +12,7 @@ function guyScript:pointTowardsPlayer(npc)
 end
 
 function guyScript:bulletHitEvent(bullet)
+    if bullet.owner ~= "player" then return end
     self.parent.state = "hostile_player"
 end
 

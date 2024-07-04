@@ -71,8 +71,7 @@
             ["prop_barrel", "desolation/assets/images/props/barrel.png"],
             ["prop_crate", "desolation/assets/images/props/crate.png"],
             ["wall_test_gray", "desolation/assets/images/walls/test_gray.png"],
-            ["tile_prototype_orange", "desolation/assets/images/tiles/prototype_orange.png"],
-            ["robot_body", "desolation/assets/images/player/robot_body.png"]
+            ["tile_prototype_orange", "desolation/assets/images/tiles/prototype_orange.png"]
         ]
     }
 }

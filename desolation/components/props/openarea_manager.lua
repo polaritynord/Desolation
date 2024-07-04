@@ -23,6 +23,28 @@ function openareaManager:determineCratePos()
     end
 end
 
+function openareaManager:determineRobotPos()
+    local playerPos = CurrentScene.player.position
+    local robotPos = {
+        math.uniform(-2200, 2200), math.uniform(-1200, 1200)
+    }
+    while true do
+        local d = coreFuncs.pointDistance(robotPos, playerPos)
+        if d > 300 then
+            local temp = true
+            for _, prop in ipairs(CurrentScene.props.tree) do
+                if coreFuncs.pointDistance(prop.position, robotPos) < 70 then
+                    temp = false
+                end
+            end
+            if temp then return robotPos end
+        end
+        robotPos = {
+            math.uniform(-2200, 2200), math.uniform(-1200, 1200)
+        }
+    end
+end
+
 function openareaManager:setupUI()
     local ui = CurrentScene.hud.UIComponent
     ui.infinite = {}
@@ -117,7 +139,10 @@ function openareaManager:update(delta)
         if self.spawnedEnemies < self.enemySpawnCount then
             self.spawnTimer = self.spawnTimer + delta
             if self.spawnTimer > self.spawnCooldown then
-                --TODO spawn cooldown, spawn enemy codes here
+                local robotData = {
+                    "robot", self:determineRobotPos()
+                }
+                CurrentScene.mapCreator.script:spawnNPC(robotData)
                 self.spawnTimer = 0
                 self.spawnedEnemies = self.spawnedEnemies + 1
             end

@@ -8,10 +8,12 @@
         "allowZoom": false,
         "beginnerInventory": {
             "weapons": [
-                ["Pistol", 13], null, null
+                ["Pistol", 13], ["AssaultRifle", 30], ["Shotgun", 6]
             ],
             "ammunition": [
-                ["light", 52]
+                ["light", 52],
+                ["medium", 120],
+                ["shotgun", 30]
             ]
         },
         "health": 100,
