@@ -143,34 +143,81 @@ function humanoidScript:explosionEvent(position, radius, intensity)
     ]]--
 end
 
-function humanoidScript:hitscanCheckTest(humanoid, weapon)
+function humanoidScript:hitscanCheckTest(humanoid, weapon, shootAngle)
     local bulletPos = {
         humanoid.position[1] + math.cos(humanoid.rotation)*weapon.bulletOffset,
         humanoid.position[2] + math.sin(humanoid.rotation)*weapon.bulletOffset
     }
-    local shootAngle = humanoid.rotation + math.uniform(-weapon.bulletSpread, weapon.bulletSpread)
     local bulletSize = {12, 6}
     for i = 1, 100 do
         --move bullet by 10 pixels
         bulletPos[1] = bulletPos[1] + 10*math.cos(shootAngle)
         bulletPos[2] = bulletPos[2] + 10*math.sin(shootAngle)
-        --check for collision
+        --*** check for collision ***
         --iterate through walls
         for _, wall in ipairs(CurrentScene.walls.tree) do
             local wallSize = {wall.scale[1]*64, wall.scale[2]*64}
             if coreFuncs.aabbCollision(bulletPos, wall.position, bulletSize, wallSize) then
-                print("bullet hit a wall")
-                if true then return end
                 --create particles
-                if false and Settings.destruction_particles then
+                if Settings.destruction_particles then
                     local particleComp = CurrentScene.bullets.particleComponent
-                    particleFuncs.createWallHitParticles(particleComp, bullet, i, wall.material)
+                    particleFuncs.createWallHitParticles(particleComp, bulletPos, shootAngle, i, wall.material)
                 end
-                --particleFuncs.createBulletHoleParticles(particleComp, bullet, i)
+                return
+            end
+        end
+        --iterate through props
+        for _, prop in ipairs(CurrentScene.props.tree) do
+            if prop.collidable then
+                local src = prop.imageComponent.source
+                local w, h = src:getWidth(), src:getHeight()
+                local propSize = {prop.scale[1]*w, prop.scale[2]*h}
+                local propPos = {prop.position[1]-propSize[1]/2, prop.position[2]-propSize[2]/2}
+                if coreFuncs.aabbCollision(bulletPos, propPos, bulletSize, propSize) then
+                    --create particles
+                    if Settings.destruction_particles then
+                        local particleComp = CurrentScene.bullets.particleComponent
+                        particleFuncs.createWallHitParticles(particleComp, bulletPos, shootAngle, i, prop.material)
+                    end
+                    --bullet hit event
+                    if prop.script.physBulletHitEvent ~= nil then
+                        prop.script:physBulletHitEvent(shootAngle, weapon)
+                    end
+                    return
+                end
+            end
+        end
+        --iterate through NPC's
+        for _, npc in ipairs(CurrentScene.npcs.tree) do
+            if npc.name ~= humanoid.name then
+                local src = npc.imageComponent.source
+                local w, h = src:getWidth(), src:getHeight()
+                local npcSize = {npc.scale[1]*w, npc.scale[2]*h}
+                local propPos = {npc.position[1]-npcSize[1]/2, npc.position[2]-npcSize[2]/2}
+                if coreFuncs.aabbCollision(bulletPos, propPos, bulletSize, npcSize) then
+                    --damage npc
+                    npc.script:damage(weapon.bulletDamage)
+                    if npc.script.bulletHitEvent ~= nil then npc.script:bulletHitEvent(humanoid) end
+                    --TODO: bullet hit sfx or an indicator?
+                    return
+                end
+            end
+        end
+        --check player collision
+        if humanoid.name ~= "player" then
+            local player = CurrentScene.player
+            local src = player.imageComponent.source
+            local w, h = src:getWidth(), src:getHeight()
+            local npcSize = {player.scale[1]*w, player.scale[2]*h}
+            local propPos = {player.position[1]-npcSize[1]/2, player.position[2]-npcSize[2]/2}
+            if coreFuncs.aabbCollision(bulletPos, propPos, bulletSize, npcSize) then
+                --damage npc
+                player.script:damage(weapon.bulletDamage, bulletPos)
+                if player.script.bulletHitEvent ~= nil then player.script:bulletHitEvent(bullet) end
+                return
             end
         end
     end
-    print("bullet out of range")
 end
 
 function humanoidScript:humanoidShootWeapon(weapon)
@@ -191,7 +238,7 @@ function humanoidScript:humanoidShootWeapon(weapon)
         --Sound effect
         Assets.sounds["shoot_" .. string.lower(weapon.name)]:stop()
         Assets.sounds["shoot_" .. string.lower(weapon.name)]:play()
-        self:hitscanCheckTest(humanoid, weapon)
+        self:hitscanCheckTest(humanoid, weapon, humanoid.rotation + math.uniform(-weapon.bulletSpread, weapon.bulletSpread))
         --[[Bullet instance creation
         local bullet = object.new(CurrentScene.bullets)
         bullet.owner = humanoid.name
@@ -213,6 +260,7 @@ function humanoidScript:humanoidShootWeapon(weapon)
         --Bullet instance creation
         local radians = math.pi*2 * (weapon.bulletSpread/360) --turn into radians
         for i = 1, weapon.bulletPerShot do
+            --[[
             local bullet = object.new(CurrentScene.bullets)
             bullet.owner = humanoid.name
             bullet.position[1] = humanoid.position[1] + math.cos(humanoid.rotation)*weapon.bulletOffset
@@ -223,6 +271,8 @@ function humanoidScript:humanoidShootWeapon(weapon)
             bullet.speed = weapon.bulletSpeed
             bullet.damage = weapon.bulletDamage
             CurrentScene.bullets:addChild(bullet)
+            ]]--
+            self:hitscanCheckTest(humanoid, weapon, humanoid.rotation + (i-2)*(radians/weapon.bulletPerShot))
         end
     end
     --particles

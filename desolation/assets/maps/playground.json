@@ -7,7 +7,7 @@
         "allowZoom": true,
         "beginnerInventory": {
             "weapons": [
-                ["Pistol", 100], ["AssaultRifle", 100], null
+                ["Pistol", 100], ["Shotgun", 100], null
             ],
 
             "ammunition": []

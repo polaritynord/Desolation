@@ -100,7 +100,7 @@ function mapCreator:loadMap(path)
             item:addComponent(table.new(itemScript))
             item.position = v[2]
             item.rotation = math.pi*2 * (v[3]/360)
-            item.scale = self.parent.itemData[item.name].scale
+            item.scale = table.new(self.parent.itemData[item.name].scale)
             item.pickupEvent = itemEventFuncs[self.parent.itemData[item.name].pickupEvent]
             --weapon data
             if item.name == "weapon" then

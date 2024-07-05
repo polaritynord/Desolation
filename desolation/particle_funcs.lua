@@ -44,7 +44,7 @@ function particleFuncs.createShootParticles(humanoid, comp, rotation)
     end
 end
 
-function particleFuncs.createWallHitParticles(comp, bullet, i, material)
+function particleFuncs.createWallHitParticles(comp, bulletPos, bulletRot, i, material)
     for _ = 1, 4 do
         local s = math.uniform(4, 10)
         --determine color based on material
@@ -57,27 +57,27 @@ function particleFuncs.createWallHitParticles(comp, bullet, i, material)
         end
         comp:newParticle(
             {
-                position = table.new(bullet.oldPositions[i]);
+                position = table.new(bulletPos);
                 size = {s, s};
                 color = color;
                 update = particleFuncs.wallHitParticleUpdate;
-                rotation = bullet.rotation + math.pi + math.uniform(-math.pi/6, math.pi/6);
+                rotation = bulletRot + math.pi + math.uniform(-math.pi/6, math.pi/6);
                 despawnTime = 0.1;
             }
         )
     end
 end
 
-function particleFuncs.createBulletHoleParticles(comp, bullet, i)
-    if not Settings.bullet_holes then return end
+function particleFuncs.createBulletHoleParticles(comp, bulletPos, bulletRot, i)
+    --if not Settings.bullet_holes then return end
     --determine rotation
-    local rot = bullet.rotation
+    local rot = bulletRot
     if rot > math.pi/4 and rot < 3*math.pi/4 then
         rot = math.pi/2
     end
     comp:newParticle(
         {
-            position = table.new(bullet.oldPositions[i]);
+            position = table.new(bulletPos);
             size = {6, 6};
             color = {0, 0, 0, 0.6};
             rotation = rot;
