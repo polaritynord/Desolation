@@ -7,7 +7,7 @@
         "allowZoom": true,
         "beginnerInventory": {
             "weapons": [
-                ["Pistol", 100], ["Shotgun", 100], null
+                ["Pistol", 100], ["AssaultRifle", 100], null
             ],
 
             "ammunition": []
@@ -18,15 +18,15 @@
         ["test_gray", [-4, -6], [9, 1]]
     ],
     "tiles": [
-        ["prototype_orange", -1, -1],
-        ["prototype_orange", 0, -1],
-        ["prototype_orange", 1, -1],
-        ["prototype_orange", -1, 0],
-        ["prototype_orange", 0, 0],
-        ["prototype_orange", 1, 0],
-        ["prototype_orange", -1, 1],
-        ["prototype_orange", 0, 1],
-        ["prototype_orange", 1, 1]
+        ["prototype_white", -1, -1],
+        ["prototype_white", 0, -1],
+        ["prototype_white", 1, -1],
+        ["prototype_white", -1, 0],
+        ["prototype_white", 0, 0],
+        ["prototype_white", 1, 0],
+        ["prototype_white", -1, 1],
+        ["prototype_white", 0, 1],
+        ["prototype_white", 1, 1]
     ],
     "props": [
         [
@@ -77,7 +77,7 @@
             ["prop_barrel", "desolation/assets/images/props/barrel.png"],
             ["prop_crate", "desolation/assets/images/props/crate.png"],
             ["wall_test_gray", "desolation/assets/images/walls/test_gray.png"],
-            ["tile_prototype_orange", "desolation/assets/images/tiles/prototype_orange.png"]
+            ["tile_prototype_white", "desolation/assets/images/tiles/prototype_white.png"]
         ]
     }
 }

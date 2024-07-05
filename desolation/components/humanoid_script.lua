@@ -1,5 +1,3 @@
-local object = require("engine.object")
-local bulletScript = require("desolation.components.bullet_script")
 local particleFuncs = require("desolation.particle_funcs")
 local coreFuncs = require("coreFuncs")
 
@@ -143,11 +141,12 @@ function humanoidScript:explosionEvent(position, radius, intensity)
     ]]--
 end
 
-function humanoidScript:hitscanCheckTest(humanoid, weapon, shootAngle)
+function humanoidScript:hitscanBulletCheck(humanoid, weapon, shootAngle)
     local bulletPos = {
         humanoid.position[1] + math.cos(humanoid.rotation)*weapon.bulletOffset,
         humanoid.position[2] + math.sin(humanoid.rotation)*weapon.bulletOffset
     }
+    local beginPos = table.new(bulletPos)
     local bulletSize = {12, 6}
     for i = 1, 100 do
         --move bullet by 10 pixels
@@ -163,7 +162,7 @@ function humanoidScript:hitscanCheckTest(humanoid, weapon, shootAngle)
                     local particleComp = CurrentScene.bullets.particleComponent
                     particleFuncs.createWallHitParticles(particleComp, bulletPos, shootAngle, i, wall.material)
                 end
-                return
+                return {beginPos, bulletPos, 15, {0.92, 0.59, 0.2, math.uniform(0.6, 0.8)}}
             end
         end
         --iterate through props
@@ -183,7 +182,7 @@ function humanoidScript:hitscanCheckTest(humanoid, weapon, shootAngle)
                     if prop.script.physBulletHitEvent ~= nil then
                         prop.script:physBulletHitEvent(shootAngle, weapon)
                     end
-                    return
+                    return {beginPos, bulletPos, 15, {0.92, 0.59, 0.2, math.uniform(0.6, 0.8)}}
                 end
             end
         end
@@ -199,7 +198,7 @@ function humanoidScript:hitscanCheckTest(humanoid, weapon, shootAngle)
                     npc.script:damage(weapon.bulletDamage)
                     if npc.script.bulletHitEvent ~= nil then npc.script:bulletHitEvent(humanoid) end
                     --TODO: bullet hit sfx or an indicator?
-                    return
+                    return {beginPos, bulletPos, 15, {0.92, 0.59, 0.2, math.uniform(0.6, 0.8)}}
                 end
             end
         end
@@ -214,10 +213,13 @@ function humanoidScript:hitscanCheckTest(humanoid, weapon, shootAngle)
                 --damage npc
                 player.script:damage(weapon.bulletDamage, bulletPos)
                 if player.script.bulletHitEvent ~= nil then player.script:bulletHitEvent(bullet) end
-                return
+                return {beginPos, bulletPos, 15, {0.92, 0.59, 0.2, math.uniform(0.6, 0.8)}}
             end
         end
     end
+    --If the function is still ongoing at this part, that means the bullet is out of range.
+    return {beginPos, bulletPos, 15, {0.92, 0.59, 0.2, math.uniform(0.6, 0.8)}}
+    --LINE TABLE ORDER: begin position, ending position, line width, timer
 end
 
 function humanoidScript:humanoidShootWeapon(weapon)
@@ -238,7 +240,10 @@ function humanoidScript:humanoidShootWeapon(weapon)
         --Sound effect
         Assets.sounds["shoot_" .. string.lower(weapon.name)]:stop()
         Assets.sounds["shoot_" .. string.lower(weapon.name)]:play()
-        self:hitscanCheckTest(humanoid, weapon, humanoid.rotation + math.uniform(-weapon.bulletSpread, weapon.bulletSpread))
+        local newLine = self:hitscanBulletCheck(
+            humanoid, weapon, humanoid.rotation + math.uniform(-weapon.bulletSpread, weapon.bulletSpread)
+        )
+        CurrentScene.bulletLineRenderer.lines[#CurrentScene.bulletLineRenderer.lines+1] = newLine
         --[[Bullet instance creation
         local bullet = object.new(CurrentScene.bullets)
         bullet.owner = humanoid.name
@@ -272,7 +277,10 @@ function humanoidScript:humanoidShootWeapon(weapon)
             bullet.damage = weapon.bulletDamage
             CurrentScene.bullets:addChild(bullet)
             ]]--
-            self:hitscanCheckTest(humanoid, weapon, humanoid.rotation + (i-2)*(radians/weapon.bulletPerShot))
+            local newLine = self:hitscanBulletCheck(
+                humanoid, weapon, humanoid.rotation + (i-2)*(radians/weapon.bulletPerShot)
+            )
+            CurrentScene.bulletLineRenderer.lines[#CurrentScene.bulletLineRenderer.lines+1] = newLine
         end
     end
     --particles

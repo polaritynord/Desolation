@@ -153,7 +153,7 @@ function openareaManager:update(delta)
                 self.waveTimer = 0
                 self.wave = self.wave + 1
                 self.clearWaveSoundPlayed = false
-                ui.infinite.waveName.text = "WAVE CLEARED"
+                ui.infinite.waveName.text = "--- WAVE CLEARED ---"
                 ui.infinite.waveDesc.text = "PREPARE FOR THE NEXT WAVE"
             end
         end

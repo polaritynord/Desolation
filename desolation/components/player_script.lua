@@ -264,6 +264,7 @@ function playerScript:load()
 end
 
 function playerScript:update(delta)
+    SetGlobal("p_speed", 2000)
     if GamePaused then return end
     local player = self.parent
     self:humanoidUpdate(delta, player)

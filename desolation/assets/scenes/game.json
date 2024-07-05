@@ -44,6 +44,11 @@
         ],
 
         [
+            "bulletLineRenderer",
+            ["imageComponent", "desolation/components/bullet_line_renderer"]
+        ],
+
+        [
             "mapCreator",
             ["desolation/components/map_creator"]
         ],

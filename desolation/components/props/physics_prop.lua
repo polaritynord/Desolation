@@ -47,7 +47,7 @@ function physicsProp:destroyCheck()
             end
             itemInstance.name = lootType
             itemInstance:addComponent(table.new(itemScript))
-            itemInstance.scale = mapCreator.itemData[lootType].scale
+            itemInstance.scale = table.new(mapCreator.itemData[lootType].scale)
             itemInstance.pickupEvent = itemEventFuncs[mapCreator.itemData[lootType].pickupEvent]
             itemInstance.script:load()
             --randomize position & rotation

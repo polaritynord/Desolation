@@ -78,7 +78,7 @@ function scene.new()
     end
 
     function s:drawGame()
-        love.graphics.scale(self.camera.scale[1], self.camera.scale[2])
+        --love.graphics.scale(self.camera.scale[1], self.camera.scale[2])
         for _, v in ipairs(self.tree) do
             v:draw()
         end
