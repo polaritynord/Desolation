@@ -89,12 +89,12 @@ function mainMenu:load()
             font = "disposable-droid"
         }
     )
-    ui.blackCover = ui:newRectangle(
-        {
-            color = {0, 0, 0, 1};
-            size = {960, 540};
-        }
-    )
+    --ui.blackCover = ui:newRectangle(
+    --    {
+    --        color = {1, 1, 1, 0};
+    --        size = {960, 540};
+    --    }
+    --)
     --inital loading stuff
     if CurrentScene.mapCreator ~= nil then
         CurrentScene.mapCreator.script:loadMap("desolation/assets/maps/" .. Settings.menu_background .. ".json")
@@ -111,9 +111,9 @@ function mainMenu:update(delta)
     ui.polarity.position[1] = 920 - MenuUIOffset
     ui.version.position[1] = 5 - MenuUIOffset
     --Change alpha of black cover
-    if ui.blackCover.color[4] > 0 then
-        ui.blackCover.color[4] = ui.blackCover.color[4] - 1.5*delta
-    end
+    --if ui.blackCover.color[4] > 0 then
+    --    ui.blackCover.color[4] = ui.blackCover.color[4] - 1.5*delta
+    --end
     --Are you sure text
     if ui.quitButton.buttonText == Loca.mainMenu.quitConfirmation then
         ui.quitButton.confirmTimer = ui.quitButton.confirmTimer - delta

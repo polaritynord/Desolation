@@ -143,8 +143,8 @@ function openareaManager:update(delta)
             self.spawnedEnemies = 0
             self.enemySpawnCount = 4 + (self.wave*(self.wave-1))/2
             self.spawnCooldown = 1--TODO
-            ui.infinite.waveName.text = "--- WAVE " .. self.wave .. " ---"
-            ui.infinite.waveDesc.text = "ELIMINATE ALL ROBOTS"
+            ui.infinite.waveName.text = "--- " .. Loca.infiniteMode.wave .. " " .. self.wave .. " ---"
+            ui.infinite.waveDesc.text = Loca.infiniteMode.eliminateAllRobots
         end
     else
         if self.spawnedEnemies < self.enemySpawnCount then
@@ -164,8 +164,8 @@ function openareaManager:update(delta)
                 self.waveTimer = 0
                 self.wave = self.wave + 1
                 self.clearWaveSoundPlayed = false
-                ui.infinite.waveName.text = "--- WAVE CLEARED ---"
-                ui.infinite.waveDesc.text = "PREPARE FOR THE NEXT WAVE"
+                ui.infinite.waveName.text = "--- " .. Loca.infiniteMode.waveClear .. " ---"
+                ui.infinite.waveDesc.text = Loca.infiniteMode.wavePrepare
             end
         end
     end

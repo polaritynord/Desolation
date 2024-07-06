@@ -28,6 +28,12 @@
         "infinite": "Infinite",
         "infiniteDesc": "Survive as long as you can."
     },
+    "infiniteMode": {
+        "wave": "WAVE",
+        "eliminateAllRobots": "ELIMINATE ALL ROBOTS",
+        "waveClear": "WAVE CLEARED",
+        "wavePrepare": "PREPARE FOR THE NEXT WAVE"
+    },
     "gameplayMenu": {
         "cameraSway": "Camera Sway: ",
         "screenShake": "Screen Shake: ",

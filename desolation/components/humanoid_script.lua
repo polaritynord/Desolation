@@ -257,6 +257,7 @@ function humanoidScript:humanoidShootWeapon(weapon)
         CurrentScene.bullets:addChild(bullet)
         --]]
     elseif weapon.ammoType == "shotgun" then
+        if weapon.magAmmo < 1 then return end
         humanoid.reloading = false
         --Fire weapon
         weapon.magAmmo = weapon.magAmmo - 1

@@ -55,6 +55,24 @@ function startupManager:load()
     Loca = love.filesystem.read("desolation/assets/loca_" .. Settings.language .. ".json")
     Loca = json.decode(Loca)
 
+    --Load achievements data
+    local fileExists = love.filesystem.getInfo("achievements.json")
+    local achievementsList = love.filesystem.read("desolation/assets/achievements_list.json")
+    local achievementsListData = json.decode(achievementsList)
+    --local defaultBindings = json.decode(defaultBindingsFile)
+    --Check if achievements file exists
+    if fileExists then
+        --Read binding file & save it as table
+        local achievementsData = love.filesystem.read("achievements.json")
+        --Decode json file
+        achievementsData = json.decode(achievementsData)
+        --TODO: check if there is any achievements missing!!!
+    else
+        --Write new achievements file
+        love.filesystem.write("achievements.json", achievementsList)
+        Achievements = achievementsListData
+    end
+
     --Screenshots folder
     if love.filesystem.getInfo("screenshots") == nil then
         love.filesystem.createDirectory("screenshots")

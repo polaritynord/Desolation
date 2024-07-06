@@ -28,6 +28,12 @@
         "infinite": "Sonsuz",
         "infiniteDesc": "Olabildigince hayatta kal."
     },
+    "infiniteMode": {
+        "wave": "DALGA",
+        "eliminateAllRobots": "TUM ROBOTLARI ETKISIZ HALE GETIR",
+        "waveClear": "DALGA TAMAMLANDI",
+        "wavePrepare": "SONRAKI DALGA ICIN HAZIRLAN"
+    },
     "gameplayMenu": {
         "cameraSway": "Kamera Sallantisi: ",
         "screenShake": "Ekran Sarsintisi: ",
