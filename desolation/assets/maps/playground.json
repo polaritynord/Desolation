@@ -63,7 +63,8 @@
         ["ammo_revolver", [150, 110], 120],
         ["ammo_light", [150, 50], 40],
         ["ammo_medium", [150, -10], 25],
-        ["weapon", [200, 100], 75, "Pistol"],
+        ["weapon", [200, 100], 75, "Revolver"],
+        ["weapon", [200, 50], 75, "AssaultRifle"],
         ["medkit", [-120, -80], 25],
         ["battery", [-120, -170], 25]
     ],

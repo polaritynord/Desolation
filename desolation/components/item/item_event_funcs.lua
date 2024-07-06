@@ -1,5 +1,21 @@
 local itemEventFuncs = {}
 
+function itemEventFuncs.createHUDNotif(source)
+    --notification in hud
+    local hud = CurrentScene.hud.UIComponent
+    local newNotif = hud:newImage(
+        {
+            position = {25, 420};
+            source = Assets.images[source];
+            color = {1, 1, 1, 0.7};
+        }
+    )
+    newNotif.scale = {1.7, 1.7}
+    newNotif.timer = 0
+    hud.acquireNotifs[#hud.acquireNotifs+1] = newNotif
+    newNotif.index = #hud.acquireNotifs
+end
+
 function itemEventFuncs.weaponPickup(item)
     local player = CurrentScene.player
     --check if player has an empty slot (TODO: optimize)
@@ -30,19 +46,7 @@ function itemEventFuncs.ammoPickup(item)
     --play sound
     local playerSounds = player.soundManager.script
     playerSounds:playStopSound(Assets.sounds["acquire"])
-    --notification in hud
-    local hud = CurrentScene.hud.UIComponent
-    local newNotif = hud:newImage(
-        {
-            position = {25, 420};
-            source = Assets.images["hud_acquire_ammo"];
-            color = {1, 1, 1, 0.7};
-        }
-    )
-    newNotif.scale = {1.7, 1.7}
-    newNotif.timer = 0
-    hud.acquireNotifs[#hud.acquireNotifs+1] = newNotif
-    newNotif.index = #hud.acquireNotifs
+    itemEventFuncs.createHUDNotif("hud_acquire_ammo")
 end
 
 function itemEventFuncs.medkitPickup(item)
@@ -54,18 +58,7 @@ function itemEventFuncs.medkitPickup(item)
     local playerSounds = player.soundManager.script
     playerSounds:playStopSound(Assets.sounds["acquire"])
     --notification in hud
-    local hud = CurrentScene.hud.UIComponent
-    local newNotif = hud:newImage(
-        {
-            position = {25, 420};
-            source = Assets.images["hud_acquire_medkit"];
-            color = {1, 1, 1, 0.7};
-        }
-    )
-    newNotif.scale = {1.7, 1.7}
-    newNotif.timer = 0
-    hud.acquireNotifs[#hud.acquireNotifs+1] = newNotif
-    newNotif.index = #hud.acquireNotifs
+    itemEventFuncs.createHUDNotif("hud_acquire_medkit")
     --vignette effects & misc
     CurrentScene.gameShaders.script.blueOffset = 255
     item.gettingPickedUp = true
@@ -80,18 +73,7 @@ function itemEventFuncs.batteryPickup(item)
     local playerSounds = player.soundManager.script
     playerSounds:playStopSound(Assets.sounds["acquire"])
     --notification in hud
-    local hud = CurrentScene.hud.UIComponent
-    local newNotif = hud:newImage(
-        {
-            position = {25, 420};
-            source = Assets.images["hud_acquire_battery"];
-            color = {1, 1, 1, 0.7};
-        }
-    )
-    newNotif.scale = {1.7, 1.7}
-    newNotif.timer = 0
-    hud.acquireNotifs[#hud.acquireNotifs+1] = newNotif
-    newNotif.index = #hud.acquireNotifs
+    itemEventFuncs.createHUDNotif("hud_acquire_battery")
     CurrentScene.gameShaders.script.blueOffset = 255
     item.gettingPickedUp = true
 end

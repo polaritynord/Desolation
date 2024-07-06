@@ -27,7 +27,9 @@
         "playgroundDesc": "Ne halt yersen ye.",
         "infinite": "Sonsuz",
         "infiniteDesc": "Olabildigince hayatta kal.",
-        "infiniteDifficulties": ["kolay", "orta", "zor"]
+        "infiniteDifficulty": "Zorluk: ",
+        "infiniteDifficulties": ["kolay", "orta", "zor", "ekstrem", "ultra"],
+        "startGame": "Oyunu Baslat"
     },
     "infiniteMode": {
         "wave": "DALGA",

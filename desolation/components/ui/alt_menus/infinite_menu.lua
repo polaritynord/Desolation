@@ -8,15 +8,15 @@ function infiniteMenu:load()
 
     ui.difficultyPicker = ui:newTextButton(
         {
-            buttonText = "Difficulty: " .. string.upper(Loca.extrasMenu.infiniteDifficulties[infinite.difficulty]);
+            buttonText = Loca.extrasMenu.infiniteDifficulty .. string.upper(Loca.extrasMenu.infiniteDifficulties[infinite.difficulty]);
             position = {0, 200};
             buttonTextSize = 30;
             hoverEvent = buttonEvents.redHover;
             unhoverEvent = buttonEvents.redUnhover;
             clickEvent = function (element)
                 infinite.difficulty = infinite.difficulty + 1
-                if infinite.difficulty > 3 then infinite.difficulty = 1 end
-                element.buttonText = "Difficulty: " .. string.upper(Loca.extrasMenu.infiniteDifficulties[infinite.difficulty])
+                if infinite.difficulty > #Loca.extrasMenu.infiniteDifficulties then infinite.difficulty = 1 end
+                element.buttonText = Loca.extrasMenu.infiniteDifficulty .. string.upper(Loca.extrasMenu.infiniteDifficulties[infinite.difficulty])
                 --TODO difficulty descriptions
             end
         }
@@ -29,10 +29,15 @@ function infiniteMenu:load()
     )
     ui.startGameButton = ui:newTextButton(
         {
-            buttonText = "Start Game";
+            buttonText = Loca.extrasMenu.startGame;
             buttonTextSize = 30;
             position = {0, 440};
-            clickEvent = function() end;
+            clickEvent = function()
+                local scene = LoadScene("desolation/assets/scenes/game.json")
+                scene.difficulty = infinite.difficulty
+                SetScene(scene)
+                scene.mapCreator.script:loadMap("desolation/assets/maps/infinite_openarea.json")
+            end;
         }
     )
 end

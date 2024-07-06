@@ -27,7 +27,9 @@
         "playgroundDesc": "Do whatever you want.",
         "infinite": "Infinite",
         "infiniteDesc": "Survive as long as you can.",
-        "infiniteDifficulties": ["easy", "normal", "hard"]
+        "infiniteDifficulty": "Difficulty: ",
+        "infiniteDifficulties": ["easy", "medium", "hard", "extreme", "ultra"],
+        "startGame": "Start Game"
     },
     "infiniteMode": {
         "wave": "WAVE",

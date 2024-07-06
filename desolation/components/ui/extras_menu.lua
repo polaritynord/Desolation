@@ -16,6 +16,7 @@ function extrasMenu:load()
                 local scene = LoadScene("desolation/assets/scenes/game.json")
                 SetScene(scene)
                 scene.mapCreator.script:loadMap("desolation/assets/maps/playground.json")
+                SetGlobal("cheats", 1)
             end;
             hoverEvent = function (element)
                 ui.modeDescription.text = Loca.extrasMenu.playgroundDesc
@@ -32,11 +33,6 @@ function extrasMenu:load()
             position = {0, 240};
             clickEvent = function ()
                 if menu.selection == "infinite" then menu.selection = nil else menu.selection = "infinite" end
-                --[[
-                local scene = LoadScene("desolation/assets/scenes/game.json")
-                SetScene(scene)
-                scene.mapCreator.script:loadMap("desolation/assets/maps/infinite_openarea.json")
-                ]]--
             end;
             hoverEvent = function (element)
                 ui.modeDescription.text = Loca.extrasMenu.infiniteDesc

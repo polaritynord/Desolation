@@ -1,6 +1,7 @@
 local coreFuncs = require "coreFuncs"
 local robotLocationMarkers = require("desolation.components.robot_location_markers")
 local object = require("engine.object")
+local itemEventFuncs = require("desolation.components.item.item_event_funcs")
 local openareaManager = ENGINE_COMPONENTS.scriptComponent.new()
 
 function openareaManager:determineCratePos()
@@ -166,6 +167,26 @@ function openareaManager:update(delta)
                 self.clearWaveSoundPlayed = false
                 ui.infinite.waveName.text = "--- " .. Loca.infiniteMode.waveClear .. " ---"
                 ui.infinite.waveDesc.text = Loca.infiniteMode.wavePrepare
+                --Give player some loot (TODO)
+                local player = CurrentScene.player
+                if player.health < 100 then
+                    itemEventFuncs.createHUDNotif("hud_acquire_medkit")
+                    player.health = player.health + 25
+                    CurrentScene.gameShaders.script.blueOffset = 255
+                    if player.health > 100 then player.health = 100 end
+                end
+                if player.armor < 100 then
+                    itemEventFuncs.createHUDNotif("hud_acquire_battery")
+                    player.armor = player.armor + 25
+                    CurrentScene.gameShaders.script.blueOffset = 255
+                    if player.armor > 100 then player.armor = 100 end
+                end
+                for _, weapon in ipairs(player.inventory.weapons) do
+                    if weapon == nil then goto skip end
+                    player.inventory.ammunition[weapon.ammoType] = player.inventory.ammunition[weapon.ammoType] + weapon.magAmmo
+                    itemEventFuncs.createHUDNotif("hud_acquire_ammo")
+                    ::skip::
+                end
             end
         end
     end

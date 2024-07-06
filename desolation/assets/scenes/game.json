@@ -108,12 +108,7 @@
                 ]
             ]
         ],
-
-        [
-            "gameMouse",
-            ["desolation/components/game_mouse", "UIComponent"]
-        ],
-
+        
         [
             "gameShaders",
             ["desolation/components/game_shaders"]
