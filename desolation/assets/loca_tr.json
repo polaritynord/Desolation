@@ -26,7 +26,8 @@
         "playground": "Oyun Alani",
         "playgroundDesc": "Ne halt yersen ye.",
         "infinite": "Sonsuz",
-        "infiniteDesc": "Olabildigince hayatta kal."
+        "infiniteDesc": "Olabildigince hayatta kal.",
+        "infiniteDifficulties": ["kolay", "orta", "zor"]
     },
     "infiniteMode": {
         "wave": "DALGA",

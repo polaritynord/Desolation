@@ -1,3 +1,4 @@
+local json = require "engine.lib.json"
 local coreFuncs = {}
 
 function coreFuncs.rgb(r, g, b)
@@ -105,6 +106,12 @@ function table.removeValue(tbl, val)
             break
         end
     end
+end
+
+function GiveAchievement(name)
+    Achievements[name].obtained = true
+    love.filesystem.write("achievements.json", json.encode(Achievements))
+    --TODO: achievement notifs
 end
 
 return coreFuncs

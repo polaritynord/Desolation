@@ -23,10 +23,11 @@
         "mainMenu": "Main Menu"
     },
     "extrasMenu": {
-    "playground": "Playground",
+        "playground": "Playground",
         "playgroundDesc": "Do whatever you want.",
         "infinite": "Infinite",
-        "infiniteDesc": "Survive as long as you can."
+        "infiniteDesc": "Survive as long as you can.",
+        "infiniteDifficulties": ["easy", "normal", "hard"]
     },
     "infiniteMode": {
         "wave": "WAVE",

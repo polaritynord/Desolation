@@ -65,7 +65,7 @@ function startupManager:load()
         --Read binding file & save it as table
         local achievementsData = love.filesystem.read("achievements.json")
         --Decode json file
-        achievementsData = json.decode(achievementsData)
+        Achievements = json.decode(achievementsData)
         --TODO: check if there is any achievements missing!!!
     else
         --Write new achievements file

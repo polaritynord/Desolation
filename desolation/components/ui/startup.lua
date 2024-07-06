@@ -10,6 +10,9 @@ function startup:load()
         SetScene(scene)
         return
     end
+    --give "thanks for playing" achievement
+    GiveAchievement("thanksForPlaying")
+    --ui setup
     Settings.first_time_playing = false
     love.filesystem.write("settings.json", json.encode(Settings))
     --elements
@@ -42,8 +45,8 @@ function startup:load()
             position = {425, 430};
             buttonText = "Proceed";
             buttonTextSize = 30;
-            hoverEvent = hover;
-            unhoverEvent = unhover;
+            hoverEvent = buttonEvents.redHover;
+            unhoverEvent = buttonEvents.redUnhover;
             clickEvent = function ()
                 love.load()
             end;

@@ -41,6 +41,7 @@ function mainMenu:load()
             position = {70, 280};
             buttonText = Loca.mainMenu.achievements;
             buttonTextSize = 30;
+            clickEvent = clickEvents.achievementsButtonClick;
         }
     )
     ui.settingsButton = ui:newTextButton(
@@ -95,7 +96,7 @@ function mainMenu:load()
     --        size = {960, 540};
     --    }
     --)
-    --inital loading stuff
+    --initial loading stuff
     if CurrentScene.mapCreator ~= nil then
         CurrentScene.mapCreator.script:loadMap("desolation/assets/maps/" .. Settings.menu_background .. ".json")
     end

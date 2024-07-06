@@ -1,9 +1,11 @@
+local buttonEvents = require "desolation.button_clickevents"
 local extrasMenu = ENGINE_COMPONENTS.scriptComponent.new()
 
 function extrasMenu:load()
     local menu = self.parent
     local ui = menu.UIComponent
     menu.open = false
+    menu.selection = nil
     --Element creation
     ui.playgroundButton = ui:newTextButton(
         {
@@ -18,7 +20,9 @@ function extrasMenu:load()
             hoverEvent = function (element)
                 ui.modeDescription.text = Loca.extrasMenu.playgroundDesc
                 ui.modeDescription.position[2] = element.position[2]
+                buttonEvents.redHover(element)
             end;
+            unhoverEvent = buttonEvents.redUnhover;
         }
     )
     ui.infiniteButton = ui:newTextButton(
@@ -27,14 +31,19 @@ function extrasMenu:load()
             buttonTextSize = 30;
             position = {0, 240};
             clickEvent = function ()
+                if menu.selection == "infinite" then menu.selection = nil else menu.selection = "infinite" end
+                --[[
                 local scene = LoadScene("desolation/assets/scenes/game.json")
                 SetScene(scene)
                 scene.mapCreator.script:loadMap("desolation/assets/maps/infinite_openarea.json")
+                ]]--
             end;
             hoverEvent = function (element)
                 ui.modeDescription.text = Loca.extrasMenu.infiniteDesc
                 ui.modeDescription.position[2] = element.position[2]
+                buttonEvents.redHover(element)
             end;
+            unhoverEvent = buttonEvents.redUnhover;
         }
     )
     ui.endlessButton2 = ui:newTextButton(
@@ -72,7 +81,7 @@ function extrasMenu:load()
             buttonText = Loca.settings.returnButton;
             buttonTextSize = 30;
             position = {0, 440};
-            clickEvent = function() menu.open = false end;
+            clickEvent = function() menu.open = false ; menu.selection = nil end;
         }
     )
 end
@@ -91,6 +100,9 @@ function extrasMenu:update(delta)
         ui.alpha = 0.25
     end
     if not menu.open then return end
+    if menu.selection ~= nil then
+        ui.modeDescription.text = ""
+    end
 end
 
 return extrasMenu

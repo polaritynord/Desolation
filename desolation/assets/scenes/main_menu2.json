@@ -78,7 +78,13 @@
 
         [
             "extras",
-            ["UIComponent", "desolation/components/ui/extras_menu"]
+            ["UIComponent", "desolation/components/ui/extras_menu"],
+            [
+                [
+                    "infiniteMenu",
+                    ["UIComponent", "desolation/components/ui/alt_menus/infinite_menu"]
+                ]
+            ]
         ]
     ],
 

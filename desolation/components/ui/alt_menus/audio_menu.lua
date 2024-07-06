@@ -5,7 +5,6 @@ function audioMenu:load()
     local settings = audio.parent
     local ui = audio.UIComponent
 
-
     ui.masterVolText = ui:newTextLabel(
         {
             text = Loca.audioMenu.masterVolume;
