@@ -7,12 +7,13 @@ function itemScript:load()
     if item.name == "weapon" then
         item.imageComponent = ENGINE_COMPONENTS.imageComponent.new(item, Assets.images["weapon_" .. string.lower(item.weaponData.name)])
     else
-        --Load image if nonexistant
+        --Load image if nonexistant (TODO get rid of this or sth idk)
         if Assets.mapImages["item_" .. item.name] == nil then
             Assets.mapImages["item_" .. item.name] = love.graphics.newImage(GAME_DIRECTORY .. "/assets/images/items/" .. item.name .. ".png")
         end
         item.imageComponent = ENGINE_COMPONENTS.imageComponent.new(item, Assets.mapImages["item_" .. item.name])
     end
+    item.imageComponent.layer = 2
 
     item.distanceToPlayer = 1000
     item.gettingPickedUp = false

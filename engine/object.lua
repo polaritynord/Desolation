@@ -50,7 +50,7 @@ function object.new(parent)
             CurrentScene.uiLayer[#CurrentScene.uiLayer+1] = self.UIComponent
         end
         if self.particleComponent and self.particleComponent.enabled then
-            CurrentScene.particleLayer[#CurrentScene.particleLayer+1] = self.particleComponent
+            CurrentScene.drawLayers[self.particleComponent.layer][#CurrentScene.drawLayers[self.particleComponent.layer]+1] = self.particleComponent
         end
         for _, v in ipairs(self.tree) do
             v:draw()

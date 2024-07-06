@@ -165,7 +165,7 @@ function humanoidScript:hitscanBulletCheck(humanoid, weapon, shootAngle)
                     local particleComp = CurrentScene.bullets.particleComponent
                     particleFuncs.createWallHitParticles(particleComp, bulletPos, shootAngle, i, wall.material)
                 end
-                return {beginPos, bulletPos, 15, {0.92, 0.59, 0.2, math.uniform(0.6, 0.8)}}
+                goto returnLine
             end
         end
         --iterate through props
@@ -185,7 +185,7 @@ function humanoidScript:hitscanBulletCheck(humanoid, weapon, shootAngle)
                     if prop.script.physBulletHitEvent ~= nil then
                         prop.script:physBulletHitEvent(shootAngle, weapon)
                     end
-                    return {beginPos, bulletPos, 15, {0.92, 0.59, 0.2, math.uniform(0.6, 0.8)}}
+                    goto returnLine
                 end
             end
         end
@@ -201,7 +201,7 @@ function humanoidScript:hitscanBulletCheck(humanoid, weapon, shootAngle)
                     npc.script:damage(weapon.bulletDamage)
                     if npc.script.bulletHitEvent ~= nil then npc.script:bulletHitEvent(humanoid) end
                     --TODO: bullet hit sfx or an indicator?
-                    return {beginPos, bulletPos, 15, {0.92, 0.59, 0.2, math.uniform(0.6, 0.8)}}
+                    goto returnLine
                 end
             end
         end
@@ -214,15 +214,16 @@ function humanoidScript:hitscanBulletCheck(humanoid, weapon, shootAngle)
             local propPos = {player.position[1]-npcSize[1]/2, player.position[2]-npcSize[2]/2}
             if coreFuncs.aabbCollision(bulletPos, propPos, bulletSize, npcSize) then
                 --damage npc
-                player.script:damage(weapon.bulletDamage, bulletPos)
+                player.script:damage(weapon.bulletDamage, beginPos)
                 if player.script.bulletHitEvent ~= nil then player.script:bulletHitEvent(bullet) end
-                return {beginPos, bulletPos, 15, {0.92, 0.59, 0.2, math.uniform(0.6, 0.8)}}
+                goto returnLine
             end
         end
     end
     --If the function is still ongoing at this part, that means the bullet is out of range.
-    return {beginPos, bulletPos, 15, {0.92, 0.59, 0.2, math.uniform(0.6, 0.8)}}
-    --LINE TABLE ORDER: begin position, ending position, line width, timer
+    ::returnLine::
+    return {beginPos, bulletPos, weapon.fireLineWidth, {weapon.fireLineColor[1], weapon.fireLineColor[2], weapon.fireLineColor[3], math.uniform(0.6, 0.8)}}
+    --LINE TABLE ORDER: begin position, ending position, line width, color
 end
 
 function humanoidScript:humanoidShootWeapon(weapon)
@@ -236,13 +237,16 @@ function humanoidScript:humanoidShootWeapon(weapon)
         Assets.sounds["empty_mag"]:play()
         return
     end
-    if weapon.weaponType == "auto" then
+    if weapon.weaponType == "auto" or weapon.weaponType == "laser" then
         if humanoid.reloading then return end
         --Fire weapon
         weapon.magAmmo = weapon.magAmmo - weapon.bulletPerShot
         --Sound effect
-        Assets.sounds["shoot_" .. string.lower(weapon.name)]:stop()
-        Assets.sounds["shoot_" .. string.lower(weapon.name)]:play()
+        if Assets.sounds["shoot_" .. string.lower(weapon.name)] ~= nil then
+            love.audio.setVolume(Settings.vol_master * Settings.vol_world)
+            Assets.sounds["shoot_" .. string.lower(weapon.name)]:stop()
+            Assets.sounds["shoot_" .. string.lower(weapon.name)]:play()
+        end
         local newLine = self:hitscanBulletCheck(
             humanoid, weapon, humanoid.rotation + math.uniform(-weapon.bulletSpread, weapon.bulletSpread)
         )
@@ -264,8 +268,11 @@ function humanoidScript:humanoidShootWeapon(weapon)
         humanoid.reloading = false
         --Fire weapon
         weapon.magAmmo = weapon.magAmmo - 1
-        Assets.sounds["shoot_" .. string.lower(weapon.name)]:stop()
-        Assets.sounds["shoot_" .. string.lower(weapon.name)]:play()
+        if Assets.sounds["shoot_" .. string.lower(weapon.name)] ~= nil then
+            love.audio.setVolume(Settings.vol_master * Settings.vol_world)
+            Assets.sounds["shoot_" .. string.lower(weapon.name)]:stop()
+            Assets.sounds["shoot_" .. string.lower(weapon.name)]:play()
+        end
         --Bullet instance creation
         local radians = math.pi*2 * (weapon.bulletSpread/360) --turn into radians
         for i = 1, weapon.bulletPerShot do

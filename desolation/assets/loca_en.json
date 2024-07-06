@@ -75,6 +75,7 @@
         "pistol": "Pistol",
         "revolver": "Revolver",
         "assaultrifle": "Assault Rifle",
-        "shotgun": "Shotgun"
+        "shotgun": "Shotgun",
+        "stolgard-pal": "Stolgard-PAL"
     }
 }

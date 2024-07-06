@@ -37,7 +37,7 @@ function robotScript:update(delta)
         robot.moveVelocity[1] = 140 * math.cos(angle)
         robot.moveVelocity[2] = 140 * math.sin(angle)
     end
-    if distance < 620 then
+    if distance < 620 and CurrentScene.player.health > 0 then
         self:humanoidShootWeapon(robot.inventory.weapons[robot.inventory.slot])
     end
 end

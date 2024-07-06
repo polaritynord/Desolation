@@ -13,7 +13,9 @@
         "screenShakeIntensity": 4.2,
         "ammoType": "light",
         "handRecoilIntensity":  15,
-        "shellColor": [0.74, 0.58, 0.31, 1]
+        "shellColor": [0.74, 0.58, 0.31, 1],
+        "fireLineColor": [0.92, 0.59, 0.2],
+        "fireLineWidth": 15
     },
 
     "Revolver": {
@@ -30,7 +32,9 @@
         "screenShakeIntensity": 4.2,
         "ammoType": "revolver",
         "handRecoilIntensity":  20,
-        "shellColor": [0.74, 0.58, 0.31, 1]
+        "shellColor": [0.74, 0.58, 0.31, 1],
+        "fireLineColor": [0.92, 0.59, 0.2],
+        "fireLineWidth": 15
     },
 
     "AssaultRifle": {
@@ -47,7 +51,9 @@
         "screenShakeIntensity": 4.8,
         "ammoType": "medium",
         "handRecoilIntensity":  17,
-        "shellColor": [0.74, 0.58, 0.31, 1]
+        "shellColor": [0.74, 0.58, 0.31, 1],
+        "fireLineColor": [0.92, 0.59, 0.2],
+        "fireLineWidth": 15
     },
 
     "Shotgun": {
@@ -64,8 +70,29 @@
         "screenShakeIntensity": 6.8,
         "ammoType": "shotgun",
         "handRecoilIntensity": 20,
-        "shellColor": [0.61, 0, 0, 1]
+        "shellColor": [0.61, 0, 0, 1],
+        "fireLineColor": [0.92, 0.59, 0.2],
+        "fireLineWidth": 15
     },
 
-    "WEAPONS_LIST": ["Pistol", "Revolver", "AssaultRifle", "Shotgun"]
+    "Stolgard-PAL": {
+        "weaponType": "laser",
+        "bulletSpeed": 3000,
+        "bulletDamage": 10,
+        "bulletSpread": 0,
+        "bulletPerShot": 1,
+        "reloadTime": 0.7,
+        "shootTime": 0.01,
+        "magSize": 100,
+        "bulletOffset": 65,
+        "recoil": 0.35,
+        "screenShakeIntensity": 4.2,
+        "ammoType": "light",
+        "handRecoilIntensity":  15,
+        "shellColor": [0.74, 0.58, 0.31, 1],
+        "fireLineColor": [0.25, 0.28, 1],
+        "fireLineWidth": 30
+    },
+
+    "WEAPONS_LIST": ["Pistol", "Revolver", "AssaultRifle", "Shotgun", "Stolgard-PAL"]
 }

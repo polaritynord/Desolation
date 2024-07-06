@@ -8,6 +8,7 @@ function particleComponent.new(parent)
         name = "particleComponent";
         particles = {};
         enabled = true;
+        layer = 3;
     }
 
     function component:newParticle(attributes)
@@ -28,7 +29,7 @@ function particleComponent.new(parent)
     end
 
     function component:update(delta)
-        if not self.enabled then return end
+        if not self.enabled or GamePaused then return end
         for i, particle in ipairs(self.particles) do
             --Particle despawning
             particle.timer = particle.timer + delta

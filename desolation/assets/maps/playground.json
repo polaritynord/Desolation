@@ -7,7 +7,7 @@
         "allowZoom": true,
         "beginnerInventory": {
             "weapons": [
-                ["Pistol", 13], ["Shotgun", 6], null
+                ["Pistol", 13], ["Shotgun", 6], ["Stolgard-PAL", 1021432140]
             ],
 
             "ammunition": []

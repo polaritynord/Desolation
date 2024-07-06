@@ -268,7 +268,10 @@ function playerScript:update(delta)
     local player = self.parent
     self:humanoidUpdate(delta, player)
 
-    if player.health <= 0 then return end
+    if player.health <= 0 then
+        player.moveVelocity = {0, 0}
+        return
+    end
     self:movement(delta, player)
     self:pointTowardsMouse(player)
     self:slotSwitching(player)

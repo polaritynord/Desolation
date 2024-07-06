@@ -29,6 +29,8 @@ function weaponManager:load()
         instance.ammoType = instanceData.ammoType
         instance.handRecoilIntensity = instanceData.handRecoilIntensity
         instance.shellColor = instanceData.shellColor
+        instance.fireLineColor = instanceData.fireLineColor
+        instance.fireLineWidth = instanceData.fireLineWidth
         self[instance.name] = instance
     end
 end
