@@ -1,7 +1,9 @@
 {
     "playerData": {
         "position": [0, 0],
-        "cameraPosition": [0, 0]
+        "cameraPosition": [0, 0],
+        "health": 100,
+        "armor": 0
     },
     "walls": [
         ["test_gray", [-10, -5], [20, 2]],

@@ -1,4 +1,6 @@
 local coreFuncs = require "coreFuncs"
+local robotLocationMarkers = require("desolation.components.robot_location_markers")
+local object = require("engine.object")
 local openareaManager = ENGINE_COMPONENTS.scriptComponent.new()
 
 function openareaManager:determineCratePos()
@@ -14,6 +16,9 @@ function openareaManager:determineCratePos()
                 if coreFuncs.pointDistance(prop.position, cratePos) < 150 then
                     temp = false
                 end
+            end
+            if coreFuncs.pointDistance(CurrentScene.player.position, cratePos) < 400 then
+                temp = false
             end
             if temp then return cratePos end
         end
@@ -79,6 +84,12 @@ function openareaManager:load()
     self.spawnCooldown = 0
     self.spawnTimer = 0
     self:setupUI()
+    --Add robot markers object to scene
+    local obj = object.new(CurrentScene.hud)
+    obj:addComponent(ENGINE_COMPONENTS.imageComponent.new(obj))
+    obj:addComponent(table.new(robotLocationMarkers))
+    obj.script:load()
+    CurrentScene.hud:addChild(obj)
     --Spawn beginning crates
     local beginningCrateAmount = 15
     for _ = 1, beginningCrateAmount do
@@ -131,7 +142,7 @@ function openareaManager:update(delta)
             self.waveTimer = 0
             self.spawnedEnemies = 0
             self.enemySpawnCount = 4 + (self.wave*(self.wave-1))/2
-            self.spawnCooldown = 3--TODO
+            self.spawnCooldown = 1--TODO
             ui.infinite.waveName.text = "--- WAVE " .. self.wave .. " ---"
             ui.infinite.waveDesc.text = "ELIMINATE ALL ROBOTS"
         end

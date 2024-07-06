@@ -3,7 +3,6 @@ local bulletLineRenderer = ENGINE_COMPONENTS.scriptComponent.new()
 
 local function drawLines(comp)
     love.graphics.setLineStyle("rough")
-    local camPos = CurrentScene.camera.position
     for _, line in ipairs(comp.parent.lines) do
         love.graphics.setColor(line[4])
         love.graphics.setLineWidth(line[3]*CurrentScene.camera.zoom)
@@ -12,6 +11,7 @@ local function drawLines(comp)
         love.graphics.line(
             pos1[1], pos1[2], pos2[1], pos2[2]
         )
+        love.graphics.setColor(1, 1, 1, 1)
     end
 end
 

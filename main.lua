@@ -190,7 +190,6 @@ function love.update(delta)
     CurrentScene:update(delta)
     updateUIOffset(delta)
     love.window.setVSync(Settings.vsync)
-    --collectgarbage()
 end
 
 function love.draw()

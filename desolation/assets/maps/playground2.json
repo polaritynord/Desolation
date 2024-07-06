@@ -1,7 +1,9 @@
 {
     "playerData": {
         "position": [100, 120],
-        "cameraPosition": [0, 100]
+        "cameraPosition": [0, 100],
+        "health": 100,
+        "armor": 0
     },
     "walls": [],
     "tiles": [
@@ -11,6 +13,13 @@
         ["prototype_green", -1, 0],
         ["prototype_green", 0, 0]
     ],
-    "props": [],
-    "items": []
+    "props": [
+        ["radio", [430, 120], 0, []]
+    ],
+    "items": [],
+    "assets": {
+        "images": [
+            ["tile_prototype_green", "desolation/assets/images/tiles/prototype_green.png"]
+        ]
+    }
 }
