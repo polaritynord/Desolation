@@ -80,18 +80,17 @@ function gameplayMenu:load()
             end
         }
     )
-    ui.sensivityText = ui:newTextLabel(
+    ui.experimentalPeekingText = ui:newTextLabel(
         {
-            text = Loca.gameplayMenu.sensivity;
             position = {0, 400};
+            text = "Experimental Peeking: ";
             size = 30;
         }
     )
-    ui.sensivitySlider = ui:newSlider(
+    ui.experimentalPeekingBox = ui:newCheckbox(
         {
-            position = {300, 405};
-            baseColor = {0.5, 0.5, 0.5, 1};
-            value = (Settings.sensivity-1)/3;
+            position = {400, 415};
+            toggled = Settings.experimental_peeking;
         }
     )
 end
@@ -116,7 +115,7 @@ function gameplayMenu:update(delta)
     Settings.screen_shake = ui.screenShakeBox.toggled
     Settings.always_sprint = ui.alwaysSprintBox.toggled
     Settings.curved_hud = ui.curvedHudBox.toggled
-    Settings.sensivity = ui.sensivitySlider.value+1
+    Settings.experimental_peeking = ui.experimentalPeekingBox.toggled
     ui.sprintTypeButton.buttonText = Loca.gameplayMenu[Settings.sprint_type]
 end
 

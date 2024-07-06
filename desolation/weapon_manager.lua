@@ -28,6 +28,7 @@ function weaponManager:load()
         instance.screenShakeIntensity = instanceData.screenShakeIntensity
         instance.ammoType = instanceData.ammoType
         instance.handRecoilIntensity = instanceData.handRecoilIntensity
+        instance.shellColor = instanceData.shellColor
         self[instance.name] = instance
     end
 end

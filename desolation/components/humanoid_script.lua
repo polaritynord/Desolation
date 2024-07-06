@@ -287,11 +287,13 @@ function humanoidScript:humanoidShootWeapon(weapon)
             CurrentScene.bulletLineRenderer.lines[#CurrentScene.bulletLineRenderer.lines+1] = newLine
         end
     end
-    --particles
+    --weapon flame particles
+    local shootParticles = CurrentScene.bullets.particleComponent
     if Settings.weapon_flame_particles then
-        local shootParticles = CurrentScene.bullets.particleComponent
         particleFuncs.createShootParticles(humanoid, shootParticles, humanoid.rotation)
     end
+    --bullet shell particles
+    particleFuncs.createBulletShellParticle(shootParticles, humanoid, weapon)
     --player stuff down here
     if humanoid.name ~= "player" then return end
     humanoid.handOffset = -weapon.handRecoilIntensity

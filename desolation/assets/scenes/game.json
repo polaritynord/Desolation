@@ -128,8 +128,6 @@
             ["weapon_assaultrifle", "desolation/assets/images/weapons/assault_rifle.png"],
             ["weapon_shotgun", "desolation/assets/images/weapons/shotgun.png"],
             ["weapon_grenade", "desolation/assets/images/hud/grenade_white.png"],
-
-            ["bullet", "desolation/assets/images/bullet.png"],
             
             ["hud_healthbar", "desolation/assets/images/hud/health_bar.png"],
             ["hud_ammo", "desolation/assets/images/hud/ammo.png"],

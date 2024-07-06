@@ -169,11 +169,11 @@ end
 
 local function updateUIOffset(delta)
     AltMenuOpen = (CurrentScene.devConsole and CurrentScene.devConsole.open) or (CurrentScene.settings and CurrentScene.settings.open) or
-                (CurrentScene.extras and CurrentScene.extras.open and CurrentScene.extras.selection ~= nil)
+                (CurrentScene.extras and CurrentScene.extras.open)
     --TODO this code is ass
     local x = (
         coreFuncs.boolToNum(AltMenuOpen) + coreFuncs.boolToNum(CurrentScene.settings and CurrentScene.settings.menu)
-        + coreFuncs.boolToNum(CurrentScene.extras and CurrentScene.extras.open)
+        + coreFuncs.boolToNum(CurrentScene.extras and CurrentScene.extras.open and CurrentScene.extras.selection ~= nil)
     )*-250
     MenuUIOffset = MenuUIOffset + (x-MenuUIOffset)*8*delta
 end

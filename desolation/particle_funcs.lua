@@ -131,4 +131,33 @@ function particleFuncs.createExplosionParticles(comp, position)
     end
 end
 
+function particleFuncs.createBulletShellParticle(comp, humanoid, weapon)
+    local color = weapon.shellColor
+    local d = math.uniform(0.8, 1)
+    local particle = comp:newParticle(
+        {
+            position = {
+                humanoid.position[1] + math.cos(humanoid.rotation)*weapon.bulletOffset/1.5,
+                humanoid.position[2] + math.sin(humanoid.rotation)*weapon.bulletOffset/1.5
+            };
+            rotation = humanoid.rotation + math.pi/2 + math.uniform(-math.pi/10, math.pi/10);
+            despawnTime = 10;
+            size = {8, 4};
+            color = {color[1]*d, color[2]*d, color[3]*d, 1};
+            update = function(particle, delta)
+                --rotate
+                particle.rotation = particle.rotation + particle.rotVelocity*delta
+                particle.rotVelocity = particle.rotVelocity + (-particle.rotVelocity)*8*delta
+                --move
+                particle.position[1] = particle.position[1] + math.cos(particle.realRot)*particle.velocity*delta
+                particle.position[2] = particle.position[2] + math.sin(particle.realRot)*particle.velocity*delta
+                particle.velocity = particle.velocity + (-particle.velocity)*8*delta
+            end;
+        }
+    )
+    particle.realRot = particle.rotation
+    particle.rotVelocity = 100
+    particle.velocity = math.uniform(600, 850)
+end
+
 return particleFuncs

@@ -7,7 +7,7 @@ function cameraController:idleCamera(delta, camera, player)
         return
     end
     self.idleTimer = self.idleTimer + delta
-    --if self.idleTimer < 3 then return end
+    --if self.idleTimer < 3 then return end (uncomment this if you dont want the camera sway to show up instantly after stopping)
 
     local speed = 1
     local intensity = 10
@@ -22,10 +22,13 @@ end
 function cameraController:movement(delta, camera, player)
     if GetGlobal("freecam") < 1 then
         --Non-freecam (follow player around)
-        local peekX = coreFuncs.boolToNum(love.mouse.isDown(2))*math.cos(player.rotation)*300
-        local peekY = coreFuncs.boolToNum(love.mouse.isDown(2))*math.sin(player.rotation)*300
-        local dx = player.position[1]+peekX - camera.position[1]
-        local dy = player.position[2]+peekY - camera.position[2]
+        local mx, my = coreFuncs.getRelativeMousePosition()
+        local dx = player.position[1] - camera.position[1]
+        local dy = player.position[2] - camera.position[2]
+        if Settings.experimental_peeking then
+            dx = dx +(mx-480)/10
+            dy = dy +(my-270)/10
+        end
         camera.position[1] = camera.position[1] + dx*8*delta
         camera.position[2] = camera.position[2] + dy*8*delta
     else

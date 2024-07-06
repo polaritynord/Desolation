@@ -56,12 +56,14 @@ function particleComponent.new(parent)
                     love.graphics.setColor(1, 1, 1, 1)
                 love.graphics.pop()
             elseif particle.type == "image" then
+                love.graphics.setColor(particle.color)
                 local src = particle.sourceImage
                 local width = src:getWidth() ;  local height = src:getHeight()
                 love.graphics.draw(
                     src, relativePos[1], relativePos[2], self.parent.rotation+particle.rotation,
                     particle.size[1]*camera.zoom, particle.size[2]*camera.zoom, width/2, height/2
                 )
+                love.graphics.setColor(1, 1, 1, 1)
             elseif particle.type == "circle" then
                 love.graphics.push()
                     love.graphics.setColor(particle.color)

@@ -26,7 +26,6 @@ function love.conf(t)
     t.window.width = 960 ; t.window.height = 540
     t.window.title = "DESOLATION"
     if table.contains(arg, "--no-vsync") then t.window.vsync = 0 end
-    t.window.resizable = false
     t.window.icon = "desolation/assets/images/icon.png"
     t.console = true
     ScreenWidth, ScreenHeight = 960, 540
