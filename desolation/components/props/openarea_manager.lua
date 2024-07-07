@@ -132,6 +132,7 @@ function openareaManager:load()
     CurrentScene.camera.zoom = 4
     CurrentScene.camera.script.zoomSmoothness = 2.3
     SetGlobal("p_speed", 200)
+    CurrentScene.gameOver.script:createInfiniteStatsElements()
 end
 
 function openareaManager:update(delta)
@@ -239,6 +240,9 @@ function openareaManager:update(delta)
     if ui.infinite.waveDesc.color[4] < 0 then ui.infinite.waveDesc.color[4] = 0 end
     if ui.infinite.waveName.color[4] > 1 then ui.infinite.waveName.color[4] = 1 end
     if ui.infinite.waveDesc.color[4] > 1 then ui.infinite.waveDesc.color[4] = 1 end
+    --If the player is dead, show stats
+    if CurrentScene.player.health > 0 then return end
+    CurrentScene.gameOver.script:updateInfiniteStats(delta)
 end
 
 return openareaManager

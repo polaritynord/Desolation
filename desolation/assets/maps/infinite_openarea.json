@@ -11,9 +11,9 @@
                 ["Pistol", 13], ["AssaultRifle", 30], ["Shotgun", 6]
             ],
             "ammunition": [
-                ["light", 52],
-                ["medium", 120],
-                ["shotgun", 30]
+                ["light", 39],
+                ["medium", 0],
+                ["shotgun", 0]
             ]
         },
         "health": 100,

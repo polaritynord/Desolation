@@ -41,7 +41,14 @@ end
 function itemEventFuncs.ammoPickup(item)
     local player = CurrentScene.player
     local ammoType = string.sub(item.name, 6, #item.name)
-    player.inventory.ammunition[ammoType] = player.inventory.ammunition[ammoType] + 20
+    --TODO move this to items.json
+    local amounts = {
+        light = 13;
+        medium = 30;
+        shotgun = 6;
+        revolver = 6;
+    }
+    player.inventory.ammunition[ammoType] = player.inventory.ammunition[ammoType] + amounts[ammoType]
     item.gettingPickedUp = true
     --play sound
     local playerSounds = player.soundManager.script

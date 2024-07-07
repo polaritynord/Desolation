@@ -16,7 +16,23 @@ function robotScript:load()
     self:humanoidSetup()
     robot.imageComponent.color = {0.4, 0.4, 0.4, 1}
     robot.hand.imageComponent.color = robot.imageComponent.color
-    local weapon = weaponManager.Pistol.new()
+    --Determine weapon
+    local name = "Pistol"
+    local wave = CurrentScene.props.openarea_manager.script.wave --TODO move this wave variable to somewhere else
+    if wave > 6 then
+        local c = math.random()
+        if c < 0.25 then
+            name = "Shotgun"
+        elseif c < 0.55 then
+            name = "AssaultRifle"
+        end
+    elseif wave > 3 then
+        local c = math.random()
+        if c < 0.25 then
+            name = "Shotgun"
+        end
+    end
+    local weapon = weaponManager[name].new()
     weapon.magAmmo = 100
     weapon.bulletDamage = weapon.bulletDamage * (CurrentScene.difficulty+1)/4
     robot.inventory.weapons[1] = weapon

@@ -45,7 +45,13 @@
         "wave": "WAVE",
         "eliminateAllRobots": "ELIMINATE ALL ROBOTS",
         "waveClear": "WAVE CLEARED",
-        "wavePrepare": "PREPARE FOR THE NEXT WAVE"
+        "wavePrepare": "PREPARE FOR THE NEXT WAVE",
+        "statsTime": "Time Survived: ",
+        "statsWaves": "Waves Cleared: ",
+        "statsKills": "Robots neutralized: ",
+        "statsCratesBroken": "Crates Broken: ",
+        "statsExplosions": "Barrels Exploded: ",
+        "statsAccuracy": "Accuracy: "
     },
     "gameplayMenu": {
         "cameraSway": "Camera Sway: ",
