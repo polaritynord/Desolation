@@ -17,6 +17,7 @@ function assets:unloadSceneAssets()
     assets.images = {}
     --remove sounds
     for k, v in pairs(assets.sounds) do
+        assets.sounds[k]:stop()
         assets.sounds[k]:release()
         assets.sounds[k] = nil
     end
@@ -32,6 +33,7 @@ function assets:unloadMapAssets()
     assets.mapImages = {}
     --remove sounds
     for k, v in pairs(assets.mapSounds) do
+        assets.mapSounds[k]:stop()
         assets.mapSounds[k]:release()
         assets.mapSounds[k] = nil
     end

@@ -92,6 +92,10 @@
         "images": [
             ["logo", "desolation/assets/images/logo.png"],
             ["nord_transparent", "engine/assets/icon_transparent.png"]
+        ],
+
+        "sounds": [
+            ["loop_menu", "desolation/assets/sounds/ost/loop_menu.wav", "stream"]
         ]
     }
 }

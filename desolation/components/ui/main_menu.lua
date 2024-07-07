@@ -101,11 +101,18 @@ function mainMenu:load()
         CurrentScene.mapCreator.script:loadMap("desolation/assets/maps/" .. Settings.menu_background .. ".json")
     end
     CurrentScene.uiShader = moonshine.chain(960, 540, moonshine.effects.glow)
+    CurrentScene.gameShader.chain(moonshine.effects.gaussianblur)
+    CurrentScene.gameShader.gaussianblur.sigma = 2.8
     CurrentScene.uiShader.glow.strength = 5
     CurrentScene.uiShader.glow.min_luma = 0.1
+    Assets.sounds["loop_menu"]:setLooping(true)
+    Assets.sounds["loop_menu"]:play()
 end
 
 function mainMenu:update(delta)
+    --Set OST volume
+    Assets.sounds["loop_menu"]:setVolume(Settings.vol_master * Settings.vol_music)
+    --Other stuff
     local ui = self.parent.UIComponent
     --UI Ofsetting
     self.parent.position[1] = MenuUIOffset
