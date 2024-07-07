@@ -16,9 +16,12 @@ function robotScript:load()
     self:humanoidSetup()
     robot.imageComponent.color = {0.4, 0.4, 0.4, 1}
     robot.hand.imageComponent.color = robot.imageComponent.color
-    robot.inventory.weapons[1] = weaponManager.Pistol.new()
-    robot.inventory.weapons[1].magAmmo = 100
-    robot.health = 40
+    local weapon = weaponManager.Pistol.new()
+    weapon.magAmmo = 100
+    weapon.bulletDamage = weapon.bulletDamage * (CurrentScene.difficulty+1)/4
+    robot.inventory.weapons[1] = weapon
+    robot.health = 50 * (CurrentScene.difficulty+1)/4
+    robot.lootDropped = false
 end
 
 function robotScript:update(delta)
@@ -26,7 +29,28 @@ function robotScript:update(delta)
     local robot = self.parent
     self:humanoidUpdate(delta, robot)
 
-    if robot.health <= 0 then return end
+    if robot.health <= 0 then
+        --***Drop loot***
+        if not robot.lootDropped then
+            local itemData = {
+                "ammo_light", table.new(robot.position), math.uniform(0, 360)
+            }
+            --Determine item type
+            local n = math.random()
+            if n < 0.25 then
+                itemData[1] = "ammo_medium"
+            elseif n >= 0.25 and n < 0.45 then
+                itemData[1] = "ammo_shotgun"
+            elseif n >= 0.45 and n < 0.57 then
+                itemData[1] = "medkit"
+            elseif n >= 0.57 and n < 0.7 then
+                itemData[1] = "battery"
+            end
+            CurrentScene.mapCreator.script:spawnItem(itemData)
+        end
+        robot.lootDropped = true
+        return
+    end
     self:pointTowardsPlayer(robot)
     robot.shootTimer = robot.shootTimer + delta/3
     local distance = coreFuncs.pointDistance(robot.position, CurrentScene.player.position)
@@ -36,9 +60,12 @@ function robotScript:update(delta)
         local angle = math.atan2(dy, dx)
         robot.moveVelocity[1] = 140 * math.cos(angle)
         robot.moveVelocity[2] = 140 * math.sin(angle)
+    else
+        robot.moveVelocity = {0, 0}
     end
     if distance < 620 and CurrentScene.player.health > 0 then
-        self:humanoidShootWeapon(robot.inventory.weapons[robot.inventory.slot])
+        local weapon = robot.inventory.weapons[robot.inventory.slot]
+        self:humanoidShootWeapon(weapon)
     end
 end
 

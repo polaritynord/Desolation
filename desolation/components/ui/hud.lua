@@ -3,6 +3,34 @@ local moonshine = require("engine.lib.moonshine")
 
 local hud = ENGINE_COMPONENTS.scriptComponent.new()
 
+local whiteShader = love.graphics.newShader[[
+extern float WhiteFactor;
+
+vec4 effect(vec4 vcolor, Image tex, vec2 texcoord, vec2 pixcoord)
+{
+    vec4 outputcolor = Texel(tex, texcoord) * vcolor;
+    outputcolor.rgb += vec3(WhiteFactor);
+    return outputcolor;
+}
+]]
+
+local function whiteIconDraw(element)
+    local src = element.source
+    if src == nil then return end
+    local width = src:getWidth() ;  local height = src:getHeight()
+    local pos = coreFuncs.getRelativeElementPosition(element.position, element.parentComp)
+
+    love.graphics.setShader(whiteShader)
+    love.graphics.setColor(element.color[1], element.color[2], element.color[3], element.color[4]*element.parentComp.alpha)
+    whiteShader:send("WhiteFactor", 1)
+    love.graphics.draw(
+        src, pos[1], pos[2], element.rotation,
+        element.scale[1], element.scale[2], width/2, height/2
+    )
+    love.graphics.setColor(1, 1, 1, 1)
+    love.graphics.setShader(nil)
+end
+
 function hud.customDraw(component)
     if not component.enabled then return end
     if Settings.curved_hud then
@@ -65,6 +93,7 @@ function hud:load()
             scale = {-3.4, 3.4};
         }
     )
+    ui.weaponImg.draw = whiteIconDraw
     ui.weaponName = ui:newTextLabel(
         {
             text = "Pistol";

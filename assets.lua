@@ -42,9 +42,6 @@ function assets.load()
     assets.defaultSounds.button_click = love.audio.newSource("desolation/assets/sounds/button_click.wav", "static")
     assets.defaultSounds.button_hover = love.audio.newSource("desolation/assets/sounds/button_hover.wav", "static")
     assets.defaultImages.missing_texture = love.graphics.newImage("engine/assets/missing_texture.png")
-    assets.cursors = {
-        combat = love.graphics.newImage("desolation/assets/images/cursor_combat.png");
-    };
     --[[if true then return end
     assets.images = {
         player = {

@@ -118,6 +118,9 @@ function UIComponent:new(parent)
             instance2.baseSize = attributes.baseSize or instance2.baseSize
             instance2.baseColor = attributes.baseColor or instance2.baseColor
             instance2.stickColor = attributes.stickColor or instance2.stickColor
+            if attributes.valueText ~= nil then
+                instance2.valueText = attributes.valueText
+            end
             instance2.value = attributes.value or instance2.value
         end
         instance2.parentComp = self

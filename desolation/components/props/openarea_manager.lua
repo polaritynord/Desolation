@@ -36,7 +36,7 @@ function openareaManager:determineRobotPos()
     }
     while true do
         local d = coreFuncs.pointDistance(robotPos, playerPos)
-        if d > 300 then
+        if d > 600 then
             local temp = true
             for _, prop in ipairs(CurrentScene.props.tree) do
                 if coreFuncs.pointDistance(prop.position, robotPos) < 70 then
@@ -92,8 +92,7 @@ function openareaManager:load()
     obj.script:load()
     CurrentScene.hud:addChild(obj)
     --Spawn beginning crates
-    local beginningCrateAmount = 15
-    for _ = 1, beginningCrateAmount do
+    for _ = 1, CurrentScene.amounts.crate do
         local cratePos = self:determineCratePos()
         local crateType = "crate"
         if math.random(0, 6) <= 3 then
@@ -102,14 +101,19 @@ function openareaManager:load()
         local propData = {
             crateType, cratePos, math.uniform(0, math.pi*2),
             {
-                {"loot", {"dynamic_loot"}}
+                {"loot", {}}
             }
         }
+        local s = math.random()
+        if s < 0.2 then
+            propData[4][1][2][#propData[4][1][2]+1] = "medkit"
+        elseif s >= 0.2 and s < 0.3 then
+            propData[4][1][2][#propData[4][1][2]+1] = "battery"
+        end
         CurrentScene.mapCreator.script:spawnProp(propData)
     end
     --Spawn beginning barrels
-    local beginningBarrelAmount = 9
-    for _ = 1, beginningBarrelAmount do
+    for _ = 1, CurrentScene.amounts.barrel do
         local cratePos = self:determineCratePos()
         local propData = {
             "barrel", cratePos, math.uniform(0, math.pi*2), {}
@@ -117,8 +121,7 @@ function openareaManager:load()
         CurrentScene.mapCreator.script:spawnProp(propData)
     end
     --Spawn beginning explosive barrels
-    local beginningExplosiveBarrelAmount = 6
-    for _ = 1, beginningExplosiveBarrelAmount do
+    for _ = 1, CurrentScene.amounts.expBarrel do
         local cratePos = self:determineCratePos()
         local propData = {
             "explosive_barrel", cratePos, math.uniform(0, math.pi*2), {}
@@ -143,7 +146,7 @@ function openareaManager:update(delta)
             self.waveTimer = 0
             self.spawnedEnemies = 0
             self.enemySpawnCount = 4 + (self.wave*(self.wave-1))/2
-            self.spawnCooldown = 1--TODO
+            self.spawnCooldown = math.uniform(2.5, 3.2)
             ui.infinite.waveName.text = "--- " .. Loca.infiniteMode.wave .. " " .. self.wave .. " ---"
             ui.infinite.waveDesc.text = Loca.infiniteMode.eliminateAllRobots
         end
@@ -157,6 +160,7 @@ function openareaManager:update(delta)
                 CurrentScene.mapCreator.script:spawnNPC(robotData)
                 self.spawnTimer = 0
                 self.spawnedEnemies = self.spawnedEnemies + 1
+                self.spawnCooldown = math.uniform(2.5, 3.2)
             end
         else
             --Wait for player to clear all enemies
@@ -180,12 +184,6 @@ function openareaManager:update(delta)
                     player.armor = player.armor + 25
                     CurrentScene.gameShaders.script.blueOffset = 255
                     if player.armor > 100 then player.armor = 100 end
-                end
-                for _, weapon in ipairs(player.inventory.weapons) do
-                    if weapon == nil then goto skip end
-                    player.inventory.ammunition[weapon.ammoType] = player.inventory.ammunition[weapon.ammoType] + weapon.magAmmo
-                    itemEventFuncs.createHUDNotif("hud_acquire_ammo")
-                    ::skip::
                 end
             end
         end

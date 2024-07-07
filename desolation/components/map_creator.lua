@@ -10,6 +10,22 @@ local coreFuncs = require("coreFuncs")
 
 local mapCreator = ENGINE_COMPONENTS.scriptComponent.new()
 
+function mapCreator:spawnItem(v)
+    local item = object.new(CurrentScene.items)
+    item.name = v[1]
+    item:addComponent(table.new(itemScript))
+    item.position = v[2]
+    item.rotation = math.pi*2 * (v[3]/360)
+    item.scale = table.new(self.parent.itemData[item.name].scale)
+    item.pickupEvent = itemEventFuncs[self.parent.itemData[item.name].pickupEvent]
+    --weapon data
+    if item.name == "weapon" then
+        item.weaponData = weaponManager[v[4]].new()
+    end
+    item.script:load()
+    CurrentScene.items:addChild(item)
+end
+
 function mapCreator:spawnProp(v)
     local propData = self.parent.propData
     local prop = object.new(CurrentScene.props)
@@ -95,19 +111,7 @@ function mapCreator:loadMap(path)
     if data.items ~= nil then
         --load items
         for _, v in ipairs(data.items) do
-            local item = object.new(CurrentScene.items)
-            item.name = v[1]
-            item:addComponent(table.new(itemScript))
-            item.position = v[2]
-            item.rotation = math.pi*2 * (v[3]/360)
-            item.scale = table.new(self.parent.itemData[item.name].scale)
-            item.pickupEvent = itemEventFuncs[self.parent.itemData[item.name].pickupEvent]
-            --weapon data
-            if item.name == "weapon" then
-                item.weaponData = weaponManager[v[4]].new()
-            end
-            item.script:load()
-            CurrentScene.items:addChild(item)
+            self:spawnItem(v)
         end
     end
     --load walls

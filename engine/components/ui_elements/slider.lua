@@ -12,6 +12,7 @@ function slider.new()
         value = 0;
         enabled = true;
         font = "disposable-droid";
+        valueText = true;
     }
 
     function instance:update()
@@ -36,6 +37,7 @@ function slider.new()
         love.graphics.setColor(self.stickColor[1], self.stickColor[2], self.stickColor[3], self.stickColor[4]*self.parentComp.alpha)
         love.graphics.rectangle("fill", pos[1], pos[2], self.value*self.baseSize[1], self.baseSize[2])
         --draw value percentage
+        if not self.valueText then return end
         love.graphics.setColor(1, 1, 1, 1)
         SetFont("desolation/assets/fonts/" .. self.font .. ".ttf", 12)
         love.graphics.printf(math.floor(self.value*100) .. "%", pos[1], pos[2], 1000, "left")

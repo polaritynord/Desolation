@@ -29,6 +29,16 @@
         "infiniteDesc": "Survive as long as you can.",
         "infiniteDifficulty": "Difficulty: ",
         "infiniteDifficulties": ["easy", "medium", "hard", "extreme", "ultra"],
+        "difficultyDescs": [
+            "I don't know if it can get easier than this.",
+            "Eh, a little more difficult.",
+            "Standard difficulty. Fair fight between you and the robots.",
+            "Designed for the elites only.",
+            "May god have mercy on your soul"
+        ],
+        "crateAmount": "Crate Amount: ",
+        "barrelAmount": "Barrel Amount: ",
+        "expBarrelAmount": "Explosive Barrel Amount: ",
         "startGame": "Start Game"
     },
     "infiniteMode": {

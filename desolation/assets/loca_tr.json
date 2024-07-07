@@ -29,6 +29,16 @@
         "infiniteDesc": "Olabildigince hayatta kal.",
         "infiniteDifficulty": "Zorluk: ",
         "infiniteDifficulties": ["kolay", "orta", "zor", "ekstrem", "ultra"],
+        "difficultyDescs": [
+            "Bundan daha kolay olabilir mi bilmiyorum.",
+            "Eh, azicik daha zor.",
+            "Standart zorluk. Robotlar ve sen arasinda adil bir savas.",
+            "Sadece elitler icin tasarlandi.",
+            "Tanrinin merhameti uzerine olsun"
+        ],
+        "crateAmount": "Kutu Miktari: ",
+        "barrelAmount": "Varil Miktari: ",
+        "expBarrelAmount": "Patlayici Varil Miktari: ",
         "startGame": "Oyunu Baslat"
     },
     "infiniteMode": {

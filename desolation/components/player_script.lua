@@ -238,9 +238,13 @@ function playerScript:reloadingWeapon(delta, player)
         end
     else
         if InputManager:isPressed("reload") then
-            local playerSounds = player.soundManager.script
             if weapon.weaponType == "auto" then
-                playerSounds:playStopSound(Assets.sounds["reload_" .. string.lower(weapon.name)])
+                love.audio.setVolume(Settings.vol_master * Settings.vol_world)
+                local src = Assets.sounds["reload_" .. string.lower(weapon.name)]
+                if src ~= nil then
+                    src:stop()
+                    src:play()
+                end
             end
             player.reloading = true
             player.reloadTimer = 0
