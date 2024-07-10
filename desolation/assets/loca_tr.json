@@ -61,7 +61,8 @@
         "sensivity": "Hassasiyet: ",
         "sprintType": "Kosma Tipi: ",
         "hold": "BASILI TUT",
-        "toggle": "AC/KAPA"
+        "toggle": "AC/KAPA",
+        "autoPickupLoot": "Otomatik Item Toplama: "
     },
     "videoMenu": {
         "vsync": "VSync: ",

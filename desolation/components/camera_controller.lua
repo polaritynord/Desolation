@@ -25,9 +25,10 @@ function cameraController:movement(delta, camera, player)
         local mx, my = coreFuncs.getRelativeMousePosition()
         local dx = player.position[1] - camera.position[1]
         local dy = player.position[2] - camera.position[2]
-        if Settings.experimental_peeking then
-            dx = dx +(mx-480)/10
-            dy = dy +(my-270)/10
+        local weapon = player.inventory.weapons[player.inventory.slot]
+        if Settings.experimental_peeking and weapon ~= nil then
+            dx = dx + (mx-480)*weapon.aimRange
+            dy = dy + (my-270)*weapon.aimRange
         end
         camera.position[1] = camera.position[1] + dx*8*delta
         camera.position[2] = camera.position[2] + dy*8*delta

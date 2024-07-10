@@ -61,7 +61,8 @@
         "sensivity": "Sensivity: ",
         "sprintType": "Sprint Type: ",
         "hold": "HOLD",
-        "toggle": "TOGGLE"
+        "toggle": "TOGGLE",
+        "autoPickupLoot": "Automatically Pick Up Loot: "
     },
     "videoMenu": {
         "vsync": "VSync: ",

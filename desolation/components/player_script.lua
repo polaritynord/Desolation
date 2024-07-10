@@ -52,8 +52,9 @@ function playerScript:movement(delta, player)
             local playerSounds = player.soundManager.script
             playerSounds:playStopSound(Assets.sounds["sprint"])
             player.sprintSoundPlayed = true
+            player.stamina = player.stamina - 10
         end
-        if GetGlobal("inf_stamina") < 1 then player.stamina = player.stamina - 25*delta end
+        if GetGlobal("inf_stamina") < 1 then player.stamina = player.stamina - GetGlobal("stamina_drain")*delta end
         speed = speed * 1.6
         --make a sprint cooldown
         if player.stamina < 0 then
@@ -70,7 +71,7 @@ function playerScript:movement(delta, player)
     player.moveVelocity[2] = player.moveVelocity[2] * speed
     --Recharge stamina
     if player.sprinting then return end
-    player.stamina = player.stamina + 18*delta
+    player.stamina = player.stamina + GetGlobal("stamina_fill")*delta
     if player.stamina > 100 then player.stamina = 100 end
 end
 

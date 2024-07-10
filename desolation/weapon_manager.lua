@@ -31,6 +31,7 @@ function weaponManager:load()
         instance.shellColor = instanceData.shellColor
         instance.fireLineColor = instanceData.fireLineColor
         instance.fireLineWidth = instanceData.fireLineWidth
+        instance.aimRange = instanceData.aimRange
         self[instance.name] = instance
     end
 end

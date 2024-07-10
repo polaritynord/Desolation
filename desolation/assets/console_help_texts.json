@@ -2,6 +2,7 @@
     "titles": [
         "cheats", "freecam", "p_speed", "s_vol_master", "s_vol_music", "s_vol_sfx",
         "g_vignette", "s_language", "noclip", "god", "invisible", "inf_stamina", "slippiness",
+        "stamina_fill", "stamina_drain",
         "assign", "run_script", "give_ammo", "clear", "give", "info", "bind", "map", "maps",
         "hurtme", "hurtarmor", "restart"
     ],
@@ -20,6 +21,8 @@
         "(bool) invisible: Makes NPC's unable to detect the presence of player.",
         "(bool) inf_stamina: Enables endless sprinting.",
         "(number) slippiness: Determines how slippery the player movement is.",
+        "(number) stamina_fill: How fast the stamina energy fills up to 100.",
+        "(number) stamina_drain: How fast the stamina energy drains during sprinting.",
         
         "assign [key] [command]:\n\tAssigns a console command to a key to instantly run it in-game.",
         "run_script [file_path]:\n\tRuns commands at the given text file.",

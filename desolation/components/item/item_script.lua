@@ -99,7 +99,7 @@ function itemScript:update(delta)
     item.scale[1] = item.scale[1] + (item.defaultScale[1]*1.4-item.scale[1])*8*delta
     item.scale[2] = item.scale[2] + (item.defaultScale[2]*1.4-item.scale[2])*8*delta
     --Picking up
-    if InputManager:isPressed("interact") and not item.gettingPickedUp and player.nearItem == item then
+    if (InputManager:isPressed("interact") or (item.name ~= "weapon" and Settings.auto_pick_loot)) and not item.gettingPickedUp and player.nearItem == item then
         if item.pickupEvent ~= nil then
             player.nearItem = nil
             item.pickupEvent(item)

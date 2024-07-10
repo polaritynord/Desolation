@@ -20,5 +20,6 @@
     "first_time_playing": true,
     "sprint_type": "hold",
     "menu_background": "dyn_menu",
-    "experimental_peeking": true
+    "experimental_peeking": true,
+    "auto_pick_loot": true
 }

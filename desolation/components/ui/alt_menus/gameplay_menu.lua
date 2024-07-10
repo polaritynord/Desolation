@@ -93,6 +93,19 @@ function gameplayMenu:load()
             toggled = Settings.experimental_peeking;
         }
     )
+    ui.itemsPickupText = ui:newTextLabel(
+        {
+            position = {0, 440};
+            text = Loca.gameplayMenu.autoPickupLoot;
+            size = 30;
+        }
+    )
+    ui.itemsPickupBox = ui:newCheckbox(
+        {
+            position = {400, 455};
+            toggled = Settings.auto_pick_loot;
+        }
+    )
 end
 
 function gameplayMenu:update(delta)
@@ -116,6 +129,7 @@ function gameplayMenu:update(delta)
     Settings.always_sprint = ui.alwaysSprintBox.toggled
     Settings.curved_hud = ui.curvedHudBox.toggled
     Settings.experimental_peeking = ui.experimentalPeekingBox.toggled
+    Settings.auto_pick_loot = ui.itemsPickupBox.toggled
     ui.sprintTypeButton.buttonText = Loca.gameplayMenu[Settings.sprint_type]
 end
 

@@ -2,7 +2,7 @@
     "Pistol": {
         "weaponType": "auto",
         "bulletSpeed": 3000,
-        "bulletDamage": 10,
+        "bulletDamage": 16,
         "bulletSpread": 0.07,
         "bulletPerShot": 1,
         "reloadTime": 0.7,
@@ -15,7 +15,8 @@
         "handRecoilIntensity":  15,
         "shellColor": [0.74, 0.58, 0.31, 1],
         "fireLineColor": [0.92, 0.59, 0.2],
-        "fireLineWidth": 15
+        "fireLineWidth": 15,
+        "aimRange": 0.1
     },
 
     "Revolver": {
@@ -34,7 +35,8 @@
         "handRecoilIntensity":  20,
         "shellColor": [0.74, 0.58, 0.31, 1],
         "fireLineColor": [0.92, 0.59, 0.2],
-        "fireLineWidth": 15
+        "fireLineWidth": 15,
+        "aimRange": 0.1
     },
 
     "AssaultRifle": {
@@ -53,7 +55,8 @@
         "handRecoilIntensity":  17,
         "shellColor": [0.74, 0.58, 0.31, 1],
         "fireLineColor": [0.92, 0.59, 0.2],
-        "fireLineWidth": 15
+        "fireLineWidth": 15,
+        "aimRange": 0.1
     },
 
     "Shotgun": {
@@ -72,7 +75,8 @@
         "handRecoilIntensity": 20,
         "shellColor": [0.61, 0, 0, 1],
         "fireLineColor": [0.92, 0.59, 0.2],
-        "fireLineWidth": 15
+        "fireLineWidth": 15,
+        "aimRange": 0.1
     },
 
     "Stolgard-PAL": {
@@ -91,7 +95,8 @@
         "handRecoilIntensity":  15,
         "shellColor": [0.74, 0.58, 0.31, 1],
         "fireLineColor": [0.25, 0.28, 1],
-        "fireLineWidth": 30
+        "fireLineWidth": 30,
+        "aimRange": 0.1
     },
 
     "WEAPONS_LIST": ["Pistol", "Revolver", "AssaultRifle", "Shotgun", "Stolgard-PAL"]
