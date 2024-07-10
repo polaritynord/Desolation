@@ -30,7 +30,7 @@
         "infiniteDifficulty": "Difficulty: ",
         "infiniteDifficulties": ["easy", "medium", "hard", "extreme", "ultra"],
         "difficultyDescs": [
-            "I don't know if it can get easier than this.",
+            "I don't know if it can get any easier than this.",
             "Eh, a little more difficult.",
             "Standard difficulty. Fair fight between you and the robots.",
             "Designed for the elites only.",
@@ -68,7 +68,7 @@
         "vignette": "Vignette: ",
         "brightness": "Brightness: ",
         "weaponFlameParticles": "Weapon Flame Particles: ",
-        "playerTrailParticles": "Player Trail Particles: ",
+        "bulletShellParticles": "Bullet Shell Particles: ",
         "destructionParticles": "Destruction Particles: ",
         "explosionParticles": "Explosion Particles: "
     },

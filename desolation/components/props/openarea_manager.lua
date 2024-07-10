@@ -76,7 +76,7 @@ end
 
 function openareaManager:load()
     self.wave = 1
-    self.waveTimer = 14
+    self.waveTimer = 9
     self.wavePrep = true
     self.newWaveSoundPlayed = true
     self.clearWaveSoundPlayed = true
@@ -141,7 +141,7 @@ function openareaManager:update(delta)
 
     self.waveTimer = self.waveTimer + delta
     if self.wavePrep then
-        if self.waveTimer > 15 then
+        if self.waveTimer > 10 then
             self.newWaveSoundPlayed = false
             self.wavePrep = false
             self.waveTimer = 0

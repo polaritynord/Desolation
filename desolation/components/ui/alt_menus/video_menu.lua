@@ -60,17 +60,17 @@ function videoMenu:load()
             toggled = Settings.weapon_flame_particles;
         }
     )
-    ui.playerTrailText = ui:newTextLabel(
+    ui.bulletShellText = ui:newTextLabel(
         {
-            text = Loca.videoMenu.playerTrailParticles;
+            text = Loca.videoMenu.bulletShellParticles;
             position = {0, 320};
             size = 30;
         }
     )
-    ui.playerTrailBox = ui:newCheckbox(
+    ui.bulletShellBox = ui:newCheckbox(
         {
             position = {400, 335};
-            toggled = Settings.player_trail_particles;
+            toggled = Settings.bullet_shell_particles;
         }
     )
     ui.destructionParticlesText = ui:newTextLabel(
@@ -120,12 +120,10 @@ function videoMenu:update(delta)
     Settings.vsync = ui.vsyncBox.toggled
     Settings.vignette = ui.vignetteBox.toggled
     Settings.weapon_flame_particles = ui.weaponParticlesBox.toggled
-    Settings.player_trail_particles = ui.playerTrailBox.toggled
+    Settings.bullet_shell_particles = ui.bulletShellBox.toggled
     Settings.destruction_particles = ui.destructionParticlesBox.toggled
     Settings.explosion_particles = ui.explosionParticlesBox.toggled
     --Settings.brightness = ui.brightnessSlider.value
-
-    love.window.setVSync(Settings.vsync)
 end
 
 return videoMenu

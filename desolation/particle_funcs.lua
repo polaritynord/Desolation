@@ -132,6 +132,7 @@ function particleFuncs.createExplosionParticles(comp, position)
 end
 
 function particleFuncs.createBulletShellParticle(comp, humanoid, weapon)
+    if not Settings.bullet_shell_particles then return end
     local color = weapon.shellColor
     local d = math.uniform(0.8, 1)
     local particle = comp:newParticle(

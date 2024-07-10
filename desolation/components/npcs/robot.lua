@@ -21,15 +21,15 @@ function robotScript:load()
     local wave = CurrentScene.props.openarea_manager.script.wave --TODO move this wave variable to somewhere else
     if wave > 6 then
         local c = math.random()
-        if c < 0.25 then
-            name = "Shotgun"
-        elseif c < 0.55 then
+        if c < 0.35 then
             name = "AssaultRifle"
+        elseif c < 0.85 then
+            name = "Shotgun"
         end
     elseif wave > 3 then
         local c = math.random()
-        if c < 0.25 then
-            name = "Shotgun"
+        if c < 0.45 then
+            name = "AssaultRifle"
         end
     end
     local weapon = weaponManager[name].new()

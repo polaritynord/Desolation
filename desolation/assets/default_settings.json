@@ -9,7 +9,7 @@
     "language": "en",
     "vsync": true,
     "weapon_flame_particles": true,
-    "player_trail_particles": true,
+    "bullet_shell_particles": true,
     "destruction_particles": true,
     "explosion_particles": true,
     "bullet_holes": false,

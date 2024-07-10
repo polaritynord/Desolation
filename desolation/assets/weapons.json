@@ -59,11 +59,11 @@
     "Shotgun": {
         "weaponType": "shotgun",
         "bulletSpeed": 3000,
-        "bulletDamage": 30,
+        "bulletDamage": 17,
         "bulletSpread": 20,
         "bulletPerShot": 3,
         "reloadTime": 0.35,
-        "shootTime": 0.7,
+        "shootTime": 0.6,
         "magSize": 6,
         "bulletOffset": 65,
         "recoil": 0.8,

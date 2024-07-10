@@ -189,7 +189,7 @@ end
 
 function love.update(delta)
     ScreenWidth, ScreenHeight = love.graphics.getDimensions()
-    if not CurrentScene then return end
+    if CurrentScene == nil then return end
     CurrentScene:update(delta)
     updateUIOffset(delta)
     love.window.setVSync(Settings.vsync)

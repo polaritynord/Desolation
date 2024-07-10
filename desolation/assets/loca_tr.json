@@ -68,7 +68,7 @@
         "vignette": "Ekran Karartisi: ",
         "brightness": "Parlaklik: ",
         "weaponFlameParticles": "Silah Ates Parcaciklari: ",
-        "playerTrailParticles": "Oyuncu Iz Parcaciklari: ",
+        "bulletShellParticles": "Mermi Kovani Parcaciklari: ",
         "destructionParticles": "Yikim Parcaciklari: ",
         "explosionParticles": "Patlama Parcaciklari: "
     },
