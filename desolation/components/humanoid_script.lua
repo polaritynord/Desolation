@@ -110,6 +110,11 @@ function humanoidScript:damage(amount, sourcePosition)
         end
     end
     --damage humanoid
+    if humanoid.armor > 0 then
+        local armorReducePower = (humanoid.armor/70)*2
+        if armorReducePower < 1 then armorReducePower = 1 end
+        amount = amount / armorReducePower
+    end
     if humanoid.armor > amount then
         humanoid.armor = humanoid.armor - amount
         return

@@ -112,6 +112,11 @@
         [
             "gameShaders",
             ["desolation/components/game_shaders"]
+        ],
+
+        [
+            "cursor",
+            ["imageComponent", "desolation/components/game_cursor_script"]
         ]
     ],
 
@@ -136,7 +141,9 @@
             ["hud_acquire_battery", "desolation/assets/images/hud/acquire_battery.png"],
             ["hud_acquire_ammo", "desolation/assets/images/hud/acquire_ammo.png"],
             ["hud_item_pickup", "desolation/assets/images/hud/item_pickup.png"],
-            ["hud_hitmarker", "desolation/assets/images/hud/hitmarker.png"]
+            ["hud_hitmarker", "desolation/assets/images/hud/hitmarker.png"],
+
+            ["cursor_combat", "desolation/assets/images/cursor_combat.png"]
         ],
 
         "sounds": [

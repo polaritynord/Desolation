@@ -34,7 +34,7 @@ function robotScript:load()
     end
     local weapon = weaponManager[name].new()
     weapon.magAmmo = 100
-    weapon.bulletDamage = weapon.bulletDamage * (CurrentScene.difficulty+1)/4
+    weapon.bulletDamage = weapon.bulletDamage * (CurrentScene.difficulty+1)/5
     robot.inventory.weapons[1] = weapon
     robot.health = 50 * (CurrentScene.difficulty+1)/4
     robot.lootDropped = false
