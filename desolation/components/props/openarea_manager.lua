@@ -29,6 +29,29 @@ function openareaManager:determineCratePos()
     end
 end
 
+function openareaManager:setRandomCrateData()
+    local cratePos = self:determineCratePos()
+    local crateType = "crate"
+    if math.random(0, 6) <= 3 then
+        crateType = "crate_big"
+    end
+    local propData = {
+        crateType, cratePos, math.uniform(0, math.pi*2),
+        {
+            {"loot", {}}
+        }
+    }
+    local s = math.random()
+    if s < 0.4 then
+        propData[4][1][2][#propData[4][1][2]+1] = "medkit"
+    elseif s >= 0.4 and s < 0.7 then
+        propData[4][1][2][#propData[4][1][2]+1] = "battery"
+    else
+        propData[4][1][2][#propData[4][1][2]+1] = "ammo_light"
+    end
+    return propData
+end
+
 function openareaManager:determineRobotPos()
     local playerPos = CurrentScene.player.position
     local robotPos = {
@@ -93,23 +116,7 @@ function openareaManager:load()
     CurrentScene.hud:addChild(obj)
     --Spawn beginning crates
     for _ = 1, CurrentScene.amounts.crate do
-        local cratePos = self:determineCratePos()
-        local crateType = "crate"
-        if math.random(0, 6) <= 3 then
-            crateType = "crate_big"
-        end
-        local propData = {
-            crateType, cratePos, math.uniform(0, math.pi*2),
-            {
-                {"loot", {}}
-            }
-        }
-        local s = math.random()
-        if s < 0.2 then
-            propData[4][1][2][#propData[4][1][2]+1] = "medkit"
-        elseif s >= 0.2 and s < 0.3 then
-            propData[4][1][2][#propData[4][1][2]+1] = "battery"
-        end
+        local propData = self:setRandomCrateData()
         CurrentScene.mapCreator.script:spawnProp(propData)
     end
     --Spawn beginning barrels
@@ -176,7 +183,7 @@ function openareaManager:update(delta)
                 local player = CurrentScene.player
                 if player.health < 100 then
                     itemEventFuncs.createHUDNotif("hud_acquire_medkit")
-                    player.health = player.health + 25
+                    player.health = player.health + 30
                     CurrentScene.gameShaders.script.blueOffset = 255
                     if player.health > 100 then player.health = 100 end
                 end

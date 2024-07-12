@@ -13,6 +13,13 @@ function crateScript:destroyEvent(prop)
     table.removeValue(CurrentScene.props.tree, prop)
     local mapCreator = CurrentScene.mapCreator.script
     mapCreator:createExplosion(prop.position, 400, 10)
+    --Infinite mode
+    if not CurrentScene.regenerateProps then return end
+    local cratePos = CurrentScene.props["openarea_manager"].script:determineCratePos()
+    local propData = {
+        "explosive_barrel", cratePos, math.uniform(0, math.pi*2), {}
+    }
+    CurrentScene.mapCreator.script:spawnProp(propData)
 end
 
 function crateScript:load()

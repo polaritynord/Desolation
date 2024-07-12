@@ -39,6 +39,7 @@
         "crateAmount": "Crate Amount: ",
         "barrelAmount": "Barrel Amount: ",
         "expBarrelAmount": "Explosive Barrel Amount: ",
+        "regenerateProps": "Regenerate Props: ",
         "startGame": "Start Game"
     },
     "infiniteMode": {

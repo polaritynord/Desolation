@@ -47,7 +47,7 @@ function assets.load()
     assets.cursors = {
         default = love.mouse.getSystemCursor("arrow");
         combat = love.mouse.newCursor("desolation/assets/images/cursor_combat.png", 12, 12);
-        reload = love.mouse.newCursor("desolation/assets/images/cursor_reload.png", 8, 8);
+        reload = love.mouse.newCursor("desolation/assets/images/cursor_reload.png", 12, 12);
     }
     --[[if true then return end
     assets.images = {

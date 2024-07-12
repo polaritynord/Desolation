@@ -39,6 +39,7 @@
         "crateAmount": "Kutu Miktari: ",
         "barrelAmount": "Varil Miktari: ",
         "expBarrelAmount": "Patlayici Varil Miktari: ",
+        "regenerateProps": "Objeleri Yeniden Olustur: ",
         "startGame": "Oyunu Baslat"
     },
     "infiniteMode": {

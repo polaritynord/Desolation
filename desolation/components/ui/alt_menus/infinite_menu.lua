@@ -10,6 +10,7 @@ function infiniteMenu:load()
         barrel = 9;
         expBarrel = 8;
     }
+    infinite.regenerateProps = true
 
     ui.difficultyPicker = ui:newTextButton(
         {
@@ -77,6 +78,19 @@ function infiniteMenu:load()
             valueText = false;
         }
     )
+    ui.regeneratePropsText = ui:newTextLabel(
+        {
+            position = {0, 400};
+            text = Loca.extrasMenu.regenerateProps;
+            size = 30;
+        }
+    )
+    ui.regeneratePropsBox = ui:newCheckbox(
+        {
+            position = {400, 415};
+            toggled = infinite.regenerateProps;
+        }
+    )
     ui.startGameButton = ui:newTextButton(
         {
             buttonText = Loca.extrasMenu.startGame;
@@ -86,6 +100,7 @@ function infiniteMenu:load()
                 local scene = LoadScene("desolation/assets/scenes/game.json")
                 scene.difficulty = infinite.difficulty
                 scene.amounts = infinite.amounts
+                scene.regenerateProps = infinite.regenerateProps
                 SetScene(scene)
                 scene.mapCreator.script:loadMap("desolation/assets/maps/infinite_openarea.json")
             end;
@@ -124,6 +139,7 @@ function infiniteMenu:update(delta)
     ui.crateAmountText.text = Loca.extrasMenu.crateAmount .. tostring(infinite.amounts.crate)
     ui.barrelAmountText.text = Loca.extrasMenu.barrelAmount .. tostring(infinite.amounts.barrel)
     ui.expBarrelAmountText.text = Loca.extrasMenu.expBarrelAmount .. tostring(infinite.amounts.expBarrel)
+    infinite.regenerateProps = ui.regeneratePropsBox.toggled
 end
 
 return infiniteMenu
