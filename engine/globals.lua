@@ -11,7 +11,7 @@ function globals:load()
     self.invisible = {0, true, true}
     self.inf_stamina = {0, true, true}
     self.slippiness = {12, true, false}
-    self.stamina_fill = {14, true, false}
+    self.stamina_fill = {16, true, false}
     self.stamina_drain = {18, true, false}
 end
 

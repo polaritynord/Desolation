@@ -291,6 +291,7 @@ function hud:update(delta)
         Assets.sounds["slot_switch"]:stop()
         Assets.sounds["slot_switch"]:play()
         ui.slotSwitchTimer = 4
+        ui.weaponImg.scale = {-4.5, 4.5}
     end
     ui.oldSlot = player.inventory.slot
 

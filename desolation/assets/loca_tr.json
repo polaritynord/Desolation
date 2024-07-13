@@ -52,7 +52,8 @@
         "statsKills": "Etkisizlestirilen Robotlar: ",
         "statsCratesBroken": "Kirilan Kasalar: ",
         "statsExplosions": "Patlatilan Variller: ",
-        "statsAccuracy": "Isabetlilik: "
+        "statsAccuracy": "Isabetlilik: ",
+        "highScore": "REKOR: "
     },
     "gameplayMenu": {
         "cameraSway": "Kamera Sallantisi: ",

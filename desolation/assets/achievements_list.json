@@ -2,5 +2,7 @@
     "thanksForPlaying": {
         "iconPath": "desolation/assets/images/achievements/thanks_for_playing.png",
         "obtained": false
-    }
+    },
+
+    "infiniteHighScores": [0, 0, 0, 0, 0]
 }

@@ -49,6 +49,11 @@
         ],
 
         [
+            "damageNumbers",
+            ["imageComponent", "desolation/components/damage_numbers"]
+        ],
+
+        [
             "mapCreator",
             ["desolation/components/map_creator"]
         ],

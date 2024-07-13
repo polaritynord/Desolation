@@ -187,6 +187,11 @@ function mapCreator:createExplosion(position, radius, intensity)
     --iterate through NPC's
     for _, npc in ipairs(CurrentScene.npcs.tree) do
         npc.script:explosionEvent(position, radius, intensity)
+        --NOTE: Hardcoded this part to give extra points if the robot was taken down with an explosion
+        --in infinite mode.
+        if npc.health <= 0 and CurrentScene.score ~= nil then
+            CurrentScene.score = CurrentScene.score + 15
+        end
     end
     --explosion effects
     if Settings.explosion_particles then

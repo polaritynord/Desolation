@@ -79,6 +79,13 @@ end
 function humanoidScript:damage(amount, sourcePosition)
     local humanoid = self.parent
     if humanoid.name == "player" and GetGlobal("god") > 0 then return end
+    --Reduce damage with armor
+    if humanoid.armor > 0 then
+        local armorReducePower = (humanoid.armor/70)*2
+        if armorReducePower < 1 then armorReducePower = 1 end
+        amount = amount / armorReducePower
+    end
+    --Player events
     if humanoid.name == "player" then
         --play sound
         local src = Assets.sounds["hurt" .. math.random(1, 3)]
@@ -108,13 +115,15 @@ function humanoidScript:damage(amount, sourcePosition)
             camera.position[1] = camera.position[1] + temp[math.random(1,2)]*max
             camera.position[2] = camera.position[2] + temp[math.random(1,2)]*max
         end
+    else
+        --damageNumber UI
+        CurrentScene.damageNumbers.numbers[#CurrentScene.damageNumbers.numbers+1] = {
+            position = table.new(humanoid.position);
+            alpha = 1;
+            number = amount;
+        }
     end
     --damage humanoid
-    if humanoid.armor > 0 then
-        local armorReducePower = (humanoid.armor/70)*2
-        if armorReducePower < 1 then armorReducePower = 1 end
-        amount = amount / armorReducePower
-    end
     if humanoid.armor > amount then
         humanoid.armor = humanoid.armor - amount
         return
@@ -156,10 +165,7 @@ function humanoidScript:hitscanBulletCheck(humanoid, weapon, shootAngle)
     }
     local beginPos = table.new(bulletPos)
     local bulletSize = {12, 6}
-    for i = 1, 100 do
-        --move bullet by 10 pixels
-        bulletPos[1] = bulletPos[1] + 10*math.cos(shootAngle)
-        bulletPos[2] = bulletPos[2] + 10*math.sin(shootAngle)
+    for i = 1, 40 do
         --*** check for collision ***
         --iterate through walls
         for _, wall in ipairs(CurrentScene.walls.tree) do
@@ -224,6 +230,9 @@ function humanoidScript:hitscanBulletCheck(humanoid, weapon, shootAngle)
                 goto returnLine
             end
         end
+        --move bullet by 25 pixels
+        bulletPos[1] = bulletPos[1] + 25*math.cos(shootAngle)
+        bulletPos[2] = bulletPos[2] + 25*math.sin(shootAngle)
     end
     --If the function is still ongoing at this part, that means the bullet is out of range.
     ::returnLine::
@@ -306,7 +315,8 @@ function humanoidScript:humanoidShootWeapon(weapon)
     end
     --bullet shell particles
     particleFuncs.createBulletShellParticle(shootParticles, humanoid, weapon)
-    --player stuff down here
+    
+    --***player stuff down here***
     if humanoid.name ~= "player" then return end
     humanoid.handOffset = -weapon.handRecoilIntensity
     if Settings.screen_shake and GetGlobal("freecam") < 1 then

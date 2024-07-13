@@ -1,10 +1,6 @@
 local coreFuncs = require "coreFuncs"
 local gameCursorScript = ENGINE_COMPONENTS.scriptComponent.new()
 
-function gameCursorScript:load()
-    
-end
-
 function gameCursorScript:update(_)
     if CurrentScene.name ~= "Game" then return end
     if GamePaused then

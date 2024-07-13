@@ -27,6 +27,7 @@ function imageComponent.new(parent, source)
             )
             pos[2] = pos[2] + 10
         end
+        love.graphics.setColor(1, 1, 1, 1)
     end
 
     return component

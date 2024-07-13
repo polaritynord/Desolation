@@ -63,8 +63,11 @@ function robotScript:update(delta)
                 itemData[1] = "battery"
             end
             CurrentScene.mapCreator.script:spawnItem(itemData)
+            --score
+            CurrentScene.score = CurrentScene.score + 10
         end
         robot.lootDropped = true
+        --***Give Score***
         return
     end
     self:pointTowardsPlayer(robot)

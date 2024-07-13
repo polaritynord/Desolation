@@ -95,6 +95,23 @@ function openareaManager:setupUI()
             color = {1, 1, 1, 0};
         }
     )
+    ui.infinite.scoreCounter = ui:newTextLabel(
+        {
+            text = "";
+            position = {12, 10};
+            size = 48;
+            font = "disposable-droid-bold";
+        }
+    )
+    ui.infinite.oldScore = CurrentScene.score
+    ui.infinite.scoreDesc = ui:newTextLabel(
+        {
+            text = Loca.infiniteMode.highScore .. Achievements.infiniteHighScores[CurrentScene.difficulty];
+            size = 24;
+            font = "disposable-droid-bold";
+            position = {12, 48};
+        }
+    )
 end
 
 function openareaManager:load()
@@ -193,6 +210,8 @@ function openareaManager:update(delta)
                     CurrentScene.gameShaders.script.blueOffset = 255
                     if player.armor > 100 then player.armor = 100 end
                 end
+                --Score
+                CurrentScene.score = CurrentScene.score + 50
             end
         end
     end
@@ -247,6 +266,15 @@ function openareaManager:update(delta)
     if ui.infinite.waveDesc.color[4] < 0 then ui.infinite.waveDesc.color[4] = 0 end
     if ui.infinite.waveName.color[4] > 1 then ui.infinite.waveName.color[4] = 1 end
     if ui.infinite.waveDesc.color[4] > 1 then ui.infinite.waveDesc.color[4] = 1 end
+    --Score counter - set text
+    ui.infinite.scoreCounter.text = CurrentScene.score
+    --Score counter - update color
+    if ui.infinite.scoreCounter.oldScore ~= CurrentScene.score then
+        ui.infinite.scoreCounter.color = {1, 0, 0, 1}
+    end
+    ui.infinite.scoreCounter.color[2] = ui.infinite.scoreCounter.color[2] + (1-ui.infinite.scoreCounter.color[2])*9*delta
+    ui.infinite.scoreCounter.color[3] = ui.infinite.scoreCounter.color[3] + (1-ui.infinite.scoreCounter.color[3])*9*delta
+    ui.infinite.scoreCounter.oldScore = CurrentScene.score
     --If the player is dead, show stats
     if CurrentScene.player.health > 0 then return end
     CurrentScene.gameOver.script:updateInfiniteStats(delta)

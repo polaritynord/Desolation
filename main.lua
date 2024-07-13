@@ -24,7 +24,7 @@ function love.wheelmoved(x, y)
     end
 
     --Ingame zooming
-    if not GamePaused and CurrentScene.name == "Game" and (CurrentScene.mapCreator.allowZoom or GetGlobal("freecam") > 0) then
+    if not GamePaused and CurrentScene.name == "Game" and (CurrentScene.mapCreator.allowZoom or GetGlobal("freecam") > 0) and love.keyboard.isDown("lctrl") then
         local camController = CurrentScene.camera.script
         if y > 0 then
             camController.playerManualZoom = camController.playerManualZoom + 0.1
@@ -32,6 +32,28 @@ function love.wheelmoved(x, y)
         elseif y < 0 then
             camController.playerManualZoom = camController.playerManualZoom - 0.1
             if camController.playerManualZoom < 0.5 then camController.playerManualZoom = 0.5 end
+        end
+    end
+
+    --Ingame slot switching
+    if not GamePaused and CurrentScene.name == "Game" and not love.keyboard.isDown("lctrl") then
+        local player = CurrentScene.player
+        local oldSlot = player.inventory.slot
+        player.inventory.slot = player.inventory.slot - y
+        if player.inventory.slot > 3 then player.inventory.slot = 1 end
+        if player.inventory.slot < 1 then player.inventory.slot = 3 end
+        --Update hand offset
+        if oldSlot ~= player.inventory.slot and player.inventory.weapons[oldSlot] ~= player.inventory.weapons[player.inventory.slot] then
+            player.handOffset = -15
+        end
+        --Cancel reload if slot switching is done
+        if oldSlot ~= player.inventory.slot then
+            player.reloading = false
+            local weapon = player.inventory.weapons[player.inventory.previousSlot]
+            if weapon then
+                local playerSounds = player.soundManager.script
+                playerSounds:stopSound(Assets.sounds["reload_" .. string.lower(weapon.name)])
+            end
         end
     end
     
