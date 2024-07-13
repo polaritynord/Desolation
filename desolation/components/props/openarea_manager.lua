@@ -2,6 +2,7 @@ local coreFuncs = require "coreFuncs"
 local robotLocationMarkers = require("desolation.components.robot_location_markers")
 local object = require("engine.object")
 local itemEventFuncs = require("desolation.components.item.item_event_funcs")
+local infiniteScoreNotifs = require("desolation.components.infinite_score_notifs")
 local openareaManager = ENGINE_COMPONENTS.scriptComponent.new()
 
 function openareaManager:determineCratePos()
@@ -106,7 +107,7 @@ function openareaManager:setupUI()
     ui.infinite.oldScore = CurrentScene.score
     ui.infinite.scoreDesc = ui:newTextLabel(
         {
-            text = Loca.infiniteMode.highScore .. Achievements.infiniteHighScores[CurrentScene.difficulty];
+            text = Loca.infiniteMode.highScore .. Achievements.infiniteHighScores[CurrentScene.difficulty] .. " (" .. string.upper(Loca.extrasMenu.infiniteDifficulties[CurrentScene.difficulty]) .. ")";
             size = 24;
             font = "disposable-droid-bold";
             position = {12, 48};
@@ -129,6 +130,13 @@ function openareaManager:load()
     local obj = object.new(CurrentScene.hud)
     obj:addComponent(ENGINE_COMPONENTS.imageComponent.new(obj))
     obj:addComponent(table.new(robotLocationMarkers))
+    obj.script:load()
+    CurrentScene.hud:addChild(obj)
+    --Add score notifications object to scene
+    obj = object.new(CurrentScene.hud)
+    obj.name = "scoreNotifs"
+    obj:addComponent(ENGINE_COMPONENTS.imageComponent.new(obj))
+    obj:addComponent(table.new(infiniteScoreNotifs))
     obj.script:load()
     CurrentScene.hud:addChild(obj)
     --Spawn beginning crates
@@ -211,6 +219,7 @@ function openareaManager:update(delta)
                     if player.armor > 100 then player.armor = 100 end
                 end
                 --Score
+                CurrentScene.hud.scoreNotifs.script:newNotif(Loca.infiniteMode.notifs.waveClear)
                 CurrentScene.score = CurrentScene.score + 50
             end
         end
@@ -274,6 +283,10 @@ function openareaManager:update(delta)
     end
     ui.infinite.scoreCounter.color[2] = ui.infinite.scoreCounter.color[2] + (1-ui.infinite.scoreCounter.color[2])*9*delta
     ui.infinite.scoreCounter.color[3] = ui.infinite.scoreCounter.color[3] + (1-ui.infinite.scoreCounter.color[3])*9*delta
+    --Set high score
+    if CurrentScene.score > Achievements.infiniteHighScores[CurrentScene.difficulty] then
+        Achievements.infiniteHighScores[CurrentScene.difficulty] = CurrentScene.score
+    end
     ui.infinite.scoreCounter.oldScore = CurrentScene.score
     --If the player is dead, show stats
     if CurrentScene.player.health > 0 then return end

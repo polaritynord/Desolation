@@ -40,8 +40,11 @@ function itemScript:movement(delta)
     local itemPos = item.position
     item.oldPos = table.new(item.position)
     if item.gettingPickedUp then
-        itemPos[1] = itemPos[1] + (playerPos[1]-itemPos[1])*10*delta
-        itemPos[2] = itemPos[2] + (playerPos[2]-itemPos[2])*10*delta
+        local angle = math.atan2(playerPos[2]-itemPos[2], playerPos[1]-itemPos[1])
+        itemPos[1] = itemPos[1] + math.cos(angle)*800*delta
+        itemPos[2] = itemPos[2] + math.sin(angle)*800*delta
+        --itemPos[1] = itemPos[1] + (playerPos[1]-itemPos[1])*10*delta
+        --itemPos[2] = itemPos[2] + (playerPos[2]-itemPos[2])*10*delta
         --Set alpha
         item.imageComponent.color[4] = item.distanceToPlayer/100
     else

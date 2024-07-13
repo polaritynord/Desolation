@@ -64,6 +64,7 @@ function robotScript:update(delta)
             end
             CurrentScene.mapCreator.script:spawnItem(itemData)
             --score
+            CurrentScene.hud.scoreNotifs.script:newNotif(Loca.infiniteMode.notifs.kill)
             CurrentScene.score = CurrentScene.score + 10
         end
         robot.lootDropped = true

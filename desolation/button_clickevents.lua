@@ -25,6 +25,7 @@ function clickEvents.quitButtonClick(element)
         element.confirmTimer = 2.4
     else
         love.filesystem.write("settings.json", json.encode(Settings))
+        love.filesystem.write("achievements.json", json.encode(Achievements))
         love.event.quit()
     end
 end

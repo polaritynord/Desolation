@@ -81,10 +81,11 @@ function guyScript:update(delta)
     if GamePaused then return end
     local npc = self.parent
     self:humanoidUpdate(delta, npc)
-    
+
     if npc.health <= 0 then return end
     npc.moveVelocity = {0, 0}
     --states
+    if CurrentScene.player == nil then return end
     if npc.state == "neutral" then
         self:neutralState(npc)
     elseif npc.state == "follow" then

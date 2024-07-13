@@ -190,6 +190,7 @@ function mapCreator:createExplosion(position, radius, intensity)
         --NOTE: Hardcoded this part to give extra points if the robot was taken down with an explosion
         --in infinite mode.
         if npc.health <= 0 and CurrentScene.score ~= nil then
+            CurrentScene.hud.scoreNotifs.script:newNotif(Loca.infiniteMode.notifs.explosionBonus)
             CurrentScene.score = CurrentScene.score + 15
         end
     end

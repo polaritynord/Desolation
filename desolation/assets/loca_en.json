@@ -53,7 +53,12 @@
         "statsCratesBroken": "Crates Broken: ",
         "statsExplosions": "Barrels Exploded: ",
         "statsAccuracy": "Accuracy: ",
-        "highScore": "HIGH SCORE: "
+        "highScore": "HIGH SCORE: ",
+        "notifs": {
+            "waveClear": "(+50) Wave Complete",
+            "kill": "(+10) Robot Eliminated",
+            "explosionBonus": "(+15) Explosion Bonus"
+        }
     },
     "gameplayMenu": {
         "cameraSway": "Camera Sway: ",
