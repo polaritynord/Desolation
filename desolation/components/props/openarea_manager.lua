@@ -43,12 +43,12 @@ function openareaManager:setRandomCrateData()
         }
     }
     local s = math.random()
-    if s < 0.4 then
+    if s < 0.25 then
         propData[4][1][2][#propData[4][1][2]+1] = "medkit"
-    elseif s >= 0.4 and s < 0.7 then
+    elseif s >= 0.25 and s < 0.45 then
         propData[4][1][2][#propData[4][1][2]+1] = "battery"
     else
-        propData[4][1][2][#propData[4][1][2]+1] = "ammo_light"
+        propData[4][1][2][#propData[4][1][2]+1] = coreFuncs.infiniteModeAmmoType(CurrentScene.wave)
     end
     return propData
 end
@@ -81,7 +81,7 @@ function openareaManager:setupUI()
 
     ui.infinite.waveName = ui:newTextLabel(
         {
-            text = "--- WAVE " .. self.wave .. " ---";
+            text = "--- WAVE " .. CurrentScene.wave .. " ---";
             position = {-10, 100};
             begin = "center";
             size = 48;
@@ -116,7 +116,6 @@ function openareaManager:setupUI()
 end
 
 function openareaManager:load()
-    self.wave = 1
     self.waveTimer = 9
     self.wavePrep = true
     self.newWaveSoundPlayed = true
@@ -178,9 +177,9 @@ function openareaManager:update(delta)
             self.wavePrep = false
             self.waveTimer = 0
             self.spawnedEnemies = 0
-            self.enemySpawnCount = 4 + (self.wave*(self.wave-1))/2
-            self.spawnCooldown = math.uniform(2.5, 3.2)
-            ui.infinite.waveName.text = "--- " .. Loca.infiniteMode.wave .. " " .. self.wave .. " ---"
+            self.enemySpawnCount = 4 + (CurrentScene.wave*(CurrentScene.wave-1))/2
+            self.spawnCooldown = math.uniform(2.5, 3.2) + CurrentScene.wave*0.07
+            ui.infinite.waveName.text = "--- " .. Loca.infiniteMode.wave .. " " .. CurrentScene.wave .. " ---"
             ui.infinite.waveDesc.text = Loca.infiniteMode.eliminateAllRobots
         end
     else
@@ -193,14 +192,13 @@ function openareaManager:update(delta)
                 CurrentScene.mapCreator.script:spawnNPC(robotData)
                 self.spawnTimer = 0
                 self.spawnedEnemies = self.spawnedEnemies + 1
-                self.spawnCooldown = math.uniform(2.5, 3.2)
             end
         else
             --Wait for player to clear all enemies
             if #CurrentScene.npcs.tree < 1 then
                 self.wavePrep = true
                 self.waveTimer = 0
-                self.wave = self.wave + 1
+                CurrentScene.wave = CurrentScene.wave + 1
                 self.clearWaveSoundPlayed = false
                 ui.infinite.waveName.text = "--- " .. Loca.infiniteMode.waveClear .. " ---"
                 ui.infinite.waveDesc.text = Loca.infiniteMode.wavePrepare
@@ -216,7 +214,7 @@ function openareaManager:update(delta)
                     itemEventFuncs.createHUDNotif("hud_acquire_battery")
                     player.armor = player.armor + 25
                     CurrentScene.gameShaders.script.blueOffset = 255
-                    if player.armor > 100 then player.armor = 100 end
+                    if player.armor > 150 then player.armor = 150 end
                 end
                 --Score
                 CurrentScene.hud.scoreNotifs.script:newNotif(Loca.infiniteMode.notifs.waveClear)

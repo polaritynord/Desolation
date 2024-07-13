@@ -53,7 +53,12 @@
         "statsCratesBroken": "Kirilan Kasalar: ",
         "statsExplosions": "Patlatilan Variller: ",
         "statsAccuracy": "Isabetlilik: ",
-        "highScore": "REKOR: "
+        "highScore": "REKOR: ",
+        "notifs": {
+            "waveClear": "(+50) Dalga Tamamlandi",
+            "kill": "(+10) Robot Etkisizlestirildi",
+            "explosionBonus": "(+15) Patlama Bonusu"
+        }
     },
     "gameplayMenu": {
         "cameraSway": "Kamera Sallantisi: ",

@@ -73,9 +73,9 @@ end
 
 function itemEventFuncs.batteryPickup(item)
     local player = CurrentScene.player
-    if player.armor == 100 then return end
+    if player.armor == 150 then return end
     player.armor = player.armor + 25
-    if player.armor > 100 then player.armor = 100 end
+    if player.armor > 150 then player.armor = 150 end
     --play sound (TODO: find a healing sound)
     local playerSounds = player.soundManager.script
     playerSounds:playStopSound(Assets.sounds["acquire"])

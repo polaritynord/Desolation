@@ -18,7 +18,7 @@ function robotScript:load()
     robot.hand.imageComponent.color = robot.imageComponent.color
     --Determine weapon
     local name = "Pistol"
-    local wave = CurrentScene.props.openarea_manager.script.wave --TODO move this wave variable to somewhere else
+    local wave = CurrentScene.wave
     if wave > 6 then
         local c = math.random()
         if c < 0.35 then
@@ -53,15 +53,25 @@ function robotScript:update(delta)
             }
             --Determine item type
             local n = math.random()
-            if n < 0.25 then
-                itemData[1] = "ammo_medium"
-            elseif n >= 0.25 and n < 0.45 then
-                itemData[1] = "ammo_shotgun"
-            elseif n >= 0.45 and n < 0.57 then
-                itemData[1] = "medkit"
-            elseif n >= 0.57 and n < 0.7 then
-                itemData[1] = "battery"
+            if n <= 0.35 then
+                itemData[1] = coreFuncs.infiniteModeAmmoType(CurrentScene.wave)
+            else
+                n = math.random()
+                if n <= 0.4 then
+                    itemData[1] = "medkit"
+                else
+                    itemData[1] = "battery"
+                end
             end
+            --if n < 0.25 then
+            --    itemData[1] = "ammo_medium"
+            --elseif n >= 0.25 and n < 0.45 then
+            --    itemData[1] = "ammo_shotgun"
+            --elseif n >= 0.45 and n < 0.57 then
+            --    itemData[1] = "medkit"
+            --elseif n >= 0.57 and n < 0.7 then
+            --    itemData[1] = "battery"
+            --end
             CurrentScene.mapCreator.script:spawnItem(itemData)
             --score
             CurrentScene.hud.scoreNotifs.script:newNotif(Loca.infiniteMode.notifs.kill)

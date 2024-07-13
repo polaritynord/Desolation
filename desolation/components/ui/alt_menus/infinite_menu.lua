@@ -102,6 +102,7 @@ function infiniteMenu:load()
                 scene.amounts = infinite.amounts
                 scene.regenerateProps = infinite.regenerateProps
                 scene.score = 0
+                scene.wave = 1
                 SetScene(scene)
                 scene.mapCreator.script:loadMap("desolation/assets/maps/infinite_openarea.json")
             end;
