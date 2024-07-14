@@ -53,14 +53,16 @@
             "kill": "(+10) Robot Eliminated",
             "explosionBonus": "(+15) Explosion Bonus"
         },
-        "gameOverTitle": "ELIMINATED",
+        "gameOverTitle": "GAME OVER",
         "statsScore": "Score: ",
         "statsTime": "Time Survived: ",
         "statsAccuracy": "Accuracy: ",
         "statsWaves": "Waves Cleared: ",
         "statsKills": "Robots Neutralized: ",
         "statsBarrels": "Barrels Exploded: ",
-        "statsCrates": "Crates Broken: "
+        "statsCrates": "Crates Broken: ",
+        "minute": " min ",
+        "second": " sec"
     },
     "gameplayMenu": {
         "cameraSway": "Camera Sway: ",

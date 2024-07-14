@@ -120,6 +120,7 @@ function openareaManager:setupUI()
             text = Loca.infiniteMode.gameOverTitle;
             position = {100, 80};
             color = {1, 1, 1, 0};
+            font = "disposable-droid-bold";
         }
     )
     self.statsText = CurrentScene.gameOver.UIComponent:newTextLabel(
@@ -140,6 +141,7 @@ function openareaManager:load()
     self.enemySpawnCount = 0
     self.spawnCooldown = 0
     self.spawnTimer = 0
+    self.survivalTimer = 0
     self:setupUI()
     --Add robot markers object to scene
     local obj = object.new(CurrentScene.hud)
@@ -178,11 +180,15 @@ function openareaManager:load()
     CurrentScene.camera.script.playerManualZoom = 0.8
     CurrentScene.camera.zoom = 4
     CurrentScene.camera.script.zoomSmoothness = 2.3
+    CurrentScene.shotsMissed = 0
+    CurrentScene.shots = 0
+    CurrentScene.kills = 0
+    CurrentScene.barrelsExploded = 0
+    CurrentScene.cratesBroken = 0
     SetGlobal("p_speed", 200)
 end
 
 function openareaManager:update(delta)
-    if love.keyboard.isDown("space") then RunConsoleCommand("hurtme") end
     if GamePaused then return end
     local ui = CurrentScene.hud.UIComponent
 
@@ -308,12 +314,18 @@ function openareaManager:update(delta)
     end
     ui.infinite.scoreCounter.oldScore = CurrentScene.score
     --***If the player is dead***
-    if CurrentScene.player.health > 0 then return end
+    if CurrentScene.player.health > 0 then
+        self.survivalTimer = self.survivalTimer + delta
+        return
+    end
     --Update stats
+    --Convert survival seconds to XX:XX:XX format
+    local timeSurvived = math.floor(self.survivalTimer/60) .. Loca.infiniteMode.minute .. math.floor(math.fmod(self.survivalTimer, 60)) .. Loca.infiniteMode.second
+    local accuracy = math.floor((CurrentScene.shots-CurrentScene.shotsMissed)/CurrentScene.shots*100) .. "%"
     self.statsText.text = Loca.infiniteMode.statsScore .. CurrentScene.score .. "\n" ..
-                        Loca.infiniteMode.statsTime .. "x" .. "\n" .. Loca.infiniteMode.statsAccuracy .. "x" .. "\n" ..
-                        Loca.infiniteMode.statsWaves .. (CurrentScene.wave-1) .. "\n" .. Loca.infiniteMode.statsKills .. "x" .. "\n" ..
-                        Loca.infiniteMode.statsBarrels .. "x" .. "\n" .. Loca.infiniteMode.statsCrates .. "x"
+                        Loca.infiniteMode.statsTime .. timeSurvived .. "\n" .. Loca.infiniteMode.statsAccuracy .. accuracy .. "\n" ..
+                        Loca.infiniteMode.statsWaves .. (CurrentScene.wave-1) .. "\n" .. Loca.infiniteMode.statsKills .. CurrentScene.kills .. "\n" ..
+                        Loca.infiniteMode.statsBarrels .. CurrentScene.barrelsExploded .. "\n" .. Loca.infiniteMode.statsCrates .. CurrentScene.cratesBroken
     self.statsText.color[4] = self.statsText.color[4] + delta
     self.statsTitle.color[4] = self.statsTitle.color[4] + delta
     --Hide away score counter

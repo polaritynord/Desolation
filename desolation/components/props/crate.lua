@@ -15,10 +15,11 @@ function crateScript:destroyEvent(crate)
     if Settings.destruction_particles then
         particleFuncs.createCrateWoodParticles(comp, crate.position)
     end
-    --Infinite mode
+    --(Infinite mode)
     if not CurrentScene.regenerateProps then return end
     local crateData = CurrentScene.props["openarea_manager"].script:setRandomCrateData()
     CurrentScene.mapCreator.script:spawnProp(crateData)
+    CurrentScene.cratesBroken = CurrentScene.cratesBroken + 1
 end
 
 function crateScript:load()

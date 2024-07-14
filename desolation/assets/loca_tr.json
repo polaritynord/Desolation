@@ -53,14 +53,16 @@
             "kill": "(+10) Robot Etkisizlestirildi",
             "explosionBonus": "(+15) Patlama Bonusu"
         },
-        "gameOverTitle": "BRBRBRR:",
+        "gameOverTitle": "OYUN BITTI",
         "statsScore": "Puan: ",
         "statsTime": "Hayatta Kalinan Zaman: ",
         "statsAccuracy": "Isabetlilik: ",
         "statsWaves": "Tamamlanan Dalgalar: ",
         "statsKills": "Etkisizlestirilen Robotlar: ",
         "statsBarrels": "Patlatilan Variller: ",
-        "statsCrates": "Kirilan Kutular: "
+        "statsCrates": "Kirilan Kutular: ",
+        "minute": " dk ",
+        "second": " sn"
     },
     "gameplayMenu": {
         "cameraSway": "Kamera Sallantisi: ",
