@@ -47,18 +47,20 @@
         "eliminateAllRobots": "TUM ROBOTLARI ETKISIZ HALE GETIR",
         "waveClear": "DALGA TAMAMLANDI",
         "wavePrepare": "SONRAKI DALGA ICIN HAZIRLAN",
-        "statsTime": "Hayatta Kalinan Zaman: ",
-        "statsWaves": "Tamamlanan Dalgalar: ",
-        "statsKills": "Etkisizlestirilen Robotlar: ",
-        "statsCratesBroken": "Kirilan Kasalar: ",
-        "statsExplosions": "Patlatilan Variller: ",
-        "statsAccuracy": "Isabetlilik: ",
         "highScore": "REKOR: ",
         "notifs": {
             "waveClear": "(+50) Dalga Tamamlandi",
             "kill": "(+10) Robot Etkisizlestirildi",
             "explosionBonus": "(+15) Patlama Bonusu"
-        }
+        },
+        "gameOverTitle": "BRBRBRR:",
+        "statsScore": "Puan: ",
+        "statsTime": "Hayatta Kalinan Zaman: ",
+        "statsAccuracy": "Isabetlilik: ",
+        "statsWaves": "Tamamlanan Dalgalar: ",
+        "statsKills": "Etkisizlestirilen Robotlar: ",
+        "statsBarrels": "Patlatilan Variller: ",
+        "statsCrates": "Kirilan Kutular: "
     },
     "gameplayMenu": {
         "cameraSway": "Kamera Sallantisi: ",

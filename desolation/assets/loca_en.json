@@ -47,18 +47,20 @@
         "eliminateAllRobots": "ELIMINATE ALL ROBOTS",
         "waveClear": "WAVE CLEARED",
         "wavePrepare": "PREPARE FOR THE NEXT WAVE",
-        "statsTime": "Time Survived: ",
-        "statsWaves": "Waves Cleared: ",
-        "statsKills": "Robots neutralized: ",
-        "statsCratesBroken": "Crates Broken: ",
-        "statsExplosions": "Barrels Exploded: ",
-        "statsAccuracy": "Accuracy: ",
         "highScore": "HIGH SCORE: ",
         "notifs": {
             "waveClear": "(+50) Wave Complete",
             "kill": "(+10) Robot Eliminated",
             "explosionBonus": "(+15) Explosion Bonus"
-        }
+        },
+        "gameOverTitle": "ELIMINATED",
+        "statsScore": "Score: ",
+        "statsTime": "Time Survived: ",
+        "statsAccuracy": "Accuracy: ",
+        "statsWaves": "Waves Cleared: ",
+        "statsKills": "Robots Neutralized: ",
+        "statsBarrels": "Barrels Exploded: ",
+        "statsCrates": "Crates Broken: "
     },
     "gameplayMenu": {
         "cameraSway": "Camera Sway: ",

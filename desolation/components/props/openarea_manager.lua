@@ -107,10 +107,26 @@ function openareaManager:setupUI()
     ui.infinite.oldScore = CurrentScene.score
     ui.infinite.scoreDesc = ui:newTextLabel(
         {
-            text = Loca.infiniteMode.highScore .. Achievements.infiniteHighScores[CurrentScene.difficulty] .. " (" .. string.upper(Loca.extrasMenu.infiniteDifficulties[CurrentScene.difficulty]) .. ")";
+            text = "";
             size = 24;
             font = "disposable-droid-bold";
             position = {12, 48};
+        }
+    )
+    --Game over statistics
+    self.statsTitle = CurrentScene.gameOver.UIComponent:newTextLabel(
+        {
+            size = 48;
+            text = Loca.infiniteMode.gameOverTitle;
+            position = {100, 80};
+            color = {1, 1, 1, 0};
+        }
+    )
+    self.statsText = CurrentScene.gameOver.UIComponent:newTextLabel(
+        {
+            size = 30;
+            position = {120, 140};
+            color = {1, 1, 1, 0};
         }
     )
 end
@@ -163,10 +179,10 @@ function openareaManager:load()
     CurrentScene.camera.zoom = 4
     CurrentScene.camera.script.zoomSmoothness = 2.3
     SetGlobal("p_speed", 200)
-    CurrentScene.gameOver.script:createInfiniteStatsElements()
 end
 
 function openareaManager:update(delta)
+    if love.keyboard.isDown("space") then RunConsoleCommand("hurtme") end
     if GamePaused then return end
     local ui = CurrentScene.hud.UIComponent
 
@@ -281,14 +297,28 @@ function openareaManager:update(delta)
     end
     ui.infinite.scoreCounter.color[2] = ui.infinite.scoreCounter.color[2] + (1-ui.infinite.scoreCounter.color[2])*9*delta
     ui.infinite.scoreCounter.color[3] = ui.infinite.scoreCounter.color[3] + (1-ui.infinite.scoreCounter.color[3])*9*delta
+    --Score description
+    local text = Loca.infiniteMode.highScore .. Achievements.infiniteHighScores[CurrentScene.difficulty] ..
+                " (" .. string.upper(Loca.extrasMenu.infiniteDifficulties[CurrentScene.difficulty]) .. ")\n" ..
+                Loca.infiniteMode.wave .. " " .. CurrentScene.wave
+    ui.infinite.scoreDesc.text = text
     --Set high score
     if CurrentScene.score > Achievements.infiniteHighScores[CurrentScene.difficulty] then
         Achievements.infiniteHighScores[CurrentScene.difficulty] = CurrentScene.score
     end
     ui.infinite.scoreCounter.oldScore = CurrentScene.score
-    --If the player is dead, show stats
+    --***If the player is dead***
     if CurrentScene.player.health > 0 then return end
-    CurrentScene.gameOver.script:updateInfiniteStats(delta)
+    --Update stats
+    self.statsText.text = Loca.infiniteMode.statsScore .. CurrentScene.score .. "\n" ..
+                        Loca.infiniteMode.statsTime .. "x" .. "\n" .. Loca.infiniteMode.statsAccuracy .. "x" .. "\n" ..
+                        Loca.infiniteMode.statsWaves .. (CurrentScene.wave-1) .. "\n" .. Loca.infiniteMode.statsKills .. "x" .. "\n" ..
+                        Loca.infiniteMode.statsBarrels .. "x" .. "\n" .. Loca.infiniteMode.statsCrates .. "x"
+    self.statsText.color[4] = self.statsText.color[4] + delta
+    self.statsTitle.color[4] = self.statsTitle.color[4] + delta
+    --Hide away score counter
+    ui.infinite.scoreCounter.color[4] = 0
+    ui.infinite.scoreDesc.color[4] = 0
 end
 
 return openareaManager

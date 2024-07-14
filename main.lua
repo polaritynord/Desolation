@@ -39,6 +39,7 @@ function love.wheelmoved(x, y)
     if not GamePaused and CurrentScene.name == "Game" and not love.keyboard.isDown("lctrl") then
         local player = CurrentScene.player
         local oldSlot = player.inventory.slot
+        player.inventory.previousSlot = player.inventory.slot
         player.inventory.slot = player.inventory.slot - y
         if player.inventory.slot > 3 then player.inventory.slot = 1 end
         if player.inventory.slot < 1 then player.inventory.slot = 3 end
