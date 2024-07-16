@@ -137,6 +137,7 @@ function UIComponent:new(parent)
             instance2.baseColor = attributes.baseColor or instance2.baseColor
             instance2.barColor = attributes.barColor or instance2.barColor
             instance2.value = attributes.value or instance2.value
+            instance2.maxValue = attributes.maxValue or instance2.maxValue
         end
         instance2.parentComp = self
         self.elements[#self.elements+1] = instance2

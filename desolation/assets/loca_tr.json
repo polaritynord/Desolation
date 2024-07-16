@@ -16,7 +16,28 @@
         "keys": "Tuslar",
         "lang": "Dil: ",
         "returnButton": "Geri Don",
-        "restartWarning": "Degisiklerin gerceklesmesi icin yeniden baslatma gerekiyor."
+        "restartWarning": "Degisiklerin gerceklesmesi icin yeniden baslatma gerekiyor.",
+        "bindingNames": {
+            "fullscreen": "Tam Ekran",
+            "sprint": "Kos",
+            "move_up": "Yukari Hareket",
+            "move_down": "Asagi Hareket",
+            "move_left": "Sola Hareket",
+            "move_right": "Saga Hareket",
+            "w_slot_1": "1. Silah Slotu",
+            "w_slot_2": "2. Silah Slotu",
+            "w_slot_3": "3. Silah Slotu",
+            "w_quickswitch": "Onceki Slota Gec",
+            "drop_weapon": "Silahi Birak",
+            "pause_game": "Oyunu Durdur",
+            "dev_console": "Yapimci Konsolunu Ac",
+            "toggle_debug": "Hata Ayiklama Menusunu Ac",
+            "interact": "Etkilesim",
+            "reload": "Silahi Doldur",
+            "toggle_hud": "HUD'u Ac/Kapa",
+            "screenshot": "Ekran Goruntusu Cek",
+            "toggle_follow": "NPC'nin Takip Etmesini Sagla"
+        }
     },
     "pauseScreen": {
         "continue": "Devam Et",

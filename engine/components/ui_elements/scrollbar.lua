@@ -11,6 +11,7 @@ function scrollBar.new()
         barColor = {1, 0, 0, 1};
         value = 0;
         mouseHovering = false;
+        maxValue = 3;
     }
 
     function instance:update()
@@ -22,12 +23,12 @@ function scrollBar.new()
             if self.mouseHovering then
                 local dy = my - pos[2] - barSize[2]/2
                 self.value = dy / self.baseSize[2]
-                if self.value < 0 then self.value = 0 end
-                if self.value > 1 - (barSize[2]/self.baseSize[2]) then self.value = 1 - (barSize[2]/self.baseSize[2]) end
             end
         else
             self.mouseHovering = my > barPos[2] and my < barPos[2]+barSize[2] and mx > barPos[1] and mx < barPos[1] + barSize[1]
         end
+        if self.value < 0 then self.value = 0 end
+        if self.value > self.maxValue - (barSize[2]/self.baseSize[2]) then self.value = self.maxValue - (barSize[2]/self.baseSize[2]) end
     end
 
     function instance:draw()
@@ -40,6 +41,7 @@ function scrollBar.new()
         --draw bar
         love.graphics.setColor(self.barColor[1], self.barColor[2], self.barColor[3], self.barColor[4]*self.parentComp.alpha)
         love.graphics.rectangle("fill", barPos[1], barPos[2], barSize[1], barSize[1])
+        love.graphics.setColor(1, 1, 1, 1)
     end
 
     return instance

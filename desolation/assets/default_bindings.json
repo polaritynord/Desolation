@@ -16,7 +16,6 @@
         ["toggle_debug", "f3"],
         ["interact", "e"],
         ["reload", "r"],
-        ["peek", "z"],
         ["toggle_hud", "f1"],
         ["screenshot", "f12"],
         ["toggle_follow", "f"]
@@ -39,7 +38,6 @@
         ["drop_weapon", 2],
         ["interact", 1],
         ["reload", 3],
-        ["peek", 0],
         ["toggle_hud", 0],
         ["screenshot", 5],
         ["toggle_follow", 0]

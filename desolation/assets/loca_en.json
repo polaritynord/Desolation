@@ -16,7 +16,28 @@
         "keys": "Keys",
         "lang": "Language: ",
         "returnButton": "Return",
-        "restartWarning": "A restart is needed for the changes to take place."
+        "restartWarning": "A restart is needed for the changes to take place.",
+        "bindingNames": {
+            "fullscreen": "Toggle Fullscreen",
+            "sprint": "Sprint",
+            "move_up": "Move Up",
+            "move_down": "Move Down",
+            "move_left": "Move Left",
+            "move_right": "Move Right",
+            "w_slot_1": "Weapon Slot 1",
+            "w_slot_2": "Weapon Slot 2",
+            "w_slot_3": "Weapon Slot 3",
+            "w_quickswitch": "Switch to Previous Slot",
+            "drop_weapon": "Drop Weapon",
+            "pause_game": "Pause Game",
+            "dev_console": "Open Developer Console",
+            "toggle_debug": "Toggle Debug Menu",
+            "interact": "Interact",
+            "reload": "Reload Weapon",
+            "toggle_hud": "Toggle HUD",
+            "screenshot": "Take Screenshot",
+            "toggle_follow": "Make NPC Follow"
+        }
     },
     "pauseScreen": {
         "continue": "Continue",

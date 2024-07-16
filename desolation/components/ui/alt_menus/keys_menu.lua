@@ -10,11 +10,17 @@ function keysMenu:load()
     --Create binding buttons
     for i = 1, #InputManager.bindings.keyboard do
         local binding = InputManager.bindings.keyboard[i]
+        local bindingTitle
+        if Loca.settings.bindingNames[binding[1]] ~= nil then
+            bindingTitle = Loca.settings.bindingNames[binding[1]]
+        else
+            bindingTitle = string.upper(binding[1])
+        end
         ui[binding[1]] = ui:newTextButton(
             {
                 position = {0, 200+(i-1)*40};
                 buttonTextSize = 30;
-                buttonText = string.upper(binding[1]) .. ": " .. binding[2];
+                buttonText = bindingTitle .. ": " .. string.upper(binding[2]);
                 clickEvent = function(element)
                     if element.textFont ~= "disposable-droid" then return end
                     --select button
@@ -25,17 +31,20 @@ function keysMenu:load()
                 end;
             }
         )
+        ui[binding[1]].title = bindingTitle
         ui[binding[1]].binding = binding
     end
+    keys.length = 200 + #InputManager.bindings.keyboard*40
     --Scrollbar
     ui.scrollbar = ui:newScrollbar(
         {
-            position = {400, 200};
+            position = {400, 250};
+            maxValue = 0.7; --Done by hand for now, figure out a better way later
+            baseColor = {0.5, 0.5, 0.5, 0.6};
+            barColor = {0.85, 0.85, 0.85, 1};
         }
     )
     ui.scrollbar.realY = ui.scrollbar.position[2]
-
-    keys.length = 200 + #InputManager.bindings.keyboard*40
 end
 
 function keysMenu:update(delta)
@@ -45,7 +54,7 @@ function keysMenu:update(delta)
 
     --UI Offsetting & canvas enabling
     keys.position[1] = 950 + MenuUIOffset
-    keys.position[2] = keys.position[2] + (keys.realY-keys.position[2])*12*delta
+    keys.position[2] = -ui.scrollbar.value*keys.length--keys.position[2] + (keys.realY-keys.position[2])*12*delta
     ui.enabled = settings.menu == "keys"
     --Transparency animation
     if ui.enabled then
@@ -54,7 +63,7 @@ function keysMenu:update(delta)
         ui.alpha = 0.25
     end
     if not ui.enabled then return end
-    keys.realY = -ui.scrollbar.value*keys.length
+    --keys.realY = -ui.scrollbar.value*keys.length
     ui.scrollbar.position[2] = ui.scrollbar.realY - keys.position[2]
 end
 

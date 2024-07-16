@@ -183,7 +183,7 @@ function love.keypressed(key, unicode)
         local keysMenu = CurrentScene.settings.keysMenu
         RunConsoleCommand("bind " .. keysMenu.selectedBinding[2][1] .. " " .. key)
         local element = keysMenu.selectedBinding[1]
-        element.buttonText = string.upper(element.binding[1]) .. ": " .. element.binding[2]
+        element.buttonText = element.title .. ": " .. string.upper(element.binding[2])
         element.textFont = "disposable-droid"
         --save bindings data
         love.filesystem.write("bindings.json", json.encode(InputManager.bindings))
