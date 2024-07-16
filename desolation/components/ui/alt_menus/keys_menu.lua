@@ -5,6 +5,7 @@ function keysMenu:load()
     local settings = keys.parent
     local ui = keys.UIComponent
     keys.selectedBinding = {nil, nil}
+    keys.realY = keys.position[2]
 
     --Create binding buttons
     for i = 1, #InputManager.bindings.keyboard do
@@ -26,6 +27,13 @@ function keysMenu:load()
         )
         ui[binding[1]].binding = binding
     end
+    --Scrollbar
+    ui.scrollbar = ui:newScrollbar(
+        {
+            position = {400, 200};
+        }
+    )
+    ui.scrollbar.realY = ui.scrollbar.position[2]
 
     keys.length = 200 + #InputManager.bindings.keyboard*40
 end
@@ -37,6 +45,7 @@ function keysMenu:update(delta)
 
     --UI Offsetting & canvas enabling
     keys.position[1] = 950 + MenuUIOffset
+    keys.position[2] = keys.position[2] + (keys.realY-keys.position[2])*12*delta
     ui.enabled = settings.menu == "keys"
     --Transparency animation
     if ui.enabled then
@@ -44,6 +53,9 @@ function keysMenu:update(delta)
     else
         ui.alpha = 0.25
     end
+    if not ui.enabled then return end
+    keys.realY = -ui.scrollbar.value*keys.length
+    ui.scrollbar.position[2] = ui.scrollbar.realY - keys.position[2]
 end
 
 return keysMenu

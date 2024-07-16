@@ -5,6 +5,7 @@ local textButton = require("engine.components.ui_elements.text_button")
 local imageButton = require("engine.components.ui_elements.image_button")
 local checkbox = require("engine.components.ui_elements.checkbox")
 local slider = require("engine.components.ui_elements.slider")
+local scrollbar = require("engine.components.ui_elements.scrollbar")
 
 local UIComponent = {}
 
@@ -121,6 +122,20 @@ function UIComponent:new(parent)
             if attributes.valueText ~= nil then
                 instance2.valueText = attributes.valueText
             end
+            instance2.value = attributes.value or instance2.value
+        end
+        instance2.parentComp = self
+        self.elements[#self.elements+1] = instance2
+        return instance2
+    end
+
+    function instance:newScrollbar(attributes)
+        local instance2 = scrollbar.new()
+        if attributes then
+            instance2.position = attributes.position or instance2.position
+            instance2.baseSize = attributes.baseSize or instance2.baseSize
+            instance2.baseColor = attributes.baseColor or instance2.baseColor
+            instance2.barColor = attributes.barColor or instance2.barColor
             instance2.value = attributes.value or instance2.value
         end
         instance2.parentComp = self

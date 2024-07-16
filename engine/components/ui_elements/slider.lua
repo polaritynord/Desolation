@@ -7,7 +7,7 @@ function slider.new()
         parentComp = nil;
         position = {600, 40};
         baseSize = {200, 20};
-        baseColor = {0, 0, 0, 1};
+        baseColor = {0.5, 0.5, 0.5, 1};
         stickColor = {1, 0, 0, 1};
         value = 0;
         enabled = true;
