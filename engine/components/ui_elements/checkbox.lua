@@ -39,10 +39,10 @@ function checkbox.new()
         if love.mouse.isDown(1) and self.mouseHovering and not self.mouseClicking then
             --TODO change this sound to something else?
             self.toggled = not self.toggled
-            love.audio.play(Assets.defaultSounds["button_click"])
+            SoundManager:playSound(Assets.defaultSounds["button_click"], Settings.vol_sfx)
             if self.clickEvent then self.clickEvent(self) end
         end
-        
+
         --check for mouse touch
         if my > pos[2] and my < pos[2] + self.size[2] and mx > pos[1] and mx < pos[1] + self.size[1] then
             if self.hoverEvent then self.hoverEvent(self) end

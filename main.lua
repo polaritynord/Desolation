@@ -6,6 +6,7 @@ local startupManager = require("engine.startup_manager")
 local fullscreen = false
 
 InputManager = require("engine.input_manager")
+SoundManager = require("engine.sound_manager")
 Globals = require("engine.globals")
 DevConsoleOpen = false
 Assets = require("assets")
@@ -204,6 +205,7 @@ end
 
 function love.load()
     love.graphics.setDefaultFilter("nearest", "nearest")
+    love.audio.setDistanceModel("linear")
     Assets.load()
     love.keyboard.setKeyRepeat(true)
     InputManager:loadBindingFile()

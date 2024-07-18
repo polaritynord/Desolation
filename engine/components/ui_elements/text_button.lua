@@ -24,8 +24,7 @@ function textButton.new()
         local delta = love.timer.getDelta()
         element.hoverOffset = element.hoverOffset + (14-element.hoverOffset) * 27 * delta
         if element.mouseHovering then return end
-        love.audio.setVolume(Settings.vol_master * Settings.vol_sfx)
-        love.audio.play(Assets.defaultSounds.button_hover)
+        SoundManager:playSound(Assets.defaultSounds["button_hover"], Settings.vol_sfx)
     end
 
     function instance.unhoverEvent(element)
@@ -40,8 +39,7 @@ function textButton.new()
         --Click event
         if love.mouse.isDown(1) and self.mouseHovering and not self.mouseClicking and self.clickEvent and InputManager.leftMouseTimer > 0.25 then
             InputManager.leftMouseTimer = 0
-            love.audio.setVolume(Settings.vol_master * Settings.vol_sfx)
-            love.audio.play(Assets.defaultSounds.button_click)
+            SoundManager:playSound(Assets.defaultSounds["button_click"], Settings.vol_sfx)
             self.clickEvent(self)
         end
         --Check for mouse touch

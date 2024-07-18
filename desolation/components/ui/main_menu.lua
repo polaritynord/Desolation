@@ -105,23 +105,16 @@ function mainMenu:load()
     CurrentScene.gameShader.gaussianblur.sigma = 2.8
     CurrentScene.uiShader.glow.strength = 5
     CurrentScene.uiShader.glow.min_luma = 0.1
-    Assets.sounds["loop_menu"]:setLooping(true)
-    Assets.sounds["loop_menu"]:play()
 end
 
 function mainMenu:update(delta)
-    --Set OST volume
-    Assets.sounds["loop_menu"]:setVolume(Settings.vol_master * Settings.vol_music)
+    SoundManager:playSound(Assets.sounds["loop_menu"], Settings.vol_music)
     --Other stuff
     local ui = self.parent.UIComponent
     --UI Ofsetting
     self.parent.position[1] = MenuUIOffset
     ui.polarity.position[1] = 920 - MenuUIOffset
     ui.version.position[1] = 5 - MenuUIOffset
-    --Change alpha of black cover
-    --if ui.blackCover.color[4] > 0 then
-    --    ui.blackCover.color[4] = ui.blackCover.color[4] - 1.5*delta
-    --end
     --Are you sure text
     if ui.quitButton.buttonText == Loca.mainMenu.quitConfirmation then
         ui.quitButton.confirmTimer = ui.quitButton.confirmTimer - delta
