@@ -9,11 +9,6 @@
                 [
                     "hand",
                     ["imageComponent", "desolation/components/humanoid_hand_script"]
-                ],
-
-                [
-                    "soundManager",
-                    ["desolation/components/player_sounds"]
                 ]
             ]
         ],
@@ -154,7 +149,24 @@
         "sounds": [
             ["explosion", "desolation/assets/sounds/explosion.wav", "static"],
             ["sprint", "desolation/assets/sounds/sprint.wav", "static"],
-            ["slot_switch", "desolation/assets/sounds/slot_switch.wav", "static"]
+            ["slot_switch", "desolation/assets/sounds/slot_switch.wav", "static"],
+            ["acquire", "desolation/assets/sounds/acquire.wav", "static"],
+            ["drop", "desolation/assets/sounds/drop.wav", "static"],
+            ["empty_mag", "desolation/assets/sounds/weapons/empty_mag.wav", "static"],
+
+            ["hurt1", "desolation/assets/sounds/hurt1.wav", "static"],
+            ["hurt2", "desolation/assets/sounds/hurt2.wav", "static"],
+            ["hurt3", "desolation/assets/sounds/hurt3.wav", "static"],
+            
+            ["reload_pistol", "desolation/assets/sounds/weapons/reload_pistol.wav", "static"],
+            ["reload_revolver", "desolation/assets/sounds/weapons/reload_revolver.wav", "static"],
+            ["reload_assaultrifle", "desolation/assets/sounds/weapons/reload_assault_rifle.wav", "static"],
+            ["reload_shotgun", "desolation/assets/sounds/weapons/reload_shotgun.wav", "static"],
+
+            ["shoot_pistol", "desolation/assets/sounds/weapons/shoot_pistol.wav", "static"],
+            ["shoot_revolver", "desolation/assets/sounds/weapons/shoot_revolver.wav", "static"],
+            ["shoot_assaultrifle", "desolation/assets/sounds/weapons/shoot_assault_rifle.wav", "static"],
+            ["shoot_shotgun", "desolation/assets/sounds/weapons/shoot_shotgun.wav", "static"]
         ]
     }
 }

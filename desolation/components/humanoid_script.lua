@@ -329,6 +329,19 @@ function humanoidScript:humanoidShootWeapon(weapon)
     hud.weaponImg.scale = {-4, 4}
 end
 
+function humanoidScript:makeFootstepSounds(humanoid)
+    --footstep sounds
+    if humanoid.moving then
+        self.stepTimer = self.stepTimer + delta
+        if self.stepTimer > 0.4 - coreFuncs.boolToNum(humanoid.sprinting)*0.15 then
+            SoundManager:playSound(Assets.mapSounds["step_grass" .. math.random(1, 4)], Settings.vol_world, humanoid.position, true)
+            self.stepTimer = 0
+        end
+    else
+        self.stepTimer = 0
+    end
+end
+
 function humanoidScript:humanoidSetup()
     local humanoid = self.parent
     humanoid.imageComponent.source = Assets.images["player_body"]

@@ -21,6 +21,7 @@ function playerSounds:playSound(sound)
 end
 
 function playerSounds:load()
+    if true then return end
     self.stepTimer = 0
     self.sounds = {
         step = {grass = {}};
@@ -56,18 +57,7 @@ function playerSounds:load()
 end
 
 function playerSounds:update(delta)
-    --footstep sounds
-    local player = self.parent.parent
-    if player.moving then
-        self.stepTimer = self.stepTimer + delta
-        if self.stepTimer > 0.4 - coreFuncs.boolToNum(player.sprinting)*0.15 then
-            --love.audio.stop(self.sounds.step)
-            love.audio.play(Assets.sounds["step_grass" .. math.random(1, 10)])
-            self.stepTimer = 0
-        end
-    else
-        self.stepTimer = 0
-    end
+    
 end
 
 return playerSounds

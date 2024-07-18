@@ -60,7 +60,12 @@
 
         "sounds": [
             ["new_wave", "desolation/assets/sounds/new_wave.wav", "static"],
-            ["wave_clear", "desolation/assets/sounds/wave_clear.wav", "static"]
+            ["wave_clear", "desolation/assets/sounds/wave_clear.wav", "static"],
+            
+            ["step_grass1", "desolation/assets/sounds/footstep/grass1.wav", "static"],
+            ["step_grass2", "desolation/assets/sounds/footstep/grass2.wav", "static"],
+            ["step_grass3", "desolation/assets/sounds/footstep/grass3.wav", "static"],
+            ["step_grass4", "desolation/assets/sounds/footstep/grass4.wav", "static"]
         ]
     }
 }

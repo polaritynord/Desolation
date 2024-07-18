@@ -49,8 +49,7 @@ function playerScript:movement(delta, player)
     if player.sprinting then
         --play sprint sound
         if not player.sprintSoundPlayed then
-            local playerSounds = player.soundManager.script
-            playerSounds:playStopSound(Assets.sounds["sprint"])
+            SoundManager:restartSound(Assets.sounds["sprint"], Settings.vol_world, player.position, true)
             player.sprintSoundPlayed = true
             player.stamina = player.stamina - 10
         end
@@ -138,9 +137,8 @@ function playerScript:slotSwitching(player)
     if oldSlot ~= player.inventory.slot then
         player.reloading = false
         local weapon = player.inventory.weapons[player.inventory.previousSlot]
-        if weapon then
-            local playerSounds = player.soundManager.script
-            playerSounds:stopSound(Assets.sounds["reload_" .. string.lower(weapon.name)])
+        if weapon ~= nil then
+            SoundManager:stopSound(Assets.sounds["reload_" .. string.lower(weapon.name)])
         end
     end
 end
@@ -171,23 +169,21 @@ function playerScript:weaponDropping(player)
     --Cancel reloading
     player.reloading = false
     if weapon then
-        local playerSounds = player.soundManager.script
-        if Assets.sounds["reload_" .. string.lower(weapon.name)] then
-            playerSounds:stopSound(Assets.sounds["reload_" .. string.lower(weapon.name)])
+        local src = Assets.sounds["reload_" .. string.lower(weapon.name)]
+        if src ~= nil then
+            SoundManager:stopSound(Assets.sounds["reload_" .. string.lower(weapon.name)])
         end
     end
     --Get rid of the held weapon
     player.inventory.weapons[player.inventory.slot] = nil
     --play sound
-    local playerSounds = player.soundManager.script
-    playerSounds:playStopSound(Assets.sounds["drop"])
+    SoundManager:restartSound(Assets.sounds["drop"], Settings.vol_world, player.position, true)
 end
 
 function playerScript:shootingWeapon(delta, player)
     player.shootTimer = player.shootTimer + delta
     local weapon = player.inventory.weapons[player.inventory.slot]
     if weapon == nil then return end
-    local playerSounds = player.soundManager.script
     if (love.mouse.isDown(1) or InputManager:getAxis(6) > 0.4) then
         self:humanoidShootWeapon(weapon)
     end
@@ -229,10 +225,10 @@ function playerScript:reloadingWeapon(delta, player)
                     --sound effects
                     local playerSounds = player.soundManager.script
                     if weapon.magAmmo == weapon.magSize then
-                        playerSounds:playStopSound(Assets.sounds["reload_" .. string.lower(weapon.name)])
+                        SoundManager:restartSound(Assets.sounds["reload_" .. string.lower(weapon.name)], Settings.vol_world, player.position, true)
                         player.reloading = false
                     else
-                        playerSounds:playStopSound(Assets.sounds["progress_" .. string.lower(weapon.name)])
+                        SoundManager:restartSound(Assets.sounds["progress_" .. string.lower(weapon.name)], Settings.vol_world, player.position, true)
                     end
                 end
             end
@@ -240,11 +236,9 @@ function playerScript:reloadingWeapon(delta, player)
     else
         if InputManager:isPressed("reload") then
             if weapon.weaponType == "auto" then
-                love.audio.setVolume(Settings.vol_master * Settings.vol_world)
                 local src = Assets.sounds["reload_" .. string.lower(weapon.name)]
                 if src ~= nil then
-                    src:stop()
-                    src:play()
+                    SoundManager:restartSound(src, Settings.vol_world, player.position, true)
                 end
             end
             player.reloading = true
