@@ -90,8 +90,7 @@ function humanoidScript:damage(amount, sourcePosition)
     if humanoid.name == "player" then
         --play sound
         local src = Assets.sounds["hurt" .. math.random(1, 3)]
-        src:setVolume(Settings.vol_master * Settings.vol_world)
-        src:stop() ; src:play()
+        SoundManager:restartSound(src, Settings.vol_world)
         --create hitmarker
         local uiComp = CurrentScene.hud.UIComponent
         local hitmarkerInstance = uiComp:newImage(
@@ -147,16 +146,6 @@ function humanoidScript:explosionEvent(position, radius, intensity)
     --hurt player
     local damageAmount = 2*(radius/distance)*intensity
     self:damage(damageAmount, position)
-    --[[screen shake (if humanoid is player)
-    if humanoid.name ~= "player" then return end
-    if Settings.screen_shake and GetGlobal("freecam") < 1 then
-        local camera = CurrentScene.camera
-        local temp = {-1, 1}
-        local max = intensity*(radius/distance)
-        camera.position[1] = camera.position[1] + temp[math.random(1,2)]*max
-        camera.position[2] = camera.position[2] + temp[math.random(1,2)]*max
-    end
-    ]]--
 end
 
 function humanoidScript:hitscanBulletCheck(humanoid, weapon, shootAngle)
@@ -257,19 +246,17 @@ function humanoidScript:humanoidShootWeapon(weapon)
     humanoid.shootTimer = 0
     --Check if there is ammo available in magazine
     if weapon.magAmmo < 1 and not humanoid.reloading then
-        Assets.sounds["empty_mag"]:stop()
-        Assets.sounds["empty_mag"]:play()
+        SoundManager:restartSound(Assets.sounds["empty_mag"], Settings.vol_world, humanoid.position, true)
         return
     end
+    local shootSound = Assets.sounds["shoot_" .. string.lower(weapon.name)]
     if weapon.weaponType == "auto" or weapon.weaponType == "laser" then
         if humanoid.reloading then return end
         --Fire weapon
         weapon.magAmmo = weapon.magAmmo - weapon.bulletPerShot
         --Sound effect
-        if Assets.sounds["shoot_" .. string.lower(weapon.name)] ~= nil then
-            love.audio.setVolume(Settings.vol_master * Settings.vol_world)
-            Assets.sounds["shoot_" .. string.lower(weapon.name)]:stop()
-            Assets.sounds["shoot_" .. string.lower(weapon.name)]:play()
+        if shootSound ~= nil then
+            SoundManager:restartSound(shootSound, Settings.vol_world, humanoid.position, true)
         end
         local newLine = self:hitscanBulletCheck(
             humanoid, weapon, humanoid.rotation + math.uniform(-weapon.bulletSpread, weapon.bulletSpread)
@@ -292,10 +279,8 @@ function humanoidScript:humanoidShootWeapon(weapon)
         humanoid.reloading = false
         --Fire weapon
         weapon.magAmmo = weapon.magAmmo - 1
-        if Assets.sounds["shoot_" .. string.lower(weapon.name)] ~= nil then
-            love.audio.setVolume(Settings.vol_master * Settings.vol_world)
-            Assets.sounds["shoot_" .. string.lower(weapon.name)]:stop()
-            Assets.sounds["shoot_" .. string.lower(weapon.name)]:play()
+        if shootSound ~= nil then
+            SoundManager:restartSound(shootSound, Settings.vol_world, humanoid.position, true)
         end
         --Bullet instance creation
         local radians = math.pi*2 * (weapon.bulletSpread/360) --turn into radians

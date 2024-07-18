@@ -78,6 +78,7 @@ end
 
 function mapCreator:loadMap(path)
     Globals:load()
+    self.ambience = nil
     --read & convert to lua table
     local data = love.filesystem.read(path)
     data = json.decode(data)

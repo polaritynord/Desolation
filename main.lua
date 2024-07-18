@@ -205,7 +205,7 @@ end
 
 function love.load()
     love.graphics.setDefaultFilter("nearest", "nearest")
-    love.audio.setDistanceModel("linear")
+    love.audio.setDistanceModel("linearclamped")
     Assets.load()
     love.keyboard.setKeyRepeat(true)
     InputManager:loadBindingFile()
