@@ -1,3 +1,5 @@
+local buttonEvents = require "desolation.button_clickevents"
+local json = require("engine.lib.json")
 local keysMenu = ENGINE_COMPONENTS.scriptComponent.new()
 
 function keysMenu:load()
@@ -34,6 +36,21 @@ function keysMenu:load()
         ui[binding[1]].title = bindingTitle
         ui[binding[1]].binding = binding
     end
+    --Reset settings button
+    ui.resetKeys = ui:newTextButton(
+        {
+            buttonText = "Reset Keybindings to Default";
+            position = {0, 240+(#InputManager.bindings.keyboard-1)*40};
+            hoverEvent = buttonEvents.redHover;
+            unhoverEvent = buttonEvents.redUnhover;
+            clickEvent = function()
+                --Write new binding file
+                local defaultBindingsFile = love.filesystem.read("desolation/assets/default_bindings.json")
+                love.filesystem.write("bindings.json", defaultBindingsFile)
+                InputManager.bindings = json.decode(defaultBindingsFile)
+            end
+        }
+    )
     keys.length = 200 + #InputManager.bindings.keyboard*40
     --Scrollbar
     ui.scrollbar = ui:newScrollbar(

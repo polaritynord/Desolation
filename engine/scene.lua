@@ -111,7 +111,8 @@ local function addObjectToScene(instance, v, _isScene)
             newObj:addComponent(newComp)
         else
             --Import script component
-            newComp = dofile(compName .. ".lua")
+            newComp = love.filesystem.load(compName .. ".lua")
+            newComp = newComp()
             newComp.name = "script"
             newObj:addComponent(newComp)
         end

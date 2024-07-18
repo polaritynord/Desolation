@@ -313,6 +313,7 @@ function openareaManager:update(delta)
         Achievements.infiniteHighScores[CurrentScene.difficulty] = CurrentScene.score
     end
     ui.infinite.scoreCounter.oldScore = CurrentScene.score
+
     --***If the player is dead***
     if CurrentScene.player.health > 0 then
         self.survivalTimer = self.survivalTimer + delta

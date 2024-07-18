@@ -45,7 +45,8 @@ function mapCreator:spawnProp(v)
     --load custom script file
     --TODO: make these scripts get stored in a pool to prevent loading it over and over again!
     if propData[prop.name] ~= nil and propData[prop.name].script ~= nil then
-        local comp = dofile(propData[prop.name].script .. ".lua")
+        local comp = love.filesystem.load(propData[prop.name].script .. ".lua")
+        comp = comp()
         prop:addComponent(comp)
         comp:load()
     end
@@ -67,7 +68,8 @@ function mapCreator:spawnNPC(v)
     npc:addChild(hand)
     --load custom script file
     if npcData[npc.name] ~= nil and npcData[npc.name].script ~= nil then
-        local comp = dofile(npcData[npc.name].script .. ".lua")
+        local comp = love.filesystem.load(npcData[npc.name].script .. ".lua")
+        comp = comp()
         npc:addComponent(comp)
         comp:load()
     end
