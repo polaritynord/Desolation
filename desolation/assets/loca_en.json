@@ -106,7 +106,10 @@
         "explosionParticles": "Explosion Particles: "
     },
     "keysMenu": {
-        "pressAKey": "Press a key..."
+        "pressAKey": "Press a key... (click to cancel)",
+        "resetToDefault": "Reset Keybindings to Default",
+        "name": "- NAME -",
+        "key": "- KEY -"
     },
     "audioMenu": {
         "masterVolume": "Master Volume: ",

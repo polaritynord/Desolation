@@ -179,15 +179,14 @@ function love.keypressed(key, unicode)
     end
 
     --Check if a button is selected in keys menu
-    if CurrentScene.settings and CurrentScene.settings.keysMenu.selectedBinding[1] then
+    if CurrentScene.settings ~= nil and CurrentScene.settings.keysMenu.selectedBinding ~= nil then
         local keysMenu = CurrentScene.settings.keysMenu
-        RunConsoleCommand("bind " .. keysMenu.selectedBinding[2][1] .. " " .. key)
-        local element = keysMenu.selectedBinding[1]
-        element.buttonText = element.title .. ": " .. string.upper(element.binding[2])
-        element.textFont = "disposable-droid"
+        RunConsoleCommand("bind " .. keysMenu.selectedBinding[1] .. " " .. key)
+        local element = keysMenu.UIComponent[keysMenu.selectedBinding[1]]
+        element.selected = false
+        keysMenu.selectedBinding = nil
         --save bindings data
         love.filesystem.write("bindings.json", json.encode(InputManager.bindings))
-        keysMenu.selectedBinding = {nil, nil}
     end
 end
 

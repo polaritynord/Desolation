@@ -106,7 +106,10 @@
         "explosionParticles": "Patlama Parcaciklari: "
     },
     "keysMenu": {
-        "pressAKey": "Bir tusa tikla..."
+        "pressAKey": "Bir tusa bas... (iptal icin tikla)",
+        "resetToDefault": "Varsayilana Sifirla",
+        "name": "- ISIM -",
+        "key": "- TUS -"
     },
     "audioMenu": {
         "masterVolume": "Ana Ses: ",
