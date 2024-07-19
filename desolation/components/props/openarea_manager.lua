@@ -248,15 +248,11 @@ function openareaManager:update(delta)
     --Update UI & sound effects
     if not self.newWaveSoundPlayed then
         self.newWaveSoundPlayed = true
-        love.audio.setVolume(Settings.vol_master * Settings.vol_music)
-        Assets.mapSounds["new_wave"]:stop()
-        Assets.mapSounds["new_wave"]:play()
+        SoundManager:restartSound(Assets.mapSounds["new_wave"], Settings.vol_sfx)
     end
     if not self.clearWaveSoundPlayed then
         self.clearWaveSoundPlayed = true
-        love.audio.setVolume(Settings.vol_master * Settings.vol_music)
-        Assets.mapSounds["wave_clear"]:stop()
-        Assets.mapSounds["wave_clear"]:play()
+        SoundManager:restartSound(Assets.mapSounds["wave_clear"], Settings.vol_sfx)
     end
     --Wave cleared text
     if self.wavePrep then

@@ -54,6 +54,7 @@ function humanoidScript:humanoidUpdate(delta, humanoid)
     humanoid.velocity[2] = humanoid.velocity[2] + (-humanoid.velocity[2])*8*delta
     self:collisionCheck(delta, humanoid)
     self:doWalkingAnim(humanoid)
+    self:makeFootstepSounds(humanoid, delta)
     if humanoid.health > 0 then return end
     --fade away
     humanoid.scale[1] = humanoid.scale[1] + 20 * delta
@@ -329,12 +330,12 @@ function humanoidScript:humanoidShootWeapon(weapon)
     hud.weaponImg.scale = {-4, 4}
 end
 
-function humanoidScript:makeFootstepSounds(humanoid)
+function humanoidScript:makeFootstepSounds(humanoid, delta)
     --footstep sounds
     if humanoid.moving then
         self.stepTimer = self.stepTimer + delta
         if self.stepTimer > 0.4 - coreFuncs.boolToNum(humanoid.sprinting)*0.15 then
-            SoundManager:playSound(Assets.mapSounds["step_grass" .. math.random(1, 4)], Settings.vol_world, humanoid.position, true)
+            SoundManager:restartSound(Assets.mapSounds["step_grass" .. math.random(1, 4)], Settings.vol_world, humanoid.position, true)
             self.stepTimer = 0
         end
     else

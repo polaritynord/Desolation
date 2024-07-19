@@ -6,8 +6,7 @@ local crateScript = table.new(physicsProp)
 
 function crateScript:bulletHitEvent(crate)
     local source = Assets.mapSounds["hit_crate" .. math.random(1, 2)]
-    source:setVolume(Settings.vol_master * Settings.vol_world)
-    source:stop() ; source:play()
+    SoundManager:restartSound(source, Settings.vol_world, crate.position, true)
 end
 
 function crateScript:destroyEvent(crate)

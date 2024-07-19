@@ -288,8 +288,7 @@ function hud:update(delta)
     --Check for recent slot switch
     ui.slotSwitchTimer = ui.slotSwitchTimer - delta
     if ui.oldSlot ~= player.inventory.slot then
-        Assets.sounds["slot_switch"]:stop()
-        Assets.sounds["slot_switch"]:play()
+        SoundManager:restartSound(Assets.sounds["slot_switch"], Settings.vol_world)
         ui.slotSwitchTimer = 4
         ui.weaponImg.scale = {-4.5, 4.5}
     end

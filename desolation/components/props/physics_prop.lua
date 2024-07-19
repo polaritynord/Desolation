@@ -66,7 +66,7 @@ function physicsProp:physBulletHitEvent(bulletRot, weaponData)
     prop.velocity[1] = prop.velocity[1] + weaponData.bulletSpeed*math.cos(bulletRot)/prop.mass
     prop.velocity[2] = prop.velocity[2] + weaponData.bulletSpeed*math.sin(bulletRot)/prop.mass
     prop.rotVelocity = math.uniform(-5, 5)
-    if prop.script.bulletHitEvent then prop.script:bulletHitEvent() end
+    if prop.script.bulletHitEvent then prop.script:bulletHitEvent(prop) end
     --if prop is fully destroyed:
     self:destroyCheck()
 end

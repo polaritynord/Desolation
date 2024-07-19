@@ -2,10 +2,9 @@ local physicsProp = require("desolation.components.props.physics_prop")
 
 local crateScript = table.new(physicsProp)
 
-function crateScript:bulletHitEvent(bullet)
+function crateScript:bulletHitEvent(crate)
     local source = Assets.mapSounds["hit_barrel" .. math.random(1, 3)]
-    source:setVolume(Settings.vol_master * Settings.vol_world)
-    source:stop() ; source:play()
+    SoundManager:restartSound(source, Settings.vol_world, crate.position, true)
 end
 
 function crateScript:destroyEvent(prop)

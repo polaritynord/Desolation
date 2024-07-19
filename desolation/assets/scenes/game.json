@@ -162,6 +162,7 @@
             ["reload_revolver", "desolation/assets/sounds/weapons/reload_revolver.wav", "static"],
             ["reload_assaultrifle", "desolation/assets/sounds/weapons/reload_assault_rifle.wav", "static"],
             ["reload_shotgun", "desolation/assets/sounds/weapons/reload_shotgun.wav", "static"],
+            ["progress_shotgun", "desolation/assets/sounds/weapons/progress_shotgun.wav", "static"],
 
             ["shoot_pistol", "desolation/assets/sounds/weapons/shoot_pistol.wav", "static"],
             ["shoot_revolver", "desolation/assets/sounds/weapons/shoot_revolver.wav", "static"],

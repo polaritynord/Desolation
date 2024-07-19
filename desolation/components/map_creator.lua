@@ -148,10 +148,9 @@ function mapCreator:loadMap(path)
     player.position = data.playerData.position
     CurrentScene.camera.position = data.playerData.cameraPosition
     --ambience
-    if data.ambience ~= nil then
-        self.ambience = love.audio.newSource(data.ambience, "stream")
-        self.ambience:setLooping(true)
-        self.ambience:play()
+    if Assets.mapSounds["ambience"] ~= nil then
+        Assets.mapSounds["ambience"]:setLooping(true)
+        SoundManager:playSound(Assets.mapSounds["ambience"], Settings.vol_world)
     end
     self.parent.allowZoom = data.playerData.allowZoom
     self.parent.cameraBoundaries = data.playerData.cameraBoundaries
@@ -202,15 +201,9 @@ function mapCreator:createExplosion(position, radius, intensity)
         local particleComp = CurrentScene.bullets.particleComponent
         particleFuncs.createExplosionParticles(particleComp, position)
     end
-    --determine the volume of sound based on distance
-    local camDistance = coreFuncs.pointDistance(CurrentScene.camera.position, position)
-    local volume = Settings.vol_master * Settings.vol_world * (radius/camDistance)
     --play sound
     local sound = Assets.sounds["explosion"]
-    sound:stop()
-    sound:setVolume(volume)
-    --sound:setPosition((position[1]-CurrentScene.camera.position[1])/100, 1, 0) --TODO too quiet, needs fix
-    sound:play()
+    SoundManager:restartSound(sound, Settings.vol_world, position, true)
 end
 
 function mapCreator:load()
@@ -224,14 +217,14 @@ function mapCreator:load()
 end
 
 function mapCreator:update(delta)
-    if self.ambience == nil then return end
+    local ambienceSource = Assets.mapSounds["ambience"]
+    if ambienceSource == nil then return end
     if GamePaused then
-        self.ambience:pause()
+        ambienceSource:pause()
     else
-        self.ambience:setVolume(Settings.vol_master * Settings.vol_music)
-        self.ambience:play()
+        ambienceSource:setVolume(Settings.vol_master * Settings.vol_music)
+        ambienceSource:play()
     end
-    --self.parent.tile.imageComponent.color = {Settings.brightness, Settings.brightness, Settings.brightness, 1}
 end
 
 return mapCreator

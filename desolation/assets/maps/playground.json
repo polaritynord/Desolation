@@ -71,7 +71,6 @@
     "npcs": [
         ["guy", [-119, 118]]
     ],
-    "ambience": "desolation/assets/sounds/ost/ambience.wav",
     "assets": {
         "images": [
             ["prop_explosive_barrel", "desolation/assets/images/props/explosive_barrel.png"],
@@ -85,7 +84,9 @@
             ["step_grass1", "desolation/assets/sounds/footstep/grass1.wav", "static"],
             ["step_grass2", "desolation/assets/sounds/footstep/grass2.wav", "static"],
             ["step_grass3", "desolation/assets/sounds/footstep/grass3.wav", "static"],
-            ["step_grass4", "desolation/assets/sounds/footstep/grass4.wav", "static"]
+            ["step_grass4", "desolation/assets/sounds/footstep/grass4.wav", "static"],
+            
+            ["ambience", "desolation/assets/sounds/ost/ambience.wav", "stream"]
         ]
     }
 }

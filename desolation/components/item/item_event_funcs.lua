@@ -34,8 +34,7 @@ function itemEventFuncs.weaponPickup(item)
     item.gettingPickedUp = true
     weaponInv[emptySlot] = item.weaponData.new()
     --play sound
-    local playerSounds = player.soundManager.script
-    playerSounds:playStopSound(Assets.sounds["acquire"])
+    SoundManager:restartSound(Assets.sounds["acquire"], Settings.vol_world)
 end
 
 function itemEventFuncs.ammoPickup(item)
@@ -51,8 +50,7 @@ function itemEventFuncs.ammoPickup(item)
     player.inventory.ammunition[ammoType] = player.inventory.ammunition[ammoType] + amounts[ammoType]
     item.gettingPickedUp = true
     --play sound
-    local playerSounds = player.soundManager.script
-    playerSounds:playStopSound(Assets.sounds["acquire"])
+    SoundManager:restartSound(Assets.sounds["acquire"], Settings.vol_world)
     itemEventFuncs.createHUDNotif("hud_acquire_ammo")
 end
 
@@ -62,8 +60,7 @@ function itemEventFuncs.medkitPickup(item)
     player.health = player.health + 25
     if player.health > 100 then player.health = 100 end
     --play sound (TODO: find a healing sound)
-    local playerSounds = player.soundManager.script
-    playerSounds:playStopSound(Assets.sounds["acquire"])
+    SoundManager:restartSound(Assets.sounds["acquire"], Settings.vol_world)
     --notification in hud
     itemEventFuncs.createHUDNotif("hud_acquire_medkit")
     --vignette effects & misc
@@ -77,8 +74,7 @@ function itemEventFuncs.batteryPickup(item)
     player.armor = player.armor + 25
     if player.armor > 150 then player.armor = 150 end
     --play sound (TODO: find a healing sound)
-    local playerSounds = player.soundManager.script
-    playerSounds:playStopSound(Assets.sounds["acquire"])
+    SoundManager:restartSound(Assets.sounds["acquire"], Settings.vol_world)
     --notification in hud
     itemEventFuncs.createHUDNotif("hud_acquire_battery")
     CurrentScene.gameShaders.script.blueOffset = 255

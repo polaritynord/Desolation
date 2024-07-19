@@ -233,15 +233,13 @@ end
 function consoleFunctions.hurtmeScript(devConsole, command, i)
     if CurrentScene.name ~= "Game" then return end
     CurrentScene.player.health = CurrentScene.player.health - 20
-    local playerSounds = CurrentScene.player.soundManager.script
-    playerSounds:playStopSound(Assets.sounds["hurt" .. math.random(1, 3)])
+    SoundManager:restartSound(Assets.sounds["hurt" .. math.random(1, 3)], Settings.vol_world, CurrentScene.player.position, true)
 end
 
 function consoleFunctions.hurtarmorScript(devConsole, command, i)
     if CurrentScene.name ~= "Game" then return end
     CurrentScene.player.armor = CurrentScene.player.armor - 20
-    local playerSounds = CurrentScene.player.soundManager.script
-    playerSounds:playStopSound(Assets.sounds["hurt" .. math.random(1, 3)])
+    SoundManager:restartSound(Assets.sounds["hurt" .. math.random(1, 3)], Settings.vol_world, CurrentScene.player.position, true)
 end
 
 function consoleFunctions.restartScript(devConsole, command, i)

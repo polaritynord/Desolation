@@ -32,7 +32,7 @@ function soundManager:restartSound(source, volume, position, cameraRelative)
         end
         love.audio.setPosition(0, 0, 0)
     end
-    source:setVolume(volume)
+    source:setVolume(Settings.vol_master * volume)
     source:stop()
     source:play()
 end

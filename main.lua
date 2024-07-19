@@ -53,9 +53,8 @@ function love.wheelmoved(x, y)
         if oldSlot ~= player.inventory.slot then
             player.reloading = false
             local weapon = player.inventory.weapons[player.inventory.previousSlot]
-            if weapon then
-                local playerSounds = player.soundManager.script
-                playerSounds:stopSound(Assets.sounds["reload_" .. string.lower(weapon.name)])
+            if weapon ~= nil then
+                SoundManager:stopSound(Assets.sounds["reload_" .. string.lower(weapon.name)])
             end
         end
     end
