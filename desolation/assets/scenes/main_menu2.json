@@ -85,6 +85,11 @@
                     ["UIComponent", "desolation/components/ui/alt_menus/infinite_menu"]
                 ]
             ]
+        ],
+
+        [
+            "achievements",
+            ["UIComponent", "desolation/components/ui/achievements_menu"]
         ]
     ],
 

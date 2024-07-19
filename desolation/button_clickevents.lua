@@ -42,4 +42,10 @@ function clickEvents.settingsButtonClick(element)
     settings.open = true
 end
 
+function clickEvents.achievementsButtonClick(element)
+    if AltMenuOpen then return end
+    local blabla = CurrentScene.achievements
+    blabla.open = true
+end
+
 return clickEvents

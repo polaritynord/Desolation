@@ -6,6 +6,7 @@ local assets = {
     defaultSounds = {};
     mapImages = {};
     mapSounds = {};
+    achievementIcons = {};
 }
 
 function assets:unloadSceneAssets()
@@ -49,6 +50,12 @@ function assets.load()
         combat = love.mouse.newCursor("desolation/assets/images/cursor_combat.png", 12, 12);
         reload = love.mouse.newCursor("desolation/assets/images/cursor_reload.png", 12, 12);
     }
+    --load achievement icons
+    for name, data in pairs(Achievements) do
+        if name ~= "infiniteHighScores" then
+            assets.achievementIcons[name] = love.graphics.newImage(data.iconPath)
+        end
+    end
     --[[if true then return end
     assets.images = {
         player = {

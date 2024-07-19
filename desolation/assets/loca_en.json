@@ -39,6 +39,9 @@
             "toggle_follow": "Make NPC Follow"
         }
     },
+    "achivementDisplayNames": {
+        "thanksForPlaying": "Thanks For Playing"
+    },
     "pauseScreen": {
         "continue": "Continue",
         "mainMenu": "Main Menu"

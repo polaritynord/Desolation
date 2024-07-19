@@ -192,8 +192,8 @@ end
 
 local function updateUIOffset(delta)
     AltMenuOpen = (CurrentScene.devConsole and CurrentScene.devConsole.open) or (CurrentScene.settings and CurrentScene.settings.open) or
-                (CurrentScene.extras and CurrentScene.extras.open)
-    --TODO this code is ass
+                (CurrentScene.extras and CurrentScene.extras.open) or ((CurrentScene.achievements and CurrentScene.achievements.open))
+    --TODO this code is absolute fucking shit
     local x = (
         coreFuncs.boolToNum(AltMenuOpen) + coreFuncs.boolToNum(CurrentScene.settings and CurrentScene.settings.menu)
         + coreFuncs.boolToNum(CurrentScene.extras and CurrentScene.extras.open and CurrentScene.extras.selection ~= nil)
@@ -204,10 +204,10 @@ end
 function love.load()
     love.graphics.setDefaultFilter("nearest", "nearest")
     love.audio.setDistanceModel("linearclamped")
-    Assets.load()
-    love.keyboard.setKeyRepeat(true)
     InputManager:loadBindingFile()
     startupManager:load()
+    Assets.load()
+    love.keyboard.setKeyRepeat(true)
     love.window.setVSync(Settings.vsync)
 end
 

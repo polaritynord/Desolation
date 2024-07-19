@@ -157,8 +157,9 @@ function humanoidScript:hitscanBulletCheck(humanoid, weapon, shootAngle)
     local beginPos = table.new(bulletPos)
     local bulletSize = {12, 6}
     --(Infinite mode)
-    if CurrentScene.shots ~= nil then
+    if CurrentScene.shots ~= nil and humanoid == CurrentScene.player then
         CurrentScene.shots = CurrentScene.shots + 1
+        CurrentScene.shotsMissed = CurrentScene.shotsMissed + 1
     end
     --Do the raycast thingy
     for i = 1, 40 do
@@ -207,6 +208,10 @@ function humanoidScript:hitscanBulletCheck(humanoid, weapon, shootAngle)
                     --damage npc
                     npc.script:damage(weapon.bulletDamage)
                     if npc.script.bulletHitEvent ~= nil then npc.script:bulletHitEvent(humanoid) end
+                    --(Infinite mode)
+                    if CurrentScene.shotsMissed ~= nil and humanoid == CurrentScene.player then
+                        CurrentScene.shotsMissed = CurrentScene.shotsMissed - 1
+                    end
                     --TODO: bullet hit sfx or an indicator?
                     goto returnLine
                 end
@@ -231,10 +236,6 @@ function humanoidScript:hitscanBulletCheck(humanoid, weapon, shootAngle)
         bulletPos[2] = bulletPos[2] + 25*math.sin(shootAngle)
     end
     --If the function is still ongoing at this part, that means the bullet is out of range.
-    --(Infinite mode)
-    if CurrentScene.shotsMissed ~= nil then
-        CurrentScene.shotsMissed = CurrentScene.shotsMissed + 1
-    end
     ::returnLine::
     return {beginPos, bulletPos, weapon.fireLineWidth, {weapon.fireLineColor[1], weapon.fireLineColor[2], weapon.fireLineColor[3], math.uniform(0.6, 0.8)}}
     --LINE TABLE ORDER: begin position, ending position, line width, color
