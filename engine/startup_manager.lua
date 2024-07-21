@@ -77,13 +77,6 @@ function startupManager:load()
     if love.filesystem.getInfo("screenshots") == nil then
         love.filesystem.createDirectory("screenshots")
     end
-
-    --Open up the default scene
-    local startScene = LoadScene(infoData.startScene)
-    if startScene.name == "Intro" and table.contains(arg, "--skip-intro") then
-        startScene = LoadScene("desolation/assets/scenes/main_menu2.json")
-    end
-    SetScene(startScene)
 end
 
 return startupManager

@@ -10,18 +10,35 @@ function achievementsMenu:load()
     for name, data in pairs(Achievements) do
         if name == "infiniteHighScores" then goto skip end
         --Icon
-        print(Assets.achievementIcons)
+        print(Assets.defaultImages["achievement_" .. name])
         ui["icon_" .. name] = ui:newImage(
             {
-                position = {0, 200};
-                source = Assets.achievementIcons[name];
-                scale = {5, 5};
+                position = {32, 160+i*40};
+                source = Assets.defaultImages["achievement_" .. name];
+                scale = {4, 4};
+            }
+        )
+        ui["title_" .. name] = ui:newTextLabel(
+            {
+                position = {72, 144+i*40};
+                text = Loca.achievementDisplayNames[name];
+                size = 40;
+                font = "disposable-droid-bold";
             }
         )
 
         ::skip::
         i = i + 1
     end
+
+    ui.returnButton = ui:newTextButton(
+        {
+            buttonText = Loca.settings.returnButton;
+            buttonTextSize = 30;
+            position = {0, 440};
+            clickEvent = function() achievements.open = false end;
+        }
+    )
 end
 
 function achievementsMenu:update(delta)

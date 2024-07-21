@@ -6,7 +6,6 @@ local assets = {
     defaultSounds = {};
     mapImages = {};
     mapSounds = {};
-    achievementIcons = {};
 }
 
 function assets:unloadSceneAssets()
@@ -53,7 +52,7 @@ function assets.load()
     --load achievement icons
     for name, data in pairs(Achievements) do
         if name ~= "infiniteHighScores" then
-            assets.achievementIcons[name] = love.graphics.newImage(data.iconPath)
+            assets.defaultImages["achievement_" .. name] = love.graphics.newImage(data.iconPath)
         end
     end
     --[[if true then return end

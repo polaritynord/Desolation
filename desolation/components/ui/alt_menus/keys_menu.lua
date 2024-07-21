@@ -129,6 +129,13 @@ function keysMenu:update(delta)
             end
             nameElement.buttonText = bindingTitle
             nameElement.textFont = "disposable-droid"
+            --key element yellow color if the key is already taken by something else
+            local excluded = table.new(InputManager.keysList)
+            table.remove(excluded, i)
+            keyElement.color = {1, 1, 1, 1}
+            if table.contains(excluded, binding[2]) then
+                keyElement.color = {1, 1, 0, 1}
+            end
         end
     end
 end

@@ -209,6 +209,14 @@ function love.load()
     Assets.load()
     love.keyboard.setKeyRepeat(true)
     love.window.setVSync(Settings.vsync)
+
+    --Open up the default scene
+    local infoData = json.decode(love.filesystem.read(GAME_DIRECTORY .. "/info.json"))
+    local startScene = LoadScene(infoData.startScene)
+    if startScene.name == "Intro" and table.contains(arg, "--skip-intro") then
+        startScene = LoadScene("desolation/assets/scenes/main_menu2.json")
+    end
+    SetScene(startScene)
 end
 
 function love.update(delta)

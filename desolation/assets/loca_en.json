@@ -13,7 +13,7 @@
         "gameplay": "Gameplay",
         "video": "Video",
         "audio": "Audio",
-        "keys": "Keys",
+        "keys": "Controls",
         "lang": "Language: ",
         "returnButton": "Return",
         "restartWarning": "A restart is needed for the changes to take place.",
@@ -39,7 +39,7 @@
             "toggle_follow": "Make NPC Follow"
         }
     },
-    "achivementDisplayNames": {
+    "achievementDisplayNames": {
         "thanksForPlaying": "Thanks For Playing"
     },
     "pauseScreen": {

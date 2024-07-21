@@ -60,6 +60,11 @@ function inputManager:loadBindingFile()
         love.filesystem.write("bindings.json", defaultBindingsFile)
         self.bindings = json.decode(defaultBindingsFile)
     end
+    --List all used keys for the controls menu to check on
+    self.keysList = {}
+    for i = 1, #self.bindings.keyboard do
+        self.keysList[#self.keysList+1] = self.bindings.keyboard[i][2]
+    end
 end
 
 function inputManager:getKeys(inputName)
