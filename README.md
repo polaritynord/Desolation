@@ -1,2 +1,4 @@
 # Desolation
 ##### A top-down shooter game that is yet to have a purpose.
+
+<a href="https://www.flaticon.com/free-icons/tick" title="tick icons">Tick icons created by Pixel perfect - Flaticon</a>
