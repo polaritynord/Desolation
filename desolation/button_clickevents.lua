@@ -39,6 +39,7 @@ end
 function clickEvents.settingsButtonClick(element)
     if AltMenuOpen then return end
     local settings = CurrentScene.settings
+    settings.preview = table.new(Settings)
     settings.open = true
 end
 

@@ -7,7 +7,8 @@
         "about": "About",
         "changelog": "Changelog",
         "quit": "Quit",
-        "quitConfirmation": "Are You Sure?"
+        "quitConfirmation": "Are You Sure?",
+        "returnButton": "Return"
     },
     "settings": {
         "gameplay": "Gameplay",
@@ -15,7 +16,7 @@
         "audio": "Audio",
         "keys": "Controls",
         "lang": "Language: ",
-        "returnButton": "Return",
+        "returnButton": "Save & Return",
         "restartWarning": "A restart is needed for the changes to take place.",
         "bindingNames": {
             "fullscreen": "Toggle Fullscreen",
@@ -41,6 +42,9 @@
     },
     "achievementDisplayNames": {
         "thanksForPlaying": "Thanks For Playing"
+    },
+    "achievementDescriptions": {
+        "thanksForPlaying": "Open the game for the first time."
     },
     "pauseScreen": {
         "continue": "Continue",

@@ -117,12 +117,12 @@ function videoMenu:update(delta)
     end
 
     if not ui.enabled then return end
-    Settings.vsync = ui.vsyncBox.toggled
-    Settings.vignette = ui.vignetteBox.toggled
-    Settings.weapon_flame_particles = ui.weaponParticlesBox.toggled
-    Settings.bullet_shell_particles = ui.bulletShellBox.toggled
-    Settings.destruction_particles = ui.destructionParticlesBox.toggled
-    Settings.explosion_particles = ui.explosionParticlesBox.toggled
+    settings.preview.vsync = ui.vsyncBox.toggled
+    settings.preview.vignette = ui.vignetteBox.toggled
+    settings.preview.weapon_flame_particles = ui.weaponParticlesBox.toggled
+    settings.preview.bullet_shell_particles = ui.bulletShellBox.toggled
+    settings.preview.destruction_particles = ui.destructionParticlesBox.toggled
+    settings.preview.explosion_particles = ui.explosionParticlesBox.toggled
     --Settings.brightness = ui.brightnessSlider.value
 end
 

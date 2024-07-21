@@ -9,9 +9,10 @@ function settings:load()
     s.open = false
     s.menu = nil
     ui.languages = {"en", "tr"}
+    ui.menuButtons = {}
 
     --Element creation
-    ui.gameplayButton = ui:newTextButton(
+    ui.menuButtons.gameplay = ui:newTextButton(
         {
             buttonText = Loca.settings.gameplay;
             buttonTextSize = 30;
@@ -19,7 +20,7 @@ function settings:load()
             clickEvent = function() if s.menu == "gameplay" then s.menu = nil else s.menu = "gameplay" end end;
         }
     )
-    ui.videoButton = ui:newTextButton(
+    ui.menuButtons.video = ui:newTextButton(
         {
             buttonText = Loca.settings.video;
             buttonTextSize = 30;
@@ -27,7 +28,7 @@ function settings:load()
             clickEvent = function() if s.menu == "video" then s.menu = nil else s.menu = "video" end end;
         }
     )
-    ui.audioButton = ui:newTextButton(
+    ui.menuButtons.audio = ui:newTextButton(
         {
             buttonText = Loca.settings.audio;
             buttonTextSize = 30;
@@ -35,7 +36,7 @@ function settings:load()
             clickEvent = function() if s.menu == "audio" then s.menu = nil else s.menu = "audio" end end;
         }
     )
-    ui.keysButton = ui:newTextButton(
+    ui.menuButtons.keys = ui:newTextButton(
         {
             buttonText = Loca.settings.keys;
             buttonTextSize = 30;
@@ -49,11 +50,15 @@ function settings:load()
             buttonTextSize = 30;
             position = {0, 360};
             clickEvent = function()
-                local i = table.contains(ui.languages, Settings.language, true) + 1
+                local i = table.contains(ui.languages, s.preview.language, true) + 1
                 if i > #ui.languages then i = 1 end
-                Settings.language = ui.languages[i]
-                love.filesystem.write("settings.json", json.encode(Settings))
-                ui.restartWarning.text = Loca.settings.restartWarning
+                s.preview.language = ui.languages[i]
+                love.filesystem.write("settings.json", json.encode(s.preview))
+                if s.preview.language ~= Settings.language then
+                    ui.restartWarning.text = Loca.settings.restartWarning
+                else
+                    ui.restartWarning.text = ""
+                end
             end;
         }
     )
@@ -70,7 +75,12 @@ function settings:load()
             buttonText = Loca.settings.returnButton;
             buttonTextSize = 30;
             position = {0, 440};
-            clickEvent = function() s.open = false; s.menu = nil end;
+            clickEvent = function()
+                s.open = false
+                s.menu = nil
+                Settings = table.new(s.preview)
+                love.filesystem.write("settings.json", json.encode(Settings))
+            end;
         }
     )
 end
@@ -90,7 +100,14 @@ function settings:update(delta)
     end
 
     if not s.open then return end
-    ui.languageButton.buttonText = Loca.settings.lang .. string.upper(Settings["language"])
+    ui.languageButton.buttonText = Loca.settings.lang .. string.upper(s.preview["language"])
+    --button coloring if respective menu is open
+    for name, element in pairs(ui.menuButtons) do
+        element.color = {1, 1, 1, 1}
+        if s.menu == name then
+            element.color = {1, 0, 0, 1}
+        end
+    end
 end
 
 return settings

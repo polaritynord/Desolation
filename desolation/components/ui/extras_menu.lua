@@ -74,7 +74,7 @@ function extrasMenu:load()
     )
     ui.returnButton = ui:newTextButton(
         {
-            buttonText = Loca.settings.returnButton;
+            buttonText = Loca.mainMenu.returnButton;
             buttonTextSize = 30;
             position = {0, 440};
             clickEvent = function() menu.open = false ; menu.selection = nil end;

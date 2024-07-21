@@ -15,7 +15,7 @@
         "audio": "Ses",
         "keys": "Kontroller",
         "lang": "Dil: ",
-        "returnButton": "Geri Don",
+        "returnButton": "Kaydet & Geri Don",
         "restartWarning": "Degisiklerin gerceklesmesi icin yeniden baslatma gerekiyor.",
         "bindingNames": {
             "fullscreen": "Tam Ekran",

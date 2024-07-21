@@ -79,10 +79,10 @@ function audioMenu:update(delta)
     end
 
     if not ui.enabled then return end
-    Settings.vol_master = ui.masterVolSlider.value
-    Settings.vol_sfx = ui.sfxVolSlider.value
-    Settings.vol_music = ui.musicVolSlider.value
-    Settings.vol_world = ui.worldVolSlider.value
+    settings.preview.vol_master = ui.masterVolSlider.value
+    settings.preview.vol_sfx = ui.sfxVolSlider.value
+    settings.preview.vol_music = ui.musicVolSlider.value
+    settings.preview.vol_world = ui.worldVolSlider.value
 end
 
 return audioMenu
