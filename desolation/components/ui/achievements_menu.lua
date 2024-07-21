@@ -6,20 +6,19 @@ function achievementsMenu:load()
     local ui = achievements.UIComponent
     achievements.open = false
 
-    local i = 1
-    for name, data in pairs(Achievements) do
-        if name == "infiniteHighScores" then goto skip end
+    for i, name in ipairs(Achievements.other.orderList) do
+        local data = Achievements[name]
         --Icon
         ui["icon_" .. name] = ui:newImage(
             {
-                position = {32, 160+i*40};
+                position = {32, 160+i*110};
                 source = Assets.defaultImages["achievement_" .. name];
                 scale = {4, 4};
             }
         )
         ui["title_" .. name] = ui:newTextLabel(
             {
-                position = {72, 144+i*40};
+                position = {72, 144+i*110};
                 text = Loca.achievementDisplayNames[name];
                 size = 40;
                 font = "disposable-droid-bold";
@@ -27,7 +26,7 @@ function achievementsMenu:load()
         )
         ui["desc_" .. name] = ui:newTextLabel(
             {
-                position = {0, 200+i*40};
+                position = {0, 200+i*110};
                 text = Loca.achievementDescriptions[name];
             }
         )
@@ -40,14 +39,14 @@ function achievementsMenu:load()
         i = i + 1
     end
 
-    ui.returnButton = ui:newTextButton(
-        {
-            buttonText = Loca.mainMenu.returnButton;
-            buttonTextSize = 30;
-            position = {0, 440};
-            clickEvent = function() achievements.open = false end;
-        }
-    )
+    --ui.returnButton = ui:newTextButton(
+    --    {
+    --        buttonText = Loca.mainMenu.returnButton;
+    --        buttonTextSize = 30;
+    --        position = {0, 440};
+    --        clickEvent = function() achievements.open = false end;
+    --    }
+    --)
 end
 
 function achievementsMenu:update(delta)

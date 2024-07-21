@@ -51,7 +51,7 @@ function assets.load()
     }
     --load achievement icons
     for name, data in pairs(Achievements) do
-        if name ~= "infiniteHighScores" then
+        if name ~= "other" then
             assets.defaultImages["achievement_" .. name] = love.graphics.newImage(data.iconPath)
         end
     end

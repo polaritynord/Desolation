@@ -7,7 +7,8 @@
         "about": "Hakkinda",
         "changelog": "Guncellemeler",
         "quit": "Oyundan Cik",
-        "quitConfirmation": "Emin Misin?"
+        "quitConfirmation": "Emin Misin?",
+        "returnButton": "Geri Don"
     },
     "settings": {
         "gameplay": "Oynanis",
@@ -38,6 +39,20 @@
             "screenshot": "Ekran Goruntusu Cek",
             "toggle_follow": "NPC'nin Takip Etmesini Sagla"
         }
+    },
+    "achievementDisplayNames": {
+        "thanksForPlaying": "Oynadigin Icin Tesekkurler",
+        "selfDestruct": "Ozyikim",
+        "distant": "Sonsuz Ufuklar",
+        "aHairsBreadth": "Kil Payi",
+        "devConsole": "Konsol"
+},
+    "achievementDescriptions": {
+        "thanksForPlaying": "Oyunu ilk defa ac.",
+        "selfDestruct": "Kendini patlayici bir varille havaya ucur.",
+        "distant": "ASIRI uzak koordinatlara git.",
+        "aHairsBreadth": "(Sonsuz) Bir dalgayi cok dusuk can ile bitir.",
+        "devConsole": "Yapimci konsolunu ac."
     },
     "pauseScreen": {
         "continue": "Devam Et",

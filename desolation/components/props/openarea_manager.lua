@@ -300,13 +300,13 @@ function openareaManager:update(delta)
     ui.infinite.scoreCounter.color[2] = ui.infinite.scoreCounter.color[2] + (1-ui.infinite.scoreCounter.color[2])*9*delta
     ui.infinite.scoreCounter.color[3] = ui.infinite.scoreCounter.color[3] + (1-ui.infinite.scoreCounter.color[3])*9*delta
     --Score description
-    local text = Loca.infiniteMode.highScore .. Achievements.infiniteHighScores[CurrentScene.difficulty] ..
+    local text = Loca.infiniteMode.highScore .. Achievements.other.infiniteHighScores[CurrentScene.difficulty] ..
                 " (" .. string.upper(Loca.extrasMenu.infiniteDifficulties[CurrentScene.difficulty]) .. ")\n" ..
                 Loca.infiniteMode.wave .. " " .. CurrentScene.wave
     ui.infinite.scoreDesc.text = text
     --Set high score
-    if CurrentScene.score > Achievements.infiniteHighScores[CurrentScene.difficulty] then
-        Achievements.infiniteHighScores[CurrentScene.difficulty] = CurrentScene.score
+    if CurrentScene.score > Achievements.other.infiniteHighScores[CurrentScene.difficulty] then
+    Achievements.other.infiniteHighScores[CurrentScene.difficulty] = CurrentScene.score
     end
     ui.infinite.scoreCounter.oldScore = CurrentScene.score
 

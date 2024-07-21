@@ -4,5 +4,28 @@
         "obtained": false
     },
 
-    "infiniteHighScores": [0, 0, 0, 0, 0]
+    "selfDestruct": {
+        "iconPath": "desolation/assets/images/achievements/self_destruct.png",
+        "obtained": false
+    },
+
+    "distant": {
+        "iconPath": "desolation/assets/images/achievements/distant.png",
+        "obtained": false
+    },
+
+    "aHairsBreadth": {
+        "iconPath": "desolation/assets/images/achievements/a_hairs_breadth.png",
+        "obtained": false
+    },
+
+    "devConsole": {
+        "iconPath": "desolation/assets/images/achievements/dev_console.png",
+        "obtained": false
+    },
+
+    "other": {
+        "infiniteHighScores": [0, 0, 0, 0, 0],
+        "orderList": ["thanksForPlaying", "selfDestruct", "distant", "aHairsBreadth", "devConsole"]
+    }
 }

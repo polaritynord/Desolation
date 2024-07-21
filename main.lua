@@ -17,12 +17,22 @@ Scenes = {}
 
 function love.wheelmoved(x, y)
     --Keys menu scrolling (TODO, make this work for all menus?)
-    if CurrentScene.settings then
+    if CurrentScene.settings and CurrentScene.settings.menu == "keys" then
         local menu = CurrentScene.settings.keysMenu
         menu.UIComponent.scrollbar.value = menu.UIComponent.scrollbar.value - y/20
         --menu.position[2] = menu.position[2] + 35*y
         if menu.realY > 0 then menu.realY = 0 end
         if menu.realY < 540-menu.length then menu.realY = 540-menu.length end
+    end
+    --Achivements menu scrolling (TODO, make this work for all menus?)
+    if CurrentScene.achievements ~= nil then
+        if CurrentScene.achievements.open then
+            local menu = CurrentScene.achievements
+            --menu.UIComponent.scrollbar.value = menu.UIComponent.scrollbar.value - y/20
+            menu.position[2] = menu.position[2] + 35*y
+            --if menu.realY > 0 then menu.realY = 0 end
+            --if menu.realY < 540-menu.length then menu.realY = 540-menu.length end
+        end
     end
 
     --Ingame zooming
