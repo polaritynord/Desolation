@@ -2,9 +2,12 @@ local physicsProp = require("desolation.components.props.physics_prop")
 
 local crateScript = table.new(physicsProp)
 
-function crateScript:bulletHitEvent(crate)
+function crateScript:bulletHitEvent(crate, bulletOwner)
     local source = Assets.mapSounds["hit_barrel" .. math.random(1, 3)]
     SoundManager:restartSound(source, Settings.vol_world, crate.position, true)
+    if crate.health < 0 and bulletOwner == CurrentScene.player then
+        crate.explodedByPlayer = true
+    end
 end
 
 function crateScript:destroyEvent(prop)
@@ -12,6 +15,10 @@ function crateScript:destroyEvent(prop)
     table.removeValue(CurrentScene.props.tree, prop)
     local mapCreator = CurrentScene.mapCreator.script
     mapCreator:createExplosion(prop.position, 400, 10)
+    --Self destruction achievement check
+    if CurrentScene.player.health <= 0 and prop.explodedByPlayer then
+        GiveAchievement("selfDestruct")
+    end
     --(Infinite mode)
     if not CurrentScene.regenerateProps then return end
     local cratePos = CurrentScene.props["openarea_manager"].script:determineCratePos()
@@ -33,6 +40,7 @@ function crateScript:load()
     end
     barrel.imageComponent = ENGINE_COMPONENTS.imageComponent.new(barrel, Assets.mapImages["prop_explosive_barrel"])
     barrel.scale = {2.5, 2.5}
+    barrel.explodedByPlayer = false
 end
 
 function crateScript:update(delta)

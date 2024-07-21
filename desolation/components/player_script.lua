@@ -246,6 +246,16 @@ function playerScript:reloadingWeapon(delta, player)
     end
 end
 
+function playerScript:distantAchivementCheck(player)
+    if Achievements.distant.obtained then return end
+    if player.position[1] ~= player.position[1] or player.position[2] ~= player.position[2] then
+        SoundManager:restartSound(Assets.sounds["hurt2"], 1)
+        player.health = -31
+        CurrentScene.gameOver.UIComponent.title.text = Loca.bruhuhuh
+        GiveAchievement("distant")
+    end
+end
+
 --Engine funcs
 function playerScript:load()
     self:humanoidSetup()
@@ -276,6 +286,7 @@ function playerScript:update(delta)
     self:weaponDropping(player)
     self:shootingWeapon(delta, player)
     self:reloadingWeapon(delta, player)
+    self:distantAchivementCheck(player)
 end
 
 return playerScript

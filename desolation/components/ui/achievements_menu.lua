@@ -39,14 +39,14 @@ function achievementsMenu:load()
         i = i + 1
     end
 
-    --ui.returnButton = ui:newTextButton(
-    --    {
-    --        buttonText = Loca.mainMenu.returnButton;
-    --        buttonTextSize = 30;
-    --        position = {0, 440};
-    --        clickEvent = function() achievements.open = false end;
-    --    }
-    --)
+    ui.returnButton = ui:newTextButton(
+        {
+            buttonText = Loca.mainMenu.returnButton;
+            buttonTextSize = 30;
+            position = {0, 180};
+            clickEvent = function() achievements.open = false end;
+        }
+    )
 end
 
 function achievementsMenu:update(delta)

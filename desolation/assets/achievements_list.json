@@ -24,8 +24,13 @@
         "obtained": false
     },
 
+    "chainReaction": {
+        "iconPath": "desolation/assets/images/achievements/chain_reaction.png",
+        "obtained": false
+    },
+
     "other": {
         "infiniteHighScores": [0, 0, 0, 0, 0],
-        "orderList": ["thanksForPlaying", "selfDestruct", "distant", "aHairsBreadth", "devConsole"]
+        "orderList": ["thanksForPlaying", "selfDestruct", "distant", "aHairsBreadth", "devConsole", "chainReaction"]
     }
 }

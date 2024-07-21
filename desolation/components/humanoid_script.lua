@@ -191,7 +191,7 @@ function humanoidScript:hitscanBulletCheck(humanoid, weapon, shootAngle)
                     end
                     --bullet hit event
                     if prop.script.physBulletHitEvent ~= nil then
-                        prop.script:physBulletHitEvent(shootAngle, weapon)
+                        prop.script:physBulletHitEvent(shootAngle, weapon, humanoid)
                     end
                     goto returnLine
                 end

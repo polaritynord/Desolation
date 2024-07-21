@@ -174,6 +174,7 @@ function love.keypressed(key, unicode)
         for i = 1, #commands do
             RunConsoleCommand(commands[i])
         end
+        GiveAchievement("devConsole")
         print("Ran console script: " .. console.commandInput)
         console.script:log("> " .. console.commandInput)
         console.commandInput = ""

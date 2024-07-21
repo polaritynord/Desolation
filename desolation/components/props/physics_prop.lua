@@ -60,13 +60,13 @@ function physicsProp:destroyCheck()
     end
 end
 
-function physicsProp:physBulletHitEvent(bulletRot, weaponData)
+function physicsProp:physBulletHitEvent(bulletRot, weaponData, bulletOwner)
     local prop = self.parent
     prop.health = prop.health - weaponData.bulletDamage
     prop.velocity[1] = prop.velocity[1] + weaponData.bulletSpeed*math.cos(bulletRot)/prop.mass
     prop.velocity[2] = prop.velocity[2] + weaponData.bulletSpeed*math.sin(bulletRot)/prop.mass
     prop.rotVelocity = math.uniform(-5, 5)
-    if prop.script.bulletHitEvent then prop.script:bulletHitEvent(prop) end
+    if prop.script.bulletHitEvent then prop.script:bulletHitEvent(prop, bulletOwner) end
     --if prop is fully destroyed:
     self:destroyCheck()
 end

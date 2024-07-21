@@ -114,15 +114,7 @@ function openareaManager:setupUI()
         }
     )
     --Game over statistics
-    self.statsTitle = CurrentScene.gameOver.UIComponent:newTextLabel(
-        {
-            size = 48;
-            text = Loca.infiniteMode.gameOverTitle;
-            position = {100, 80};
-            color = {1, 1, 1, 0};
-            font = "disposable-droid-bold";
-        }
-    )
+    CurrentScene.gameOver.UIComponent.title.text = Loca.infiniteMode.gameOverTitle
     self.statsText = CurrentScene.gameOver.UIComponent:newTextLabel(
         {
             size = 30;
@@ -226,6 +218,10 @@ function openareaManager:update(delta)
                 ui.infinite.waveDesc.text = Loca.infiniteMode.wavePrepare
                 --Give player some loot (TODO)
                 local player = CurrentScene.player
+                --Low health achievement
+                if player.health < 25 then
+                    GiveAchievement("aHairsBreadth")
+                end
                 if player.health < 100 then
                     itemEventFuncs.createHUDNotif("hud_acquire_medkit")
                     player.health = player.health + 30
@@ -324,7 +320,7 @@ function openareaManager:update(delta)
                         Loca.infiniteMode.statsWaves .. (CurrentScene.wave-1) .. "\n" .. Loca.infiniteMode.statsKills .. CurrentScene.kills .. "\n" ..
                         Loca.infiniteMode.statsBarrels .. CurrentScene.barrelsExploded .. "\n" .. Loca.infiniteMode.statsCrates .. CurrentScene.cratesBroken
     self.statsText.color[4] = self.statsText.color[4] + delta
-    self.statsTitle.color[4] = self.statsTitle.color[4] + delta
+    self.title.color[4] = self.title.color[4] + delta
     --Hide away score counter
     ui.infinite.scoreCounter.color[4] = 0
     ui.infinite.scoreDesc.color[4] = 0

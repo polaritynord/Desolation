@@ -45,14 +45,16 @@
         "selfDestruct": "Ozyikim",
         "distant": "Sonsuz Ufuklar",
         "aHairsBreadth": "Kil Payi",
-        "devConsole": "Konsol"
+        "devConsole": "Konsol",
+        "chainReaction": "Zincirleme Tepkime"
 },
     "achievementDescriptions": {
         "thanksForPlaying": "Oyunu ilk defa ac.",
         "selfDestruct": "Kendini patlayici bir varille havaya ucur.",
         "distant": "ASIRI uzak koordinatlara git.",
         "aHairsBreadth": "(Sonsuz) Bir dalgayi cok dusuk can ile bitir.",
-        "devConsole": "Yapimci konsolunu ac."
+        "devConsole": "Yapimci konsolunu ac.",
+        "chainReaction": "Bir patlamayla baska patlayicilari patlat."
     },
     "pauseScreen": {
         "continue": "Devam Et",
@@ -144,5 +146,6 @@
         "assaultrifle": "Taramali T.",
         "shotgun": "Pompali T.",
         "stolgard-pal": "Stolgard-PAL"
-    }
+    },
+    "bruhuhuh": "O KADAR UZAKTA NE YAPIYORSUN LAN?!"
 }

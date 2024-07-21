@@ -45,14 +45,16 @@
         "selfDestruct": "Self-Destruction",
         "distant": "Eternal Horizons",
         "aHairsBreadth": "A Hair's Breadth",
-        "devConsole": "The Console"
+        "devConsole": "The Console",
+        "chainReaction": "Chain Reaction"
 },
     "achievementDescriptions": {
         "thanksForPlaying": "Open the game for the first time.",
         "selfDestruct": "Blow yourself up eith an explosive barrel.",
         "distant": "Travel to VERY distant coordinates.",
         "aHairsBreadth": "(Infinite) Complete a wave with extremely low health.",
-        "devConsole": "Open up the developer console."
+        "devConsole": "Open up the developer console.",
+        "chainReaction": "Detonate more explosives with an explosion."
     },
     "pauseScreen": {
         "continue": "Continue",
@@ -144,5 +146,6 @@
         "assaultrifle": "Assault Rifle",
         "shotgun": "Shotgun",
         "stolgard-pal": "Stolgard-PAL"
-    }
+    },
+    "bruhuhuh": "WHAT THE HELL ARE YOU DOING THAT FAR AWAY?!"
 }

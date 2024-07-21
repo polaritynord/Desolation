@@ -179,6 +179,10 @@ function mapCreator:createExplosion(position, radius, intensity)
     --iterate through props
     for _, prop in ipairs(CurrentScene.props.tree) do
         if prop.script.explosionEvent then prop.script:explosionEvent(position, radius, intensity) end
+        --chain reaction achievement
+        if prop.name == "explosive_barrel" and prop.health <= 0 then
+            GiveAchievement("chainReaction")
+        end
     end
     --iterate through items
     for _, item in ipairs(CurrentScene.items.tree) do

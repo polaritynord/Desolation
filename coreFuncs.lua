@@ -139,6 +139,7 @@ function table.removeValue(tbl, val)
 end
 
 function GiveAchievement(name)
+    if Achievements[name].obtained then return end
     Achievements[name].obtained = true
     love.filesystem.write("achievements.json", json.encode(Achievements))
     --TODO: achievement notifs
