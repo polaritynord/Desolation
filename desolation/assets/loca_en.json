@@ -46,7 +46,10 @@
         "distant": "Eternal Horizons",
         "aHairsBreadth": "A Hair's Breadth",
         "devConsole": "The Console",
-        "chainReaction": "Chain Reaction"
+        "chainReaction": "Chain Reaction",
+        "1k_3": "Tough Metal",
+        "1k_4": "\"Extreme\"ly Easy",
+        "1k_5": "No Mercy"
     },
     "achievementDescriptions": {
         "thanksForPlaying": "Open the game for the first time.",
@@ -54,7 +57,10 @@
         "distant": "Travel to VERY distant coordinates.",
         "aHairsBreadth": "(Infinite) Complete a wave with extremely low health.",
         "devConsole": "Open up the developer console.",
-        "chainReaction": "Detonate more explosives with an explosion."
+        "chainReaction": "Detonate more explosives with an explosion.",
+        "1k_3": "(Infinite) Reach 1000 score on Hard mode.",
+        "1k_4": "(Infinite) Reach 1000 score on Extreme mode.",
+        "1k_5": "(Infinite) Reach 1000 score on Ultra mode."
     },
     "pauseScreen": {
         "continue": "Continue",

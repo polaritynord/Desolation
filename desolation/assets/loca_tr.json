@@ -46,7 +46,11 @@
         "distant": "Sonsuz Ufuklar",
         "aHairsBreadth": "Kil Payi",
         "devConsole": "Konsol",
-        "chainReaction": "Zincirleme Tepkime"
+        "chainReaction": "Zincirleme Tepkime",
+        "1k_3": "Sert Metal",
+        "1k_4": "\"Ekstrem\" Derece Kolay",
+        "1k_5": "Sifir Merhamet"
+        
 },
     "achievementDescriptions": {
         "thanksForPlaying": "Oyunu ilk defa ac.",
@@ -54,7 +58,10 @@
         "distant": "ASIRI uzak koordinatlara git.",
         "aHairsBreadth": "(Sonsuz) Bir dalgayi cok dusuk can ile bitir.",
         "devConsole": "Yapimci konsolunu ac.",
-        "chainReaction": "Bir patlamayla baska patlayicilari patlat."
+        "chainReaction": "Bir patlamayla baska patlayicilari patlat.",
+        "1k_3": "(Sonsuz) Zor modda 1000 puana ulas.",
+        "1k_4": "(Sonsuz) Ekstrem modda 1000 puana ulas.",
+        "1k_5": "(Infinite) Ultra modda 1000 puana ulas."
     },
     "pauseScreen": {
         "continue": "Devam Et",

@@ -306,6 +306,11 @@ function openareaManager:update(delta)
     end
     ui.infinite.scoreCounter.oldScore = CurrentScene.score
 
+    --1K Point achievements
+    if CurrentScene.difficulty >= 3 and CurrentScene.score >= 1000 then
+        GiveAchievement("1k_" .. CurrentScene.difficulty)
+    end
+
     --***If the player is dead***
     if CurrentScene.player.health > 0 then
         self.survivalTimer = self.survivalTimer + delta
@@ -320,7 +325,7 @@ function openareaManager:update(delta)
                         Loca.infiniteMode.statsWaves .. (CurrentScene.wave-1) .. "\n" .. Loca.infiniteMode.statsKills .. CurrentScene.kills .. "\n" ..
                         Loca.infiniteMode.statsBarrels .. CurrentScene.barrelsExploded .. "\n" .. Loca.infiniteMode.statsCrates .. CurrentScene.cratesBroken
     self.statsText.color[4] = self.statsText.color[4] + delta
-    self.title.color[4] = self.title.color[4] + delta
+    CurrentScene.gameOver.UIComponent.title.color[4] = CurrentScene.gameOver.UIComponent.title.color[4] + delta
     --Hide away score counter
     ui.infinite.scoreCounter.color[4] = 0
     ui.infinite.scoreDesc.color[4] = 0

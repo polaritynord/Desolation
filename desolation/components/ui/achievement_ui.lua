@@ -3,32 +3,31 @@ local achievementUI = {}
 function achievementUI:load()
     self.parent.queue = {}
     self.timer = 0
-    self.soundPlayed = false
 
     local ui = self.parent.UIComponent
     ui.icon = ui:newImage(
         {
             source = "none";
-            position = {330, 90};
+            position = {330, 330};
             scale = {5, 5};
-            color = {1, 1, 1, 0};
+            color = {1, 1, 0, 0};
         }
     )
     ui.title = ui:newTextLabel(
         {
             text = "Achievement Obtained!";
             size = 30;
-            position = {385, 50};
-            color = {1, 1, 1, 0};
+            position = {385, 290};
+            color = {1, 1, 0, 0};
         }
     )
     ui.achievementName = ui:newTextLabel(
         {
             text = "";
-            position = {385, 80};
+            position = {385, 320};
             font = "disposable-droid-bold";
             size = 48;
-            color = {1, 1, 1, 0};
+            color = {1, 1, 0, 0};
         }
     )
 end
@@ -58,14 +57,8 @@ function achievementUI:update(delta)
             ui.title.color[4] = ui.title.color[4] + 2*delta
             ui.achievementName.color[4] = ui.achievementName.color[4] + 2*delta
         end
-        --Play sound effect
-        if not self.soundPlayed then
-            SoundManager:restartSound(Assets.sounds["achievement_obtain"], Settings.vol_sfx)
-            self.soundPlayed = true
-        end
     else
         self.timer = 0
-        self.soundPlayed = false
         --Move on to the next achievement
         if #self.parent.queue > 0 then
             self.parent.currentAchivement = self.parent.queue[1]

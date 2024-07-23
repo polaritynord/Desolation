@@ -142,7 +142,11 @@ function GiveAchievement(name)
     if Achievements[name].obtained then return end
     Achievements[name].obtained = true
     love.filesystem.write("achievements.json", json.encode(Achievements))
-    --TODO: achievement notifs
+    --Add ach. to notif queue
+    if CurrentScene.achievementUI == nil then return end
+    CurrentScene.achievementUI.queue[#CurrentScene.achievementUI.queue+1] = name
+    --Play sound
+    SoundManager:restartSound(Assets.sounds["achievement_obtain"], Settings.vol_sfx)
 end
 
 return coreFuncs

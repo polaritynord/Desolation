@@ -26,6 +26,7 @@ function mainMenu:load()
             position = {70, 200};
             buttonText = Loca.mainMenu.campaign;
             buttonTextSize = 30;
+            color = {1, 1, 1, 0.2};
         }
     )
     ui.extrasButton = ui:newTextButton(
@@ -57,6 +58,7 @@ function mainMenu:load()
             position = {70, 360};
             buttonText = Loca.mainMenu.about;
             buttonTextSize = 30;
+            color = {1, 1, 1, 0.2};
         }
     )
     ui.changelogButton = ui:newTextButton(
@@ -64,6 +66,7 @@ function mainMenu:load()
             position = {70, 400};
             buttonText = Loca.mainMenu.changelog;
             buttonTextSize = 30;
+            color = {1, 1, 1, 0.2};
         }
     )
     ui.quitButton = ui:newTextButton(

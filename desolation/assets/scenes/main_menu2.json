@@ -90,11 +90,6 @@
         [
             "achievements",
             ["UIComponent", "desolation/components/ui/achievements_menu"]
-        ],
-
-        [
-            "achievementUI",
-            ["UIComponent", "desolation/components/ui/achievement_ui"]
         ]
     ],
 

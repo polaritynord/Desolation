@@ -29,8 +29,23 @@
         "obtained": false
     },
 
+    "1k_3": {
+        "iconPath": "desolation/assets/images/achievements/1k_3.png",
+        "obtained": false
+    },
+
+    "1k_4": {
+        "iconPath": "desolation/assets/images/achievements/1k_4.png",
+        "obtained": false
+    },
+
+    "1k_5": {
+        "iconPath": "desolation/assets/images/achievements/1k_5.png",
+        "obtained": false
+    },
+
     "other": {
         "infiniteHighScores": [0, 0, 0, 0, 0],
-        "orderList": ["thanksForPlaying", "selfDestruct", "distant", "aHairsBreadth", "devConsole", "chainReaction"]
+        "orderList": ["thanksForPlaying", "selfDestruct", "distant", "aHairsBreadth", "devConsole", "chainReaction", "1k_3", "1k_4", "1k_5"]
     }
 }
