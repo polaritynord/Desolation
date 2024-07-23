@@ -5,6 +5,8 @@ function achievementsMenu:load()
     local settings = achievements.parent
     local ui = achievements.UIComponent
     achievements.open = false
+    achievements.length = 1000
+    achievements.realY = achievements.position[2]
 
     for i, name in ipairs(Achievements.other.orderList) do
         local data = Achievements[name]
@@ -34,6 +36,7 @@ function achievementsMenu:load()
             ui["title_" .. name].color = {0, 1, 0, 1};
             ui["icon_" .. name].color = {0, 1, 0, 1};
         end
+        achievements.length = achievements.length + 10
 
         ::skip::
         i = i + 1
@@ -56,6 +59,7 @@ function achievementsMenu:update(delta)
 
     --UI Offsetting & canvas enabling
     achievements.position[1] = 650 + MenuUIOffset
+    achievements.position[2] = achievements.position[2] + (achievements.realY-achievements.position[2])*8*delta
     ui.enabled = achievements.open
     --Transparency animation
     if ui.enabled then

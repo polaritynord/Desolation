@@ -225,6 +225,7 @@ function hud:load()
             }
         )
     end
+    --Other variables
     ui.acquireNotifs = {}
     ui.hitmarkers = {}
     ui.followingImgs = {}

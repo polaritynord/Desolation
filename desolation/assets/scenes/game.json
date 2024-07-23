@@ -108,6 +108,11 @@
                 ]
             ]
         ],
+
+        [
+            "achievementUI",
+            ["UIComponent", "desolation/components/ui/achievement_ui"]
+        ],
         
         [
             "gameShaders",
@@ -116,7 +121,7 @@
 
         [
             "cursor",
-            ["imageComponent", "desolation/components/game_cursor_script"]
+            ["desolation/components/game_cursor_script"]
         ]
     ],
 
@@ -153,6 +158,7 @@
             ["acquire", "desolation/assets/sounds/acquire.wav", "static"],
             ["drop", "desolation/assets/sounds/drop.wav", "static"],
             ["empty_mag", "desolation/assets/sounds/weapons/empty_mag.wav", "static"],
+            ["achievement_obtain", "desolation/assets/sounds/achievement_obtain.wav", "static"],
 
             ["hurt1", "desolation/assets/sounds/hurt1.wav", "static"],
             ["hurt2", "desolation/assets/sounds/hurt2.wav", "static"],

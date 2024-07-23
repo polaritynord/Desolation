@@ -7,9 +7,9 @@ function keysMenu:load()
     local settings = keys.parent
     local ui = keys.UIComponent
     keys.realY = keys.position[2]
-    keys.length = 200 + #InputManager.bindings.keyboard*40
+    keys.length = 300 + #InputManager.bindings.keyboard*40
 
-    --scrollbar element
+    --[[scrollbar element
     ui.scrollbar = ui:newScrollbar(
         {
             position = {480, 250};
@@ -19,6 +19,7 @@ function keysMenu:load()
         }
     )
     ui.scrollbar.realY = ui.scrollbar.position[2]
+    ]]--
     --key binding main title or some shi
     ui:newTextLabel(
         {
@@ -95,7 +96,7 @@ function keysMenu:update(delta)
 
     --UI Offsetting & canvas enabling
     keys.position[1] = 950 + MenuUIOffset
-    keys.position[2] = -ui.scrollbar.value*keys.length--keys.position[2] + (keys.realY-keys.position[2])*12*delta
+    keys.position[2] = keys.position[2] + (keys.realY-keys.position[2])*8*delta
     ui.enabled = settings.menu == "keys"
     --Transparency animation
     if ui.enabled then
@@ -110,8 +111,6 @@ function keysMenu:update(delta)
         end
         return
     end
-    --keys.realY = -ui.scrollbar.value*keys.length
-    ui.scrollbar.position[2] = ui.scrollbar.realY - keys.position[2]
     --Update binding name and titles
     for i = 1, #InputManager.bindings.keyboard do
         local binding = InputManager.bindings.keyboard[i]
