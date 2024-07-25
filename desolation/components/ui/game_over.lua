@@ -5,7 +5,7 @@ function gameOver:load()
     ui.rectangle = ui:newRectangle(
         {
             size = {960, 540};
-            color = {0, 0, 0, 0};
+            color = {0, 0, 0, 1};
         }
     )
     ui.title = CurrentScene.gameOver.UIComponent:newTextLabel(

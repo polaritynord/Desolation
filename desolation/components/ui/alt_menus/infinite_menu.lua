@@ -4,6 +4,7 @@ local infiniteMenu = ENGINE_COMPONENTS.scriptComponent.new()
 function infiniteMenu:load()
     local infinite = self.parent
     local ui = infinite.UIComponent
+    ui.enabled = false
     infinite.difficulty = 1
     infinite.amounts = {
         crate = 28;

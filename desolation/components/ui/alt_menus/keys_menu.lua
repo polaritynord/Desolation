@@ -6,6 +6,7 @@ function keysMenu:load()
     local keys = self.parent
     local settings = keys.parent
     local ui = keys.UIComponent
+    ui.enabled = false
     keys.realY = keys.position[2]
     keys.length = 300 + #InputManager.bindings.keyboard*40
 

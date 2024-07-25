@@ -5,6 +5,7 @@ function extrasMenu:load()
     local menu = self.parent
     local ui = menu.UIComponent
     menu.open = false
+    ui.enabled = false
     menu.selection = nil
     --Element creation
     ui.playgroundButton = ui:newTextButton(

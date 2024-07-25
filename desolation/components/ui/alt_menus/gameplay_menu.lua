@@ -7,6 +7,7 @@ function gameplayMenu:load()
     local settings = gameplay.parent
 
     local ui = gameplay.UIComponent
+    ui.enabled = false
     ui.cameraSwayText = ui:newTextLabel(
         {
             text = Loca.gameplayMenu.cameraSway;

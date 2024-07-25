@@ -4,6 +4,7 @@ function achievementsMenu:load()
     local achievements = self.parent
     local settings = achievements.parent
     local ui = achievements.UIComponent
+    ui.enabled = false
     achievements.open = false
     achievements.length = 200
     achievements.realY = achievements.position[2]

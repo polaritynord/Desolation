@@ -1,6 +1,10 @@
 local soundManager = {}
 
 function soundManager:playSound(source, volume, position, cameraRelative)
+    if source == nil then
+        ConsoleLog("Attempt to play sound failed: not loaded!")
+        return
+    end
     if cameraRelative then
         source:setPosition(position[1], position[2])
         love.audio.setPosition(CurrentScene.camera.position[1], 1, CurrentScene.camera.position[2])
@@ -15,14 +19,26 @@ function soundManager:playSound(source, volume, position, cameraRelative)
 end
 
 function soundManager:stopSound(source)
+    if source == nil then
+        ConsoleLog("Attempt to play sound failed: not loaded!")
+        return
+    end
     source:stop()
 end
 
 function soundManager:pauseSound(source)
+    if source == nil then
+        ConsoleLog("Attempt to play sound failed: not loaded!")
+        return
+    end
     source:pause()
 end
 
 function soundManager:restartSound(source, volume, position, cameraRelative)
+    if source == nil then
+        ConsoleLog("Attempt to play sound failed: not loaded!")
+        return
+    end
     if cameraRelative then
         source:setPosition(position[1], position[2])
         love.audio.setPosition(CurrentScene.camera.position[1], 1, CurrentScene.camera.position[2])

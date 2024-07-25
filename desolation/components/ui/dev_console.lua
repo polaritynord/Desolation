@@ -23,10 +23,6 @@ function devConsole:readCommandsFromInput(commandInput, secondaryJoin)
     return commands
 end
 
-function devConsole:log(text)
-    self.parent.logs[#self.parent.logs+1] = text
-end
-
 function devConsole:load()
     local console = self.parent
     local ui = console.UIComponent
@@ -179,10 +175,10 @@ function RunConsoleCommand(command)
             if not GetGlobalCheatValue(temp) then return end
             if GetGlobal(temp) < 1 then
                 SetGlobal(temp, 1)
-                devConsole:log(temp .. " ON")
+                ConsoleLog(temp .. " ON")
             else
                 SetGlobal(temp, 0)
-                devConsole:log(temp .. " OFF")
+                ConsoleLog(temp .. " OFF")
             end
         else
             --Set value
@@ -194,6 +190,14 @@ function RunConsoleCommand(command)
     if table.contains(consoleFuncs.funcsList, temp) then
         consoleFuncs[temp .. "Script"](devConsole.parent, command, i)
     end
+end
+
+function ConsoleLog(text, writeToConsole)
+    if writeToConsole == nil then writeToConsole = true end
+    if writeToConsole then print(text) end
+    if CurrentScene.devConsole == nil then return end
+    local console = CurrentScene.devConsole
+    console.logs[#console.logs+1] = text
 end
 
 return devConsole

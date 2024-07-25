@@ -113,23 +113,23 @@ function consoleFunctions.helpScript(devConsole, command, i)
             if table.contains(consoleFunctions.funcsList, v, false) then
                 statementType = "function"
             end
-            devConsole.script:log("\t\t(" .. statementType .. ") " .. v)
+            ConsoleLog("\t\t(" .. statementType .. ") " .. v)
         end
-        devConsole.script:log("\tWrite \"help [statement] to view detailed information.\n\tList of statements:")
+        ConsoleLog("\tWrite \"help [statement] to view detailed information.\n\tList of statements:")
         return
     end
 
     --Fetch description & make sure it exists
     local descIndex = table.contains(devConsole.helpTexts.titles, temp, true)
     if descIndex == false then
-        devConsole.script:log("Unknown statement \"" .. temp .. "\".\nWrite \"help\" to view the full list of globals and functions.")
+        ConsoleLog("Unknown statement \"" .. temp .. "\".\nWrite \"help\" to view the full list of globals and functions.")
         return
     end
-    devConsole.script:log("\t" .. devConsole.helpTexts.descriptions[descIndex])
+    ConsoleLog("\t" .. devConsole.helpTexts.descriptions[descIndex])
 end
 
 function consoleFunctions.loremScript(devConsole, command, i)
-    devConsole.script:log("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at libero ac elit eleifend bibendum eget eu odio. Donec tristique sodales efficitur. Donec bibendum, dui quis placerat ullamcorper, odio dolor feugiat quam, vel pretium orci eros eget risus. Vestibulum ligula nunc, lacinia ut augue nec, egestas consectetur lorem. Integer ante urna, posuere id arcu vel, fermentum feugiat sem. Morbi vehicula, ligula ac iaculis viverra, augue nisi dignissim metus, in vestibulum enim nisl aliquet nunc. Mauris euismod nibh quis aliquet interdum. Cras porttitor")
+    ConsoleLog("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at libero ac elit eleifend bibendum eget eu odio. Donec tristique sodales efficitur. Donec bibendum, dui quis placerat ullamcorper, odio dolor feugiat quam, vel pretium orci eros eget risus. Vestibulum ligula nunc, lacinia ut augue nec, egestas consectetur lorem. Integer ante urna, posuere id arcu vel, fermentum feugiat sem. Morbi vehicula, ligula ac iaculis viverra, augue nisi dignissim metus, in vestibulum enim nisl aliquet nunc. Mauris euismod nibh quis aliquet interdum. Cras porttitor")
 end
 
 function consoleFunctions.giveScript(devConsole, command, i)
@@ -158,9 +158,9 @@ function consoleFunctions.giveScript(devConsole, command, i)
 end
 
 function consoleFunctions.infoScript(devConsole, command, i)
-    devConsole.script:log("Made by Polaritynord")
-    devConsole.script:log("Using " .. ENGINE_NAME .. " build " .. ENGINE_VERSION)
-    devConsole.script:log(GAME_NAME .. " version " .. GAME_VERSION .. " (" .. GAME_VERSION_STATE .. ")")
+    ConsoleLog("Made by Polaritynord")
+    ConsoleLog("Using " .. ENGINE_NAME .. " build " .. ENGINE_VERSION)
+    ConsoleLog(GAME_NAME .. " version " .. GAME_VERSION .. " (" .. GAME_VERSION_STATE .. ")")
 end
 
 function consoleFunctions.bindScript(devConsole, command, i)
@@ -214,7 +214,7 @@ function consoleFunctions.mapScript(devConsole, command, i)
     --check if map exists
     local path = string.lower(GAME_NAME) .. "/assets/maps/" .. temp .. ".json"
     if love.filesystem.getInfo(path) == nil then
-        devConsole.script:log("couldn't find map \"" .. temp .. "\".")
+        ConsoleLog("couldn't find map \"" .. temp .. "\".")
         return
     end
     local scene = LoadScene("desolation/assets/scenes/game.json")
@@ -225,9 +225,9 @@ end
 function consoleFunctions.mapsScript(devConsole, command, i)
     local files = love.filesystem.getDirectoryItems(string.lower(GAME_NAME) .. "/assets/maps")
     for k = 1, #files do
-        devConsole.script:log(files[k])
+        ConsoleLog(files[k])
     end
-    devConsole.script:log("List of maps:")
+    ConsoleLog("List of maps:")
 end
 
 function consoleFunctions.hurtmeScript(devConsole, command, i)

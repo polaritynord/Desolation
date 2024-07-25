@@ -5,15 +5,7 @@ local mainMenu = ENGINE_COMPONENTS.scriptComponent.new()
 
 function mainMenu:load()
     local ui = self.parent.UIComponent
-    --[[
-    ui.background = ui:newImage(
-        {
-            source = Assets.images.ui.menuBackground;
-            scale = {0.7, 0.7};
-            position = {480, 270};
-        }
-    )
-    ]]--
+
     ui.title = ui:newImage(
         {
             source = Assets.images.logo;
@@ -26,7 +18,7 @@ function mainMenu:load()
             position = {70, 200};
             buttonText = Loca.mainMenu.campaign;
             buttonTextSize = 30;
-            color = {1, 1, 1, 0.2};
+            color = {1, 1, 1, 0.35};
         }
     )
     ui.extrasButton = ui:newTextButton(
@@ -58,7 +50,7 @@ function mainMenu:load()
             position = {70, 360};
             buttonText = Loca.mainMenu.about;
             buttonTextSize = 30;
-            color = {1, 1, 1, 0.2};
+            color = {1, 1, 1, 0.35};
         }
     )
     ui.changelogButton = ui:newTextButton(
@@ -66,7 +58,7 @@ function mainMenu:load()
             position = {70, 400};
             buttonText = Loca.mainMenu.changelog;
             buttonTextSize = 30;
-            color = {1, 1, 1, 0.2};
+            color = {1, 1, 1, 0.35};
         }
     )
     ui.quitButton = ui:newTextButton(
@@ -93,12 +85,6 @@ function mainMenu:load()
             font = "disposable-droid"
         }
     )
-    --ui.blackCover = ui:newRectangle(
-    --    {
-    --        color = {1, 1, 1, 0};
-    --        size = {960, 540};
-    --    }
-    --)
     --initial loading stuff
     if CurrentScene.mapCreator ~= nil then
         CurrentScene.mapCreator.script:loadMap("desolation/assets/maps/" .. Settings.menu_background .. ".json")

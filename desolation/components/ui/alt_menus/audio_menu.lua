@@ -4,6 +4,7 @@ function audioMenu:load()
     local audio = self.parent
     local settings = audio.parent
     local ui = audio.UIComponent
+    ui.enabled = false
 
     ui.masterVolText = ui:newTextLabel(
         {

@@ -4,6 +4,7 @@ function videoMenu:load()
     local video = self.parent
     local settings = video.parent
     local ui = video.UIComponent
+    ui.enabled = false
 
     ui.vsyncText = ui:newTextLabel(
         {

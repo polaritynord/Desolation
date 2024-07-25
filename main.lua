@@ -175,7 +175,7 @@ function love.keypressed(key, unicode)
         end
         GiveAchievement("devConsole")
         print("Ran console script: " .. console.commandInput)
-        console.script:log("> " .. console.commandInput)
+        ConsoleLog("> " .. console.commandInput)
         console.commandInput = ""
     end
 
