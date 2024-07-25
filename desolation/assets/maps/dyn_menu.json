@@ -8,7 +8,7 @@
     "walls": [
         ["test_gray", [-10, -5], [20, 2]],
         ["test_gray", [14, -5], [5, 10]],
-        ["test_gray", [-8, 3], [22, 2]]
+        ["test_gray", [-8, 3], [18, 2]]
     ],
     "tiles": [
         ["prototype_black", 0, 0]

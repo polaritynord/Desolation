@@ -54,8 +54,16 @@
         [
             "explosive_barrel", [116, -212], 0, []
         ],
+
         [
             "explosive_barrel", [41, -131], 0, []
+        ],
+
+        [
+            "trigger_prop", [360, 305], 0,
+            [
+                ["event", "soundTest"]
+            ]
         ]
     ],
     "items": [

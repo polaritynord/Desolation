@@ -13,6 +13,7 @@ function globals:load()
     self.slippiness = {12, true, false}
     self.stamina_fill = {16, true, false}
     self.stamina_drain = {18, true, false}
+    self.draw_triggers = {1, false, true}
 end
 
 function GetGlobal(name)

@@ -3,6 +3,10 @@
         "script": "desolation/components/props/exp_text"
     },
 
+    "trigger_prop": {
+        "script": "desolation/components/props/trigger_prop"
+    },
+
     "crate": {
         "script": "desolation/components/props/crate",
         "movable": true,

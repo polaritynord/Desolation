@@ -132,7 +132,8 @@ function love.keypressed(key, unicode)
 
     --Take screenshot key
     if table.contains(InputManager:getKeys("screenshot"), key) then
-        love.graphics.captureScreenshot("screenshots/" .. os.date("%Y%m%d%H%m%S") .. ".png")
+        love.graphics.captureScreenshot("screenshots/" .. os.date("%Y.%m.%d %H.%m.%S") .. ".png")
+        ConsoleLog("Screenshot saved at " .. love.filesystem.getRealDirectory("screenshots"))
     end
 
     --***DEVCONSOLE RELATED STUFF DOWN HERE***
