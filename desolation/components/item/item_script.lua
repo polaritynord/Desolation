@@ -57,6 +57,7 @@ function itemScript:movement(delta)
         --Turn & velocity decrease
         item.rotation = item.rotation - item.rotVelocity*delta
         item.rotVelocity = item.rotVelocity + (-item.rotVelocity)*math.pi*2*delta
+        self:collisionCheck()
     end
 end
 
@@ -86,7 +87,6 @@ function itemScript:update(delta)
 
     local player = CurrentScene.player
     self:movement(delta)
-    self:collisionCheck()
     --Distance calculation
     if player ~= nil then
         item.distanceToPlayer = coreFuncs.pointDistance(item.position, player.position)

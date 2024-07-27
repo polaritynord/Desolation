@@ -20,6 +20,7 @@ function triggerProp:load()
     prop.imageComponent = ENGINE_COMPONENTS.imageComponent.new(prop)
     prop.imageComponent.draw = customDraw
     if prop.size == nil then prop.size = {80, 80} end
+    if prop.destroyInTrigger == nil then prop.destroyInTrigger = false end
 end
 
 function triggerProp:update(_)
@@ -30,6 +31,10 @@ function triggerProp:update(_)
     local propPos = self.parent.position
     if coreFuncs.aabbCollision(playerPos, propPos, {48, 48}, self.parent.size) then
         triggerEvents[self.parent.event](self.parent)
+        --Destroy object
+        if self.parent.destroyInTrigger then
+            table.removeValue(CurrentScene.props.tree, self.parent)
+        end
     end
 end
 

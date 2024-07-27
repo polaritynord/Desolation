@@ -1,8 +1,4 @@
 {
-    "exp_text": {
-        "script": "desolation/components/props/exp_text"
-    },
-
     "trigger_prop": {
         "script": "desolation/components/props/trigger_prop"
     },

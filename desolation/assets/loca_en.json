@@ -141,7 +141,7 @@
         "worldVolume": "World Volume: "
     },
     "game": {
-        "playgroundWelcome": "This is a testing. Please remain calm."
+        "achievementObtained": "Achivement Obtained!"
     },
     "intro": {
         "betaText": "This game is in early development. Everything is subject to change."

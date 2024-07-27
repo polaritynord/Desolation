@@ -40,7 +40,10 @@ function scene.new()
     end
 
     function s:draw()
-        self.drawLayers = {{}, {}, {}}
+        self.drawLayers = {}
+        for i = 1, 5 do
+            self.drawLayers[#self.drawLayers+1] = {}
+        end
         self.uiLayer = {}
         self.particleLayer = {}
         self.particleCount = 0

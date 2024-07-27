@@ -104,7 +104,7 @@ function mapCreator:loadMap(path)
             local tile = object.new(CurrentScene.tiles)
             --maybe set name?
             tile.imageComponent = ENGINE_COMPONENTS.imageComponent.new(tile, Assets.mapImages["tile_" .. v[1]])
-            tile.imageComponent.layer = 3
+            tile.imageComponent.layer = 5
             tile.scale = {2, 2}
             tile.position = {v[2]*1024, v[3]*1024}
             CurrentScene.tiles:addChild(tile)

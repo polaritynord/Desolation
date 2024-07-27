@@ -15,7 +15,7 @@ function achievementUI:load()
     )
     ui.title = ui:newTextLabel(
         {
-            text = "Achievement Obtained!";
+            text = Loca.game.achievementObtained;
             size = 30;
             position = {385, 290};
             color = {1, 1, 0, 0};

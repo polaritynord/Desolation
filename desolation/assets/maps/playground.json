@@ -1,21 +1,20 @@
 {
     "playerData": {
-        "position": [0, 100],
-        "cameraPosition": [0, 100],
+        "position": [0, 0],
+        "cameraPosition": [0, 0],
         "health": 100,
         "armor": 100,
         "allowZoom": true,
         "beginnerInventory": {
             "weapons": [
-                ["Pistol", 13], ["Shotgun", 6], null
+                null, null, null
             ],
 
             "ammunition": []
         }
     },
     "walls": [
-        ["test_gray", [5, -6], [1, 9]],
-        ["test_gray", [-4, -6], [9, 1]]
+        ["table", [-7, -5], [4, 0.9]]
     ],
     "tiles": [
         ["prototype_white", -1, -1],
@@ -29,63 +28,18 @@
         ["prototype_white", 1, 1]
     ],
     "props": [
-        [
-            "exp_text", [0, -256], 0,
-            [
-                ["text", "$playgroundWelcome"],
-                ["font", "disposable-droid"]
-            ]
-        ],
-        [
-            "crate", [-262, -65], 45, []
-        ],
-        [
-            "crate_big", [-180, -65], 29,
-            [
-                ["loot", ["medkit","battery","ammo_medium","ammo_medium","ammo_medium","ammo_medium"]]
-            ]
-        ],
-        [
-            "barrel", [-60, -232], 0, []
-        ],
-        [
-            "explosive_barrel", [160, -130], 0, []
-        ],
-        [
-            "explosive_barrel", [116, -212], 0, []
-        ],
-
-        [
-            "explosive_barrel", [41, -131], 0, []
-        ],
-
-        [
-            "trigger_prop", [360, 305], 0,
-            [
-                ["event", "soundTest"]
-            ]
-        ]
+        
     ],
     "items": [
-        ["ammo_shotgun", [150, 170], 0],
-        ["ammo_revolver", [150, 110], 120],
-        ["ammo_light", [150, 50], 40],
-        ["ammo_medium", [150, -10], 25],
-        ["weapon", [200, 100], 75, "Revolver"],
-        ["weapon", [200, 50], 75, "AssaultRifle"],
-        ["medkit", [-120, -80], 25],
-        ["battery", [-120, -170], 25]
+        ["weapon", [-200, -280], 37, "Pistol"]
     ],
     "npcs": [
-        ["guy", [-119, 118]]
     ],
     "assets": {
         "images": [
-            ["prop_explosive_barrel", "desolation/assets/images/props/explosive_barrel.png"],
-            ["prop_barrel", "desolation/assets/images/props/barrel.png"],
-            ["prop_crate", "desolation/assets/images/props/crate.png"],
+            ["tile_prototype_white", "desolation/assets/images/tiles/prototype_white.png"],
             ["wall_test_gray", "desolation/assets/images/walls/test_gray.png"],
-            ["tile_prototype_white", "desolation/assets/images/tiles/prototype_white.png"]
+            ["wall_table", "desolation/assets/images/walls/table.png"]
         ],
 
         "sounds": [
