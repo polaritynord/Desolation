@@ -23,6 +23,7 @@ function mapCreator:spawnItem(v)
         item.weaponData = weaponManager[v[4]].new()
     end
     item.script:load()
+	item.velocity = v[4]
     CurrentScene.items:addChild(item)
 end
 

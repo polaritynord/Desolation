@@ -1,7 +1,7 @@
 {
     "name": "DESOLATION",
     "author": "Polaritynord",
-    "version": "1.2",
+    "version": "1.3.dev1 (2025 Overhaul)",
     "versionState": "alpha",
     "startScene": "desolation/assets/scenes/main_menu2.json",
     "icon": "desolation/assets/images/icon.png"

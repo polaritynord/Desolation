@@ -49,7 +49,7 @@ function robotScript:update(delta)
         --***Drop loot***
         if not robot.lootDropped then
             local itemData = {
-                "ammo_light", table.new(robot.position), math.uniform(0, 360)
+                "ammo_light", table.new(robot.position), math.uniform(0, 360), math.uniform(250, 400)
             }
             --Determine item type
             local n = math.random()
@@ -72,6 +72,7 @@ function robotScript:update(delta)
             --elseif n >= 0.57 and n < 0.7 then
             --    itemData[1] = "battery"
             --end
+			
             CurrentScene.mapCreator.script:spawnItem(itemData)
             --score
             if CurrentScene.score ~= nil then
