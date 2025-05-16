@@ -15,7 +15,20 @@ CurrentScene = nil
 GamePaused = false
 Scenes = {}
 
+function love.mousemoved()
+    --input type check
+    if InputManager.inputType == "joystick" then
+        print("keyboard input mode active")
+        InputManager.inputType = "keyboard"
+    end
+end
+
 function love.wheelmoved(x, y)
+    --input type check
+    if InputManager.inputType == "joystick" then
+        print("keyboard input mode active")
+        InputManager.inputType = "keyboard"
+    end
     --Keys menu scrolling (TODO, make this work for all menus?)
     if CurrentScene.settings and CurrentScene.settings.menu == "keys" then
         local menu = CurrentScene.settings.keysMenu

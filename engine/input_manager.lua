@@ -10,6 +10,7 @@ local inputManager = {
 function love.joystickadded(joystick)
     if inputManager.joystick ~= nil then return end
     inputManager.joystick = joystick
+    inputManager.inputType = "joystick"
     print("joystick connected")
 end
 

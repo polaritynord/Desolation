@@ -131,9 +131,10 @@
     },
     "keysMenu": {
         "pressAKey": "Bir tusa bas... (iptal icin tikla)",
-        "resetToDefault": "Varsayilana Sifirla",
+        "resetToDefault": "Kontrolleri Varsayilana Sifirla",
         "name": "- ISIM -",
-        "key": "- TUS -"
+        "key": "- TUS -",
+        "showControllerIcon": "Kumanda Ikonunu Goster: "
     },
     "audioMenu": {
         "masterVolume": "Ana Ses: ",

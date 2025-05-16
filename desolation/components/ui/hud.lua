@@ -331,7 +331,7 @@ function hud:update(delta)
     end
     --Joystick indicator
     ui.joystickImg.source = nil
-    if InputManager.inputType == "joystick" then
+    if InputManager.inputType == "joystick" and Settings.show_controller_icon then
         ui.joystickImg.source = Assets.images.hud_joystick
     end
     --Notifications
@@ -368,7 +368,12 @@ function hud:update(delta)
             (item.position[1]-CurrentScene.camera.position[1])*CurrentScene.camera.zoom+480,
             (item.position[2]-CurrentScene.camera.position[2]-50)*CurrentScene.camera.zoom+270
         }
+        --There is no controller binding customization rn so I simply made it
+        --show "A". might change later idk.
         ui.itemPickupKey.text = string.upper(InputManager:getKeys("interact")[1])
+        if InputManager.inputType == "joystick" then
+            ui.itemPickupKey.text = "A"
+        end
         ui.itemPickupKey.position = {
             (item.position[1]-CurrentScene.camera.position[1])*CurrentScene.camera.zoom+470,
             (item.position[2]-CurrentScene.camera.position[2]-50)*CurrentScene.camera.zoom+252

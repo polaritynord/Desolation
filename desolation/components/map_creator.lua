@@ -23,8 +23,10 @@ function mapCreator:spawnItem(v)
         item.weaponData = weaponManager[v[4]].new()
     end
     item.script:load()
-	item.velocity = v[4]
+    --Some bs I did for robot loots to have velocity
+    --if item.name ~= "weapon" then item.velocity = v[4] end
     CurrentScene.items:addChild(item)
+    return item
 end
 
 function mapCreator:spawnProp(v)

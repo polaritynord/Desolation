@@ -90,6 +90,11 @@
         [
             "achievements",
             ["UIComponent", "desolation/components/ui/achievements_menu"]
+        ],
+
+        [
+            "cursor",
+            ["desolation/components/game_cursor_script"]
         ]
     ],
 

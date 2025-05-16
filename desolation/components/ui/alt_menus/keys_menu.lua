@@ -8,7 +8,7 @@ function keysMenu:load()
     local ui = keys.UIComponent
     ui.enabled = false
     keys.realY = keys.position[2]
-    keys.length = 300 + #InputManager.bindings.keyboard*40
+    keys.length = 380 + #InputManager.bindings.keyboard*40
 
     --[[scrollbar element
     ui.scrollbar = ui:newScrollbar(
@@ -88,6 +88,20 @@ function keysMenu:load()
             end
         }
     )
+    ui.showControllerIconText = ui:newTextLabel(
+        {
+            size = 30;
+            font = "disposable-droid-bold";
+            text = Loca.keysMenu.showControllerIcon;
+            position = {0, 275+#InputManager.bindings.keyboard*40}
+        }
+    )
+    ui.showControllerIconBox = ui:newCheckbox(
+        {
+            position = {400, 290+#InputManager.bindings.keyboard*40};
+            toggled = Settings.show_controller_icon;
+        }
+    )
 end
 
 function keysMenu:update(delta)
@@ -112,6 +126,8 @@ function keysMenu:update(delta)
         end
         return
     end
+    --Controller settings here
+    settings.preview.show_controller_icon = ui.showControllerIconBox.toggled
     --Update binding name and titles
     for i = 1, #InputManager.bindings.keyboard do
         local binding = InputManager.bindings.keyboard[i]

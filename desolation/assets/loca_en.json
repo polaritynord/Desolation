@@ -132,7 +132,8 @@
         "pressAKey": "Press a key... (click to cancel)",
         "resetToDefault": "Reset Keybindings to Default",
         "name": "- NAME -",
-        "key": "- KEY -"
+        "key": "- KEY -",
+        "showControllerIcon": "Show Controller Icon: "
     },
     "audioMenu": {
         "masterVolume": "Master Volume: ",

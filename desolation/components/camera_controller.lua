@@ -26,9 +26,15 @@ function cameraController:movement(delta, camera, player)
         local dx = player.position[1] - camera.position[1]
         local dy = player.position[2] - camera.position[2]
         local weapon = player.inventory.weapons[player.inventory.slot]
+        --Peeking
         if Settings.experimental_peeking and weapon ~= nil then
-            dx = dx + (mx-480)*weapon.aimRange
-            dy = dy + (my-270)*weapon.aimRange
+            if InputManager.inputType == "keyboard" then
+                dx = dx + (mx-480)*weapon.aimRange
+                dy = dy + (my-270)*weapon.aimRange
+            else --Joystick peeking
+                dx = dx + InputManager:getAxis(3, 0.15)*weapon.aimRange*300
+                dy = dy + InputManager:getAxis(4, 0.15)*weapon.aimRange*300
+            end
         end
         camera.position[1] = camera.position[1] + dx*8*delta
         camera.position[2] = camera.position[2] + dy*8*delta

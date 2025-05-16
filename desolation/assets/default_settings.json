@@ -21,5 +21,6 @@
     "sprint_type": "hold",
     "menu_background": "dyn_menu",
     "experimental_peeking": true,
-    "auto_pick_loot": true
+    "auto_pick_loot": true,
+    "show_controller_icon": true
 }
