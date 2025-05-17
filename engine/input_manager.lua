@@ -12,6 +12,13 @@ function love.joystickadded(joystick)
     inputManager.joystick = joystick
     inputManager.inputType = "joystick"
     print("joystick connected")
+    --"Connected" notification
+    local cursorObject = CurrentScene.cursor
+    if cursorObject ~= nil then
+        local controllerNotif = cursorObject.UIComponent.controllerNotif
+        controllerNotif.text = Loca.controllerConnected
+        controllerNotif.color[4] = 1
+    end
 end
 
 function love.joystickremoved(joystick)
@@ -19,6 +26,13 @@ function love.joystickremoved(joystick)
     inputManager.joystick = nil
     inputManager.inputType = "keyboard"
     print("joystick removed")
+    --"Disconnected" notification
+    local cursorObject = CurrentScene.cursor
+    if cursorObject ~= nil then
+        local controllerNotif = cursorObject.UIComponent.controllerNotif
+        controllerNotif.text = Loca.controllerDisconnected
+        controllerNotif.color[4] = 1
+    end
 end
 
 function love.joystickpressed(joystick, button)
@@ -35,6 +49,12 @@ function love.joystickpressed(joystick, button)
         CurrentScene.settings.menu = nil
         CurrentScene.settings.open = false
     end
+end
+
+function inputManager:setInputTypeTo(type)
+    if self.inputType == type then return end
+    print(type .. " input mode active")
+    self.inputType = type
 end
 
 function inputManager:loadBindingFile()

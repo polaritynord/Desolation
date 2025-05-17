@@ -94,7 +94,7 @@
 
         [
             "cursor",
-            ["desolation/components/game_cursor_script"]
+            ["UIComponent", "desolation/components/game_cursor_script"]
         ]
     ],
 

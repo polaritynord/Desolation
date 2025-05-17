@@ -155,5 +155,7 @@
         "shotgun": "Pompali T.",
         "stolgard-pal": "Stolgard-PAL"
     },
-    "bruhuhuh": "O KADAR UZAKTA NE YAPIYORSUN LAN?!"
+    "bruhuhuh": "O KADAR UZAKTA NE YAPIYORSUN LAN?!",
+    "controllerConnected": "Kumanda Baglandi",
+    "controllerDisconnected": "Kumanda Baglantisi Koptu"
 }

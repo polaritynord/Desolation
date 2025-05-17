@@ -16,19 +16,11 @@ GamePaused = false
 Scenes = {}
 
 function love.mousemoved()
-    --input type check
-    if InputManager.inputType == "joystick" then
-        print("keyboard input mode active")
-        InputManager.inputType = "keyboard"
-    end
+    InputManager:setInputTypeTo("keyboard")
 end
 
 function love.wheelmoved(x, y)
-    --input type check
-    if InputManager.inputType == "joystick" then
-        print("keyboard input mode active")
-        InputManager.inputType = "keyboard"
-    end
+    InputManager:setInputTypeTo("keyboard")
     --Keys menu scrolling (TODO, make this work for all menus?)
     if CurrentScene.settings and CurrentScene.settings.menu == "keys" then
         local menu = CurrentScene.settings.keysMenu
@@ -102,11 +94,7 @@ function love.keypressed(key, unicode)
     if console then
         consoleUI = console.UIComponent
     else consoleUI = nil end
-    --input type check
-    if InputManager.inputType == "joystick" then
-        print("keyboard input mode active")
-        InputManager.inputType = "keyboard"
-    end
+    InputManager:setInputTypeTo("keyboard")
     -- Fullscreen key
     if table.contains(InputManager:getKeys("fullscreen"), key) then
         fullscreen = not fullscreen

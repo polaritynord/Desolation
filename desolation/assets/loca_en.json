@@ -154,5 +154,7 @@
         "shotgun": "Shotgun",
         "stolgard-pal": "Stolgard-PAL"
     },
-    "bruhuhuh": "WHAT THE HELL ARE YOU DOING THAT FAR AWAY?!"
+    "bruhuhuh": "WHAT THE HELL ARE YOU DOING THAT FAR AWAY?!",
+    "controllerConnected": "Controller Connected",
+    "controllerDisconnected": "Controller Disconnected"
 }
