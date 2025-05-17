@@ -100,6 +100,22 @@ function videoMenu:load()
             toggled = Settings.explosion_particles;
         }
     )
+    ui.shinyMenuText = ui:newTextLabel(
+        {
+            text = Loca.videoMenu.shinyMenu;
+            position = {0, 440};
+            size = 30;
+        }
+    )
+    ui.shinyMenuBox = ui:newCheckbox(
+        {
+            position = {400, 455};
+            toggled = Settings.shiny_menu;
+            clickEvent = function ()
+                settings.UIComponent.restartWarning.text = Loca.settings.restartWarning
+            end
+        }
+    )
 end
 
 function videoMenu:update(delta)
@@ -124,6 +140,7 @@ function videoMenu:update(delta)
     settings.preview.bullet_shell_particles = ui.bulletShellBox.toggled
     settings.preview.destruction_particles = ui.destructionParticlesBox.toggled
     settings.preview.explosion_particles = ui.explosionParticlesBox.toggled
+    settings.preview.shiny_menu = ui.shinyMenuBox.toggled
     --Settings.brightness = ui.brightnessSlider.value
 end
 

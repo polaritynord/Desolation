@@ -127,7 +127,8 @@
         "weaponFlameParticles": "Silah Ates Parcaciklari: ",
         "bulletShellParticles": "Mermi Kovani Parcaciklari: ",
         "destructionParticles": "Yikim Parcaciklari: ",
-        "explosionParticles": "Patlama Parcaciklari: "
+        "explosionParticles": "Patlama Parcaciklari: ",
+        "shinyMenu": "Parlak Menu: "
     },
     "keysMenu": {
         "pressAKey": "Bir tusa bas... (iptal icin tikla)",

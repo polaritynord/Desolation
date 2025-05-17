@@ -126,7 +126,8 @@
         "weaponFlameParticles": "Weapon Flame Particles: ",
         "bulletShellParticles": "Bullet Shell Particles: ",
         "destructionParticles": "Destruction Particles: ",
-        "explosionParticles": "Explosion Particles: "
+        "explosionParticles": "Explosion Particles: ",
+        "shinyMenu": "Shiny Menu: "
     },
     "keysMenu": {
         "pressAKey": "Press a key... (click to cancel)",

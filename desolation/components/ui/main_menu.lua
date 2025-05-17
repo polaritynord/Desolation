@@ -3,6 +3,15 @@ local moonshine = require("engine.lib.moonshine")
 
 local mainMenu = ENGINE_COMPONENTS.scriptComponent.new()
 
+function mainMenu:loadShaders()
+    if not Settings.shiny_menu then return end
+    CurrentScene.uiShader = moonshine.chain(960, 540, moonshine.effects.glow)
+    CurrentScene.gameShader.chain(moonshine.effects.gaussianblur)
+    CurrentScene.gameShader.gaussianblur.sigma = 2.8
+    CurrentScene.uiShader.glow.strength = 5
+    CurrentScene.uiShader.glow.min_luma = 0.1
+end
+
 function mainMenu:load()
     local ui = self.parent.UIComponent
 
@@ -89,11 +98,8 @@ function mainMenu:load()
     if CurrentScene.mapCreator ~= nil then
         CurrentScene.mapCreator.script:loadMap("desolation/assets/maps/" .. Settings.menu_background .. ".json")
     end
-    CurrentScene.uiShader = moonshine.chain(960, 540, moonshine.effects.glow)
-    CurrentScene.gameShader.chain(moonshine.effects.gaussianblur)
-    CurrentScene.gameShader.gaussianblur.sigma = 2.8
-    CurrentScene.uiShader.glow.strength = 5
-    CurrentScene.uiShader.glow.min_luma = 0.1
+    --Cool shader stuff
+    self:loadShaders()
 end
 
 function mainMenu:update(delta)
