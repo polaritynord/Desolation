@@ -6,10 +6,10 @@ local mainMenu = ENGINE_COMPONENTS.scriptComponent.new()
 function mainMenu:loadShaders()
     if not Settings.shiny_menu then return end
     CurrentScene.uiShader = moonshine.chain(960, 540, moonshine.effects.glow)
-    CurrentScene.gameShader.chain(moonshine.effects.gaussianblur)
-    CurrentScene.gameShader.gaussianblur.sigma = 2.8
     CurrentScene.uiShader.glow.strength = 5
     CurrentScene.uiShader.glow.min_luma = 0.1
+    CurrentScene.gameShader.chain(moonshine.effects.gaussianblur)
+    CurrentScene.gameShader.gaussianblur.sigma = 2.8
 end
 
 function mainMenu:load()
@@ -94,6 +94,16 @@ function mainMenu:load()
             font = "disposable-droid"
         }
     )
+    --Controller UI
+    ui.controllerSelection = 1
+    ui.controllerArrow = ui:newImage(
+        {
+            source = Assets.images.controller_selection;
+            position = {50, 215};
+            scale = {-0.8, 0.8};
+        }
+    )
+    ui.controllerAxisMoved = false
     --initial loading stuff
     if CurrentScene.mapCreator ~= nil then
         CurrentScene.mapCreator.script:loadMap("desolation/assets/maps/" .. Settings.menu_background .. ".json")
@@ -124,6 +134,18 @@ function mainMenu:update(delta)
     local y = math.sin((love.timer.getTime()))*10
     camera.position[1] = -MenuUIOffset--camera.position[1] + (x-camera.position[1])*2.5*delta
     camera.position[2] = camera.position[2] + (y-camera.position[2])*2.5*delta
+    --Controller selection code
+    if InputManager.inputType ~= "joystick" then return end
+    if InputManager:getAxis(2) > 0.5 and not ui.controllerAxisMoved then
+        ui.controllerAxisMoved = true
+        ui.controllerSelection = ui.controllerSelection + 1
+    end
+    if InputManager:getAxis(2) < -0.5 and not ui.controllerAxisMoved then
+        ui.controllerAxisMoved = true
+        ui.controllerSelection = ui.controllerSelection - 1
+    end
+    if math.abs(InputManager:getAxis(2)) < 0.5 then ui.controllerAxisMoved = false end
+    ui.controllerArrow.position[2] = 215 + 40*(ui.controllerSelection-1)
 end
 
 return mainMenu

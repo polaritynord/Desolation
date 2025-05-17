@@ -101,7 +101,8 @@
     "assets": {
         "images": [
             ["logo", "desolation/assets/images/logo.png"],
-            ["nord_transparent", "engine/assets/icon_transparent.png"]
+            ["nord_transparent", "engine/assets/icon_transparent.png"],
+            ["controller_selection", "desolation/assets/images/hud/hitmarker.png"]
         ],
 
         "sounds": [
