@@ -49,4 +49,10 @@ function clickEvents.achievementsButtonClick(element)
     blabla.open = true
 end
 
+function clickEvents.changelogButtonClick(element)
+    if AltMenuOpen then return end
+    local changelog = CurrentScene.changelog
+    changelog.open = true
+end
+
 return clickEvents

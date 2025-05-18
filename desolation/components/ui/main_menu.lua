@@ -67,7 +67,7 @@ function mainMenu:load()
             position = {70, 400};
             buttonText = Loca.mainMenu.changelog;
             buttonTextSize = 30;
-            color = {1, 1, 1, 0.35};
+            clickEvent = clickEvents.changelogButtonClick;
         }
     )
     ui.quitButton = ui:newTextButton(
@@ -94,13 +94,14 @@ function mainMenu:load()
             font = "disposable-droid"
         }
     )
-    --Controller UI
+    --Controller UI (TODO: NOT DONE WITH THIS AT ALL. GODT SIDETRACKED. RETURN LATER.)
     ui.controllerSelection = 1
     ui.controllerArrow = ui:newImage(
         {
             source = Assets.images.controller_selection;
             position = {50, 215};
             scale = {-0.8, 0.8};
+            color = {1, 1, 1, 0};
         }
     )
     ui.controllerAxisMoved = false

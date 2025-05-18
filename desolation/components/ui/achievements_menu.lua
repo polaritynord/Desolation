@@ -2,7 +2,7 @@ local achievementsMenu = ENGINE_COMPONENTS.scriptComponent.new()
 
 function achievementsMenu:load()
     local achievements = self.parent
-    local settings = achievements.parent
+    local _settings = achievements.parent
     local ui = achievements.UIComponent
     ui.enabled = false
     achievements.open = false

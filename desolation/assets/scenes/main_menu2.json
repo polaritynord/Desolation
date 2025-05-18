@@ -93,6 +93,11 @@
         ],
 
         [
+            "changelog",
+            ["UIComponent", "desolation/components/ui/changelog_menu"]
+        ],
+
+        [
             "cursor",
             ["UIComponent", "desolation/components/game_cursor_script"]
         ]
