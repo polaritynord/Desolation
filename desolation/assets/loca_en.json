@@ -66,6 +66,9 @@
         "continue": "Continue",
         "mainMenu": "Main Menu"
     },
+    "campaignMenu": {
+        "wip": "Work In Progress..."
+    },
     "extrasMenu": {
         "playground": "Playground",
         "playgroundDesc": "Do whatever you want.",

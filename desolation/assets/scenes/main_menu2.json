@@ -77,6 +77,11 @@
         ],
 
         [
+            "campaign",
+            ["UIComponent", "desolation/components/ui/campaign_menu"]
+        ],
+
+        [
             "extras",
             ["UIComponent", "desolation/components/ui/extras_menu"],
             [
@@ -95,6 +100,11 @@
         [
             "changelog",
             ["UIComponent", "desolation/components/ui/changelog_menu"]
+        ],
+
+        [
+            "about",
+            ["UIComponent", "desolation/components/ui/about_menu"]
         ],
 
         [

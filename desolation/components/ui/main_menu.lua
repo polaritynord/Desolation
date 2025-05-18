@@ -27,7 +27,7 @@ function mainMenu:load()
             position = {70, 200};
             buttonText = Loca.mainMenu.campaign;
             buttonTextSize = 30;
-            color = {1, 1, 1, 0.35};
+            clickEvent = clickEvents.campaignButtonClick;
         }
     )
     ui.extrasButton = ui:newTextButton(
@@ -59,7 +59,7 @@ function mainMenu:load()
             position = {70, 360};
             buttonText = Loca.mainMenu.about;
             buttonTextSize = 30;
-            color = {1, 1, 1, 0.35};
+            clickEvent = clickEvents.aboutButtonClick;
         }
     )
     ui.changelogButton = ui:newTextButton(

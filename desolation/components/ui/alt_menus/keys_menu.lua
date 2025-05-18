@@ -80,14 +80,10 @@ function keysMenu:load()
             position = {0, 240+#InputManager.bindings.keyboard*40};
             hoverEvent = buttonEvents.redHover;
             unhoverEvent = buttonEvents.redUnhover;
-            clickEvent = function()
-                --Write new binding file
-                local defaultBindingsFile = love.filesystem.read("desolation/assets/default_bindings.json")
-                love.filesystem.write("bindings.json", defaultBindingsFile)
-                InputManager.bindings = json.decode(defaultBindingsFile)
-            end
+            clickEvent = buttonEvents.resetKeysButtonClick;
         }
     )
+    ui.resetKeys.confirmTimer = 0
     ui.showControllerIconText = ui:newTextLabel(
         {
             size = 30;
@@ -152,6 +148,14 @@ function keysMenu:update(delta)
             if table.contains(excluded, binding[2]) then
                 keyElement.color = {1, 1, 0, 1}
             end
+        end
+    end
+    --Are you sure text for the reset button
+    if ui.resetKeys.buttonText == Loca.mainMenu.quitConfirmation then
+        ui.resetKeys.confirmTimer = ui.resetKeys.confirmTimer - delta
+        if ui.resetKeys.confirmTimer < 0 then
+            ui.resetKeys.buttonText = Loca.keysMenu.resetToDefault
+            ui.resetKeys.textFont = "disposable-droid"
         end
     end
 end

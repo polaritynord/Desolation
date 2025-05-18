@@ -67,6 +67,9 @@
         "continue": "Devam Et",
         "mainMenu": "Ana Menu"
     },
+    "campaignMenu": {
+        "wip": "Yapim Asamasinda..."
+    },
     "extrasMenu": {
         "playground": "Oyun Alani",
         "playgroundDesc": "Ne halt yersen ye.",
