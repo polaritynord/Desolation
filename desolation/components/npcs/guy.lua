@@ -74,7 +74,7 @@ function guyScript:load()
     npc.state = "neutral"
     npc.interactPressed = false
     npc.inventory.weapons[1] = weaponManager.Pistol:new()
-    npc.inventory.weapons[1].magAmmo = 0
+    npc.inventory.weapons[1].magAmmo = 13
 end
 
 function guyScript:update(delta)

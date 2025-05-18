@@ -77,9 +77,19 @@ function humanoidScript:doWalkingAnim(humanoid)
     humanoid.scale[2] = 4 + humanoid.animationSizeDiff
 end
 
-function humanoidScript:damage(amount, sourcePosition)
+function humanoidScript:damage(amount, sourcePosition, pierceArmor)
     local humanoid = self.parent
     if humanoid.name == "player" and GetGlobal("god") > 0 then return end
+    --Directly damage health if pierceArmor is true
+    if pierceArmor == true then
+        humanoid.health = humanoid.health - amount
+        --Play sound as well while you're at it
+        if humanoid.name == "player" then
+            local src = Assets.sounds["hurt" .. math.random(1, 3)]
+            SoundManager:restartSound(src, Settings.vol_world)
+        end
+        return
+    end
     --Reduce damage with armor
     if humanoid.armor > 0 then
         local armorReducePower = (humanoid.armor/70)*2
