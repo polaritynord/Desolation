@@ -3,7 +3,7 @@
         "cheats", "freecam", "p_speed", "g_vignette", "s_language", "noclip", "god", "invisible",
         "inf_stamina", "slippiness", "stamina_fill", "stamina_drain",
         "assign", "run_script", "give_ammo", "clear", "give", "info", "bind", "map", "maps",
-        "hurtme", "hurtarmor", "restart", "summon"
+        "hurtme", "hurtarmor", "restart", "summon", "newprop", "newitem"
     ],
 
     "descriptions": [
@@ -32,6 +32,8 @@
         "hurtme:\n\tDamages the player.",
         "hurtarmor:\n\tDamages player armor.",
         "restart:\n\tRestarts the game.",
-        "summon [name]:\n\tSummons an NPC in front of the player."
+        "summon [name]:\n\tSpawns an NPC in front of the player.",
+        "newprop [name]:\n\tSpawns a prop in front of the player.",
+        "newitem [name]:\n\tSpawns an item in front of the player."
     ]
 }

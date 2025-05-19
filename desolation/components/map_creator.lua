@@ -12,6 +12,11 @@ local mapCreator = ENGINE_COMPONENTS.scriptComponent.new()
 
 function mapCreator:spawnItem(v)
     local item = object.new(CurrentScene.items)
+    --Return if the item doesnt exist in the database
+    if self.parent.itemData[v[1]] == nil then
+        ConsoleLog("WARNING: Couldn't spawn item " .. v[1] .. ", nonexistant.")
+        return
+    end
     item.name = v[1]
     item:addComponent(table.new(itemScript))
     item.position = v[2]
@@ -31,6 +36,11 @@ end
 
 function mapCreator:spawnProp(v)
     local propData = self.parent.propData
+    --Return if the prop doesnt exist in the database
+    if propData[v[1]] == nil then
+        ConsoleLog("WARNING: Couldn't spawn prop " .. v[1] .. ", nonexistant.")
+        return
+    end
     local prop = object.new(CurrentScene.props)
     prop.name = v[1]
     prop.collidable = propData[prop.name].collidable or false
