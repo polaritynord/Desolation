@@ -21,6 +21,12 @@ function mapCreator:spawnItem(v)
     item:addComponent(table.new(itemScript))
     item.position = v[2]
     item.rotation = math.pi*2 * (v[3]/360)
+    --Set despawning attribute
+    if item.name == "weapon" then
+        item.notDespawning = true
+    else
+        if v[4] ~= nil then item.notDespawning = v[4] else item.notDespawning = false end
+    end
     item.scale = table.new(self.parent.itemData[item.name].scale)
     item.pickupEvent = itemEventFuncs[self.parent.itemData[item.name].pickupEvent]
     --weapon data

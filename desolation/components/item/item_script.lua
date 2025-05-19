@@ -22,6 +22,7 @@ function itemScript:load()
     item.realRot = 0
     item.defaultScale = table.new(item.scale)
     item.oldPos = table.new(item.position)
+    item.despawnTimer = 0
 end
 
 function itemScript:explosionEvent(position, radius, intensity)
@@ -87,6 +88,12 @@ function itemScript:update(delta)
 
     local player = CurrentScene.player
     self:movement(delta)
+    --Increment despawn timer & despawn if 4 minutes passed (if not flagged as non-despawnable)
+    item.despawnTimer = item.despawnTimer + delta
+    if item.despawnTimer >= 240 and not item.notDespawning then
+        table.removeValue(CurrentScene.items.tree, item)
+        return
+    end
     --Distance calculation
     if player ~= nil then
         item.distanceToPlayer = coreFuncs.pointDistance(item.position, player.position)
