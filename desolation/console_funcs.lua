@@ -3,7 +3,8 @@ local weaponManager = require("desolation.weapon_manager")
 local consoleFunctions = {
     funcsList = {
         "assign", "run_script", "give_ammo", "clear", "help", "lorem",
-        "give", "info", "bind", "map", "maps", "hurtme", "hurtarmor", "restart"
+        "give", "info", "bind", "map", "maps", "hurtme", "hurtarmor", "restart",
+        "summon"
     };
 }
 
@@ -244,6 +245,36 @@ end
 
 function consoleFunctions.restartScript(devConsole, command, i)
     love.load()
+end
+
+function consoleFunctions.summonScript(devConsole, command, i)
+    --Return if cheats are disabled
+    if GetGlobal("cheats") < 1 then return end
+    i = i + 1
+    --Skip spaces
+    while string.sub(command, i, i) == " " do
+        i = i + 1
+    end
+    --Read NPC name
+    local temp = ""
+    while string.sub(command, i, i) ~= " " do
+        --Check for incorrect writing
+        if i > #command then
+            break
+        end
+        temp = temp .. string.sub(command, i, i)
+        i = i + 1
+    end
+    --Summon the NPC
+    local player = CurrentScene.player
+    local mapCreator = CurrentScene.mapCreator
+    --Determine position
+    local spawnPosition = {0, 0}
+    if CurrentScene.player ~= nil then
+        spawnPosition[1] = player.position[1] + math.cos(player.rotation)*100
+        spawnPosition[2] = player.position[2] + math.sin(player.rotation)*100
+    end
+    mapCreator.script:spawnNPC({temp, spawnPosition})
 end
 
 return consoleFunctions

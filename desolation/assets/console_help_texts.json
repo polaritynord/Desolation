@@ -3,7 +3,7 @@
         "cheats", "freecam", "p_speed", "g_vignette", "s_language", "noclip", "god", "invisible",
         "inf_stamina", "slippiness", "stamina_fill", "stamina_drain",
         "assign", "run_script", "give_ammo", "clear", "give", "info", "bind", "map", "maps",
-        "hurtme", "hurtarmor", "restart"
+        "hurtme", "hurtarmor", "restart", "summon"
     ],
 
     "descriptions": [
@@ -31,6 +31,7 @@
         "maps:\n\tReturns a list of maps in game directory.",
         "hurtme:\n\tDamages the player.",
         "hurtarmor:\n\tDamages player armor.",
-        "restart:\n\tRestarts the game."
+        "restart:\n\tRestarts the game.",
+        "summon [name]:\n\tSummons an NPC in front of the player."
     ]
 }

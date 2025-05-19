@@ -58,6 +58,11 @@ end
 
 function mapCreator:spawnNPC(v)
     local npcData = self.parent.npcData
+    --Return if the NPC doesnt exist in the database
+    if npcData[v[1]] == nil then
+        ConsoleLog("WARNING: Couldn't spawn NPC " .. v[1] .. ", nonexistant.")
+        return
+    end
     local npc = object.new(CurrentScene.npcs)
     npc.name = v[1]
     npc.position = v[2]
