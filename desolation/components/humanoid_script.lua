@@ -40,6 +40,30 @@ function humanoidScript:collisionCheck(delta, humanoid)
             end
         end
     end
+    --iterate through NPC's
+    for _, npc in ipairs(CurrentScene.npcs.tree) do
+        if npc ~= self.parent then
+            local src = npc.imageComponent.source
+            local w, h = src:getWidth(), src:getHeight()
+            local npcSize = {npc.scale[1]*w, npc.scale[2]*h}
+            local npcPos = {npc.position[1]-npcSize[1]/2, npc.position[2]-npcSize[2]/2}
+            if coreFuncs.aabbCollision(humanoidPos, npcPos, size, npcSize) then
+                humanoid.position = table.new(humanoid.oldPos)
+                if not humanoid.moving then
+                    npc.velocity = {-npc.velocity[1], -npc.velocity[2]}
+                end
+                --push the dude
+                --calculate push rotation
+                local dx, dy = humanoidPos[1]-npcPos[1], humanoidPos[2]-npcPos[2]
+                local pushRot = math.atan2(dy, dx) + math.pi
+                local playerSpeed = 140 --NOTE speed??
+                if humanoid.sprinting then playerSpeed = playerSpeed*1.6 end
+                local vel = math.getVecValue(humanoid.moveVelocity)/140
+                npc.velocity[1] = npc.velocity[1] + vel*math.cos(pushRot)*playerSpeed/10*delta*100
+                npc.velocity[2] = npc.velocity[2] + vel*math.sin(pushRot)*playerSpeed/10*delta*100
+            end
+        end
+    end
 end
 
 function humanoidScript:humanoidUpdate(delta, humanoid)

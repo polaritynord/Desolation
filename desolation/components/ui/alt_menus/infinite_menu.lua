@@ -7,9 +7,9 @@ function infiniteMenu:load()
     ui.enabled = false
     infinite.difficulty = 1
     infinite.amounts = {
-        crate = 28;
-        barrel = 9;
-        expBarrel = 8;
+        crate = 54;
+        barrel = 16;
+        expBarrel = 15;
     }
     infinite.regenerateProps = true
 
@@ -47,6 +47,7 @@ function infiniteMenu:load()
             baseColor = {0.5, 0.5, 0.5, 1};
             baseSize = {135, 18};
             valueText = false;
+            value = 0.88;
         }
     )
     ui.barrelAmountText = ui:newTextLabel(
@@ -62,6 +63,7 @@ function infiniteMenu:load()
             baseColor = {0.5, 0.5, 0.5, 1};
             baseSize = {135, 18};
             valueText = false;
+            value = 0.68;
         }
     )
     ui.expBarrelAmountText = ui:newTextLabel(
@@ -77,6 +79,7 @@ function infiniteMenu:load()
             baseColor = {0.5, 0.5, 0.5, 1};
             baseSize = {135, 18};
             valueText = false;
+            value = 0.71;
         }
     )
     ui.regeneratePropsText = ui:newTextLabel(

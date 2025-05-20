@@ -49,7 +49,7 @@ function guyScript:followState(npc)
     npc.unarmed = true
     --check player interaction
     if not npc.interactPressed and InputManager:isPressed("toggle_follow") then
-        npc.state = "neutral"
+        --npc.state = "neutral"
         return
     end
     --move towards player if distant enough
