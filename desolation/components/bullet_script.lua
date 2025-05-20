@@ -52,7 +52,8 @@ function bulletScript:collisionCheck(bullet)
                 local npcSize = {npc.scale[1]*w, npc.scale[2]*h}
                 local propPos = {npc.position[1]-npcSize[1]/2, npc.position[2]-npcSize[2]/2}
                 if coreFuncs.aabbCollision(bulletPos, propPos, size, npcSize) then
-                    --remove bullet
+                    --remove bullet (have a chance of piercing through too)
+                    local pierceThrough = math.uniform(0, 1) <= weapon.pierceChance
                     table.removeValue(CurrentScene.bullets.tree, bullet)
                     --damage npc
                     npc.script:damage(bullet.damage)

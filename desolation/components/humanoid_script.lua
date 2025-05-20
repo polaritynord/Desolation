@@ -40,7 +40,7 @@ function humanoidScript:collisionCheck(delta, humanoid)
             end
         end
     end
-    --iterate through NPC's
+    --iterate through NPC's (TODO: They all have the mass of a crate for now!)
     for _, npc in ipairs(CurrentScene.npcs.tree) do
         if npc ~= self.parent then
             local src = npc.imageComponent.source
@@ -227,7 +227,17 @@ function humanoidScript:hitscanBulletCheck(humanoid, weapon, shootAngle)
                     if prop.script.physBulletHitEvent ~= nil then
                         prop.script:physBulletHitEvent(shootAngle, weapon, humanoid)
                     end
-                    goto returnLine
+                    --Stop the bullet here (depending on piercing chance)
+                    local pierceThrough = math.uniform(0, 1) <= weapon.pierceChance
+                    if not pierceThrough then
+                        goto returnLine
+                    else
+                        --Skip until it doesnt touch that guy anymore?
+                        repeat
+                            bulletPos[1] = bulletPos[1] + 25*math.cos(shootAngle)
+                            bulletPos[2] = bulletPos[2] + 25*math.sin(shootAngle)
+                        until not coreFuncs.aabbCollision(bulletPos, propPos, bulletSize, propSize)
+                    end
                 end
             end
         end
@@ -247,7 +257,17 @@ function humanoidScript:hitscanBulletCheck(humanoid, weapon, shootAngle)
                         CurrentScene.shotsMissed = CurrentScene.shotsMissed - 1
                     end
                     --TODO: bullet hit sfx or an indicator?
-                    goto returnLine
+                    --Stop the bullet here (depending on piercing chance)
+                    local pierceThrough = math.uniform(0, 1) <= weapon.pierceChance
+                    if not pierceThrough then
+                        goto returnLine
+                    else
+                        --Skip until it doesnt touch that guy anymore?
+                        repeat
+                            bulletPos[1] = bulletPos[1] + 25*math.cos(shootAngle)
+                            bulletPos[2] = bulletPos[2] + 25*math.sin(shootAngle)
+                        until not coreFuncs.aabbCollision(bulletPos, propPos, bulletSize, npcSize)
+                    end
                 end
             end
         end
@@ -262,7 +282,17 @@ function humanoidScript:hitscanBulletCheck(humanoid, weapon, shootAngle)
                 --damage npc
                 player.script:damage(weapon.bulletDamage, beginPos)
                 if player.script.bulletHitEvent ~= nil then player.script:bulletHitEvent(bullet) end
-                goto returnLine
+                --Stop the bullet here (depending on piercing chance)
+                local pierceThrough = math.uniform(0, 1) <= weapon.pierceChance
+                if not pierceThrough then
+                    goto returnLine
+                else
+                    --Skip until it doesnt touch that guy anymore?
+                    repeat
+                        bulletPos[1] = bulletPos[1] + 25*math.cos(shootAngle)
+                        bulletPos[2] = bulletPos[2] + 25*math.sin(shootAngle)
+                    until not coreFuncs.aabbCollision(bulletPos, propPos, bulletSize, npcSize)
+                end
             end
         end
         --move bullet by 25 pixels

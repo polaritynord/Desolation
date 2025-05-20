@@ -16,7 +16,8 @@
         "shellColor": [0.74, 0.58, 0.31, 1],
         "fireLineColor": [0.92, 0.59, 0.2],
         "fireLineWidth": 15,
-        "aimRange": 0.1
+        "aimRange": 0.1,
+        "pierceChance": 0.15
     },
 
     "Revolver": {
@@ -36,7 +37,8 @@
         "shellColor": [0.74, 0.58, 0.31, 1],
         "fireLineColor": [0.92, 0.59, 0.2],
         "fireLineWidth": 15,
-        "aimRange": 0.1
+        "aimRange": 0.1,
+        "pierceChance": 0.65
     },
 
     "AssaultRifle": {
@@ -56,7 +58,8 @@
         "shellColor": [0.74, 0.58, 0.31, 1],
         "fireLineColor": [0.92, 0.59, 0.2],
         "fireLineWidth": 15,
-        "aimRange": 0.1
+        "aimRange": 0.1,
+        "pierceChance": 0.42
     },
 
     "Shotgun": {
@@ -76,7 +79,8 @@
         "shellColor": [0.61, 0, 0, 1],
         "fireLineColor": [0.92, 0.59, 0.2],
         "fireLineWidth": 15,
-        "aimRange": 0.1
+        "aimRange": 0.1,
+        "pierceChance": 0.3
     },
 
     "Stolgard-PAL": {
@@ -96,7 +100,8 @@
         "shellColor": [0.74, 0.58, 0.31, 1],
         "fireLineColor": [0.25, 0.28, 1],
         "fireLineWidth": 30,
-        "aimRange": 0.1
+        "aimRange": 0.1,
+        "pierceChance": 0.3
     },
 
     "WEAPONS_LIST": ["Pistol", "Revolver", "AssaultRifle", "Shotgun", "Stolgard-PAL"]
