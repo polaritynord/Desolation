@@ -59,8 +59,7 @@ function itemEventFuncs.medkitPickup(item)
     if player.health == 100 then return end
     player.health = player.health + 25
     if player.health > 100 then player.health = 100 end
-    --play sound (TODO: find a healing sound)
-    SoundManager:restartSound(Assets.sounds["acquire"], Settings.vol_world)
+    SoundManager:restartSound(Assets.sounds["medkit_pickup"], Settings.vol_world)
     --notification in hud
     itemEventFuncs.createHUDNotif("hud_acquire_medkit")
     --vignette effects & misc
@@ -73,8 +72,7 @@ function itemEventFuncs.batteryPickup(item)
     if player.armor == 150 then return end
     player.armor = player.armor + 25
     if player.armor > 150 then player.armor = 150 end
-    --play sound (TODO: find a healing sound)
-    SoundManager:restartSound(Assets.sounds["acquire"], Settings.vol_world)
+    SoundManager:restartSound(Assets.sounds["battery_pickup"], Settings.vol_world)
     --notification in hud
     itemEventFuncs.createHUDNotif("hud_acquire_battery")
     CurrentScene.gameShaders.script.blueOffset = 255

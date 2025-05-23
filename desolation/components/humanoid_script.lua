@@ -40,7 +40,7 @@ function humanoidScript:collisionCheck(delta, humanoid)
             end
         end
     end
-    --iterate through NPC's (TODO: They all have the mass of a crate for now!)
+    --iterate through NPC's
     for _, npc in ipairs(CurrentScene.npcs.tree) do
         if npc ~= self.parent then
             local src = npc.imageComponent.source
@@ -59,8 +59,8 @@ function humanoidScript:collisionCheck(delta, humanoid)
                 local playerSpeed = 140 --NOTE speed??
                 if humanoid.sprinting then playerSpeed = playerSpeed*1.6 end
                 local vel = math.getVecValue(humanoid.moveVelocity)/140
-                npc.velocity[1] = npc.velocity[1] + vel*math.cos(pushRot)*playerSpeed/10*delta*100
-                npc.velocity[2] = npc.velocity[2] + vel*math.sin(pushRot)*playerSpeed/10*delta*100
+                npc.velocity[1] = npc.velocity[1] + vel*math.cos(pushRot)*playerSpeed/npc.mass*delta*100
+                npc.velocity[2] = npc.velocity[2] + vel*math.sin(pushRot)*playerSpeed/npc.mass*delta*100
             end
         end
     end

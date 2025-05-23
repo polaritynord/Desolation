@@ -162,7 +162,11 @@ function playerScript:weaponDropping(player)
     itemInstance.position[1] = player.position[1]
     itemInstance.position[2] = player.position[2]
     itemInstance.velocity = 550
-    itemInstance.rotVelocity = math.uniform(-1, 1)*math.pi*12 --TODO this could've been better
+    local spinDirection = 1
+    if math.uniform(0, 1) < 0.5 then
+        spinDirection = -1
+    end
+    itemInstance.rotVelocity = spinDirection*math.pi*math.uniform(8, 14)
     itemInstance.realRot = player.rotation
 
     CurrentScene.items:addChild(itemInstance)

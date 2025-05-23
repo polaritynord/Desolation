@@ -24,7 +24,6 @@ function infiniteMenu:load()
                 infinite.difficulty = infinite.difficulty + 1
                 if infinite.difficulty > #Loca.extrasMenu.infiniteDifficulties then infinite.difficulty = 1 end
                 element.buttonText = Loca.extrasMenu.infiniteDifficulty .. string.upper(Loca.extrasMenu.infiniteDifficulties[infinite.difficulty])
-                --TODO difficulty descriptions
             end
         }
     )

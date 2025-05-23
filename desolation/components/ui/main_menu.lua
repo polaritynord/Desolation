@@ -94,7 +94,7 @@ function mainMenu:load()
             font = "disposable-droid"
         }
     )
-    --Controller UI (TODO: NOT DONE WITH THIS AT ALL. GODT SIDETRACKED. RETURN LATER.)
+    --Controller UI (TODO: NOT DONE WITH THIS AT ALL. GOT SIDETRACKED. RETURN LATER.)
     ui.controllerSelection = 1
     ui.controllerArrow = ui:newImage(
         {

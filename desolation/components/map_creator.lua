@@ -83,6 +83,7 @@ function mapCreator:spawnNPC(v)
     npc.name = v[1]
     npc.position = v[2]
     npc.imageComponent = ENGINE_COMPONENTS.imageComponent.new(npc)
+    npc.mass = npcData[npc.name].mass or 10
     --add hand object
     local hand = object.new(npc)
     hand.name = "hand"

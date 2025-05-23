@@ -1,9 +1,11 @@
 {
     "guy": {
-        "script": "desolation/components/npcs/guy"
+        "script": "desolation/components/npcs/guy",
+        "mass": 10
     },
 
     "robot": {
-        "script": "desolation/components/npcs/robot"
+        "script": "desolation/components/npcs/robot",
+        "mass": 12
     }
 }

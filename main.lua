@@ -15,6 +15,11 @@ CurrentScene = nil
 GamePaused = false
 Scenes = {}
 
+-- Just some debugging stuff here
+if os.getenv("LOCAL_LUA_DEBUGGER_VSCODE") == "1" then
+    require("lldebugger").start()
+end
+
 function love.mousemoved()
     InputManager:setInputTypeTo("keyboard")
 end
