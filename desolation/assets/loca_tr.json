@@ -49,7 +49,8 @@
         "chainReaction": "Zincirleme Tepkime",
         "1k_3": "Sert Metal",
         "1k_4": "\"Ekstrem\" Derece Kolay",
-        "1k_5": "Sifir Merhamet"
+        "1k_5": "Sifir Merhamet",
+        "play_all_radios": "Tum Radyolari Oynat"
         
 },
     "achievementDescriptions": {
@@ -61,7 +62,8 @@
         "chainReaction": "Bir patlamayla baska patlayicilari patlat.",
         "1k_3": "(Sonsuz) Zor modda 1000 puana ulas.",
         "1k_4": "(Sonsuz) Ekstrem modda 1000 puana ulas.",
-        "1k_5": "(Infinite) Ultra modda 1000 puana ulas."
+        "1k_5": "(Infinite) Ultra modda 1000 puana ulas.",
+        "play_all_radios": "(Hikaye) Tum ses kayitlarini bul ve oynat."
     },
     "pauseScreen": {
         "continue": "Devam Et",

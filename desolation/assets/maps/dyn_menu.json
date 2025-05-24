@@ -22,6 +22,10 @@
         ],
         [
             "crate", [355, -35], 75, []
+        ],
+
+        [
+            "radio", [974, 364], 0, []
         ]
     ],
     "items": [
@@ -30,8 +34,13 @@
     "assets": {
         "images": [
             ["prop_crate", "desolation/assets/images/props/crate.png"],
+            ["prop_radio", "desolation/assets/images/props/radio.png"],
             ["wall_test_gray", "desolation/assets/images/walls/test_gray.png"],
             ["tile_prototype_black", "desolation/assets/images/tiles/prototype_black.png"]
+        ],
+
+        "sounds": [
+            ["wake_up", "desolation/assets/sounds/ost/wakeup.wav", "stream"]
         ]
     }
 }

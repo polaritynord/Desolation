@@ -16,7 +16,7 @@ function extrasMenu:load()
             clickEvent = function ()
                 local scene = LoadScene("desolation/assets/scenes/game.json")
                 SetScene(scene)
-                scene.mapCreator.script:loadMap("desolation/assets/maps/playground_old.json")
+                scene.mapCreator.script:loadMap("desolation/assets/maps/dyn_menu.json")
                 SetGlobal("cheats", 1)
             end;
             hoverEvent = function (element)

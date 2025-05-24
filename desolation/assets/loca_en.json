@@ -49,7 +49,8 @@
         "chainReaction": "Chain Reaction",
         "1k_3": "Tough Metal",
         "1k_4": "\"Extreme\"ly Easy",
-        "1k_5": "No Mercy"
+        "1k_5": "No Mercy",
+        "play_all_radios": "Play All Radios"
     },
     "achievementDescriptions": {
         "thanksForPlaying": "Open the game for the first time.",
@@ -60,7 +61,8 @@
         "chainReaction": "Detonate more explosives with an explosion.",
         "1k_3": "(Infinite) Reach 1000 score on Hard mode.",
         "1k_4": "(Infinite) Reach 1000 score on Extreme mode.",
-        "1k_5": "(Infinite) Reach 1000 score on Ultra mode."
+        "1k_5": "(Infinite) Reach 1000 score on Ultra mode.",
+        "play_all_radios": "(Campaign) Find and play all sound recordings."
     },
     "pauseScreen": {
         "continue": "Continue",

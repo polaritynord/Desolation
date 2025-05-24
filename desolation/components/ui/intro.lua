@@ -78,7 +78,7 @@ function intro:update(delta)
     end
     --Launch main menu if intro is done or skipped
     if self.timer > 10 or love.keyboard.isDown("space") then
-        local scene = LoadScene("desolation/assets/scenes/main_menu2.json")
+        local scene = LoadScene("desolation/assets/scenes/game.json")
         SetScene(scene)
     end
 end

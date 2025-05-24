@@ -44,8 +44,12 @@
         "obtained": false
     },
 
+    "play_all_radios": {
+        "iconPath": "desolation/assets/images/achievements/play_all_radios.png"
+    },
+
     "other": {
         "infiniteHighScores": [0, 0, 0, 0, 0],
-        "orderList": ["thanksForPlaying", "selfDestruct", "distant", "aHairsBreadth", "devConsole", "chainReaction", "1k_3", "1k_4", "1k_5"]
+        "orderList": ["thanksForPlaying", "selfDestruct", "distant", "aHairsBreadth", "devConsole", "chainReaction", "play_all_radios", "1k_3", "1k_4", "1k_5"]
     }
 }
