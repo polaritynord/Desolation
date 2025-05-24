@@ -19,6 +19,7 @@ function campaignMenu:load()
             buttonTextSize = 30;
             position = {0, 440};
             clickEvent = function() campaign.open = false ; campaign.selection = nil end;
+            bindedKey = "escape";
         }
     )
 end

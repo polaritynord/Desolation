@@ -12,6 +12,7 @@ function aboutMenu:load()
             buttonTextSize = 30;
             position = {0, 440};
             clickEvent = function() about.open = false ; about.selection = nil end;
+            bindedKey = "escape";
         }
     )
 end

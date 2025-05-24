@@ -14,14 +14,14 @@ function achievementsMenu:load()
         --Icon
         ui["icon_" .. name] = ui:newImage(
             {
-                position = {32, 160+i*110};
+                position = {32, 190+i*110};
                 source = Assets.defaultImages["achievement_" .. name];
                 scale = {4, 4};
             }
         )
         ui["title_" .. name] = ui:newTextLabel(
             {
-                position = {72, 144+i*110};
+                position = {72, 174+i*110};
                 text = Loca.achievementDisplayNames[name];
                 size = 40;
                 font = "disposable-droid-bold";
@@ -29,7 +29,7 @@ function achievementsMenu:load()
         )
         ui["desc_" .. name] = ui:newTextLabel(
             {
-                position = {0, 200+i*110};
+                position = {0, 230+i*110};
                 text = Loca.achievementDescriptions[name];
             }
         )
@@ -38,17 +38,24 @@ function achievementsMenu:load()
             ui["icon_" .. name].color = {0, 1, 0, 1};
         end
         achievements.length = achievements.length + 150
-
-        ::skip::
-        i = i + 1
     end
+
+    ui.progressText = ui:newTextLabel(
+        {
+            position = {0, 180};
+            text = "Progress: 11/72 (15%)";
+            size = 30;
+            font = "disposable-droid"
+        }
+    )
 
     ui.returnButton = ui:newTextButton(
         {
             buttonText = Loca.mainMenu.returnButton;
             buttonTextSize = 30;
-            position = {0, 180};
+            position = {0, 220};
             clickEvent = function() achievements.open = false end;
+            bindedKey = "escape";
         }
     )
 end

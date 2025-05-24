@@ -79,6 +79,7 @@ function extrasMenu:load()
             buttonTextSize = 30;
             position = {0, 440};
             clickEvent = function() menu.open = false ; menu.selection = nil end;
+            bindedKey = "escape";
         }
     )
 end

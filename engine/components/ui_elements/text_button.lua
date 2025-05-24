@@ -15,6 +15,7 @@ function textButton.new()
         clickEvent = nil;
         hoverEvent = nil;
         unhoverEvent = nil;
+        bindedKey = nil;
         textFont = "disposable-droid";
         enabled = true;
         begin = "left";
@@ -37,7 +38,7 @@ function textButton.new()
         local pos = coreFuncs.getRelativeElementPosition(self.position, self.parentComp)
 
         --Click event
-        if love.mouse.isDown(1) and self.mouseHovering and not self.mouseClicking and self.clickEvent and InputManager.leftMouseTimer > 0.25 then
+        if ((love.mouse.isDown(1) and self.mouseHovering and not self.mouseClicking) or self.bindedKey ~= nil and love.keyboard.isDown(self.bindedKey)) and self.clickEvent and InputManager.leftMouseTimer > 0.25 then
             InputManager.leftMouseTimer = 0
             SoundManager:playSound(Assets.defaultSounds["button_click"], Settings.vol_sfx)
             self.clickEvent(self)

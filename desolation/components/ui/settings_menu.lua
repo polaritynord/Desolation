@@ -81,6 +81,7 @@ function settings:load()
                 Settings = table.new(s.preview)
                 love.filesystem.write("settings.json", json.encode(Settings))
             end;
+            bindedKey = "escape";
         }
     )
 end
