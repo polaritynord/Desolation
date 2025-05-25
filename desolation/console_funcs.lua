@@ -339,7 +339,7 @@ end
 
 function consoleFunctions.tpScript(devConsole, command, i)
     --Return if cheats are disabled
-    --if GetGlobal("cheats") < 1 then return end
+    if GetGlobal("cheats") < 1 then return end
     i = i + 1
     --Skip spaces
     while string.sub(command, i, i) == " " do

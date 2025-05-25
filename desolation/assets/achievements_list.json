@@ -45,11 +45,17 @@
     },
 
     "play_all_radios": {
-        "iconPath": "desolation/assets/images/achievements/play_all_radios.png"
+        "iconPath": "desolation/assets/images/achievements/play_all_radios.png",
+        "obtained": false
+    },
+
+    "for_a_reason": {
+        "iconPath": "desolation/assets/images/achievements/for_a_reason.png",
+        "obtained": false
     },
 
     "other": {
         "infiniteHighScores": [0, 0, 0, 0, 0],
-        "orderList": ["thanksForPlaying", "selfDestruct", "distant", "aHairsBreadth", "devConsole", "chainReaction", "play_all_radios", "1k_3", "1k_4", "1k_5"]
+        "orderList": ["for_a_reason", "thanksForPlaying", "selfDestruct", "distant", "aHairsBreadth", "devConsole", "chainReaction", "play_all_radios", "1k_3", "1k_4", "1k_5"]
     }
 }

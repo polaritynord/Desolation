@@ -40,6 +40,9 @@
             "toggle_follow": "Make NPC Follow"
         }
     },
+    "achievementsMenu": {
+        "progress": "PROGRESS"
+    },
     "achievementDisplayNames": {
         "thanksForPlaying": "Thanks For Playing",
         "selfDestruct": "Self-Destruction",
@@ -50,7 +53,8 @@
         "1k_3": "Tough Metal",
         "1k_4": "\"Extreme\"ly Easy",
         "1k_5": "No Mercy",
-        "play_all_radios": "Play All Radios"
+        "play_all_radios": "Play All Radios",
+        "for_a_reason": "For a Reason"
     },
     "achievementDescriptions": {
         "thanksForPlaying": "Open the game for the first time.",
@@ -62,7 +66,8 @@
         "1k_3": "(Infinite) Reach 1000 score on Hard mode.",
         "1k_4": "(Infinite) Reach 1000 score on Extreme mode.",
         "1k_5": "(Infinite) Reach 1000 score on Ultra mode.",
-        "play_all_radios": "(Campaign) Find and play all sound recordings."
+        "play_all_radios": "(Campaign) Find and play all sound recordings.",
+        "for_a_reason": "Obtain all achievements in the game."
     },
     "pauseScreen": {
         "continue": "Continue",

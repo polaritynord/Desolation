@@ -8,6 +8,7 @@ function achievementsMenu:load()
     achievements.open = false
     achievements.length = 200
     achievements.realY = achievements.position[2]
+    local obtainedAchievement = 0
 
     for i, name in ipairs(Achievements.other.orderList) do
         local data = Achievements[name]
@@ -36,6 +37,7 @@ function achievementsMenu:load()
         if data.obtained then
             ui["title_" .. name].color = {0, 1, 0, 1};
             ui["icon_" .. name].color = {0, 1, 0, 1};
+            obtainedAchievement = obtainedAchievement + 1
         end
         achievements.length = achievements.length + 150
     end
@@ -43,9 +45,10 @@ function achievementsMenu:load()
     ui.progressText = ui:newTextLabel(
         {
             position = {0, 180};
-            text = "Progress: 11/72 (15%)";
+            text = Loca.achievementsMenu.progress .. ": " .. obtainedAchievement .. "/" .. #Achievements.other.orderList .. " (" .. math.floor(obtainedAchievement/#Achievements.other.orderList*100) .. "%)";
             size = 30;
-            font = "disposable-droid"
+            font = "disposable-droid";
+            color = {1, 1, 0, 1};
         }
     )
 
