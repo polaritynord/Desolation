@@ -4,7 +4,7 @@ local consoleFunctions = {
     funcsList = {
         "assign", "run_script", "give_ammo", "clear", "help", "lorem",
         "give", "info", "bind", "map", "maps", "hurtme", "hurtarmor", "restart",
-        "summon", "newprop", "newitem"
+        "summon", "newprop", "newitem", "tp"
     };
 }
 
@@ -335,6 +335,52 @@ function consoleFunctions.newpropScript(devConsole, command, i)
         spawnPosition[2] = player.position[2] + math.sin(player.rotation)*100
     end
     mapCreator.script:spawnProp({temp, spawnPosition, 0, {}})
+end
+
+function consoleFunctions.tpScript(devConsole, command, i)
+    --Return if cheats are disabled
+    --if GetGlobal("cheats") < 1 then return end
+    i = i + 1
+    --Skip spaces
+    while string.sub(command, i, i) == " " do
+        i = i + 1
+    end
+    --Read x position
+    local x = ""
+    while string.sub(command, i, i) ~= " " do
+        --Check for incorrect writing
+        if i > #command then
+            break
+        end
+        x = x .. string.sub(command, i, i)
+        i = i + 1
+    end
+    --Read y position
+    local y = ""
+    i = i + 1
+    while string.sub(command, i, i) ~= " " do
+        --Check for incorrect writing
+        if i > #command then
+            break
+        end
+        y = y .. string.sub(command, i, i)
+        i = i + 1
+    end
+    local player = CurrentScene.player
+    if player == nil then
+        ConsoleLog("ERROR: No player to teleport.")
+        return
+    end
+    --Check if x and y are numbers
+    local xNum = tonumber(x)
+    local yNum = tonumber(y)
+    if xNum == nil or yNum == nil then
+        ConsoleLog("ERROR: Invalid coordinates.")
+        return
+    end
+    --Teleport player
+    player.position[1] = xNum
+    player.position[2] = yNum
 end
 
 return consoleFunctions

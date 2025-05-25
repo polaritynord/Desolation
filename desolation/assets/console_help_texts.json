@@ -3,7 +3,7 @@
         "cheats", "freecam", "p_speed", "g_vignette", "s_language", "noclip", "god", "invisible",
         "inf_stamina", "slippiness", "stamina_fill", "stamina_drain",
         "assign", "run_script", "give_ammo", "clear", "give", "info", "bind", "map", "maps",
-        "hurtme", "hurtarmor", "restart", "summon", "newprop", "newitem"
+        "hurtme", "hurtarmor", "restart", "summon", "newprop", "newitem", "tp"
     ],
 
     "descriptions": [
@@ -34,6 +34,7 @@
         "restart:\n\tRestarts the game.",
         "summon [name]:\n\tSpawns an NPC in front of the player.",
         "newprop [name]:\n\tSpawns a prop in front of the player.",
-        "newitem [name]:\n\tSpawns an item in front of the player."
+        "newitem [name]:\n\tSpawns an item in front of the player.",
+        "tp [x] [y]:\n\tTeleports the player to the given coordinates."
     ]
 }

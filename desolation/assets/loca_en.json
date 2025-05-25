@@ -132,7 +132,9 @@
         "bulletShellParticles": "Bullet Shell Particles: ",
         "destructionParticles": "Destruction Particles: ",
         "explosionParticles": "Explosion Particles: ",
-        "shinyMenu": "Shiny Menu: "
+        "shinyMenu": "Shiny Menu: ",
+        "resolution": "Resolution: ",
+        "fullscreen": "Fullscreen: "
     },
     "keysMenu": {
         "pressAKey": "Press a key... (click to cancel)",

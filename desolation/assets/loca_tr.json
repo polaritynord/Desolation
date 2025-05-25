@@ -133,7 +133,9 @@
         "bulletShellParticles": "Mermi Kovani Parcaciklari: ",
         "destructionParticles": "Yikim Parcaciklari: ",
         "explosionParticles": "Patlama Parcaciklari: ",
-        "shinyMenu": "Parlak Menu: "
+        "shinyMenu": "Parlak Menu: ",
+        "resolution": "Cozunurluk: ",
+        "fullscreen": "Tam Ekran: "
     },
     "keysMenu": {
         "pressAKey": "Bir tusa bas... (iptal icin tikla)",

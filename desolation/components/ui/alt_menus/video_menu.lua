@@ -1,3 +1,4 @@
+local buttonEvents = require("desolation.button_clickevents")
 local videoMenu = ENGINE_COMPONENTS.scriptComponent.new()
 
 function videoMenu:load()
@@ -6,29 +7,40 @@ function videoMenu:load()
     local ui = video.UIComponent
     ui.enabled = false
 
+    ui.resolutionButton = ui:newTextButton(
+        {
+            buttonText = Loca.videoMenu.resolution .. "\t" .. tostring(Settings.resolution[1]) .. "x" .. tostring(Settings.resolution[2]);
+            buttonTextSize = 30;
+            position = {0, 200};
+            hoverEvent = buttonEvents.redHover;
+            unhoverEvent = buttonEvents.redUnhover;
+            clickEvent = function()
+            end;
+        }
+    )
     ui.vsyncText = ui:newTextLabel(
         {
             text = Loca.videoMenu.vsync;
-            position = {0, 200};
+            position = {0, 240};
             size = 30;
         }
     )
     ui.vsyncBox = ui:newCheckbox(
         {
-            position = {400, 215};
+            position = {400, 255};
             toggled = Settings.vsync;
         }
     )
     ui.vignetteText = ui:newTextLabel(
         {
             text = Loca.videoMenu.vignette;
-            position = {0, 240};
+            position = {0, 280};
             size = 30;
         }
     )
     ui.vignetteBox = ui:newCheckbox(
         {
-            position = {400, 255};
+            position = {400, 295};
             toggled = Settings.vignette;
         }
     )
@@ -51,65 +63,65 @@ function videoMenu:load()
     ui.weaponParticlesText = ui:newTextLabel(
         {
             text = Loca.videoMenu.weaponFlameParticles;
-            position = {0, 280};
+            position = {0, 320};
             size = 30;
         }
     )
     ui.weaponParticlesBox = ui:newCheckbox(
         {
-            position = {400, 295};
+            position = {400, 335};
             toggled = Settings.weapon_flame_particles;
         }
     )
     ui.bulletShellText = ui:newTextLabel(
         {
             text = Loca.videoMenu.bulletShellParticles;
-            position = {0, 320};
+            position = {0, 360};
             size = 30;
         }
     )
     ui.bulletShellBox = ui:newCheckbox(
         {
-            position = {400, 335};
+            position = {400, 375};
             toggled = Settings.bullet_shell_particles;
         }
     )
     ui.destructionParticlesText = ui:newTextLabel(
         {
             text = Loca.videoMenu.destructionParticles;
-            position = {0, 360};
+            position = {0, 400};
             size = 30;
         }
     )
     ui.destructionParticlesBox = ui:newCheckbox(
         {
-            position = {400, 375};
+            position = {400, 415};
             toggled = Settings.destruction_particles;
         }
     )
     ui.explosionParticlesText = ui:newTextLabel(
         {
             text = Loca.videoMenu.explosionParticles;
-            position = {0, 400};
+            position = {0, 440};
             size = 30;
         }
     )
     ui.explosionParticlesBox = ui:newCheckbox(
         {
-            position = {400, 415};
+            position = {400, 455};
             toggled = Settings.explosion_particles;
         }
     )
     ui.shinyMenuText = ui:newTextLabel(
         {
             text = Loca.videoMenu.shinyMenu;
-            position = {0, 440};
+            position = {0, 480};
             size = 30;
         }
     )
     ui.shinyMenuBox = ui:newCheckbox(
         {
-            position = {400, 455};
+            position = {400, 495};
             toggled = Settings.shiny_menu;
             clickEvent = function ()
                 settings.UIComponent.restartWarning.text = Loca.settings.restartWarning
