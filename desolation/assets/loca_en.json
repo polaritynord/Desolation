@@ -6,7 +6,7 @@
         "settings": "Settings",
         "about": "About",
         "changelog": "Changelog",
-        "quit": "Quit",
+        "quit": "Quit Game",
         "quitConfirmation": "Are You Sure?",
         "returnButton": "Return"
     },
@@ -105,7 +105,8 @@
         "notifs": {
             "waveClear": "(+50) Wave Complete",
             "kill": "(+10) Robot Eliminated",
-            "explosionBonus": "(+15) Explosion Bonus"
+            "explosionBonus": "(+15) Explosion Bonus",
+            "survivingPoint": "(+10) Surviving"
         },
         "gameOverTitle": "GAME OVER",
         "statsScore": "Score: ",
@@ -130,7 +131,7 @@
         "autoPickupLoot": "Automatically Pick Up Loot: "
     },
     "videoMenu": {
-        "vsync": "VSync: ",
+        "vsync": "V-Sync: ",
         "vignette": "Vignette: ",
         "brightness": "Brightness: ",
         "weaponFlameParticles": "Weapon Flame Particles: ",

@@ -51,6 +51,11 @@ function startupManager:load()
         Settings = defaultSettingsData
     end
 
+    --Set up the window depending on the settings
+    local w = Settings.resolution_options[Settings.resolution][1]
+    local h = Settings.resolution_options[Settings.resolution][2]
+    love.window.setMode(w, h, {fullscreen=Settings.fullscreen})
+
     --Load localization data
     Loca = love.filesystem.read("desolation/assets/loca_" .. Settings.language .. ".json")
     Loca = json.decode(Loca)

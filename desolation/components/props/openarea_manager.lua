@@ -134,6 +134,7 @@ function openareaManager:load()
     self.spawnCooldown = 0
     self.spawnTimer = 0
     self.survivalTimer = 0
+    self.survivalPointTimer = 0
     self:setupUI()
     --Add robot markers object to scene
     local obj = object.new(CurrentScene.hud)
@@ -185,6 +186,7 @@ function openareaManager:update(delta)
     local ui = CurrentScene.hud.UIComponent
 
     self.waveTimer = self.waveTimer + delta
+    --Wave loop
     if self.wavePrep then
         if self.waveTimer > 10 then
             self.newWaveSoundPlayed = false
@@ -238,6 +240,16 @@ function openareaManager:update(delta)
                 CurrentScene.hud.scoreNotifs.script:newNotif(Loca.infiniteMode.notifs.waveClear)
                 CurrentScene.score = CurrentScene.score + 50
             end
+        end
+    end
+
+    --Give surviving points
+    if CurrentScene.player.health > 0 then
+        self.survivalPointTimer = self.survivalPointTimer + delta
+        if self.survivalPointTimer >= 10 then
+            CurrentScene.score = CurrentScene.score + 10
+            CurrentScene.hud.scoreNotifs.script:newNotif(Loca.infiniteMode.notifs.survivingPoint)
+            self.survivalPointTimer = 0
         end
     end
 

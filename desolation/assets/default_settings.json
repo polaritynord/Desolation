@@ -24,6 +24,7 @@
     "auto_pick_loot": true,
     "show_controller_icon": true,
     "shiny_menu": true,
-    "resolution": [960, 540],
+    "fullscreen": false,
+    "resolution": 1,
     "resolution_options": [[960, 540], [1024, 576], [1152, 648], [1280, 720], [1920, 1080]]
 }

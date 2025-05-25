@@ -3,7 +3,7 @@ local json  = require("engine.lib.json")
 local coreFuncs = require("coreFuncs")
 local startupManager = require("engine.startup_manager")
 
-local fullscreen = false
+--local fullscreen = false
 
 InputManager = require("engine.input_manager")
 SoundManager = require("engine.sound_manager")
@@ -27,8 +27,9 @@ end
 function love.wheelmoved(x, y)
     InputManager:setInputTypeTo("keyboard")
     --Keys menu scrolling (TODO, make this work for all menus?)
-    if CurrentScene.settings and CurrentScene.settings.menu == "keys" then
+    if CurrentScene.settings and (CurrentScene.settings.menu == "keys" or CurrentScene.settings.menu == "video") then
         local menu = CurrentScene.settings.keysMenu
+        if CurrentScene.settings.menu == "video" then menu = CurrentScene.settings.videoMenu end
         menu.realY = menu.realY + 35*y
         if menu.realY > 0 then menu.realY = 0 end
         if menu.realY < 540-menu.length then menu.realY = 540-menu.length end
@@ -102,9 +103,15 @@ function love.keypressed(key, unicode)
     InputManager:setInputTypeTo("keyboard")
     -- Fullscreen key
     if table.contains(InputManager:getKeys("fullscreen"), key) then
-        fullscreen = not fullscreen
+        --fullscreen = not fullscreen
         --love.window.setMode(love.window.getDesktopDimensions())
-        love.window.setFullscreen(fullscreen, "desktop")
+        love.window.setFullscreen(not love.window.getFullscreen(), "desktop")
+        --Switch the fullscreen option in the settings too
+        Settings.fullscreen = love.window.getFullscreen()
+        if CurrentScene.settings ~= nil then
+            CurrentScene.settings.videoMenu.UIComponent.fullscreenBox.toggled = love.window.getFullscreen()
+        end
+
         --love.window.setFullscreen(fullscreen, "desktop")
         -- Set window dimensions to default
         --if not fullscreen and false then

@@ -6,41 +6,70 @@ function videoMenu:load()
     local settings = video.parent
     local ui = video.UIComponent
     ui.enabled = false
+    video.realY = video.position[2]
+    video.length = 655
 
+    ui.resolutionText = ui:newTextLabel(
+        {
+            text = Loca.videoMenu.resolution;
+            size = 30;
+            position = {0, 200};
+        }
+    )
     ui.resolutionButton = ui:newTextButton(
         {
-            buttonText = Loca.videoMenu.resolution .. "\t" .. tostring(Settings.resolution[1]) .. "x" .. tostring(Settings.resolution[2]);
+            buttonText = tostring(Settings.resolution_options[Settings.resolution][1]) .. "x" .. Settings.resolution_options[Settings.resolution][2];
             buttonTextSize = 30;
-            position = {0, 200};
+            position = {350, 200};
             hoverEvent = buttonEvents.redHover;
             unhoverEvent = buttonEvents.redUnhover;
-            clickEvent = function()
+            clickEvent = function(element)
+                settings.preview.resolution = settings.preview.resolution + 1
+                if settings.preview.resolution > #settings.preview.resolution_options then settings.preview.resolution = 1 end
+                element.buttonText = tostring(settings.preview.resolution_options[settings.preview.resolution][1]) .. "x" .. settings.preview.resolution_options[settings.preview.resolution][2]
+                love.window.setMode(settings.preview.resolution_options[settings.preview.resolution][1], settings.preview.resolution_options[settings.preview.resolution][2], {fullscreen=love.window.getFullscreen()})
+            end;
+        }
+    )
+    ui.fullscreenButton = ui:newTextLabel(
+        {
+            text = Loca.videoMenu.fullscreen;
+            size = 30;
+            position = {0, 240};
+        }
+    )
+    ui.fullscreenBox = ui:newCheckbox(
+        {
+            position = {400, 255};
+            toggled = Settings.fullscreen;
+            clickEvent = function(element)
+                love.window.setFullscreen(element.toggled, "desktop")
             end;
         }
     )
     ui.vsyncText = ui:newTextLabel(
         {
             text = Loca.videoMenu.vsync;
-            position = {0, 240};
+            position = {0, 280};
             size = 30;
         }
     )
     ui.vsyncBox = ui:newCheckbox(
         {
-            position = {400, 255};
+            position = {400, 295};
             toggled = Settings.vsync;
         }
     )
     ui.vignetteText = ui:newTextLabel(
         {
             text = Loca.videoMenu.vignette;
-            position = {0, 280};
+            position = {0, 320};
             size = 30;
         }
     )
     ui.vignetteBox = ui:newCheckbox(
         {
-            position = {400, 295};
+            position = {400, 335};
             toggled = Settings.vignette;
         }
     )
@@ -63,65 +92,65 @@ function videoMenu:load()
     ui.weaponParticlesText = ui:newTextLabel(
         {
             text = Loca.videoMenu.weaponFlameParticles;
-            position = {0, 320};
+            position = {0, 360};
             size = 30;
         }
     )
     ui.weaponParticlesBox = ui:newCheckbox(
         {
-            position = {400, 335};
+            position = {400, 375};
             toggled = Settings.weapon_flame_particles;
         }
     )
     ui.bulletShellText = ui:newTextLabel(
         {
             text = Loca.videoMenu.bulletShellParticles;
-            position = {0, 360};
+            position = {0, 400};
             size = 30;
         }
     )
     ui.bulletShellBox = ui:newCheckbox(
         {
-            position = {400, 375};
+            position = {400, 415};
             toggled = Settings.bullet_shell_particles;
         }
     )
     ui.destructionParticlesText = ui:newTextLabel(
         {
             text = Loca.videoMenu.destructionParticles;
-            position = {0, 400};
+            position = {0, 440};
             size = 30;
         }
     )
     ui.destructionParticlesBox = ui:newCheckbox(
         {
-            position = {400, 415};
+            position = {400, 455};
             toggled = Settings.destruction_particles;
         }
     )
     ui.explosionParticlesText = ui:newTextLabel(
         {
             text = Loca.videoMenu.explosionParticles;
-            position = {0, 440};
+            position = {0, 480};
             size = 30;
         }
     )
     ui.explosionParticlesBox = ui:newCheckbox(
         {
-            position = {400, 455};
+            position = {400, 495};
             toggled = Settings.explosion_particles;
         }
     )
     ui.shinyMenuText = ui:newTextLabel(
         {
             text = Loca.videoMenu.shinyMenu;
-            position = {0, 480};
+            position = {0, 520};
             size = 30;
         }
     )
     ui.shinyMenuBox = ui:newCheckbox(
         {
-            position = {400, 495};
+            position = {400, 535};
             toggled = Settings.shiny_menu;
             clickEvent = function ()
                 settings.UIComponent.restartWarning.text = Loca.settings.restartWarning
@@ -137,6 +166,7 @@ function videoMenu:update(delta)
 
     --UI Offsetting & canvas enabling
     video.position[1] = 950 + MenuUIOffset
+    video.position[2] = video.position[2] + (video.realY-video.position[2])*8*delta
     ui.enabled = settings.menu == "video"
     --Transparency animation
     if ui.enabled then
@@ -146,6 +176,8 @@ function videoMenu:update(delta)
     end
 
     if not ui.enabled then return end
+    settings.preview.fullscreen = ui.fullscreenBox.toggled
+    --settings.preview.resolution = 
     settings.preview.vsync = ui.vsyncBox.toggled
     settings.preview.vignette = ui.vignetteBox.toggled
     settings.preview.weapon_flame_particles = ui.weaponParticlesBox.toggled
