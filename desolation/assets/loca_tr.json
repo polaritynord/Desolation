@@ -84,6 +84,8 @@
         "infiniteDesc": "Olabildigince hayatta kal.",
         "infiniteDifficulty": "Zorluk: ",
         "infiniteDifficulties": ["kolay", "orta", "zor", "ekstrem", "ultra"],
+        "highScore": "Rekor Puan",
+        "matchesPlayed": "Oynanan Maclar",
         "difficultyDescs": [
             "Bundan daha kolay olabilir mi bilmiyorum.",
             "Eh, azicik daha zor.",

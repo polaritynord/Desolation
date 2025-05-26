@@ -83,6 +83,8 @@
         "infiniteDesc": "Survive as long as you can.",
         "infiniteDifficulty": "Difficulty: ",
         "infiniteDifficulties": ["easy", "medium", "hard", "extreme", "ultra"],
+        "highScore": "High Score",
+        "matchesPlayed": "Matches Played",
         "difficultyDescs": [
             "I don't know if it can get any easier than this.",
             "Eh, a little more difficult.",

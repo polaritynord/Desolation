@@ -27,9 +27,17 @@ function infiniteMenu:load()
             end
         }
     )
+    ui.difficultyHighScoreText = ui:newTextLabel(
+        {
+            text = Loca.extrasMenu.highScore .. ": ";
+            size = 24;
+            position = {300, 202};
+            color = {1, 1, 1, 0.8};
+        }
+    )
     ui.difficultyDescription = ui:newTextLabel(
         {
-            position = {0, 240};
+            position = {0, 250};
             size = 16;
         }
     )
@@ -138,6 +146,10 @@ function infiniteMenu:update(delta)
     else
         ui.difficultyDescription.font = "disposable-droid"
     end
+    --Set the difficulty high score text
+    local score = Achievements.other.infiniteHighScores[infinite.difficulty]
+    local count = Achievements.other.infiniteMatchCounts[infinite.difficulty]
+    ui.difficultyHighScoreText.text = Loca.extrasMenu.highScore .. ": " .. tostring(score) .. "\n" .. Loca.extrasMenu.matchesPlayed .. ": " .. tostring(count)
     --Calculate amount values
     infinite.amounts.crate = math.floor(28+(ui.crateAmountSlider.value)*30)
     infinite.amounts.barrel = math.floor(9+(ui.barrelAmountSlider.value)*11)

@@ -135,6 +135,8 @@ function openareaManager:load()
     self.spawnTimer = 0
     self.survivalTimer = 0
     self.survivalPointTimer = 0
+    self.deathTimer = 0
+    self.matchCounted = false
     self:setupUI()
     --Add robot markers object to scene
     local obj = object.new(CurrentScene.hud)
@@ -329,6 +331,12 @@ function openareaManager:update(delta)
         return
     end
     --Update stats
+    --Increment the amount of matches played
+    if not self.matchCounted and CurrentScene.score > 0 then
+        Achievements.other.infiniteMatchCounts[CurrentScene.difficulty] = Achievements.other.infiniteMatchCounts[CurrentScene.difficulty] + 1
+    end
+    CurrentScene.camera.zoom = CurrentScene.camera.zoom + (0.1-CurrentScene.camera.zoom)*4*delta
+    self.matchCounted = true
     --Convert survival seconds to XX:XX:XX format
     local timeSurvived = math.floor(self.survivalTimer/60) .. Loca.infiniteMode.minute .. math.floor(math.fmod(self.survivalTimer, 60)) .. Loca.infiniteMode.second
     local accuracy = math.floor((CurrentScene.shots-CurrentScene.shotsMissed)/CurrentScene.shots*100) .. "%"

@@ -7,7 +7,7 @@ function cameraController:idleCamera(delta, camera, player)
         return
     end
     self.idleTimer = self.idleTimer + delta
-    --if self.idleTimer < 3 then return end (uncomment this if you dont want the camera sway to show up instantly after stopping)
+    --if self.idleTimer < 3 then return end --(uncomment this if you dont want the camera sway to show up instantly after stopping)
 
     local speed = 1
     local intensity = 10
@@ -27,7 +27,7 @@ function cameraController:movement(delta, camera, player)
         local dy = player.position[2] - camera.position[2]
         local weapon = player.inventory.weapons[player.inventory.slot]
         --Peeking
-        if Settings.experimental_peeking and weapon ~= nil then
+        if Settings.experimental_peeking and weapon ~= nil and player.health > 0 then
             if InputManager.inputType == "keyboard" then
                 dx = dx + (mx-480)*weapon.aimRange
                 dy = dy + (my-270)*weapon.aimRange

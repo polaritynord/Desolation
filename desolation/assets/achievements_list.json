@@ -56,6 +56,7 @@
 
     "other": {
         "infiniteHighScores": [0, 0, 0, 0, 0],
+        "infiniteMatchCounts": [0, 0, 0, 0, 0],
         "orderList": ["for_a_reason", "thanksForPlaying", "selfDestruct", "distant", "aHairsBreadth", "devConsole", "chainReaction", "play_all_radios", "1k_3", "1k_4", "1k_5"]
     }
 }
