@@ -273,8 +273,6 @@ function playerScript:load()
         ["q"] = false;
     }
     player.nearItem = nil
-    player.inventory.weapons[3] = weaponManager["Stolgard-PAL"].new()
-    player.inventory.weapons[3].magAmmo = 10000000000
 end
 
 function playerScript:update(delta)

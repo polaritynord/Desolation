@@ -109,6 +109,8 @@ function infiniteMenu:load()
                 SetScene(scene)
                 scene.mapCreator.script:loadMap("desolation/assets/maps/infinite_openarea.json")
             end;
+            hoverEvent = buttonEvents.redHover;
+            unhoverEvent = buttonEvents.redUnhover;
         }
     )
 end

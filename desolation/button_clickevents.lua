@@ -13,6 +13,18 @@ function clickEvents.redUnhover(element)
     element.color[3] = element.color[3] + (1-element.color[3])*8*delta
 end
 
+function clickEvents.defaultHoverEvent(element)
+    local delta = love.timer.getDelta()
+    element.hoverOffset = element.hoverOffset + (14-element.hoverOffset) * 27 * delta
+    if element.mouseHovering then return end
+    SoundManager:playSound(Assets.defaultSounds["button_hover"], Settings.vol_sfx)
+end
+
+function clickEvents.defaultUnhoverEvent(element)
+    local delta = love.timer.getDelta()
+    element.hoverOffset = element.hoverOffset + (0-element.hoverOffset) * 27 * delta
+end
+
 function clickEvents.resetKeysButtonClick(element)
     if element.buttonText == Loca.keysMenu.resetToDefault then
         element.textFont = "disposable-droid-italic"

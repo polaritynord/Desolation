@@ -1,4 +1,5 @@
 local coreFuncs = require("coreFuncs")
+local buttonEvents = require("desolation.button_clickevents")
 
 local textButton = {}
 
@@ -13,25 +14,13 @@ function textButton.new()
         mouseClicking = false;
         hoverOffset = 0;
         clickEvent = nil;
-        hoverEvent = nil;
-        unhoverEvent = nil;
+        hoverEvent = buttonEvents.defaultHoverEvent;
+        unhoverEvent = buttonEvents.defaultUnhoverEvent;
         bindedKey = nil;
         textFont = "disposable-droid";
         enabled = true;
         begin = "left";
     }
-
-    function instance.hoverEvent(element)
-        local delta = love.timer.getDelta()
-        element.hoverOffset = element.hoverOffset + (14-element.hoverOffset) * 27 * delta
-        if element.mouseHovering then return end
-        SoundManager:playSound(Assets.defaultSounds["button_hover"], Settings.vol_sfx)
-    end
-
-    function instance.unhoverEvent(element)
-        local delta = love.timer.getDelta()
-        element.hoverOffset = element.hoverOffset + (0-element.hoverOffset) * 27 * delta
-    end
 
     function instance:update(delta)
         local mx, my = coreFuncs.getRelativeMousePosition()

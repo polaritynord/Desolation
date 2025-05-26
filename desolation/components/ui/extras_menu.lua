@@ -22,9 +22,8 @@ function extrasMenu:load()
             hoverEvent = function (element)
                 ui.modeDescription.text = Loca.extrasMenu.playgroundDesc
                 ui.modeDescription.position[2] = element.position[2]
-                buttonEvents.redHover(element)
+                buttonEvents.defaultHoverEvent(element)
             end;
-            unhoverEvent = buttonEvents.redUnhover;
         }
     )
     ui.infiniteButton = ui:newTextButton(
@@ -38,9 +37,8 @@ function extrasMenu:load()
             hoverEvent = function (element)
                 ui.modeDescription.text = Loca.extrasMenu.infiniteDesc
                 ui.modeDescription.position[2] = element.position[2]
-                buttonEvents.redHover(element)
+                buttonEvents.defaultHoverEvent(element)
             end;
-            unhoverEvent = buttonEvents.redUnhover;
         }
     )
     ui.endlessButton2 = ui:newTextButton(
@@ -96,6 +94,12 @@ function extrasMenu:update(delta)
         ui.alpha = ui.alpha + (1-ui.alpha)*12*delta
     else
         ui.alpha = 0.25
+    end
+    --Make infinite button seem red if currently in that menu (TODO apply this to other modes if i happen to add them)
+    if menu.selection == "infinite" then
+        ui.infiniteButton.color = {1, 0, 0, 1}
+    else
+        ui.infiniteButton.color = {1, 1, 1, 1}
     end
     if not menu.open then return end
     if menu.selection ~= nil then
