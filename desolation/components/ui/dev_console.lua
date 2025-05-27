@@ -39,6 +39,7 @@ function devConsole:load()
     console.assignedKeys = {};
     console.assignedCommands = {}
     console.logOffset = 0
+    console.inputIndex = 1
 
     --Element creation
     ui.window = ui:newRectangle(
@@ -94,9 +95,12 @@ function devConsole:load()
 end
 
 function devConsole:updateInputText(console, ui)
-    ui.commandInputText.text = "> " .. console.commandInput
-    if console.takingInput and math.floor(love.timer.getTime()) % 2 == 0 then
-        ui.commandInputText.text = ui.commandInputText.text .. "_"
+    ui.commandInputText.text = "> "
+    if console.takingInput then
+        --ui.commandInputText.text = ui.commandInputText.text .. "_"
+        ui.commandInputText.text = ui.commandInputText.text .. string.sub(console.commandInput, 1, console.inputIndex-1) .. "_" .. string.sub(console.commandInput, console.inputIndex, #console.commandInput)
+    else
+        ui.commandInputText.text = ui.commandInputText.text .. console.commandInput
     end
 end
 
@@ -110,6 +114,7 @@ end
 function devConsole:update(delta)
     local console = self.parent
     local ui = console.UIComponent
+    print(console.inputIndex)
 
     --UI Offsetting & canvas enabling
     console.position[1] = 600 + MenuUIOffset
@@ -140,6 +145,7 @@ function love.textinput(t)
     local console = devConsole.parent
     if console.takingInput and console.open then
         console.commandInput = console.commandInput .. t
+        console.inputIndex = console.inputIndex + 1
     end
 end
 

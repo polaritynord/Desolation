@@ -101,6 +101,28 @@ function love.keypressed(key, unicode)
         consoleUI = console.UIComponent
     else consoleUI = nil end
     InputManager:setInputTypeTo("keyboard")
+    --Various devconsole related stuff
+    if console.takingInput then
+        --Arrows
+        if key == "left" then
+            console.inputIndex = console.inputIndex - 1
+            if console.inputIndex < 1 then console.inputIndex = 1 end
+        end
+        if key == "right" then
+            console.inputIndex = console.inputIndex + 1
+            if console.inputIndex > #console.commandInput + 1 then console.inputIndex = #console.commandInput + 1 end
+        end
+        --Paste
+        if (love.keyboard.isDown("lctrl") or love.keyboard.isDown("rctrl")) and key == "v" then
+            local clipboardText = love.system.getClipboardText()
+            if clipboardText ~= nil and clipboardText ~= "" then
+                local temp = string.sub(console.commandInput, console.inputIndex, string.len(console.commandInput))
+                console.commandInput = string.sub(console.commandInput, 1, console.inputIndex-1) .. clipboardText
+                console.inputIndex = console.inputIndex + string.len(clipboardText)
+                console.commandInput = console.commandInput .. temp
+            end
+        end
+    end
     -- Fullscreen key
     if table.contains(InputManager:getKeys("fullscreen"), key) then
         --fullscreen = not fullscreen
@@ -165,10 +187,12 @@ function love.keypressed(key, unicode)
         -- get the byte offset to the last UTF-8 character in the string.
         local byteoffset = utf8.offset(console.commandInput, -1)
 
-        if byteoffset then
+        if byteoffset and console.inputIndex > 1 then
             -- remove the last UTF-8 character.
             -- string.sub operates on bytes rather than UTF-8 characters, so we couldn't do string.sub(text, 1, -2).
-            console.commandInput = string.sub(console.commandInput, 1, byteoffset - 1)
+            console.commandInput = string.sub(console.commandInput, 1, console.inputIndex - 2) .. string.sub(console.commandInput, console.inputIndex, byteoffset + 1)
+            --console.commandInput = string.sub(console.commandInput, 1, byteoffset - 1)
+            console.inputIndex = console.inputIndex - 1
         end
     end
 
@@ -191,10 +215,11 @@ function love.keypressed(key, unicode)
         print("Ran console script: " .. console.commandInput)
         ConsoleLog("> " .. console.commandInput)
         console.commandInput = ""
+        console.inputIndex = 1
     end
 
     --Check if the key is assigned to a devConsole command
-    if table.contains(console.assignedKeys, key) then
+    if table.contains(console.assignedKeys, key) and not GamePaused then
         local commandInput = console.assignedCommands[table.contains(console.assignedKeys, key, true)]
         local commands = console.script:readCommandsFromInput(commandInput, true)
         for i = 1, #commands do

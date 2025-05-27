@@ -45,7 +45,7 @@ function achievementsMenu:load()
     ui.progressText = ui:newTextLabel(
         {
             position = {0, 180};
-            text = Loca.achievementsMenu.progress .. ": " .. obtainedAchievement .. "/" .. #Achievements.other.orderList .. " (" .. math.floor(obtainedAchievement/#Achievements.other.orderList*100) .. "%)";
+            text = Loca.achievementsMenu.progress .. ": " .. obtainedAchievement .. "/" .. #Achievements.other.orderList-1 .. " (" .. math.floor(obtainedAchievement/(#Achievements.other.orderList-1)*100) .. "%)";
             size = 30;
             font = "disposable-droid";
             color = {1, 1, 0, 1};
