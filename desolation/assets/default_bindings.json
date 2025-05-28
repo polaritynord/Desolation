@@ -40,6 +40,8 @@
         ["reload", 3],
         ["toggle_hud", 0],
         ["screenshot", 5],
-        ["toggle_follow", 0]
+        ["toggle_follow", 0],
+        ["menu_up", 12],
+        ["menu_down", 13]
     ]
 }

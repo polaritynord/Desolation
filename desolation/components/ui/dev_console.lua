@@ -114,7 +114,6 @@ end
 function devConsole:update(delta)
     local console = self.parent
     local ui = console.UIComponent
-    print(console.inputIndex)
 
     --UI Offsetting & canvas enabling
     console.position[1] = 600 + MenuUIOffset
