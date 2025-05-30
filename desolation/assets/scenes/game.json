@@ -146,6 +146,7 @@
             ["hud_acquire_battery", "desolation/assets/images/hud/acquire_battery.png"],
             ["hud_acquire_light_ammo", "desolation/assets/images/hud/acquire_light_ammo.png"],
             ["hud_acquire_medium_ammo", "desolation/assets/images/hud/acquire_medium_ammo.png"],
+            ["hud_acquire_revolver_ammo", "desolation/assets/images/hud/acquire_revolver_ammo.png"],
             ["hud_acquire_shotgun_ammo", "desolation/assets/images/hud/acquire_shotgun_ammo.png"],
             ["hud_item_pickup", "desolation/assets/images/hud/item_pickup.png"],
             ["hud_hitmarker", "desolation/assets/images/hud/hitmarker.png"],

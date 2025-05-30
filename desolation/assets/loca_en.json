@@ -179,6 +179,12 @@
         "shotgun": "Shotgun",
         "stolgard-pal": "Stolgard-PAL"
     },
+    "aboutMenu": {
+        "title": "ABOUT"
+    },
+    "changelogMenu": {
+        "title": "CHANGELOG"
+    },
     "bruhuhuh": "WHAT THE HELL ARE YOU DOING THAT FAR AWAY?!",
     "controllerConnected": "Controller Connected",
     "controllerDisconnected": "Controller Disconnected"

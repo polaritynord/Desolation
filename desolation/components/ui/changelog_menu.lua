@@ -7,6 +7,14 @@ function changelogMenu:load()
     ui.enabled = false
     changelog.open = false
 
+    ui.title = ui:newTextLabel(
+        {
+            text = Loca.changelogMenu.title;
+            size = 45;
+            position = {0, 140};
+            font = "disposable-droid-bold";
+        }
+    )
     ui.test = ui:newTextLabel(
         {
             text = "This menu is most likely going to be empty\nuntil I figure out how to fetch text from the\nweb lol" ..

@@ -6,6 +6,14 @@ function aboutMenu:load()
     local ui = about.UIComponent
     ui.enabled = false
     about.open = false
+    ui.title = ui:newTextLabel(
+        {
+            text = Loca.aboutMenu.title;
+            size = 45;
+            position = {0, 140};
+            font = "disposable-droid-bold";
+        }
+    )
     ui.returnButton = ui:newTextButton(
         {
             buttonText = Loca.mainMenu.returnButton;

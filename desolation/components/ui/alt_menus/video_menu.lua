@@ -169,7 +169,6 @@ function videoMenu:load()
 end
 
 function videoMenu:update(delta)
-    print(MenuUIOffset)
     local video = self.parent
     local settings = video.parent
     local ui = video.UIComponent
