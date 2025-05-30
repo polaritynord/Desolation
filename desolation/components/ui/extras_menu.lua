@@ -8,6 +8,14 @@ function extrasMenu:load()
     ui.enabled = false
     menu.selection = nil
     --Element creation
+    ui.title = ui:newTextLabel(
+        {
+            text = Loca.extrasMenu.title;
+            size = 45;
+            position = {0, 140};
+            font = "disposable-droid-bold";
+        }
+    )
     ui.playgroundButton = ui:newTextButton(
         {
             buttonText = Loca.extrasMenu.playground;

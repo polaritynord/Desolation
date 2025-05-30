@@ -11,6 +11,7 @@
         "returnButton": "Return"
     },
     "settings": {
+        "title": "SETTINGS",
         "gameplay": "Gameplay",
         "video": "Video",
         "audio": "Audio",
@@ -38,9 +39,14 @@
             "toggle_hud": "Toggle HUD",
             "screenshot": "Take Screenshot",
             "toggle_follow": "Make NPC Follow"
-        }
+        },
+        "videoTitle": "VIDEO SETTINGS",
+        "gameplayTitle": "GAMEPLAY SETTINGS",
+        "audioTitle": "AUDIO SETTINGS",
+        "keysTitle": "CONTROLS SETTINGS"
     },
     "achievementsMenu": {
+        "title": "ACHIEVEMENTS",
         "progress": "PROGRESS"
     },
     "achievementDisplayNames": {
@@ -74,9 +80,12 @@
         "mainMenu": "Main Menu"
     },
     "campaignMenu": {
+        "title": "CAMPAIGN",
         "wip": "Work In Progress..."
     },
     "extrasMenu": {
+        "title": "EXTRA GAMEMODES",
+        "infiniteTitle": "INFINITE MODE",
         "playground": "Playground",
         "playgroundDesc": "Do whatever you want.",
         "infinite": "Infinite",

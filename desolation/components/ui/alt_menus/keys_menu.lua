@@ -21,6 +21,14 @@ function keysMenu:load()
     )
     ui.scrollbar.realY = ui.scrollbar.position[2]
     ]]--
+    ui.title = ui:newTextLabel(
+        {
+            text = Loca.settings.keysTitle;
+            size = 45;
+            position = {0, 140};
+            font = "disposable-droid-bold";
+        }
+    )
     --key binding main title or some shi
     ui:newTextLabel(
         {

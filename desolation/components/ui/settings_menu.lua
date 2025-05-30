@@ -12,6 +12,14 @@ function settings:load()
     ui.menuButtons = {}
 
     --Element creation
+    ui.title = ui:newTextLabel(
+        {
+            text = Loca.settings.title;
+            size = 45;
+            position = {0, 140};
+            font = "disposable-droid-bold";
+        }
+    )
     ui.menuButtons.gameplay = ui:newTextButton(
         {
             buttonText = Loca.settings.gameplay;

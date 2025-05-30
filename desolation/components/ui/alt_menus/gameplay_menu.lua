@@ -8,6 +8,15 @@ function gameplayMenu:load()
 
     local ui = gameplay.UIComponent
     ui.enabled = false
+    ui.title = ui:newTextLabel(
+        {
+            text = Loca.settings.gameplayTitle;
+            size = 45;
+            position = {0, 140};
+            font = "disposable-droid-bold";
+        }
+    )
+
     ui.cameraSwayText = ui:newTextLabel(
         {
             text = Loca.gameplayMenu.cameraSway;

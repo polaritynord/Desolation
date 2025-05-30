@@ -51,7 +51,7 @@ function itemEventFuncs.ammoPickup(item)
     item.gettingPickedUp = true
     --play sound
     SoundManager:restartSound(Assets.sounds["acquire"], Settings.vol_world)
-    itemEventFuncs.createHUDNotif("hud_acquire_ammo")
+    itemEventFuncs.createHUDNotif("hud_acquire_" .. ammoType .. "_ammo")
 end
 
 function itemEventFuncs.medkitPickup(item)

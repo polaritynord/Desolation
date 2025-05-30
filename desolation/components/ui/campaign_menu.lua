@@ -6,6 +6,14 @@ function campaignMenu:load()
     local ui = campaign.UIComponent
     ui.enabled = false
     campaign.open = false
+    ui.title = ui:newTextLabel(
+        {
+            text = Loca.campaignMenu.title;
+            size = 45;
+            position = {0, 140};
+            font = "disposable-droid-bold";
+        }
+    )
     ui.wipText = ui:newTextLabel(
         {
             text = Loca.campaignMenu.wip;

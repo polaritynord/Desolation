@@ -6,6 +6,15 @@ function audioMenu:load()
     local ui = audio.UIComponent
     ui.enabled = false
 
+    ui.title = ui:newTextLabel(
+        {
+            text = Loca.settings.audioTitle;
+            size = 45;
+            position = {0, 140};
+            font = "disposable-droid-bold";
+        }
+    )
+
     ui.masterVolText = ui:newTextLabel(
         {
             text = Loca.audioMenu.masterVolume;

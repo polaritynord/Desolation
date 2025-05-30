@@ -227,7 +227,7 @@ function playerScript:reloadingWeapon(delta, player)
                     player.inventory.ammunition[weapon.ammoType] = player.inventory.ammunition[weapon.ammoType] - 1
                     weapon.magAmmo = weapon.magAmmo + 1
                     --sound effects
-                    if weapon.magAmmo == weapon.magSize then
+                    if weapon.magAmmo == weapon.magSize or player.inventory.ammunition[weapon.ammoType] < 1 then
                         SoundManager:restartSound(Assets.sounds["reload_" .. string.lower(weapon.name)], Settings.vol_world, player.position, true)
                         player.reloading = false
                     else

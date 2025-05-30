@@ -9,6 +9,15 @@ function videoMenu:load()
     video.realY = video.position[2]
     video.length = 655
 
+    ui.title = ui:newTextLabel(
+        {
+            text = Loca.settings.videoTitle;
+            size = 45;
+            position = {0, 140};
+            font = "disposable-droid-bold";
+        }
+    )
+
     ui.resolutionText = ui:newTextLabel(
         {
             text = Loca.videoMenu.resolution;
@@ -160,6 +169,7 @@ function videoMenu:load()
 end
 
 function videoMenu:update(delta)
+    print(MenuUIOffset)
     local video = self.parent
     local settings = video.parent
     local ui = video.UIComponent

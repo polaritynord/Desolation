@@ -17,6 +17,7 @@ function radioScript:update(delta)
     radio.distanceToPlayer = coreFuncs.pointDistance(radio.position, player.position)
     if radio.distanceToPlayer > 80 then return end
     if InputManager:isPressed("interact") and not radio.playerPressing then
+        GiveAchievement("play_all_radios")
         SoundManager:restartSound(Assets.mapSounds["wake_up"], Settings.vol_world, nil, false)
     end
     radio.playerPressing = InputManager:isPressed("interact")

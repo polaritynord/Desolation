@@ -11,6 +11,7 @@
         "returnButton": "Geri Don"
     },
     "settings": {
+        "title": "AYARLAR",
         "gameplay": "Oynanis",
         "video": "Video",
         "audio": "Ses",
@@ -38,9 +39,14 @@
             "toggle_hud": "HUD'u Ac/Kapa",
             "screenshot": "Ekran Goruntusu Cek",
             "toggle_follow": "NPC'nin Takip Etmesini Sagla"
-        }
+        },
+        "videoTitle": "VIDEO AYARLARI",
+        "gameplayTitle": "OYNANIS AYARLARI",
+        "audioTitle": "SES AYARLARI",
+        "keysTitle": "KONTROL AYARLARI"
     },
     "achievementsMenu": {
+        "title": "BASARIMLAR",
         "progress": "ILERLEME"
     },
     "achievementDisplayNames": {
@@ -75,9 +81,12 @@
         "mainMenu": "Ana Menu"
     },
     "campaignMenu": {
+        "title": "HIKAYE MODU",
         "wip": "Yapim Asamasinda..."
     },
     "extrasMenu": {
+        "title": "EK OYUN MODLARI",
+        "infiniteTitle": "SONSUZ MOD",
         "playground": "Oyun Alani",
         "playgroundDesc": "Ne halt yersen ye.",
         "infinite": "Sonsuz",

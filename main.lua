@@ -58,7 +58,7 @@ function love.wheelmoved(x, y)
     end
 
     --Ingame slot switching
-    if not GamePaused and CurrentScene.name == "Game" and not love.keyboard.isDown("lctrl") then
+    if not GamePaused and CurrentScene.name == "Game" and not love.keyboard.isDown("lctrl") and CurrentScene.player.health > 0 then
         local player = CurrentScene.player
         local oldSlot = player.inventory.slot
         player.inventory.previousSlot = player.inventory.slot
@@ -102,7 +102,7 @@ function love.keypressed(key, unicode)
     else consoleUI = nil end
     InputManager:setInputTypeTo("keyboard")
     --Various devconsole related stuff
-    if console.takingInput then
+    if console ~= nil and console.takingInput then
         --Arrows
         if key == "left" then
             console.inputIndex = console.inputIndex - 1

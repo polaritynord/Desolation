@@ -4,7 +4,7 @@ local consoleFunctions = {
     funcsList = {
         "assign", "run_script", "give_ammo", "clear", "help", "lorem",
         "give", "info", "bind", "map", "maps", "hurtme", "hurtarmor", "restart",
-        "summon", "newprop", "newitem", "tp"
+        "summon", "newprop", "newitem", "tp", "scene", "scenes"
     };
 }
 
@@ -33,8 +33,16 @@ function consoleFunctions.assignScript(devConsole, command, i)
         i = i + 1
     end
     local assignCommand = temp
-    devConsole.assignedCommands[#devConsole.assignedCommands+1] = assignCommand
-    devConsole.assignedKeys[#devConsole.assignedKeys+1] = assignedKey
+    --If no other key was assigned before:
+    local index = table.contains(devConsole.assignedKeys, assignedKey, true)
+    if not index then
+        --If the key was never assigned before:
+        devConsole.assignedCommands[#devConsole.assignedCommands+1] = assignCommand
+        devConsole.assignedKeys[#devConsole.assignedKeys+1] = assignedKey
+    else
+        --Overwrite the existing assignment:
+        devConsole.assignedCommands[index] = assignCommand
+    end
 end
 
 function consoleFunctions.run_scriptScript(devConsole, command, i)
@@ -215,7 +223,7 @@ function consoleFunctions.mapScript(devConsole, command, i)
     --check if map exists
     local path = string.lower(GAME_NAME) .. "/assets/maps/" .. temp .. ".json"
     if love.filesystem.getInfo(path) == nil then
-        ConsoleLog("couldn't find map \"" .. temp .. "\".")
+        ConsoleLog("ERROR: Couldn't find map \"" .. temp .. "\".")
         return
     end
     local scene = LoadScene("desolation/assets/scenes/game.json")
@@ -381,6 +389,39 @@ function consoleFunctions.tpScript(devConsole, command, i)
     --Teleport player
     player.position[1] = xNum
     player.position[2] = yNum
+end
+
+function consoleFunctions.sceneScript(devConsole, command, i)
+    i = i + 1
+    --Skip spaces
+    while string.sub(command, i, i) == " " do
+        i = i + 1
+    end
+    --Read scene name
+    local temp = ""
+    while string.sub(command, i, i) ~= " " do
+        --Check for incorrect writing
+        if i > #command then
+            break
+        end
+        temp = temp .. string.sub(command, i, i)
+        i = i + 1
+    end
+    --Check if scene exists
+    local path = string.lower(GAME_NAME) .. "/assets/scenes/" .. temp .. ".json"
+    if love.filesystem.getInfo(path) == nil then
+        ConsoleLog("ERROR: Couldn't find scene \"" .. temp .. "\".")
+        return
+    end
+    SetScene(LoadScene(path))
+end
+
+function consoleFunctions.scenesScript(devConsole, command, i)
+    local files = love.filesystem.getDirectoryItems(string.lower(GAME_NAME) .. "/assets/scenes")
+    for k = 1, #files do
+        ConsoleLog(files[k])
+    end
+    ConsoleLog("List of scenes:")
 end
 
 return consoleFunctions

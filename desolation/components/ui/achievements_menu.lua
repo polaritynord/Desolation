@@ -10,19 +10,28 @@ function achievementsMenu:load()
     achievements.realY = achievements.position[2]
     local obtainedAchievement = 0
 
+    ui.title = ui:newTextLabel(
+        {
+            text = Loca.achievementsMenu.title;
+            size = 45;
+            position = {0, 140};
+            font = "disposable-droid-bold";
+        }
+    )
+
     for i, name in ipairs(Achievements.other.orderList) do
         local data = Achievements[name]
         --Icon
         ui["icon_" .. name] = ui:newImage(
             {
-                position = {32, 190+i*110};
+                position = {32, 195+i*110};
                 source = Assets.defaultImages["achievement_" .. name];
                 scale = {4, 4};
             }
         )
         ui["title_" .. name] = ui:newTextLabel(
             {
-                position = {72, 174+i*110};
+                position = {72, 179+i*110};
                 text = Loca.achievementDisplayNames[name];
                 size = 40;
                 font = "disposable-droid-bold";
@@ -30,7 +39,7 @@ function achievementsMenu:load()
         )
         ui["desc_" .. name] = ui:newTextLabel(
             {
-                position = {0, 230+i*110};
+                position = {0, 235+i*110};
                 text = Loca.achievementDescriptions[name];
             }
         )
@@ -44,8 +53,8 @@ function achievementsMenu:load()
 
     ui.progressText = ui:newTextLabel(
         {
-            position = {0, 180};
-            text = Loca.achievementsMenu.progress .. ": " .. obtainedAchievement .. "/" .. #Achievements.other.orderList-1 .. " (" .. math.floor(obtainedAchievement/(#Achievements.other.orderList-1)*100) .. "%)";
+            position = {0, 200};
+            text = Loca.achievementsMenu.progress .. ": " .. obtainedAchievement .. "/" .. #Achievements.other.orderList .. " (" .. math.floor(obtainedAchievement/#Achievements.other.orderList*100) .. "%)";
             size = 30;
             font = "disposable-droid";
             color = {1, 1, 0, 1};
@@ -56,7 +65,7 @@ function achievementsMenu:load()
         {
             buttonText = Loca.mainMenu.returnButton;
             buttonTextSize = 30;
-            position = {0, 220};
+            position = {0, 230};
             clickEvent = function() achievements.open = false end;
             bindedKey = "escape";
         }

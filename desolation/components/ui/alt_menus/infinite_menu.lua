@@ -13,6 +13,14 @@ function infiniteMenu:load()
     }
     infinite.regenerateProps = true
 
+    ui.title = ui:newTextLabel(
+        {
+            text = Loca.extrasMenu.infiniteTitle;
+            size = 45;
+            position = {0, 140};
+            font = "disposable-droid-bold";
+        }
+    )
     ui.difficultyPicker = ui:newTextButton(
         {
             buttonText = Loca.extrasMenu.infiniteDifficulty .. string.upper(Loca.extrasMenu.infiniteDifficulties[infinite.difficulty]);
