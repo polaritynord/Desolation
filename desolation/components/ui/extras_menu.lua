@@ -88,6 +88,7 @@ function extrasMenu:load()
             bindedKey = "escape";
         }
     )
+    ui.controllerButtons = {ui.playgroundButton, ui.infiniteButton, ui.endlessButton2, ui.endlessButton3, ui.returnButton}
 end
 
 function extrasMenu:update(delta)

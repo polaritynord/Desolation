@@ -43,6 +43,8 @@
         ["screenshot", 5],
         ["toggle_follow", 0],
         ["menu_up", 12],
-        ["menu_down", 13]
+        ["menu_down", 13],
+        ["slider_right", 15],
+        ["slider_left", 14]
     ]
 }

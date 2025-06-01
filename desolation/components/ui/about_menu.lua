@@ -23,6 +23,7 @@ function aboutMenu:load()
             bindedKey = "escape";
         }
     )
+    ui.controllerButtons = {ui.returnButton}
 end
 
 function aboutMenu:update(delta)

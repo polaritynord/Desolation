@@ -10,6 +10,17 @@ function achievementsMenu:load()
     achievements.realY = achievements.position[2]
     local obtainedAchievement = 0
 
+    ui.returnButton = ui:newTextButton(
+        {
+            buttonText = Loca.mainMenu.returnButton;
+            buttonTextSize = 30;
+            position = {0, 230};
+            clickEvent = function() achievements.open = false end;
+            bindedKey = "escape";
+        }
+    )
+    ui.controllerButtons = {ui.returnButton}
+
     ui.title = ui:newTextLabel(
         {
             text = Loca.achievementsMenu.title;
@@ -43,6 +54,7 @@ function achievementsMenu:load()
                 text = Loca.achievementDescriptions[name];
             }
         )
+        ui.controllerButtons[#ui.controllerButtons+1] = ui["desc_" .. name]
         if data.obtained then
             ui["title_" .. name].color = {0, 1, 0, 1};
             ui["icon_" .. name].color = {0, 1, 0, 1};
@@ -58,16 +70,6 @@ function achievementsMenu:load()
             size = 30;
             font = "disposable-droid";
             color = {1, 1, 0, 1};
-        }
-    )
-
-    ui.returnButton = ui:newTextButton(
-        {
-            buttonText = Loca.mainMenu.returnButton;
-            buttonTextSize = 30;
-            position = {0, 230};
-            clickEvent = function() achievements.open = false end;
-            bindedKey = "escape";
         }
     )
 end

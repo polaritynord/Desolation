@@ -48,6 +48,7 @@ function keysMenu:load()
             color = {1, 1, 1, 0.2};
         }
     )
+    ui.controllerButtons = {}
     --key binding titles
     for i = 1, #InputManager.bindings.keyboard do
         local binding = InputManager.bindings.keyboard[i]
@@ -72,6 +73,7 @@ function keysMenu:load()
                 end
             }
         )
+        ui.controllerButtons[#ui.controllerButtons+1] = ui[binding[1]]
         ui["key_" .. binding[1]] = ui:newTextLabel(
             {
                 size = 30;
@@ -106,6 +108,7 @@ function keysMenu:load()
             toggled = Settings.show_controller_icon;
         }
     )
+    ui.controllerButtons[#ui.controllerButtons+1] = ui.showControllerIconBox
 end
 
 function keysMenu:update(delta)
@@ -165,6 +168,10 @@ function keysMenu:update(delta)
             ui.resetKeys.buttonText = Loca.keysMenu.resetToDefault
             ui.resetKeys.textFont = "disposable-droid"
         end
+    end
+    --quitting when using controller
+    if InputManager:isPressed("return") then
+        settings.menu = nil
     end
 end
 

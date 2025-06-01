@@ -20,7 +20,7 @@ function gameCursorScript:load()
         }
     )
     ui.controllerSelection = 1
-    ui.controllerCurrentMenu = CurrentScene.mainMenu.UIComponent --Dynamically change this later.
+    ui.controllerCurrentMenu = nil
     ui.controllerAxisPressed = false
     ui.controllerArrowsPressed = false
     ui.controllerInteractPressed = false
@@ -36,19 +36,27 @@ function gameCursorScript:update(delta)
         --ui.controllerCurrentMenu = nil
         --Absolute shit code regarding the menus here as well:
         local temp = ui.controllerCurrentMenu
-        if CurrentScene.campaign.open then ui.controllerCurrentMenu = CurrentScene.campaign.UIComponent end
-        if CurrentScene.extras.open then ui.controllerCurrentMenu = CurrentScene.extras.UIComponent end
-        if CurrentScene.achievements.open then ui.controllerCurrentMenu = CurrentScene.achievements.UIComponent end
+        if CurrentScene.name == "Main Menu" then
+            if CurrentScene.campaign.open then ui.controllerCurrentMenu = CurrentScene.campaign.UIComponent end
+            if CurrentScene.extras.open then ui.controllerCurrentMenu = CurrentScene.extras.UIComponent end
+            if CurrentScene.achievements.open then ui.controllerCurrentMenu = CurrentScene.achievements.UIComponent end
+            if CurrentScene.about.open then ui.controllerCurrentMenu = CurrentScene.about.UIComponent end
+            if CurrentScene.changelog.open then ui.controllerCurrentMenu = CurrentScene.changelog.UIComponent end
+        end
         if CurrentScene.settings.open then ui.controllerCurrentMenu = CurrentScene.settings.UIComponent end
         if CurrentScene.settings.open and CurrentScene.settings.menu ~= nil then
             ui.controllerCurrentMenu = CurrentScene.settings[CurrentScene.settings.menu .. "Menu"].UIComponent
         end
-        if CurrentScene.about.open then ui.controllerCurrentMenu = CurrentScene.about.UIComponent end
-        if CurrentScene.changelog.open then ui.controllerCurrentMenu = CurrentScene.changelog.UIComponent end
         if temp ~= ui.controllerCurrentMenu then ui.controllerSelection = 1 end
     else
         local temp = ui.controllerCurrentMenu
-        ui.controllerCurrentMenu = CurrentScene.mainMenu.UIComponent
+        if CurrentScene.name == "Main Menu" then
+            ui.controllerCurrentMenu = CurrentScene.mainMenu.UIComponent
+        elseif GamePaused then
+            ui.controllerCurrentMenu = CurrentScene.pauseScreen.UIComponent
+        else
+            ui.controllerCurrentMenu = nil
+        end
         if temp ~= ui.controllerCurrentMenu then ui.controllerSelection = 1 end
     end
     --Hide and return if keyboard is being used:
@@ -57,30 +65,46 @@ function gameCursorScript:update(delta)
     else
         ui.controllerArrow.color[4] = 1
         --Use arrow keys to change selection
-        if InputManager:isPressed("menu_down") and not ui.controllerArrowsPressed then
-            ui.controllerArrowsPressed = true
+        if (InputManager:isPressed("menu_down") and not ui.controllerArrowsPressed) or (InputManager:getAxis(2, 0.07) > 0.3 and not ui.controllerAxisPressed) then
+            if InputManager:isPressed("menu_down") then ui.controllerArrowsPressed = true end
+            if InputManager:getAxis(2, 0.07) > 0.3 then ui.controllerAxisPressed = true end
             ui.controllerSelection = ui.controllerSelection + 1
             SoundManager:playSound(Assets.defaultSounds["button_hover"], Settings.vol_sfx)
             if ui.controllerSelection > #ui.controllerCurrentMenu.controllerButtons then ui.controllerSelection = 1 end
         end
-        if InputManager:isPressed("menu_up") and not ui.controllerArrowsPressed then
-            ui.controllerArrowsPressed = true
+        if (InputManager:isPressed("menu_up") and not ui.controllerArrowsPressed) or (InputManager:getAxis(2, 0.07) < -0.3 and not ui.controllerAxisPressed) then
+            if InputManager:isPressed("menu_up") then ui.controllerArrowsPressed = true end
+            if InputManager:getAxis(2, 0.07) < -0.3 then ui.controllerAxisPressed = true end
             ui.controllerSelection = ui.controllerSelection - 1
             SoundManager:playSound(Assets.defaultSounds["button_hover"], Settings.vol_sfx)
             if ui.controllerSelection < 1  then ui.controllerSelection = #ui.controllerCurrentMenu.controllerButtons end
         end
         if not InputManager:isPressed("menu_down") and not InputManager:isPressed("menu_up") then ui.controllerArrowsPressed = false end
-        --Update the position of the arrow
+        if math.abs(InputManager:getAxis(2, 0.07)) < 0.3 then ui.controllerAxisPressed = false end
         local selectedButton = ui.controllerCurrentMenu.controllerButtons[ui.controllerSelection]
+        --Slider code
+        if selectedButton.imASliderAndYoullAcknowledgeIt then
+            if InputManager:isPressed("slider_right") then
+                selectedButton.value = selectedButton.value + 1.2*delta
+                if selectedButton.value > 1 then selectedButton.value = 1 end
+            end
+            if InputManager:isPressed("slider_left") then
+                selectedButton.value = selectedButton.value - 1.2*delta
+                if selectedButton.value < 0 then selectedButton.value = 0 end
+            end
+        end
+        --Update the position of the arrow
         local pos = coreFuncs.getRelativeElementPosition(selectedButton.position, ui.controllerCurrentMenu)
         ui.controllerArrow.position[1] = ui.controllerArrow.position[1] + (pos[1]-25-ui.controllerArrow.position[1])*12*delta
-        ui.controllerArrow.position[2] = ui.controllerArrow.position[2] + (selectedButton.position[2]+16-ui.controllerArrow.position[2])*12*delta
+        local y = selectedButton.position[2]+16
+        if ui.controllerCurrentMenu.parent.realY then y = y + ui.controllerCurrentMenu.parent.realY end
+        ui.controllerArrow.position[2] = ui.controllerArrow.position[2] + (y-ui.controllerArrow.position[2])*12*delta
         --Selected button code
-        selectedButton:hoverEvent()
+        if selectedButton.hoverEvent then selectedButton:hoverEvent() end
         if InputManager:isPressed("interact") and not ui.controllerInteractPressed then
             ui.controllerInteractPressed = true
             SoundManager:playSound(Assets.defaultSounds["button_click"], Settings.vol_sfx)
-            selectedButton:clickEvent()
+            if selectedButton.clickEvent then selectedButton:clickEvent() end
         end
         if not InputManager:isPressed("interact") then ui.controllerInteractPressed = false end
     end

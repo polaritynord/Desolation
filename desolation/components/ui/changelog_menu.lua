@@ -32,6 +32,7 @@ function changelogMenu:load()
             bindedKey = "escape";
         }
     )
+    ui.controllerButtons = {ui.returnButton}
 end
 
 function changelogMenu:update(delta)

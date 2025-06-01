@@ -71,6 +71,7 @@ function audioMenu:load()
             value = Settings.vol_world;
         }
     )
+    ui.controllerButtons = {ui.masterVolSlider, ui.sfxVolSlider, ui.musicVolSlider, ui.worldVolSlider}
 end
 
 function audioMenu:update(delta)
@@ -93,6 +94,10 @@ function audioMenu:update(delta)
     settings.preview.vol_sfx = ui.sfxVolSlider.value
     settings.preview.vol_music = ui.musicVolSlider.value
     settings.preview.vol_world = ui.worldVolSlider.value
+    --quitting when using controller
+    if InputManager:isPressed("return") then
+        settings.menu = nil
+    end
 end
 
 return audioMenu

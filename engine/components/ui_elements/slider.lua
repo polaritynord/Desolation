@@ -4,6 +4,7 @@ local slider = {}
 
 function slider.new()
     local instance = {
+        imASliderAndYoullAcknowledgeIt = true;
         parentComp = nil;
         position = {600, 40};
         baseSize = {200, 20};

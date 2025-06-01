@@ -52,6 +52,8 @@ function videoMenu:load()
             position = {400, 255};
             toggled = Settings.fullscreen;
             clickEvent = function(element)
+                element.toggled = not element.toggled
+                SoundManager:playSound(Assets.defaultSounds["button_click"], Settings.vol_sfx)
                 love.window.setFullscreen(element.toggled, "desktop")
             end;
         }
@@ -161,11 +163,25 @@ function videoMenu:load()
         {
             position = {400, 535};
             toggled = Settings.shiny_menu;
-            clickEvent = function ()
+            clickEvent = function (element)
+                element.toggled = not element.toggled
+                SoundManager:playSound(Assets.defaultSounds["button_click"], Settings.vol_sfx)
                 settings.UIComponent.restartWarning.text = Loca.settings.restartWarning
             end
         }
     )
+    ui.controllerButtons = {
+        ui.resolutionButton,
+        ui.fullscreenBox,
+        ui.vsyncBox,
+        ui.vignetteBox,
+        --ui.brightnessSlider,
+        ui.weaponParticlesBox,
+        ui.bulletShellBox,
+        ui.destructionParticlesBox,
+        ui.explosionParticlesBox,
+        ui.shinyMenuBox
+    }
 end
 
 function videoMenu:update(delta)
@@ -195,6 +211,10 @@ function videoMenu:update(delta)
     settings.preview.explosion_particles = ui.explosionParticlesBox.toggled
     settings.preview.shiny_menu = ui.shinyMenuBox.toggled
     --Settings.brightness = ui.brightnessSlider.value
+    --quitting when using controller
+    if InputManager:isPressed("return") then
+        settings.menu = nil
+    end
 end
 
 return videoMenu

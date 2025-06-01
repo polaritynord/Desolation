@@ -30,6 +30,7 @@ function campaignMenu:load()
             bindedKey = "escape";
         }
     )
+    ui.controllerButtons = {ui.returnButton}
 end
 
 function campaignMenu:update(delta)

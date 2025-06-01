@@ -127,6 +127,7 @@
 
     "assets": {
         "images": [
+            ["controller_selection", "desolation/assets/images/hud/hitmarker.png"],
             ["logo", "desolation/assets/images/logo.png"],
             ["player_body", "desolation/assets/images/player/body.png"],
             ["player_hand_empty", "desolation/assets/images/player/hand_empty.png"],
