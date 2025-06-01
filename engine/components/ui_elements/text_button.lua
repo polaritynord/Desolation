@@ -25,15 +25,14 @@ function textButton.new()
     function instance:update(delta)
         local mx, my = coreFuncs.getRelativeMousePosition()
         local pos = coreFuncs.getRelativeElementPosition(self.position, self.parentComp)
-
         --Click event
-        if ((love.mouse.isDown(1) and self.mouseHovering and not self.mouseClicking) or self.bindedKey ~= nil and love.keyboard.isDown(self.bindedKey)) and self.clickEvent and InputManager.leftMouseTimer > 0.25 then
+        if ((love.mouse.isDown(1) and self.mouseHovering and not self.mouseClicking) or self.bindedKey ~= nil and love.keyboard.isDown(self.bindedKey)) and self.clickEvent and InputManager.leftMouseTimer > 0.25 and InputManager.inputType == "keyboard" then
             InputManager.leftMouseTimer = 0
             SoundManager:playSound(Assets.defaultSounds["button_click"], Settings.vol_sfx)
             self.clickEvent(self)
         end
         --Check for mouse touch
-        if my > pos[2] and my < pos[2] + self.buttonTextSize and mx > pos[1] and mx < pos[1] + 200 then
+        if my > pos[2] and my < pos[2] + self.buttonTextSize and mx > pos[1] and mx < pos[1] + 200 and InputManager.inputType == "keyboard" then
             if self.hoverEvent then self.hoverEvent(self) end
             self.mouseHovering = true
             self.mouseClicking = love.mouse.isDown(1)

@@ -16,7 +16,7 @@ end
 function clickEvents.defaultHoverEvent(element)
     local delta = love.timer.getDelta()
     element.hoverOffset = element.hoverOffset + (14-element.hoverOffset) * 27 * delta
-    if element.mouseHovering then return end
+    if element.mouseHovering or InputManager.inputType == "joystick" then return end
     SoundManager:playSound(Assets.defaultSounds["button_hover"], Settings.vol_sfx)
 end
 

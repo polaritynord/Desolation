@@ -12,16 +12,6 @@ function mainMenu:loadShaders()
     CurrentScene.gameShader.gaussianblur.sigma = 2.8
 end
 
-function mainMenu:manageControllerSelectionEvents()
-    local ui = self.parent.UIComponent
-    if InputManager:isPressed("interact") and not ui.controllerInteractPressed then
-        ui.controllerInteractPressed = true
-        SoundManager:playSound(Assets.defaultSounds["button_click"], Settings.vol_sfx)
-        ui.controllerButtons[ui.controllerSelection]:clickEvent()
-    end
-    if not InputManager:isPressed("interact") then ui.controllerInteractPressed = false end
-end
-
 function mainMenu:load()
     local ui = self.parent.UIComponent
 
@@ -105,17 +95,6 @@ function mainMenu:load()
             font = "disposable-droid"
         }
     )
-    --Controller UI (TODO: NOT DONE WITH THIS AT ALL. GOT SIDETRACKED. RETURN LATER.)
-    ui.controllerSelection = 1
-    ui.controllerArrow = ui:newImage(
-        {
-            source = Assets.images.controller_selection;
-            position = {50, 215};
-            scale = {-0.8, 0.8};
-        }
-    )
-    ui.controllerAxisMoved = false
-    ui.controllerInteractPressed = false
     --initial loading stuff
     if CurrentScene.mapCreator ~= nil then
         CurrentScene.mapCreator.script:loadMap("desolation/assets/maps/" .. Settings.menu_background .. ".json")
@@ -146,28 +125,6 @@ function mainMenu:update(delta)
     local y = math.sin((love.timer.getTime()))*10
     camera.position[1] = -MenuUIOffset--camera.position[1] + (x-camera.position[1])*2.5*delta
     camera.position[2] = camera.position[2] + (y-camera.position[2])*2.5*delta
-
-    --Controller selection code
-    if InputManager.inputType ~= "joystick" then
-        ui.controllerArrow.color[4] = 0
-        return
-    else
-        ui.controllerArrow.color[4] = 1
-    end
-    self:manageControllerSelectionEvents()
-
-    if (InputManager:getAxis(2) > 0.5 or InputManager:isPressed("menu_down")) and not ui.controllerAxisMoved then
-        ui.controllerAxisMoved = true
-        ui.controllerSelection = ui.controllerSelection + 1
-        if ui.controllerSelection > #ui.controllerButtons then ui.controllerSelection = 1 end
-    end
-    if (InputManager:getAxis(2) < -0.5 or InputManager:isPressed("menu_up")) and not ui.controllerAxisMoved then
-        ui.controllerAxisMoved = true
-        ui.controllerSelection = ui.controllerSelection - 1
-        if ui.controllerSelection < 1 then ui.controllerSelection = #ui.controllerButtons end
-    end
-    if math.abs(InputManager:getAxis(2)) < 0.5 and not InputManager:isPressed({"menu_down", "menu_up"}) then ui.controllerAxisMoved = false end
-    ui.controllerArrow.position[2] = ui.controllerArrow.position[2] + (215 + 40*(ui.controllerSelection-1)-ui.controllerArrow.position[2])*12*delta
 end
 
 return mainMenu
