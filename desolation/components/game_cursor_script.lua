@@ -31,8 +31,28 @@ function gameCursorScript:update(delta)
     --Smoothly hide the controller notification
     ui.controllerNotif.color[4] = ui.controllerNotif.color[4] + (-ui.controllerNotif.color[4])*4*delta
     --CONTROLLER ARROW CODE DOWN HERE:
+    --Update current menu (TODO Game pause menu to be added later)
+    if AltMenuOpen then
+        --ui.controllerCurrentMenu = nil
+        --Absolute shit code regarding the menus here as well:
+        local temp = ui.controllerCurrentMenu
+        if CurrentScene.campaign.open then ui.controllerCurrentMenu = CurrentScene.campaign.UIComponent end
+        if CurrentScene.extras.open then ui.controllerCurrentMenu = CurrentScene.extras.UIComponent end
+        if CurrentScene.achievements.open then ui.controllerCurrentMenu = CurrentScene.achievements.UIComponent end
+        if CurrentScene.settings.open then ui.controllerCurrentMenu = CurrentScene.settings.UIComponent end
+        if CurrentScene.settings.open and CurrentScene.settings.menu ~= nil then
+            ui.controllerCurrentMenu = CurrentScene.settings[CurrentScene.settings.menu .. "Menu"].UIComponent
+        end
+        if CurrentScene.about.open then ui.controllerCurrentMenu = CurrentScene.about.UIComponent end
+        if CurrentScene.changelog.open then ui.controllerCurrentMenu = CurrentScene.changelog.UIComponent end
+        if temp ~= ui.controllerCurrentMenu then ui.controllerSelection = 1 end
+    else
+        local temp = ui.controllerCurrentMenu
+        ui.controllerCurrentMenu = CurrentScene.mainMenu.UIComponent
+        if temp ~= ui.controllerCurrentMenu then ui.controllerSelection = 1 end
+    end
     --Hide and return if keyboard is being used:
-    if InputManager.inputType == "keyboard" then
+    if InputManager.inputType == "keyboard" or ui.controllerCurrentMenu == nil then
         ui.controllerArrow.color[4] = 0
     else
         ui.controllerArrow.color[4] = 1
@@ -52,7 +72,8 @@ function gameCursorScript:update(delta)
         if not InputManager:isPressed("menu_down") and not InputManager:isPressed("menu_up") then ui.controllerArrowsPressed = false end
         --Update the position of the arrow
         local selectedButton = ui.controllerCurrentMenu.controllerButtons[ui.controllerSelection]
-        ui.controllerArrow.position[1] = selectedButton.position[1]-25
+        local pos = coreFuncs.getRelativeElementPosition(selectedButton.position, ui.controllerCurrentMenu)
+        ui.controllerArrow.position[1] = ui.controllerArrow.position[1] + (pos[1]-25-ui.controllerArrow.position[1])*12*delta
         ui.controllerArrow.position[2] = ui.controllerArrow.position[2] + (selectedButton.position[2]+16-ui.controllerArrow.position[2])*12*delta
         --Selected button code
         selectedButton:hoverEvent()

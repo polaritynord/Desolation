@@ -17,6 +17,11 @@ function checkbox.new()
         mouseClicking = false;
     }
 
+    function instance.clickEvent(element)
+        element.toggled = not element.toggled
+        SoundManager:playSound(Assets.defaultSounds["button_click"], Settings.vol_sfx)
+    end
+
     function instance.hoverEvent(element)
         local delta = love.timer.getDelta()
         element.size[1] = element.size[1] + (element.realSize[1]+5-element.size[1]) * 8.25 * delta
@@ -37,9 +42,7 @@ function checkbox.new()
 
         --Click event
         if love.mouse.isDown(1) and self.mouseHovering and not self.mouseClicking then
-            --TODO change this sound to something else?
-            self.toggled = not self.toggled
-            SoundManager:playSound(Assets.defaultSounds["button_click"], Settings.vol_sfx)
+            --TODO change the sound to something else?
             if self.clickEvent then self.clickEvent(self) end
         end
 

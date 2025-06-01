@@ -116,6 +116,15 @@ function gameplayMenu:load()
             toggled = Settings.auto_pick_loot;
         }
     )
+    ui.controllerButtons = {
+        ui.cameraSwayBox,
+        ui.screenShakeBox,
+        ui.alwaysSprintBox,
+        ui.curvedHudBox,
+        ui.sprintTypeButton,
+        ui.experimentalPeekingBox,
+        ui.itemsPickupBox
+    }
 end
 
 function gameplayMenu:update(delta)
@@ -141,6 +150,10 @@ function gameplayMenu:update(delta)
     settings.preview.experimental_peeking = ui.experimentalPeekingBox.toggled
     settings.preview.auto_pick_loot = ui.itemsPickupBox.toggled
     ui.sprintTypeButton.buttonText = Loca.gameplayMenu[Settings.sprint_type]
+    --quitting when using controller
+    if InputManager:isPressed("return") then
+        settings.menu = nil
+    end
 end
 
 return gameplayMenu

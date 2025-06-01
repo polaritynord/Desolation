@@ -92,6 +92,7 @@ function settings:load()
             bindedKey = "escape";
         }
     )
+    ui.controllerButtons = {ui.menuButtons.gameplay, ui.menuButtons.video, ui.menuButtons.audio, ui.menuButtons.keys, ui.languageButton, ui.returnButton}
 end
 
 function settings:update(delta)

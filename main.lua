@@ -11,6 +11,7 @@ Globals = require("engine.globals")
 DevConsoleOpen = false
 Assets = require("assets")
 MenuUIOffset = 0
+RealMenuUIOffset = 0
 CurrentScene = nil
 GamePaused = false
 Scenes = {}
@@ -245,11 +246,11 @@ local function updateUIOffset(delta)
                 or (CurrentScene.changelog and CurrentScene.changelog.open) or (CurrentScene.about and CurrentScene.about.open)
                 or (CurrentScene.campaign and CurrentScene.campaign.open)
     --TODO this code is absolute fucking shit
-    local x = (
+    RealMenuUIOffset = (
         coreFuncs.boolToNum(AltMenuOpen) + coreFuncs.boolToNum(CurrentScene.settings and CurrentScene.settings.menu)
         + coreFuncs.boolToNum(CurrentScene.extras and CurrentScene.extras.open and CurrentScene.extras.selection ~= nil)
     )*-250
-    MenuUIOffset = MenuUIOffset + (x-MenuUIOffset)*8*delta
+    MenuUIOffset = MenuUIOffset + (RealMenuUIOffset-MenuUIOffset)*8*delta
 end
 
 function love.load()
