@@ -322,6 +322,10 @@ function humanoidScript:humanoidShootWeapon(weapon)
         weapon.magAmmo = weapon.magAmmo - weapon.bulletPerShot
         --Sound effect
         if shootSound ~= nil then
+            --Controller vibration
+            if InputManager.inputType == "joystick" and InputManager.joystick ~= nil and humanoid.name == "player" and Settings.controller_vibration then
+                InputManager.joystick:setVibration(0.8, 0.8, 0.1)
+            end
             SoundManager:restartSound(shootSound, Settings.vol_world, humanoid.position, true)
         end
         local newLine = self:hitscanBulletCheck(
@@ -346,6 +350,10 @@ function humanoidScript:humanoidShootWeapon(weapon)
         --Fire weapon
         weapon.magAmmo = weapon.magAmmo - 1
         if shootSound ~= nil then
+            --Controller vibration (TODO: Improve)
+            if InputManager.inputType == "joystick" and InputManager.joystick ~= nil and humanoid.name == "player" and Settings.controller_vibration then
+                InputManager.joystick:setVibration(0.8, 0.8, 0.1)
+            end
             SoundManager:restartSound(shootSound, Settings.vol_world, humanoid.position, true)
         end
         --Bullet instance creation

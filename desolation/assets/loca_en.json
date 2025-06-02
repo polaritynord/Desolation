@@ -139,7 +139,8 @@
         "sprintType": "Sprint Type: ",
         "hold": "HOLD",
         "toggle": "TOGGLE",
-        "autoPickupLoot": "Automatically Pick Up Loot: "
+        "autoPickupLoot": "Automatically Pick Up Loot: ",
+        "controllerVibration": "Controller Vibration: "
     },
     "videoMenu": {
         "vsync": "V-Sync: ",

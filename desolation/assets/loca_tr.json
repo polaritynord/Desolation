@@ -140,7 +140,8 @@
         "sprintType": "Kosma Tipi: ",
         "hold": "BASILI TUT",
         "toggle": "AC/KAPA",
-        "autoPickupLoot": "Otomatik Item Toplama: "
+        "autoPickupLoot": "Otomatik Item Toplama: ",
+        "controllerVibration": "Kumanda Titresimi: "
     },
     "videoMenu": {
         "vsync": "V-Senkronizasyonu: ",

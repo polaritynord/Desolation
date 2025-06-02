@@ -116,6 +116,19 @@ function gameplayMenu:load()
             toggled = Settings.auto_pick_loot;
         }
     )
+    ui.controllerVibrationText = ui:newTextLabel(
+        {
+            text = "Controller Vibration: ";
+            size = 30;
+            position = {0, 480};
+        }
+    )
+    ui.controllerVibrationBox = ui:newCheckbox(
+        {
+            position = {400, 495};
+            toggled = Settings.controller_vibration;
+        }
+    )
     ui.controllerButtons = {
         ui.cameraSwayBox,
         ui.screenShakeBox,
@@ -123,7 +136,8 @@ function gameplayMenu:load()
         ui.curvedHudBox,
         ui.sprintTypeButton,
         ui.experimentalPeekingBox,
-        ui.itemsPickupBox
+        ui.itemsPickupBox,
+        ui.controllerVibrationBox
     }
 end
 
@@ -149,6 +163,7 @@ function gameplayMenu:update(delta)
     settings.preview.curved_hud = ui.curvedHudBox.toggled
     settings.preview.experimental_peeking = ui.experimentalPeekingBox.toggled
     settings.preview.auto_pick_loot = ui.itemsPickupBox.toggled
+    settings.preview.controller_vibration = ui.controllerVibrationBox.toggled
     ui.sprintTypeButton.buttonText = Loca.gameplayMenu[Settings.sprint_type]
     --quitting when using controller
     if InputManager:isPressed("return") then

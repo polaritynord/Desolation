@@ -129,6 +129,14 @@ function infiniteMenu:load()
             unhoverEvent = buttonEvents.redUnhover;
         }
     )
+    ui.controllerButtons = {
+        ui.difficultyPicker,
+        ui.crateAmountSlider,
+        ui.barrelAmountSlider,
+        ui.expBarrelAmountSlider,
+        ui.regeneratePropsBox,
+        ui.startGameButton
+    }
 end
 
 function infiniteMenu:update(delta)
@@ -167,6 +175,10 @@ function infiniteMenu:update(delta)
     ui.barrelAmountText.text = Loca.extrasMenu.barrelAmount .. tostring(infinite.amounts.barrel)
     ui.expBarrelAmountText.text = Loca.extrasMenu.expBarrelAmount .. tostring(infinite.amounts.expBarrel)
     infinite.regenerateProps = ui.regeneratePropsBox.toggled
+    --quitting when using controller
+    if InputManager:isPressed("return") then
+        menu.selection = nil
+    end
 end
 
 return infiniteMenu

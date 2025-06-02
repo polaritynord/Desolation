@@ -47,6 +47,9 @@ function gameCursorScript:update(delta)
         if CurrentScene.settings.open and CurrentScene.settings.menu ~= nil then
             ui.controllerCurrentMenu = CurrentScene.settings[CurrentScene.settings.menu .. "Menu"].UIComponent
         end
+        if CurrentScene.extras ~= nil and CurrentScene.extras.open and CurrentScene.extras.selection ~= nil then
+            ui.controllerCurrentMenu = CurrentScene.extras[CurrentScene.extras.selection .. "Menu"].UIComponent
+        end
         if temp ~= ui.controllerCurrentMenu then ui.controllerSelection = 1 end
     else
         local temp = ui.controllerCurrentMenu
@@ -84,20 +87,36 @@ function gameCursorScript:update(delta)
         local selectedButton = ui.controllerCurrentMenu.controllerButtons[ui.controllerSelection]
         --Slider code
         if selectedButton.imASliderAndYoullAcknowledgeIt then
-            if InputManager:isPressed("slider_right") then
+            if InputManager:isPressed("slider_right") or InputManager:getAxis(1, 0.07) > 0.3 then
                 selectedButton.value = selectedButton.value + 1.2*delta
                 if selectedButton.value > 1 then selectedButton.value = 1 end
             end
-            if InputManager:isPressed("slider_left") then
+            if InputManager:isPressed("slider_left") or InputManager:getAxis(1, 0.07) < -0.3 then
                 selectedButton.value = selectedButton.value - 1.2*delta
                 if selectedButton.value < 0 then selectedButton.value = 0 end
             end
         end
         --Update the position of the arrow
         local pos = coreFuncs.getRelativeElementPosition(selectedButton.position, ui.controllerCurrentMenu)
-        ui.controllerArrow.position[1] = ui.controllerArrow.position[1] + (pos[1]-25-ui.controllerArrow.position[1])*12*delta
+        --Scroll down if too low on the screen
         local y = selectedButton.position[2]+16
+        --Fix a positioning issue with checkboxes
+        if selectedButton.toggled ~= nil then
+            y = y - 15
+            pos[1] = pos[1] - 5
+        end
+        --Scroll down if the arrow is too low on the screen
+        if ui.controllerCurrentMenu.parent.realY and y+ui.controllerCurrentMenu.parent.realY > 500 then
+            ui.controllerCurrentMenu.parent.realY = ui.controllerCurrentMenu.parent.realY - 60
+        end
+        --Scroll up if the arrow is too high on the screen
+        if ui.controllerCurrentMenu.parent.realY and y+ui.controllerCurrentMenu.parent.realY < 200 then
+            ui.controllerCurrentMenu.parent.realY = ui.controllerCurrentMenu.parent.realY + 60
+        end
+        --TODO: The scrolling code might not be framerate independent. Meaning it could work
+        --slower than intended in lower framerates.
         if ui.controllerCurrentMenu.parent.realY then y = y + ui.controllerCurrentMenu.parent.realY end
+        ui.controllerArrow.position[1] = ui.controllerArrow.position[1] + (pos[1]-25-ui.controllerArrow.position[1])*12*delta
         ui.controllerArrow.position[2] = ui.controllerArrow.position[2] + (y-ui.controllerArrow.position[2])*12*delta
         --Selected button code
         if selectedButton.hoverEvent then selectedButton:hoverEvent() end

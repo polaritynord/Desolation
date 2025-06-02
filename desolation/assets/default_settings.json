@@ -26,5 +26,6 @@
     "shiny_menu": true,
     "fullscreen": false,
     "resolution": 1,
-    "resolution_options": [[960, 540], [1024, 576], [1152, 648], [1280, 720], [1920, 1080]]
+    "resolution_options": [[960, 540], [1024, 576], [1152, 648], [1280, 720], [1920, 1080]],
+    "controller_vibration": true
 }
