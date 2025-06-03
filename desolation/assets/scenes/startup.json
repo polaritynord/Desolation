@@ -7,6 +7,17 @@
         [
             "stuff",
             ["UIComponent", "desolation/components/ui/startup"]
+        ],
+        
+        [
+            "cursor",
+            ["UIComponent", "desolation/components/game_cursor_script"]
         ]
-    ]
+    ],
+
+    "assets": {
+        "images": [
+            ["controller_selection", "desolation/assets/images/hud/hitmarker.png"]
+        ]
+    }
 }

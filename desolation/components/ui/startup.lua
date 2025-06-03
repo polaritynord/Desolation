@@ -29,7 +29,7 @@ function startup:load()
         {
             buttonText = string.upper(Settings.language);
             buttonTextSize = 42;
-            position = {450, 360};
+            position = {415, 360};
             clickEvent = function ()
                 local i = table.contains(ui.languages, Settings.language, true) + 1
                 if i > #ui.languages then i = 1 end
@@ -52,11 +52,17 @@ function startup:load()
             end;
         }
     )
+    ui.controllerButtons = {ui.selectButton, ui.continueButton}
 end
 
 function startup:update(delta)
     local ui = self.parent.UIComponent
-    ui.selectButton.buttonText = string.upper(Settings["language"])
+    if Settings.language == "tr" then
+        ui.selectButton.buttonText = "Turkce"
+    else
+        ui.selectButton.buttonText = "English"
+    end
+    --ui.selectButton.buttonText = string.upper(Settings["language"])
 end
 
 return startup

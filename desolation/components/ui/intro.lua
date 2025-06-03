@@ -77,7 +77,7 @@ function intro:update(delta)
         ui.alpha = ui.alpha - 4*delta
     end
     --Launch main menu if intro is done or skipped
-    if self.timer > 10 or love.keyboard.isDown("space") then
+    if self.timer > 10 or love.keyboard.isDown("space") or InputManager:isPressed("interact") then
         local scene = LoadScene("desolation/assets/scenes/main_menu2.json")
         SetScene(scene)
     end

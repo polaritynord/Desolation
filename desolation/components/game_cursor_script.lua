@@ -55,8 +55,10 @@ function gameCursorScript:update(delta)
         local temp = ui.controllerCurrentMenu
         if CurrentScene.name == "Main Menu" then
             ui.controllerCurrentMenu = CurrentScene.mainMenu.UIComponent
-        elseif GamePaused then
+        elseif CurrentScene.name == "Game" and GamePaused then
             ui.controllerCurrentMenu = CurrentScene.pauseScreen.UIComponent
+        elseif CurrentScene.name == "Startup" then
+            ui.controllerCurrentMenu = CurrentScene.stuff.UIComponent
         else
             ui.controllerCurrentMenu = nil
         end

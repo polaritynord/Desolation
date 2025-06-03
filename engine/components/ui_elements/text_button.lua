@@ -31,8 +31,19 @@ function textButton.new()
             SoundManager:playSound(Assets.defaultSounds["button_click"], Settings.vol_sfx)
             self.clickEvent(self)
         end
+        --Check for controller selection
+        local cursorUI = CurrentScene.cursor.UIComponent
+        if InputManager.inputType == "joystick" and cursorUI.controllerCurrentMenu ~= nil then
+            local selectedButton = cursorUI.controllerCurrentMenu.controllerButtons[cursorUI.controllerSelection]
+            if selectedButton == instance then
+                if self.hoverEvent then self.hoverEvent(self) end
+            else
+                if self.unhoverEvent then self.unhoverEvent(self) end
+            end
+        end
         --Check for mouse touch
-        if my > pos[2] and my < pos[2] + self.buttonTextSize and mx > pos[1] and mx < pos[1] + 200 and InputManager.inputType == "keyboard" then
+        if InputManager.inputType ~= "keyboard" then return end
+        if my > pos[2] and my < pos[2] + self.buttonTextSize and mx > pos[1] and mx < pos[1] + 200 then
             if self.hoverEvent then self.hoverEvent(self) end
             self.mouseHovering = true
             self.mouseClicking = love.mouse.isDown(1)
