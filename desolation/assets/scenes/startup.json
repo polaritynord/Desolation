@@ -5,13 +5,13 @@
         ["camera", []],
 
         [
-            "stuff",
-            ["UIComponent", "desolation/components/ui/startup"]
-        ],
-        
-        [
             "cursor",
             ["UIComponent", "desolation/components/game_cursor_script"]
+        ],
+
+        [
+            "stuff",
+            ["UIComponent", "desolation/components/ui/startup"]
         ]
     ],
 

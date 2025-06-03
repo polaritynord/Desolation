@@ -31,6 +31,11 @@ function textButton.new()
             SoundManager:playSound(Assets.defaultSounds["button_click"], Settings.vol_sfx)
             self.clickEvent(self)
         end
+        --NOTE There was this issue where the game crashed when switching from Startup scene to Intro - because
+        --for a brief moment, the game would assume there was still some buttons and shit to work with
+        --fixed it just by adding the cursor object to the intro despite not needing to. Might be better ways,
+        --but this does the job.
+        
         --Check for controller selection
         local cursorUI = CurrentScene.cursor.UIComponent
         if InputManager.inputType == "joystick" and cursorUI.controllerCurrentMenu ~= nil then

@@ -17,6 +17,7 @@ function gameCursorScript:load()
             source = Assets.images.controller_selection;
             position = {600, 100};
             scale = {-0.8, 0.8};
+            color = {1, 1, 1, 0};
         }
     )
     ui.controllerSelection = 1

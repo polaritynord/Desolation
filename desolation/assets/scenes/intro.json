@@ -7,6 +7,11 @@
         [
             "intro",
             ["UIComponent", "desolation/components/ui/intro"]
+        ],
+
+        [
+            "cursor",
+            ["UIComponent", "desolation/components/game_cursor_script"]
         ]
     ],
 
