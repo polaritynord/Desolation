@@ -22,6 +22,21 @@ function mainMenu:load()
             scale = {2.5, 2.5};
         }
     )
+    ui.newGameButton = ui:newTextButton(
+        {
+            position = {70, 200};
+            buttonText = "NEW GAME";
+            buttonTextSize = 30;
+        }
+    )
+    ui.loadGameButton = ui:newTextButton(
+        {
+            position = {70, 240};
+            buttonText = "LOAD GAME";
+            buttonTextSize = 30;
+        }
+    )
+    --[[
     ui.campaignButton = ui:newTextButton(
         {
             position = {70, 200};
@@ -30,9 +45,10 @@ function mainMenu:load()
             clickEvent = clickEvents.campaignButtonClick;
         }
     )
+    ]]--
     ui.extrasButton = ui:newTextButton(
         {
-            position = {70, 240};
+            position = {70, 280};
             buttonText = Loca.mainMenu.extra;
             buttonTextSize = 30;
             clickEvent = clickEvents.extrasButtonClick;
@@ -40,7 +56,7 @@ function mainMenu:load()
     )
     ui.achievementsButton = ui:newTextButton(
         {
-            position = {70, 280};
+            position = {70, 320};
             buttonText = Loca.mainMenu.achievements;
             buttonTextSize = 30;
             clickEvent = clickEvents.achievementsButtonClick;
@@ -48,18 +64,10 @@ function mainMenu:load()
     )
     ui.settingsButton = ui:newTextButton(
         {
-            position = {70, 320};
+            position = {70, 360};
             buttonText = Loca.mainMenu.settings;
             buttonTextSize = 30;
             clickEvent = clickEvents.settingsButtonClick;
-        }
-    )
-    ui.aboutButton = ui:newTextButton(
-        {
-            position = {70, 360};
-            buttonText = Loca.mainMenu.about;
-            buttonTextSize = 30;
-            clickEvent = clickEvents.aboutButtonClick;
         }
     )
     ui.changelogButton = ui:newTextButton(
@@ -78,7 +86,7 @@ function mainMenu:load()
             clickEvent = clickEvents.quitButtonClick;
         }
     )
-    ui.controllerButtons = {ui.campaignButton, ui.extrasButton, ui.achievementsButton, ui.settingsButton, ui.aboutButton, ui.changelogButton, ui.quitButton}
+    ui.controllerButtons = {ui.newGameButton, ui.loadGameButton, ui.extrasButton, ui.achievementsButton, ui.settingsButton, ui.changelogButton, ui.quitButton}
     ui.quitButton.confirmTimer = 0
     --Other things
     ui.polarity = ui:newImage(

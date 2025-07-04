@@ -14,6 +14,21 @@ function campaignMenu:load()
             font = "disposable-droid-bold";
         }
     )
+    ui.newGameButton = ui:newTextButton(
+        {
+            buttonText = "New Game";
+            position = {0, 200};
+            buttonTextSize = 30;
+        }
+    )
+    ui.loadGameButton = ui:newTextButton(
+        {
+            buttonText = "Load Game";
+            position = {0, 240};
+            buttonTextSize = 30;
+        }
+    )
+    --[[
     ui.wipText = ui:newTextLabel(
         {
             text = Loca.campaignMenu.wip;
@@ -21,6 +36,7 @@ function campaignMenu:load()
             position = {0, 200};
         }
     )
+    ]]--
     ui.returnButton = ui:newTextButton(
         {
             buttonText = Loca.mainMenu.returnButton;

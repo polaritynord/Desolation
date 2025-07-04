@@ -1,12 +1,12 @@
 {
     "mainMenu": {
-        "campaign": "Campaign",
-        "extra": "Extra Gamemodes",
-        "achievements": "Achievements",
-        "settings": "Settings",
+        "campaign": "Story Mode",
+        "extra": "EXTRA GAMEMODES",
+        "achievements": "ACHIEVEMENTS   ",
+        "settings": "SETTINGS",
         "about": "About",
-        "changelog": "Changelog",
-        "quit": "Quit Game",
+        "changelog": "CHANGELOG",
+        "quit": "QUIT",
         "quitConfirmation": "Are You Sure?",
         "returnButton": "Return"
     },
@@ -72,15 +72,15 @@
         "1k_3": "(Infinite) Reach 1000 score on Hard mode.",
         "1k_4": "(Infinite) Reach 1000 score on Extreme mode.",
         "1k_5": "(Infinite) Reach 1000 score on Ultra mode.",
-        "play_all_radios": "(Campaign) Find and play all sound recordings.",
+        "play_all_radios": "(Story) Find and play all sound recordings.",
         "for_a_reason": "Obtain all achievements in the game."
     },
     "pauseScreen": {
-        "continue": "Continue",
-        "mainMenu": "Main Menu"
+        "continue": "CONTINUE",
+        "mainMenu": "MAIN MENU"
     },
     "campaignMenu": {
-        "title": "CAMPAIGN",
+        "title": "STORY MODE",
         "wip": "Work In Progress..."
     },
     "extrasMenu": {

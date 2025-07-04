@@ -33,10 +33,10 @@ function videoMenu:load()
             hoverEvent = buttonEvents.redHover;
             unhoverEvent = buttonEvents.redUnhover;
             clickEvent = function(element)
-                settings.preview.resolution = settings.preview.resolution + 1
-                if settings.preview.resolution > #settings.preview.resolution_options then settings.preview.resolution = 1 end
-                element.buttonText = tostring(settings.preview.resolution_options[settings.preview.resolution][1]) .. "x" .. settings.preview.resolution_options[settings.preview.resolution][2]
-                love.window.setMode(settings.preview.resolution_options[settings.preview.resolution][1], settings.preview.resolution_options[settings.preview.resolution][2], {fullscreen=love.window.getFullscreen()})
+                Settings.resolution = Settings.resolution + 1
+                if Settings.resolution > #Settings.resolution_options then Settings.resolution = 1 end
+                element.buttonText = tostring(Settings.resolution_options[Settings.resolution][1]) .. "x" .. Settings.resolution_options[Settings.resolution][2]
+                love.window.setMode(Settings.resolution_options[Settings.resolution][1], Settings.resolution_options[Settings.resolution][2], {fullscreen=love.window.getFullscreen()})
             end;
         }
     )

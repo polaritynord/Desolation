@@ -137,8 +137,11 @@ function love.keypressed(key, unicode)
 
         --love.window.setFullscreen(fullscreen, "desktop")
         -- Set window dimensions to default
-        --if not fullscreen and false then
-        -- love.window.setMode(960, 540, {resizable=true}) end
+        if not love.window.getFullscreen() then
+            local res = Settings.resolution_options[Settings.resolution]
+            print(res[1], res[2])
+            love.window.setMode(res[1], res[2], {})
+        end
     end
 
     --Pause key (not devConsoleUI.takingInput)
