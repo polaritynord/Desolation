@@ -247,7 +247,7 @@ local function updateUIOffset(delta)
     AltMenuOpen = (CurrentScene.devConsole and CurrentScene.devConsole.open) or (CurrentScene.settings and CurrentScene.settings.open) or
                 (CurrentScene.extras and CurrentScene.extras.open) or ((CurrentScene.achievements and CurrentScene.achievements.open))
                 or (CurrentScene.changelog and CurrentScene.changelog.open) or (CurrentScene.about and CurrentScene.about.open)
-                or (CurrentScene.campaign and CurrentScene.campaign.open)
+                or (CurrentScene.newGameMenu and CurrentScene.newGameMenu.open) or (CurrentScene.loadGameMenu and CurrentScene.loadGameMenu.open)
     --TODO this code is absolute fucking shit
     RealMenuUIOffset = (
         coreFuncs.boolToNum(AltMenuOpen) + coreFuncs.boolToNum(CurrentScene.settings and CurrentScene.settings.menu)

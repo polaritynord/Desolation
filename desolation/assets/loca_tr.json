@@ -1,12 +1,13 @@
 {
     "mainMenu": {
         "campaign": "Hikaye Modu",
-        "extra": "Ek Oyun Modlari",
-        "achievements": "Basarimlar",
-        "settings": "Ayarlar",
-        "about": "Hakkinda",
-        "changelog": "Guncellemeler",
-        "quit": "Oyundan Cik",
+        "newGame": "YENI OYUN",
+        "loadGame": "KAYITLI OYUNLAR",
+        "extra": "EK OYUN MODLARI",
+        "achievements": "BASARIMLAR",
+        "settings": "AYARLAR",
+        "changelog": "GUNCELLEMELER",
+        "quit": "OYUNDAN CIK",
         "quitConfirmation": "Emin Misin?",
         "returnButton": "Geri Don"
     },
@@ -83,6 +84,13 @@
     "campaignMenu": {
         "title": "HIKAYE MODU",
         "wip": "Yapim Asamasinda..."
+    },
+    "newGameMenu": {
+        "title": "YENI OYUN"
+    },
+    "loadGameMenu": {
+        "title": "KAYITLI OYUNLAR",
+        "noSavesFound": "Kayitli oyun dosyasi bulunamadi.\nYeni bir oyun baslatmak icin\n\"Yeni Oyun\"a tiklayin."
     },
     "extrasMenu": {
         "title": "EK OYUN MODLARI",

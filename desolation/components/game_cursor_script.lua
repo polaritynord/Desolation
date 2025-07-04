@@ -38,7 +38,7 @@ function gameCursorScript:update(delta)
         --Absolute shit code regarding the menus here as well:
         local temp = ui.controllerCurrentMenu
         if CurrentScene.name == "Main Menu" then
-            if CurrentScene.campaign.open then ui.controllerCurrentMenu = CurrentScene.campaign.UIComponent end
+            --if CurrentScene.campaign.open then ui.controllerCurrentMenu = CurrentScene.campaign.UIComponent end
             if CurrentScene.extras.open then ui.controllerCurrentMenu = CurrentScene.extras.UIComponent end
             if CurrentScene.achievements.open then ui.controllerCurrentMenu = CurrentScene.achievements.UIComponent end
             if CurrentScene.about.open then ui.controllerCurrentMenu = CurrentScene.about.UIComponent end

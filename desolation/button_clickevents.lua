@@ -56,6 +56,18 @@ function clickEvents.quitButtonClick(element)
     end
 end
 
+function clickEvents.newGameButtonClick(element)
+    if AltMenuOpen then return end
+    local newGameMenu = CurrentScene.newGameMenu
+    newGameMenu.open = true
+end
+
+function clickEvents.loadGameButtonClick(element)
+    if AltMenuOpen then return end
+    local loadGameMenu = CurrentScene.loadGameMenu
+    loadGameMenu.open = true
+end
+
 function clickEvents.extrasButtonClick(element)
     if AltMenuOpen then return end
     local extras = CurrentScene.extras
@@ -87,10 +99,12 @@ function clickEvents.aboutButtonClick(element)
     about.open = true
 end
 
+--[[
 function clickEvents.campaignButtonClick(element)
     if AltMenuOpen then return end
     local campaign = CurrentScene.campaign
     campaign.open = true
 end
+]]--
 
 return clickEvents

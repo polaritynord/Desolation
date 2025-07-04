@@ -25,15 +25,17 @@ function mainMenu:load()
     ui.newGameButton = ui:newTextButton(
         {
             position = {70, 200};
-            buttonText = "NEW GAME";
+            buttonText = Loca.mainMenu.newGame;
             buttonTextSize = 30;
+            clickEvent = clickEvents.newGameButtonClick;
         }
     )
     ui.loadGameButton = ui:newTextButton(
         {
             position = {70, 240};
-            buttonText = "LOAD GAME";
+            buttonText = Loca.mainMenu.loadGame;
             buttonTextSize = 30;
+            clickEvent = clickEvents.loadGameButtonClick;
         }
     )
     --[[

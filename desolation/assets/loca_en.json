@@ -1,8 +1,10 @@
 {
     "mainMenu": {
         "campaign": "Story Mode",
+        "newGame": "NEW GAME",
+        "loadGame": "LOAD GAME",
         "extra": "EXTRA GAMEMODES",
-        "achievements": "ACHIEVEMENTS   ",
+        "achievements": "ACHIEVEMENTS",
         "settings": "SETTINGS",
         "about": "About",
         "changelog": "CHANGELOG",
@@ -82,6 +84,13 @@
     "campaignMenu": {
         "title": "STORY MODE",
         "wip": "Work In Progress..."
+    },
+    "newGameMenu": {
+        "title": "NEW GAME"
+    },
+    "loadGameMenu": {
+        "title": "LOAD GAME",
+        "noSavesFound": "No save files found. Click \"New Game\" to\nstart a new game."
     },
     "extrasMenu": {
         "title": "EXTRA GAMEMODES",

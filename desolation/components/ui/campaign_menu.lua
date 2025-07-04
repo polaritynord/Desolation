@@ -1,3 +1,5 @@
+--THIS SCRIPT IS UNUSED
+
 local campaignMenu = ENGINE_COMPONENTS.scriptComponent.new()
 
 function campaignMenu:load()

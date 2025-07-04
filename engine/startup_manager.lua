@@ -82,6 +82,11 @@ function startupManager:load()
     if love.filesystem.getInfo("screenshots") == nil then
         love.filesystem.createDirectory("screenshots")
     end
+    
+    --Saves folder
+    if love.filesystem.getInfo("saves") == nil then
+        love.filesystem.createDirectory("saves")
+    end
 end
 
 return startupManager
