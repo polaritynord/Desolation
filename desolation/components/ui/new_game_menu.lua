@@ -13,6 +13,13 @@ function newGameMenu:load()
             font = "disposable-droid-bold";
         }
     )
+    ui.nameText = ui:newTextLabel(
+        {
+            text = "Name: JONATHAN (Add editing later lol)";
+            size = 30;
+            position = {0, 200};
+        }
+    )
     ui.returnButton = ui:newTextButton(
         {
             buttonText = Loca.mainMenu.returnButton;

@@ -86,11 +86,17 @@ function robotScript:update(delta)
         --***Give Score***
         return
     end
+
+    -- 5/7/25 After friends of mine complained that the robots fired at them even when they were not in sight,
+    -- I decided to make it so that no enemy can shoot you unless you can see them.
+    -- Seems to be good for now, but I might change how close they tend to approach.
     self:pointTowardsPlayer(robot)
     robot.shootTimer = robot.shootTimer + delta/3
     local distance = coreFuncs.pointDistance(robot.position, CurrentScene.player.position)
-    if distance > 500 then
-        --walk towards player
+    local pos = coreFuncs.getRelativePosition(robot.position, CurrentScene.camera)
+    local inSight = pos[1] > -20 and pos[1] < 980 and pos[2] > -20 and pos[2] < 560
+    --Walk towards player
+    if not inSight or distance > 450 then
         local dx, dy = CurrentScene.player.position[1]-robot.position[1], CurrentScene.player.position[2]-robot.position[2]
         local angle = math.atan2(dy, dx)
         robot.moveVelocity[1] = 140 * math.cos(angle)
@@ -98,7 +104,8 @@ function robotScript:update(delta)
     else
         robot.moveVelocity = {0, 0}
     end
-    if distance < 620 and CurrentScene.player.health > 0 then
+    --Shoot at player
+    if inSight and CurrentScene.player.health > 0 then
         local weapon = robot.inventory.weapons[robot.inventory.slot]
         self:humanoidShootWeapon(weapon)
     end

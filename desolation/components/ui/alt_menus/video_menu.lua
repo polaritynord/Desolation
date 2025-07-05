@@ -202,7 +202,7 @@ function videoMenu:update(delta)
 
     if not ui.enabled then return end
     settings.preview.fullscreen = ui.fullscreenBox.toggled
-    --settings.preview.resolution = 
+    settings.preview.resolution = Settings.resolution
     settings.preview.vsync = ui.vsyncBox.toggled
     settings.preview.vignette = ui.vignetteBox.toggled
     settings.preview.weapon_flame_particles = ui.weaponParticlesBox.toggled

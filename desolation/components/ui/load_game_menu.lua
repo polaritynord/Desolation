@@ -52,7 +52,6 @@ function loadGameMenu:update(delta)
     --Check for save count
     if love.filesystem.getInfo("saves") then
         local saves = love.filesystem.getDirectoryItems("saves")
-        print(#saves)
         if #saves > 0 then
             ui.noSavesFound.color[4] = 0
             --Write save files here

@@ -139,7 +139,6 @@ function love.keypressed(key, unicode)
         -- Set window dimensions to default
         if not love.window.getFullscreen() then
             local res = Settings.resolution_options[Settings.resolution]
-            print(res[1], res[2])
             love.window.setMode(res[1], res[2], {})
         end
     end

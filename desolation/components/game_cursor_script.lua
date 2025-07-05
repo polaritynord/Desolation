@@ -44,8 +44,8 @@ function gameCursorScript:update(delta)
             if CurrentScene.about.open then ui.controllerCurrentMenu = CurrentScene.about.UIComponent end
             if CurrentScene.changelog.open then ui.controllerCurrentMenu = CurrentScene.changelog.UIComponent end
         end
-        if CurrentScene.settings.open then ui.controllerCurrentMenu = CurrentScene.settings.UIComponent end
-        if CurrentScene.settings.open and CurrentScene.settings.menu ~= nil then
+        if CurrentScene.settings and CurrentScene.settings.open then ui.controllerCurrentMenu = CurrentScene.settings.UIComponent end
+        if CurrentScene.settings and CurrentScene.settings.open and CurrentScene.settings.menu ~= nil then
             ui.controllerCurrentMenu = CurrentScene.settings[CurrentScene.settings.menu .. "Menu"].UIComponent
         end
         if CurrentScene.extras ~= nil and CurrentScene.extras.open and CurrentScene.extras.selection ~= nil then
