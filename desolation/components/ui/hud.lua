@@ -230,16 +230,40 @@ function hud:updateFollowIndicators(ui)
     end
 end
 
-function hud:updateControllerHints(ui)
+function hud:updateControllerHints(player, ui)
     --Controller icon
     ui.joystickImg.source = nil
     if InputManager.inputType == "joystick" and Settings.show_controller_icon then
         ui.joystickImg.source = Assets.images.hud_joystick
     end
-    --TODO Might add some instructions
+    --Aim assist square
+    if InputManager.inputType == "joystick" then
+        if player.aimAssistTarget ~= nil then
+            ui.targetSquare.color[4] = 1
+            local target = player.aimAssistTarget
+            local camX, camY = unpack(CurrentScene.camera.position)
+            local targetPos = target.position
+            local src = target.imageComponent.source
+            local targetSize = {
+                src:getWidth()*target.scale[1],
+                src:getHeight()*target.scale[2]
+            }
+            ui.targetSquare.position = {
+                (targetPos[1]-camX-targetSize[1]/2)*CurrentScene.camera.zoom+480,
+                (targetPos[2]-camY-targetSize[2]/2)*CurrentScene.camera.zoom+270
+            }
+            ui.targetSquare.size = targetSize
+        else
+            ui.targetSquare.color[4] = 0
+        end
+    else
+        ui.targetSquare.color[4] = 0
+    end
+    --TODO Might add some instructions (like press R2 to fire and stuff)
 end
 
 function hud:load()
+    --TODO Might clean this shit up later too
     local ui = self.parent.UIComponent
     self.parent.crtShader = moonshine.chain(960, 540, moonshine.effects.crt)
     self.parent.crtShader.crt.feather = 0
@@ -420,6 +444,7 @@ function hud:load()
             drawType = "line";
             lineWidth = 5;
             position = {480, 270};
+            color = {0.811, 0.356, 0.129, 0};
         }
     )
     --Other variables
@@ -440,7 +465,7 @@ function hud:update(delta)
     end
     self:updateMonitors(player, ui)
     self:updateWeaponMonitor(player, ui, delta)
-    self:updateControllerHints(ui)
+    self:updateControllerHints(player, ui)
     self:updateAcquireNotifs(ui, delta)
     self:updatePickupHint(ui, delta)
     --Grenade slots

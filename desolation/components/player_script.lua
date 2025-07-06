@@ -78,7 +78,7 @@ function playerScript:returnAimAssistTarget(assistType)
     local playerPos = self.parent.position
     local distance
     local targetData = {math.huge, nil}
-    
+
     if assistType == 1 then --Return the closest target
         for _, npc in ipairs(CurrentScene.npcs.tree) do
             distance = coreFuncs.pointDistance(playerPos, npc.position)
@@ -111,6 +111,11 @@ function playerScript:pointTowardsMouse(player)
         --Do Aim Assist raycast
         if math.abs(axis1) > 0.1 or math.abs(axis2) > 0.1 then
             local target = self:returnAimAssistTarget(1)
+            player.aimAssistTarget = target
+            if target ~= nil then
+                local relativePos = coreFuncs.getRelativePosition(target.position, CurrentScene.camera)
+                x, y = unpack(relativePos)
+            end
         end
     end
     local dx = x-pos[1] ; local dy = y-pos[2]
@@ -294,6 +299,7 @@ function playerScript:load()
         ["q"] = false;
     }
     player.nearItem = nil
+    player.aimAssistTarget = nil
 end
 
 function playerScript:update(delta)
