@@ -27,5 +27,6 @@
     "fullscreen": false,
     "resolution": 1,
     "resolution_options": [[960, 540], [1024, 576], [1152, 648], [1280, 720], [1600, 900], [1920, 1080]],
-    "controller_vibration": true
+    "controller_vibration": true,
+    "controller_aim_assist": true
 }

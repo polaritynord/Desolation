@@ -8,6 +8,9 @@ function gameplayMenu:load()
 
     local ui = gameplay.UIComponent
     ui.enabled = false
+    gameplay.realY = gameplay.position[2]
+    gameplay.length = 655
+    
     ui.title = ui:newTextLabel(
         {
             text = Loca.settings.gameplayTitle;
@@ -129,6 +132,19 @@ function gameplayMenu:load()
             toggled = Settings.controller_vibration;
         }
     )
+    ui.controllerAimAssist = ui:newTextLabel(
+        {
+            text = Loca.gameplayMenu.controllerAimAssist;
+            size = 30;
+            position = {0, 520};
+        }
+    )
+    ui.controllerAimAssistBox = ui:newCheckbox(
+        {
+            position = {400, 535};
+            toggled = Settings.controller_aim_assist;
+        }
+    )
     ui.controllerButtons = {
         ui.cameraSwayBox,
         ui.screenShakeBox,
@@ -137,7 +153,8 @@ function gameplayMenu:load()
         ui.sprintTypeButton,
         ui.experimentalPeekingBox,
         ui.itemsPickupBox,
-        ui.controllerVibrationBox
+        ui.controllerVibrationBox,
+        ui.controllerAimAssistBox
     }
 end
 
@@ -148,6 +165,7 @@ function gameplayMenu:update(delta)
 
     --UI Offsetting & canvas enabling
     gameplay.position[1] = 950 + MenuUIOffset
+    gameplay.position[2] = gameplay.position[2] + (gameplay.realY-gameplay.position[2])*8*delta
     ui.enabled = settings.menu == "gameplay"
     --Transparency animation
     if ui.enabled then
@@ -164,6 +182,7 @@ function gameplayMenu:update(delta)
     settings.preview.experimental_peeking = ui.experimentalPeekingBox.toggled
     settings.preview.auto_pick_loot = ui.itemsPickupBox.toggled
     settings.preview.controller_vibration = ui.controllerVibrationBox.toggled
+    settings.preview.controller_aim_assist = ui.controllerAimAssistBox.toggled
     ui.sprintTypeButton.buttonText = Loca.gameplayMenu[Settings.sprint_type]
     --quitting when using controller
     if InputManager:isPressed("return") then

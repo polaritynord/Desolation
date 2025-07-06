@@ -1,6 +1,7 @@
 {
     "trigger_prop": {
-        "script": "desolation/components/props/trigger_prop"
+        "script": "desolation/components/props/trigger_prop",
+        "targetable": false
     },
 
     "crate": {
@@ -8,7 +9,8 @@
         "movable": true,
         "collidable": true,
         "material": "wood",
-        "mass": 10
+        "mass": 10,
+        "targetable": true
     },
     
     "crate_big": {
@@ -17,7 +19,8 @@
         "collidable": true,
         "material": "wood",
         "health": 150,
-        "mass": 20
+        "mass": 20,
+        "targetable": true
     },
 
     "barrel": {
@@ -26,7 +29,8 @@
         "collidable": true,
         "material": "concrete",
         "invincible": true,
-        "mass": 12
+        "mass": 12,
+        "targetable": true
     },
 
     "explosive_barrel": {
@@ -36,16 +40,19 @@
         "material": "concrete",
         "invincible": false,
         "health": 20,
-        "mass": 12
+        "mass": 12,
+        "targetable": true
     },
 
     "radio": {
         "script": "desolation/components/props/radio",
         "movable": false,
-        "collidable": false
+        "collidable": false,
+        "targetable": false
     },
 
     "openarea_manager": {
-        "script": "desolation/components/props/openarea_manager"
+        "script": "desolation/components/props/openarea_manager",
+        "targetable": false
     }
 }

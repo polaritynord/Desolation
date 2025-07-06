@@ -149,7 +149,8 @@
         "hold": "BASILI TUT",
         "toggle": "AC/KAPA",
         "autoPickupLoot": "Otomatik Item Toplama: ",
-        "controllerVibration": "Kumanda Titresimi: "
+        "controllerVibration": "Kumanda Titresimi: ",
+        "controllerAimAssist": "Kumanda Nisan Yardimi: "
     },
     "videoMenu": {
         "vsync": "V-Senkronizasyonu: ",

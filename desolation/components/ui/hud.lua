@@ -237,22 +237,28 @@ function hud:updateControllerHints(player, ui)
         ui.joystickImg.source = Assets.images.hud_joystick
     end
     --Aim assist square
-    if InputManager.inputType == "joystick" then
+    if InputManager.inputType == "joystick" and Settings.controller_aim_assist then
         if player.aimAssistTarget ~= nil then
             ui.targetSquare.color[4] = 1
             local target = player.aimAssistTarget
             local camX, camY = unpack(CurrentScene.camera.position)
             local targetPos = target.position
             local src = target.imageComponent.source
-            local targetSize = {
-                src:getWidth()*target.scale[1],
-                src:getHeight()*target.scale[2]
-            }
+            local targetSize
+            if src ~= nil then
+                targetSize = {
+                    src:getWidth()*target.scale[1],
+                    src:getHeight()*target.scale[2]
+                }
+            else
+                targetSize = {30, 30}
+            end
             ui.targetSquare.position = {
                 (targetPos[1]-camX-targetSize[1]/2)*CurrentScene.camera.zoom+480,
                 (targetPos[2]-camY-targetSize[2]/2)*CurrentScene.camera.zoom+270
             }
-            ui.targetSquare.size = targetSize
+            ui.targetSquare.size = {targetSize[1]*CurrentScene.camera.zoom, targetSize[2]*CurrentScene.camera.zoom}
+            ui.targetSquare.lineWidth = 5*CurrentScene.camera.zoom
         else
             ui.targetSquare.color[4] = 0
         end

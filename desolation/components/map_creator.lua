@@ -55,6 +55,7 @@ function mapCreator:spawnProp(v)
     prop.material = propData[prop.name].material or "wood"
     prop.health = propData[prop.name].health or 100
     prop.mass = propData[prop.name].mass or 0.05
+    prop.targetable = propData[prop.name].targetable or false
     prop.position = v[2]
     prop.rotation = v[3]
     --custom variables

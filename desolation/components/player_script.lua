@@ -74,16 +74,47 @@ function playerScript:movement(delta, player)
     if player.stamina > 100 then player.stamina = 100 end
 end
 
-function playerScript:returnAimAssistTarget(assistType)
+function playerScript:returnAimAssistTarget(assistType, x, y)
     local playerPos = self.parent.position
+    local relativePlayerPos = coreFuncs.getRelativePosition(playerPos, CurrentScene.camera)
     local distance
     local targetData = {math.huge, nil}
 
     if assistType == 1 then --Return the closest target
+        --Iterate through NPC's
         for _, npc in ipairs(CurrentScene.npcs.tree) do
             distance = coreFuncs.pointDistance(playerPos, npc.position)
             if distance < targetData[1] then
                 targetData = {distance, npc}
+            end
+        end
+        --Iterate through props
+        for _, prop in ipairs(CurrentScene.props.tree) do
+            distance = coreFuncs.pointDistance(playerPos, prop.position)
+            if distance < 1000 and distance < targetData[1] and prop.targetable then
+                targetData = {distance, prop}
+            end
+        end
+    else --More advanced, find closest target on where the player is aiming at
+        local expectedRotation = math.atan2(y-relativePlayerPos[2], x-relativePlayerPos[1])
+        --Iterate through NPC's
+        for _, npc in ipairs(CurrentScene.npcs.tree) do
+            distance = coreFuncs.pointDistance(playerPos, npc.position)
+            x, y = unpack(coreFuncs.getRelativePosition(npc.position, CurrentScene.camera))
+            local dx, dy = x-relativePlayerPos[1], y-relativePlayerPos[2]
+            local rot = math.atan2(dy, dx)
+            if distance < 1000 and distance < targetData[1] and rot > expectedRotation-math.pi/6 and rot < expectedRotation+math.pi/6 then
+                targetData = {distance, npc}
+            end
+        end
+        --Iterate through props
+        for _, prop in ipairs(CurrentScene.props.tree) do
+            distance = coreFuncs.pointDistance(playerPos, prop.position)
+            x, y = unpack(coreFuncs.getRelativePosition(prop.position, CurrentScene.camera))
+            local dx, dy = x-relativePlayerPos[1], y-relativePlayerPos[2]
+            local rot = math.atan2(dy, dx)
+            if distance < 1000 and distance < targetData[1] and rot > expectedRotation-math.pi/6 and rot < expectedRotation+math.pi/6 and prop.targetable then
+                targetData = {distance, prop}
             end
         end
     end
@@ -91,7 +122,7 @@ function playerScript:returnAimAssistTarget(assistType)
     return targetData[2]
 end
 
-function playerScript:pointTowardsMouse(player)
+function playerScript:pointTowardsMouse(player, delta)
     local pos = coreFuncs.getRelativePosition(player.position, CurrentScene.camera)
     local x, y
     if InputManager.inputType == "keyboard" then
@@ -109,17 +140,19 @@ function playerScript:pointTowardsMouse(player)
             y = pos[2] + math.sin(player.rotation)*50
         end
         --Do Aim Assist raycast
-        if math.abs(axis1) > 0.1 or math.abs(axis2) > 0.1 then
-            local target = self:returnAimAssistTarget(1)
+        if Settings.controller_aim_assist and (math.abs(axis1) > 0.1 or math.abs(axis2) > 0.1) then
+            local target = self:returnAimAssistTarget(2, x, y)
             player.aimAssistTarget = target
             if target ~= nil then
-                local relativePos = coreFuncs.getRelativePosition(target.position, CurrentScene.camera)
-                x, y = unpack(relativePos)
+                x, y = unpack(coreFuncs.getRelativePosition(target.position, CurrentScene.camera))
             end
         end
     end
+    --Rotate towards the finalized target
     local dx = x-pos[1] ; local dy = y-pos[2]
-    player.rotation = math.atan2(dy, dx)
+    local goal = math.atan2(dy, dx)
+    local diff = (goal-player.rotation+math.pi)%(2*math.pi)-math.pi
+    player.rotation = player.rotation + diff*18*delta
 end
 
 function playerScript:slotSwitching(player)
@@ -312,7 +345,7 @@ function playerScript:update(delta)
         return
     end
     self:movement(delta, player)
-    self:pointTowardsMouse(player)
+    self:pointTowardsMouse(player, delta)
     self:slotSwitching(player)
     self:weaponDropping(player)
     self:shootingWeapon(delta, player)

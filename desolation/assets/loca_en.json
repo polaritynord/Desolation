@@ -149,7 +149,8 @@
         "hold": "HOLD",
         "toggle": "TOGGLE",
         "autoPickupLoot": "Automatically Pick Up Loot: ",
-        "controllerVibration": "Controller Vibration: "
+        "controllerVibration": "Controller Vibration: ",
+        "controllerAimAssist": "Controller Aim Assist: "
     },
     "videoMenu": {
         "vsync": "V-Sync: ",
