@@ -39,6 +39,8 @@ function gameCursorScript:update(delta)
         local temp = ui.controllerCurrentMenu
         if CurrentScene.name == "Main Menu" then
             --if CurrentScene.campaign.open then ui.controllerCurrentMenu = CurrentScene.campaign.UIComponent end
+            if CurrentScene.newGameMenu.open then ui.controllerCurrentMenu = CurrentScene.newGameMenu.UIComponent end
+            if CurrentScene.loadGameMenu.open then ui.controllerCurrentMenu = CurrentScene.loadGameMenu.UIComponent end
             if CurrentScene.extras.open then ui.controllerCurrentMenu = CurrentScene.extras.UIComponent end
             if CurrentScene.achievements.open then ui.controllerCurrentMenu = CurrentScene.achievements.UIComponent end
             if CurrentScene.about.open then ui.controllerCurrentMenu = CurrentScene.about.UIComponent end
@@ -109,6 +111,7 @@ function gameCursorScript:update(delta)
             pos[1] = pos[1] - 5
         end
         --Scroll down if the arrow is too low on the screen
+        local temp = ui.controllerCurrentMenu.parent.realY
         if ui.controllerCurrentMenu.parent.realY and y+ui.controllerCurrentMenu.parent.realY > 500 then
             ui.controllerCurrentMenu.parent.realY = ui.controllerCurrentMenu.parent.realY - 60
         end

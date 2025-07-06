@@ -350,7 +350,7 @@ function humanoidScript:humanoidShootWeapon(weapon)
         --Fire weapon
         weapon.magAmmo = weapon.magAmmo - 1
         if shootSound ~= nil then
-            --Controller vibration (TODO: Improve)
+            --Controller vibration (TODO: Improve) VIBRATION SEEMS TO BE BROKEN IN LINUX
             if InputManager.inputType == "joystick" and InputManager.joystick ~= nil and humanoid.name == "player" and Settings.controller_vibration then
                 InputManager.joystick:setVibration(0.8, 0.8, 0.1)
             end

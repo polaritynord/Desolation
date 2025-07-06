@@ -54,7 +54,12 @@ function videoMenu:load()
             clickEvent = function(element)
                 element.toggled = not element.toggled
                 SoundManager:playSound(Assets.defaultSounds["button_click"], Settings.vol_sfx)
-                love.window.setFullscreen(element.toggled, "desktop")
+                love.window.setFullscreen(not love.window.getFullscreen(), "desktop")
+                -- Set window dimensions to default
+                if not love.window.getFullscreen() then
+                    local res = Settings.resolution_options[Settings.resolution]
+                    love.window.setMode(res[1], res[2], {})
+                end
             end;
         }
     )
