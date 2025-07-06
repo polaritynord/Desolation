@@ -15,7 +15,7 @@ function newGameMenu:load()
     )
     ui.nameText = ui:newTextLabel(
         {
-            text = "Name: JONATHAN (Add editing later lol)";
+            text = "";
             size = 30;
             position = {0, 200};
         }
