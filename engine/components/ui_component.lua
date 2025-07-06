@@ -39,6 +39,8 @@ function UIComponent:new(parent)
             instance2.position = attributes.position or instance2.position
             instance2.size = attributes.size or instance2.size
             instance2.color = attributes.color or instance2.color
+            instance2.drawType = attributes.drawType or instance2.drawType
+            instance2.lineWidth = attributes.lineWidth or instance2.lineWidth
         end
         instance2.parentComp = self
         self.elements[#self.elements+1] = instance2

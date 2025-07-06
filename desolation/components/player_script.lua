@@ -74,28 +74,21 @@ function playerScript:movement(delta, player)
     if player.stamina > 100 then player.stamina = 100 end
 end
 
-function playerScript:controllerAimAssist()
-    local player = self.parent
-    local pos = table.new(player.position)
-    local target = nil
-    local distanceList = {}
-    for i = 1, 40 do
-        --Iterate through NPC's
+function playerScript:returnAimAssistTarget(assistType)
+    local playerPos = self.parent.position
+    local distance
+    local targetData = {math.huge, nil}
+    
+    if assistType == 1 then --Return the closest target
         for _, npc in ipairs(CurrentScene.npcs.tree) do
-            local distance = coreFuncs.pointDistance(pos, npc.position)
-            distanceList[#distanceList+1] = distance
+            distance = coreFuncs.pointDistance(playerPos, npc.position)
+            if distance < targetData[1] then
+                targetData = {distance, npc}
+            end
         end
-        pos[1] = pos[1] + 25*math.cos(player.rotation)
-        pos[2] = pos[2] + 25*math.sin(player.rotation)
     end
-    --Return found target (or nil)
-    if #distanceList > 0 then
-        local minValue = math.min(unpack(distanceList))
-        print(table.contains(distanceList, minValue, true))
-        return CurrentScene.npcs.tree[table.contains(distanceList, minValue, true)]
-    else
-        return nil
-    end
+
+    return targetData[2]
 end
 
 function playerScript:pointTowardsMouse(player)
@@ -117,8 +110,7 @@ function playerScript:pointTowardsMouse(player)
         end
         --Do Aim Assist raycast
         if math.abs(axis1) > 0.1 or math.abs(axis2) > 0.1 then
-            local target = self:controllerAimAssist()
-            --print(target)
+            local target = self:returnAimAssistTarget(1)
         end
     end
     local dx = x-pos[1] ; local dy = y-pos[2]

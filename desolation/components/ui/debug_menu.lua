@@ -21,12 +21,13 @@ function debugMenu:update(delta)
     local rmx, rmy = coreFuncs.getRelativeMousePosition()
     --write vsync next to fps counter if enabled
     local fps_suffix
-    if love.window.getVSync() == 1 then
+    if Settings.vsync then
         fps_suffix = " (VSync ON)"
     else
         fps_suffix = " (VSync OFF)"
     end
     --Update debug text
+    --TODO Make this more customizable using a JSON file!
     ui.debugTextsLeft.text = GAME_NAME .. " - Made by " .. AUTHOR .. "\n"
                         .. "FPS: " .. fps .. "/" .. averageFps .. fps_suffix ..
                         "\nPlayer Coordinates: X=" .. math.floor(playerPos[1]) .. " Y=" .. math.floor(playerPos[2])
