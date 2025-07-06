@@ -58,7 +58,7 @@ end
 function startup:update(delta)
     local ui = self.parent.UIComponent
     if Settings.language == "tr" then
-        ui.selectButton.buttonText = "Turkce"
+        ui.selectButton.buttonText = "Türkçe"
     else
         ui.selectButton.buttonText = "English"
     end

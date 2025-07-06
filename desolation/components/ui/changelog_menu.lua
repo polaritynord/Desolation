@@ -15,18 +15,25 @@ function changelogMenu:load()
             font = "disposable-droid-bold";
         }
     )
-    ui.test = ui:newTextLabel(
+    ui.versionTitle = ui:newTextLabel(
         {
-            text = "This menu is most likely going to be empty\nuntil I figure out how to fetch text from the\nweb lol" ..
-                "\n\nHonestly shouldn't be that hard, but I think I\ngotta create a github website";
-            size = 30;
             position = {0, 200};
+            text = "Alpha 1.4";
+            font = "disposable-droid-bold";
+            size = 30;
+        }
+    )
+    ui.changelogText = ui:newTextLabel(
+        {
+            position = {0, 240};
+            text = "This is some sample text I've made up from my mind to experiment with how different changelogs of current and previous versions would look like in this menu. Of course, I still have got to figure out how to fetch those texts, 'cause I can't be bothered with manually adding them to the game.";
+            wrapLimit = 600;
         }
     )
     ui.returnButton = ui:newTextButton(
         {
             buttonText = Loca.mainMenu.returnButton;
-            buttonTextSize = 30;
+            buttonTextSize = 35;
             position = {0, 440};
             clickEvent = function() changelog.open = false ; changelog.selection = nil end;
             bindedKey = "escape";

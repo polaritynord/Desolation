@@ -112,7 +112,7 @@ function settings:update(delta)
     if not s.open then return end
     --TODO Hardcoded this, if I happen to add other languages update it.
     local lang = "English"
-    if s.preview.language == "tr" then lang = "Turkce" end
+    if s.preview.language == "tr" then lang = "Türkçe" end
     ui.languageButton.buttonText = Loca.settings.lang .. lang
     --button coloring if respective menu is open
     for name, element in pairs(ui.menuButtons) do
