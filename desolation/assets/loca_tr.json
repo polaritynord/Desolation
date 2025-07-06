@@ -1,202 +1,202 @@
 {
     "mainMenu": {
         "campaign": "Hikaye Modu",
-        "newGame": "YENI OYUN",
+        "newGame": "YENİ OYUN",
         "loadGame": "KAYITLI OYUNLAR",
         "extra": "EK OYUN MODLARI",
-        "achievements": "BASARIMLAR",
+        "achievements": "BAŞARIMLAR",
         "settings": "AYARLAR",
-        "changelog": "GUNCELLEMELER",
-        "quit": "OYUNDAN CIK",
+        "changelog": "GÜNCELLEMELER",
+        "quit": "OYUNDAN ÇIK",
         "quitConfirmation": "Emin Misin?",
-        "returnButton": "Geri Don"
+        "returnButton": "Geri Dön"
     },
     "settings": {
         "title": "AYARLAR",
-        "gameplay": "Oynanis",
+        "gameplay": "Oynanış",
         "video": "Video",
         "audio": "Ses",
         "keys": "Kontroller",
         "lang": "Dil: ",
-        "returnButton": "Kaydet & Geri Don",
-        "restartWarning": "Degisiklerin gerceklesmesi icin yeniden baslatma gerekiyor.",
+        "returnButton": "Kaydet & Geri Dön",
+        "restartWarning": "Degişiklerin gercekleşmesi icin yeniden başlatma gerekiyor.",
         "bindingNames": {
             "fullscreen": "Tam Ekran",
-            "sprint": "Kos",
-            "move_up": "Yukari Hareket",
-            "move_down": "Asagi Hareket",
+            "sprint": "Koş",
+            "move_up": "Yukarı Hareket",
+            "move_down": "Aşağı Hareket",
             "move_left": "Sola Hareket",
-            "move_right": "Saga Hareket",
+            "move_right": "Sağa Hareket",
             "w_slot_1": "1. Silah Slotu",
             "w_slot_2": "2. Silah Slotu",
             "w_slot_3": "3. Silah Slotu",
-            "w_quickswitch": "Onceki Slota Gec",
-            "drop_weapon": "Silahi Birak",
+            "w_quickswitch": "Önceki Slota Gec",
+            "drop_weapon": "Silahı Bırak",
             "pause_game": "Oyunu Durdur",
-            "dev_console": "Yapimci Konsolunu Ac",
-            "toggle_debug": "Hata Ayiklama Menusunu Ac",
-            "interact": "Etkilesim",
-            "reload": "Silahi Doldur",
-            "toggle_hud": "HUD'u Ac/Kapa",
-            "screenshot": "Ekran Goruntusu Cek",
-            "toggle_follow": "NPC'nin Takip Etmesini Sagla"
+            "dev_console": "Yapımcı Konsolunu Aç",
+            "toggle_debug": "Hata Ayıklama Menüsünü Aç",
+            "interact": "Etkileşim",
+            "reload": "Silahı Doldur",
+            "toggle_hud": "HUD'u Aç/Kapa",
+            "screenshot": "Ekran Görüntüsü Çek",
+            "toggle_follow": "NPC'nin Takip Etmesini Sağla"
         },
-        "videoTitle": "VIDEO AYARLARI",
-        "gameplayTitle": "OYNANIS AYARLARI",
+        "videoTitle": "VİDEO AYARLARI",
+        "gameplayTitle": "OYNANIŞ AYARLARI",
         "audioTitle": "SES AYARLARI",
         "keysTitle": "KONTROL AYARLARI"
     },
     "achievementsMenu": {
-        "title": "BASARIMLAR",
-        "progress": "ILERLEME"
+        "title": "BAŞARIMLAR",
+        "progress": "İLERLEME"
     },
     "achievementDisplayNames": {
-        "thanksForPlaying": "Oynadigin Icin Tesekkurler",
-        "selfDestruct": "Ozyikim",
+        "thanksForPlaying": "Oynadığın İçin Teşekkürler",
+        "selfDestruct": "Özyıkım",
         "distant": "Sonsuz Ufuklar",
-        "aHairsBreadth": "Kil Payi",
+        "aHairsBreadth": "Kıl Payı",
         "devConsole": "Konsol",
         "chainReaction": "Zincirleme Tepkime",
         "1k_3": "Sert Metal",
         "1k_4": "\"Ekstrem\" Derece Kolay",
-        "1k_5": "Sifir Merhamet",
-        "play_all_radios": "Tum Radyolari Oynat",
-        "for_a_reason": "Bir Sebep Icin"
+        "1k_5": "Sıfır Merhamet",
+        "play_all_radios": "Tum Radyoları Oynat",
+        "for_a_reason": "Bir Sebep İçin"
         
 },
     "achievementDescriptions": {
-        "thanksForPlaying": "Oyunu ilk defa ac.",
-        "selfDestruct": "Kendini patlayici bir varille havaya ucur.",
-        "distant": "ASIRI uzak koordinatlara git.",
-        "aHairsBreadth": "(Sonsuz) Bir dalgayi cok dusuk can ile bitir.",
-        "devConsole": "Yapimci konsolunu ac.",
-        "chainReaction": "Bir patlamayla baska patlayicilari patlat.",
-        "1k_3": "(Sonsuz) Zor modda 1000 puana ulas.",
-        "1k_4": "(Sonsuz) Ekstrem modda 1000 puana ulas.",
-        "1k_5": "(Sonsuz) Ultra modda 1000 puana ulas.",
-        "play_all_radios": "(Hikaye) Tum ses kayitlarini bul ve oynat.",
-        "for_a_reason": "Oyundaki tum basarimlari edin."
+        "thanksForPlaying": "Oyunu ilk defa aç.",
+        "selfDestruct": "Kendini patlayıcı bir varille havaya uçur.",
+        "distant": "AŞIRI uzak koordinatlara git.",
+        "aHairsBreadth": "(Sonsuz) Bir dalgayı çok düşük can ile bitir.",
+        "devConsole": "Yapımcı konsolunu aç.",
+        "chainReaction": "Bir patlamayla baska patlayıcıları patlat.",
+        "1k_3": "(Sonsuz) Zor modda 1000 puana ulaş.",
+        "1k_4": "(Sonsuz) Ekstrem modda 1000 puana ulaş.",
+        "1k_5": "(Sonsuz) Ultra modda 1000 puana ulaş.",
+        "play_all_radios": "(Hikaye) Tüm ses kayıtlarını bul ve oynat.",
+        "for_a_reason": "Oyundaki tüm başarımları edin."
     },
     "pauseScreen": {
         "continue": "Devam Et",
-        "mainMenu": "Ana Menu"
+        "mainMenu": "Ana Menü"
     },
     "campaignMenu": {
-        "title": "HIKAYE MODU",
-        "wip": "Yapim Asamasinda..."
+        "title": "HİKAYE MODU",
+        "wip": "Yapım Aşamasında..."
     },
     "newGameMenu": {
-        "title": "YENI OYUN"
+        "title": "YENİ OYUN"
     },
     "loadGameMenu": {
         "title": "KAYITLI OYUNLAR",
-        "noSavesFound": "Kayitli oyun dosyasi bulunamadi.\nYeni bir oyun baslatmak icin\n\"Yeni Oyun\"a tiklayin."
+        "noSavesFound": "Kayıtlı oyun dosyası bulunamadı.\nYeni bir oyun başlatmak için\n\"Yeni Oyun\"a tıklayın."
     },
     "extrasMenu": {
         "title": "EK OYUN MODLARI",
         "infiniteTitle": "SONSUZ MOD",
-        "playground": "Oyun Alani",
+        "playground": "Oyun Alanı",
         "playgroundDesc": "Ne halt yersen ye.",
         "infinite": "Sonsuz",
-        "infiniteDesc": "Olabildigince hayatta kal.",
+        "infiniteDesc": "Olabildiğince hayatta kal.",
         "infiniteDifficulty": "Zorluk: ",
         "infiniteDifficulties": ["kolay", "orta", "zor", "ekstrem", "ultra"],
         "highScore": "Rekor Puan",
-        "matchesPlayed": "Oynanan Maclar",
+        "matchesPlayed": "Oynanan Maçlar",
         "difficultyDescs": [
             "Bundan daha kolay olabilir mi bilmiyorum.",
-            "Eh, azicik daha zor.",
-            "Standart zorluk. Robotlar ve sen arasinda adil bir savas.",
-            "Sadece elitler icin tasarlandi.",
-            "Tanrinin merhameti uzerine olsun"
+            "Eh, azıcık daha zor.",
+            "Standart zorluk. Robotlar ve sen arasında adil bir savaş.",
+            "Sadece elitler icin tasarlandı.",
+            "Tanrının merhameti üzerine olsun"
         ],
-        "crateAmount": "Kutu Miktari: ",
-        "barrelAmount": "Varil Miktari: ",
-        "expBarrelAmount": "Patlayici Varil Miktari: ",
-        "regenerateProps": "Objeleri Yeniden Olustur: ",
-        "startGame": "Oyunu Baslat"
+        "crateAmount": "Kutu Miktarı: ",
+        "barrelAmount": "Varil Miktarı: ",
+        "expBarrelAmount": "Patlayıcı Varil Miktarı: ",
+        "regenerateProps": "Objeleri Yeniden Oluştur: ",
+        "startGame": "Oyunu Başlat"
     },
     "infiniteMode": {
         "wave": "DALGA",
-        "eliminateAllRobots": "TUM ROBOTLARI ETKISIZ HALE GETIR",
+        "eliminateAllRobots": "TÜM ROBOTLARI ETKİSİZ HALE GETİR",
         "waveClear": "DALGA TAMAMLANDI",
-        "wavePrepare": "SONRAKI DALGA ICIN HAZIRLAN",
+        "wavePrepare": "SONRAKİ DALGA İÇİN HAZIRLAN",
         "highScore": "REKOR: ",
         "notifs": {
-            "waveClear": "(+50) Dalga Tamamlandi",
-            "kill": "(+10) Robot Etkisizlestirildi",
+            "waveClear": "(+50) Dalga Tamamlandı",
+            "kill": "(+10) Robot Etkisizleştirildi",
             "explosionBonus": "(+15) Patlama Bonusu",
             "survivingPoint": "(+10) Hayatta Kalma"
         },
-        "gameOverTitle": "OYUN BITTI",
+        "gameOverTitle": "OYUN BİTTİ",
         "statsScore": "Puan: ",
-        "statsTime": "Hayatta Kalinan Zaman: ",
-        "statsAccuracy": "Isabetlilik: ",
+        "statsTime": "Hayatta Kalınan Zaman: ",
+        "statsAccuracy": "İsabetlililk: ",
         "statsWaves": "Tamamlanan Dalgalar: ",
-        "statsKills": "Etkisizlestirilen Robotlar: ",
-        "statsBarrels": "Patlatilan Variller: ",
-        "statsCrates": "Kirilan Kutular: ",
+        "statsKills": "Etkisizleştirilen Robotlar: ",
+        "statsBarrels": "Patlatılan Variller: ",
+        "statsCrates": "Kırılan Kutular: ",
         "minute": " dk ",
         "second": " sn"
     },
     "gameplayMenu": {
-        "cameraSway": "Kamera Sallantisi: ",
-        "screenShake": "Ekran Sarsintisi: ",
-        "alwaysSprint": "Her Zaman Kos: ",
-        "curvedHud": "Bombeli Arayuz: ",
+        "cameraSway": "Kamera Sallantısı: ",
+        "screenShake": "Ekran Sarsintısı: ",
+        "alwaysSprint": "Her Zaman Koş: ",
+        "curvedHud": "Bombeli Arayüz: ",
         "sensivity": "Hassasiyet: ",
-        "sprintType": "Kosma Tipi: ",
+        "sprintType": "Koşma Tipi: ",
         "hold": "BASILI TUT",
-        "toggle": "AC/KAPA",
-        "autoPickupLoot": "Otomatik Item Toplama: ",
-        "controllerVibration": "Kumanda Titresimi: ",
-        "controllerAimAssist": "Kumanda Nisan Yardimi: "
+        "toggle": "AÇ/KAPA",
+        "autoPickupLoot": "Otomatik İtem Toplama: ",
+        "controllerVibration": "Kumanda Titreşimi: ",
+        "controllerAimAssist": "Kumanda Nişan Yardımı: "
     },
     "videoMenu": {
         "vsync": "V-Senkronizasyonu: ",
-        "vignette": "Ekran Karartisi: ",
-        "brightness": "Parlaklik: ",
-        "weaponFlameParticles": "Silah Ates Parcaciklari: ",
-        "bulletShellParticles": "Mermi Kovani Parcaciklari: ",
-        "destructionParticles": "Yikim Parcaciklari: ",
-        "explosionParticles": "Patlama Parcaciklari: ",
-        "shinyMenu": "Parlayan Menu: ",
-        "resolution": "Cozunurluk: ",
+        "vignette": "Ekran Karartısı: ",
+        "brightness": "Parlaklık: ",
+        "weaponFlameParticles": "Silah Ateş Parçacıkları: ",
+        "bulletShellParticles": "Mermi Kovanı Parçacıkları: ",
+        "destructionParticles": "Yıkım Parçacıkları: ",
+        "explosionParticles": "Patlama Parçacıkları: ",
+        "shinyMenu": "Parlayan Menü: ",
+        "resolution": "Çözünürlük: ",
         "fullscreen": "Tam Ekran: "
     },
     "keysMenu": {
-        "pressAKey": "Bir tusa bas... (iptal icin tikla)",
-        "resetToDefault": "Kontrolleri Varsayilana Sifirla",
-        "name": "- ISIM -",
-        "key": "- TUS -",
-        "showControllerIcon": "Kumanda Ikonunu Goster: "
+        "pressAKey": "Bir tuşa bas... (iptal için tıkla)",
+        "resetToDefault": "Kontrolleri Varsayılana Sıfırla",
+        "name": "- İSİM -",
+        "key": "- TUŞ -",
+        "showControllerIcon": "Kumanda İkonunu Göster: "
     },
     "audioMenu": {
         "masterVolume": "Ana Ses: ",
         "sfxVolume": "Ses Efektleri: ",
-        "musicVolume": "Muzik Sesi: ",
-        "worldVolume": "Dunya Sesi: "
+        "musicVolume": "Müzik Sesi: ",
+        "worldVolume": "Dünya Sesi: "
     },
     "game": {
-        "achievementObtained": "Basarim Edinildi!"
+        "achievementObtained": "Başarım Edinildi!"
     },
     "intro": {
-        "betaText": "Bu oyun erken gelistirme asamasindadir. Her sey degisime aciktir."
+        "betaText": "Bu oyun erken geliştirme aşamasındadır. Her şey değişime açıktır."
     },
     "weapons": {
         "pistol": "Tabanca",
-        "revolver": "Altipatlar",
-        "assaultrifle": "Taramali T.",
-        "shotgun": "Pompali T.",
+        "revolver": "Altıpatlar",
+        "assaultrifle": "Taramalı T.",
+        "shotgun": "Pompalı T.",
         "stolgard-pal": "Stolgard-PAL"
     },
     "aboutMenu": {
         "title": "HAKKINDA"
     },
     "changelogMenu": {
-        "title": "GUNCELLEMELER"
+        "title": "GÜNCELLEMELER"
     },
     "bruhuhuh": "O KADAR UZAKTA NE YAPIYORSUN LAN?!",
-    "controllerConnected": "Kumanda Baglandi",
-    "controllerDisconnected": "Kumanda Baglantisi Koptu"
+    "controllerConnected": "Kumanda Bağlandı",
+    "controllerDisconnected": "Kumanda Bağlantısı Koptu"
 }
