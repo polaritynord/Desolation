@@ -1,6 +1,14 @@
 local json = require "engine.lib.json"
 local coreFuncs = {}
 
+function coreFuncs.totalLineCount(filePath)
+    local ctr = 0
+    for _ in io.lines(filePath) do
+        ctr = ctr + 1
+    end
+    return ctr
+end
+
 function coreFuncs.rgb(r, g, b)
     local val
     if g and b then

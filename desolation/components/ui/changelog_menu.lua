@@ -1,4 +1,14 @@
+local coreFuncs = require("coreFuncs")
 local changelogMenu = ENGINE_COMPONENTS.scriptComponent.new()
+
+function changelogMenu:readChangelogFiles(changelog)
+    changelog.texts = {}
+    for _, fileName in ipairs(love.filesystem.getDirectoryItems(GAME_DIRECTORY .. "/assets/changelogs")) do
+        local filePath = GAME_DIRECTORY .. "/assets/changelogs/" .. fileName
+        local lineCount = coreFuncs.totalLineCount(filePath)
+        changelog.texts[#changelog.texts+1] = {love.filesystem.read(filePath), lineCount}
+    end
+end
 
 function changelogMenu:load()
     local changelog = self.parent
@@ -6,6 +16,11 @@ function changelogMenu:load()
     local ui = changelog.UIComponent
     ui.enabled = false
     changelog.open = false
+    changelog.realY = changelog.position[2]
+    changelog.length = 655
+
+    self:readChangelogFiles(changelog)
+    changelog.currentIndex = 1
 
     ui.title = ui:newTextLabel(
         {
@@ -21,12 +36,13 @@ function changelogMenu:load()
             text = "Alpha 1.4";
             font = "disposable-droid-bold";
             size = 30;
+            begin = "left";
         }
     )
     ui.changelogText = ui:newTextLabel(
         {
             position = {0, 240};
-            text = "This is some sample text I've made up from my mind to experiment with how different changelogs of current and previous versions would look like in this menu. Of course, I still have got to figure out how to fetch those texts, 'cause I can't be bothered with manually adding them to the game.";
+            text = changelog.texts[1][1];--"This is some sample text I've made up from my mind to experiment with how different changelogs of current and previous versions would look like in this menu. Of course, I still have got to figure out how to fetch those texts, 'cause I can't be bothered with manually adding them to the game.";
             wrapLimit = 600;
         }
     )
@@ -49,6 +65,7 @@ function changelogMenu:update(delta)
 
     --UI Offsetting & canvas enabling
     changelog.position[1] = 600 + MenuUIOffset
+    changelog.position[2] = changelog.position[2] + (changelog.realY-changelog.position[2])*8*delta
     ui.enabled = changelog.open
     --Transparency animation
     if ui.enabled then
@@ -58,6 +75,10 @@ function changelogMenu:update(delta)
     end
 
     if not ui.enabled then return end
+    --Change length based on current selected text
+    local lineCount = changelog.texts[changelog.currentIndex][2]
+    changelog.length = 65*lineCount
+    ui.returnButton.position[2] = 440+(lineCount-1)*36.5
 end
 
 return changelogMenu

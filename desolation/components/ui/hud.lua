@@ -238,7 +238,8 @@ function hud:updateControllerHints(player, ui)
     end
     --Aim assist square
     if InputManager.inputType == "joystick" and Settings.controller_aim_assist then
-        if player.aimAssistTarget ~= nil then
+        local axis1, axis2 = InputManager:getAxis(3), InputManager:getAxis(4)
+        if player.aimAssistTarget ~= nil and (math.abs(axis1) > 0.1 or math.abs(axis2) > 0.1) then
             ui.targetSquare.color[4] = 1
             local target = player.aimAssistTarget
             local camX, camY = unpack(CurrentScene.camera.position)

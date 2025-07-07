@@ -28,9 +28,10 @@ end
 function love.wheelmoved(x, y)
     InputManager:setInputTypeTo("keyboard")
     --Keys menu scrolling (TODO, make this work for all menus?)
-    if CurrentScene.settings and (CurrentScene.settings.menu == "keys" or CurrentScene.settings.menu == "video") then
+    if CurrentScene.settings and (CurrentScene.settings.menu == "keys" or CurrentScene.settings.menu == "video" or CurrentScene.settings.menu == "gameplay") then
         local menu = CurrentScene.settings.keysMenu
         if CurrentScene.settings.menu == "video" then menu = CurrentScene.settings.videoMenu end
+        if CurrentScene.settings.menu == "gameplay" then menu = CurrentScene.settings.gameplayMenu end
         menu.realY = menu.realY + 35*y
         if menu.realY > 0 then menu.realY = 0 end
         if menu.realY < 540-menu.length then menu.realY = 540-menu.length end
@@ -39,6 +40,16 @@ function love.wheelmoved(x, y)
     if CurrentScene.achievements ~= nil then
         if CurrentScene.achievements.open then
             local menu = CurrentScene.achievements
+            --menu.UIComponent.scrollbar.value = menu.UIComponent.scrollbar.value - y/20
+            menu.realY = menu.realY + 35*y
+            if menu.realY > 0 then menu.realY = 0 end
+            if menu.realY < 540-menu.length then menu.realY = 540-menu.length end
+        end
+    end
+    --Changelog menu scrolling (TODO, make this work for all menus?)
+    if CurrentScene.changelog ~= nil then
+        if CurrentScene.changelog.open then
+            local menu = CurrentScene.changelog
             --menu.UIComponent.scrollbar.value = menu.UIComponent.scrollbar.value - y/20
             menu.realY = menu.realY + 35*y
             if menu.realY > 0 then menu.realY = 0 end

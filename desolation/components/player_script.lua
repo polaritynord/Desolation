@@ -113,7 +113,7 @@ function playerScript:returnAimAssistTarget(assistType, x, y)
             x, y = unpack(coreFuncs.getRelativePosition(prop.position, CurrentScene.camera))
             local dx, dy = x-relativePlayerPos[1], y-relativePlayerPos[2]
             local rot = math.atan2(dy, dx)
-            if distance < 1000 and distance < targetData[1] and rot > expectedRotation-math.pi/12 and rot < expectedRotation+math.pi/12 and prop.targetable then
+            if distance < 1000 and distance < targetData[1] and rot > expectedRotation-math.pi/8 and rot < expectedRotation+math.pi/8 and prop.targetable then
                 targetData = {distance, prop}
             end
         end
