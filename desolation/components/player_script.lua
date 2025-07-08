@@ -142,9 +142,11 @@ function playerScript:pointTowardsMouse(player, delta)
         --Do Aim Assist raycast
         if Settings.controller_aim_assist and (math.abs(axis1) > 0.1 or math.abs(axis2) > 0.1) then
             local target = self:returnAimAssistTarget(2, x, y)
-            player.aimAssistTarget = target
-            if target ~= nil then
-                x, y = unpack(coreFuncs.getRelativePosition(target.position, CurrentScene.camera))
+            if player.aimAssistTarget == nil or InputManager:getAxis(6) <= 0.4 or player.aimAssistTarget.health <= 0 then
+                player.aimAssistTarget = target
+            end
+            if player.aimAssistTarget ~= nil then
+                x, y = unpack(coreFuncs.getRelativePosition(player.aimAssistTarget.position, CurrentScene.camera))
             end
         end
     end
@@ -310,12 +312,14 @@ function playerScript:reloadingWeapon(delta, player)
 end
 
 function playerScript:distantAchivementCheck(player)
-    if Achievements.distant.obtained then return end
+    --if Achievements.distant.obtained then return end
     if player.position[1] ~= player.position[1] or player.position[2] ~= player.position[2] then
         SoundManager:restartSound(Assets.sounds["hurt2"], 1)
         player.health = -31
         CurrentScene.gameOver.UIComponent.title.text = Loca.bruhuhuh
-        GiveAchievement("distant")
+        if not Achievements.distant.obtained then
+            GiveAchievement("distant")
+        end
     end
 end
 

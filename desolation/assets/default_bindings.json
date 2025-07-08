@@ -45,6 +45,7 @@
         ["menu_up", 12],
         ["menu_down", 13],
         ["slider_right", 15],
-        ["slider_left", 14]
+        ["slider_left", 14],
+        ["toggle_zoom", 9]
     ]
 }

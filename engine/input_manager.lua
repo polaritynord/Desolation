@@ -8,6 +8,8 @@ local inputManager = {
 }
 
 function love.joystickadded(joystick)
+    print(joystick:getButtonCount())
+    print(joystick:getName())
     if inputManager.joystick ~= nil then return end
     inputManager.joystick = joystick
     inputManager.inputType = "joystick"

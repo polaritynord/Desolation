@@ -6,7 +6,13 @@ function changelogMenu:readChangelogFiles(changelog)
     for _, fileName in ipairs(love.filesystem.getDirectoryItems(GAME_DIRECTORY .. "/assets/changelogs")) do
         local filePath = GAME_DIRECTORY .. "/assets/changelogs/" .. fileName
         local lineCount = coreFuncs.totalLineCount(filePath)
-        changelog.texts[#changelog.texts+1] = {love.filesystem.read(filePath), lineCount}
+        --Find the first line (by iterating through all of them, why tf was there not a better solution??)
+        local firstLine = ""
+        for line in love.filesystem.lines(filePath) do
+            firstLine = line
+            break
+        end
+        changelog.texts[#changelog.texts+1] = {love.filesystem.read(filePath), lineCount, firstLine}
     end
 end
 
@@ -30,6 +36,7 @@ function changelogMenu:load()
             font = "disposable-droid-bold";
         }
     )
+    --[[
     ui.versionTitle = ui:newTextLabel(
         {
             position = {0, 200};
@@ -39,9 +46,10 @@ function changelogMenu:load()
             begin = "left";
         }
     )
+    ]]--
     ui.changelogText = ui:newTextLabel(
         {
-            position = {0, 240};
+            position = {0, 200};
             text = changelog.texts[1][1];--"This is some sample text I've made up from my mind to experiment with how different changelogs of current and previous versions would look like in this menu. Of course, I still have got to figure out how to fetch those texts, 'cause I can't be bothered with manually adding them to the game.";
             wrapLimit = 600;
         }
@@ -55,7 +63,7 @@ function changelogMenu:load()
             bindedKey = "escape";
         }
     )
-    ui.controllerButtons = {ui.returnButton}
+    ui.controllerButtons = {ui.changelogText, ui.returnButton}
 end
 
 function changelogMenu:update(delta)
@@ -78,7 +86,7 @@ function changelogMenu:update(delta)
     --Change length based on current selected text
     local lineCount = changelog.texts[changelog.currentIndex][2]
     changelog.length = 65*lineCount
-    ui.returnButton.position[2] = 440+(lineCount-1)*36.5
+    ui.returnButton.position[2] = 620+(lineCount-1)*10
 end
 
 return changelogMenu

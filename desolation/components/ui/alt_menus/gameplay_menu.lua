@@ -179,6 +179,7 @@ function gameplayMenu:update(delta)
     settings.preview.screen_shake = ui.screenShakeBox.toggled
     settings.preview.always_sprint = ui.alwaysSprintBox.toggled
     settings.preview.curved_hud = ui.curvedHudBox.toggled
+    settings.preview.sprint_type = ui.sprintTypeButton.sprint_type
     settings.preview.experimental_peeking = ui.experimentalPeekingBox.toggled
     settings.preview.auto_pick_loot = ui.itemsPickupBox.toggled
     settings.preview.controller_vibration = ui.controllerVibrationBox.toggled

@@ -1,0 +1,13 @@
+Alpha 1.4
+
+* Full controller support added. You can now navigate through the UI & play the game using a controller.
+* Titles are added to the menus in the main menu & pause menu.
+* "New Game" and "Load Game" menus added for the upcoming Story Mode.
+* Aim assist added for controllers. Can be turned off from the settings.
+* Robots in Infinite Mode now won't shoot at the player if they're not in sight.
+* Developer console improvements:
+  - Left and right arrow keys can be used to navigate in the written command.
+  - Ctrl+V shorcut can be used to paste text.
+  - "scene" function added to change scenes with commands.
+  - "scenes" function added to view a list of scene files in the game.
+  - "assign" function now overwrites the assigned command if the same key is used.
