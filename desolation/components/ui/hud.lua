@@ -266,7 +266,7 @@ function hud:updateControllerHints(player, ui)
     else
         ui.targetSquare.color[4] = 0
     end
-    --TODO Might add some instructions (like press R2 to fire and stuff)
+    --Controller hints
 end
 
 function hud:load()

@@ -44,6 +44,7 @@ function assets.load()
     assets.defaultSounds.button_click = love.audio.newSource("desolation/assets/sounds/button_click.wav", "static")
     assets.defaultSounds.button_hover = love.audio.newSource("desolation/assets/sounds/button_hover.wav", "static")
     assets.defaultImages.missing_texture = love.graphics.newImage("engine/assets/missing_texture.png")
+    assets.defaultImages.controller_hints_ps = love.graphics.newQuad(0, 0, 563, 32, 32, 32)
     assets.cursors = {
         default = love.mouse.getSystemCursor("arrow");
         combat = love.mouse.newCursor("desolation/assets/images/cursor_combat.png", 12, 12);

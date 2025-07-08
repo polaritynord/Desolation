@@ -21,7 +21,6 @@ function wallScript:load()
     wall.imageComponent.source:setWrap("repeat", "repeat")
     wall.imageComponent.quad = love.graphics.newQuad(0, 0, wall.scale[1]*64, wall.scale[2]*64, 64, 64)
     wall.imageComponent.draw = noCenteredDraw
-    wall.imageComponent.depth = 5
 end
 
 function wallScript:update(delta)

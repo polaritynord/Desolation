@@ -18,6 +18,10 @@ function UIComponent:new(parent)
         alpha = 1;
     }
 
+    function instance:removeElement(element)
+        table.removeValue(self.elements, element)
+    end
+
     function instance:newTextLabel(attributes)
         local instance2 = textLabel.new()
         if attributes then
@@ -57,7 +61,7 @@ function UIComponent:new(parent)
             instance2.rotation = attributes.rotation or instance2.rotation
             instance2.color = attributes.color or instance2.color
         end
-        if attributes.source == "none" then
+        if attributes ~= nil and attributes.source == "none" then
             instance2.source = nil
         end
         instance2.parentComp = self
