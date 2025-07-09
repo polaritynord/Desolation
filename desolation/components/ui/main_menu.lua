@@ -114,8 +114,9 @@ function mainMenu:load()
     --Setup controller hints
     CurrentScene.controllerHints.script:updateHints(
         {
-            {1, "Select"},
-            {2, "Back"}
+            {1, "SELECT"},
+            {12, "DOWN"},
+            {13, "UP"}
         },
         {120, 510}
     )

@@ -460,6 +460,16 @@ function hud:load()
     ui.followingImgs = {}
     ui.slotSwitchTimer = 0
     ui.oldSlot = 1
+    --Controller hints setup
+    local contHints = CurrentScene.controllerHints.script
+    contHints:updateHints(
+        {
+            {1, "INTERACT"},
+            {3, "RELOAD"},
+            {2, "DROP WEAPON"}
+        },
+        {17, 405}
+    )
 end
 
 function hud:update(delta)

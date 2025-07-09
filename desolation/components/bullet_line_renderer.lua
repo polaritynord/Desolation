@@ -21,6 +21,7 @@ function bulletLineRenderer:load()
 end
 
 function bulletLineRenderer:update(delta)
+    if GamePaused then return end
     for i, line in ipairs(self.parent.lines) do
         line[3] = line[3] + (-line[3])*18*delta
         if line[3] < 0.1 then

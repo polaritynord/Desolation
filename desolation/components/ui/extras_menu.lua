@@ -40,7 +40,11 @@ function extrasMenu:load()
             buttonTextSize = 30;
             position = {0, 240};
             clickEvent = function ()
-                if menu.selection == "infinite" then menu.selection = nil else menu.selection = "infinite" end
+                if menu.selection == "infinite" then
+                    menu.selection = nil
+                else
+                    menu.selection = "infinite"
+                end
             end;
             hoverEvent = function (element)
                 ui.modeDescription.text = Loca.extrasMenu.infiniteDesc
