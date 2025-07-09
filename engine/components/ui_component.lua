@@ -60,6 +60,9 @@ function UIComponent:new(parent)
             instance2.scale = attributes.scale or instance2.scale
             instance2.rotation = attributes.rotation or instance2.rotation
             instance2.color = attributes.color or instance2.color
+            instance2.quad = attributes.quad or instance2.quad
+            instance2.quadOriginPos = attributes.quadOriginPos or instance2.quadOriginPos
+            instance2.quadShearSize = attributes.quadShearSize or instance2.quadShearSize
         end
         if attributes ~= nil and attributes.source == "none" then
             instance2.source = nil

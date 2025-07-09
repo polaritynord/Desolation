@@ -86,7 +86,7 @@ function changelogMenu:update(delta)
     --Change length based on current selected text
     local lineCount = changelog.texts[changelog.currentIndex][2]
     changelog.length = 65*lineCount
-    ui.returnButton.position[2] = 620+(lineCount-1)*10
+    ui.returnButton.position[2] = 515+(lineCount-1)*24
 end
 
 return changelogMenu

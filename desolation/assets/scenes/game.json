@@ -3,11 +3,6 @@
     "backgroundColor": [0.2, 0.2, 0.2],
     "tree": [
         [
-            "controllerHints",
-            ["UIComponent", "desolation/components/controller_hints_script"]
-        ],
-
-        [
             "player",
             ["imageComponent", "particleComponent", "desolation/components/player_script"],
             [

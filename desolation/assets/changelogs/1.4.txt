@@ -1,13 +1,18 @@
-Alpha 1.4
-
-* Full controller support added. You can now navigate through the UI & play the game using a controller.
-* Titles are added to the menus in the main menu & pause menu.
-* "New Game" and "Load Game" menus added for the upcoming Story Mode.
-* Aim assist added for controllers. Can be turned off from the settings.
-* Robots in Infinite Mode now won't shoot at the player if they're not in sight.
-* Developer console improvements:
-  - Left and right arrow keys can be used to navigate in the written command.
-  - Ctrl+V shorcut can be used to paste text.
-  - "scene" function added to change scenes with commands.
-  - "scenes" function added to view a list of scene files in the game.
-  - "assign" function now overwrites the assigned command if the same key is used.
+* Full controller support added. Navigating through the UI is now possible.
+* Added aim assist to controllers. Can be closed from the gameplay settings. Still needs some work.
+* Added button hints for controllers. Only works in the main menu for the time being. Will be improved.
+* Robots in Infinite Mode now don't shoot you if you can't see them.
+* The font has been modified to support Turkish characters. (excluding the italic font)
+* Shotgun's buffed to shoot 4 bullets per firing and shoot cooldown was decreased from 0.5 to 0.4 seconds.
+* Added "matches played" and "high score" texts to Infinite Mode's menu.
+* Developer console additions:
+    - Left and right arrows can now be used to navigate through the written command.
+    - Ctrl + V shortcut pastes text from clipboard.
+    - "scene [name]" function added.
+    - "scenes" function added.
+    - "assign" function now overwrites the commands if the same key is used twice.
+* Added titles to menus in the main menu & pause menu.
+* The changelog menu now works. Will be improved in later versions.
+* Revamped the main menu buttons. Removed "Campaign" and "About" buttons.
+* Added custom ammo acquire images (may change later).
+* Various source code optimization & cleaning.

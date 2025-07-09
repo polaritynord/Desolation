@@ -111,15 +111,6 @@ function mainMenu:load()
     end
     --Cool shader stuff
     self:loadShaders()
-    --Setup controller hints
-    CurrentScene.controllerHints.script:updateHints(
-        {
-            {1, "SELECT"},
-            {12, "DOWN"},
-            {13, "UP"}
-        },
-        {120, 510}
-    )
 end
 
 function mainMenu:update(delta)

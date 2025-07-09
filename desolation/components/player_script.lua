@@ -78,21 +78,21 @@ function playerScript:returnAimAssistTarget(assistType, x, y)
     local playerPos = self.parent.position
     local relativePlayerPos = coreFuncs.getRelativePosition(playerPos, CurrentScene.camera)
     local distance
-    local targetData = {math.huge, nil}
+    local targetData = {math.huge, nil, false} --Distance, object, isNPC?
 
     if assistType == 1 then --Return the closest target
         --Iterate through NPC's
         for _, npc in ipairs(CurrentScene.npcs.tree) do
             distance = coreFuncs.pointDistance(playerPos, npc.position)
             if distance < targetData[1] then
-                targetData = {distance, npc}
+                targetData = {distance, npc, true}
             end
         end
         --Iterate through props
         for _, prop in ipairs(CurrentScene.props.tree) do
             distance = coreFuncs.pointDistance(playerPos, prop.position)
-            if distance < 1000 and distance < targetData[1] and prop.targetable then
-                targetData = {distance, prop}
+            if distance < 1000 and distance < targetData[1] and prop.targetable and not targetData[3] then
+                targetData = {distance, prop, false}
             end
         end
     else --More advanced, find closest target on where the player is aiming at

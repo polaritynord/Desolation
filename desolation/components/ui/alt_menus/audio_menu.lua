@@ -96,6 +96,7 @@ function audioMenu:update(delta)
     settings.preview.vol_world = ui.worldVolSlider.value
     --quitting when using controller
     if InputManager:isPressed("return") then
+        UpdateControllerHints("menu_normal")
         settings.menu = nil
     end
 end

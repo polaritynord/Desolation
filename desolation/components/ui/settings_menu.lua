@@ -25,7 +25,15 @@ function settings:load()
             buttonText = Loca.settings.gameplay;
             buttonTextSize = 30;
             position = {0, 200};
-            clickEvent = function() if s.menu == "gameplay" then s.menu = nil else s.menu = "gameplay" end end;
+            clickEvent = function()
+                if s.menu == "gameplay" then
+                    s.menu = nil
+                    UpdateControllerHints("menu_normal")
+                else
+                    s.menu = "gameplay"
+                    UpdateControllerHints("menu_withreturn")
+                end
+            end;
         }
     )
     ui.menuButtons.video = ui:newTextButton(
@@ -33,7 +41,15 @@ function settings:load()
             buttonText = Loca.settings.video;
             buttonTextSize = 30;
             position = {0, 240};
-            clickEvent = function() if s.menu == "video" then s.menu = nil else s.menu = "video" end end;
+            clickEvent = function()
+                if s.menu == "video" then
+                    s.menu = nil
+                    UpdateControllerHints("menu_normal")
+                else
+                    s.menu = "video"
+                    UpdateControllerHints("menu_withreturn")
+                end
+            end;
         }
     )
     ui.menuButtons.audio = ui:newTextButton(
@@ -41,7 +57,15 @@ function settings:load()
             buttonText = Loca.settings.audio;
             buttonTextSize = 30;
             position = {0, 280};
-            clickEvent = function() if s.menu == "audio" then s.menu = nil else s.menu = "audio" end end;
+            clickEvent = function()
+                if s.menu == "audio" then
+                    s.menu = nil
+                    UpdateControllerHints("menu_normal")
+                else
+                    s.menu = "audio"
+                    UpdateControllerHints("menu_sliders")
+                end
+            end;
         }
     )
     ui.menuButtons.keys = ui:newTextButton(
@@ -49,7 +73,15 @@ function settings:load()
             buttonText = Loca.settings.keys;
             buttonTextSize = 30;
             position = {0, 320};
-            clickEvent = function() if s.menu == "keys" then s.menu = nil else s.menu = "keys" end end;
+            clickEvent = function()
+                if s.menu == "keys" then
+                    s.menu = nil
+                    UpdateControllerHints("menu_normal")
+                else
+                    s.menu = "keys"
+                    UpdateControllerHints("menu_withreturn")
+                end
+            end;
         }
     )
     ui.languageButton = ui:newTextButton(
@@ -88,6 +120,7 @@ function settings:load()
                 s.menu = nil
                 Settings = table.new(s.preview)
                 love.filesystem.write("settings.json", json.encode(Settings))
+                UpdateControllerHints("menu_normal")
             end;
             bindedKey = "escape";
         }

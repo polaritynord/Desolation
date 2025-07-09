@@ -42,8 +42,10 @@ function extrasMenu:load()
             clickEvent = function ()
                 if menu.selection == "infinite" then
                     menu.selection = nil
+                    UpdateControllerHints("menu_normal")
                 else
                     menu.selection = "infinite"
+                    UpdateControllerHints("menu_sliders")
                 end
             end;
             hoverEvent = function (element)
@@ -88,7 +90,11 @@ function extrasMenu:load()
             buttonText = Loca.mainMenu.returnButton;
             buttonTextSize = 30;
             position = {0, 440};
-            clickEvent = function() menu.open = false ; menu.selection = nil end;
+            clickEvent = function()
+                menu.open = false
+                menu.selection = nil
+                UpdateControllerHints("menu_normal")
+            end;
             bindedKey = "escape";
         }
     )

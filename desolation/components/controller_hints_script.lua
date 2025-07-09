@@ -1,11 +1,12 @@
 local controllerHintsScript = ENGINE_COMPONENTS.scriptComponent.new()
 
-function controllerHintsScript:updateHints(hintTable, position)
+function controllerHintsScript:updateHints(hintName)
     local ui = self.parent.UIComponent
-    self.hints = hintTable
-    self.parent.position = position
+    self.hints = self.hintPresets[hintName][1]
+    self.parent.position = self.hintPresets[hintName][2]
     --Remove previous elements (need to check if this works)
     for _, v in ipairs(ui.hintElements) do
+        v[1].quad:release()
         ui:removeElement(v[1])
         ui:removeElement(v[2])
     end
@@ -16,9 +17,10 @@ function controllerHintsScript:updateHints(hintTable, position)
             --Image
             ui:newImage(
                 {
-                    source = Assets.images["nord_transparent"];
-                    scale = {0.32, 0.32};
-                    position = {xPos, 16};
+                    source = Assets.defaultImages.controller_hints_ps;
+                    quad = love.graphics.newQuad((hint[1]-1)*33, 0, 32, 32, Assets.defaultImages.controller_hints_ps);
+                    scale = {0.65, 0.65};
+                    position = {xPos-8, 6};
                 }
             ),
             --Text
@@ -34,75 +36,9 @@ function controllerHintsScript:updateHints(hintTable, position)
     end
 end
 
-function controllerHintsScript:extrasMenuCheck()
-    if not CurrentScene.extras.open then return end
-    --If there is a change in the selection:
-    if self.oldExtraSelection ~= CurrentScene.extras.selection then
-        if CurrentScene.extras.selection == "infinite" then --Infinite menu
-            self:updateHints(
-                {
-                    {1, "SELECT"},
-                    {2, "BACK"},
-                    {12, "DOWN"},
-                    {13, "UP"},
-                    {15, "INCREASE"},
-                    {14, "DECREASE"}
-                },
-                {120, 510}
-            )
-        else
-            --Return to default
-            self:updateHints(
-                {
-                    {1, "SELECT"},
-                    {12, "DOWN"},
-                    {13, "UP"}
-                },
-                {120, 510}
-            )
-        end
-    end
-    self.oldExtraSelection = CurrentScene.extras.selection
-end
-
-function controllerHintsScript:settingsMenuCheck()
-    if not CurrentScene.settings.open then return end
-    local settings = CurrentScene.settings
-    if self.oldSettingsSelection ~= settings.menu then
-        if settings.menu == "audio" then --Audio menu
-            self:updateHints(
-                {
-                    {1, "SELECT"},
-                    {2, "BACK"},
-                    {12, "DOWN"},
-                    {13, "UP"},
-                    {15, "INCREASE"},
-                    {14, "DECREASE"}
-                },
-                {120, 510}
-            )
-        elseif settings.menu ~= nil then --Every other menu
-            self:updateHints(
-                {
-                    {1, "SELECT"},
-                    {2, "BACK"},
-                    {12, "DOWN"},
-                    {13, "UP"}
-                },
-                {120, 510}
-            )
-        else --No menu selected
-            self:updateHints(
-                {
-                    {1, "SELECT"},
-                    {12, "DOWN"},
-                    {13, "UP"},
-                },
-                {120, 510}
-            )
-        end
-    end
-    self.oldSettingsSelection = settings.menu
+function UpdateControllerHints(hintName)
+    if InputManager.inputType ~= "joystick" then return end
+    controllerHintsScript:updateHints(hintName)
 end
 
 function controllerHintsScript:load()
@@ -111,18 +47,45 @@ function controllerHintsScript:load()
     ui.hintElements = {}
     self.oldExtraSelection = nil
     self.oldSettingsSelection = nil
+    self.hintPresets =
+    {
+        menu_normal = {
+            {
+                {1, "SELECT"},
+                {13, "DOWN"},
+                {12, "UP"},
+            },
+            {120, 510}
+        },
+        menu_withreturn = {
+            {
+                {1, "SELECT"},
+                {2, "BACK"},
+                {13, "DOWN"},
+                {12, "UP"}
+            },
+            {120, 510}
+        },
+        menu_sliders = {
+            {
+                {1, "SELECT"},
+                {2, "BACK"},
+                {13, "DOWN"},
+                {12, "UP"},
+                {15, "INCREASE"},
+                {14, "DECREASE"}
+            },
+            {120, 510}
+        },
+        game_none = {{}, {0, 0}}
+    }
+    self:updateHints("menu_normal")
 end
 
 function controllerHintsScript:update(delta)
     local ui = self.parent.UIComponent
-    --ui.enabled = InputManager.inputType == "joystick"
+    ui.enabled = InputManager.inputType == "joystick"
     if not ui.enabled then return end
-    if CurrentScene.name == "Main Menu" then
-        self:extrasMenuCheck()
-        self:settingsMenuCheck()
-    elseif CurrentScene.name == "Game" then
-        print(#self.hints)
-    end
 end
 
 return controllerHintsScript
