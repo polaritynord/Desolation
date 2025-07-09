@@ -2,7 +2,10 @@ local coreFuncs = require("coreFuncs")
 local changelogMenu = ENGINE_COMPONENTS.scriptComponent.new()
 
 function changelogMenu:readChangelogFiles(changelog)
-    changelog.texts = {}
+    changelog.texts = {
+        {love.filesystem.read("desolation/assets/changelogs/1.4.txt"), 20, "Alpha 1.4"}
+    }
+    --[[
     for _, fileName in ipairs(love.filesystem.getDirectoryItems(GAME_DIRECTORY .. "/assets/changelogs")) do
         local filePath = GAME_DIRECTORY .. "/assets/changelogs/" .. fileName
         local lineCount = coreFuncs.totalLineCount(filePath)
@@ -14,6 +17,7 @@ function changelogMenu:readChangelogFiles(changelog)
         end
         changelog.texts[#changelog.texts+1] = {love.filesystem.read(filePath), lineCount, firstLine}
     end
+    ]]--
 end
 
 function changelogMenu:load()

@@ -1,3 +1,5 @@
+Alpha 1.4
+
 * Full controller support added. Navigating through the UI is now possible.
 * Added aim assist to controllers. Can be closed from the gameplay settings. Still needs some work.
 * Added button hints for controllers. Only works in the main menu for the time being. Will be improved.
