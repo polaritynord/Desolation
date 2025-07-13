@@ -161,4 +161,27 @@ function particleFuncs.createBulletShellParticle(comp, humanoid, weapon)
     particle.velocity = math.uniform(600, 850)
 end
 
+--UNUSED FOR NOW.
+function particleFuncs.createHumanoidTrailParticle(comp, humanoid)
+    -- TODO add settings option to here
+    local particle = comp:newParticle(
+        {
+            position = {humanoid.position[1], humanoid.position[2]};
+            rotation = 0;
+            despawnTime = 0.6;
+            size = {35, 35};
+            color = {0.15, 0.15, 0.15, 0.3};
+            update = function(particle, delta)
+                --rotation
+                particle.rotation = particle.rotation + 2*delta
+                --size
+                particle.size[1] = particle.size[1] - 70*delta
+                particle.size[2] = particle.size[1]
+                --transparency
+                particle.color[4] = particle.color[4] - 0.5*delta
+            end
+        }
+    )
+end
+
 return particleFuncs

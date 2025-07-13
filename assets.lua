@@ -48,7 +48,7 @@ function assets.load()
     assets.cursors = {
         default = love.mouse.newCursor("desolation/assets/images/cursor_default.png", 0, 0);
         combat = love.mouse.newCursor("desolation/assets/images/cursor_combat.png", 18, 18);
-        reload = love.mouse.newCursor("desolation/assets/images/cursor_rel  oad.png", 18, 18);
+        reload = love.mouse.newCursor("desolation/assets/images/cursor_reload.png", 18, 18);
     }
     --load achievement icons
     for name, data in pairs(Achievements) do

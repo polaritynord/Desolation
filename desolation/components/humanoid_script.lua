@@ -66,30 +66,6 @@ function humanoidScript:collisionCheck(delta, humanoid)
     end
 end
 
-function humanoidScript:humanoidUpdate(delta, humanoid)
-    --Update hand offset
-    humanoid.handOffset = humanoid.handOffset + (-humanoid.handOffset) * 20 * delta
-    --movement
-    humanoid.moving = math.abs(humanoid.moveVelocity[1]) > 0 or math.abs(humanoid.moveVelocity[2]) > 0
-    humanoid.oldPos = table.new(humanoid.position)
-    humanoid.position[1] = humanoid.position[1] + (humanoid.velocity[1]*delta) + (humanoid.moveVelocity[1]*delta)
-    humanoid.position[2] = humanoid.position[2] + (humanoid.velocity[2]*delta) + (humanoid.moveVelocity[2]*delta)
-    humanoid.velocity[1] = humanoid.velocity[1] + (-humanoid.velocity[1])*8*delta
-    humanoid.velocity[2] = humanoid.velocity[2] + (-humanoid.velocity[2])*8*delta
-    self:collisionCheck(delta, humanoid)
-    self:doWalkingAnim(humanoid)
-    self:makeFootstepSounds(humanoid, delta)
-    if humanoid.health > 0 then return end
-    --fade away
-    humanoid.scale[1] = humanoid.scale[1] + 20 * delta
-    humanoid.scale[2] = humanoid.scale[2] + 20 * delta
-    humanoid.imageComponent.color[4] = humanoid.imageComponent.color[4] - 25 * delta
-    humanoid.hand.imageComponent.color[4] = humanoid.imageComponent.color[4]
-    --remove from npc list
-    if humanoid.imageComponent.color[4] > 0 or humanoid.name == "player" then return end
-    table.removeValue(CurrentScene.npcs.tree, humanoid)
-end
-
 function humanoidScript:doWalkingAnim(humanoid)
     if not humanoid.moving then return end
     local time = love.timer.getTime()
@@ -416,6 +392,24 @@ function humanoidScript:makeFootstepSounds(humanoid, delta)
     end
 end
 
+function humanoidScript:leaveTrailParticles(humanoid, delta)
+    if not humanoid.moving then
+        humanoid.trailTimer = 0
+        return
+    end
+    local cooldown = 0.05
+    humanoid.trailTimer = humanoid.trailTimer + delta
+    if humanoid.trailTimer > cooldown then
+        humanoid.trailTimer = 0
+        local particleComp = CurrentScene.bullets.particleComponent
+        --ok so apparently I've made particle positions relative to the object, so
+        --I can't really use the player's own particle component because it always follows the
+        --player around that way
+        --So bullets it is lmao, gotta love Polarity Engine
+        particleFuncs.createHumanoidTrailParticle(particleComp, humanoid)
+    end
+end
+
 function humanoidScript:humanoidSetup()
     local humanoid = self.parent
     humanoid.imageComponent.source = Assets.images["player_body"]
@@ -442,10 +436,36 @@ function humanoidScript:humanoidSetup()
     }
     humanoid.shootTimer = 0
     humanoid.reloadTimer = 0
+    humanoid.trailTimer = 0
     humanoid.oldPos = table.new(humanoid.position)
     humanoid.animationSizeDiff = 0
     humanoid.handOffset = 0
     humanoid.unarmed = false
+end
+
+function humanoidScript:humanoidUpdate(delta, humanoid)
+    --Update hand offset
+    humanoid.handOffset = humanoid.handOffset + (-humanoid.handOffset) * 20 * delta
+    --movement
+    humanoid.moving = math.abs(humanoid.moveVelocity[1]) > 0 or math.abs(humanoid.moveVelocity[2]) > 0
+    humanoid.oldPos = table.new(humanoid.position)
+    humanoid.position[1] = humanoid.position[1] + (humanoid.velocity[1]*delta) + (humanoid.moveVelocity[1]*delta)
+    humanoid.position[2] = humanoid.position[2] + (humanoid.velocity[2]*delta) + (humanoid.moveVelocity[2]*delta)
+    humanoid.velocity[1] = humanoid.velocity[1] + (-humanoid.velocity[1])*8*delta
+    humanoid.velocity[2] = humanoid.velocity[2] + (-humanoid.velocity[2])*8*delta
+    self:collisionCheck(delta, humanoid)
+    self:doWalkingAnim(humanoid)
+    self:makeFootstepSounds(humanoid, delta)
+    --self:leaveTrailParticles(humanoid, delta)
+    if humanoid.health > 0 then return end
+    --fade away
+    humanoid.scale[1] = humanoid.scale[1] + 20 * delta
+    humanoid.scale[2] = humanoid.scale[2] + 20 * delta
+    humanoid.imageComponent.color[4] = humanoid.imageComponent.color[4] - 25 * delta
+    humanoid.hand.imageComponent.color[4] = humanoid.imageComponent.color[4]
+    --remove from npc list
+    if humanoid.imageComponent.color[4] > 0 or humanoid.name == "player" then return end
+    table.removeValue(CurrentScene.npcs.tree, humanoid)
 end
 
 return humanoidScript

@@ -1,5 +1,5 @@
 local json = require("engine.lib.json")
-local moonshine = require("engine.lib.moonshine")
+local lighter = require("engine.lib.lighter")
 local object = require "engine.object"
 
 local scene = {}
@@ -13,11 +13,22 @@ function scene.new()
         particleCount = 0;
         uiShader = nil;
         gameShader = nil;
+        lighter = lighter();
+        lightCanvas = love.graphics.newCanvas();
     }
 
     function s:addChild(obj)
         self.tree[#self.tree+1] = obj
         self[obj.name] = obj
+    end
+
+    function s:preDrawLights()
+        love.graphics.setCanvas({ self.lightCanvas, stencil = true})
+            love.graphics.translate((-self.camera.position[1])*self.camera.zoom+480, (-self.camera.position[2])*self.camera.zoom+270)
+            love.graphics.scale(self.camera.zoom, self.camera.zoom)
+            love.graphics.clear(0.1, 0.1, 0.1) -- Global illumination level
+            self.lighter:drawLights()
+        love.graphics.setCanvas()
     end
 
     function s:load()
@@ -29,6 +40,7 @@ function scene.new()
                 child:load()
             end
         end
+        self.lighter:addLight(0, 0, 500, 1, 0.5, 0.5)
     end
 
     function s:update(delta)
@@ -37,6 +49,7 @@ function scene.new()
         end
         if self.camera.script then self.camera.script:update(delta) end
         InputManager.leftMouseTimer = InputManager.leftMouseTimer + delta
+        self:preDrawLights()
     end
 
     function s:draw()
@@ -55,6 +68,9 @@ function scene.new()
                 self.gameShader.draw(
                     function ()
                         self:drawGame()
+                        love.graphics.setBlendMode("multiply", "premultiplied")
+                        love.graphics.draw(self.lightCanvas)
+                        love.graphics.setBlendMode("alpha")
                     end
                 )
             end
