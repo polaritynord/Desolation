@@ -159,6 +159,7 @@
             ["explosion", "desolation/assets/sounds/explosion.wav", "static"],
             ["sprint", "desolation/assets/sounds/sprint.wav", "static"],
             ["slot_switch", "desolation/assets/sounds/slot_switch.wav", "static"],
+            ["flashlight_on", "desolation/assets/sounds/flashlight_on.wav", "static"],
             ["acquire", "desolation/assets/sounds/acquire.wav", "static"],
             ["medkit_pickup", "desolation/assets/sounds/medkit_pickup.wav", "static"],
             ["battery_pickup", "desolation/assets/sounds/battery_pickup.wav", "static"],

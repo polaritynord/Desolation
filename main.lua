@@ -17,11 +17,6 @@ CurrentScene = nil
 GamePaused = false
 Scenes = {}
 
--- Just some debugging stuff here
-if os.getenv("LOCAL_LUA_DEBUGGER_VSCODE") == "1" then
-    require("lldebugger").start()
-end
-
 function love.mousemoved()
     InputManager:setInputTypeTo("keyboard")
 end
@@ -178,6 +173,12 @@ function love.keypressed(key, unicode)
     --Toggle HUD key
     if table.contains(InputManager:getKeys("toggle_hud"), key) and CurrentScene.name == "Game" then
         CurrentScene.hud.UIComponent.enabled = not CurrentScene.hud.UIComponent.enabled
+    end
+
+    --Toggle flashlight
+    if table.contains(InputManager:getKeys("flashlight"), key) and CurrentScene.name == "Game" then
+        CurrentScene.player.flashlightOn = not CurrentScene.player.flashlightOn
+        SoundManager:playSound(Assets.sounds["flashlight_on"], Settings.vol_world)
     end
 
     --Take screenshot key

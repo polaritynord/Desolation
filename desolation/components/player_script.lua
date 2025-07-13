@@ -324,7 +324,14 @@ function playerScript:distantAchivementCheck(player)
 end
 
 function playerScript:updateLights(delta, player)
-    --[[ light
+    --Primary light
+    self.lightRadius = self.lightRadius + (500-150*coreFuncs.boolToNum(player.moving)-self.lightRadius)*2*delta
+    Lighter:updateLight(player.primaryLight, player.position[1], player.position[2], self.lightRadius, 0.8, 0.8, 0.8, 0.5)
+    --Flashlight
+    if not player.flashlightOn then
+        player.flashlight.a = 0
+        return
+    end
     self.lightFlickerTimer = self.lightFlickerTimer + delta
     if not self.lightFlickered and self.lightFlickerTimer > self.lightFlickerTime then
         self.lightFlickered = true
@@ -335,12 +342,9 @@ function playerScript:updateLights(delta, player)
             self.lightFlickerTime = math.uniform(1, 7)
             self.lightFlickerTimer = 0
         end
-    else
     end
-    ]]--
-    --Primary light
-    self.lightRadius = self.lightRadius + (500-150*coreFuncs.boolToNum(player.moving)-self.lightRadius)*2*delta
-    Lighter:updateLight(player.primaryLight, player.position[1], player.position[2], self.lightRadius, 0.8, 0.8, 0.8, 0.5)
+    Lighter:updateLight(player.flashlight, player.position[1]+220*math.cos(player.rotation), player.position[2]+220*math.sin(player.rotation), 400, 1, 1, 1, 0.7*coreFuncs.boolToNum(not self.lightFlickered))
+    player.flashlight.rotation = player.rotation
 end
 
 --Engine funcs
@@ -357,12 +361,17 @@ function playerScript:load()
     }
     player.nearItem = nil
     player.aimAssistTarget = nil
+    --Light variables
     player.primaryLight = CurrentScene:addLight(player.position[1], player.position[3], 500, 0.8, 0.8, 0.8)
+    player.flashlight = CurrentScene:addLight(player.position[1]+154, player.position[2], 400, 1, 1, 1)
+    player.flashlight.gradientImage = FlashlightGradientImage
+
     --player.primaryLight = Lighter:addLight(player.position[1], player.position[2], 350, 0.8, 0.8, 0.8)
     self.lightRadius = 500
     self.lightFlickerTimer = 0
     self.lightFlickerTime = math.uniform(1, 7)
     self.lightFlickered = false
+    player.flashlightOn = true
 end
 
 function playerScript:update(delta)

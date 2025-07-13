@@ -40,7 +40,8 @@
             "reload": "Reload Weapon",
             "toggle_hud": "Toggle HUD",
             "screenshot": "Take Screenshot",
-            "toggle_follow": "Make NPC Follow"
+            "toggle_follow": "Make NPC Follow",
+            "flashlight": "Toggle Flashlight"
         },
         "videoTitle": "VIDEO SETTINGS",
         "gameplayTitle": "GAMEPLAY SETTINGS",

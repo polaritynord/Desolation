@@ -272,8 +272,8 @@ end
 function hud:load()
     --TODO Might clean this shit up later too
     local ui = self.parent.UIComponent
-    self.parent.crtShader = moonshine.chain(960, 540, moonshine.effects.crt)
-    self.parent.crtShader.crt.feather = 0
+    self.parent.crtShader = moonshine.chain(960, 540, moonshine.effects.glow)
+    --self.parent.crtShader.crt.feather = 0
     ui.draw = self.customDraw
     --Left side (health etc.)
     ui.healthBar = ui:newImage(

@@ -39,7 +39,8 @@
             "reload": "Silahı Doldur",
             "toggle_hud": "HUD'u Aç/Kapa",
             "screenshot": "Ekran Görüntüsü Çek",
-            "toggle_follow": "NPC'nin Takip Etmesini Sağla"
+            "toggle_follow": "NPC'nin Takip Etmesini Sağla",
+            "flashlight": "Toggle Flashlight"
         },
         "videoTitle": "VİDEO AYARLARI",
         "gameplayTitle": "OYNANIŞ AYARLARI",

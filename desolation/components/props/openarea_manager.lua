@@ -140,7 +140,7 @@ function openareaManager:load()
     self:setupUI()
     --Add robot markers object to scene
     local obj = object.new(CurrentScene.hud)
-    obj:addComponent(ENGINE_COMPONENTS.imageComponent.new(obj))
+    obj:addComponent(ENGINE_COMPONENTS.UIComponent.new(obj))
     obj:addComponent(table.new(robotLocationMarkers))
     obj.script:load()
     CurrentScene.hud:addChild(obj)

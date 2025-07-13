@@ -21,7 +21,7 @@ local function drawMarkers(comp)
 end
 
 function robotLocationMarkers:load()
-    self.parent.imageComponent.draw = drawMarkers
+    self.parent.UIComponent.draw = drawMarkers
 end
 
 return robotLocationMarkers
