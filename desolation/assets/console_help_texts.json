@@ -1,7 +1,7 @@
 {
     "titles": [
         "cheats", "freecam", "p_speed", "g_vignette", "s_language", "noclip", "god", "invisible",
-        "inf_stamina", "slippiness", "stamina_fill", "stamina_drain",
+        "inf_stamina", "slippiness", "stamina_fill", "stamina_drain", "fullbright",
         "assign", "run_script", "give_ammo", "clear", "give", "info", "bind", "map", "maps",
         "hurtme", "hurtarmor", "restart", "summon", "newprop", "newitem", "tp", "scene", "scenes"
     ],
@@ -19,6 +19,7 @@
         "(number) slippiness: Determines how slippery the player movement is.",
         "(number) stamina_fill: How fast the stamina energy fills up to 100.",
         "(number) stamina_drain: How fast the stamina energy drains during sprinting.",
+        "(bool) fullbright: Disables lights if set to true.",
         
         "assign [key] [command]:\n\tAssigns a console command to a key to instantly run it in-game.",
         "run_script [file_path]:\n\tRuns commands at the given text file.",

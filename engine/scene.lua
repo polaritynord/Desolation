@@ -1,5 +1,4 @@
 local json = require("engine.lib.json")
-local lighter = require("engine.lib.lighter")
 local object = require "engine.object"
 
 local scene = {}
@@ -13,8 +12,9 @@ function scene.new()
         particleCount = 0;
         uiShader = nil;
         gameShader = nil;
-        lighter = lighter();
         lightCanvas = love.graphics.newCanvas();
+        illumination = {0, 0, 0};
+        lights = {};
     }
 
     function s:addChild(obj)
@@ -26,8 +26,8 @@ function scene.new()
         love.graphics.setCanvas({ self.lightCanvas, stencil = true})
             love.graphics.translate((-self.camera.position[1])*self.camera.zoom+480, (-self.camera.position[2])*self.camera.zoom+270)
             love.graphics.scale(self.camera.zoom, self.camera.zoom)
-            love.graphics.clear(0.1, 0.1, 0.1) -- Global illumination level
-            self.lighter:drawLights()
+            love.graphics.clear(unpack(self.illumination)) -- Global illumination level
+            Lighter:drawLights()
         love.graphics.setCanvas()
     end
 
@@ -40,7 +40,6 @@ function scene.new()
                 child:load()
             end
         end
-        self.lighter:addLight(0, 0, 500, 1, 0.5, 0.5)
     end
 
     function s:update(delta)
@@ -183,9 +182,14 @@ function LoadScene(file)
 end
 
 function SetScene(sceneTable)
-    if CurrentScene ~= nil then
+    if CurrentScene ~= nil then --my poor attempts on preventing memory leak :(
+        for _, light in ipairs(CurrentScene.lights) do
+            Lighter:removeLight(light)
+        end
+        --CurrentScene.lightCanvas:release() (crashes?!)
         CurrentScene.tree = nil
         CurrentScene = nil
+        --TODO add polygons for walls after being done with other stuff
     end
     CurrentScene = sceneTable
     CurrentScene:load()

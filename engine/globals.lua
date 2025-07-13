@@ -1,7 +1,7 @@
 local globals = {}
 
 function globals:load()
-    -- {value, cheatsEnabled, toggleable}
+    -- {value, cheatProtection, toggleable}
     --NOTE might as well move this to a json file later
     self.cheats = {0, false, true}
     self.freecam = {0, true, true}
@@ -14,6 +14,7 @@ function globals:load()
     self.stamina_fill = {16, true, false}
     self.stamina_drain = {18, true, false}
     self.draw_triggers = {1, false, true}
+    self.fullbright = {0, false, true} --NOTE Might change cheat protection to false.
 end
 
 function GetGlobal(name)

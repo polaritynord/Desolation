@@ -5,6 +5,7 @@ local startupManager = require("engine.startup_manager")
 
 --local fullscreen = false
 
+Lighter = require("engine.lib.lighter")()
 InputManager = require("engine.input_manager")
 SoundManager = require("engine.sound_manager")
 Globals = require("engine.globals")
