@@ -1,36 +1,24 @@
 local coreFuncs = require "coreFuncs"
 local gameCursorScript = ENGINE_COMPONENTS.scriptComponent.new()
 
-function gameCursorScript:load()
-    local ui = self.parent.UIComponent
-    ui.controllerNotif = ui:newTextLabel(
-        {
-            text = "Controller Connected";
-            size = 40;
-            begin = "center";
-            position = {-35, 400};
-            color = {1, 1, 1, 0};
-        }
-    )
-    ui.controllerArrow = ui:newImage(
-        {
-            source = Assets.images.controller_selection;
-            position = {600, 100};
-            scale = {-0.8, 0.8};
-            color = {1, 1, 1, 0};
-        }
-    )
-    ui.controllerSelection = 1
-    ui.controllerCurrentMenu = nil
-    ui.controllerAxisPressed = false
-    ui.controllerArrowsPressed = false
-    ui.controllerInteractPressed = false
+function gameCursorScript:setCursorImage()
+    --Hide cursor if a controller is being used & return
+    love.mouse.setVisible(InputManager.inputType ~= "joystick")
+    if not love.mouse.isVisible() then return end
+    --Set to default cursor if the game is paused or the player isn't in the game at all
+    if CurrentScene.name ~= "Game" or GamePaused then
+        love.mouse.setCursor(Assets.cursors.default)
+        return
+    end
+    --Change cursor based on reloading state
+    if CurrentScene.player.reloading then
+        love.mouse.setCursor(Assets.cursors.reload)
+    else
+        love.mouse.setCursor(Assets.cursors.combat)
+    end
 end
 
-function gameCursorScript:update(delta)
-    local ui = self.parent.UIComponent
-    --Smoothly hide the controller notification
-    ui.controllerNotif.color[4] = ui.controllerNotif.color[4] + (-ui.controllerNotif.color[4])*4*delta
+function gameCursorScript:controllerNavigation(ui)
     --CONTROLLER ARROW CODE DOWN HERE:
     --Update current menu (TODO Game pause menu to be added later)
     if AltMenuOpen then
@@ -133,19 +121,40 @@ function gameCursorScript:update(delta)
         end
         if not InputManager:isPressed("interact") then ui.controllerInteractPressed = false end
     end
-    --ACTUAL CURSOR STUFF DOWN HERE:
-    --Hide cursor if the joystick is being used
-    love.mouse.setVisible(InputManager.inputType ~= "joystick")
-    if CurrentScene.name ~= "Game" then return end
-    if GamePaused then
-        love.mouse.setCursor(Assets.cursors.default)
-    else
-        if CurrentScene.player.reloading then
-            love.mouse.setCursor(Assets.cursors.reload)
-        else
-            love.mouse.setCursor(Assets.cursors.combat)
-        end
-    end
+end
+
+function gameCursorScript:load()
+    local ui = self.parent.UIComponent
+    ui.controllerNotif = ui:newTextLabel(
+        {
+            text = "Controller Connected";
+            size = 40;
+            begin = "center";
+            position = {-35, 400};
+            color = {1, 1, 1, 0};
+        }
+    )
+    ui.controllerArrow = ui:newImage(
+        {
+            source = Assets.images.controller_selection;
+            position = {600, 100};
+            scale = {-0.8, 0.8};
+            color = {1, 1, 1, 0};
+        }
+    )
+    ui.controllerSelection = 1
+    ui.controllerCurrentMenu = nil
+    ui.controllerAxisPressed = false
+    ui.controllerArrowsPressed = false
+    ui.controllerInteractPressed = false
+end
+
+function gameCursorScript:update(delta)
+    local ui = self.parent.UIComponent
+    --Smoothly hide the controller notification
+    ui.controllerNotif.color[4] = ui.controllerNotif.color[4] + (-ui.controllerNotif.color[4])*4*delta
+    self:controllerNavigation(ui)
+    self:setCursorImage()
 end
 
 return gameCursorScript

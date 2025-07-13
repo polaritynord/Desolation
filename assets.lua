@@ -46,9 +46,9 @@ function assets.load()
     assets.defaultImages.missing_texture = love.graphics.newImage("engine/assets/missing_texture.png")
     assets.defaultImages.controller_hints_ps = love.graphics.newImage("desolation/assets/images/controller_hints/ps.png")
     assets.cursors = {
-        default = love.mouse.getSystemCursor("arrow");
-        combat = love.mouse.newCursor("desolation/assets/images/cursor_combat.png", 12, 12);
-        reload = love.mouse.newCursor("desolation/assets/images/cursor_reload.png", 12, 12);
+        default = love.mouse.newCursor("desolation/assets/images/cursor_default.png", 0, 0);
+        combat = love.mouse.newCursor("desolation/assets/images/cursor_combat.png", 18, 18);
+        reload = love.mouse.newCursor("desolation/assets/images/cursor_rel  oad.png", 18, 18);
     }
     --load achievement icons
     for name, data in pairs(Achievements) do
