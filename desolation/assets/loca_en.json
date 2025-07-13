@@ -62,7 +62,7 @@
         "1k_4": "\"Extreme\"ly Easy",
         "1k_5": "No Mercy",
         "play_all_radios": "Play All Radios",
-        "for_a_reason": "For a Reason"
+        "for_a_reason": "FOR A REASON"
     },
     "achievementDescriptions": {
         "thanksForPlaying": "Open the game for the first time.",
@@ -140,6 +140,7 @@
         "second": " sec"
     },
     "gameplayMenu": {
+        "skipIntro": "Skip Intro: ",
         "cameraSway": "Camera Sway: ",
         "screenShake": "Screen Shake: ",
         "alwaysSprint": "Always Sprint: ",

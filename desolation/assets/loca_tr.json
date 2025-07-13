@@ -61,7 +61,7 @@
         "1k_4": "\"Ekstrem\" Derece Kolay",
         "1k_5": "Sıfır Merhamet",
         "play_all_radios": "Tum Radyoları Oynat",
-        "for_a_reason": "Bir Sebep İçin"
+        "for_a_reason": "BİR SEBEP İÇİN"
         
 },
     "achievementDescriptions": {
@@ -140,6 +140,7 @@
         "second": " sn"
     },
     "gameplayMenu": {
+        "skipIntro": "İntroyu Atla: ",
         "cameraSway": "Kamera Sallantısı: ",
         "screenShake": "Ekran Sarsintısı: ",
         "alwaysSprint": "Her Zaman Koş: ",

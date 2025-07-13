@@ -4,6 +4,12 @@ local json = require("engine.lib.json")
 local startup = {}
 
 function startup:load()
+    --skip if "skip intro" option is on
+    if Settings.skip_intro then
+        local scene = LoadScene("desolation/assets/scenes/main_menu2.json")
+        SetScene(scene)
+        return
+    end
     --skip if this is not the first time playing
     if not Settings.first_time_playing then
         local scene = LoadScene("desolation/assets/scenes/intro.json")

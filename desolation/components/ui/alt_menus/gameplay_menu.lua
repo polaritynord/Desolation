@@ -20,68 +20,81 @@ function gameplayMenu:load()
         }
     )
 
+    ui.skipIntroText = ui:newTextLabel(
+        {
+            text = Loca.gameplayMenu.skipIntro;
+            position = {0, 200};
+            size = 30;
+        }
+    )
+    ui.skipIntroBox = ui:newCheckbox(
+        {
+            position = {400, 215};
+            toggled = Settings.skip_intro;
+        }
+    )
     ui.cameraSwayText = ui:newTextLabel(
         {
             text = Loca.gameplayMenu.cameraSway;
-            position = {0, 200};
+            position = {0, 240};
             size = 30;
         }
     )
     ui.cameraSwayBox = ui:newCheckbox(
         {
-            position = {400, 215};
+            position = {400, 255};
             toggled = Settings.camera_sway;
         }
     )
     ui.screenShakeText = ui:newTextLabel(
         {
             text = Loca.gameplayMenu.screenShake;
-            position = {0, 240};
+            position = {0, 280};
             size = 30;
         }
     )
     ui.screenShakeBox = ui:newCheckbox(
         {
-            position = {400, 255};
+            position = {400, 295};
             toggled = Settings.screen_shake;
         }
     )
     ui.alwaysSprintText = ui:newTextLabel(
         {
             text = Loca.gameplayMenu.alwaysSprint;
-            position = {0, 280};
+            position = {0, 320};
             size = 30;
         }
     )
     ui.alwaysSprintBox = ui:newCheckbox(
         {
-            position = {400, 295};
+            position = {400, 335};
             toggled = Settings.always_sprint;
         }
     )
     ui.curvedHudText = ui:newTextLabel(
         {
             text = Loca.gameplayMenu.curvedHud;
-            position = {0, 320};
+            position = {0, 360};
             size = 30;
         }
     )
     ui.curvedHudBox = ui:newCheckbox(
         {
-            position = {400, 335};
+            position = {400, 375};
             toggled = Settings.curved_hud;
         }
     )
     ui.sprintTypeText = ui:newTextLabel(
         {
             text = Loca.gameplayMenu.sprintType;
-            position = {0, 360};
+            position = {0, 400};
             size = 30;
         }
     )
     ui.sprintTypeButton = ui:newTextButton(
         {
-            position = {370, 360};
+            position = {370, 400};
             buttonText = "";
             buttonTextSize = 30;
             hoverEvent = buttonEvents.redHover;
@@ -95,27 +108,27 @@ function gameplayMenu:load()
     )
     ui.experimentalPeekingText = ui:newTextLabel(
         {
-            position = {0, 400};
+            position = {0, 440};
             text = "Experimental Peeking: ";
             size = 30;
         }
     )
     ui.experimentalPeekingBox = ui:newCheckbox(
         {
-            position = {400, 415};
+            position = {400, 455};
             toggled = Settings.experimental_peeking;
         }
     )
     ui.itemsPickupText = ui:newTextLabel(
         {
-            position = {0, 440};
+            position = {0, 480};
             text = Loca.gameplayMenu.autoPickupLoot;
             size = 30;
         }
     )
     ui.itemsPickupBox = ui:newCheckbox(
         {
-            position = {400, 455};
+            position = {400, 495};
             toggled = Settings.auto_pick_loot;
         }
     )
@@ -123,12 +136,12 @@ function gameplayMenu:load()
         {
             text = "Controller Vibration: ";
             size = 30;
-            position = {0, 480};
+            position = {0, 520};
         }
     )
     ui.controllerVibrationBox = ui:newCheckbox(
         {
-            position = {400, 495};
+            position = {400, 535};
             toggled = Settings.controller_vibration;
         }
     )
@@ -136,12 +149,12 @@ function gameplayMenu:load()
         {
             text = Loca.gameplayMenu.controllerAimAssist;
             size = 30;
-            position = {0, 520};
+            position = {0, 560};
         }
     )
     ui.controllerAimAssistBox = ui:newCheckbox(
         {
-            position = {400, 535};
+            position = {400, 575};
             toggled = Settings.controller_aim_assist;
         }
     )
@@ -175,6 +188,7 @@ function gameplayMenu:update(delta)
     end
 
     if not ui.enabled then return end
+    settings.preview.skip_intro = ui.skipIntroBox.toggled
     settings.preview.camera_sway = ui.cameraSwayBox.toggled
     settings.preview.screen_shake = ui.screenShakeBox.toggled
     settings.preview.always_sprint = ui.alwaysSprintBox.toggled
