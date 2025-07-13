@@ -108,6 +108,8 @@ function mapCreator:loadMap(path)
     --read & convert to lua table
     local data = love.filesystem.read(path)
     data = json.decode(data)
+    --Set illumination
+    CurrentScene.illumination = data.illumination or {0.4, 0.4, 0.4}
     --Load map assets
     Assets:unloadMapAssets()
     if data.assets ~= nil then
@@ -153,6 +155,16 @@ function mapCreator:loadMap(path)
             wall.position = {v[2][1]*64, v[2][2]*64}
             wall.scale = v[3]
             wall.script:load()
+            --Add light polygon data
+            CurrentScene:addLightPolygon(
+                {
+                    wall.position[1], wall.position[2], --topleft
+                    wall.position[1]+64*wall.scale[1], wall.position[2], --topright
+                    wall.position[1]+64*wall.scale[1], wall.position[2]+64*wall.scale[2], --bottomright
+                    wall.position[1], wall.position[2]+64*wall.scale[2] --bottomleft
+                }
+            )
+            --Add to scene tree
             CurrentScene.walls:addChild(wall)
         end
     end

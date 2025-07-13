@@ -13,8 +13,9 @@ function scene.new()
         uiShader = nil;
         gameShader = nil;
         lightCanvas = love.graphics.newCanvas();
-        illumination = {0, 0, 0};
+        illumination = {0.2, 0.2, 0.2};
         lights = {};
+        lightPolygons = {};
     }
 
     function s:addChild(obj)
@@ -23,12 +24,30 @@ function scene.new()
     end
 
     function s:preDrawLights()
+        if GetGlobal("fullbright") > 0 then return end
         love.graphics.setCanvas({ self.lightCanvas, stencil = true})
             love.graphics.translate((-self.camera.position[1])*self.camera.zoom+480, (-self.camera.position[2])*self.camera.zoom+270)
             love.graphics.scale(self.camera.zoom, self.camera.zoom)
             love.graphics.clear(unpack(self.illumination)) -- Global illumination level
             Lighter:drawLights()
         love.graphics.setCanvas()
+    end
+
+    function s:addLight(x, y, radius, r, g, b, a)
+        local light = Lighter:addLight(
+            x or 0,
+            y or 0,
+            radius or 300,
+            r or 1, g or 1, b or 1, a or 1
+        )
+        self.lights[#self.lights+1] = light
+        return light
+    end
+
+    function s:addLightPolygon(polygon)
+        Lighter:addPolygon(polygon)
+        self.lightPolygons[#self.lightPolygons+1] = polygon
+        return polygon
     end
 
     function s:load()
@@ -67,6 +86,7 @@ function scene.new()
                 self.gameShader.draw(
                     function ()
                         self:drawGame()
+                        if GetGlobal("fullbright") > 0 then return end
                         love.graphics.setBlendMode("multiply", "premultiplied")
                         love.graphics.draw(self.lightCanvas)
                         love.graphics.setBlendMode("alpha")
@@ -185,6 +205,9 @@ function SetScene(sceneTable)
     if CurrentScene ~= nil then --my poor attempts on preventing memory leak :(
         for _, light in ipairs(CurrentScene.lights) do
             Lighter:removeLight(light)
+        end
+        for _, polygon in ipairs(CurrentScene.lightPolygons) do
+            Lighter:removePolygon(polygon)
         end
         --CurrentScene.lightCanvas:release() (crashes?!)
         CurrentScene.tree = nil

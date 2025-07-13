@@ -324,8 +324,7 @@ function playerScript:distantAchivementCheck(player)
 end
 
 function playerScript:updateLights(delta, player)
-    --Primary light
-    self.lightRadius = self.lightRadius + (500-150*coreFuncs.boolToNum(player.moving)-self.lightRadius)*2*delta
+    --[[ light
     self.lightFlickerTimer = self.lightFlickerTimer + delta
     if not self.lightFlickered and self.lightFlickerTimer > self.lightFlickerTime then
         self.lightFlickered = true
@@ -337,9 +336,11 @@ function playerScript:updateLights(delta, player)
             self.lightFlickerTimer = 0
         end
     else
-
     end
-    Lighter:updateLight(player.primaryLight, player.position[1], player.position[2], self.lightRadius, 0.8, 0.8, 0.8, coreFuncs.boolToNum(not self.lightFlickered))
+    ]]--
+    --Primary light
+    self.lightRadius = self.lightRadius + (500-150*coreFuncs.boolToNum(player.moving)-self.lightRadius)*2*delta
+    Lighter:updateLight(player.primaryLight, player.position[1], player.position[2], self.lightRadius, 0.8, 0.8, 0.8, 0.5)
 end
 
 --Engine funcs
@@ -356,8 +357,9 @@ function playerScript:load()
     }
     player.nearItem = nil
     player.aimAssistTarget = nil
-    player.primaryLight = Lighter:addLight(player.position[1], player.position[2], 350, 0.8, 0.8, 0.8)
-    self.lightRadius = 350
+    player.primaryLight = CurrentScene:addLight(player.position[1], player.position[3], 500, 0.8, 0.8, 0.8)
+    --player.primaryLight = Lighter:addLight(player.position[1], player.position[2], 350, 0.8, 0.8, 0.8)
+    self.lightRadius = 500
     self.lightFlickerTimer = 0
     self.lightFlickerTime = math.uniform(1, 7)
     self.lightFlickered = false
