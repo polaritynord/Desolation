@@ -147,7 +147,7 @@ function openareaManager:load()
     --Add score notifications object to scene
     obj = object.new(CurrentScene.hud)
     obj.name = "scoreNotifs"
-    obj:addComponent(ENGINE_COMPONENTS.imageComponent.new(obj))
+    obj:addComponent(ENGINE_COMPONENTS.UIComponent.new(obj))
     obj:addComponent(table.new(infiniteScoreNotifs))
     obj.script:load()
     CurrentScene.hud:addChild(obj)

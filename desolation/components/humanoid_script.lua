@@ -291,6 +291,7 @@ function humanoidScript:humanoidShootWeapon(weapon)
         SoundManager:restartSound(Assets.sounds["empty_mag"], Settings.vol_world, humanoid.position, true)
         return
     end
+
     local shootSound = Assets.sounds["shoot_" .. string.lower(weapon.name)]
     if weapon.weaponType == "auto" or weapon.weaponType == "laser" then
         if humanoid.reloading then return end
@@ -360,6 +361,8 @@ function humanoidScript:humanoidShootWeapon(weapon)
     end
     --bullet shell particles
     particleFuncs.createBulletShellParticle(shootParticles, humanoid, weapon)
+    --Update firing light
+    Lighter:updateLight(humanoid.firingLight, humanoid.position[1]+weapon.bulletOffset*math.cos(humanoid.rotation), humanoid.position[2]+weapon.bulletOffset*math.sin(humanoid.rotation), 300, 0.98, 0.45, 0.01, 1)
     
     --***player stuff down here***
     if humanoid.name ~= "player" then return end
@@ -410,6 +413,11 @@ function humanoidScript:leaveTrailParticles(humanoid, delta)
     end
 end
 
+function humanoidScript:updateFiringLight(humanoid, delta)
+    humanoid.firingLight.a = humanoid.firingLight.a + (-humanoid.firingLight.a)*8*delta
+    --TODO Enhance this light!
+end
+
 function humanoidScript:humanoidSetup()
     local humanoid = self.parent
     humanoid.imageComponent.source = Assets.images["player_body"]
@@ -441,6 +449,8 @@ function humanoidScript:humanoidSetup()
     humanoid.animationSizeDiff = 0
     humanoid.handOffset = 0
     humanoid.unarmed = false
+    --Light stuff
+    humanoid.firingLight = CurrentScene:addLight(humanoid.position[1], humanoid.position[2], 300, 0.98, 0.45, 0.01, 0)
 end
 
 function humanoidScript:humanoidUpdate(delta, humanoid)
@@ -456,6 +466,7 @@ function humanoidScript:humanoidUpdate(delta, humanoid)
     self:collisionCheck(delta, humanoid)
     self:doWalkingAnim(humanoid)
     self:makeFootstepSounds(humanoid, delta)
+    self:updateFiringLight(humanoid, delta)
     --self:leaveTrailParticles(humanoid, delta)
     if humanoid.health > 0 then return end
     --fade away
@@ -465,6 +476,7 @@ function humanoidScript:humanoidUpdate(delta, humanoid)
     humanoid.hand.imageComponent.color[4] = humanoid.imageComponent.color[4]
     --remove from npc list
     if humanoid.imageComponent.color[4] > 0 or humanoid.name == "player" then return end
+    CurrentScene:removeLight(humanoid.firingLight)
     table.removeValue(CurrentScene.npcs.tree, humanoid)
 end
 

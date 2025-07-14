@@ -44,6 +44,18 @@ function scene.new()
         return light
     end
 
+    function s:removeLight(light)
+        local index = table.contains(self.lights, light, true)
+        Lighter:removeLight(light)
+        table.remove(self.lights, index)
+    end
+
+    function s:removeLightPolygon(polygon)
+        local index = table.contains(self.lightPolygons, polygon, true)
+        Lighter:removePolygon(polygon)
+        table.remove(self.lightPolygons, index)
+    end
+
     function s:addLightPolygon(polygon)
         Lighter:addPolygon(polygon)
         self.lightPolygons[#self.lightPolygons+1] = polygon
@@ -212,7 +224,6 @@ function SetScene(sceneTable)
         --CurrentScene.lightCanvas:release() (crashes?!)
         CurrentScene.tree = nil
         CurrentScene = nil
-        --TODO add polygons for walls after being done with other stuff
     end
     CurrentScene = sceneTable
     CurrentScene:load()

@@ -21,7 +21,7 @@ end
 
 function infiniteScoreNotifs:load()
     self.parent.notifs = {}
-    self.parent.imageComponent.draw = drawNotifs
+    self.parent.UIComponent.draw = drawNotifs
 end
 
 function infiniteScoreNotifs:update(delta)

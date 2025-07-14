@@ -1,5 +1,5 @@
 {
-    "illumination": [0.2, 0.2, 0.2],
+    "illumination": [0, 0, 0],
     "playerData": {
         "position": [0, 0],
         "cameraPosition": [0, 0],
