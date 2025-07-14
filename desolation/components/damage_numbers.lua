@@ -12,7 +12,7 @@ local function drawNumbers(comp)
 end
 
 function damageNumbers:load()
-   self.parent.imageComponent.draw = drawNumbers
+   self.parent.UIComponent.draw = drawNumbers
    self.parent.numbers = {}
 end
 

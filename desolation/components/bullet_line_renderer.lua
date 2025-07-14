@@ -17,7 +17,7 @@ end
 
 function bulletLineRenderer:load()
     self.parent.lines = {}
-    self.parent.imageComponent.draw = drawLines
+    self.parent.UIComponent.draw = drawLines
 end
 
 function bulletLineRenderer:update(delta)

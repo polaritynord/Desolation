@@ -214,6 +214,12 @@ function mapCreator:loadMap(path)
 end
 
 function mapCreator:createExplosion(position, radius, intensity)
+    --add light data
+    if GetGlobal("fullbright") < 1 then
+        self.explosionLights[#self.explosionLights+1] = CurrentScene:addLight(
+            position[1], position[2], 1000, 0.98, 0.45, 0.01, 1
+        )
+    end
     --iterate through props
     for _, prop in ipairs(CurrentScene.props.tree) do
         if prop.script.explosionEvent then prop.script:explosionEvent(position, radius, intensity) end
@@ -248,6 +254,17 @@ function mapCreator:createExplosion(position, radius, intensity)
     SoundManager:restartSound(sound, Settings.vol_world, position, true)
 end
 
+function mapCreator:updateExplosionLights(delta)
+    if GetGlobal("fullbright") > 0 then return end
+    for i, light in ipairs(self.explosionLights) do
+        light.a = light.a - 0.8*delta
+        if light.a <= 0 then
+            table.remove(self.explosionLights, i)
+            CurrentScene:removeLight(light)
+        end
+    end
+end
+
 function mapCreator:load()
     GamePaused = false
     self.parent.propData = love.filesystem.read(GAME_DIRECTORY .. "/assets/props.json")
@@ -256,9 +273,12 @@ function mapCreator:load()
     self.parent.itemData = json.decode(self.parent.itemData)
     self.parent.npcData = love.filesystem.read(GAME_DIRECTORY .. "/assets/npcs.json")
     self.parent.npcData = json.decode(self.parent.npcData)
+    self.explosionLights = {}
 end
 
 function mapCreator:update(delta)
+    self:updateExplosionLights(delta)
+    --Ambience stuff
     local ambienceSource = Assets.mapSounds["ambience"]
     if ambienceSource == nil then return end
     if GamePaused then

@@ -332,7 +332,6 @@ function playerScript:updateLights(delta, player)
         player.flashlight.a = 0
         return
     end
-    --[[ UNUSED FLASHLIGHT FLICKER CODE
     self.lightFlickerTimer = self.lightFlickerTimer + delta
     if not self.lightFlickered and self.lightFlickerTimer > self.lightFlickerTime then
         self.lightFlickered = true
@@ -344,9 +343,9 @@ function playerScript:updateLights(delta, player)
             self.lightFlickerTimer = 0
         end
     end
-    ]]--
-    Lighter:updateLight(player.flashlight, player.position[1]+220*math.cos(player.rotation), player.position[2]+220*math.sin(player.rotation), 400, 1, 1, 1)
-    player.flashlight.a = player.flashlight.a + (0.7-player.flashlight.a)*8*delta
+    local offset = 22
+    Lighter:updateLight(player.flashlight, player.position[1]+offset*math.cos(player.rotation), player.position[2]+offset*math.sin(player.rotation), 10000, 1, 1, 1)
+    player.flashlight.a = 0.7*coreFuncs.boolToNum(not self.lightFlickered)
     player.flashlight.rotation = player.rotation
 end
 
@@ -366,7 +365,7 @@ function playerScript:load()
     player.aimAssistTarget = nil
     --Light variables
     player.primaryLight = CurrentScene:addLight(player.position[1], player.position[3], 500, 0.8, 0.8, 0.8)
-    player.flashlight = CurrentScene:addLight(player.position[1]+154, player.position[2], 800, 1, 1, 1)
+    player.flashlight = CurrentScene:addLight(player.position[1], player.position[2], 100, 1, 1, 1)
     player.flashlight.gradientImage = FlashlightGradientImage
 
     --player.primaryLight = Lighter:addLight(player.position[1], player.position[2], 350, 0.8, 0.8, 0.8)
@@ -384,6 +383,7 @@ function playerScript:update(delta)
 
     if player.health <= 0 then
         player.moveVelocity = {0, 0}
+        player.flashlight.a = 0
         return
     end
     self:movement(delta, player)

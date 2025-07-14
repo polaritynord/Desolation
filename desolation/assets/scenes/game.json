@@ -40,12 +40,17 @@
 
         [
             "bulletLineRenderer",
-            ["imageComponent", "desolation/components/bullet_line_renderer"]
+            ["UIComponent", "desolation/components/bullet_line_renderer"]
         ],
 
         [
             "damageNumbers",
-            ["imageComponent", "desolation/components/damage_numbers"]
+            ["UIComponent", "desolation/components/damage_numbers"]
+        ],
+
+        [
+            "keyHints",
+            ["UIComponent", "desolation/components/ui/key_hints"]
         ],
 
         [

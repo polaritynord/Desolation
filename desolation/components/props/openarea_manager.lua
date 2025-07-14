@@ -124,6 +124,20 @@ function openareaManager:setupUI()
     )
 end
 
+function openareaManager:doDaylightCycle(delta)
+    local speed = 0.1
+    self.daylightTimer = self.daylightTimer + delta
+    CurrentScene.illumination[1] = 0.45*(math.sin(self.daylightTimer*speed))+0.55
+    --Give flashlight hint if not given before
+    if not self.flashlightHintGiven and CurrentScene.illumination[1] < 0.2 then
+        CurrentScene.keyHints.script:addHintToQueue("f")
+        self.flashlightHintGiven = true
+    end
+    --set the other color values as well
+    CurrentScene.illumination[2] = CurrentScene.illumination[1]
+    CurrentScene.illumination[3] = CurrentScene.illumination[1]
+end
+
 function openareaManager:load()
     self.waveTimer = 9
     self.wavePrep = true
@@ -137,6 +151,8 @@ function openareaManager:load()
     self.survivalPointTimer = 0
     self.deathTimer = 0
     self.matchCounted = false
+    self.daylightTimer = 0
+    self.flashlightHintGiven = false
     self:setupUI()
     --Add robot markers object to scene
     local obj = object.new(CurrentScene.hud)
@@ -186,6 +202,7 @@ end
 function openareaManager:update(delta)
     if GamePaused then return end
     local ui = CurrentScene.hud.UIComponent
+    self:doDaylightCycle(delta)
 
     self.waveTimer = self.waveTimer + delta
     --Wave loop
