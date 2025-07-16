@@ -127,7 +127,13 @@
         "images": [
             ["logo", "desolation/assets/images/logo.png"],
             ["nord_transparent", "engine/assets/icon_transparent.png"],
-            ["controller_selection", "desolation/assets/images/hud/hitmarker.png"]
+            ["controller_selection", "desolation/assets/images/hud/hitmarker.png"],
+
+            ["difficulty_1", "desolation/assets/images/difficulty_icons/difficulty_1.png"],
+            ["difficulty_2", "desolation/assets/images/difficulty_icons/difficulty_2.png"],
+            ["difficulty_3", "desolation/assets/images/difficulty_icons/difficulty_3.png"],
+            ["difficulty_4", "desolation/assets/images/difficulty_icons/difficulty_4.png"],
+            ["difficulty_5", "desolation/assets/images/difficulty_icons/difficulty_5.png"]
         ],
 
         "sounds": [

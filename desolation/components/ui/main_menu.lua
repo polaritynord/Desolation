@@ -8,8 +8,6 @@ function mainMenu:loadShaders()
     CurrentScene.uiShader = moonshine.chain(960, 540, moonshine.effects.glow)
     CurrentScene.uiShader.glow.strength = 5
     CurrentScene.uiShader.glow.min_luma = 0.1
-    CurrentScene.gameShader.chain(moonshine.effects.gaussianblur)
-    CurrentScene.gameShader.gaussianblur.sigma = 2.8
 end
 
 function mainMenu:load()
@@ -122,6 +120,8 @@ function mainMenu:load()
     end
     --Cool shader stuff
     self:loadShaders()
+    CurrentScene.gameShader.chain(moonshine.effects.gaussianblur)
+    CurrentScene.gameShader.gaussianblur.sigma = 2.8
 end
 
 function mainMenu:update(delta)

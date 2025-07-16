@@ -21,10 +21,17 @@ function infiniteMenu:load()
             font = "disposable-droid-bold";
         }
     )
+    ui.difficultyIcon = ui:newImage(
+        {
+            source = Assets.images.difficulty_1;
+            position = {20, 214};
+            scale = {1.5, 1.5};
+        }
+    )
     ui.difficultyPicker = ui:newTextButton(
         {
             buttonText = Loca.extrasMenu.infiniteDifficulty .. string.upper(Loca.extrasMenu.infiniteDifficulties[infinite.difficulty]);
-            position = {0, 200};
+            position = {48, 200};
             buttonTextSize = 30;
             hoverEvent = buttonEvents.redHover;
             unhoverEvent = buttonEvents.redUnhover;
@@ -155,6 +162,8 @@ function infiniteMenu:update(delta)
     end
 
     if not ui.enabled then return end
+    --Set difficulty icon
+    ui.difficultyIcon.source = Assets.images["difficulty_" .. infinite.difficulty]
     --Set the difficulty description
     ui.difficultyDescription.text = Loca.extrasMenu.difficultyDescs[infinite.difficulty]
     if infinite.difficulty == #Loca.extrasMenu.infiniteDifficulties then
