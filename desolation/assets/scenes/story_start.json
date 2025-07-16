@@ -1,0 +1,17 @@
+{
+    "name": "Story Start",
+    "backgroundColor": [0, 0, 0],
+    "tree": [
+        ["camera", []],
+
+        [
+            "cursor",
+            ["UIComponent", "desolation/components/game_cursor_script"]
+        ],
+
+        [
+            "storyInception",
+            ["particleComponent", "UIComponent", "desolation/components/ui/story_start"]
+        ]
+    ]
+}

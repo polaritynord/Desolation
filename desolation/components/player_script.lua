@@ -343,7 +343,7 @@ function playerScript:updateLights(delta, player)
             self.lightFlickerTimer = 0
         end
     end
-    local offset = 22
+    local offset = 20
     Lighter:updateLight(player.flashlight, player.position[1]+offset*math.cos(player.rotation), player.position[2]+offset*math.sin(player.rotation), 10000, 1, 1, 1)
     player.flashlight.a = 0.7*coreFuncs.boolToNum(not self.lightFlickered)
     player.flashlight.rotation = player.rotation

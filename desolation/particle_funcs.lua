@@ -184,4 +184,16 @@ function particleFuncs.createHumanoidTrailParticle(comp, humanoid)
     )
 end
 
+function particleFuncs.createStoryStartParticles(comp)
+    local scale = math.uniform(2, 5)
+    comp:newParticle(
+        {
+            position = {math.uniform(0, 960), math.uniform(0, 540)};
+            size = {scale, scale};
+            despawnTime = math.uniform(4, 6);
+            rotation = math.uniform(0, 2*math.pi);
+        }
+    )
+end
+
 return particleFuncs

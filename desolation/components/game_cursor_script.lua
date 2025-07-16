@@ -3,7 +3,7 @@ local gameCursorScript = ENGINE_COMPONENTS.scriptComponent.new()
 
 function gameCursorScript:setCursorImage()
     --Hide cursor if a controller is being used & return
-    love.mouse.setVisible(InputManager.inputType ~= "joystick")
+    love.mouse.setVisible(InputManager.inputType ~= "joystick" and CurrentScene.name ~= "Story Start")
     if not love.mouse.isVisible() then return end
     --Set to default cursor if the game is paused or the player isn't in the game at all
     if CurrentScene.name ~= "Game" or GamePaused then

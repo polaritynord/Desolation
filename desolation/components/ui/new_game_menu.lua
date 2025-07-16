@@ -1,4 +1,5 @@
-local newGameMenu = {}
+local buttonEvents = require("desolation.button_clickevents")
+local newGameMenu = ENGINE_COMPONENTS.scriptComponent.new()
 
 function newGameMenu:load()
     local menu = self.parent
@@ -13,11 +14,17 @@ function newGameMenu:load()
             font = "disposable-droid-bold";
         }
     )
-    ui.nameText = ui:newTextLabel(
+    ui.startButton = ui:newTextButton(
         {
-            text = "";
-            size = 30;
+            buttonText = "Temporary button to start new one!";
             position = {0, 200};
+            buttonTextSize = 30;
+            hoverEvent = buttonEvents.redHover;
+            unhoverEvent = buttonEvents.redUnhover;
+            clickEvent = function ()
+                local scene = LoadScene("desolation/assets/scenes/story_start.json")
+                SetScene(scene)
+            end
         }
     )
     ui.returnButton = ui:newTextButton(

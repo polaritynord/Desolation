@@ -16,7 +16,7 @@
     "camera_sway": true,
     "screen_shake": true,
     "always_sprint": false,
-    "curved_hud": true,
+    "curved_hud": false,
     "first_time_playing": true,
     "sprint_type": "hold",
     "menu_background": "dyn_menu",
