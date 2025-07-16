@@ -180,6 +180,12 @@ function mapCreator:loadMap(path)
             self:spawnNPC(v)
         end
     end
+    --load lights
+    if data.lights ~= nil then
+        for _, light in ipairs(data.lights) do --x, y, radius, r, g, b, a
+            CurrentScene:addLight(unpack(light))
+        end
+    end
     --player data
     if CurrentScene.player == nil then return end
     local player = CurrentScene.player

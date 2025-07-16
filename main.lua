@@ -16,6 +16,7 @@ RealMenuUIOffset = 0
 CurrentScene = nil
 GamePaused = false
 Scenes = {}
+OldSceneName = ""
 
 function love.mousemoved()
     InputManager:setInputTypeTo("keyboard")
@@ -295,6 +296,6 @@ function love.update(delta)
 end
 
 function love.draw()
-    if not CurrentScene then return end
+    if CurrentScene == nil or CurrentScene.name ~= OldSceneName then return end
     CurrentScene:draw()
 end

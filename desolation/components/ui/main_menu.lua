@@ -20,6 +20,7 @@ function mainMenu:load()
             source = Assets.images.logo;
             position = {320, 100};
             scale = {2.5, 2.5};
+            color = {1, 1, 1, 0};
         }
     )
     ui.newGameButton = ui:newTextButton(
@@ -28,6 +29,7 @@ function mainMenu:load()
             buttonText = Loca.mainMenu.newGame;
             buttonTextSize = 30;
             clickEvent = clickEvents.newGameButtonClick;
+            color = {1, 1, 1, 0};
         }
     )
     ui.loadGameButton = ui:newTextButton(
@@ -36,6 +38,7 @@ function mainMenu:load()
             buttonText = Loca.mainMenu.loadGame;
             buttonTextSize = 30;
             clickEvent = clickEvents.loadGameButtonClick;
+            color = {1, 1, 1, 0};
         }
     )
     --[[
@@ -54,6 +57,7 @@ function mainMenu:load()
             buttonText = Loca.mainMenu.extra;
             buttonTextSize = 30;
             clickEvent = clickEvents.extrasButtonClick;
+            color = {1, 1, 1, 0};
         }
     )
     ui.achievementsButton = ui:newTextButton(
@@ -62,6 +66,7 @@ function mainMenu:load()
             buttonText = Loca.mainMenu.achievements;
             buttonTextSize = 30;
             clickEvent = clickEvents.achievementsButtonClick;
+            color = {1, 1, 1, 0};
         }
     )
     ui.settingsButton = ui:newTextButton(
@@ -70,6 +75,7 @@ function mainMenu:load()
             buttonText = Loca.mainMenu.settings;
             buttonTextSize = 30;
             clickEvent = clickEvents.settingsButtonClick;
+            color = {1, 1, 1, 0};
         }
     )
     ui.changelogButton = ui:newTextButton(
@@ -78,6 +84,7 @@ function mainMenu:load()
             buttonText = Loca.mainMenu.changelog;
             buttonTextSize = 30;
             clickEvent = clickEvents.changelogButtonClick;
+            color = {1, 1, 1, 0};
         }
     )
     ui.quitButton = ui:newTextButton(
@@ -86,6 +93,7 @@ function mainMenu:load()
             buttonText = Loca.mainMenu.quit;
             buttonTextSize = 30;
             clickEvent = clickEvents.quitButtonClick;
+            color = {1, 1, 1, 0};
         }
     )
     ui.controllerButtons = {ui.newGameButton, ui.loadGameButton, ui.extrasButton, ui.achievementsButton, ui.settingsButton, ui.changelogButton, ui.quitButton}
@@ -96,15 +104,18 @@ function mainMenu:load()
             source = Assets.images["nord_transparent"];
             position = {920, 510};
             scale = {0.5, 0.5};
+            color = {1, 1, 1, 0};
         }
     )
     ui.version = ui:newTextLabel(
         {
             text = GAME_VERSION_STATE .. " " .. GAME_VERSION;
             position = {5, 512.5};
-            font = "disposable-droid"
+            font = "disposable-droid";
+            color = {1, 1, 1, 0};
         }
     )
+    self.appearCooldown = 0.5
     --initial loading stuff
     if CurrentScene.mapCreator ~= nil then
         CurrentScene.mapCreator.script:loadMap("desolation/assets/maps/" .. Settings.menu_background .. ".json")
@@ -121,6 +132,20 @@ function mainMenu:update(delta)
     self.parent.position[1] = MenuUIOffset
     ui.polarity.position[1] = 920 - MenuUIOffset
     ui.version.position[1] = 5 - MenuUIOffset
+    --Slowly increase alpha of all elements & illumination of scene
+    if self.appearCooldown <= 0 then
+        for _, element in ipairs(ui.elements) do
+            element.color[4] = element.color[4] + delta*0.7
+            if element.color[4] > 1 then element.color[4] = 1 end
+        end
+        local ilumSpeed = 0.3
+        CurrentScene.illumination[1] = CurrentScene.illumination[1] + ilumSpeed*delta
+        CurrentScene.illumination[2] = CurrentScene.illumination[1]
+        CurrentScene.illumination[3] = CurrentScene.illumination[1]
+        if CurrentScene.illumination[1] > 0.7 then CurrentScene.illumination[1] = 0.7 end
+    else
+        self.appearCooldown = self.appearCooldown - delta
+    end
     --Are you sure text
     if ui.quitButton.buttonText == Loca.mainMenu.quitConfirmation then
         ui.quitButton.confirmTimer = ui.quitButton.confirmTimer - delta

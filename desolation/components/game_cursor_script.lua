@@ -18,7 +18,7 @@ function gameCursorScript:setCursorImage()
     end
 end
 
-function gameCursorScript:controllerNavigation(ui)
+function gameCursorScript:controllerNavigation(ui, delta)
     --CONTROLLER ARROW CODE DOWN HERE:
     --Update current menu (TODO Game pause menu to be added later)
     if AltMenuOpen then
@@ -153,7 +153,7 @@ function gameCursorScript:update(delta)
     local ui = self.parent.UIComponent
     --Smoothly hide the controller notification
     ui.controllerNotif.color[4] = ui.controllerNotif.color[4] + (-ui.controllerNotif.color[4])*4*delta
-    self:controllerNavigation(ui)
+    self:controllerNavigation(ui, delta)
     self:setCursorImage()
 end
 
