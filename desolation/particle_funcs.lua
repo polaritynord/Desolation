@@ -185,15 +185,26 @@ function particleFuncs.createHumanoidTrailParticle(comp, humanoid)
 end
 
 function particleFuncs.createStoryStartParticles(comp)
-    local scale = math.uniform(2, 5)
-    comp:newParticle(
+    local scale = math.uniform(1, 3)
+    local particle = comp:newParticle(
         {
             position = {math.uniform(0, 960), math.uniform(0, 540)};
             size = {scale, scale};
-            despawnTime = math.uniform(4, 6);
+            despawnTime = math.uniform(5, 8);
             rotation = math.uniform(0, 2*math.pi);
+            color = {1, 1, 1, 0};
+            update = function (particle, delta)
+                local mult = 0.3
+                if particle.timer > particle.despawnTime/2 then mult = -mult end
+                particle.color[4] = particle.color[4] + mult*delta
+                particle.position[1] = particle.position[1] + particle.velocity[1]*delta
+                particle.position[2] = particle.position[2] + particle.velocity[2]*delta
+                particle.velocity[1] = particle.velocity[1] + (-particle.velocity[1])*0.5*delta
+                particle.velocity[2] = particle.velocity[2] + (-particle.velocity[2])*0.5*delta
+            end
         }
     )
+    particle.velocity = {math.uniform(-50, 50), math.uniform(-50, 50)}
 end
 
 return particleFuncs

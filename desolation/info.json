@@ -3,6 +3,6 @@
     "author": "Polaritynord",
     "version": "1.5.dev1",
     "versionState": "alpha",
-    "startScene": "desolation/assets/scenes/startup.json",
+    "startScene": "desolation/assets/scenes/story_start.json",
     "icon": "desolation/assets/images/icon.png"
 }
