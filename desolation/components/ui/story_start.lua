@@ -1,6 +1,14 @@
 local particleFuncs = require("desolation.particle_funcs")
 local storyStart = ENGINE_COMPONENTS.scriptComponent.new()
 
+function storyStart:startSpeak(text, emphasises)
+    self.speechTimer = 0
+    self.weirdFontTimer = 0
+    self.emphasisIndexes = emphasises or {}
+    self.speechText = text or "I WOKE YOU UP FOR A REASON"
+    self.speechIndex = 1
+end
+
 function storyStart:load()
     local ui = self.parent.UIComponent
     ui.speechTextLabel = ui:newTextLabel(
@@ -13,21 +21,23 @@ function storyStart:load()
         }
     )
     self.speechIndex = 1
-    self.speechText = "HELLO, AIDEN WILLIAMS."
-    self.emphasisIndexes = {{7, 0.5}, {13, 0.3}} --{INDEX, DURATION}
+    self.speechText = ""
+    self.emphasisIndexes = {} --{INDEX, DURATION}
+    self.weirdFontTimer = 0
     self.speechTimer = 0
     self.particleTimer = 0
     --Create some particles for startup
-    for i = 1, 500 do
+    for _ = 1, 500 do
         particleFuncs.createStoryStartParticles(self.parent.particleComponent)
     end
     CurrentScene.camera.position = {480, 270}
+    self:startSpeak()
 end
 
 function storyStart:update(delta)
     local ui = self.parent.UIComponent
     --Background particles
-    local particleCooldown = 0.1
+    local particleCooldown = 0.05
     if self.particleTimer > particleCooldown then
         particleFuncs.createStoryStartParticles(self.parent.particleComponent)
         self.particleTimer = 0
@@ -35,7 +45,7 @@ function storyStart:update(delta)
     self.particleTimer = self.particleTimer + delta
     --Speech
     local speed = 0.07
-    if self.speechTimer > speed then
+    if self.speechTimer > speed and self.speechIndex <= self.speechText:len() then
         --skip spaces
         if string.sub(self.speechText, self.speechIndex, self.speechIndex) == " " then
             ui.speechTextLabel.text = ui.speechTextLabel.text .. string.sub(self.speechText, self.speechIndex, self.speechIndex)
@@ -50,8 +60,19 @@ function storyStart:update(delta)
                 self.speechTimer = self.speechTimer - emphasis[2]
             end
         end
+        --play sound
+        SoundManager:restartSound(Assets.sounds.speak_sfx, Settings.vol_sfx)
+    end
+    --Switch to weird font every now and then (TODO Improve)
+    if self.weirdFontTimer > 1 then
+        ui.speechTextLabel.font = "pryonkalsov"
+        if self.weirdFontTimer > 1.1 then
+            ui.speechTextLabel.font = "white-rabbit"
+            self.weirdFontTimer = 0
+        end
     end
     self.speechTimer = self.speechTimer + delta
+    self.weirdFontTimer = self.weirdFontTimer + delta
 end
 
 return storyStart

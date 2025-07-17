@@ -1,6 +1,6 @@
 {
     "name": "Main Menu",
-    "backgroundColor": [0.2, 0.2, 0.2],
+    "backgroundColor": [0, 0, 0],
     "tree": [
         [
             "camera", []

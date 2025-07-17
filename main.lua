@@ -278,12 +278,20 @@ function love.load()
     love.keyboard.setKeyRepeat(true)
     love.window.setVSync(Settings.vsync)
 
-    --Open up the default scene
+    --Open up the default scene (or the scene given in args)
     local infoData = json.decode(love.filesystem.read(GAME_DIRECTORY .. "/info.json"))
-    local startScene = LoadScene(infoData.startScene)
+    local startScene = nil
+    if table.contains(arg, "--scene") then
+        local i = table.contains(arg, "--scene", true)
+        startScene = LoadScene(GAME_DIRECTORY .. "/assets/scenes/" .. arg[i+1] .. ".json")
+    else
+        startScene = LoadScene(infoData.startScene)
+    end
+    --[[
     if startScene.name == "Intro" and table.contains(arg, "--skip-intro") then
         startScene = LoadScene("desolation/assets/scenes/main_menu2.json")
     end
+    ]]--
     SetScene(startScene)
 end
 
@@ -296,6 +304,10 @@ function love.update(delta)
 end
 
 function love.draw()
-    if CurrentScene == nil or CurrentScene.name ~= OldSceneName then return end
+    if CurrentScene == nil then return end
+    if CurrentScene.name ~= OldSceneName then
+        OldSceneName = CurrentScene.name
+        return
+    end
     CurrentScene:draw()
 end

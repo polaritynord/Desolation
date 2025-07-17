@@ -226,7 +226,6 @@ function SetScene(sceneTable)
         CurrentScene = nil
     end
     CurrentScene = sceneTable
-    OldSceneName = CurrentScene.name
     CurrentScene:load()
 end
 

@@ -13,5 +13,11 @@
             "storyInception",
             ["particleComponent", "UIComponent", "desolation/components/ui/story_start"]
         ]
-    ]
+    ],
+
+    "assets": {
+        "sounds": [
+            ["speak_sfx", "desolation/assets/sounds/speak_sfx.wav", "static"]
+        ]
+    }
 }

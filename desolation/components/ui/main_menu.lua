@@ -113,7 +113,7 @@ function mainMenu:load()
             color = {1, 1, 1, 0};
         }
     )
-    self.appearCooldown = 0--0.5
+    self.appearCooldown = 0.5
     --initial loading stuff
     if CurrentScene.mapCreator ~= nil then
         CurrentScene.mapCreator.script:loadMap("desolation/assets/maps/" .. Settings.menu_background .. ".json")
