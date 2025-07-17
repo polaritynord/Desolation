@@ -9,6 +9,8 @@ function particleComponent.new(parent)
         particles = {};
         enabled = true;
         layer = 3;
+        color = {1, 1, 1, 1};
+        combineColors = false;
     }
 
     function component:newParticle(attributes)
@@ -45,19 +47,23 @@ function particleComponent.new(parent)
         local objPos = self.parent.position
         local camera = CurrentScene.camera
         for _, particle in ipairs(self.particles) do
+            local color = particle.color
+            if self.combineColors then
+                color = coreFuncs.combineColors(particle.color, self.color)
+            end
             local offsettedPos = {particle.position[1]+objPos[1], particle.position[2]+objPos[2]}
             local relativePos = coreFuncs.getRelativePosition(offsettedPos, camera)
 
             if particle.type == "rect" then
                 love.graphics.push()
-                    love.graphics.setColor(particle.color)
+                    love.graphics.setColor(color)
                     love.graphics.translate(relativePos[1], relativePos[2])
                     love.graphics.rotate(particle.rotation+self.parent.rotation)
                     love.graphics.rectangle("fill", -particle.size[1]/2*camera.zoom, -particle.size[2]/2*camera.zoom, particle.size[1]*camera.zoom, particle.size[2]*camera.zoom)
                     love.graphics.setColor(1, 1, 1, 1)
                 love.graphics.pop()
             elseif particle.type == "image" then
-                love.graphics.setColor(particle.color)
+                love.graphics.setColor(color)
                 local src = particle.sourceImage
                 local width = src:getWidth() ;  local height = src:getHeight()
                 love.graphics.draw(
@@ -67,7 +73,7 @@ function particleComponent.new(parent)
                 love.graphics.setColor(1, 1, 1, 1)
             elseif particle.type == "circle" then
                 love.graphics.push()
-                    love.graphics.setColor(particle.color)
+                    love.graphics.setColor(color)
                     love.graphics.translate(relativePos[1], relativePos[2])
                     love.graphics.rotate(particle.rotation+self.parent.rotation)
                     love.graphics.circle("fill", 0, 0, particle.size[1])

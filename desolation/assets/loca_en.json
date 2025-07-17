@@ -1,4 +1,35 @@
 {
+    "story": {
+        "beginningSpeech": [
+            "...",
+            "HELLO, AIDEN WILLIAMS.",
+            "PLEASE KEEP CALM. YOU ARE STILL ASLEEP.",
+            "...IN HIBERNATION.",
+            "WE WILL WAKE YOU UP SHORTLY. UNTIL THEN...",
+            "PLEASE... LISTEN CAREFULLY.",
+            "...",
+            "WHEN YOU OPEN YOUR EYES,",
+            "AND START TO SEARCH YOUR SURROUNDINGS...",
+            "YOU WILL SEE THAT, YOUR SITUATION...",
+            "IS RATHER...",
+            "DIRE.",
+            "UNFORTUNATELY, WE CAN DO NOTHING MUCH IN THAT REGARD.",
+            "BUT, KNOW THAT...",
+            "WE WILL BE WITH YOU.",
+            "YOU WILL NOT BE ALONE IN YOUR JOURNEY TO FREEDOM.",
+            "...",
+            "WE WISH YOU GOOD LUCK, AIDEN.",
+            "UNTIL WE MEET AGAIN,",
+            "KEEP THIS IN MIND AT ALL TIMES:",
+            "WE WOKE YOU UP FOR A REASON"
+        ],
+
+        "begSpeechEmphasises": [
+            [
+                [1, 100]
+            ]
+        ]
+    },
     "mainMenu": {
         "campaign": "Story Mode",
         "newGame": "NEW GAME",

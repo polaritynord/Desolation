@@ -1,6 +1,15 @@
 local json = require "engine.lib.json"
 local coreFuncs = {}
 
+function coreFuncs.combineColors(color1, color2)
+    return {
+        (color1[1]+color2[1])/2,
+        (color1[2]+color2[2])/2,
+        (color1[3]+color2[3])/2,
+        (color1[4]+color2[4])/2
+    }
+end
+
 function coreFuncs.totalLineCount(filePath)
     local ctr = 0
     for _ in io.lines(filePath) do
