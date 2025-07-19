@@ -16,7 +16,7 @@ function newGameMenu:load()
     )
     ui.startButton = ui:newTextButton(
         {
-            buttonText = "Temporary button to start new one!";
+            buttonText = "Temporary Button";
             position = {0, 200};
             buttonTextSize = 30;
             hoverEvent = buttonEvents.redHover;
@@ -39,7 +39,7 @@ function newGameMenu:load()
             bindedKey = "escape";
         }
     )
-    ui.controllerButtons = {ui.returnButton}
+    ui.controllerButtons = {ui.startButton, ui.returnButton}
 end
 
 function newGameMenu:update(delta)

@@ -14,14 +14,14 @@ function storyStart:load()
         {
             text = "";
             size = 30;
-            font = "white-rabbit";
+            font = "press-start";
             begin = "center";
-            position = {250, 270};
+            position = {225, 270};
             wrapLimit = 500;
         }
     )
     --god i suck at naming variables
-    self.currentStringIndex = 1
+    self.currentStringIndex = 21
     self.speechIndex = 1
     self.speechText = ""
     self.emphasisIndexes = {} --{INDEX, DURATION}
@@ -48,16 +48,22 @@ function storyStart:update(delta)
         self.particleTimer = 0
     end
     self.particleTimer = self.particleTimer + delta
-    if self.reachedSpeechEnd then
-        local speed = 0.5
+    if self.currentStringIndex >= #Loca.story.beginningSpeech then
+        local speed = 0.2
         self.bgColor = self.bgColor + speed*delta
+        if self.bgColor > 1.08 then
+            love.event.quit()
+        end
         love.graphics.setBackgroundColor(self.bgColor, self.bgColor, self.bgColor)
         ui.speechTextLabel.color = {particleComp.color[1], particleComp.color[2], particleComp.color[3], 1}
-        return
     end
     --Speech
     local speed = 0.07
-    if self.speechTimer > speed then
+    if self.speechTimer > speed and not self.reachedSpeechEnd then
+        --reset text if a new string is being spoken
+        if self.speechIndex == 1 then
+            ui.speechTextLabel.text = ""
+        end
         --skip spaces
         if string.sub(self.speechText, self.speechIndex, self.speechIndex) == " " then
             ui.speechTextLabel.text = ui.speechTextLabel.text .. string.sub(self.speechText, self.speechIndex, self.speechIndex)
@@ -65,7 +71,6 @@ function storyStart:update(delta)
         end
         ui.speechTextLabel.text = ui.speechTextLabel.text .. string.sub(self.speechText, self.speechIndex, self.speechIndex)
         self.speechTimer = 0
-        self.speechIndex = self.speechIndex + 1
         --check if emphasis needs to be done
         if Loca.story.begSpeechEmphasises[self.currentStringIndex] ~= nil then
             for _, emphasis in ipairs(Loca.story.begSpeechEmphasises[self.currentStringIndex]) do
@@ -74,6 +79,7 @@ function storyStart:update(delta)
                 end
             end
         end
+        self.speechIndex = self.speechIndex + 1
         --check if it reached the end of string
         if self.speechIndex > self.speechText:len()+1 then
             self.currentStringIndex = self.currentStringIndex + 1
@@ -83,7 +89,7 @@ function storyStart:update(delta)
             else
                 --Move on to the next one
                 self:startSpeak(Loca.story.beginningSpeech[self.currentStringIndex])
-                ui.speechTextLabel.text = ""
+                --ui.speechTextLabel.text = ""
                 self.speechTimer = -1
             end
         end
@@ -91,13 +97,13 @@ function storyStart:update(delta)
         SoundManager:restartSound(Assets.sounds.speak_sfx, Settings.vol_sfx)
     end
     --Switch to weird font every now and then (TODO Improve)
-    if self.weirdFontTimer > 1 then
-        ui.speechTextLabel.font = "pryonkalsov"
-        if self.weirdFontTimer > 1.1 then
-            ui.speechTextLabel.font = "white-rabbit"
-            self.weirdFontTimer = 0
-        end
-    end
+    --if self.weirdFontTimer > 1 then
+    --    ui.speechTextLabel.font = "pryonkalsov"
+    --    if self.weirdFontTimer > 1.1 then
+    --        ui.speechTextLabel.font = "white-rabbit"
+    --        self.weirdFontTimer = 0
+    --    end
+    --end
     self.speechTimer = self.speechTimer + delta
     self.weirdFontTimer = self.weirdFontTimer + delta
 end

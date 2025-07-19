@@ -3,8 +3,8 @@
         "beginningSpeech": [
             "...",
             "HELLO, AIDEN WILLIAMS.",
-            "PLEASE KEEP CALM. YOU ARE STILL ASLEEP.",
-            "...IN HIBERNATION.",
+            "PLEASE STAY CALM. YOU ARE STILL ASLEEP.",
+            "IN HIBERNATION.",
             "WE WILL WAKE YOU UP SHORTLY. UNTIL THEN...",
             "PLEASE... LISTEN CAREFULLY.",
             "...",
@@ -16,7 +16,7 @@
             "UNFORTUNATELY, WE CAN DO NOTHING MUCH IN THAT REGARD.",
             "BUT, KNOW THAT...",
             "WE WILL BE WITH YOU.",
-            "YOU WILL NOT BE ALONE IN YOUR JOURNEY TO FREEDOM.",
+            "YOU WILL NOT BE ALONE ON YOUR JOURNEY TO FREEDOM.",
             "...",
             "WE WISH YOU GOOD LUCK, AIDEN.",
             "UNTIL WE MEET AGAIN,",
@@ -26,7 +26,53 @@
 
         "begSpeechEmphasises": [
             [
-                [1, 100]
+                [1, 0.4], [2, 0.4], [3, 0.4]
+            ],
+            [
+                [6, 0.4], [12, 0.3]
+            ],
+            [
+                [17, 0.6]
+            ],
+            [],
+            [
+                [28, 0.6]
+            ],
+            [
+                [9, 0.6]
+            ],
+            [
+                [1, 0.4], [2, 0.4], [3, 0.4]
+            ],
+            [],
+            [],
+            [
+               [18, 0.6] 
+            ],
+            [],
+            [],
+            [
+                [14, 0.6]
+            ],
+            [
+                [4, 0.6]
+            ],
+            [],
+            [],
+            [
+                [1, 0.4], [2, 0.4], [3, 0.4]
+            ],
+            [
+                [22, 0.4]
+            ],
+            [],
+            [
+                [17, 0.6]
+            ],
+            [
+                [2, 0.3], [7, 0.3], [11, 0.3],
+                [14, 0.3], [18, 0.3], [20, 0.3],
+                [27, 0.3]
             ]
         ]
     },

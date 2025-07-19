@@ -1,4 +1,81 @@
 {
+    "story": {
+        "beginningSpeech": [
+            "...",
+            "HELLO, AIDEN WILLIAMS.",
+            "PLEASE STAY CALM. YOU ARE STILL ASLEEP.",
+            "IN HIBERNATION.",
+            "WE WILL WAKE YOU UP SHORTLY. UNTIL THEN...",
+            "PLEASE... LISTEN CAREFULLY.",
+            "...",
+            "WHEN YOU OPEN YOUR EYES,",
+            "AND START TO SEARCH YOUR SURROUNDINGS...",
+            "YOU WILL SEE THAT, YOUR SITUATION...",
+            "IS RATHER...",
+            "DIRE.",
+            "UNFORTUNATELY, WE CAN DO NOTHING MUCH IN THAT REGARD.",
+            "BUT, KNOW THAT...",
+            "WE WILL BE WITH YOU.",
+            "YOU WILL NOT BE ALONE ON YOUR JOURNEY TO FREEDOM.",
+            "...",
+            "WE WISH YOU GOOD LUCK, AIDEN.",
+            "UNTIL WE MEET AGAIN,",
+            "KEEP THIS IN MIND AT ALL TIMES:",
+            "WE WOKE YOU UP FOR A REASON"
+        ],
+
+        "begSpeechEmphasises": [
+            [
+                [1, 0.4], [2, 0.4], [3, 0.4]
+            ],
+            [
+                [6, 0.4], [12, 0.3]
+            ],
+            [
+                [17, 0.6]
+            ],
+            [],
+            [
+                [28, 0.6]
+            ],
+            [
+                [9, 0.6]
+            ],
+            [
+                [1, 0.4], [2, 0.4], [3, 0.4]
+            ],
+            [],
+            [],
+            [
+               [18, 0.6] 
+            ],
+            [],
+            [],
+            [
+                [14, 0.6]
+            ],
+            [
+                [4, 0.6]
+            ],
+            [],
+            [],
+            [
+                [1, 0.4], [2, 0.4], [3, 0.4]
+            ],
+            [
+                [22, 0.4]
+            ],
+            [],
+            [
+                [17, 0.6]
+            ],
+            [
+                [2, 0.3], [7, 0.3], [11, 0.3],
+                [14, 0.3], [18, 0.3], [20, 0.3],
+                [27, 0.3]
+            ]
+        ]
+    },
     "mainMenu": {
         "campaign": "Hikaye Modu",
         "newGame": "YENİ OYUN",
