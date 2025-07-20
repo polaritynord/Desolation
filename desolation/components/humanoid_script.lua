@@ -383,11 +383,12 @@ function humanoidScript:humanoidShootWeapon(weapon)
 end
 
 function humanoidScript:makeFootstepSounds(humanoid, delta)
+    if humanoid.steppingOnMaterial == nil then return end
     --footstep sounds
     if humanoid.moving then
         self.stepTimer = self.stepTimer + delta
         if self.stepTimer > 0.4 - coreFuncs.boolToNum(humanoid.sprinting)*0.15 then
-            SoundManager:restartSound(Assets.mapSounds["step_grass" .. math.random(1, 4)], Settings.vol_world, humanoid.position, true)
+            SoundManager:restartSound(Assets.mapSounds["step_" .. humanoid.steppingOnMaterial .. math.random(1, 4)], Settings.vol_world, humanoid.position, true)
             self.stepTimer = 0
         end
     else
@@ -430,6 +431,7 @@ function humanoidScript:humanoidSetup()
     humanoid.reloading = false
     humanoid.moving = false
     humanoid.sprinting = false
+    humanoid.steppingOnMaterial = nil
     humanoid.inventory = {
         weapons = {nil, nil, nil};
         items = {};

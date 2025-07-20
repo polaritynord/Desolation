@@ -69,6 +69,11 @@
         ],
 
         [
+            "chapterTitle",
+            ["UIComponent", "desolation/components/ui/chapter_title"]
+        ],
+
+        [
             "debugMenu",
             ["UIComponent", "desolation/components/ui/debug_menu"]
         ],

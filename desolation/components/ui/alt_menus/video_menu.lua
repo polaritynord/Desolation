@@ -218,7 +218,7 @@ function videoMenu:update(delta)
     --Settings.brightness = ui.brightnessSlider.value
     --quitting when using controller
     if InputManager:isPressed("return") then
-        UpdateControllerHints("menu_normal")
+        --UpdateControllerHints("menu_normal")
         settings.menu = nil
     end
 end

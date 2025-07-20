@@ -1,9 +1,9 @@
 {
     "brightness": 1,
     "vol_master": 1,
-    "vol_music": 1,
-    "vol_world": 1,
-    "vol_sfx": 1,
+    "vol_music": 0.75,
+    "vol_world": 0.25,
+    "vol_sfx": 0.5,
     "vignette": 1,
     "sensivity": 1,
     "language": "en",

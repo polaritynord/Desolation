@@ -41,11 +41,6 @@
         ],
 
         [
-            "controllerHints",
-            ["UIComponent", "desolation/components/controller_hints_script"]
-        ],
-
-        [
             "mainMenu",
             ["UIComponent", "desolation/components/ui/main_menu"]
         ],

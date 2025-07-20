@@ -28,10 +28,10 @@ function settings:load()
             clickEvent = function()
                 if s.menu == "gameplay" then
                     s.menu = nil
-                    UpdateControllerHints("menu_normal")
+                    --UpdateControllerHints("menu_normal")
                 else
                     s.menu = "gameplay"
-                    UpdateControllerHints("menu_withreturn")
+                    --UpdateControllerHints("menu_withreturn")
                 end
             end;
         }
@@ -44,10 +44,10 @@ function settings:load()
             clickEvent = function()
                 if s.menu == "video" then
                     s.menu = nil
-                    UpdateControllerHints("menu_normal")
+                    --UpdateControllerHints("menu_normal")
                 else
                     s.menu = "video"
-                    UpdateControllerHints("menu_withreturn")
+                    --UpdateControllerHints("menu_withreturn")
                 end
             end;
         }
@@ -60,10 +60,10 @@ function settings:load()
             clickEvent = function()
                 if s.menu == "audio" then
                     s.menu = nil
-                    UpdateControllerHints("menu_normal")
+                    --UpdateControllerHints("menu_normal")
                 else
                     s.menu = "audio"
-                    UpdateControllerHints("menu_sliders")
+                    --UpdateControllerHints("menu_sliders")
                 end
             end;
         }
@@ -76,10 +76,10 @@ function settings:load()
             clickEvent = function()
                 if s.menu == "keys" then
                     s.menu = nil
-                    UpdateControllerHints("menu_normal")
+                    --UpdateControllerHints("menu_normal")
                 else
                     s.menu = "keys"
-                    UpdateControllerHints("menu_withreturn")
+                    --UpdateControllerHints("menu_withreturn")
                 end
             end;
         }
@@ -120,7 +120,7 @@ function settings:load()
                 s.menu = nil
                 Settings = table.new(s.preview)
                 love.filesystem.write("settings.json", json.encode(Settings))
-                UpdateControllerHints("menu_normal")
+                --UpdateControllerHints("menu_normal")
             end;
             bindedKey = "escape";
         }

@@ -187,7 +187,7 @@ function infiniteMenu:update(delta)
     --quitting when using controller
     if InputManager:isPressed("return") then
         menu.selection = nil
-        UpdateControllerHints("menu_normal")
+        --UpdateControllerHints("menu_normal")
     end
 end
 

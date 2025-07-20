@@ -26,10 +26,7 @@
         ["test_gray", [7, -9], [4, 1]]
     ],
     "tiles": [
-        ["prototype_black", 0, 0],
-        ["prototype_black", 1, 0],
-        ["prototype_black", 1, 1],
-        ["prototype_black", 0, 1]
+        ["prototype_black", 0, 0]
     ],
     "props": [],
     "items": [],
@@ -42,7 +39,12 @@
             ["tile_prototype_black", "desolation/assets/images/tiles/prototype_black.png"]
         ],
         "sounds": [
-            ["ambience", "desolation/assets/sounds/ost/dormitory_ambience.wav", "stream"]
+            ["ambience", "desolation/assets/sounds/ost/dormitory_ambience.wav", "stream"],
+            
+            ["step_concrete1", "desolation/assets/sounds/footstep/concrete1.wav", "static"],
+            ["step_concrete2", "desolation/assets/sounds/footstep/concrete2.wav", "static"],
+            ["step_concrete3", "desolation/assets/sounds/footstep/concrete3.wav", "static"],
+            ["step_concrete4", "desolation/assets/sounds/footstep/concrete4.wav", "static"]
         ]
     }
 }

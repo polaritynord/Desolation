@@ -202,7 +202,7 @@ function gameplayMenu:update(delta)
     --quitting when using controller
     if InputManager:isPressed("return") then
         settings.menu = nil
-        UpdateControllerHints("menu_normal")
+        --UpdateControllerHints("menu_normal")
     end
 end
 

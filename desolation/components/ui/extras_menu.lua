@@ -42,10 +42,10 @@ function extrasMenu:load()
             clickEvent = function ()
                 if menu.selection == "infinite" then
                     menu.selection = nil
-                    UpdateControllerHints("menu_normal")
+                    --UpdateControllerHints("menu_normal")
                 else
                     menu.selection = "infinite"
-                    UpdateControllerHints("menu_sliders")
+                    --UpdateControllerHints("menu_sliders")
                 end
             end;
             hoverEvent = function (element)
@@ -93,7 +93,7 @@ function extrasMenu:load()
             clickEvent = function()
                 menu.open = false
                 menu.selection = nil
-                UpdateControllerHints("menu_normal")
+                --UpdateControllerHints("menu_normal")
             end;
             bindedKey = "escape";
         }
