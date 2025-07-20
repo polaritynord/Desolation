@@ -51,8 +51,11 @@ function storyStart:update(delta)
     if self.currentStringIndex >= #Loca.story.beginningSpeech then
         local speed = 0.2
         self.bgColor = self.bgColor + speed*delta
-        if self.bgColor > 1.08 then
-            love.event.quit()
+        --Load into game scene
+        if self.bgColor > -1.08 then
+            local scene = LoadScene("desolation/assets/scenes/game.json")
+            SetScene(scene)
+            scene.mapCreator.script:loadMap("desolation/assets/maps/c1_bedroom.json")
         end
         love.graphics.setBackgroundColor(self.bgColor, self.bgColor, self.bgColor)
         ui.speechTextLabel.color = {particleComp.color[1], particleComp.color[2], particleComp.color[3], 1}
