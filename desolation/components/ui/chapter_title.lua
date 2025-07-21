@@ -7,7 +7,7 @@ function chapterTitle:load()
             text = "CHAPTER 1\nDORMITORIES";
             begin = "center";
             size = 30;
-            position= {-25, 300};
+            position = {-25, 300};
         }
     )
 end

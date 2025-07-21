@@ -1,5 +1,4 @@
 local object = require("engine.object")
-local tileScript = require("desolation.components.tile_script")
 local itemScript = require("desolation.components.item.item_script")
 local wallScript = require("desolation.components.wall_script")
 local humanoidHandScript = require("desolation.components.humanoid_hand_script")
@@ -135,8 +134,6 @@ function mapCreator:loadMap(path)
             tile.imageComponent.layer = 5
             tile.scale = {2, 2}
             tile.position = {v[2]*1024, v[3]*1024}
-            --Quickly add script to tile for material detection on humanoids
-            tile:addComponent(table.new(tileScript))
             tile.material = v[4] or "concrete"
             CurrentScene.tiles:addChild(tile)
         end

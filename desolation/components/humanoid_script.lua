@@ -419,6 +419,19 @@ function humanoidScript:updateFiringLight(humanoid, delta)
     --TODO Enhance this light!
 end
 
+function humanoidScript:checkTileMaterial(humanoid)
+    for _, tile in ipairs(CurrentScene.tiles.tree) do
+        --This collision check might be a bit crappy but it works
+        if coreFuncs.aabbCollision(
+            humanoid.position, {tile.position[1]-512, tile.position[2]-512}, {48, 48}, {1024, 1024}
+        ) then
+            humanoid.steppingOnMaterial = tile.material
+            return
+        end
+    end
+    humanoid.steppingOnMaterial = nil
+end
+
 function humanoidScript:humanoidSetup()
     local humanoid = self.parent
     humanoid.imageComponent.source = Assets.images["player_body"]
@@ -469,6 +482,7 @@ function humanoidScript:humanoidUpdate(delta, humanoid)
     self:doWalkingAnim(humanoid)
     self:makeFootstepSounds(humanoid, delta)
     self:updateFiringLight(humanoid, delta)
+    self:checkTileMaterial(humanoid)
     --self:leaveTrailParticles(humanoid, delta)
     if humanoid.health > 0 then return end
     --fade away

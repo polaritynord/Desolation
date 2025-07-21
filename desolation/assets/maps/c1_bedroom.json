@@ -1,5 +1,5 @@
 {
-    "illumination": [1, 1, 1],
+    "illumination": [0, 0, 0],
     "playerData": {
         "position": [-250, 0],
         "cameraPosition": [0, 0],
@@ -9,28 +9,31 @@
     
     "walls": [
         ["test_gray", [-1, -2], [1, 5]],
-        ["test_gray", [-1, 2], [-6, 1]],
-        ["test_gray", [-8, -3], [1, 6]],
+        ["test_gray", [-7, 2], [6, 1]],
+        ["test_gray", [-8, -2], [1, 5]],
         ["test_gray", [-3, -3], [8, 1]],
-        ["test_gray", [-5, -3], [-6, 1]],
-        ["test_gray", [-11, -3], [1, -5]],
+        ["test_gray", [-11, -3], [6, 1]],
+        ["test_gray", [-11, -8], [1, 5]],
         ["test_gray", [-11, -9], [6, 1]],
         ["test_gray", [-3, -9], [8, 1]],
         ["test_gray", [2, -2], [1, 5]],
         ["test_gray", [7, -3], [3, 1]],
         ["test_gray", [3, 2], [6, 1]],
-        ["test_gray", [9, 3], [1, -5]],
+        ["test_gray", [9, -2], [1, 5]],
         ["test_gray", [-8, -14], [1, 5]],
         ["test_gray", [-7, -14], [6, 1]],
         ["test_gray", [-1, -14], [1, 5]],
         ["test_gray", [7, -9], [4, 1]]
     ],
     "tiles": [
-        ["prototype_black", 0, 0]
+        ["prototype_black", 0, 0],
+        ["prototype_green", 1, 0, "grass"]
     ],
     "props": [],
     "items": [],
-    "lights": [],
+    "lights": [
+        [-250, 0, 1000, 1, 1, 1, 1]
+    ],
 
     "assets": {
         "images": [
@@ -44,7 +47,7 @@
             ["step_concrete1", "desolation/assets/sounds/footstep/concrete1.wav", "static"],
             ["step_concrete2", "desolation/assets/sounds/footstep/concrete2.wav", "static"],
             ["step_concrete3", "desolation/assets/sounds/footstep/concrete3.wav", "static"],
-            ["step_concrete4", "desolation/assets/sounds/footstep/concrete4.wav", "static"]
+            ["step_concrete4", "desolation/assets/sounds/footstep/concrete4.wav", "static"],
         ]
     }
 }
