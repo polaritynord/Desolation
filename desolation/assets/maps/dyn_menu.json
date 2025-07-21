@@ -12,7 +12,8 @@
         ["test_gray", [-8, 3], [18, 2]]
     ],
     "tiles": [
-        ["prototype_black", 0, 0]
+        ["prototype_black", 0, 0],
+        ["prototype_black", 1, 0]
     ],
     "props": [
         [

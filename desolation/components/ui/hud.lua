@@ -460,16 +460,15 @@ function hud:load()
     ui.followingImgs = {}
     ui.slotSwitchTimer = 0
     ui.oldSlot = 1
+    ui.hiddenHUD = false
 end
 
 function hud:update(delta)
     if GamePaused then return end
     local ui = self.parent.UIComponent
     local player = CurrentScene.player
-    if not player.armorAcquired then
-        ui.enabled = false
-        return
-    end
+    ui.enabled = player.armorAcquired and not ui.hiddenHUD
+    if not ui.enabled then return end
     self:updateMonitors(player, ui)
     self:updateWeaponMonitor(player, ui, delta)
     self:updateControllerHints(player, ui)

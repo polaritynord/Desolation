@@ -45,6 +45,8 @@ function playerScript:movement(delta, player)
             end
         end
     end
+    --Dont allow sprinting if the armor is not acquired
+    if not player.armorAcquired then player.sprinting = false end
     if player.stamina < 0 or player.sprintCooldown > 0 or not player.moving then player.sprinting = false end
     if player.sprinting then
         --play sprint sound
@@ -328,6 +330,8 @@ function playerScript:updateLights(delta, player)
     self.lightRadius = self.lightRadius + (500-150*coreFuncs.boolToNum(player.moving)-self.lightRadius)*2*delta
     Lighter:updateLight(player.primaryLight, player.position[1], player.position[2], self.lightRadius, 0.8, 0.8, 0.8, 0.5)
     --Flashlight
+    --Close flashlight if the armor is not acquired (prob unnecessary code though)
+    if not player.armorAcquired then player.flashlightOn = false end
     if not player.flashlightOn then
         player.flashlight.a = 0
         return
@@ -377,6 +381,9 @@ function playerScript:load()
 end
 
 function playerScript:update(delta)
+    if love.keyboard.isDown("space") then
+        CurrentScene.mapCreator.changingMapTo = "desolation/assets/maps/playground_old.json"
+    end
     if GamePaused then return end
     local player = self.parent
     self:humanoidUpdate(delta, player)

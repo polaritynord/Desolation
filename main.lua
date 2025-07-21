@@ -17,6 +17,7 @@ CurrentScene = nil
 GamePaused = false
 Scenes = {}
 OldSceneName = ""
+MapChanged = false
 
 function love.mousemoved()
     InputManager:setInputTypeTo("keyboard")
@@ -103,6 +104,10 @@ function love.wheelmoved(x, y)
 end
 
 function love.keypressed(key, unicode)
+    if key == "4" then
+        CurrentScene.player.armorAcquired = not CurrentScene.player.armorAcquired
+        print(CurrentScene.player.armorAcquired)
+    end
     --console shit
     local console = CurrentScene.devConsole
     local consoleUI
@@ -173,11 +178,11 @@ function love.keypressed(key, unicode)
 
     --Toggle HUD key
     if table.contains(InputManager:getKeys("toggle_hud"), key) and CurrentScene.name == "Game" then
-        CurrentScene.hud.UIComponent.enabled = not CurrentScene.hud.UIComponent.enabled
+        CurrentScene.hud.UIComponent.hiddenHUD = not CurrentScene.hud.UIComponent.hiddenHUD
     end
 
     --Toggle flashlight
-    if table.contains(InputManager:getKeys("flashlight"), key) and CurrentScene.name == "Game" and not GamePaused and CurrentScene.player.health > 0 then
+    if table.contains(InputManager:getKeys("flashlight"), key) and CurrentScene.name == "Game" and not GamePaused and CurrentScene.player.health > 0 and CurrentScene.player.armorAcquired then
         CurrentScene.player.flashlightOn = not CurrentScene.player.flashlightOn
         SoundManager:restartSound(Assets.sounds["flashlight_on"], Settings.vol_world)
     end
@@ -307,6 +312,10 @@ function love.draw()
     if CurrentScene == nil then return end
     if CurrentScene.name ~= OldSceneName then
         OldSceneName = CurrentScene.name
+        return
+    end
+    if MapChanged then
+        MapChanged = false
         return
     end
     CurrentScene:draw()

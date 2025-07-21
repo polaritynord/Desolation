@@ -101,8 +101,10 @@ function mapCreator:spawnNPC(v)
     CurrentScene.npcs:addChild(npc)
 end
 
-function mapCreator:loadMap(path)
-    Globals:load()
+function mapCreator:loadMap(path, resetGlobals)
+    if not resetGlobals then
+        Globals:load()
+    end
     self.ambience = nil
     --read & convert to lua table
     local data = love.filesystem.read(path)
@@ -186,16 +188,16 @@ function mapCreator:loadMap(path)
             CurrentScene:addLight(unpack(light))
         end
     end
-    --player data
-    if CurrentScene.player == nil then return end
-    local player = CurrentScene.player
-    player.position = data.playerData.position
-    CurrentScene.camera.position = data.playerData.cameraPosition
     --ambience
     if Assets.mapSounds["ambience"] ~= nil then
         Assets.mapSounds["ambience"]:setLooping(true)
         SoundManager:playSound(Assets.mapSounds["ambience"], Settings.vol_world)
     end
+    --player data
+    if CurrentScene.player == nil then return end
+    local player = CurrentScene.player
+    player.position = data.playerData.position
+    CurrentScene.camera.position = data.playerData.cameraPosition
     self.parent.allowZoom = data.playerData.allowZoom
     self.parent.cameraBoundaries = data.playerData.cameraBoundaries
     --load up beginner inventory
@@ -217,6 +219,12 @@ function mapCreator:loadMap(path)
     end
     player.health = data.playerData.health
     player.armor = data.playerData.armor
+    if data.playerData.armorAcquired ~= nil then
+        player.armorAcquired = data.playerData.armorAcquired
+    else
+        player.armorAcquired = true
+    end
+    MapChanged = true
 end
 
 function mapCreator:createExplosion(position, radius, intensity)
@@ -279,6 +287,7 @@ function mapCreator:load()
     self.parent.itemData = json.decode(self.parent.itemData)
     self.parent.npcData = love.filesystem.read(GAME_DIRECTORY .. "/assets/npcs.json")
     self.parent.npcData = json.decode(self.parent.npcData)
+    self.parent.changingMapTo = nil
     self.explosionLights = {}
 end
 

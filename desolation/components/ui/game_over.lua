@@ -24,9 +24,21 @@ function gameOver:update(delta)
     local player = CurrentScene.player
     local ui = self.parent.UIComponent
     if player.health > 0 then
-        --opening black fade away
-        ui.rectangle.color[4] = ui.rectangle.color[4] - delta
-        if ui.rectangle.color[4] < 0 then ui.rectangle.color[4] = 0 end
+        local mapCreator = CurrentScene.mapCreator
+        if mapCreator.changingMapTo == nil then
+            --opening black fade away
+            ui.rectangle.color[4] = ui.rectangle.color[4] - delta
+            if ui.rectangle.color[4] < 0 then ui.rectangle.color[4] = 0 end
+        else
+            --black fade in
+            ui.rectangle.color[4] = ui.rectangle.color[4] + delta
+            if ui.rectangle.color[4] > 1.2 then
+                local scene = LoadScene("desolation/assets/scenes/game.json")
+                SetScene(scene)
+                scene.mapCreator.script:loadMap(mapCreator.changingMapTo)
+                mapCreator.changingMapTo = nil
+            end
+        end
     else
         --game over screen background
         ui.rectangle.color = {1, 0, 0, ui.rectangle.color[4]}
