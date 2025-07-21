@@ -157,7 +157,8 @@
     },
     "pauseScreen": {
         "continue": "DEVAM ET",
-        "mainMenu": "ANA MENÜ"
+        "mainMenu": "ANA MENÜ",
+        "saveProgress": "İLERLEME KAYDET"
     },
     "campaignMenu": {
         "title": "HİKAYE MODU",

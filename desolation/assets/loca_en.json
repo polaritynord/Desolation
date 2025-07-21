@@ -161,7 +161,8 @@
     },
     "pauseScreen": {
         "continue": "CONTINUE",
-        "mainMenu": "MAIN MENU"
+        "mainMenu": "MAIN MENU",
+        "saveProgress": "SAVE PROGRESS"
     },
     "campaignMenu": {
         "title": "STORY MODE",

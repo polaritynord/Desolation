@@ -1,6 +1,5 @@
 local json = require("engine.lib.json")
-local moonshine = require("engine.lib.moonshine")
-
+local coreFuncs = require("coreFuncs")
 local clickEvents = require("desolation.button_clickevents")
 
 local pauseScreen = ENGINE_COMPONENTS.scriptComponent.new()
@@ -28,9 +27,20 @@ function pauseScreen:load()
             end;
         }
     )
+    ui.saveProgressButton = ui:newTextButton(
+        {
+            position = {70, 240},
+            buttonText = Loca.pauseScreen.saveProgress;
+            buttonTextSize = 30;
+            clickEvent = function ()
+                if not CurrentScene.mapCreator.saveableMap then return end
+                print("test")
+            end
+        }
+    )
     ui.settingsButton = ui:newTextButton(
         {
-            position = {70, 240};
+            position = {70, 280};
             buttonText = Loca.mainMenu.settings;
             buttonTextSize = 30;
             clickEvent = clickEvents.settingsButtonClick;
@@ -38,7 +48,7 @@ function pauseScreen:load()
     )
     ui.menuButton = ui:newTextButton(
         {
-            position = {70, 280};
+            position = {70, 320};
             buttonText = Loca.pauseScreen.mainMenu;
             buttonTextSize = 30;
             clickEvent = function ()
@@ -51,14 +61,14 @@ function pauseScreen:load()
     )
     ui.quitButton = ui:newTextButton(
         {
-            position = {70, 320};
+            position = {70, 360};
             buttonText = Loca.mainMenu.quit;
             buttonTextSize = 30;
             clickEvent = clickEvents.quitButtonClick;
         }
     )
     ui.quitButton.confirmTimer = 0
-    ui.controllerButtons = {ui.continueButton, ui.settingsButton, ui.menuButton, ui.quitButton}
+    ui.controllerButtons = {ui.continueButton, ui.saveProgressButton, ui.settingsButton, ui.menuButton, ui.quitButton}
 end
 
 function pauseScreen:update(delta)
@@ -84,6 +94,8 @@ function pauseScreen:update(delta)
             ui.quitButton.textFont = "disposable-droid"
         end
     end
+    --Dim the "save progress" button if not playing a saveable map (aka story)
+    ui.saveProgressButton.color[4] = 0.5 + 0.5*coreFuncs.boolToNum(CurrentScene.mapCreator.saveableMap)
 end
 
 return pauseScreen

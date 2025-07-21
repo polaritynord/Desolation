@@ -244,6 +244,7 @@ function mapCreator:loadMap(path, resetGlobals)
     MapChanged = true
     self.parent.changingMapTo = nil
     self.parent.mapTransitionPlayer = nil
+    self.parent.saveableMap = data.saveable
 end
 
 function mapCreator:createExplosion(position, radius, intensity)
@@ -309,6 +310,7 @@ function mapCreator:load()
     self.parent.changingMapTo = nil
     self.parent.mapTransitionPlayer = nil
     self.explosionLights = {}
+    self.parent.saveableMap = false
 end
 
 function mapCreator:update(delta)

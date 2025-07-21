@@ -1,5 +1,6 @@
 {
     "illumination": [0.2, 0.2, 0.2],
+    "saveable": false,
     "playerData": {
         "position": [0, 0],
         "cameraPosition": [0, 0],
