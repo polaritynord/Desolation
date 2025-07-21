@@ -1,7 +1,7 @@
 {
     "illumination": [1, 1, 1],
     "playerData": {
-        "position": [-250, 0],
+        "position": [-250, 70],
         "cameraPosition": [0, 0],
         "health": 100,
         "armor": 0,
@@ -18,20 +18,41 @@
         ["test_gray", [-11, -9], [6, 1]],
         ["test_gray", [-3, -9], [8, 1]],
         ["test_gray", [2, -2], [1, 5]],
-        ["test_gray", [7, -3], [3, 1]],
+        ["test_gray", [7, -3], [10, 1]],
+        ["test_gray", [16, -2], [1, 12]],
+        ["test_gray", [23, -3], [1, 13]],
         ["test_gray", [3, 2], [6, 1]],
         ["test_gray", [9, -2], [1, 5]],
         ["test_gray", [-8, -14], [1, 5]],
         ["test_gray", [-7, -14], [6, 1]],
         ["test_gray", [-1, -14], [1, 5]],
-        ["test_gray", [7, -9], [4, 1]]
+        ["test_gray", [7, -9], [26, 1]],
+        ["test_gray", [24, -3], [9, 1]],
+        ["test_gray", [35, -3], [8, 1]],
+        ["test_gray", [45, -3], [6, 1]],
+        ["test_gray", [30, -14], [1, 5]],
+        ["test_gray", [31, -14], [7, 1]],
+        ["test_gray", [37, -13], [1, 4]],
+        ["test_gray", [35, -9], [6, 1]],
+        ["test_gray", [2, -14], [1, 5]],
+        ["test_gray", [3, -14], [7, 1]],
+        ["test_gray", [9, -13], [1, 4]]
     ],
     "tiles": [
+        ["prototype_black", -1, 0],
         ["prototype_black", 0, 0],
-        ["prototype_green", 1, 0, "grass"]
+        ["prototype_black", 1, 0],
+        ["prototype_black", 2, 0],
+        ["prototype_black", 1, 1]
     ],
     "props": [
-        ["c1_bedroom", [0, 0], 0, []]
+        ["c1_bedroom", [0, 0], 0, []],
+
+        ["crate", [-500, -400], 36, []],
+        ["crate_big", [-580, -400], 36, []],
+        ["crate_big", [-597, -305], -20, []],
+        ["barrel", [-530, -340], 0, []],
+        ["barrel", [-580, -230], 0, []]
     ],
     "items": [],
     "lights": [
@@ -41,7 +62,12 @@
     "assets": {
         "images": [
             ["player_body", "desolation/assets/images/player/body.png"],
+
+            ["prop_crate", "desolation/assets/images/props/crate.png"],
+            ["prop_barrel", "desolation/assets/images/props/barrel.png"],
+            
             ["wall_test_gray", "desolation/assets/images/walls/test_gray.png"],
+            
             ["tile_prototype_black", "desolation/assets/images/tiles/prototype_black.png"]
         ],
         "sounds": [

@@ -11,7 +11,11 @@ function keyHints:addHintToQueue(key, customDescription)
         end
         if desc == nil then desc = "[DESC. NOT FOUND]" end
     end
-    self.parent.queue[#self.parent.queue+1] = string.upper(key) .. " - " .. string.upper(desc)
+    if key ~= nil then
+        self.parent.queue[#self.parent.queue+1] = string.upper(key) .. " - " .. string.upper(desc)
+    else
+        self.parent.queue[#self.parent.queue+1] = string.upper(desc)
+    end
 end
 
 function keyHints:load()
@@ -46,6 +50,9 @@ function keyHints:update(delta)
     --Continue to next one
     if obj.currentHintTimer > 5 then --TODO make this value customizable
         table.remove(obj.queue, 1)
+        --TODO think about adding a little cooldown. Right now, it feels
+        --a bit too instant.
+        obj.currentHintTimer = 0
     end
 end
 

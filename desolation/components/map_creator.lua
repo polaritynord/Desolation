@@ -56,7 +56,7 @@ function mapCreator:spawnProp(v)
     prop.mass = propData[prop.name].mass or 0.05
     prop.targetable = propData[prop.name].targetable or false
     prop.position = v[2]
-    prop.rotation = v[3]
+    prop.rotation = v[3]*math.pi/180
     --custom variables
     for _, k in ipairs(v[4]) do
         prop[k[1]] = k[2]

@@ -9,6 +9,8 @@ function c1Bedroom:update(delta)
     self.keyHintTimer = self.keyHintTimer + delta
     if self.keyHintTimer > 2 and not self.moveAroundHintGiven then
         local keyHintsScript = CurrentScene.keyHints.script
+        --Look around hint
+        keyHintsScript:addHintToQueue(nil, Loca.customKeyHintDescriptions.useMouse)
         --Movement hint (WASD by default)
         local moveUpKey = InputManager:getKeys("move_up")[1]:upper()
         local moveDownKey = InputManager:getKeys("move_down")[1]:upper()

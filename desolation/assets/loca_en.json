@@ -1,5 +1,6 @@
 {
     "customKeyHintDescriptions": {
+        "useMouse": "USE THE MOUSE TO LOOK",
         "moveAround": "MOVE AROUND"
     },
     "story": {
