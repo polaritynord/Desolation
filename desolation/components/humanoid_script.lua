@@ -463,7 +463,8 @@ function humanoidScript:humanoidSetup()
     humanoid.oldPos = table.new(humanoid.position)
     humanoid.animationSizeDiff = 0
     humanoid.handOffset = 0
-    humanoid.unarmed = false
+    --humanoid.unarmed = false (have no idea why this variable existed priorly)
+    self.stepTimer = 0
     --Light stuff
     humanoid.firingLight = CurrentScene:addLight(humanoid.position[1], humanoid.position[2], 300, 0.98, 0.45, 0.01, 0)
 end

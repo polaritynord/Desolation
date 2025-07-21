@@ -27,21 +27,21 @@
         ["test_gray", [-38, 22], [77, 4]]
     ],
     "tiles": [
-        ["prototype_green", -2, -1],
-        ["prototype_green", -1, -1],
-        ["prototype_green", 0, -1],
-        ["prototype_green", 1, -1],
-        ["prototype_green", 2, -1],
-        ["prototype_green", -2, 0],
-        ["prototype_green", -1, 0],
-        ["prototype_green", 0, 0],
-        ["prototype_green", 1, 0],
-        ["prototype_green", 2, 0],
-        ["prototype_green", -2, 1],
-        ["prototype_green", -1, 1],
-        ["prototype_green", 0, 1],
-        ["prototype_green", 1, 1],
-        ["prototype_green", 2, 1]
+        ["prototype_green", -2, -1, "grass"],
+        ["prototype_green", -1, -1, "grass"],
+        ["prototype_green", 0, -1, "grass"],
+        ["prototype_green", 1, -1, "grass"],
+        ["prototype_green", 2, -1, "grass"],
+        ["prototype_green", -2, 0, "grass"],
+        ["prototype_green", -1, 0, "grass"],
+        ["prototype_green", 0, 0, "grass"],
+        ["prototype_green", 1, 0, "grass"],
+        ["prototype_green", 2, 0, "grass"],
+        ["prototype_green", -2, 1, "grass"],
+        ["prototype_green", -1, 1, "grass"],
+        ["prototype_green", 0, 1, "grass"],
+        ["prototype_green", 1, 1, "grass"],
+        ["prototype_green", 2, 1, "grass"]
     ],
     "props": [
         ["openarea_manager", [0, 0], 0, []]

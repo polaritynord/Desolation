@@ -18,15 +18,15 @@
         ["table", [-7, -5], [4, 0.9]]
     ],
     "tiles": [
-        ["prototype_white", -1, -1],
-        ["prototype_white", 0, -1],
-        ["prototype_white", 1, -1],
-        ["prototype_white", -1, 0],
-        ["prototype_white", 0, 0],
-        ["prototype_white", 1, 0],
-        ["prototype_white", -1, 1],
-        ["prototype_white", 0, 1],
-        ["prototype_white", 1, 1]
+        ["prototype_white", -1, -1, "grass"],
+        ["prototype_white", 0, -1, "grass"],
+        ["prototype_white", 1, -1, "grass"],
+        ["prototype_white", -1, 0, "grass"],
+        ["prototype_white", 0, 0, "grass"],
+        ["prototype_white", 1, 0, "grass"],
+        ["prototype_white", -1, 1, "grass"],
+        ["prototype_white", 0, 1, "grass"],
+        ["prototype_white", 1, 1, "grass"]
     ],
     "props": [
         
