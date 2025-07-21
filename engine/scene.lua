@@ -21,6 +21,7 @@ function scene.new()
     function s:addChild(obj)
         self.tree[#self.tree+1] = obj
         self[obj.name] = obj
+        return obj
     end
 
     function s:preDrawLights()

@@ -56,6 +56,8 @@ function storyStart:update(delta)
             local scene = LoadScene("desolation/assets/scenes/game.json")
             SetScene(scene)
             scene.mapCreator.script:loadMap("desolation/assets/maps/c1_bedroom.json")
+            love.graphics.setBackgroundColor(0, 0, 0)
+            return
         end
         love.graphics.setBackgroundColor(self.bgColor, self.bgColor, self.bgColor)
         ui.speechTextLabel.color = {particleComp.color[1], particleComp.color[2], particleComp.color[3], 1}

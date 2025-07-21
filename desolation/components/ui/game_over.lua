@@ -33,10 +33,11 @@ function gameOver:update(delta)
             --black fade in
             ui.rectangle.color[4] = ui.rectangle.color[4] + delta
             if ui.rectangle.color[4] > 1.2 then
+                local temp = CurrentScene.mapCreator.mapTransitionPlayer
                 local scene = LoadScene("desolation/assets/scenes/game.json")
                 SetScene(scene)
-                scene.mapCreator.script:loadMap(mapCreator.changingMapTo)
-                mapCreator.changingMapTo = nil
+                scene.mapCreator.mapTransitionPlayer = temp
+                scene.mapCreator.script:loadMap(mapCreator.changingMapTo, false)
             end
         end
     else

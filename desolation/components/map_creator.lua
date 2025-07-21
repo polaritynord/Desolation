@@ -102,7 +102,8 @@ function mapCreator:spawnNPC(v)
 end
 
 function mapCreator:loadMap(path, resetGlobals)
-    if not resetGlobals then
+    --dunno why I had to write it like this
+    if resetGlobals == nil or resetGlobals == true then
         Globals:load()
     end
     self.ambience = nil
@@ -194,37 +195,55 @@ function mapCreator:loadMap(path, resetGlobals)
         SoundManager:playSound(Assets.mapSounds["ambience"], Settings.vol_world)
     end
     --player data
-    if CurrentScene.player == nil then return end
-    local player = CurrentScene.player
-    player.position = data.playerData.position
-    CurrentScene.camera.position = data.playerData.cameraPosition
-    self.parent.allowZoom = data.playerData.allowZoom
-    self.parent.cameraBoundaries = data.playerData.cameraBoundaries
-    --load up beginner inventory
-    local inv = data.playerData.beginnerInventory
-    if inv ~= nil then
-        --load wepaons
-        for i, v in ipairs(inv.weapons) do
-            if v == nil then
-                player.inventory.weapons[i] = nil
-            else
-                player.inventory.weapons[i] = weaponManager[v[1]].new()
-                player.inventory.weapons[i].magAmmo = v[2]
+    if CurrentScene.player ~= nil then
+        local player = CurrentScene.player
+        --If no previous playerData is passed through
+        if self.parent.mapTransitionPlayer == nil then
+            player.position = data.playerData.position
+            CurrentScene.camera.position = data.playerData.cameraPosition
+            self.parent.allowZoom = data.playerData.allowZoom
+            self.parent.cameraBoundaries = data.playerData.cameraBoundaries
+            --load up beginner inventory
+            local inv = data.playerData.beginnerInventory
+            if inv ~= nil then
+                --load wepaons
+                for i, v in ipairs(inv.weapons) do
+                    if v == nil then
+                        player.inventory.weapons[i] = nil
+                    else
+                        player.inventory.weapons[i] = weaponManager[v[1]].new()
+                        player.inventory.weapons[i].magAmmo = v[2]
+                    end
+                end
+                --load ammunition
+                for _, v in ipairs(inv.ammunition) do
+                    player.inventory.ammunition[v[1]] = v[2]
+                end
             end
+            player.health = data.playerData.health
+            player.armor = data.playerData.armor
+            if data.playerData.armorAcquired ~= nil then
+                player.armorAcquired = data.playerData.armorAcquired
+            else
+                player.armorAcquired = true
+            end
+        else
+            --If the player is, indeed, coming from another map
+            --(just set the position)
+            local oldPlayer = self.parent.mapTransitionPlayer
+            player.flashlightOn = oldPlayer.flashlightOn
+            player.armorAcquired = oldPlayer.armorAcquired
+            player.inventory = table.new(oldPlayer.inventory)
+            player.stamina = oldPlayer.stamina
+            player.armor = oldPlayer.armor
+            player.health = oldPlayer.health
+            --gosh I hope I'm not doing memory leaks with this shit
+            player.position = data.playerData.position
         end
-        --load ammunition
-        for _, v in ipairs(inv.ammunition) do
-            player.inventory.ammunition[v[1]] = v[2]
-        end
-    end
-    player.health = data.playerData.health
-    player.armor = data.playerData.armor
-    if data.playerData.armorAcquired ~= nil then
-        player.armorAcquired = data.playerData.armorAcquired
-    else
-        player.armorAcquired = true
     end
     MapChanged = true
+    self.parent.changingMapTo = nil
+    self.parent.mapTransitionPlayer = nil
 end
 
 function mapCreator:createExplosion(position, radius, intensity)
@@ -288,6 +307,7 @@ function mapCreator:load()
     self.parent.npcData = love.filesystem.read(GAME_DIRECTORY .. "/assets/npcs.json")
     self.parent.npcData = json.decode(self.parent.npcData)
     self.parent.changingMapTo = nil
+    self.parent.mapTransitionPlayer = nil
     self.explosionLights = {}
 end
 

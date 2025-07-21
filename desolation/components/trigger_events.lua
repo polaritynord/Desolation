@@ -4,9 +4,10 @@ function triggerEvents.soundTest(prop)
 
 end
 
-function triggerEvents.leaveDorm(prop)
-    --currently unused. Was thinking about adding flashlight hints,
-    --but maybe the player should travel through dim light in the beginning. 
+function triggerEvents.loadc1Hallway(prop)
+    local mapCreator = CurrentScene.mapCreator
+    mapCreator.changingMapTo = "desolation/assets/maps/c1_hallway.json"
+    mapCreator.mapTransitionPlayer = CurrentScene.player
 end
 
 return triggerEvents

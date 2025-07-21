@@ -37,6 +37,7 @@ function keyHints:load()
 end
 
 function keyHints:update(delta)
+    if GamePaused then return end
     local obj = self.parent
     local ui = obj.UIComponent
     if #obj.queue < 1 then
