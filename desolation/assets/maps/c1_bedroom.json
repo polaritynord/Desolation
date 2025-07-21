@@ -30,7 +30,9 @@
         ["prototype_black", 0, 0],
         ["prototype_green", 1, 0, "grass"]
     ],
-    "props": [],
+    "props": [
+        ["c1_bedroom", [0, 0], 0, []]
+    ],
     "items": [],
     "lights": [
         [-250, 0, 1000, 1, 1, 1, 1]

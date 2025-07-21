@@ -381,9 +381,6 @@ function playerScript:load()
 end
 
 function playerScript:update(delta)
-    if love.keyboard.isDown("space") then
-        CurrentScene.mapCreator.changingMapTo = "desolation/assets/maps/playground_old.json"
-    end
     if GamePaused then return end
     local player = self.parent
     self:humanoidUpdate(delta, player)

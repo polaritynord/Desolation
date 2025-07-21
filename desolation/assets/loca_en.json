@@ -1,4 +1,7 @@
 {
+    "customKeyHintDescriptions": {
+        "moveAround": "MOVE AROUND"
+    },
     "story": {
         "beginningSpeech": [
             "...",

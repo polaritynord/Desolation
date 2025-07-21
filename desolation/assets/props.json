@@ -54,5 +54,10 @@
     "openarea_manager": {
         "script": "desolation/components/props/openarea_manager",
         "targetable": false
+    },
+
+    "c1_bedroom": {
+        "script": "desolation/components/props/storyManagers/c1_bedroom",
+        "targetable": false
     }
 }
