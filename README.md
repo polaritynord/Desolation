@@ -17,6 +17,7 @@
 * DESOLATION is **free**. <sup><sub>(at least for the time being, I might want to sell it when it's complete)</sub></sup>
 * It is available for download in [GameJolt](https://gamejolt.com/games/desolation/890404), [Itch.io](https://polaritynord.itch.io/desolation/) and [GitHub Releases](https://github.com/polaritynord/desolation/releases/latest). You can download the game from the website of your choice.
 * For playing in an operating system different than Windows, you can use the **.love** file. Visit the https://love2d.org/ website to download the Love2D framework to your system and run the file with the **.love** extension.
+* For the ones that want to clone the source code, I recommend downloading a release instead if you do not intend on viewing/changing the code, as it may be unstable.
 
 # Screenshots
 (last updated: 22/07/2025)
