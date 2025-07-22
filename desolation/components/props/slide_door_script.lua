@@ -9,6 +9,7 @@ function slideDoorScript:load()
     door.moving = false
     door.closeTimer = 0
     door.oldPosition = table.new(door.position)
+    door.opening = false
 end
 
 function slideDoorScript:update(delta)
@@ -23,7 +24,7 @@ function slideDoorScript:update(delta)
     door.collidable = distance >= 85
     --Move and make sound
     local moveSpeed = 500
-    if door.collidable then
+    if distance >= 85 then
         door.closeTimer = door.closeTimer + delta
         if door.closeTimer > 1.6 then
             --Closing
@@ -41,12 +42,16 @@ function slideDoorScript:update(delta)
         --Opening
         if not door.moving then
             SoundManager:restartSound(Assets.mapSounds["slide_door_open"], Settings.vol_world, door.position, true)
+            door.opening = true
         end
         door.moving = true
         door.closeTimer = 0
+    end
+    if door.opening then
         door.position[1] = door.position[1] - moveSpeed*delta
         if door.position[1] < door.oldPosition[1]-128 then
             door.position[1] = door.oldPosition[1]-128
+            door.opening = false
         end
     end
 end

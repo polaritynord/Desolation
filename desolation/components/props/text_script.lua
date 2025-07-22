@@ -19,21 +19,17 @@ function textScript:load()
     local prop = self.parent
     prop.imageComponent = ENGINE_COMPONENTS.imageComponent.new(prop, nil)
     prop.imageComponent.draw = textDraw
+    prop.imageComponent.layer = 4
     prop.text = prop.text or "HELLO WORLD"
     prop.minDistance = prop.minDistance or 100
     prop.color = prop.color or {1, 1, 1, 1}
     prop.wrapLimit = prop.wrapLimit or 1000
     prop.font = prop.font or "disposable-droid"
+    prop.oldAlpha = prop.color[4]
 end
 
 function textScript:update(delta)
-    local prop = self.parent
-    local distance = coreFuncs.pointDistance(prop.position, CurrentScene.player.position)
-    if distance <= prop.minDistance then
-        print("aaa")
-    else
-        print("bbb")
-    end
+    --TODO add centered text, proper distance check and alpha changing
 end
 
 return textScript

@@ -3,7 +3,7 @@ local globals = {}
 function globals:load()
     -- {value, cheatProtection, toggleable}
     --NOTE might as well move this to a json file later
-    self.cheats = {0, false, true}
+    self.cheats = {1, false, true}
     self.freecam = {0, true, true}
     self.p_speed = {160, true, false}
     self.noclip = {0, true, true}

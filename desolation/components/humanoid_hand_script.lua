@@ -24,9 +24,15 @@ function playerHandScript:update(delta)
     --Set position
     hand.position = pos
     hand.rotation = player.rotation
+    --Do walk animation
+    local sizeDiff = 0
+    if player.moving then
+        local time = love.timer.getTime()
+        sizeDiff = math.sin((time-10)*12)/4
+    end
     hand.scale = {
-        2.8 + player.animationSizeDiff/2,
-        2.8 + player.animationSizeDiff/2
+        2.8 + sizeDiff/2,
+        2.8 + sizeDiff/2
     }
 end
 
