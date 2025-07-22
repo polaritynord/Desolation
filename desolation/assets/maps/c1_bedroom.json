@@ -85,6 +85,55 @@
         ],
 
         [
+            "slide_door", [-257, -540], 0,
+            [
+                ["locked", true]
+            ]
+        ],
+
+        [
+            "slide_door", [383, -540], 0,
+            [
+                ["locked", true]
+            ]
+        ],
+
+        [
+            "slide_door", [383, -164], 0,
+            [
+                ["locked", true]
+            ]
+        ],
+
+        [
+            "slide_door", [2178, -540], 0,
+            [
+                ["locked", true]
+            ]
+        ],
+
+        [
+            "slide_door", [2178, -164], 0,
+            [
+                ["locked", true]
+            ]
+        ],
+
+        [
+            "slide_door", [2818, -540], 0,
+            [
+                ["locked", true]
+            ]
+        ],
+
+        [
+            "slide_door", [2818, -164], 0,
+            [
+                ["locked", true]
+            ]
+        ],
+
+        [
             "trigger_prop", [1100, 1136], 0,
             [
                 ["event", "loadc1Hallway"],

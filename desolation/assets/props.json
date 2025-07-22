@@ -55,7 +55,8 @@
         "script": "desolation/components/props/slide_door_script",
         "movable": false,
         "collidable": true,
-        "targetable": false
+        "targetable": false,
+        "piercable": false
     },
 
     "openarea_manager": {

@@ -204,7 +204,7 @@ function humanoidScript:hitscanBulletCheck(humanoid, weapon, shootAngle)
                         prop.script:physBulletHitEvent(shootAngle, weapon, humanoid)
                     end
                     --Stop the bullet here (depending on piercing chance)
-                    local pierceThrough = math.uniform(0, 1) <= weapon.pierceChance
+                    local pierceThrough = math.uniform(0, 1) <= weapon.pierceChance and prop.piercable
                     if not pierceThrough then
                         goto returnLine
                     else
@@ -234,7 +234,7 @@ function humanoidScript:hitscanBulletCheck(humanoid, weapon, shootAngle)
                     end
                     --TODO: bullet hit sfx or an indicator?
                     --Stop the bullet here (depending on piercing chance)
-                    local pierceThrough = math.uniform(0, 1) <= weapon.pierceChance
+                    local pierceThrough = math.uniform(0, 1) <= weapon.pierceChance and prop.piercable
                     if not pierceThrough then
                         goto returnLine
                     else
@@ -259,7 +259,7 @@ function humanoidScript:hitscanBulletCheck(humanoid, weapon, shootAngle)
                 player.script:damage(weapon.bulletDamage, beginPos)
                 if player.script.bulletHitEvent ~= nil then player.script:bulletHitEvent(bullet) end
                 --Stop the bullet here (depending on piercing chance)
-                local pierceThrough = math.uniform(0, 1) <= weapon.pierceChance
+                local pierceThrough = math.uniform(0, 1) <= weapon.pierceChance and prop.piercable
                 if not pierceThrough then
                     goto returnLine
                 else

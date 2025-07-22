@@ -4,6 +4,7 @@ local slideDoorScript = ENGINE_COMPONENTS.scriptComponent.new()
 function slideDoorScript:load()
     local door = self.parent
     door.imageComponent = ENGINE_COMPONENTS.imageComponent.new(door, Assets.mapImages["prop_slide_door"])
+    door.imageComponent.layer = 4
     door.scale = {3.7, 2.3}
     door.moving = false
     door.closeTimer = 0
