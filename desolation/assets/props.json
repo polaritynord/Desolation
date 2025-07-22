@@ -51,6 +51,13 @@
         "targetable": false
     },
 
+    "slide_door": {
+        "script": "desolation/components/props/slide_door_script",
+        "movable": false,
+        "collidable": true,
+        "targetable": false
+    },
+
     "openarea_manager": {
         "script": "desolation/components/props/openarea_manager",
         "targetable": false

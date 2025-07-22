@@ -78,6 +78,13 @@
         ["barrel", [-580, -230], 0, []],
 
         [
+            "slide_door", [-257, -164], 0,
+            [
+                ["locked", false]
+            ]
+        ],
+
+        [
             "trigger_prop", [1100, 1136], 0,
             [
                 ["event", "loadc1Hallway"],
@@ -111,6 +118,7 @@
 
             ["prop_crate", "desolation/assets/images/props/crate.png"],
             ["prop_barrel", "desolation/assets/images/props/barrel.png"],
+            ["prop_slide_door", "desolation/assets/images/props/slide_door.png"],
             
             ["wall_test_gray", "desolation/assets/images/walls/test_gray.png"],
             
