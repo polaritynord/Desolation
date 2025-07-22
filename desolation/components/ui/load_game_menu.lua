@@ -13,6 +13,18 @@ function loadGameMenu:load()
             font = "disposable-droid-bold";
         }
     )
+    ui.tempButton = ui:newTextButton(
+        {
+            buttonText = "Load test.sav";
+            position = {0, 200};
+            buttonTextSize = 30;
+            clickEvent = function ()
+                local scene = LoadScene("desolation/assets/scenes/game.json")
+                SetScene(scene)
+                scene.mapCreator.script:loadSave("saves/test.sav")
+            end
+        }
+    )
     ui.noSavesFound = ui:newTextLabel(
         {
             text = Loca.loadGameMenu.noSavesFound;

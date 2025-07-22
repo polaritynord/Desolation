@@ -107,6 +107,7 @@ function mapCreator:spawnNPC(v)
 end
 
 function mapCreator:loadMap(path, resetGlobals)
+    self.mapBaseData = {}
     --dunno why I had to write it like this
     if resetGlobals == nil or resetGlobals == true then
         Globals:load()
@@ -115,6 +116,7 @@ function mapCreator:loadMap(path, resetGlobals)
     --read & convert to lua table
     local data = love.filesystem.read(path)
     data = json.decode(data)
+    self.parent.mapName = data.name or "Map"
     --Set illumination
     CurrentScene.illumination = data.illumination or {0.4, 0.4, 0.4}
     --Load map assets
@@ -250,6 +252,21 @@ function mapCreator:loadMap(path, resetGlobals)
     self.parent.changingMapTo = nil
     self.parent.mapTransitionPlayer = nil
     self.parent.saveableMap = data.saveable
+    self.mapBaseData = {
+        name = data.name,
+        illumination = data.illumination,
+        saveable = data.saveable,
+        assets = data.assets,
+        lights = data.lights
+    }
+end
+
+function mapCreator:loadSave(path)
+    Globals:load()
+    local saveFile = love.filesystem.read(path)
+    local saveData = json.decode(saveFile)
+    --Setup player data
+
 end
 
 function mapCreator:createExplosion(position, radius, intensity)
@@ -304,6 +321,32 @@ function mapCreator:updateExplosionLights(delta)
     end
 end
 
+function mapCreator:saveProgress()
+    local title = os.date("%d/%m/%Y %H.%m") .. " (" .. self.parent.mapName .. ")"
+    --Save player data first
+    local player = CurrentScene.player
+    local saveData = {
+        player = {
+            position = table.new(player.position),
+            health = player.health,
+            armor = player.armor,
+            stamina = player.stamina,
+            inventory = table.new(player.inventory) --is duplicating necessary?
+        },
+        walls = {},
+        items = {},
+        lights = {},
+        props = {}
+    }
+    --Save walls
+    for _, wall in ipairs(CurrentScene.walls.tree) do
+        local wallData = {wall.name, {wall.position[1]/64,wall.position[2]/64}, {wall.scale[1], wall.scale[2]}}
+        saveData.walls[#saveData.walls+1] = wallData
+    end
+    --Encode file and write
+    love.filesystem.write("saves/test.sav", json.encode(saveData))
+end
+
 function mapCreator:load()
     GamePaused = false
     self.parent.propData = love.filesystem.read(GAME_DIRECTORY .. "/assets/props.json")
@@ -316,6 +359,8 @@ function mapCreator:load()
     self.parent.mapTransitionPlayer = nil
     self.explosionLights = {}
     self.parent.saveableMap = false
+    self.parent.mapName = "Map"
+    self.mapBaseData = {}
 end
 
 function mapCreator:update(delta)

@@ -34,7 +34,7 @@ function pauseScreen:load()
             buttonTextSize = 30;
             clickEvent = function ()
                 if not CurrentScene.mapCreator.saveableMap then return end
-                print("test")
+                CurrentScene.mapCreator.script:saveProgress()
             end
         }
     )

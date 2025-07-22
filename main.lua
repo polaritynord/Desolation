@@ -106,7 +106,6 @@ end
 function love.keypressed(key, unicode)
     if key == "4" then
         CurrentScene.player.armorAcquired = not CurrentScene.player.armorAcquired
-        print(CurrentScene.player.armorAcquired)
     end
     --console shit
     local console = CurrentScene.devConsole
