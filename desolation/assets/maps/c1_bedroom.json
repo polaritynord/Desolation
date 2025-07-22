@@ -4,7 +4,7 @@
     "saveable": true,
     "playerData": {
         "position": [-250, 70],
-        "cameraPosition": [0, 0],
+        "cameraPosition": [-250, 70],
         "health": 100,
         "armor": 0,
         "armorAcquired": false

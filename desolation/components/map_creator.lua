@@ -114,8 +114,13 @@ function mapCreator:loadMap(path, resetGlobals)
     end
     self.ambience = nil
     --read & convert to lua table
-    local data = love.filesystem.read(path)
-    data = json.decode(data)
+    local data
+    if type(path) == "string" then
+        data = love.filesystem.read(path)
+        data = json.decode(data)
+    else
+        data = path
+    end
     self.parent.mapName = data.name or "Map"
     --Set illumination
     CurrentScene.illumination = data.illumination or {0.4, 0.4, 0.4}
@@ -213,7 +218,7 @@ function mapCreator:loadMap(path, resetGlobals)
             --load up beginner inventory
             local inv = data.playerData.beginnerInventory
             if inv ~= nil then
-                --load wepaons
+                --load weapons
                 for i, v in ipairs(inv.weapons) do
                     if v == nil then
                         player.inventory.weapons[i] = nil
@@ -252,12 +257,17 @@ function mapCreator:loadMap(path, resetGlobals)
     self.parent.changingMapTo = nil
     self.parent.mapTransitionPlayer = nil
     self.parent.saveableMap = data.saveable
+    if not data.saveable then return end
+    --Since these map datas are not changeable (mostly),
+    --I just straight up save them here to write it to
+    --the save file afterwards.
     self.mapBaseData = {
         name = data.name,
         illumination = data.illumination,
         saveable = data.saveable,
         assets = data.assets,
-        lights = data.lights
+        lights = data.lights,
+        walls = data.walls
     }
 end
 
@@ -265,8 +275,7 @@ function mapCreator:loadSave(path)
     Globals:load()
     local saveFile = love.filesystem.read(path)
     local saveData = json.decode(saveFile)
-    --Setup player data
-
+    self:loadMap(saveData)
 end
 
 function mapCreator:createExplosion(position, radius, intensity)
@@ -323,25 +332,36 @@ end
 
 function mapCreator:saveProgress()
     local title = os.date("%d/%m/%Y %H.%m") .. " (" .. self.parent.mapName .. ")"
-    --Save player data first
     local player = CurrentScene.player
     local saveData = {
-        player = {
-            position = table.new(player.position),
+        playerData = {
+            position = player.position,
+            cameraPosition = player.position,
             health = player.health,
             armor = player.armor,
             stamina = player.stamina,
-            inventory = table.new(player.inventory) --is duplicating necessary?
+            beginnerInventory = {
+                weapons = {},
+                ammunition = {}
+            }
         },
-        walls = {},
+        name = self.mapBaseData.name,
+        illumination = self.mapBaseData.illumination,
+        saveable = self.mapBaseData.saveable,
+        assets = self.mapBaseData.assets,
+        walls = self.mapBaseData.walls,
         items = {},
-        lights = {},
-        props = {}
+        props = {},
+        lights = self.mapBaseData.lights
     }
-    --Save walls
-    for _, wall in ipairs(CurrentScene.walls.tree) do
-        local wallData = {wall.name, {wall.position[1]/64,wall.position[2]/64}, {wall.scale[1], wall.scale[2]}}
-        saveData.walls[#saveData.walls+1] = wallData
+    --Convert player's inventory to the type that map files use
+    for name, ammoCount in pairs(player.inventory.ammunition) do
+        local table = {name, ammoCount}
+        saveData.playerData.beginnerInventory.ammunition[#saveData.playerData.beginnerInventory.ammunition+1] = table
+    end
+    for _, weapon in ipairs(player.inventory.weapons) do
+        local table = {weapon.name, weapon.magAmmo}
+        saveData.playerData.beginnerInventory.weapons[#saveData.playerData.beginnerInventory.weapons+1] = table
     end
     --Encode file and write
     love.filesystem.write("saves/test.sav", json.encode(saveData))
