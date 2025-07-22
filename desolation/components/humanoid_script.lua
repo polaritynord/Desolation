@@ -23,7 +23,7 @@ function humanoidScript:collisionCheck(delta, humanoid)
             local propPos = {prop.position[1]-propSize[1]/2, prop.position[2]-propSize[2]/2}
             if coreFuncs.aabbCollision(humanoidPos, propPos, size, propSize) then
                 humanoid.position = table.new(humanoid.oldPos)
-                if not humanoid.moving then
+                if not humanoid.moving and prop.velocity ~= nil then
                     prop.velocity = {-prop.velocity[1], -prop.velocity[2]}
                 end
                 --pushing crates
