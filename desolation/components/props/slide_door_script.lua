@@ -25,7 +25,7 @@ function slideDoorScript:update(delta)
     local moveSpeed = 500
     if door.collidable then
         door.closeTimer = door.closeTimer + delta
-        if door.closeTimer > 2 then
+        if door.closeTimer > 1.6 then
             --Closing
             if door.moving then
                 --NOTE might need a close sound effect

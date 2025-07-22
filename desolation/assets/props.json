@@ -4,6 +4,11 @@
         "targetable": false
     },
 
+    "text": {
+        "script": "desolation/components/props/text_script",
+        "targetable": false
+    },
+
     "crate": {
         "script": "desolation/components/props/crate",
         "movable": true,
