@@ -114,14 +114,10 @@ function mapCreator:loadMap(path, resetGlobals)
     end
     self.ambience = nil
     --read & convert to lua table
-    local data
-    if type(path) == "string" then
-        data = love.filesystem.read(path)
-        data = json.decode(data)
-    else
-        data = path
-    end
-    self.parent.mapName = data.name or "Map"
+    local data = love.filesystem.read("desolation/assets/maps/" .. path .. ".json")
+    data = json.decode(data)
+    self.parent.prettyMapName = data.name or "Map"
+    self.parent.mapName = path
     --Set illumination
     CurrentScene.illumination = data.illumination or {0.4, 0.4, 0.4}
     --Load map assets
@@ -257,25 +253,24 @@ function mapCreator:loadMap(path, resetGlobals)
     self.parent.changingMapTo = nil
     self.parent.mapTransitionPlayer = nil
     self.parent.saveableMap = data.saveable
-    if not data.saveable then return end
-    --Since these map datas are not changeable (mostly),
-    --I just straight up save them here to write it to
-    --the save file afterwards.
-    self.mapBaseData = {
-        name = data.name,
-        illumination = data.illumination,
-        saveable = data.saveable,
-        assets = data.assets,
-        lights = data.lights,
-        walls = data.walls
-    }
 end
 
 function mapCreator:loadSave(path)
-    Globals:load()
     local saveFile = love.filesystem.read(path)
     local saveData = json.decode(saveFile)
-    self:loadMap(saveData)
+    self:loadMap(saveData.mapName, true)
+    --Set player data
+    local player = CurrentScene.player
+    player.health = saveData.playerData.health
+    player.armor = saveData.playerData.armor
+    player.stamina = saveData.playerData.stamina
+    for i, weapon in ipairs(saveData.playerData.beginnerInventory.weapons) do
+        if weapon ~= nil then
+            local weaponObj = weaponManager[weapon[1]].new()
+            weaponObj.magAmmo = weapon[2]
+            player.inventory.weapons[i] = weaponObj
+        end
+    end
 end
 
 function mapCreator:createExplosion(position, radius, intensity)
@@ -331,12 +326,10 @@ function mapCreator:updateExplosionLights(delta)
 end
 
 function mapCreator:saveProgress()
-    local title = os.date("%d/%m/%Y %H.%m") .. " (" .. self.parent.mapName .. ")"
     local player = CurrentScene.player
     local saveData = {
+        title = os.date("%d/%m/%Y %H.%m") .. " (" .. self.parent.mapName .. ")",
         playerData = {
-            position = player.position,
-            cameraPosition = player.position,
             health = player.health,
             armor = player.armor,
             stamina = player.stamina,
@@ -345,14 +338,8 @@ function mapCreator:saveProgress()
                 ammunition = {}
             }
         },
-        name = self.mapBaseData.name,
-        illumination = self.mapBaseData.illumination,
-        saveable = self.mapBaseData.saveable,
-        assets = self.mapBaseData.assets,
-        walls = self.mapBaseData.walls,
-        items = {},
-        props = {},
-        lights = self.mapBaseData.lights
+        prettyMapName = self.parent.prettyMapName,
+        mapName = self.parent.mapName
     }
     --Convert player's inventory to the type that map files use
     for name, ammoCount in pairs(player.inventory.ammunition) do
@@ -379,8 +366,8 @@ function mapCreator:load()
     self.parent.mapTransitionPlayer = nil
     self.explosionLights = {}
     self.parent.saveableMap = false
-    self.parent.mapName = "Map"
-    self.mapBaseData = {}
+    self.parent.mapName = ""
+    self.parent.prettyMapName = "Map"
 end
 
 function mapCreator:update(delta)

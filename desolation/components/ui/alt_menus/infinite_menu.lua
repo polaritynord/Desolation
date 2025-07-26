@@ -130,7 +130,7 @@ function infiniteMenu:load()
                 scene.score = 0
                 scene.wave = 1
                 SetScene(scene)
-                scene.mapCreator.script:loadMap("desolation/assets/maps/infinite_openarea.json")
+                scene.mapCreator.script:loadMap("infinite_openarea")
             end;
             hoverEvent = buttonEvents.redHover;
             unhoverEvent = buttonEvents.redUnhover;

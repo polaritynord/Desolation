@@ -55,7 +55,7 @@ function storyStart:update(delta)
         if self.bgColor > -1.08 then
             local scene = LoadScene("desolation/assets/scenes/game.json")
             SetScene(scene)
-            scene.mapCreator.script:loadMap("desolation/assets/maps/c1_bedroom.json")
+            scene.mapCreator.script:loadMap("c1_bedroom")
             love.graphics.setBackgroundColor(0, 0, 0)
             return
         end

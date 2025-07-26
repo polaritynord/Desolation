@@ -13,6 +13,7 @@ function slideDoorScript:load()
 end
 
 function slideDoorScript:update(delta)
+    if GamePaused then return end
     local door = self.parent
     if door.locked then
         door.collidable = true

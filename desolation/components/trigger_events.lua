@@ -6,7 +6,7 @@ end
 
 function triggerEvents.loadc1Hallway(prop)
     local mapCreator = CurrentScene.mapCreator
-    mapCreator.changingMapTo = "desolation/assets/maps/c1_hallway.json"
+    mapCreator.changingMapTo = "c1_hallway"
     mapCreator.mapTransitionPlayer = CurrentScene.player
 end
 

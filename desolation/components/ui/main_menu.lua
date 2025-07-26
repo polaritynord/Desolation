@@ -106,7 +106,7 @@ function mainMenu:load()
     self.appearCooldown = 0.5
     --initial loading stuff
     if CurrentScene.mapCreator ~= nil then
-        CurrentScene.mapCreator.script:loadMap("desolation/assets/maps/" .. Settings.menu_background .. ".json")
+        CurrentScene.mapCreator.script:loadMap(Settings.menu_background)
     end
     --Cool shader stuff
     self:loadShaders()
