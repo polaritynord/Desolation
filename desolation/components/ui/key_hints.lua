@@ -34,12 +34,23 @@ function keyHints:load()
             color = {1, 1, 0, 1};
         }
     )
+    ui.progressSaveText = ui:newTextLabel(
+        {
+            text = "Progress Saved.";
+            size = 30;
+            color = {1, 1, 1, 0};
+        }
+    )
 end
 
 function keyHints:update(delta)
-    if GamePaused then return end
     local obj = self.parent
     local ui = obj.UIComponent
+    --Slowly decrease the alpha of "progress saved" text
+    ui.progressSaveText.color[4] = ui.progressSaveText.color[4] - delta
+    if ui.progressSaveText.color[4] < 0 then ui.progressSaveText.color[4] = 0 end
+    --Code regarding key hints
+    if GamePaused then return end
     if #obj.queue < 1 then
         ui.hintText.color[4] = 0
         obj.currentHintTimer = 0

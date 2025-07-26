@@ -216,7 +216,7 @@ function mapCreator:loadMap(path, resetGlobals)
             if inv ~= nil then
                 --load weapons
                 for i, v in ipairs(inv.weapons) do
-                    if v == nil then
+                    if v == nil or v == "null" then
                         player.inventory.weapons[i] = nil
                     else
                         player.inventory.weapons[i] = weaponManager[v[1]].new()
@@ -264,12 +264,19 @@ function mapCreator:loadSave(path)
     player.health = saveData.playerData.health
     player.armor = saveData.playerData.armor
     player.stamina = saveData.playerData.stamina
+    player.armorAcquired = saveData.playerData.armorAcquired
+    player.flashlightOn = saveData.playerData.flashlightOn
     for i, weapon in ipairs(saveData.playerData.beginnerInventory.weapons) do
-        if weapon ~= nil then
+        if weapon ~= nil and weapon ~= "null" then
             local weaponObj = weaponManager[weapon[1]].new()
             weaponObj.magAmmo = weapon[2]
             player.inventory.weapons[i] = weaponObj
+        else
+            player.inventory.weapons[i] = nil
         end
+    end
+    for _, ammunition in ipairs(saveData.playerData.beginnerInventory.ammunition) do
+        player.inventory.ammunition[ammunition[1]] = ammunition[2]
     end
 end
 
@@ -328,15 +335,17 @@ end
 function mapCreator:saveProgress()
     local player = CurrentScene.player
     local saveData = {
-        title = os.date("%d/%m/%Y %H.%m") .. " (" .. self.parent.mapName .. ")",
+        title = os.date("%d.%m.%Y %H.%m") .. " " .. self.parent.prettyMapName,
         playerData = {
             health = player.health,
             armor = player.armor,
             stamina = player.stamina,
             beginnerInventory = {
-                weapons = {},
+                weapons = {"null", "null", "null"},
                 ammunition = {}
-            }
+            },
+            armorAcquired = player.armorAcquired,
+            flashlightOn = player.flashlightOn
         },
         prettyMapName = self.parent.prettyMapName,
         mapName = self.parent.mapName
@@ -346,12 +355,18 @@ function mapCreator:saveProgress()
         local table = {name, ammoCount}
         saveData.playerData.beginnerInventory.ammunition[#saveData.playerData.beginnerInventory.ammunition+1] = table
     end
-    for _, weapon in ipairs(player.inventory.weapons) do
-        local table = {weapon.name, weapon.magAmmo}
-        saveData.playerData.beginnerInventory.weapons[#saveData.playerData.beginnerInventory.weapons+1] = table
+    --This is definitely going to be comedy for people analyzing my code in the future
+    for i = 1,3 do
+        if player.inventory.weapons[i] ~= nil then
+            local weapon = player.inventory.weapons[i]
+            local table = {weapon.name, weapon.magAmmo}
+            saveData.playerData.beginnerInventory.weapons[i] = table
+        else
+            saveData.playerData.beginnerInventory.weapons[i] = "null"
+        end
     end
     --Encode file and write
-    love.filesystem.write("saves/test.sav", json.encode(saveData))
+    love.filesystem.write("saves/" .. saveData.title .. ".sav", json.encode(saveData))
 end
 
 function mapCreator:load()

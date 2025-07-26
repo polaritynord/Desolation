@@ -35,6 +35,9 @@ function pauseScreen:load()
             clickEvent = function ()
                 if not CurrentScene.mapCreator.saveableMap then return end
                 CurrentScene.mapCreator.script:saveProgress()
+                CurrentScene.keyHints.UIComponent.progressSaveText.color[4] = 1
+                GamePaused = false
+                SoundManager:restartSound(Assets.defaultSounds.save, Settings.vol_sfx)
             end
         }
     )
