@@ -89,6 +89,11 @@
         ],
 
         [
+            "loadGameMenu",
+            ["UIComponent", "desolation/components/ui/load_game_menu"]
+        ],
+
+        [
             "devConsole",
             ["UIComponent", "desolation/components/ui/dev_console"]
         ],

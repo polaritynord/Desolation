@@ -334,8 +334,10 @@ end
 
 function mapCreator:saveProgress()
     local player = CurrentScene.player
+    local now = os.date("*t")
+    print(now.month)
     local saveData = {
-        title = os.date("%d.%m.%Y %H.%m") .. " " .. self.parent.prettyMapName,
+        title = now.day .. "." .. now.month .. "." .. now.year .. " " .. now.hour .. "." .. now.min .. " " .. self.parent.prettyMapName,
         playerData = {
             health = player.health,
             armor = player.armor,

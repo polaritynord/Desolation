@@ -192,6 +192,15 @@ function love.keypressed(key, unicode)
         ConsoleLog("Screenshot saved at " .. love.filesystem.getRealDirectory("screenshots"))
     end
 
+    --Save progress key
+    if table.contains(InputManager:getKeys("save_progress"), key) and CurrentScene.name == "Game" then
+        if CurrentScene.mapCreator.saveableMap then
+            CurrentScene.mapCreator.script:saveProgress()
+            CurrentScene.keyHints.UIComponent.progressSaveText.color[4] = 1
+            SoundManager:restartSound(Assets.defaultSounds.save, Settings.vol_sfx)
+        end
+    end
+
     --***DEVCONSOLE RELATED STUFF DOWN HERE***
     if not console then return end
     --Developer console opening key

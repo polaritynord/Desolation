@@ -1,3 +1,4 @@
+local clickEvents = require("desolation.button_clickevents")
 local loadGameMenu = {}
 
 function loadGameMenu:load()
@@ -43,6 +44,24 @@ function loadGameMenu:load()
         }
     )
     ui.controllerButtons = {ui.returnButton}
+    --Load up saves (if they exist)
+    for i, saveName in ipairs(table.reverse(love.filesystem.getDirectoryItems("saves"))) do
+        ui["saveButton" .. i] = ui:newTextButton(
+            {
+                buttonText = string.sub(saveName, 1, saveName:len()-4);
+                position = {0, 200+40*(i-1)};
+                hoverEvent = clickEvents.redHover;
+                unhoverEvent = clickEvents.redUnhover;
+                clickEvent = function (element)
+                    local scene = LoadScene("desolation/assets/scenes/game.json")
+                    SetScene(scene)
+                    scene.mapCreator.script:loadSave("saves/" .. element.saveName)
+                end
+            }
+        )
+        ui["saveButton" .. i].saveName = saveName
+        ui.controllerButtons[#ui.controllerButtons+1] = ui["saveButton" .. i]
+    end
 end
 
 function loadGameMenu:update(delta)
@@ -60,17 +79,22 @@ function loadGameMenu:update(delta)
     end
 
     if not ui.enabled then return end
+    local saves = love.filesystem.getDirectoryItems("saves")
+    if #saves > 6 then
+        ui.returnButton.position[2] = 440 + 40*(#saves-6)
+    else
+        ui.returnButton.position[2] = 440
+    end
 
     --Check for save count
     if love.filesystem.getInfo("saves") then
-        local saves = love.filesystem.getDirectoryItems("saves")
         if #saves > 0 then
             ui.noSavesFound.color[4] = 0
             --Write save files here
         else
             --Show no saves found here
             ui.noSavesFound.color[4] = 1
-        end    
+        end
     end
 end
 

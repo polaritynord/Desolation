@@ -18,7 +18,8 @@
         ["reload", "r"],
         ["toggle_hud", "f1"],
         ["screenshot", "f12"],
-        ["flashlight", "f"]
+        ["flashlight", "f"],
+        ["save_progress", "f6"]
     ],
 
     "joystick": [
@@ -46,6 +47,7 @@
         ["menu_down", 13],
         ["slider_right", 15],
         ["slider_left", 14],
-        ["toggle_zoom", 9]
+        ["toggle_zoom", 9],
+        ["save_progress", 0]
     ]
 }

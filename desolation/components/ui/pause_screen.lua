@@ -41,9 +41,20 @@ function pauseScreen:load()
             end
         }
     )
-    ui.settingsButton = ui:newTextButton(
+    ui.loadGameButton = ui:newTextButton(
         {
             position = {70, 280};
+            buttonText = Loca.mainMenu.loadGame;
+            buttonTextSize = 30;
+            clickEvent = function (element)
+                if not CurrentScene.mapCreator.saveableMap then return end
+                clickEvents.loadGameButtonClick(element)
+            end;
+        }
+    )
+    ui.settingsButton = ui:newTextButton(
+        {
+            position = {70, 320};
             buttonText = Loca.mainMenu.settings;
             buttonTextSize = 30;
             clickEvent = clickEvents.settingsButtonClick;
@@ -51,7 +62,7 @@ function pauseScreen:load()
     )
     ui.menuButton = ui:newTextButton(
         {
-            position = {70, 320};
+            position = {70, 360};
             buttonText = Loca.pauseScreen.mainMenu;
             buttonTextSize = 30;
             clickEvent = function ()
@@ -64,7 +75,7 @@ function pauseScreen:load()
     )
     ui.quitButton = ui:newTextButton(
         {
-            position = {70, 360};
+            position = {70, 400};
             buttonText = Loca.mainMenu.quit;
             buttonTextSize = 30;
             clickEvent = clickEvents.quitButtonClick;
@@ -99,6 +110,7 @@ function pauseScreen:update(delta)
     end
     --Dim the "save progress" button if not playing a saveable map (aka story)
     ui.saveProgressButton.color[4] = 0.5 + 0.5*coreFuncs.boolToNum(CurrentScene.mapCreator.saveableMap)
+    ui.loadGameButton.color[4] = 0.5 + 0.5*coreFuncs.boolToNum(CurrentScene.mapCreator.saveableMap)
 end
 
 return pauseScreen

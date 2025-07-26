@@ -122,7 +122,8 @@
             "toggle_hud": "Toggle HUD",
             "screenshot": "Take Screenshot",
             "toggle_follow": "Make NPC Follow",
-            "flashlight": "Toggle Flashlight"
+            "flashlight": "Toggle Flashlight",
+            "save_progress": "Save Progress"
         },
         "videoTitle": "VIDEO SETTINGS",
         "gameplayTitle": "GAMEPLAY SETTINGS",

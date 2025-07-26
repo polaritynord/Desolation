@@ -22,6 +22,13 @@ function table.contains(table, element, returnIndex)
     return false
 end
 
+function table.reverse(tab)
+    for i = 1, math.ceil(#tab/2), 1 do
+        tab[i], tab[#tab-i+1] = tab[#tab-i+1], tab[i]
+    end
+    return tab
+end
+
 function love.conf(t)
     t.window.width = 960 ; t.window.height = 540
     t.window.title = "DESOLATION"
