@@ -201,6 +201,14 @@ function love.keypressed(key, unicode)
         end
     end
 
+    --Player quick slot switching
+    local player = CurrentScene.player
+    if player ~= nil and player.inventory.previousSlot and table.contains(InputManager:getKeys("w_quickswitch"), key) and CurrentScene.name == "Game" and not GamePaused and player.health > 0 then
+        local temp = player.inventory.previousSlot
+        player.inventory.previousSlot = player.inventory.slot
+        player.inventory.slot = temp
+    end
+
     --***DEVCONSOLE RELATED STUFF DOWN HERE***
     if not console then return end
     --Developer console opening key

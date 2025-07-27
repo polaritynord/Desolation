@@ -200,6 +200,14 @@
                 ["destroyInTrigger", true],
                 ["size", [350, 80]]
             ]
+        ],
+        [
+            "trigger_prop", [-290, -275], 0,
+            [
+                ["event", "chapter1Title"],
+                ["destroyInTrigger", true],
+                ["size", [80, 80]]
+            ]
         ]
     ],
     "items": [],

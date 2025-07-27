@@ -7,7 +7,7 @@ end
 
 function c1Bedroom:update(delta)
     self.keyHintTimer = self.keyHintTimer + delta
-    if self.keyHintTimer > 2 and not self.moveAroundHintGiven then
+    if self.keyHintTimer > 2 and not self.moveAroundHintGiven and InputManager.inputType == "keyboard" then
         local keyHintsScript = CurrentScene.keyHints.script
         --Look around hint
         keyHintsScript:addHintToQueue(nil, Loca.customKeyHintDescriptions.useMouse)

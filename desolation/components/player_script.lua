@@ -160,6 +160,7 @@ function playerScript:pointTowardsMouse(player, delta)
 end
 
 function playerScript:slotSwitching(player)
+    if not player.armorAcquired then return end
     local oldSlot = player.inventory.slot
     --Switch slot with number keys
     for i = 1, 3 do
@@ -181,13 +182,6 @@ function playerScript:slotSwitching(player)
             if player.inventory.slot > 3 then player.inventory.slot = 1 end
         end
     end
-    --Quick slot switching
-    if InputManager:isPressed("w_quickswitch") and not player.keyPressData["q"] and player.inventory.previousSlot then
-        local temp = player.inventory.previousSlot
-        player.inventory.previousSlot = player.inventory.slot
-        player.inventory.slot = temp
-    end
-    player.keyPressData["q"] = InputManager:isPressed("w_quickswitch")
     if InputManager.inputType == "joystick" then
         player.keyPressData.leftSlot = InputManager.joystick:isDown(10)
         player.keyPressData.rightSlot = InputManager.joystick:isDown(11)
@@ -361,10 +355,7 @@ function playerScript:load()
     player.sprintCooldown = 0
     player.sprintSoundPlayed = false
     player.armorAcquired = true
-    --TODO Find a better way to handle these key presses?
-    player.keyPressData = {
-        ["q"] = false;
-    }
+    player.keyPressData = {}
     player.nearItem = nil
     player.aimAssistTarget = nil
     --Light variables
