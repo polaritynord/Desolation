@@ -79,4 +79,13 @@ function itemEventFuncs.batteryPickup(item)
     item.gettingPickedUp = true
 end
 
+function itemEventFuncs.flashlightPickup(item)
+    local player = CurrentScene.player
+    if player.flashlightAcquired then return end
+    item.gettingPickedUp = true
+    player.flashlightAcquired = true
+    local keyHintsScript = CurrentScene.keyHints.script
+    keyHintsScript:addHintToQueue("f")
+end
+
 return itemEventFuncs

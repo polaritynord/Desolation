@@ -323,7 +323,7 @@ function playerScript:updateLights(delta, player)
     Lighter:updateLight(player.primaryLight, player.position[1], player.position[2], self.lightRadius, 0.8, 0.8, 0.8, 0.5)
     --Flashlight
     --Close flashlight if the armor is not acquired (prob unnecessary code though)
-    if not player.armorAcquired then player.flashlightOn = false end
+    if not player.flashlightAcquired then player.flashlightOn = false end
     if not player.flashlightOn then
         player.flashlight.a = 0
         return
@@ -353,6 +353,7 @@ function playerScript:load()
     player.sprintCooldown = 0
     player.sprintSoundPlayed = false
     player.armorAcquired = true
+    player.flashlightAcquired = false
     player.keyPressData = {}
     player.nearItem = nil
     player.aimAssistTarget = nil

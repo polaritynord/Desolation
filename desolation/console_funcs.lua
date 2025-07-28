@@ -232,7 +232,7 @@ function consoleFunctions.mapScript(devConsole, command, i)
     end
     local scene = LoadScene("desolation/assets/scenes/game.json")
     SetScene(scene)
-    scene.mapCreator.script:loadMap(path)
+    scene.mapCreator.script:loadMap(temp)
 end
 
 function consoleFunctions.mapsScript(devConsole, command, i)

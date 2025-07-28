@@ -179,7 +179,7 @@ function love.keypressed(key, unicode)
     end
 
     --Toggle flashlight
-    if table.contains(InputManager:getKeys("flashlight"), key) and CurrentScene.name == "Game" and not GamePaused and CurrentScene.player.health > 0 and CurrentScene.player.armorAcquired then
+    if table.contains(InputManager:getKeys("flashlight"), key) and CurrentScene.name == "Game" and not GamePaused and CurrentScene.player.health > 0 and CurrentScene.player.flashlightAcquired then
         CurrentScene.player.flashlightOn = not CurrentScene.player.flashlightOn
         SoundManager:restartSound(Assets.sounds["flashlight_on"], Settings.vol_world)
     end

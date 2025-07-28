@@ -235,12 +235,18 @@ function mapCreator:loadMap(path, resetGlobals)
             else
                 player.armorAcquired = true
             end
+            if data.playerData.flashlightAcquired ~= nil then
+                player.flashlightAcquired = data.playerData.flashlightAcquired
+            else
+                player.flashlightAcquired = false
+            end
         else
             --If the player is, indeed, coming from another map
             --(just set the position)
             local oldPlayer = self.parent.mapTransitionPlayer
             player.flashlightOn = oldPlayer.flashlightOn
             player.armorAcquired = oldPlayer.armorAcquired
+            player.flashlightAcquired = oldPlayer.flashlightAcquired
             player.inventory = table.new(oldPlayer.inventory)
             player.stamina = oldPlayer.stamina
             player.armor = oldPlayer.armor
@@ -265,6 +271,7 @@ function mapCreator:loadSave(path)
     player.armor = saveData.playerData.armor
     player.stamina = saveData.playerData.stamina
     player.armorAcquired = saveData.playerData.armorAcquired
+    player.flashlightAcquired = saveData.playerData.flashlightAcquired
     player.flashlightOn = saveData.playerData.flashlightOn
     for i, weapon in ipairs(saveData.playerData.beginnerInventory.weapons) do
         if weapon ~= nil and weapon ~= "null" then
@@ -347,6 +354,7 @@ function mapCreator:saveProgress()
                 ammunition = {}
             },
             armorAcquired = player.armorAcquired,
+            flashlightAcquired = player.flashlightAcquired,
             flashlightOn = player.flashlightOn
         },
         prettyMapName = self.parent.prettyMapName,

@@ -38,6 +38,11 @@ function gameOver:update(delta)
                 SetScene(scene)
                 scene.mapCreator.mapTransitionPlayer = temp
                 scene.mapCreator.script:loadMap(mapCreator.changingMapTo, false)
+                --Save progress
+                if not CurrentScene.mapCreator.saveableMap then return end
+                CurrentScene.mapCreator.script:saveProgress()
+                CurrentScene.keyHints.UIComponent.progressSaveText.color[4] = 1
+                --SoundManager:restartSound(Assets.defaultSounds.save, Settings.vol_sfx)
             end
         end
     else

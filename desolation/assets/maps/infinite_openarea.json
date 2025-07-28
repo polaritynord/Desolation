@@ -19,7 +19,8 @@
             ]
         },
         "health": 100,
-        "armor": 25
+        "armor": 25,
+        "flashlightAcquired": true
     },
     "walls": [
         ["test_gray", [-42, -26], [4, 52]],
