@@ -10,11 +10,14 @@ function gameCursorScript:setCursorImage()
         love.mouse.setCursor(Assets.cursors.default)
         return
     end
+    local player = CurrentScene.player
     --Change cursor based on reloading state
-    if CurrentScene.player.reloading then
+    if player.reloading then
         love.mouse.setCursor(Assets.cursors.reload)
-    else
+    elseif player.inventory.weapons[player.inventory.slot] ~= nil then
         love.mouse.setCursor(Assets.cursors.combat)
+    else
+        love.mouse.setCursor(Assets.cursors.unarmed)
     end
 end
 

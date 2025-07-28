@@ -78,6 +78,36 @@
                 [14, 0.3], [18, 0.3], [20, 0.3],
                 [27, 0.3]
             ]
+        ],
+
+        "wakeupText": [
+            "UNITED WORLD NATIONS (UWN)",
+            "\nHIBERNATION SERVICES - MINISTRY OF MATERIALS",
+            "\n\nInitiating Wake-Up Protocol...",
+            "\n\nPersonnel: Aiden Williams (ID: A12L.1310, Priority LVL 3)",
+            "\nAge: 26",
+            "\nSex: Male",
+            "\nHeight: 182cm",
+            "\nWeight: 76kg",
+            "\n\nVital signs of personnel are average.",
+            "\nNeuronal activities are moderate.",
+            "\n\nPersonnel is ready to be released from Capsule A04.",
+            "\n\nUnlocking capsule..."
+        ],
+
+        "wakeupTextTimes": [
+            1.7,
+            2.2,
+            3.4,
+            5,
+            5.5,
+            6,
+            6.5,
+            7,
+            8.5,
+            9.5,
+            11,
+            13
         ]
     },
     "mainMenu": {

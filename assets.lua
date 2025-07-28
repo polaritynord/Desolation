@@ -48,6 +48,7 @@ function assets.load()
     assets.defaultImages.controller_hints_ps = love.graphics.newImage("desolation/assets/images/controller_hints/ps.png")
     assets.cursors = {
         default = love.mouse.newCursor("desolation/assets/images/cursor_default.png", 0, 0);
+        unarmed = love.mouse.newCursor("desolation/assets/images/cursor_unarmed.png", 6, 6);
         combat = love.mouse.newCursor("desolation/assets/images/cursor_combat.png", 18, 18);
         reload = love.mouse.newCursor("desolation/assets/images/cursor_reload.png", 18, 18);
     }

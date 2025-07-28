@@ -5,7 +5,7 @@
     "playerData": {
         "position": [-250, 70],
         "cameraPosition": [-250, 70],
-        "health": 100,
+        "health": 70,
         "armor": 0,
         "armorAcquired": false,
         "allowZoom": true
