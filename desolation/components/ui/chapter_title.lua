@@ -22,6 +22,7 @@ function chapterTitle:load()
 end
 
 function chapterTitle:update(delta)
+    if GamePaused then return end
     local ui = self.parent.UIComponent
     if ui.title.text == "" then return end
     if self.waitTimer > 3 then

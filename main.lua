@@ -3,7 +3,7 @@ local json  = require("engine.lib.json")
 local coreFuncs = require("coreFuncs")
 local startupManager = require("engine.startup_manager")
 
-Lighter = require("engine.lib.lighter")()
+Lighter = require("engine.lib.lighterlib")()
 InputManager = require("engine.input_manager")
 SoundManager = require("engine.sound_manager")
 Globals = require("engine.globals")
