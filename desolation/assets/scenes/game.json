@@ -155,7 +155,8 @@
             ["weapon_shotgun", "desolation/assets/images/weapons/shotgun.png"],
             ["weapon_grenade", "desolation/assets/images/hud/grenade_white.png"],
             
-            ["hud_healthbar", "desolation/assets/images/hud/health_bar.png"],
+            ["hud_monitors", "desolation/assets/images/hud/monitors.png"],
+            ["hud_monitors_noarmor", "desolation/assets/images/hud/monitors_noarmor.png"],
             ["hud_ammo", "desolation/assets/images/hud/ammo.png"],
             ["hud_joystick", "desolation/assets/images/hud/joystick.png"],
             ["hud_acquire_medkit", "desolation/assets/images/hud/acquire_medkit.png"],

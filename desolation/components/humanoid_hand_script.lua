@@ -28,7 +28,9 @@ function playerHandScript:update(delta)
     local sizeDiff = 0
     if player.moving then
         local time = love.timer.getTime()
-        sizeDiff = math.sin((time-10)*12)/4
+        local speed = 12
+        if player.sprinting then speed = speed + 8 end
+        sizeDiff = math.sin((time-10)*speed)/4
     end
     hand.scale = {
         2.8 + sizeDiff/2,

@@ -52,6 +52,13 @@ function hud.customDraw(component)
 end
 
 function hud:updateMonitors(player, ui)
+    --Change monitor source depending on player's armor
+    if player.armorAcquired then
+       ui.monitorImg.source = Assets.images.hud_monitors
+    else
+        ui.monitorImg.source = Assets.images.hud_monitors_noarmor
+    end
+    --Set monitor texts
     ui.healthMonitor.text = math.ceil(player.health)
     ui.armorMonitor.text = math.ceil(player.armor)
     ui.staminaMonitor.text = math.ceil(player.stamina)
@@ -60,7 +67,7 @@ function hud:updateMonitors(player, ui)
     ui.healthMonitor.color = {1, temp, temp, 1}
     --update armor monitor color
     temp = coreFuncs.boolToNum(player.armor > 30)
-    ui.armorMonitor.color = {1, temp, temp, 1}
+    ui.armorMonitor.color = {1, temp, temp, coreFuncs.boolToNum(player.armorAcquired)}
     --update stamina monitor color
     temp = coreFuncs.boolToNum(player.stamina > 30)
     ui.staminaMonitor.color = {1, temp, temp, 1}
@@ -276,9 +283,9 @@ function hud:load()
     self.parent.crtShader.crt.feather = 0
     ui.draw = self.customDraw
     --Left side (health etc.)
-    ui.healthBar = ui:newImage(
+    ui.monitorImg = ui:newImage(
         {
-            source = Assets.images.hud_healthbar;
+            source = Assets.images.hud_monitors;
             position = {140, 487};
             scale = {2.35, 2.35};
         }
@@ -467,7 +474,7 @@ function hud:update(delta)
     if GamePaused then return end
     local ui = self.parent.UIComponent
     local player = CurrentScene.player
-    ui.enabled = player.armorAcquired and not ui.hiddenHUD
+    ui.enabled = not ui.hiddenHUD
     if not ui.enabled then return end
     self:updateMonitors(player, ui)
     self:updateWeaponMonitor(player, ui, delta)

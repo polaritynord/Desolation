@@ -46,7 +46,6 @@ function playerScript:movement(delta, player)
         end
     end
     --Dont allow sprinting if the armor is not acquired
-    if not player.armorAcquired then player.sprinting = false end
     if player.stamina < 0 or player.sprintCooldown > 0 or not player.moving then player.sprinting = false end
     if player.sprinting then
         --play sprint sound
@@ -160,7 +159,6 @@ function playerScript:pointTowardsMouse(player, delta)
 end
 
 function playerScript:slotSwitching(player)
-    if not player.armorAcquired then return end
     local oldSlot = player.inventory.slot
     --Switch slot with number keys
     for i = 1, 3 do

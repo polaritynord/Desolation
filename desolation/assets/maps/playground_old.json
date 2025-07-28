@@ -57,7 +57,6 @@
         [
             "trigger_prop", [360, 305], 0,
             [
-                ["event", "soundTest"],
                 ["destroyInTrigger", true]
             ]
         ]
