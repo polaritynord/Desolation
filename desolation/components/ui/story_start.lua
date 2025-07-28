@@ -21,7 +21,7 @@ function storyStart:load()
         }
     )
     --god i suck at naming variables
-    self.currentStringIndex = 21
+    self.currentStringIndex = 1
     self.speechIndex = 1
     self.speechText = ""
     self.emphasisIndexes = {} --{INDEX, DURATION}
@@ -52,7 +52,7 @@ function storyStart:update(delta)
         local speed = 0.2
         self.bgColor = self.bgColor + speed*delta
         --Load into game scene
-        if self.bgColor > -1.08 then
+        if self.bgColor > 1.08 then
             local scene = LoadScene("desolation/assets/scenes/game.json")
             SetScene(scene)
             scene.mapCreator.script:loadMap("c1_bedroom")
@@ -61,6 +61,11 @@ function storyStart:update(delta)
         end
         love.graphics.setBackgroundColor(self.bgColor, self.bgColor, self.bgColor)
         ui.speechTextLabel.color = {particleComp.color[1], particleComp.color[2], particleComp.color[3], 1}
+    end
+    --Temporary skipping key
+    if love.keyboard.isDown("space") then
+        self.bgColor = 2
+        self.currentStringIndex = 21
     end
     --Speech
     local speed = 0.07

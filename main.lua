@@ -3,29 +3,27 @@ local json  = require("engine.lib.json")
 local coreFuncs = require("coreFuncs")
 local startupManager = require("engine.startup_manager")
 
---local fullscreen = false
-
 Lighter = require("engine.lib.lighter")()
 InputManager = require("engine.input_manager")
 SoundManager = require("engine.sound_manager")
 Globals = require("engine.globals")
-DevConsoleOpen = false
 Assets = require("assets")
 MenuUIOffset = 0
 RealMenuUIOffset = 0
 CurrentScene = nil
-GamePaused = false
 Scenes = {}
 OldSceneName = ""
 MapChanged = false
+DevConsoleOpen = false
+GamePaused = false
 
 function love.mousemoved()
     InputManager:setInputTypeTo("keyboard")
 end
 
-function love.wheelmoved(x, y)
+function love.wheelmoved(_, y)
     InputManager:setInputTypeTo("keyboard")
-    --Keys menu scrolling (TODO, make this work for all menus?)
+    --Scrolling in various alt menus (TODO: Improve?)
     if CurrentScene.settings and (CurrentScene.settings.menu == "keys" or CurrentScene.settings.menu == "video" or CurrentScene.settings.menu == "gameplay") then
         local menu = CurrentScene.settings.keysMenu
         if CurrentScene.settings.menu == "video" then menu = CurrentScene.settings.videoMenu end
@@ -34,7 +32,7 @@ function love.wheelmoved(x, y)
         if menu.realY > 0 then menu.realY = 0 end
         if menu.realY < 540-menu.length then menu.realY = 540-menu.length end
     end
-    --Achivements menu scrolling (TODO, make this work for all menus?)
+    --Achivements menu scrolling
     if CurrentScene.achievements ~= nil then
         if CurrentScene.achievements.open then
             local menu = CurrentScene.achievements
@@ -44,7 +42,7 @@ function love.wheelmoved(x, y)
             if menu.realY < 540-menu.length then menu.realY = 540-menu.length end
         end
     end
-    --Changelog menu scrolling (TODO, make this work for all menus?)
+    --Changelog menu scrolling
     if CurrentScene.changelog ~= nil then
         if CurrentScene.changelog.open then
             local menu = CurrentScene.changelog
