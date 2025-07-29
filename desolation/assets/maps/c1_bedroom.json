@@ -232,8 +232,6 @@
 
     "assets": {
         "images": [
-            ["player_body", "desolation/assets/images/player/body.png"],
-
             ["prop_crate", "desolation/assets/images/props/crate.png"],
             ["prop_barrel", "desolation/assets/images/props/barrel.png"],
             ["prop_slide_door", "desolation/assets/images/props/slide_door.png"],

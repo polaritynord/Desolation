@@ -74,6 +74,36 @@
                 [14, 0.3], [18, 0.3], [20, 0.3],
                 [27, 0.3]
             ]
+        ],
+
+        "wakeupText": [
+            "BİRLEŞMİŞ DÜNYA MİLLETLERİ (BDM)",
+            "\nKIŞ UYKUSU HİZMETLERİ - Değerli Madenler Bakanlığı",
+            "\n\nUyandırma Protokolü başlatılıyor...",
+            "\n\nPersonel: Aiden Williams (NO: A12L.1310, Öncelik SVY 3)",
+            "\nYaş: 26",
+            "\nCinsiyet: Erkek",
+            "\nBoy: 182cm",
+            "\nKilo: 76kg",
+            "\n\nPersonelin yaşam göstergeleri ortalama.",
+            "\nNöron aktiviteleri makul.",
+            "\n\nPersonel Kapsül A04'den serbest bırakılmaya hazır.",
+            "\n\nKapsül kilidi açılıyor..."
+        ],
+
+        "wakeupTextTimes": [
+            1.7,
+            2.2,
+            3.4,
+            5,
+            5.5,
+            6,
+            6.5,
+            7,
+            8.5,
+            9.5,
+            11,
+            13
         ]
     },
     "mainMenu": {

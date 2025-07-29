@@ -24,6 +24,10 @@ end
 
 function c1Bedroom:update(delta)
     if GamePaused then return end
+    --Temporary skipping key
+    if love.keyboard.isDown("space") then
+        self.wakeupComplete = true
+    end
     local ui = CurrentScene.gameOver.UIComponent
     --TODO Might want to hide the cursor here
     if self.wakeupComplete then
@@ -46,6 +50,7 @@ function c1Bedroom:update(delta)
             self.moveAroundHintGiven = true
         end
     else
+        CurrentScene.player.moveVelocity = {0, 0}
         --Before waking up (initiation process)
         self.initiationTimer = self.initiationTimer + delta
         --Turn the white screen to full black
