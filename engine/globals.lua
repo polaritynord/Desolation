@@ -14,7 +14,7 @@ function globals:load()
     self.stamina_fill = {16, true, false}
     self.stamina_drain = {18, true, false}
     self.draw_triggers = {0, false, true}
-    self.fullbright = {1, false, true} --NOTE Might change cheat protection to false.
+    self.fullbright = {0, false, true} --NOTE Might change cheat protection to false.
 end
 
 function GetGlobal(name)

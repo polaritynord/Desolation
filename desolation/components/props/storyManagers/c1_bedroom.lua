@@ -65,6 +65,7 @@ function c1Bedroom:update(delta)
             if self.initiationTimer >= Loca.story.wakeupTextTimes[i] and self.textIndex < i then
                 self.textIndex = self.textIndex + 1
                 ui.infoText.text = ui.infoText.text .. text
+                SoundManager:restartSound(Assets.mapSounds.console_process, Settings.vol_world)
             end
         end
         --After reaching the end, wait for a little, then get rid of the text. After waiting just a little more, make

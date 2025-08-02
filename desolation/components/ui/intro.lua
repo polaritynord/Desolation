@@ -1,5 +1,4 @@
 local moonshine = require("engine.lib.moonshine")
-local coreFuncs = require("coreFuncs")
 
 local intro = ENGINE_COMPONENTS.scriptComponent.new()
 
@@ -15,7 +14,7 @@ function intro:load()
     )
     ui.polarity = ui:newImage(
         {
-            position = {350, 270};
+            position = {170, 270};
             scale = {0.3, 0.3};
             source = "none";
         }
@@ -23,15 +22,22 @@ function intro:load()
     ui.title = ui:newTextLabel(
         {
             text = "";--"Made by \nPolarity";
-            position = {415, 220};
+            position = {235, 220};
             size = 54;
         }
     )
     ui.titleNord = ui:newTextLabel(
         {
             text = "";--"nord";
-            position = {595, 270};
+            position = {415, 270};
             size = 36;
+        }
+    )
+    ui.loveLogo = ui:newImage(
+        {
+            source = "none";
+            scale = {0.5, 0.5};
+            position = {700, 270};
         }
     )
     ui.beta = ui:newTextLabel(
@@ -70,6 +76,7 @@ function intro:update(delta)
         ui.title.text = "Made by\nPolarity"
         ui.titleNord.text = "nord"
         ui.beta.text = Loca.intro.betaText
+        ui.loveLogo.source = Assets.images["love_logo"]
         ui.alpha = ui.alpha + 4*delta
     end
     --Hide everything else

@@ -1,6 +1,33 @@
 local clickEvents = require("desolation.button_clickevents")
 local loadGameMenu = {}
 
+function loadGameMenu:refreshSaveButtons()
+    local ui = self.parent.UIComponent
+    --Remove old ones
+    for i, element in ipairs(ui.saveButtons) do
+        ui:removeElement(element)
+        table.remove(ui.saveButtons, i)
+    end
+    --Load up saves (if they exist)
+    for i, saveName in ipairs(table.reverse(love.filesystem.getDirectoryItems("saves"))) do
+        local element = ui:newTextButton(
+            {
+                buttonText = string.sub(saveName, 1, saveName:len()-4);
+                position = {0, 200+40*(i-1)};
+                hoverEvent = clickEvents.redHover;
+                unhoverEvent = clickEvents.redUnhover;
+                clickEvent = function (element)
+                    local scene = LoadScene("desolation/assets/scenes/game.json")
+                    SetScene(scene)
+                    scene.mapCreator.script:loadSave("saves/" .. element.saveName)
+                end
+            }
+        )
+        element.saveName = saveName
+        ui.saveButtons[#ui.saveButtons+1] = element
+    end
+end
+
 function loadGameMenu:load()
     local menu = self.parent
     local ui = menu.UIComponent
@@ -14,18 +41,6 @@ function loadGameMenu:load()
             font = "disposable-droid-bold";
         }
     )
-    --ui.tempButton = ui:newTextButton(
-    --    {
-    --        buttonText = "Load test.sav";
-    --        position = {0, 200};
-    --        buttonTextSize = 30;
-    --        clickEvent = function ()
-    --            local scene = LoadScene("desolation/assets/scenes/game.json")
-    --            SetScene(scene)
-    --            scene.mapCreator.script:loadSave("saves/test.sav")
-    --        end
-    --    }
-    --)
     ui.noSavesFound = ui:newTextLabel(
         {
             text = Loca.loadGameMenu.noSavesFound;
@@ -44,24 +59,8 @@ function loadGameMenu:load()
         }
     )
     ui.controllerButtons = {ui.returnButton}
-    --Load up saves (if they exist)
-    for i, saveName in ipairs(table.reverse(love.filesystem.getDirectoryItems("saves"))) do
-        ui["saveButton" .. i] = ui:newTextButton(
-            {
-                buttonText = string.sub(saveName, 1, saveName:len()-4);
-                position = {0, 200+40*(i-1)};
-                hoverEvent = clickEvents.redHover;
-                unhoverEvent = clickEvents.redUnhover;
-                clickEvent = function (element)
-                    local scene = LoadScene("desolation/assets/scenes/game.json")
-                    SetScene(scene)
-                    scene.mapCreator.script:loadSave("saves/" .. element.saveName)
-                end
-            }
-        )
-        ui["saveButton" .. i].saveName = saveName
-        ui.controllerButtons[#ui.controllerButtons+1] = ui["saveButton" .. i]
-    end
+    ui.saveButtons = {}
+    self:refreshSaveButtons()
 end
 
 function loadGameMenu:update(delta)

@@ -16,7 +16,7 @@ function humanoidScript:collisionCheck(delta, humanoid)
     end
     --iterate through props
     for _, prop in ipairs(CurrentScene.props.tree) do
-        if prop.collidable then
+        if prop.collidable and prop.imageComponent.source ~= nil then
             local src = prop.imageComponent.source
             local w, h = src:getWidth(), src:getHeight()
             local propSize = {prop.scale[1]*w, prop.scale[2]*h}

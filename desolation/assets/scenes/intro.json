@@ -18,11 +18,13 @@
     "assets": {
         "images": [
             ["logo", "desolation/assets/images/logo.png"],
-            ["nord", "engine/assets/icon.png"]
+            ["nord", "engine/assets/icon.png"],
+            ["love_logo", "engine/assets/love_logo.png"]
         ],
 
         "sounds": [
-            ["ost_intro", "desolation/assets/sounds/ost/intro.wav", "static"]
+            ["ost_intro", "desolation/assets/sounds/ost/intro.wav", "static"],
+			["console_process", "desolation/assets/sounds/console_process.wav", "static"]
         ]
     }
 }

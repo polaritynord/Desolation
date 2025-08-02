@@ -250,7 +250,8 @@
             ["step_concrete3", "desolation/assets/sounds/footstep/concrete3.wav", "static"],
             ["step_concrete4", "desolation/assets/sounds/footstep/concrete4.wav", "static"],
 
-            ["slide_door_open", "desolation/assets/sounds/slide_door_open.wav", "static"]
+            ["slide_door_open", "desolation/assets/sounds/slide_door_open.wav", "static"],
+            ["console_process", "desolation/assets/sounds/console_process.wav", "static"]
         ]
     }
 }

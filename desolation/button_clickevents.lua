@@ -66,6 +66,7 @@ function clickEvents.loadGameButtonClick(element)
     if AltMenuOpen then return end
     local loadGameMenu = CurrentScene.loadGameMenu
     loadGameMenu.open = true
+    loadGameMenu.script:refreshSaveButtons()
 end
 
 function clickEvents.extrasButtonClick(element)
