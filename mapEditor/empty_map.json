@@ -1,0 +1,23 @@
+{
+    "playerData": {
+        "position": [0, 0],
+        "cameraPosition": [0, 0],
+        "health": 100,
+        "armor": 0
+    },
+
+    "walls": [],
+
+    "tiles": [],
+
+    "props": [],
+
+    "items": [],
+
+    "assets": {
+        "images": [
+            ["player_body", "desolation/assets/images/player/body.png"]
+        ],
+        "sounds": []
+    }
+}

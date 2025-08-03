@@ -1,0 +1,36 @@
+{
+    "ammo_light": {
+        "scale": [0.35, 0.35],
+        "pickupEvent": "ammoPickup"
+    },
+
+    "ammo_medium": {
+        "scale": [0.35, 0.35],
+        "pickupEvent": "ammoPickup"
+    },
+
+    "ammo_revolver": {
+        "scale": [0.35, 0.35],
+        "pickupEvent": "ammoPickup"
+    },
+
+    "ammo_shotgun": {
+        "scale": [0.35, 0.35],
+        "pickupEvent": "ammoPickup"
+    },
+
+    "weapon": {
+        "scale": [2, 2],
+        "pickupEvent": "weaponPickup"
+    },
+
+    "medkit": {
+        "scale": [0.5, 0.5],
+        "pickupEvent": "medkitPickup"
+    },
+
+    "battery": {
+        "scale": [0.4, 0.4],
+        "pickupEvent": "batteryPickup"
+    }
+}
