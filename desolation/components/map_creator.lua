@@ -203,6 +203,7 @@ function mapCreator:loadMap(path, resetGlobals)
         SoundManager:playSound(Assets.mapSounds["ambience"], Settings.vol_world)
     end
     --player data
+    self.parent.cameraBoundaries = data.playerData.cameraBoundaries
     if CurrentScene.player ~= nil then
         local player = CurrentScene.player
         --If no previous playerData is passed through
@@ -210,7 +211,6 @@ function mapCreator:loadMap(path, resetGlobals)
             player.position = data.playerData.position
             CurrentScene.camera.position = data.playerData.cameraPosition
             self.parent.allowZoom = data.playerData.allowZoom
-            self.parent.cameraBoundaries = data.playerData.cameraBoundaries
             --load up beginner inventory
             local inv = data.playerData.beginnerInventory
             if inv ~= nil then

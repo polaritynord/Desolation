@@ -1,4 +1,5 @@
 local json = require("json")
+local urfs = require("engine.lib.urfs")
 
 local function cameraControls(delta)
     --Mouse controls
@@ -127,7 +128,7 @@ local function loadMap(resetCamera)
         images = {}
     }
     for i, img in ipairs(CurrentMap.assets.images) do
-        Assets.images[img[1]] = love.graphics.newImage(BASE_DIRECTORY .. img[2])
+        Assets.images[img[1]] = love.graphics.newImage(img[2])
         print("Loading images (" .. i .. "/" .. #CurrentMap.assets.images .. ")...")
     end
     --Wall quad data and shit like that
@@ -174,9 +175,7 @@ function love.keypressed(key, unicode)
 end
 
 function love.load()
-    print(love.filesystem.getWorkingDirectory())
-    BASE_DIRECTORY = love.filesystem.getWorkingDirectory() .. "/"
-    print(BASE_DIRECTORY)
+    urfs.mount(".") --Mount the upper directory to access game assets
     love.graphics.setDefaultFilter("nearest", "nearest")
     loadMap(true)
 end
