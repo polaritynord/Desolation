@@ -54,7 +54,7 @@ function love.wheelmoved(_, y)
     end
 
     --Ingame zooming
-    if not GamePaused and CurrentScene.name == "Game" and (CurrentScene.mapCreator.allowZoom or GetGlobal("freecam") > 0) and love.keyboard.isDown("lctrl") then
+    if not GamePaused and CurrentScene.name == "Game" and (CurrentScene.mapCreator.allowZoom or GetGlobal("freecam") > 0) then
         local camController = CurrentScene.camera.script
         if y > 0 then
             camController.playerManualZoom = camController.playerManualZoom + 0.1
@@ -65,7 +65,7 @@ function love.wheelmoved(_, y)
         end
     end
 
-    --Ingame slot switching
+    --[[Ingame slot switching
     if not GamePaused and CurrentScene.name == "Game" and not love.keyboard.isDown("lctrl") and CurrentScene.player.health > 0 then
         local player = CurrentScene.player
         local oldSlot = player.inventory.slot
@@ -86,6 +86,7 @@ function love.wheelmoved(_, y)
             end
         end
     end
+    ]]--
     
     --DevConsole scrolling
     local console = CurrentScene.devConsole

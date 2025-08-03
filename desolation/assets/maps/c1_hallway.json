@@ -17,9 +17,9 @@
         ["test_gray", [-4, -5], [1, 13]],
         ["test_gray", [3, -5], [1, 13]],
         
-        ["test_gray", [-15, 7], [11, 1]],
-        ["test_gray", [-15, 8], [1, 6]],
-        ["test_gray", [-15, 14], [11, 1]],
+        ["test_gray", [-11, 7], [7, 1]],
+        ["test_gray", [-11, 8], [1, 6]],
+        ["test_gray", [-11, 14], [7, 1]],
 
         ["test_gray", [-4, 14], [1, 9]],
         ["test_gray", [3, 14], [1, 9]],
@@ -45,9 +45,9 @@
         ["test_gray", [50, -1], [1, 9]],
         ["test_gray", [57, -1], [1, 9]],
 
-        ["test_gray", [58, 7], [11, 1]],
-        ["test_gray", [58, 14], [11, 1]],
-        ["test_gray", [68, 8], [1, 6]],
+        ["test_gray", [58, 7], [7, 1]],
+        ["test_gray", [58, 14], [7, 1]],
+        ["test_gray", [64, 8], [1, 6]],
 
         ["test_gray", [32, 15], [1, 2]],
         ["test_gray", [30, 16], [2, 1]],
@@ -55,31 +55,66 @@
         ["test_gray", [21, 15], [1, 2]],
         ["test_gray", [22, 16], [2, 1]],
 
-        ["test_gray", [23, 17], [1, 19]],
-        ["test_gray", [30, 17], [1, 19]],
+        ["test_gray", [23, 17], [1, 9]],
+        ["test_gray", [30, 17], [1, 9]],
+        ["test_gray", [23, 28], [1, 8]],
+        ["test_gray", [30, 28], [1, 8]],
         ["test_gray", [24, 35], [6, 1]],
 
         ["test_gray", [18, 29], [5, 1]],
         ["test_gray", [18, 24], [1, 5]],
         ["test_gray", [19, 24], [4, 1]],
 
-        ["test_gray", [31, 30], [5, 1]],
-        ["test_gray", [35, 24], [1, 6]],
+        ["test_gray", [31, 29], [5, 1]],
+        ["test_gray", [35, 24], [1, 5]],
         ["test_gray", [31, 24], [4, 1]]
     ],
 
     "tiles": [
+        ["prototype_black", -1, -1],
+        ["prototype_black", 0, -1],
+        ["prototype_black", 1, -1],
+        ["prototype_black", 2, -1],
+        ["prototype_black", 3, -1],
+        ["prototype_black", 4, -1],
+        
         ["prototype_black", -1, 0],
-        ["prototype_black", -1, 1],
         ["prototype_black", 0, 0],
-        ["prototype_black", 0, 1],
         ["prototype_black", 1, 0],
-        ["prototype_black", 1, 1],
         ["prototype_black", 2, 0],
-        ["prototype_black", 2, 1]
+        ["prototype_black", 3, 0],
+        ["prototype_black", 4, 0],
+
+        ["prototype_black", -1, 1],
+        ["prototype_black", 0, 1],
+        ["prototype_black", 1, 1],
+        ["prototype_black", 2, 1],
+        ["prototype_black", 3, 1],
+        ["prototype_black", 4, 1],
+
+        ["prototype_black", -1, 2],
+        ["prototype_black", 0, 2],
+        ["prototype_black", 1, 2],
+        ["prototype_black", 2, 2],
+        ["prototype_black", 3, 2],
+        ["prototype_black", 4, 2]
     ],
 
-    "props": [],
+    "props": [
+        [
+            "slide_door", [1500, 1730], 90,
+            [
+                ["locked", false]
+            ]
+        ],
+
+        [
+            "slide_door", [1955, 1730], 90,
+            [
+                ["locked", true]
+            ]
+        ]
+    ],
 
     "items": [
     ],
@@ -89,7 +124,8 @@
             ["player_body", "desolation/assets/images/player/body.png"],
 
             ["tile_prototype_black", "desolation/assets/images/tiles/prototype_black.png"],
-            ["wall_test_gray", "desolation/assets/images/walls/test_gray.png"]
+            ["wall_test_gray", "desolation/assets/images/walls/test_gray.png"],
+            ["prop_slide_door", "desolation/assets/images/props/slide_door.png"]
         ],
         "sounds": []
     }

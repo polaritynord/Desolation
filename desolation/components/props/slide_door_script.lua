@@ -22,7 +22,7 @@ function slideDoorScript:update(delta)
     --TODO add humanoids
     --Measure distance to player
     local distance = coreFuncs.pointDistance(CurrentScene.player.position, door.oldPosition)
-    door.collidable = distance >= 85
+    door.collidable = false--distance >= 85
     --Move and make sound
     local moveSpeed = 500
     if distance >= 85 then
@@ -34,9 +34,13 @@ function slideDoorScript:update(delta)
                 SoundManager:restartSound(Assets.mapSounds["slide_door_open"], Settings.vol_world, door.position, true)
             end
             door.moving = false
-            door.position[1] = door.position[1] + moveSpeed*delta
+            door.position[1] = door.position[1] + moveSpeed*math.cos(door.rotation)*delta
+            door.position[2] = door.position[2] + moveSpeed*math.sin(door.rotation)*delta
             if door.position[1] > door.oldPosition[1] then
                 door.position[1] = door.oldPosition[1]
+            end
+            if door.position[2] > door.oldPosition[2] then
+                door.position[2] = door.oldPosition[2]
             end
         end
     else
@@ -49,9 +53,14 @@ function slideDoorScript:update(delta)
         door.closeTimer = 0
     end
     if door.opening then
-        door.position[1] = door.position[1] - moveSpeed*delta
-        if door.position[1] < door.oldPosition[1]-128 then
-            door.position[1] = door.oldPosition[1]-128
+        door.position[1] = door.position[1] - moveSpeed*math.cos(door.rotation)*delta
+        door.position[2] = door.position[2] - moveSpeed*math.sin(door.rotation)*delta
+        if door.position[1] < door.oldPosition[1]-128*math.cos(door.rotation) then
+            door.position[1] = door.oldPosition[1]-128*math.cos(door.rotation)
+            door.opening = false
+        end
+        if door.position[2] < door.oldPosition[2]-128*math.sin(door.rotation) then
+            door.position[2] = door.oldPosition[2]-128*math.sin(door.rotation)
             door.opening = false
         end
     end

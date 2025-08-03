@@ -20,6 +20,14 @@ function humanoidScript:collisionCheck(delta, humanoid)
             local src = prop.imageComponent.source
             local w, h = src:getWidth(), src:getHeight()
             local propSize = {prop.scale[1]*w, prop.scale[2]*h}
+            --NOTE hardcoded the scale values to be swapped if the prop is rotated exactly 90 degrees
+            --(for slide doors)
+            if prop.rotation == math.pi/2 or prop.rotation == -math.pi/2 then
+                --propSize = {propSize[2], propSize[1]} (this one didnt work??)
+                local temp = propSize[1]
+                propSize[1] = propSize[2]
+                propSize[2] = temp
+            end
             local propPos = {prop.position[1]-propSize[1]/2, prop.position[2]-propSize[2]/2}
             if coreFuncs.aabbCollision(humanoidPos, propPos, size, propSize) then
                 humanoid.position = table.new(humanoid.oldPos)
