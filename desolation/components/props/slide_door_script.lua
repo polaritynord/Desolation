@@ -5,7 +5,11 @@ function slideDoorScript:load()
     local door = self.parent
     door.imageComponent = ENGINE_COMPONENTS.imageComponent.new(door, Assets.mapImages["prop_slide_door"])
     door.imageComponent.layer = 4
-    door.scale = {3.7, 2.3}
+    if door.big then
+        door.scale = {11, 3.5}
+    else
+        door.scale = {3.7, 2.3}
+    end
     door.moving = false
     door.closeTimer = 0
     door.oldPosition = table.new(door.position)

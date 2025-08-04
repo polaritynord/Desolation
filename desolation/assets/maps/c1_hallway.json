@@ -103,16 +103,93 @@
 
     "props": [
         [
+            "image", [1725, 700], 0,
+            [
+                ["source", "uwn_logo"],
+                ["scale", [10, 10]],
+                ["color", [0.8, 0.8, 0.8, 1]]
+            ]
+        ],
+
+        [
             "slide_door", [1500, 1730], 90,
+            [
+                ["locked", false]
+            ]
+        ],
+        [
+            "slide_door", [1955, 1730], 90,
             [
                 ["locked", false]
             ]
         ],
 
         [
-            "slide_door", [1955, 1730], 90,
+            "slide_door", [0, 1000], 0,
             [
-                ["locked", false]
+                ["big", true],
+                ["locked", true]
+            ]
+        ],
+        [
+            "slide_door", [-300, 420], 0,
+            [
+                ["big", true],
+                ["locked", true]
+            ]
+        ],
+        [
+            "slide_door", [300, 420], 0,
+            [
+                ["big", true],
+                ["locked", true]
+            ]
+        ],
+        [
+            "slide_door", [3450, 1000], 0,
+            [
+                ["big", true],
+                ["locked", true]
+            ]
+        ],
+        [
+            "slide_door", [3450, 420], 0,
+            [
+                ["big", true],
+                ["locked", true]
+            ]
+        ],
+
+        [
+            "text", [-120, 500], 0,
+            [
+                ["text", "A DORMITORIES"],
+                ["scale", [1.4, 1.4]],
+                ["color", [1, 1, 1, 0.4]]
+            ]
+        ],
+        [
+            "text", [-120, 860], 0,
+            [
+                ["text", "B DORMITORIES"],
+                ["scale", [1.4, 1.4]],
+                ["color", [1, 1, 1, 0.4]]
+            ]
+        ],
+        [
+            "text", [3346, 500], 0,
+            [
+                ["text", "C DORMITORIES"],
+                ["scale", [1.4, 1.4]],
+                ["color", [1, 1, 1, 0.4]]
+            ]
+        ],
+        [
+            "text", [3346, 860], 0,
+            [
+                ["text", "D DORMITORIES"],
+                ["scale", [1.4, 1.4]],
+                ["color", [1, 1, 1, 0.4]]
             ]
         ],
 
@@ -124,7 +201,6 @@
                 ["destroyInTrigger", true]
             ]
         ],
-
         [
             "trigger_prop", [1280, 510], 0,
             [
@@ -137,7 +213,7 @@
 
     "items": [
         [
-            "flashlight", [0, 250], 0, true
+            "flashlight", [0, 450], 0, true
         ],
 
         [
@@ -153,10 +229,13 @@
     "assets": {
         "images": [
             ["player_body", "desolation/assets/images/player/body.png"],
+            ["uwn_logo", "desolation/assets/images/uwn_logo.png"],
 
             ["tile_prototype_black", "desolation/assets/images/tiles/prototype_black.png"],
             ["wall_test_gray", "desolation/assets/images/walls/test_gray.png"],
-            ["prop_slide_door", "desolation/assets/images/props/slide_door.png"]
+            ["prop_slide_door", "desolation/assets/images/props/slide_door.png"],
+            ["weapon_pistol", "desolation/assets/images/weapons/pistol.png"],
+            ["item_flashlight", "desolation/assets/images/items/flashlight.png"]
         ],
         "sounds": [
             ["ambience", "desolation/assets/sounds/ost/dormitory_ambience.wav", "stream"],

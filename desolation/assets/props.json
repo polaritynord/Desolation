@@ -4,6 +4,10 @@
         "targetable": false
     },
 
+    "image": {
+        "script": "desolation/components/props/image_script"
+    },
+
     "text": {
         "script": "desolation/components/props/text_script",
         "targetable": false
