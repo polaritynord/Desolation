@@ -16,6 +16,7 @@ end
 
 function wallScript:load()
     local wall = self.parent
+    if wall.name == "invisible" then return end
     wall.imageComponent = ENGINE_COMPONENTS.imageComponent.new(wall, Assets.mapImages["wall_" .. wall.name])
     wall.imageComponent.layer = 3
     wall.imageComponent.source:setWrap("repeat", "repeat")

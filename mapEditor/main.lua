@@ -134,8 +134,10 @@ local function loadMap(resetCamera)
     --Wall quad data and shit like that
     WallQuadData = {}
     for i, wall in ipairs(CurrentMap.walls) do
-        Assets.images["wall_" .. wall[1]]:setWrap("repeat", "repeat")
-        WallQuadData[#WallQuadData+1] = love.graphics.newQuad(0, 0, wall[3][1]*64, wall[3][2]*64, 64, 64)
+        if wall.name ~= "invisible" then
+            Assets.images["wall_" .. wall[1]]:setWrap("repeat", "repeat")
+            WallQuadData[#WallQuadData+1] = love.graphics.newQuad(0, 0, wall[3][1]*64, wall[3][2]*64, 64, 64)
+        end
         print("Loading wall quad data (" .. i .. "/" .. #CurrentMap.walls .. ")...")
     end
     --Camera

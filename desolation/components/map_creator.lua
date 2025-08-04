@@ -167,14 +167,16 @@ function mapCreator:loadMap(path, resetGlobals)
             wall.scale = v[3]
             wall.script:load()
             --Add light polygon data
-            CurrentScene:addLightPolygon(
-                {
-                    wall.position[1], wall.position[2], --topleft
-                    wall.position[1]+64*wall.scale[1], wall.position[2], --topright
-                    wall.position[1]+64*wall.scale[1], wall.position[2]+64*wall.scale[2], --bottomright
-                    wall.position[1], wall.position[2]+64*wall.scale[2] --bottomleft
-                }
-            )
+            if wall.name ~= "invisible" then
+                CurrentScene:addLightPolygon(
+                    {
+                        wall.position[1], wall.position[2], --topleft
+                        wall.position[1]+64*wall.scale[1], wall.position[2], --topright
+                        wall.position[1]+64*wall.scale[1], wall.position[2]+64*wall.scale[2], --bottomright
+                        wall.position[1], wall.position[2]+64*wall.scale[2] --bottomleft
+                    }
+                )
+            end
             --Add to scene tree
             CurrentScene.walls:addChild(wall)
         end
@@ -204,13 +206,13 @@ function mapCreator:loadMap(path, resetGlobals)
     end
     --player data
     self.parent.cameraBoundaries = data.playerData.cameraBoundaries
+    self.parent.allowZoom = data.playerData.allowZoom
     if CurrentScene.player ~= nil then
         local player = CurrentScene.player
         --If no previous playerData is passed through
         if self.parent.mapTransitionPlayer == nil then
             player.position = data.playerData.position
             CurrentScene.camera.position = data.playerData.cameraPosition
-            self.parent.allowZoom = data.playerData.allowZoom
             --load up beginner inventory
             local inv = data.playerData.beginnerInventory
             if inv ~= nil then
@@ -252,7 +254,6 @@ function mapCreator:loadMap(path, resetGlobals)
             player.armor = oldPlayer.armor
             player.health = oldPlayer.health
             --gosh I hope I'm not doing memory leaks with this shit
-            player.position = data.playerData.position
         end
     end
     MapChanged = true

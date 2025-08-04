@@ -5,18 +5,15 @@
     "playerData": {
         "position": [0, 0],
         "cameraPosition": [0, 0],
-        "cameraBoundaries": [
-            [-100000000, 10000000], [-46, 1000000]
-        ],
         "health": 100,
         "armor": 0,
         "allowZoom": true
     },
 
     "walls": [
-        ["test_gray", [-3, -5], [6, 1]],
-        ["test_gray", [-4, -5], [1, 13]],
-        ["test_gray", [3, -5], [1, 13]],
+        ["invisible", [-3, -5], [6, 1]],
+        ["test_gray", [-4, -13], [1, 21]],
+        ["test_gray", [3, -13], [1, 21]],
         
         ["test_gray", [-11, 7], [7, 1]],
         ["test_gray", [-11, 8], [1, 6]],
@@ -107,7 +104,7 @@
             [
                 ["source", "uwn_logo"],
                 ["scale", [10, 10]],
-                ["color", [0.8, 0.8, 0.8, 1]]
+                ["color", [1, 1, 1, 0.2]]
             ]
         ],
 
@@ -140,6 +137,13 @@
         ],
         [
             "slide_door", [300, 420], 0,
+            [
+                ["big", true],
+                ["locked", true]
+            ]
+        ],
+        [
+            "slide_door", [1735, 140], 0,
             [
                 ["big", true],
                 ["locked", true]
