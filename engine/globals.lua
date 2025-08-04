@@ -5,7 +5,7 @@ function globals:load()
     --NOTE might as well move this to a json file later
     self.cheats = {1, false, true}
     self.freecam = {1, true, true}
-    self.p_speed = {760, true, false}
+    self.p_speed = {200, true, false}
     self.noclip = {0, true, true}
     self.god = {0, true, true}
     self.invisible = {0, true, true}
@@ -13,7 +13,7 @@ function globals:load()
     self.slippiness = {12, true, false}
     self.stamina_fill = {16, true, false}
     self.stamina_drain = {12, true, false}
-    self.draw_triggers = {0, false, true}
+    self.draw_triggers = {1, false, true}
     self.fullbright = {1, false, true} --NOTE Might change cheat protection to false.
 end
 

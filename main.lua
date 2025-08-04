@@ -298,9 +298,17 @@ function love.load()
     love.keyboard.setKeyRepeat(true)
     love.window.setVSync(Settings.vsync)
 
+    local startScene = nil
+    --Open map directly if given
+    if table.contains(arg, "--map") then
+        local i = table.contains(arg, "--map", true)
+        startScene = LoadScene(GAME_DIRECTORY .. "/assets/scenes/game.json")
+        SetScene(startScene)
+        startScene.mapCreator.script:loadMap(arg[i+1])
+        return
+    end
     --Open up the default scene (or the scene given in args)
     local infoData = json.decode(love.filesystem.read(GAME_DIRECTORY .. "/info.json"))
-    local startScene = nil
     if table.contains(arg, "--scene") then
         local i = table.contains(arg, "--scene", true)
         startScene = LoadScene(GAME_DIRECTORY .. "/assets/scenes/" .. arg[i+1] .. ".json")

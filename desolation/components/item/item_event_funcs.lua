@@ -86,6 +86,8 @@ function itemEventFuncs.flashlightPickup(item)
     player.flashlightAcquired = true
     local keyHintsScript = CurrentScene.keyHints.script
     keyHintsScript:addHintToQueue("f")
+    --play sound
+    SoundManager:restartSound(Assets.sounds["acquire"], Settings.vol_world)
 end
 
 return itemEventFuncs

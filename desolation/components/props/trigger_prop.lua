@@ -24,7 +24,7 @@ function triggerProp:load()
 end
 
 function triggerProp:update(_)
-    if self.parent.event == nil then return end
+    if self.parent.event == nil or GamePaused then return end
     local playerPos = table.new(CurrentScene.player.position)
     playerPos[1] = playerPos[1]-24
     playerPos[2] = playerPos[2]-24

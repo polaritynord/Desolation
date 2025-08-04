@@ -11,4 +11,14 @@ function triggerEvents.loadc1Hallway(prop)
     mapCreator.mapTransitionPlayer = CurrentScene.player
 end
 
+function triggerEvents.sprintHint(prop)
+    local keyHintsScript = CurrentScene.keyHints.script
+    keyHintsScript:addHintToQueue("lshift")
+end
+
+function triggerEvents.zoomHint(prop)
+    local keyHintsScript = CurrentScene.keyHints.script
+    keyHintsScript:addHintToQueue(nil, "USE THE SCROLL WHEEL TO ZOOM")
+end
+
 return triggerEvents
