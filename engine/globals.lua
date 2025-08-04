@@ -4,8 +4,8 @@ function globals:load()
     -- {value, cheatProtection, toggleable}
     --NOTE might as well move this to a json file later
     self.cheats = {1, false, true}
-    self.freecam = {0, true, true}
-    self.p_speed = {200, true, false}
+    self.freecam = {1, true, true}
+    self.p_speed = {700, true, false}
     self.noclip = {0, true, true}
     self.god = {0, true, true}
     self.invisible = {0, true, true}

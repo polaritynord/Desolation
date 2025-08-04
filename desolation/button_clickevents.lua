@@ -1,6 +1,7 @@
 local json = require "engine.lib.json"
 local clickEvents = {}
 
+--UI buttons
 function clickEvents.redHover(element)
     local delta = love.timer.getDelta()
     element.color[2] = element.color[2] + (-element.color[2])*8*delta
@@ -100,12 +101,22 @@ function clickEvents.aboutButtonClick(element)
     about.open = true
 end
 
---[[
-function clickEvents.campaignButtonClick(element)
-    if AltMenuOpen then return end
-    local campaign = CurrentScene.campaign
-    campaign.open = true
+-- Ingame buttons
+function clickEvents.c1HallwayOpenLights(buttonProp)
+    
 end
-]]--
+
+function clickEvents.c1HallwayOpenDoor(buttonProp)
+    --Find the specific door
+    local hallwayDoor = nil
+    for _, prop in ipairs(CurrentScene.props.tree) do
+        print(prop.isHallwayDoor)
+        if prop.isHallwayDoor then
+            hallwayDoor = prop
+        end
+    end
+    if hallwayDoor == nil then return end
+    hallwayDoor.position[1] = hallwayDoor.position[1] - 200
+end
 
 return clickEvents

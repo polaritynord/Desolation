@@ -8,6 +8,10 @@
         "script": "desolation/components/props/image_script"
     },
 
+    "placeholder_button": {
+        "script": "desolation/components/props/placeholder_button_script"
+    },
+
     "text": {
         "script": "desolation/components/props/text_script",
         "targetable": false

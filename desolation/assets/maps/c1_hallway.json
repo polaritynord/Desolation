@@ -109,6 +109,19 @@
         ],
 
         [
+            "placeholder_button", [2190, 1722], 0,
+            [
+                ["pressEvent", "c1HallwayOpenDoor"]
+            ]
+        ],
+        [
+            "placeholder_button", [1266, 1722], 0, 
+            [
+                ["pressEvent", "c1HallwayOpenLights"]
+            ]
+        ],
+
+        [
             "slide_door", [1500, 1730], 90,
             [
                 ["locked", false]
@@ -146,7 +159,8 @@
             "slide_door", [1735, 140], 0,
             [
                 ["big", true],
-                ["locked", true]
+                ["locked", true],
+                ["isHallwayDoor", true]
             ]
         ],
         [
@@ -221,13 +235,14 @@
         ],
 
         [
-            "weapon", [2107, 1722], 0, "Pistol", true
+            "weapon", [2101, 1636], 32, "Pistol", true
         ]
     ],
 
     "lights": [
         [0, -100, 600, 1, 0, 0, 1],
-        [0, 290, 600, 1, 0, 0, 1]
+        [0, 290, 600, 1, 0, 0, 1],
+        [1722, 715, 10000, 1, 1, 1, 1]
     ],
 
     "assets": {
@@ -238,6 +253,7 @@
             ["tile_prototype_black", "desolation/assets/images/tiles/prototype_black.png"],
             ["wall_test_gray", "desolation/assets/images/walls/test_gray.png"],
             ["prop_slide_door", "desolation/assets/images/props/slide_door.png"],
+            ["prop_placeholder_button", "desolation/assets/images/props/placeholder_button.png"],
             ["weapon_pistol", "desolation/assets/images/weapons/pistol.png"],
             ["item_flashlight", "desolation/assets/images/items/flashlight.png"]
         ],
