@@ -111,13 +111,15 @@
         [
             "placeholder_button", [2190, 1722], 0,
             [
-                ["pressEvent", "c1HallwayOpenDoor"]
+                ["pressEvent", "c1HallwayOpenDoor"],
+                ["onePressOnly", true]
             ]
         ],
         [
             "placeholder_button", [1266, 1722], 0, 
             [
-                ["pressEvent", "c1HallwayOpenLights"]
+                ["pressEvent", "c1HallwayOpenLights"],
+                ["onePressOnly", true]
             ]
         ],
 
@@ -210,6 +212,38 @@
                 ["color", [1, 1, 1, 0.4]]
             ]
         ],
+        [
+            "text", [1620, 270], 0,
+            [
+                ["text", "LABORATORIES"],
+                ["scale", [1.4, 1.4]],
+                ["color", [1, 1, 1, 0.4]]
+            ]
+        ],
+        [
+            "text", [1575, 1100], 0,
+            [
+                ["text", "MAINATANCE ROOMS"],
+                ["scale", [1.4, 1.4]],
+                ["color", [1, 1, 1, 0.4]]
+            ]
+        ],
+        [
+            "text", [1600, 1675], 90,
+            [
+                ["text", "LIGHTS"],
+                ["scale", [1.4, 1.4]],
+                ["color", [1, 1, 1, 0.4]]
+            ]
+        ],
+        [
+            "text", [1900, 1675], 90,
+            [
+                ["text", "DOORS"],
+                ["scale", [1.4, 1.4]],
+                ["color", [1, 1, 1, 0.4]]
+            ]
+        ],
 
         [
             "trigger_prop", [250, 510], 0,
@@ -224,6 +258,14 @@
             [
                 ["event", "zoomHint"],
                 ["size", [50, 400]],
+                ["destroyInTrigger", true]
+            ]
+        ],
+        [
+            "trigger_prop", [1545, -900], 0,
+            [
+                ["event", "loadc1Labs"],
+                ["size", [380, 40]],
                 ["destroyInTrigger", true]
             ]
         ]
@@ -241,8 +283,7 @@
 
     "lights": [
         [0, -100, 600, 1, 0, 0, 1],
-        [0, 290, 600, 1, 0, 0, 1],
-        [1722, 715, 10000, 1, 1, 1, 1]
+        [0, 290, 600, 1, 0, 0, 1]
     ],
 
     "assets": {
@@ -265,7 +306,8 @@
             ["step_concrete3", "desolation/assets/sounds/footstep/concrete3.wav", "static"],
             ["step_concrete4", "desolation/assets/sounds/footstep/concrete4.wav", "static"],
 
-            ["slide_door_open", "desolation/assets/sounds/slide_door_open.wav", "static"]
+            ["slide_door_open", "desolation/assets/sounds/slide_door_open.wav", "static"],
+            ["hallway_door_open", "desolation/assets/sounds/hallway_door_open.wav", "static"]
         ]
     }
 }

@@ -102,8 +102,13 @@ function clickEvents.aboutButtonClick(element)
 end
 
 -- Ingame buttons
+local function c1HallwayDoorUpdate(prop, delta)
+    if prop.position[1] < prop.oldPosition[1] - 300 then return end
+    prop.position[1] = prop.position[1] - 100*delta
+end
+
 function clickEvents.c1HallwayOpenLights(buttonProp)
-    
+    CurrentScene:addLight(1722, 715, 10000, 1, 1, 1, 1)
 end
 
 function clickEvents.c1HallwayOpenDoor(buttonProp)
@@ -116,7 +121,8 @@ function clickEvents.c1HallwayOpenDoor(buttonProp)
         end
     end
     if hallwayDoor == nil then return end
-    hallwayDoor.position[1] = hallwayDoor.position[1] - 200
+    SoundManager:playSound(Assets.mapSounds["hallway_door_open"], Settings.vol_world, hallwayDoor.position, true)
+    hallwayDoor.update = c1HallwayDoorUpdate
 end
 
 return clickEvents
