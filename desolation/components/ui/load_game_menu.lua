@@ -3,6 +3,7 @@ local loadGameMenu = {}
 
 function loadGameMenu:refreshSaveButtons()
     local ui = self.parent.UIComponent
+    ui.controllerButtons = {}
     --Remove old ones
     for i, element in ipairs(ui.saveButtons) do
         ui:removeElement(element)
@@ -25,7 +26,9 @@ function loadGameMenu:refreshSaveButtons()
         )
         element.saveName = saveName
         ui.saveButtons[#ui.saveButtons+1] = element
+        ui.controllerButtons[#ui.controllerButtons+1] = element
     end
+    ui.controllerButtons[#ui.controllerButtons+1] = ui.returnButton
     self.parent.realY = self.parent.position[2]
     self.parent.length = 600+35*(#ui.saveButtons-8)
 end
@@ -60,7 +63,6 @@ function loadGameMenu:load()
             bindedKey = "escape";
         }
     )
-    ui.controllerButtons = {ui.returnButton}
     ui.saveButtons = {}
     self:refreshSaveButtons()
 end

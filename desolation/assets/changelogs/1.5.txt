@@ -1,0 +1,31 @@
+Alpha 1.5
+
+* Updated the README.md file to have a better description, alongside installation instructions and screenshots.
+* Added a new cursor type for when the player is unarmed, and reduced size of the UI cursor.
+* Integrated the lighter library to the game engine, adding lighting to the game's maps.
+* Added daylight cycles to the Infinite Mode.
+* New global: fullbright - set to 0 by default, disables lighting if set to 1 or greater.
+* The "Curved HUD" option in the gameplay settings is now disabled by default.
+* Disabled the turkish translation for now. The game will open in English regardless of which language you pick.
+* Added a new "Skip Intro" option in the gameplay settings.
+* Added difficulty icons to the Infinite Mode menu.
+* Shrinked tile images by 50%.
+* Increased the p_speed global from 140 to 200.
+* Added flashlight to player. Obtained by picking up a flashlight item, and toggled using F by default.
+* Story Mode's first moments:
+    * Added the beginning speech scene.
+    * Added the first two maps.
+* Added custom materials for tiles, allowing different step sound effects to play. (concrete and grass)
+* Newly added props:
+    * text: replaced the old exp_text. Used to write text within the map.
+    * placeholder_button: As its name suggests, used as a placeholder button for the dormitories mainatance rooms.
+    * slide_door: A metal door that opens when the player gets close.
+* The armor monitor in the HUD now doesn't show when armorAcquired variable of player is false.
+* Adjusted the humanoid hand animation by a little.
+* Implemented a system to smoothly transition maps while preserving player's data.
+* Removed controller hints, and added key hints (subject to change).
+* Added the LÖVE logo to the intro.
+* Added the mapEditor repository directly to this repository. Might change in future updates.
+* Added new arguments "--scene" and "--map" to directly open a scene or map from the terminal, while launching the game.
+* Fixed an issue where a newly-transitioned scene would draw itself for a frame without updating.
+* Removed name_ideas.txt.

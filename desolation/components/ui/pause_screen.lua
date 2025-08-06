@@ -82,7 +82,7 @@ function pauseScreen:load()
         }
     )
     ui.quitButton.confirmTimer = 0
-    ui.controllerButtons = {ui.continueButton, ui.saveProgressButton, ui.settingsButton, ui.menuButton, ui.quitButton}
+    ui.controllerButtons = {ui.continueButton, ui.saveProgressButton, ui.loadGameButton, ui.settingsButton, ui.menuButton, ui.quitButton}
 end
 
 function pauseScreen:update(delta)

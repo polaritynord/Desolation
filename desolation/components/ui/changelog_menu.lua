@@ -3,7 +3,7 @@ local changelogMenu = ENGINE_COMPONENTS.scriptComponent.new()
 
 function changelogMenu:readChangelogFiles(changelog)
     changelog.texts = {
-        {love.filesystem.read("desolation/assets/changelogs/1.4.txt"), 20, "Alpha 1.4"}
+        {love.filesystem.read("desolation/assets/changelogs/1.5.txt"), 20, "Alpha 1.5"}
     }
     --[[
     for _, fileName in ipairs(love.filesystem.getDirectoryItems(GAME_DIRECTORY .. "/assets/changelogs")) do
@@ -27,7 +27,7 @@ function changelogMenu:load()
     ui.enabled = false
     changelog.open = false
     changelog.realY = changelog.position[2]
-    changelog.length = 655
+    changelog.length = 1600
 
     self:readChangelogFiles(changelog)
     changelog.currentIndex = 1
@@ -62,7 +62,7 @@ function changelogMenu:load()
         {
             buttonText = Loca.mainMenu.returnButton;
             buttonTextSize = 35;
-            position = {0, 440};
+            position = {0, 1460};
             clickEvent = function() changelog.open = false ; changelog.selection = nil end;
             bindedKey = "escape";
         }
@@ -87,7 +87,8 @@ function changelogMenu:update(delta)
     end
 
     if not ui.enabled then return end
-    --Change length based on current selected text
+    --Change length based on current selected text (NOTE unused for now)
+    if true then return end
     local lineCount = changelog.texts[changelog.currentIndex][2]
     changelog.length = 65*lineCount
     ui.returnButton.position[2] = 515+(lineCount-1)*24

@@ -1,4 +1,4 @@
-local json = require("json")
+local json = require("engine.lib.json")
 local urfs = require("engine.lib.urfs")
 
 local function cameraControls(delta)
