@@ -57,7 +57,8 @@ function startupManager:load()
     love.window.setMode(w, h, {fullscreen=Settings.fullscreen})
 
     --Load localization data
-    Loca = love.filesystem.read("desolation/assets/loca_" .. Settings.language .. ".json")
+    Loca = love.filesystem.read("desolation/assets/loca_en.json")
+    --Loca = love.filesystem.read("desolation/assets/loca_" .. Settings.language .. ".json")
     Loca = json.decode(Loca)
 
     --Load achievements data

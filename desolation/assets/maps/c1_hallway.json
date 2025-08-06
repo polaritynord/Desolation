@@ -1,5 +1,5 @@
 {
-    "name": "Chapter 1 - Hallway",
+    "name": "Chapter 1 - Dormitories II",
     "illumination": [0, 0, 0],
     "saveable": true,
     "playerData": {
@@ -151,13 +151,6 @@
             ]
         ],
         [
-            "slide_door", [300, 420], 0,
-            [
-                ["big", true],
-                ["locked", true]
-            ]
-        ],
-        [
             "slide_door", [1735, 140], 0,
             [
                 ["big", true],
@@ -288,7 +281,6 @@
 
     "assets": {
         "images": [
-            ["player_body", "desolation/assets/images/player/body.png"],
             ["uwn_logo", "desolation/assets/images/uwn_logo.png"],
 
             ["tile_prototype_black", "desolation/assets/images/tiles/prototype_black.png"],

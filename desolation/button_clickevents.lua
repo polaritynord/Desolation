@@ -66,8 +66,8 @@ end
 function clickEvents.loadGameButtonClick(element)
     if AltMenuOpen then return end
     local loadGameMenu = CurrentScene.loadGameMenu
-    loadGameMenu.open = true
     loadGameMenu.script:refreshSaveButtons()
+    loadGameMenu.open = true
 end
 
 function clickEvents.extrasButtonClick(element)
@@ -103,7 +103,7 @@ end
 
 -- Ingame buttons
 local function c1HallwayDoorUpdate(prop, delta)
-    if prop.position[1] < prop.oldPosition[1] - 300 then return end
+    if prop.position[1] < prop.oldPosition[1] - 350 then return end
     prop.position[1] = prop.position[1] - 100*delta
 end
 
@@ -115,7 +115,6 @@ function clickEvents.c1HallwayOpenDoor(buttonProp)
     --Find the specific door
     local hallwayDoor = nil
     for _, prop in ipairs(CurrentScene.props.tree) do
-        print(prop.isHallwayDoor)
         if prop.isHallwayDoor then
             hallwayDoor = prop
         end

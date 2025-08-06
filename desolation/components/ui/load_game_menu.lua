@@ -26,6 +26,8 @@ function loadGameMenu:refreshSaveButtons()
         element.saveName = saveName
         ui.saveButtons[#ui.saveButtons+1] = element
     end
+    self.parent.realY = self.parent.position[2]
+    self.parent.length = 600+35*(#ui.saveButtons-8)
 end
 
 function loadGameMenu:load()
@@ -69,6 +71,7 @@ function loadGameMenu:update(delta)
 
     --UI Offsetting & canvas enabling
     menu.position[1] = 600 + MenuUIOffset
+    menu.position[2] = menu.position[2] + (menu.realY-menu.position[2])*8*delta
     ui.enabled = menu.open
     --Transparency animation
     if ui.enabled then

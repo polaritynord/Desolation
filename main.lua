@@ -52,6 +52,16 @@ function love.wheelmoved(_, y)
             if menu.realY < 540-menu.length then menu.realY = 540-menu.length end
         end
     end
+    --Load game menu scrolling
+    if CurrentScene.loadGameMenu ~= nil then
+        if CurrentScene.loadGameMenu.open then
+            local menu = CurrentScene.loadGameMenu
+            --menu.UIComponent.scrollbar.value = menu.UIComponent.scrollbar.value - y/20
+            menu.realY = menu.realY + 35*y
+            if menu.realY > 0 then menu.realY = 0 end
+            if menu.realY < 540-menu.length then menu.realY = 540-menu.length end
+        end
+    end
 
     --Ingame zooming
     if not GamePaused and CurrentScene.name == "Game" and (CurrentScene.mapCreator.allowZoom or GetGlobal("freecam") > 0) then
@@ -61,7 +71,7 @@ function love.wheelmoved(_, y)
             if camController.playerManualZoom > 2.5 then camController.playerManualZoom = 2.5 end
         elseif y < 0 then
             camController.playerManualZoom = camController.playerManualZoom - 0.1
-            if camController.playerManualZoom < 0.1 then camController.playerManualZoom = 0.1 end
+            if camController.playerManualZoom < 0.5 then camController.playerManualZoom = 0.5 end
         end
     end
 
