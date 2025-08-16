@@ -72,6 +72,7 @@ function gameplayMenu:load()
             toggled = Settings.always_sprint;
         }
     )
+    --[[
     ui.curvedHudText = ui:newTextLabel(
         {
             text = Loca.gameplayMenu.curvedHud;
@@ -85,16 +86,17 @@ function gameplayMenu:load()
             toggled = Settings.curved_hud;
         }
     )
+    ]]--
     ui.sprintTypeText = ui:newTextLabel(
         {
             text = Loca.gameplayMenu.sprintType;
-            position = {0, 400};
+            position = {0, 360};
             size = 30;
         }
     )
     ui.sprintTypeButton = ui:newTextButton(
         {
-            position = {370, 400};
+            position = {370, 360};
             buttonText = "";
             buttonTextSize = 30;
             hoverEvent = buttonEvents.redHover;
@@ -108,27 +110,27 @@ function gameplayMenu:load()
     )
     ui.experimentalPeekingText = ui:newTextLabel(
         {
-            position = {0, 440};
+            position = {0, 400};
             text = "Experimental Peeking: ";
             size = 30;
         }
     )
     ui.experimentalPeekingBox = ui:newCheckbox(
         {
-            position = {400, 455};
+            position = {400, 415};
             toggled = Settings.experimental_peeking;
         }
     )
     ui.itemsPickupText = ui:newTextLabel(
         {
-            position = {0, 480};
+            position = {0, 440};
             text = Loca.gameplayMenu.autoPickupLoot;
             size = 30;
         }
     )
     ui.itemsPickupBox = ui:newCheckbox(
         {
-            position = {400, 495};
+            position = {400, 455};
             toggled = Settings.auto_pick_loot;
         }
     )
@@ -136,12 +138,12 @@ function gameplayMenu:load()
         {
             text = "Controller Vibration: ";
             size = 30;
-            position = {0, 520};
+            position = {0, 480};
         }
     )
     ui.controllerVibrationBox = ui:newCheckbox(
         {
-            position = {400, 535};
+            position = {400, 495};
             toggled = Settings.controller_vibration;
         }
     )
@@ -149,12 +151,12 @@ function gameplayMenu:load()
         {
             text = Loca.gameplayMenu.controllerAimAssist;
             size = 30;
-            position = {0, 560};
+            position = {0, 520};
         }
     )
     ui.controllerAimAssistBox = ui:newCheckbox(
         {
-            position = {400, 575};
+            position = {400, 535};
             toggled = Settings.controller_aim_assist;
         }
     )
@@ -162,7 +164,6 @@ function gameplayMenu:load()
         ui.cameraSwayBox,
         ui.screenShakeBox,
         ui.alwaysSprintBox,
-        ui.curvedHudBox,
         ui.sprintTypeButton,
         ui.experimentalPeekingBox,
         ui.itemsPickupBox,
@@ -192,7 +193,7 @@ function gameplayMenu:update(delta)
     settings.preview.camera_sway = ui.cameraSwayBox.toggled
     settings.preview.screen_shake = ui.screenShakeBox.toggled
     settings.preview.always_sprint = ui.alwaysSprintBox.toggled
-    settings.preview.curved_hud = ui.curvedHudBox.toggled
+    --settings.preview.curved_hud = ui.curvedHudBox.toggled
     settings.preview.sprint_type = Settings.sprint_type
     settings.preview.experimental_peeking = ui.experimentalPeekingBox.toggled
     settings.preview.auto_pick_loot = ui.itemsPickupBox.toggled

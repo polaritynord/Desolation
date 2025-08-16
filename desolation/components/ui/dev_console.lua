@@ -1,5 +1,6 @@
 local coreFuncs = require("coreFuncs")
 local json = require("engine.lib.json")
+local utf8 = require("utf8")
 local consoleFuncs = require("desolation.console_funcs")
 
 local devConsole = ENGINE_COMPONENTS.scriptComponent.new()

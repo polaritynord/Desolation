@@ -14,6 +14,16 @@ function clickEvents.redUnhover(element)
     element.color[3] = element.color[3] + (1-element.color[3])*8*delta
 end
 
+function clickEvents.fadeIn(element)
+    local delta = love.timer.getDelta()
+    element.color[4] = element.color[4] + (1-element.color[4])*8*delta
+end
+
+function clickEvents.fadeOut(element)
+    local delta = love.timer.getDelta()
+    element.color[4] = element.color[4] + (0.5-element.color[4])*8*delta
+end
+
 function clickEvents.defaultHoverEvent(element)
     local delta = love.timer.getDelta()
     element.hoverOffset = element.hoverOffset + (14-element.hoverOffset) * 27 * delta

@@ -284,7 +284,8 @@
         "resetToDefault": "Reset Keybindings to Default",
         "name": "- NAME -",
         "key": "- KEY -",
-        "showControllerIcon": "Show Controller Icon: "
+        "showControllerIcon": "Show Controller Icon: ",
+        "tutorial": "Click on a name and press a key to reassign."
     },
     "audioMenu": {
         "masterVolume": "Master Volume: ",

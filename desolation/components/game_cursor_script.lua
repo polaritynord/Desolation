@@ -5,12 +5,12 @@ function gameCursorScript:setCursorImage()
     --Hide cursor if a controller is being used & return
     love.mouse.setVisible(InputManager.inputType ~= "joystick" and CurrentScene.name ~= "Story Start" and not self.parent.hideCursor)
     if not love.mouse.isVisible() then return end
-    --Set to default cursor if the game is paused or the player isn't in the game at all
-    if CurrentScene.name ~= "Game" or GamePaused then
+    --Set to default cursor if the game is paused or the player is dead
+    local player = CurrentScene.player
+    if CurrentScene.name ~= "Game" or GamePaused or (player ~= nil and player.health <= 0) then
         love.mouse.setCursor(Assets.cursors.default)
         return
     end
-    local player = CurrentScene.player
     --Change cursor based on reloading state
     if player.reloading then
         love.mouse.setCursor(Assets.cursors.reload)

@@ -29,10 +29,17 @@ function keysMenu:load()
             font = "disposable-droid-bold";
         }
     )
+    ui.tutorial = ui:newTextLabel(
+        {
+            text = Loca.keysMenu.tutorial;
+            position = {0, 190};
+            size = 16;
+        }
+    )
     --key binding main title or some shi
     ui:newTextLabel(
         {
-            position = {0, 200};
+            position = {0, 215};
             size = 30;
             font = "disposable-droid-bold";
             text = Loca.keysMenu.name;
@@ -41,7 +48,7 @@ function keysMenu:load()
     )
     ui:newTextLabel(
         {
-            position = {375, 200};
+            position = {375, 215};
             size = 30;
             font = "disposable-droid-bold";
             text = Loca.keysMenu.key;
@@ -62,7 +69,7 @@ function keysMenu:load()
             {
                 buttonTextSize = 30;
                 buttonText = bindingTitle;
-                position = {0, 200+i*40};
+                position = {0, 215+i*40};
                 clickEvent = function (element)
                     if element.selected then
                         element.selected = false
@@ -79,7 +86,7 @@ function keysMenu:load()
                 size = 30;
                 font = "disposable-droid-bold";
                 text = string.upper(binding[2]);
-                position = {370, 200+i*40};
+                position = {370, 215+i*40};
             }
         )
     end
@@ -87,7 +94,7 @@ function keysMenu:load()
     ui.resetKeys = ui:newTextButton(
         {
             buttonText = Loca.keysMenu.resetToDefault;
-            position = {0, 240+#InputManager.bindings.keyboard*40};
+            position = {0, 255+#InputManager.bindings.keyboard*40};
             hoverEvent = buttonEvents.redHover;
             unhoverEvent = buttonEvents.redUnhover;
             clickEvent = buttonEvents.resetKeysButtonClick;
@@ -99,12 +106,12 @@ function keysMenu:load()
             size = 30;
             font = "disposable-droid-bold";
             text = Loca.keysMenu.showControllerIcon;
-            position = {0, 275+#InputManager.bindings.keyboard*40}
+            position = {0, 300+#InputManager.bindings.keyboard*40}
         }
     )
     ui.showControllerIconBox = ui:newCheckbox(
         {
-            position = {400, 290+#InputManager.bindings.keyboard*40};
+            position = {400, 305+#InputManager.bindings.keyboard*40};
             toggled = Settings.show_controller_icon;
         }
     )

@@ -1,4 +1,6 @@
 local gameOver = ENGINE_COMPONENTS.scriptComponent.new()
+local json = require("engine.lib.json")
+local buttonEvents = require("desolation.button_clickevents")
 
 function gameOver:load()
     local ui = self.parent.UIComponent
@@ -10,11 +12,38 @@ function gameOver:load()
     )
     ui.title = CurrentScene.gameOver.UIComponent:newTextLabel(
         {
-            size = 48;
+            size = 96;
+            begin = "center";
             text = Loca.infiniteMode.gameOverTitle;
-            position = {100, 80};
+            position = {130, 80};
             color = {1, 1, 1, 0};
             font = "disposable-droid-bold";
+        }
+    )
+    ui.mainMenuButton = CurrentScene.gameOver.UIComponent:newTextButton(
+        {
+            position = {230, 360};
+            buttonText = "MAIN MENU";
+            buttonTextSize = 36;
+            textFont = "disposable-droid-bold";
+            hoverEvent = buttonEvents.fadeIn;
+            unhoverEvent =  buttonEvents.fadeOut;
+            clickEvent = function ()
+                love.filesystem.write("settings.json", json.encode(Settings))
+                love.filesystem.write("achievements.json", json.encode(Achievements))
+                local scene = LoadScene("desolation/assets/scenes/main_menu2.json")
+                SetScene(scene)
+            end
+        }
+    )
+    ui.replayButton = CurrentScene.gameOver.UIComponent:newTextButton(
+        {
+            position = {570, 360};
+            buttonText = "TRY AGAIN";
+            buttonTextSize = 36;
+            textFont = "disposable-droid-bold";
+            hoverEvent = buttonEvents.fadeIn;
+            unhoverEvent =  buttonEvents.fadeOut;
         }
     )
     ui.title.wrapLimit = 700
@@ -48,8 +77,8 @@ function gameOver:update(delta)
     else
         --game over screen background
         ui.rectangle.color = {1, 0, 0, ui.rectangle.color[4]}
-        ui.rectangle.color[4] = ui.rectangle.color[4] + (0.6-ui.rectangle.color[4])*8*delta
-        ui.title.color[4] = ui.title.color[4] + delta
+        ui.rectangle.color[4] = ui.rectangle.color[4] + (0.8-ui.rectangle.color[4])*8*delta
+        ui.title.color[4] = ui.title.color[4] + 0.6*delta
     end
 end
 

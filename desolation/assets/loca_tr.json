@@ -279,7 +279,8 @@
         "resetToDefault": "Kontrolleri Varsayılana Sıfırla",
         "name": "- İSİM -",
         "key": "- TUŞ -",
-        "showControllerIcon": "Kumanda İkonunu Göster: "
+        "showControllerIcon": "Kumanda İkonunu Göster: ",
+        "tutorial": "Click on a name, and press a key to reassign."
     },
     "audioMenu": {
         "masterVolume": "Ana Ses: ",

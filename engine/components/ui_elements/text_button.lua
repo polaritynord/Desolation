@@ -7,6 +7,7 @@ function textButton.new()
     local instance = {
         position = {0, 0};
         color = {1, 1, 1, 1};
+        scale = {1, 1};
         parentComp = nil;
         buttonText = "Button";
         buttonTextSize = 24;
@@ -63,7 +64,10 @@ function textButton.new()
         local pos = coreFuncs.getRelativeElementPosition(self.position, self.parentComp)
         love.graphics.setColor(self.color[1], self.color[2], self.color[3], self.color[4]*self.parentComp.alpha)
         SetFont("desolation/assets/fonts/" .. self.textFont .. ".ttf", self.buttonTextSize)
-        love.graphics.printf(self.buttonText, pos[1]+self.hoverOffset, pos[2], 1000, self.begin)
+        love.graphics.printf(
+            self.buttonText, pos[1]+self.hoverOffset, pos[2], 1000, self.begin,
+            0, self.scale[1], self.scale[2]
+        )
         love.graphics.setColor(1, 1, 1, 1)
     end
 
