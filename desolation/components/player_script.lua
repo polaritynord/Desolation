@@ -368,7 +368,6 @@ function playerScript:load()
     self.lightFlickerTime = math.uniform(1, 7)
     self.lightFlickered = false
     player.flashlightOn = false
-    player.health = -1
 end
 
 function playerScript:update(delta)

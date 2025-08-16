@@ -118,7 +118,7 @@ function openareaManager:setupUI()
     self.statsText = CurrentScene.gameOver.UIComponent:newTextLabel(
         {
             size = 30;
-            position = {120, 140};
+            position = {120, 166};
             color = {1, 1, 1, 0};
         }
     )

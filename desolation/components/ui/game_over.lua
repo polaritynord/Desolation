@@ -1,6 +1,6 @@
 local gameOver = ENGINE_COMPONENTS.scriptComponent.new()
 local json = require("engine.lib.json")
-local buttonEvents = require("desolation.button_clickevents")
+local coreFuncs = require("coreFuncs")
 
 function gameOver:load()
     local ui = self.parent.UIComponent
@@ -22,28 +22,44 @@ function gameOver:load()
     )
     ui.mainMenuButton = CurrentScene.gameOver.UIComponent:newTextButton(
         {
-            position = {230, 360};
+            position = {230, 400};
             buttonText = "MAIN MENU";
             buttonTextSize = 36;
             textFont = "disposable-droid-bold";
-            hoverEvent = buttonEvents.fadeIn;
-            unhoverEvent =  buttonEvents.fadeOut;
             clickEvent = function ()
+                --TODO add saving progress to story mode (adjust the text label too maybe)
                 love.filesystem.write("settings.json", json.encode(Settings))
                 love.filesystem.write("achievements.json", json.encode(Achievements))
                 local scene = LoadScene("desolation/assets/scenes/main_menu2.json")
                 SetScene(scene)
-            end
+            end;
+            color = {1, 1, 1, 0};
+            hoverEvent = function () end;
+            unhoverEvent = function () end;
         }
     )
     ui.replayButton = CurrentScene.gameOver.UIComponent:newTextButton(
         {
-            position = {570, 360};
+            position = {570, 400};
             buttonText = "TRY AGAIN";
             buttonTextSize = 36;
             textFont = "disposable-droid-bold";
-            hoverEvent = buttonEvents.fadeIn;
-            unhoverEvent =  buttonEvents.fadeOut;
+            clickEvent = function ()
+                --If infinite mode, restart the game with the same configurations
+                --TODO add the story time resetting here as well (and playground)
+                if CurrentScene.difficulty == nil then return end
+                local scene = LoadScene("desolation/assets/scenes/game.json")
+                scene.difficulty = CurrentScene.difficulty
+                scene.amounts = CurrentScene.amounts
+                scene.regenerateProps = CurrentScene.regenerateProps
+                scene.score = 0
+                scene.wave = 1
+                SetScene(scene)
+                scene.mapCreator.script:loadMap("infinite_openarea")
+            end;
+            color = {1, 1, 1, 0};
+            hoverEvent = function () end;
+            unhoverEvent = function () end;
         }
     )
     ui.title.wrapLimit = 700
@@ -51,6 +67,7 @@ end
 
 function gameOver:update(delta)
     local player = CurrentScene.player
+    if player == nil then return end --NOTE not the best way to fix the error I faced
     local ui = self.parent.UIComponent
     if player.health > 0 then
         local mapCreator = CurrentScene.mapCreator
@@ -79,7 +96,13 @@ function gameOver:update(delta)
         ui.rectangle.color = {1, 0, 0, ui.rectangle.color[4]}
         ui.rectangle.color[4] = ui.rectangle.color[4] + (0.8-ui.rectangle.color[4])*8*delta
         ui.title.color[4] = ui.title.color[4] + 0.6*delta
+        if ui.title.color[4] > 1.3 then
+            ui.mainMenuButton.color[4] = ui.mainMenuButton.color[4] + (0.5+coreFuncs.boolToNum(ui.mainMenuButton.mouseHovering)*0.5-ui.mainMenuButton.color[4])*8*delta
+            ui.replayButton.color[4] = ui.replayButton.color[4] + (0.5+coreFuncs.boolToNum(ui.replayButton.mouseHovering)*0.5-ui.replayButton.color[4])*8*delta
+        end
     end
+    ui.mainMenuButton.enabled = player.health <= 0 and ui.title.color[4] > 1.3
+    ui.replayButton.enabled = ui.mainMenuButton.enabled
 end
 
 return gameOver
