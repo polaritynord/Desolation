@@ -21,17 +21,24 @@ function infiniteMenu:load()
             font = "disposable-droid-bold";
         }
     )
+    ui.openareaMapIcon = ui:newImageButton(
+        {
+            position = {0, 200};
+            source = Assets.images["map_openarea"];
+            scale = {0.15, 0.15};
+        }
+    )
     ui.difficultyIcon = ui:newImage(
         {
             source = Assets.images.difficulty_1;
-            position = {20, 214};
+            position = {20, 304};
             scale = {1.5, 1.5};
         }
     )
     ui.difficultyPicker = ui:newTextButton(
         {
             buttonText = Loca.extrasMenu.infiniteDifficulty .. string.upper(Loca.extrasMenu.infiniteDifficulties[infinite.difficulty]);
-            position = {48, 200};
+            position = {48, 290};
             buttonTextSize = 30;
             hoverEvent = buttonEvents.redHover;
             unhoverEvent = buttonEvents.redUnhover;
@@ -46,26 +53,26 @@ function infiniteMenu:load()
         {
             text = Loca.extrasMenu.highScore .. ": ";
             size = 24;
-            position = {300, 202};
+            position = {300, 292};
             color = {1, 1, 1, 0.8};
         }
     )
     ui.difficultyDescription = ui:newTextLabel(
         {
-            position = {0, 250};
+            position = {0, 340};
             size = 16;
         }
     )
     ui.crateAmountText = ui:newTextLabel(
         {
             text = Loca.extrasMenu.crateAmount;
-            position = {0, 280};
+            position = {0, 370};
             size = 30;
         }
     )
     ui.crateAmountSlider = ui:newSlider(
         {
-            position = {355, 286};
+            position = {355, 376};
             baseColor = {0.5, 0.5, 0.5, 1};
             baseSize = {135, 18};
             valueText = false;
@@ -75,13 +82,13 @@ function infiniteMenu:load()
     ui.barrelAmountText = ui:newTextLabel(
         {
             text = Loca.extrasMenu.barrelAmount;
-            position = {0, 320};
+            position = {0, 410};
             size = 30;
         }
     )
     ui.barrelAmountSlider = ui:newSlider(
         {
-            position = {355, 326};
+            position = {355, 416};
             baseColor = {0.5, 0.5, 0.5, 1};
             baseSize = {135, 18};
             valueText = false;
@@ -91,13 +98,13 @@ function infiniteMenu:load()
     ui.expBarrelAmountText = ui:newTextLabel(
         {
             text = Loca.extrasMenu.expBarrelAmount;
-            position = {0, 360};
+            position = {0, 450};
             size = 30;
         }
     )
     ui.expBarrelAmountSlider = ui:newSlider(
         {
-            position = {355, 366};
+            position = {355, 456};
             baseColor = {0.5, 0.5, 0.5, 1};
             baseSize = {135, 18};
             valueText = false;
@@ -106,14 +113,14 @@ function infiniteMenu:load()
     )
     ui.regeneratePropsText = ui:newTextLabel(
         {
-            position = {0, 400};
+            position = {0, 490};
             text = Loca.extrasMenu.regenerateProps;
             size = 30;
         }
     )
     ui.regeneratePropsBox = ui:newCheckbox(
         {
-            position = {400, 415};
+            position = {400, 505};
             toggled = infinite.regenerateProps;
         }
     )
@@ -121,7 +128,7 @@ function infiniteMenu:load()
         {
             buttonText = Loca.extrasMenu.startGame;
             buttonTextSize = 30;
-            position = {0, 440};
+            position = {0, 530};
             clickEvent = function()
                 local scene = LoadScene("desolation/assets/scenes/game.json")
                 scene.difficulty = infinite.difficulty

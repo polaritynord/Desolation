@@ -23,7 +23,7 @@ function textButton.new()
         begin = "left";
     }
 
-    function instance:update(delta)
+    function instance:update(_)
         local mx, my = coreFuncs.getRelativeMousePosition()
         local pos = coreFuncs.getRelativeElementPosition(self.position, self.parentComp)
         --Click event

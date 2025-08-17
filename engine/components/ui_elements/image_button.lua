@@ -5,37 +5,49 @@ local imageButton = {}
 function imageButton.new()
     local instance = {
         position = {0, 0};
-        baseColor = {0, 0, 0, 1};
-        textColor = {1, 1, 1, 1};
-        text = "Button";
+        color = {1, 1, 1, 1};
+        scale = {1, 1};
+        rotation = 0;
+        source = Assets.defaultImages.missing_texture;
         parentComp = nil;
-        textSize = 24;
         mouseHovering = false;
         mouseClicking = false;
         clickEvent = nil;
         hoverEvent = nil;
-        font = "disposable-droid";
-        baseScale = {100, 50};
-        wrapLimit = 1000;
+        unhoverEvent = nil;
+        bindedKey = nil;
         enabled = true;
     }
 
     function instance:update(delta)
         local mx, my = coreFuncs.getRelativeMousePosition()
         local pos = coreFuncs.getRelativeElementPosition(self.position, self.parentComp)
-
         --Click event
-        if love.mouse.isDown(1) and self.mouseHovering and not self.mouseClicking and self.clickEvent then
-            love.audio.play(Assets.sounds.sfx.buttonClick)
+        if (love.mouse.isDown(1) and self.mouseHovering and not self.mouseClicking) and self.clickEvent ~= nil and InputManager.inputType == "keyboard" then
+            InputManager.leftMouseTimer = 0
+            SoundManager:playSound(Assets.defaultSounds["button_click"], Settings.vol_sfx)
             self.clickEvent(self)
         end
-
-        --check for mouse touch
-        if my > pos[2] and my < pos[2] + self.baseScale[2] and mx > pos[1] and mx < pos[1] + self.baseScale[1] then
+        --Check for controller selection
+        local cursorUI = CurrentScene.cursor.UIComponent
+        if InputManager.inputType == "joystick" and cursorUI.controllerCurrentMenu ~= nil then
+            local selectedButton = cursorUI.controllerCurrentMenu.controllerButtons[cursorUI.controllerSelection]
+            if selectedButton == instance then
+                if self.hoverEvent then self.hoverEvent(self) end
+            else
+                if self.unhoverEvent then self.unhoverEvent(self) end
+            end
+        end
+        --Check for mouse touch
+        if InputManager.inputType ~= "keyboard" then return end
+        local w = self.source:getWidth()*self.scale[1]
+        local h = self.source:getHeight()*self.scale[2]
+        if coreFuncs.aabbCollision(pos, {mx, my}, {w, h}, {1, 1}) then
             if self.hoverEvent then self.hoverEvent(self) end
             self.mouseHovering = true
             self.mouseClicking = love.mouse.isDown(1)
         else
+            if self.unhoverEvent then self.unhoverEvent(self) end
             self.mouseHovering = false
             self.mouseClicking = false
         end
@@ -43,15 +55,15 @@ function imageButton.new()
 
     function instance:draw()
         local pos = coreFuncs.getRelativeElementPosition(self.position, self.parentComp)
-        --draw base
-        love.graphics.setColor(self.baseColor[1], self.baseColor[2], self.baseColor[3], self.baseColor[4]*self.parentComp.alpha)
-        love.graphics.rectangle("fill", pos[1], pos[2], self.baseScale[1], self.baseScale[2])
-        
-        --draw text
-        SetFont("desolation/assets/fonts/" .. self.font .. ".ttf", self.textSize)
-        love.graphics.setColor(self.textColor[1], self.textColor[2], self.textColor[3], self.textColor[4]*self.parentComp.alpha)
-        love.graphics.printf(self.text, pos[1], pos[2], self.wrapLimit, "left")
-        love.graphics.setColor(1, 1, 1, 1)
+        love.graphics.push()
+            local w = self.source:getWidth()
+            local h = self.source:getHeight()
+            love.graphics.setColor(unpack(self.color))
+            love.graphics.draw(
+                self.source, pos[1], pos[2], self.rotation, self.scale[1], self.scale[2],
+                w/2, h/2
+            )
+        love.graphics.pop()
     end
 
     return instance

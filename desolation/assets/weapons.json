@@ -23,11 +23,11 @@
     "Revolver": {
         "weaponType": "auto",
         "bulletSpeed": 3000,
-        "bulletDamage": 32,
+        "bulletDamage": 50,
         "bulletSpread": 0.04,
         "bulletPerShot": 1,
         "reloadTime": 2.9,
-        "shootTime": 0.75,
+        "shootTime": 0.6,
         "magSize": 6,
         "bulletOffset": 65,
         "recoil": 0.45,

@@ -95,13 +95,14 @@ function UIComponent:new(parent)
         local instance2 = imageButton.new()
         if attributes then
             instance2.position = attributes.position or instance2.position
-            instance2.baseColor = attributes.baseColor or instance2.baseColor
-            instance2.textColor = attributes.textColor or instance2.textColor
-            instance2.text = attributes.text or instance2.text
-            instance2.textSize = attributes.textSize or instance2.textSize
-            instance2.baseScale = attributes.baseScale or instance2.baseScale
+            instance2.color = attributes.color or instance2.color
+            instance2.scale = attributes.scale or instance2.scale
+            instance2.rotation = attributes.rotation or instance2.rotation
+            instance2.source = attributes.source or instance2.source
             instance2.clickEvent = attributes.clickEvent or instance2.clickEvent
             instance2.hoverEvent = attributes.hoverEvent or instance2.hoverEvent
+            instance2.unhoverEvent = attributes.unhoverEvent or instance2.unhoverEvent
+            instance2.bindedKey = attributes.bindedKey or instance2.bindedKey
         end
         instance2.parentComp = self
         self.elements[#self.elements+1] = instance2

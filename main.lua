@@ -71,7 +71,7 @@ function love.wheelmoved(_, y)
             if camController.playerManualZoom > 2.5 then camController.playerManualZoom = 2.5 end
         elseif y < 0 then
             camController.playerManualZoom = camController.playerManualZoom - 0.1
-            if camController.playerManualZoom < 0.5 then camController.playerManualZoom = 0.5 end
+            if camController.playerManualZoom < 0.01 then camController.playerManualZoom = 0.01 end
         end
     end
 

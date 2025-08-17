@@ -128,7 +128,8 @@
             ["difficulty_2", "desolation/assets/images/difficulty_icons/difficulty_2.png"],
             ["difficulty_3", "desolation/assets/images/difficulty_icons/difficulty_3.png"],
             ["difficulty_4", "desolation/assets/images/difficulty_icons/difficulty_4.png"],
-            ["difficulty_5", "desolation/assets/images/difficulty_icons/difficulty_5.png"]
+            ["difficulty_5", "desolation/assets/images/difficulty_icons/difficulty_5.png"],
+            ["map_openarea", "desolation/assets/images/infinite_maps/openarea.png"]
         ],
 
         "sounds": [

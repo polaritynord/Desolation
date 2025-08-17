@@ -200,7 +200,7 @@ function openareaManager:load()
 end
 
 function openareaManager:update(delta)
-    if GamePaused then return end
+    if GamePaused or true then return end
     local ui = CurrentScene.hud.UIComponent
     self:doDaylightCycle(delta)
 
