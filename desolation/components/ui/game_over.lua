@@ -47,15 +47,23 @@ function gameOver:load()
             clickEvent = function ()
                 --If infinite mode, restart the game with the same configurations
                 --TODO add the story time resetting here as well (and playground)
-                if CurrentScene.difficulty == nil then return end
-                local scene = LoadScene("desolation/assets/scenes/game.json")
-                scene.difficulty = CurrentScene.difficulty
-                scene.amounts = CurrentScene.amounts
-                scene.regenerateProps = CurrentScene.regenerateProps
-                scene.score = 0
-                scene.wave = 1
-                SetScene(scene)
-                scene.mapCreator.script:loadMap("infinite_openarea")
+                if CurrentScene.difficulty == nil then
+                    if CurrentScene.mapCreator.prettyMapName == "Playground" then
+                        local scene = LoadScene("desolation/assets/scenes/game.json")
+                        SetScene(scene)
+                        scene.mapCreator.script:loadMap("playground_old")
+                    end
+                else
+                    --INFINITE GAME MODE
+                    local scene = LoadScene("desolation/assets/scenes/game.json")
+                    scene.difficulty = CurrentScene.difficulty
+                    scene.amounts = CurrentScene.amounts
+                    scene.regenerateProps = CurrentScene.regenerateProps
+                    scene.score = 0
+                    scene.wave = 1
+                    SetScene(scene)
+                    scene.mapCreator.script:loadMap("infinite_openarea")
+                end
             end;
             color = {1, 1, 1, 0};
             hoverEvent = function () end;

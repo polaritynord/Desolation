@@ -27,7 +27,7 @@ function textButton.new()
         local mx, my = coreFuncs.getRelativeMousePosition()
         local pos = coreFuncs.getRelativeElementPosition(self.position, self.parentComp)
         --Click event
-        if ((love.mouse.isDown(1) and self.mouseHovering and not self.mouseClicking) or self.bindedKey ~= nil and love.keyboard.isDown(self.bindedKey)) and self.clickEvent and InputManager.leftMouseTimer > 0.25 and InputManager.inputType == "keyboard" then
+        if ((love.mouse.isDown(1) and self.mouseHovering and not self.mouseClicking) or self.bindedKey ~= nil and love.keyboard.isDown(self.bindedKey)) and self.clickEvent and InputManager.leftMouseTimer > 0.1 and InputManager.inputType == "keyboard" then
             InputManager.leftMouseTimer = 0
             SoundManager:playSound(Assets.defaultSounds["button_click"], Settings.vol_sfx)
             self.clickEvent(self)

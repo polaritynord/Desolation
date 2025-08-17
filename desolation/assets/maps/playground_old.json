@@ -1,4 +1,5 @@
 {
+    "name": "Playground",
     "illumination": [0.3, 0.3, 0.3],
     "saveable": false,
     "playerData": {
