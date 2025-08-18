@@ -72,6 +72,10 @@
         "piercable": false
     },
 
+    "power_orb": {
+        "script": "desolation/components/props/power_orb_script"
+    },
+
     "openarea_manager": {
         "script": "desolation/components/props/openarea_manager",
         "targetable": false

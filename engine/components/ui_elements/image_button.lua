@@ -42,7 +42,7 @@ function imageButton.new()
         if InputManager.inputType ~= "keyboard" then return end
         local w = self.source:getWidth()*self.scale[1]
         local h = self.source:getHeight()*self.scale[2]
-        if coreFuncs.aabbCollision(pos, {mx, my}, {w, h}, {1, 1}) then
+        if coreFuncs.aabbCollision({pos[1]-w/2, pos[2]-h/2}, {mx, my}, {w, h}, {1, 1}) then
             if self.hoverEvent then self.hoverEvent(self) end
             self.mouseHovering = true
             self.mouseClicking = love.mouse.isDown(1)

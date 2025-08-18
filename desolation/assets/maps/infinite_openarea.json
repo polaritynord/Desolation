@@ -46,7 +46,13 @@
         ["prototype_green", 2, 1, "grass"]
     ],
     "props": [
-        ["openarea_manager", [0, 0], 0, []]
+        ["openarea_manager", [0, 0], 0, []],
+        [
+            "power_orb", [334, -7], 0,
+            [
+                ["type", "hahaha"]
+            ]
+        ]
     ],
     "items": [
     ],
@@ -58,7 +64,8 @@
             ["wall_test_gray", "desolation/assets/images/walls/test_gray.png"],
             ["prop_crate", "desolation/assets/images/props/crate.png"],
             ["prop_barrel", "desolation/assets/images/props/barrel.png"],
-            ["prop_explosive_barrel", "desolation/assets/images/props/explosive_barrel.png"]
+            ["prop_explosive_barrel", "desolation/assets/images/props/explosive_barrel.png"],
+            ["power_orbs", "desolation/assets/images/power_orbs.png"]
         ],
 
         "sounds": [

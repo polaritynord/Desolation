@@ -32,6 +32,15 @@ function love.wheelmoved(_, y)
         if menu.realY > 0 then menu.realY = 0 end
         if menu.realY < 540-menu.length then menu.realY = 540-menu.length end
     end
+    --Infinite menu scrolling
+    if CurrentScene.extras ~= nil then
+        if CurrentScene.extras.infiniteMenu.UIComponent.enabled then
+            local menu = CurrentScene.extras.infiniteMenu
+            menu.realY = menu.realY + 35*y
+            if menu.realY > 0 then menu.realY = 0 end
+            if menu.realY < 540-menu.length then menu.realY = 540-menu.length end
+        end
+    end
     --Achivements menu scrolling
     if CurrentScene.achievements ~= nil then
         if CurrentScene.achievements.open then

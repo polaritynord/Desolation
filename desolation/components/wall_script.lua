@@ -24,8 +24,4 @@ function wallScript:load()
     wall.imageComponent.draw = noCenteredDraw
 end
 
-function wallScript:update(delta)
-    
-end
-
 return wallScript
