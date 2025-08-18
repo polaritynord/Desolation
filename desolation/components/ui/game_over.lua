@@ -71,6 +71,7 @@ function gameOver:load()
         }
     )
     ui.title.wrapLimit = 700
+    ui.controllerButtons = {ui.mainMenuButton, ui.replayButton}
 end
 
 function gameOver:update(delta)

@@ -179,6 +179,8 @@ function infiniteMenu:load()
         }
     )
     ui.controllerButtons = {
+        ui.mapLeftArrow,
+        ui.mapRightArrow,
         ui.difficultyPicker,
         ui.crateAmountSlider,
         ui.barrelAmountSlider,

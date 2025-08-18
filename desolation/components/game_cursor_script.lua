@@ -23,7 +23,7 @@ end
 
 function gameCursorScript:controllerNavigation(ui, delta)
     --CONTROLLER ARROW CODE DOWN HERE:
-    --Update current menu (TODO Game pause menu to be added later)
+    --Update current menu
     if AltMenuOpen then
         --ui.controllerCurrentMenu = nil
         --Absolute shit code regarding the menus here as well:
@@ -49,8 +49,12 @@ function gameCursorScript:controllerNavigation(ui, delta)
         local temp = ui.controllerCurrentMenu
         if CurrentScene.name == "Main Menu" then
             ui.controllerCurrentMenu = CurrentScene.mainMenu.UIComponent
-        elseif CurrentScene.name == "Game" and GamePaused then
-            ui.controllerCurrentMenu = CurrentScene.pauseScreen.UIComponent
+        elseif CurrentScene.name == "Game" then
+            if GamePaused then
+                ui.controllerCurrentMenu = CurrentScene.pauseScreen.UIComponent
+            elseif CurrentScene.gameOver.UIComponent.title.color[4] > 1.3 then
+                ui.controllerCurrentMenu = CurrentScene.gameOver.UIComponent
+            end
         elseif CurrentScene.name == "Startup" then
             ui.controllerCurrentMenu = CurrentScene.stuff.UIComponent
         else

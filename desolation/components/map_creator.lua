@@ -322,7 +322,7 @@ function mapCreator:createExplosion(position, radius, intensity)
     --explosion effects
     if Settings.explosion_particles then
         local particleComp = CurrentScene.bullets.particleComponent
-        particleFuncs.createExplosionParticles(particleComp, position)
+        particleFuncs.createExplosionParticles(particleComp, position, radius)
     end
     --play sound
     local sound = Assets.sounds["explosion"]

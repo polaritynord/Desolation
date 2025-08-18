@@ -144,7 +144,7 @@ function particleFuncs.createCrateWoodParticles(comp, position)
     end
 end
 
-function particleFuncs.createExplosionParticles(comp, position)
+function particleFuncs.createExplosionParticles(comp, position, radius)
     --base
     comp:newParticle(
         {
@@ -168,6 +168,26 @@ function particleFuncs.createExplosionParticles(comp, position)
             }
         )
         particle.rotation = math.atan2(particle.position[2]-position[2], particle.position[1]-position[1])
+    end
+    --Cool halo particles I thought of recently
+    local rot = 0
+    for _ = 1, 360 do
+        comp:newParticle(
+            {
+                position = {position[1], position[2]};
+                size = {16, 16};
+                color = {1, 1, 1, 0.8};
+                despawnTime = 0.5;
+                rotation = rot;
+                update = function (particle, delta)
+                    local speed = 500*radius/100
+                    particle.position[1] = particle.position[1] + math.cos(particle.rotation)*speed*delta
+                    particle.position[2] = particle.position[2] + math.sin(particle.rotation)*speed*delta
+                    particle.color[4] = particle.color[4]-3.7*delta
+                end
+            }
+        )
+        rot = rot + 1
     end
 end
 

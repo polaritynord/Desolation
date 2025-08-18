@@ -174,7 +174,7 @@ function love.keypressed(key, unicode)
     end
 
     --Pause key (not devConsoleUI.takingInput)
-    if table.contains(InputManager:getKeys("pause_game"), key) and (console and not console.open) and CurrentScene.name == "Game" and not AltMenuOpen then
+    if table.contains(InputManager:getKeys("pause_game"), key) and (console and not console.open) and CurrentScene.name == "Game" and not AltMenuOpen and CurrentScene.player.health > 0 then
         GamePaused = not GamePaused
         CurrentScene.settings.menu = nil
         CurrentScene.settings.open = false
