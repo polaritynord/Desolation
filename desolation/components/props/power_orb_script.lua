@@ -1,28 +1,70 @@
 local coreFuncs = require("coreFuncs")
 local powerOrbScript = ENGINE_COMPONENTS.scriptComponent.new()
 
-local function drawOrb(comp)
+--Custom draw function for power orb with the background circle & icon
+local function drawOrb(self)
     local camera = CurrentScene.camera
-    local pos = coreFuncs.getRelativePosition(comp.parent.position, camera)
+    local pos = coreFuncs.getRelativePosition(self.parent.position, camera)
+    --Draw circle
+    love.graphics.setColor(0.15, 0.2, 0.9, 0.7*self.parent.imageComponent.color[4])
     love.graphics.draw(
-        comp.source, comp.quad, pos[1], pos[2], comp.parent.rotation,
-        camera.zoom, camera.zoom, 10, 10
+        Assets.mapImages["orb_circle"], pos[1], pos[2], self.parent.rotation,
+        camera.zoom*self.parent.scale[1]*1.6, camera.zoom*self.parent.scale[2]*1.6, 8, 8
     )
+    love.graphics.setColor(unpack(self.parent.imageComponent.color))
+    --Draw orb icon
+    love.graphics.draw(
+        self.source, self.quad, pos[1], pos[2], self.parent.rotation,
+        camera.zoom*self.parent.scale[1], camera.zoom*self.parent.scale[2], 10, 10
+    )
+    love.graphics.setColor(1, 1, 1, 1)
 end
 
+local function doSinWaveAnimation(orb)
+    local time = love.timer.getTime()
+    orb.scale[1] = 2.5 + math.sin(time*3)/5
+    orb.scale[2] = orb.scale[1]
+end
+
+local function playerAcquireCheck(orb, player)
+    --Measure distance to player
+    local distance = coreFuncs.pointDistance(orb.position, player.position)
+    if distance >= 75 then return end
+    orb.acquired = true
+    SoundManager:restartSound(Assets.mapSounds["acquire_power_orb"], Settings.vol_world)
+end
+
+--Event functions
 function powerOrbScript:load()
     local orb = self.parent
-    --orb properties
-    orb.type = "fastFire" or orb.type
-    --image component and draw function
+    --Orb properties
+    orb.type = "fastFire"
+    orb.acquired = false
+    orb.scale = {2.5, 2.5}
+    --Setup image component and set draw function
     orb.imageComponent = ENGINE_COMPONENTS.imageComponent.new(orb, Assets.mapImages["power_orbs"])
     orb.imageComponent.draw = drawOrb
     orb.imageComponent.quad = love.graphics.newQuad(0, 0, 20, 20, 20, 20)
+    --Add light
+    orb.light = CurrentScene:addLight(orb.position[1], orb.position[2], 500, 1, 1, 1, 1)
 end
 
 function powerOrbScript:update(delta)
     local orb = self.parent
     local player = CurrentScene.player
+    if orb.acquired then
+        --Fade out
+        orb.scale[1] = orb.scale[1] + 5*delta
+        orb.scale[2] = orb.scale[1]
+        orb.imageComponent.color[4] = orb.imageComponent.color[4] - 3*delta
+        if orb.imageComponent.color[4] < 0 then
+            table.removeValue(CurrentScene.props.tree, orb)
+            CurrentScene:removeLight(orb.light)
+        end
+    else
+        doSinWaveAnimation(orb)
+        playerAcquireCheck(orb, player)
+    end
 end
 
 return powerOrbScript
