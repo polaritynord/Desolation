@@ -81,9 +81,10 @@ function robotScript:update(delta)
                 CurrentScene.score = CurrentScene.score + 10
                 CurrentScene.kills = CurrentScene.kills + 1
             end
+            --play sound effect
+            SoundManager:restartSound(Assets.mapSounds["robot_eliminate"], Settings.vol_sfx)
         end
         robot.lootDropped = true
-        --***Give Score***
         return
     end
 

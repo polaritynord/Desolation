@@ -44,6 +44,46 @@ function particleFuncs.createShootParticles(humanoid, comp, rotation)
     end
 end
 
+function particleFuncs.createPowerOrbIdleParticles(orb, comp)
+    comp:newParticle(
+        {
+            position = {orb.position[1], orb.position[2]};
+            size = {4, 4};
+            despawnTime = 0.4;
+            color = {1, 1, 1, 0.6};
+            rotation = math.uniform(0, math.pi*2);
+            update = function (particle, delta)
+                local speed = 100
+                particle.position[1] = particle.position[1] + math.cos(particle.rotation)*speed*delta
+                particle.position[2] = particle.position[2] + math.sin(particle.rotation)*speed*delta
+            end
+        }
+    )
+end
+
+function particleFuncs.createPowerOrbAcquireParticles(orb, comp)
+    local rot = 0
+    local count = 360
+    for _ = 1, count do
+        comp:newParticle(
+            {
+                position = {orb.position[1], orb.position[2]};
+                size = {16, 16};
+                color = {0.25, 0.83, 0.96, 0.8};
+                despawnTime = 0.5;
+                rotation = rot;
+                update = function (particle, delta)
+                    local speed = 500
+                    particle.position[1] = particle.position[1] + math.cos(particle.rotation)*speed*delta
+                    particle.position[2] = particle.position[2] + math.sin(particle.rotation)*speed*delta
+                    particle.color[4] = particle.color[4]-3.7*delta
+                end
+            }
+        )
+        rot = rot + 360/count
+    end
+end
+
 function particleFuncs.createWallHitParticles(comp, bulletPos, bulletRot, i, material)
     for _ = 1, 4 do
         local s = math.uniform(4, 10)

@@ -1,4 +1,5 @@
 local coreFuncs = require("coreFuncs")
+local particleFuncs = require("desolation.particle_funcs")
 local powerOrbScript = ENGINE_COMPONENTS.scriptComponent.new()
 
 --Custom draw function for power orb with the background circle & icon
@@ -20,10 +21,10 @@ local function drawOrb(self)
     love.graphics.setColor(1, 1, 1, 1)
 end
 
-local function doSinWaveAnimation(orb)
-    local time = love.timer.getTime()
-    orb.scale[1] = 2.5 + math.sin(time*3)/5
+local function doSinWaveAnimation(orb, delta)
+    orb.scale[1] = 2.5 + math.sin(orb.animTimer*3)/5
     orb.scale[2] = orb.scale[1]
+    orb.animTimer = orb.animTimer + delta
 end
 
 local function playerAcquireCheck(orb, player)
@@ -32,16 +33,19 @@ local function playerAcquireCheck(orb, player)
     if distance >= 75 then return end
     orb.acquired = true
     SoundManager:restartSound(Assets.mapSounds["acquire_power_orb"], Settings.vol_world)
+    particleFuncs.createPowerOrbAcquireParticles(orb, CurrentScene.bullets.particleComponent)
 end
 
 --Event functions
 function powerOrbScript:load()
     local orb = self.parent
-    --Orb properties
+    --Public properties
     orb.type = "fastFire"
     orb.acquired = false
     orb.scale = {2.5, 2.5}
-    --Setup image component and set draw function
+    orb.animTimer = 0
+    orb.particleTimer = 0
+    --Setup components and set draw function
     orb.imageComponent = ENGINE_COMPONENTS.imageComponent.new(orb, Assets.mapImages["power_orbs"])
     orb.imageComponent.draw = drawOrb
     orb.imageComponent.quad = love.graphics.newQuad(0, 0, 20, 20, 20, 20)
@@ -50,20 +54,26 @@ function powerOrbScript:load()
 end
 
 function powerOrbScript:update(delta)
+    if GamePaused then return end
     local orb = self.parent
     local player = CurrentScene.player
     if orb.acquired then
         --Fade out
-        orb.scale[1] = orb.scale[1] + 5*delta
+        orb.scale[1] = orb.scale[1] + 9*delta
         orb.scale[2] = orb.scale[1]
-        orb.imageComponent.color[4] = orb.imageComponent.color[4] - 3*delta
+        orb.imageComponent.color[4] = orb.imageComponent.color[4] - 8*delta
         if orb.imageComponent.color[4] < 0 then
             table.removeValue(CurrentScene.props.tree, orb)
             CurrentScene:removeLight(orb.light)
         end
     else
-        doSinWaveAnimation(orb)
+        doSinWaveAnimation(orb, delta)
         playerAcquireCheck(orb, player)
+        if orb.particleTimer > 0.02 then
+            particleFuncs.createPowerOrbIdleParticles(orb, CurrentScene.bullets.particleComponent)
+            orb.particleTimer = 0
+        end
+        orb.particleTimer = orb.particleTimer + delta
     end
 end
 

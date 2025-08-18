@@ -12,6 +12,8 @@ end
 
 function crateScript:destroyEvent(prop)
     --remove self so this shit doesnt crash the game
+    --NOTE from 18/08/25: tried commenting the line below for fun, but now it didn't crash
+    --the game?? tf?? it entered an endless chain of destruction back when I implemented it?
     table.removeValue(CurrentScene.props.tree, prop)
     local mapCreator = CurrentScene.mapCreator.script
     mapCreator:createExplosion(prop.position, 400, 10)
