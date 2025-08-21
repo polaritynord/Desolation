@@ -39,13 +39,16 @@ local function playerAcquireCheck(orb, player)
     --TODO custom timers for powerups
     --TODO Maybe make the powerups not start the moment you gain them,
     --but when you press "e"? Like mario kart, I guess?
+    if orb.type == "speed" then
+        player.stamina = 100
+    end
 end
 
 --Event functions
 function powerOrbScript:load()
     local orb = self.parent
     --Public properties
-    orb.type = orb.type or "fastFire"
+    orb.type = orb.type or "speed"
     orb.acquired = false
     orb.scale = {2.5, 2.5}
     orb.animTimer = 0

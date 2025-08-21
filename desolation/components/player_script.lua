@@ -12,6 +12,10 @@ local playerScript = table.new(humanoidScript)
 function playerScript:movement(delta, player)
     local speed = GetGlobal("p_speed")
     player.moveVelocity = {0, 0}
+    --Multiply speed if infinite mode and speed powerup is obtained
+    if CurrentScene.currentPowerup == "speed" then
+        speed = speed * 1.4
+    end
     --Get input
     if InputManager.inputType == "keyboard" then
         --KEYBOARD
@@ -45,16 +49,18 @@ function playerScript:movement(delta, player)
             end
         end
     end
-    --Dont allow sprinting if the armor is not acquired
-    if player.stamina < 0 or player.sprintCooldown > 0 or not player.moving then player.sprinting = false end
+    if ((player.stamina < 0 or player.sprintCooldown > 0) and CurrentScene.currentPowerup ~= "speed") or not player.moving then player.sprinting = false end
     if player.sprinting then
         --play sprint sound
         if not player.sprintSoundPlayed then
             SoundManager:restartSound(Assets.sounds["sprint"], Settings.vol_world, player.position, true)
             player.sprintSoundPlayed = true
-            player.stamina = player.stamina - 10
+            if CurrentScene.currentPowerup ~= "speed" then
+                player.stamina = player.stamina - 10
+            end
         end
-        if GetGlobal("inf_stamina") < 1 then player.stamina = player.stamina - GetGlobal("stamina_drain")*delta end
+        --Decrease stamina
+        if GetGlobal("inf_stamina") < 1 and CurrentScene.currentPowerup ~= "speed" then player.stamina = player.stamina - GetGlobal("stamina_drain")*delta end
         speed = speed * 1.6
         --make a sprint cooldown
         if player.stamina < 0 then
@@ -73,6 +79,24 @@ function playerScript:movement(delta, player)
     if player.sprinting then return end
     player.stamina = player.stamina + GetGlobal("stamina_fill")*delta
     if player.stamina > 100 then player.stamina = 100 end
+end
+
+function playerScript:leaveTrailParticles(player, delta)
+    if not player.moving or CurrentScene.currentPowerup ~= "speed" then
+        player.trailTimer = 0
+        return
+    end
+    local cooldown = 0.05
+    player.trailTimer = player.trailTimer + delta
+    if player.trailTimer > cooldown then
+        player.trailTimer = 0
+        local particleComp = CurrentScene.bullets.particleComponent
+        --ok so apparently I've made particle positions relative to the object, so
+        --I can't really use the player's own particle component because it always follows the
+        --player around that way
+        --So bullets it is lmao, gotta love Polarity Engine
+        particleFuncs.createHumanoidTrailParticle(particleComp, player)
+    end
 end
 
 function playerScript:returnAimAssistTarget(assistType, x, y)
@@ -382,6 +406,7 @@ function playerScript:update(delta)
     end
     self:movement(delta, player)
     self:pointTowardsMouse(player, delta)
+    self:leaveTrailParticles(player, delta)
     self:slotSwitching(player)
     self:weaponDropping(player)
     self:shootingWeapon(delta, player)

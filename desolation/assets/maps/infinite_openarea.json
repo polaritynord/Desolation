@@ -50,7 +50,7 @@
         [
             "power_orb", [334, -7], 0,
             [
-                ["type", "heal"]
+                ["type", "speed"]
             ]
         ]
     ],

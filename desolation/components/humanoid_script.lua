@@ -412,24 +412,6 @@ function humanoidScript:makeFootstepSounds(humanoid, delta)
     end
 end
 
-function humanoidScript:leaveTrailParticles(humanoid, delta)
-    if not humanoid.moving then
-        humanoid.trailTimer = 0
-        return
-    end
-    local cooldown = 0.05
-    humanoid.trailTimer = humanoid.trailTimer + delta
-    if humanoid.trailTimer > cooldown then
-        humanoid.trailTimer = 0
-        local particleComp = CurrentScene.bullets.particleComponent
-        --ok so apparently I've made particle positions relative to the object, so
-        --I can't really use the player's own particle component because it always follows the
-        --player around that way
-        --So bullets it is lmao, gotta love Polarity Engine
-        particleFuncs.createHumanoidTrailParticle(particleComp, humanoid)
-    end
-end
-
 function humanoidScript:updateFiringLight(humanoid, delta)
     humanoid.firingLight.a = humanoid.firingLight.a + (-humanoid.firingLight.a)*8*delta
     --TODO Enhance this light!
@@ -499,7 +481,6 @@ function humanoidScript:humanoidUpdate(delta, humanoid)
     self:makeFootstepSounds(humanoid, delta)
     self:updateFiringLight(humanoid, delta)
     self:checkTileMaterial(humanoid)
-    --self:leaveTrailParticles(humanoid, delta)
     if humanoid.health > 0 then return end
     --fade away
     humanoid.scale[1] = humanoid.scale[1] + 20 * delta
