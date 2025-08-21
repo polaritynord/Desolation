@@ -196,6 +196,8 @@ function openareaManager:load()
     CurrentScene.kills = 0
     CurrentScene.barrelsExploded = 0
     CurrentScene.cratesBroken = 0
+    CurrentScene.currentPowerup = nil
+    CurrentScene.powerupTimer = 0
     SetGlobal("p_speed", 200)
 end
 
@@ -259,6 +261,22 @@ function openareaManager:update(delta)
                 CurrentScene.hud.scoreNotifs.script:newNotif(Loca.infiniteMode.notifs.waveClear)
                 CurrentScene.score = CurrentScene.score + 50
             end
+        end
+    end
+
+    --Decrease timer if a powerup exists
+    if CurrentScene.currentPowerup ~= nil then
+        --Heal player if the poweup is "heal"
+        if CurrentScene.currentPowerup == "heal" then
+            CurrentScene.player.health = 100
+            CurrentScene.player.armor = CurrentScene.player.armor + 50 --NOTE might make this 25
+            if CurrentScene.player.armor > 150 then CurrentScene.player.armor = 100 end
+            CurrentScene.gameShaders.script.blueOffset = 255
+            CurrentScene.currentPowerup = nil
+        end
+        CurrentScene.powerupTimer = CurrentScene.powerupTimer - delta
+        if CurrentScene.powerupTimer <= 0 then
+            CurrentScene.currentPowerup = nil
         end
     end
 

@@ -34,13 +34,18 @@ local function playerAcquireCheck(orb, player)
     orb.acquired = true
     SoundManager:restartSound(Assets.mapSounds["acquire_power_orb"], Settings.vol_world)
     particleFuncs.createPowerOrbAcquireParticles(orb, CurrentScene.bullets.particleComponent)
+    CurrentScene.currentPowerup = orb.type
+    CurrentScene.powerupTimer = 5
+    --TODO custom timers for powerups
+    --TODO Maybe make the powerups not start the moment you gain them,
+    --but when you press "e"? Like mario kart, I guess?
 end
 
 --Event functions
 function powerOrbScript:load()
     local orb = self.parent
     --Public properties
-    orb.type = "fastFire"
+    orb.type = orb.type or "fastFire"
     orb.acquired = false
     orb.scale = {2.5, 2.5}
     orb.animTimer = 0

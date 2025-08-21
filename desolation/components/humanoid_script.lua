@@ -291,7 +291,15 @@ end
 
 function humanoidScript:humanoidShootWeapon(weapon)
     local humanoid = self.parent
-    if weapon == nil or humanoid.shootTimer < weapon.shootTime then return end
+    --Return if the humanoid is not holding a weapon
+    if weapon == nil then return end
+    --Measure if the shoot timer passed the shooting time of weapon
+    --(while also checking for infinite mode fast fire powerup)
+    local shootTime = weapon.shootTime
+    if CurrentScene.currentPowerup == "fastFire" and humanoid.name == "player" then
+        shootTime = shootTime/2
+    end
+    if humanoid.shootTimer < shootTime then return end
 
     humanoid.shootTimer = 0
     --Check if there is ammo available in magazine
