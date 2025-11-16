@@ -25,55 +25,17 @@ function infiniteMenu:load()
             font = "disposable-droid-bold";
         }
     )
-    ui.mapIcon = ui:newImage(
-        {
-            position = {245, 253};
-            source = Assets.images["map_openarea"];
-            scale = {0.15, 0.15};
-        }
-    )
-    ui.mapLeftArrow = ui:newImageButton(
-        {
-            position = {120, 253};
-            source = Assets.images["controller_selection"];
-            scale = {1.6, 1.6};
-            hoverEvent = buttonEvents.redHover;
-            unhoverEvent = buttonEvents.redUnhover;
-            clickEvent = function (_)
-                infinite.mapSelection = infinite.mapSelection - 1
-                if infinite.mapSelection < 1 then
-                    infinite.mapSelection = #infinite.maps
-                end
-            end
-        }
-    )
-    ui.mapRightArrow = ui:newImageButton(
-        {
-            position = {365, 253};
-            source = Assets.images["controller_selection"];
-            rotation = math.pi;
-            scale = {1.6, 1.6};
-            hoverEvent = buttonEvents.redHover;
-            unhoverEvent = buttonEvents.redUnhover;
-            clickEvent = function (_)
-                infinite.mapSelection = infinite.mapSelection + 1
-                if infinite.mapSelection > #infinite.maps then
-                    infinite.mapSelection = 1
-                end
-            end
-        }
-    )
     ui.difficultyIcon = ui:newImage(
         {
             source = Assets.images.difficulty_1;
-            position = {20, 349};
+            position = {20, 214};
             scale = {1.5, 1.5};
         }
     )
     ui.difficultyPicker = ui:newTextButton(
         {
             buttonText = Loca.extrasMenu.infiniteDifficulty .. string.upper(Loca.extrasMenu.infiniteDifficulties[infinite.difficulty]);
-            position = {48, 335};
+            position = {48, 200};
             buttonTextSize = 30;
             hoverEvent = buttonEvents.redHover;
             unhoverEvent = buttonEvents.redUnhover;
@@ -88,26 +50,26 @@ function infiniteMenu:load()
         {
             text = Loca.extrasMenu.highScore .. ": ";
             size = 24;
-            position = {300, 337};
+            position = {300, 202};
             color = {1, 1, 1, 0.8};
         }
     )
     ui.difficultyDescription = ui:newTextLabel(
         {
-            position = {0, 385};
+            position = {0, 250};
             size = 16;
         }
     )
     ui.crateAmountText = ui:newTextLabel(
         {
             text = Loca.extrasMenu.crateAmount;
-            position = {0, 415};
+            position = {0, 280};
             size = 30;
         }
     )
     ui.crateAmountSlider = ui:newSlider(
         {
-            position = {355, 421};
+            position = {355, 286};
             baseColor = {0.5, 0.5, 0.5, 1};
             baseSize = {135, 18};
             valueText = false;
@@ -117,13 +79,13 @@ function infiniteMenu:load()
     ui.barrelAmountText = ui:newTextLabel(
         {
             text = Loca.extrasMenu.barrelAmount;
-            position = {0, 455};
+            position = {0, 320};
             size = 30;
         }
     )
     ui.barrelAmountSlider = ui:newSlider(
         {
-            position = {355, 461};
+            position = {355, 326};
             baseColor = {0.5, 0.5, 0.5, 1};
             baseSize = {135, 18};
             valueText = false;
@@ -133,13 +95,13 @@ function infiniteMenu:load()
     ui.expBarrelAmountText = ui:newTextLabel(
         {
             text = Loca.extrasMenu.expBarrelAmount;
-            position = {0, 495};
+            position = {0, 360};
             size = 30;
         }
     )
     ui.expBarrelAmountSlider = ui:newSlider(
         {
-            position = {355, 501};
+            position = {355, 366};
             baseColor = {0.5, 0.5, 0.5, 1};
             baseSize = {135, 18};
             valueText = false;
@@ -148,14 +110,14 @@ function infiniteMenu:load()
     )
     ui.regeneratePropsText = ui:newTextLabel(
         {
-            position = {0, 535};
+            position = {0, 400};
             text = Loca.extrasMenu.regenerateProps;
             size = 30;
         }
     )
     ui.regeneratePropsBox = ui:newCheckbox(
         {
-            position = {400, 550};
+            position = {400, 415};
             toggled = infinite.regenerateProps;
         }
     )
@@ -163,7 +125,7 @@ function infiniteMenu:load()
         {
             buttonText = Loca.extrasMenu.startGame;
             buttonTextSize = 30;
-            position = {0, 575};
+            position = {0, 440};
             clickEvent = function()
                 local scene = LoadScene("desolation/assets/scenes/game.json")
                 scene.difficulty = infinite.difficulty
