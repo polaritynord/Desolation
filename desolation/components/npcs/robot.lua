@@ -14,6 +14,7 @@ end
 function robotScript:load()
     local robot = self.parent
     self:humanoidSetup()
+	--Make it darker since I'm using the same body as the player
     robot.imageComponent.color = {0.4, 0.4, 0.4, 1}
     robot.hand.imageComponent.color = robot.imageComponent.color
     --Determine weapon
@@ -33,7 +34,8 @@ function robotScript:load()
         end
     end
     local weapon = weaponManager[name].new()
-    weapon.magAmmo = 100
+    --TODO: Make robots reload their weapons as well?
+	weapon.magAmmo = 100
     weapon.bulletDamage = weapon.bulletDamage * (CurrentScene.difficulty+1)/5
     robot.inventory.weapons[1] = weapon
     robot.health = 50 * (CurrentScene.difficulty+1)/4

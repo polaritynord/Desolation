@@ -1,0 +1,5 @@
+Alpha 1.6
+
+1.6.dev1 todo list:
+- go over every code file in the project and review them, adding comments about what I can improve and such.
+- refactor code if you feel the need for it.

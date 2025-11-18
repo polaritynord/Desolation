@@ -4,10 +4,12 @@ local itemScript = ENGINE_COMPONENTS.scriptComponent.new()
 
 function itemScript:load()
     local item = self.parent
+	--This way of handling assets sort of conflicts with what I did in other objects. Here I am loading te asset AS
+	--the item loads, but in the others I made the assets load before the objects did (if I remember correctly).
+	--so I should probably get rid of this as I stated previously. TODO.
     if item.name == "weapon" then
         item.imageComponent = ENGINE_COMPONENTS.imageComponent.new(item, Assets.images["weapon_" .. string.lower(item.weaponData.name)])
     else
-        --Load image if nonexistant (TODO get rid of this or sth idk)
         if Assets.mapImages["item_" .. item.name] == nil then
             Assets.mapImages["item_" .. item.name] = love.graphics.newImage(GAME_DIRECTORY .. "/assets/images/items/" .. item.name .. ".png")
         end
@@ -44,9 +46,12 @@ function itemScript:movement(delta)
         local angle = math.atan2(playerPos[2]-itemPos[2], playerPos[1]-itemPos[1])
         itemPos[1] = itemPos[1] + math.cos(angle)*800*delta
         itemPos[2] = itemPos[2] + math.sin(angle)*800*delta
-        --itemPos[1] = itemPos[1] + (playerPos[1]-itemPos[1])*10*delta
+       
+		--previously used exponential speed
+		--itemPos[1] = itemPos[1] + (playerPos[1]-itemPos[1])*10*delta
         --itemPos[2] = itemPos[2] + (playerPos[2]-itemPos[2])*10*delta
-        --Set alpha
+        
+		--Set alpha
         item.imageComponent.color[4] = item.distanceToPlayer/100
     else
         --Move
