@@ -172,7 +172,7 @@ end
 
 function consoleFunctions.infoScript(devConsole, command, i)
     ConsoleLog("Made by Polaritynord")
-    ConsoleLog("Using " .. ENGINE_NAME .. " build " .. ENGINE_VERSION)
+    ConsoleLog("Using " .. ENGINE_NAME .. " Version " .. ENGINE_VERSION)
     ConsoleLog(GAME_NAME .. " version " .. GAME_VERSION .. " (" .. GAME_VERSION_STATE .. ")")
 end
 

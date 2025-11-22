@@ -71,7 +71,7 @@ end
 function guyScript:load()
     local npc = self.parent
     self:humanoidSetup()
-    npc.state = "neutral"
+    npc.state = "follow"
     npc.interactPressed = false
     npc.inventory.weapons[1] = weaponManager.Pistol:new()
     npc.inventory.weapons[1].magAmmo = 13

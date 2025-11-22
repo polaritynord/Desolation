@@ -1,6 +1,5 @@
 ![Banner](https://i.ibb.co/H5W8Wpw/newbanner.png)
 [![Itch.io](https://img.shields.io/badge/Itch-%23FF0B34.svg?style=for-the-badge&logo=Itch.io&logoColor=white)](https://polaritynord.itch.io/desolation/)
-[![Trello](https://img.shields.io/badge/Trello-%23026AA7.svg?style=for-the-badge&logo=Trello&logoColor=white)](https://trello.com/invite/b/683220ba424b9e54d4fed483/ATTIf880e07229055db11842fc1418b3a6489269ED31/desolation)
 
 # Table of Contents
 * [Description](#description)
@@ -26,3 +25,6 @@
 ![](https://i.ibb.co/9kGqDLnt/vlcsnap-2025-07-19-14h49m07s484.png)
 ![](https://i.ibb.co/VW0pf6c6/vlcsnap-2025-07-19-15h06m39s704.png)
 ![](https://i.ibb.co/nGv4fsJ/vlcsnap-2025-07-19-15h06m51s342.png)
+
+---
+Made with [Polarity Engine](https://github.com/polaritynord/polarity-engine/), using the [Love2D](https://love2d.org/) framework.

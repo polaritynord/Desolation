@@ -30,7 +30,6 @@ function c1Bedroom:update(delta)
         self.wakeupComplete = true
     end
     local ui = CurrentScene.gameOver.UIComponent
-    --TODO Might want to hide the cursor here
     if self.wakeupComplete then
         ui.blackScreen.color[4] = ui.blackScreen.color[4] - 3*delta
         --After waking up
